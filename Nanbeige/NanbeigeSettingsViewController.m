@@ -8,6 +8,7 @@
 
 #import "NanbeigeSettingsViewController.h"
 #import "Environment.h"
+#import "ROConnect.h"
 
 #define kWBSDKDemoAppKey @"1362082242"
 #define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"
@@ -29,6 +30,7 @@
 
 @implementation NanbeigeSettingsViewController
 @synthesize weiBoEngine;
+@synthesize renren;
 
 - (void)didReceiveMemoryWarning
 {
@@ -40,6 +42,8 @@
 {
     [weiBoEngine setDelegate:nil];
     [weiBoEngine release], weiBoEngine = nil;
+	
+	[renren release], renren = nil;
     
     [indicatorView release], indicatorView = nil;
     
@@ -82,13 +86,16 @@
     [engine release];
 	
 	if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) {
-		
+		// TODO
 	}
 }
 
 - (void)setupRenren
 {
-	// TODO
+    renren = [Renren sharedRenren];
+	if ([renren isSessionValid]) {
+		// TODO
+	}
 }
 
 - (void)viewDidUnload
@@ -155,13 +162,76 @@
 	NSUInteger row = [indexPath row];
 	switch (row) {
 		case 0:
-			[weiBoEngine logIn];
+			[self weiboLogIn];
+			break;
+		case 1:
+			[self renrenLogIn];
 			break;
 			
 		default:
 			break;
 	}
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)weiboLogIn
+{
+	[weiBoEngine logIn];
+}
+
+- (void)renrenLogIn
+{
+	NSHTTPCookieStorage *cookies;
+	cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+	NSArray* graphCookies = [cookies cookiesForURL:
+							 [NSURL URLWithString:@"http://graph.renren.com"]];
+	
+	for (NSHTTPCookie* cookie in graphCookies) {
+		[cookies deleteCookie:cookie];
+	}
+	NSArray* widgetCookies = [cookies cookiesForURL:[NSURL URLWithString:@"http://widget.renren.com"]];
+	
+	for (NSHTTPCookie* cookie in widgetCookies) {
+		[cookies deleteCookie:cookie];
+	}
+	[indicatorView startAnimating];
+	if (![self.renren isSessionValid]){
+		[self.renren authorizationInNavigationWithPermisson:nil andDelegate:self];
+	} else {
+		// TODO login successfully!
+		[indicatorView stopAnimating];
+		UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
+														   message:@"人人账号已登录！" 
+														  delegate:self
+												 cancelButtonTitle:@"确定" 
+												 otherButtonTitles:nil];
+		[alertView setTag:kWBAlertViewLogInTag];
+		[alertView show];
+		[alertView release];
+	}
+}
+
+-(void)showAlert:(NSString*)message{
+	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
+													   message:message
+													  delegate:nil
+											 cancelButtonTitle:@"确定"
+											 otherButtonTitles:nil];
+	[alertView show];
+    [alertView release];
+}
+
+-(void)showAlert:(NSString *)message
+		 withTag:(int)tag
+{
+	UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
+													   message:message
+													  delegate:self
+											 cancelButtonTitle:@"确定" 
+											 otherButtonTitles:nil];
+    [alertView setTag:tag];
+	[alertView show];
+	[alertView release];
 }
 
 #pragma mark - WBEngineDelegate Methods
@@ -171,70 +241,74 @@
 - (void)engineAlreadyLoggedIn:(WBEngine *)engine
 {
     [indicatorView stopAnimating];
-    if ([engine isUserExclusive])
-    {
-        UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
-                                                           message:@"请先登出！" 
-                                                          delegate:nil
-                                                 cancelButtonTitle:@"确定" 
-                                                 otherButtonTitles:nil];
-        [alertView show];
-        [alertView release];
+    if ([engine isUserExclusive]) {
+        [self showAlert:@"请先登出！"];
     }
 }
 
 - (void)engineDidLogIn:(WBEngine *)engine
 {
-    [indicatorView stopAnimating];
-    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
-													   message:@"登录成功！" 
-													  delegate:self
-											 cancelButtonTitle:@"确定" 
-											 otherButtonTitles:nil];
-    [alertView setTag:kWBAlertViewLogInTag];
-	[alertView show];
-	[alertView release];
+	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
 }
 
 - (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
 {
     [indicatorView stopAnimating];
     NSLog(@"didFailToLogInWithError: %@", error);
-    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
-													   message:@"登录失败！" 
-													  delegate:nil
-											 cancelButtonTitle:@"确定" 
-											 otherButtonTitles:nil];
-	[alertView show];
-	[alertView release];
+    [self showAlert:@"登录失败！"];
 }
 
 - (void)engineDidLogOut:(WBEngine *)engine
 {
-    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
-													   message:@"登出成功！" 
-													  delegate:self
-											 cancelButtonTitle:@"确定" 
-											 otherButtonTitles:nil];
-    [alertView setTag:kWBAlertViewLogOutTag];
-	[alertView show];
-	[alertView release];
+	[self showAlert:@"登出成功！" withTag:kWBAlertViewLogOutTag];
 }
 
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
-    
+    [self showAlert:@"未授权！"];
 }
 
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
-    UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
-													   message:@"请重新登录！" 
-													  delegate:nil
-											 cancelButtonTitle:@"确定" 
-											 otherButtonTitles:nil];
+    [self showAlert:@"登录失败！"];
+}
+
+#pragma mark - RenrenDelegate methods
+
+-(void)renrenDidLogin:(Renren *)renren{
+	[indicatorView stopAnimating];
+	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
+}
+
+- (void)renren:(Renren *)renren loginFailWithError:(ROError*)error{
+	NSString *title = [NSString stringWithFormat:@"Error code:%d", [error code]];
+	NSString *description = [NSString stringWithFormat:@"%@", [error localizedDescription]];
+	UIAlertView *alertView =[[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] autorelease];
 	[alertView show];
-	[alertView release];
+}
+
+- (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response{
+	NSDictionary* params = (NSDictionary *)response.rootObject;
+    if (params!=nil) {
+        NSString *msg=nil;
+        NSMutableString *result = [[NSMutableString alloc] initWithString:@""];
+        for (id key in params) {
+			msg = [NSString stringWithFormat:@"key: %@ value: %@    ",key,[params objectForKey:key]];
+		    [result appendString:msg];
+		}
+		[self showAlert:result];
+        [result release];
+	}
+}
+
+- (void)renren:(Renren *)renren requestFailWithError:(ROError*)error{
+	//Demo Test
+    NSString* errorCode = [NSString stringWithFormat:@"Error:%d",error.code];
+    NSString* errorMsg = [error localizedDescription];
+    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:errorCode message:errorMsg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 @end

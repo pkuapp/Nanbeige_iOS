@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "WBEngine.h"
+#import "Renren.h"
 
-@interface NanbeigeSettingsViewController : UITableViewController <WBEngineDelegate> {
+@interface NanbeigeSettingsViewController : UITableViewController <WBEngineDelegate, RenrenDelegate> {
 	
     WBEngine *weiBoEngine;
+	Renren *renren;
     UIActivityIndicatorView *indicatorView;
 	
 }
 
-@property (nonatomic, retain) WBEngine *weiBoEngine;
+@property (retain, nonatomic) WBEngine *weiBoEngine;
+@property (retain, nonatomic) Renren *renren;
 
 @end

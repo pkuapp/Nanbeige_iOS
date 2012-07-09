@@ -17,7 +17,7 @@
 
 #import "WBRequest.h"
 #import "WBUtil.h"
-#import "JSON.h"
+#import "SBJSON.h"
 
 #import "WBSDKGlobal.h"
 
