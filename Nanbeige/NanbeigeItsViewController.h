@@ -2,7 +2,7 @@
 //  NanbeigeItsViewController.h
 //  Nanbeige
 //
-//  Created by Wang Zhongyu on 12-7-8.
+//  Created by Wang Zhongyu on 12-7-9.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 

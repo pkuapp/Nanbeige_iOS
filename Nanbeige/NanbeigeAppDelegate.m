@@ -2,7 +2,7 @@
 //  NanbeigeAppDelegate.m
 //  Nanbeige
 //
-//  Created by Wang Zhongyu on 12-7-7.
+//  Created by Wang Zhongyu on 12-7-9.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
@@ -12,12 +12,17 @@
 
 @synthesize window = _window;
 
+- (void)dealloc
+{
+	[_window release];
+    [super dealloc];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
