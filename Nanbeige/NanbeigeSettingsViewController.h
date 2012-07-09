@@ -16,6 +16,9 @@
 	Renren *renren;
     UIActivityIndicatorView *indicatorView;
 	
+	UIButton *weiboLogOutBtnOAuth;
+	UIButton *renrenLogOutBtnOAuth;
+	
 }
 
 @property (retain, nonatomic) WBEngine *weiBoEngine;

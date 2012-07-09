@@ -138,7 +138,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="信息流" id="ZvE-6i-moI">
-                        <barButtonItem key="rightBarButtonItem" title="吐槽" id="1sw-PG-31f">
+                        <barButtonItem key="leftBarButtonItem" title="人人吐槽" id="0Bm-a5-Tng">
+                            <connections>
+                                <action selector="onRenrenSendButtonPressed:" destination="cmY-ax-mzU" id="rHW-EG-2A8"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="微吐槽" id="1sw-PG-31f">
                             <connections>
                                 <action selector="onSendButtonPressed:" destination="cmY-ax-mzU" id="RRu-qJ-oej"/>
                             </connections>
@@ -238,7 +243,7 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="连接南北阁账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2uN-pS-7GK">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="登录南北阁账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2uN-pS-7GK">
                                                     <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -340,6 +345,24 @@
             <point key="canvasLocation" x="502" y="-948"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
+        </class>
+        <class className="NanbeigeMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
+        </class>
+        <class className="NanbeigeSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSettingsViewController.h"/>
+        </class>
+        <class className="NanbeigeStreamViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onRenrenSendButtonPressed:"/>
+                <relationship kind="action" name="onSendButtonPressed:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

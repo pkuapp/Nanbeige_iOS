@@ -128,7 +128,8 @@
                                            params:params
                                        httpMethod:@"GET"];
     
-    WBAuthorizeWebView *webView = [[WBAuthorizeWebView alloc] init];
+    //WBAuthorizeWebView *webView = [[WBAuthorizeWebView alloc] init];
+    NanbeigeWBAuthorizeWebView *webView = [[NanbeigeWBAuthorizeWebView alloc] init];
     [webView setDelegate:self];
     [webView loadRequestWithURL:[NSURL URLWithString:urlString]];
     [webView show:YES];
@@ -140,9 +141,9 @@
     [self requestAccessTokenWithUserID:userID password:password];
 }
 
-#pragma mark - WBAuthorizeWebViewDelegate Methods
+#pragma mark - NanbeigeWBAuthorizeWebViewDelegate Methods
 
-- (void)authorizeWebView:(WBAuthorizeWebView *)webView didReceiveAuthorizeCode:(NSString *)code
+- (void)authorizeWebView:(NanbeigeWBAuthorizeWebView *)webView didReceiveAuthorizeCode:(NSString *)code
 {
     [webView hide:YES];
     

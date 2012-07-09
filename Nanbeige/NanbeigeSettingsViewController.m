@@ -87,7 +87,22 @@
 	
 	if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) {
 		// TODO
+		[self setWeiboLogoutButton];
 	}
+}
+- (void)setWeiboLogoutButton
+{
+	weiboLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[weiboLogOutBtnOAuth setFrame:CGRectMake(250, 20, 50, 25)];
+	//[weiboLogOutBtnOAuth setBackgroundImage:[UIImage imageNamed:@"login_button_48.png"] forState:UIControlStateNormal];
+	[weiboLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
+	[weiboLogOutBtnOAuth addTarget:self action:@selector(onWeiboLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:weiboLogOutBtnOAuth];
+}
+- (void)onWeiboLogOutButtonPressed
+{
+    [weiBoEngine logOut];
+	[weiboLogOutBtnOAuth removeFromSuperview];
 }
 
 - (void)setupRenren
@@ -95,7 +110,23 @@
     renren = [Renren sharedRenren];
 	if ([renren isSessionValid]) {
 		// TODO
+		[self setRenrenLogoutButton];
 	}
+}
+- (void)setRenrenLogoutButton
+{
+	renrenLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[renrenLogOutBtnOAuth setFrame:CGRectMake(250, 65, 50, 25)];
+	//[renrenLogOutBtnOAuth setBackgroundImage:[UIImage imageNamed:@"login_button_48.png"] forState:UIControlStateNormal];
+	[renrenLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
+	[renrenLogOutBtnOAuth addTarget:self action:@selector(onRenrenLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:renrenLogOutBtnOAuth];
+}
+- (void)onRenrenLogOutButtonPressed
+{
+	[renren logout:self];
+	[self showAlert:@"登出成功！" withTag:kWBAlertViewLogOutTag];
+	[renrenLogOutBtnOAuth removeFromSuperview];
 }
 
 - (void)viewDidUnload
@@ -159,15 +190,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	NSUInteger section = [indexPath section];
 	NSUInteger row = [indexPath row];
-	switch (row) {
+	switch (section) {
 		case 0:
-			[self weiboLogIn];
+			switch (row) {
+				case 0:
+					[self weiboLogIn];
+					break;
+				case 1:
+					[self renrenLogIn];
+					break;
+				default:
+					break;
+			}
 			break;
 		case 1:
-			[self renrenLogIn];
 			break;
-			
+		case 2:
+			break;
 		default:
 			break;
 	}
@@ -249,6 +290,7 @@
 - (void)engineDidLogIn:(WBEngine *)engine
 {
 	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
+	[self setWeiboLogoutButton];
 }
 
 - (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
@@ -278,6 +320,7 @@
 -(void)renrenDidLogin:(Renren *)renren{
 	[indicatorView stopAnimating];
 	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
+	[self setRenrenLogoutButton];
 }
 
 - (void)renren:(Renren *)renren loginFailWithError:(ROError*)error{

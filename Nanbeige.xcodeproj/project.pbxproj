@@ -288,6 +288,10 @@
 		262AD7A215AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76115AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m */; };
 		262AD7A315AAE50F000C2EF7 /* ROPublishPhotoInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */; };
 		262AD81615AAFB50000C2EF7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */; };
+		26E7CB9715AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */; };
+		26E960EE15AB5DA700A4C595 /* RequestBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E960EA15AB5DA700A4C595 /* RequestBaseViewController.m */; };
+		26E960EF15AB5DA700A4C595 /* StatusPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E960EC15AB5DA700A4C595 /* StatusPostViewController.m */; };
+		26E960F015AB5DA700A4C595 /* StatusPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E960ED15AB5DA700A4C595 /* StatusPostViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -656,6 +660,13 @@
 		262AD76215AAE50F000C2EF7 /* ROPublishPhotoInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROPublishPhotoInternal.h; sourceTree = "<group>"; };
 		262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROPublishPhotoInternal.m; sourceTree = "<group>"; };
 		262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		26E7CB9515AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWBAuthorizeWebView.h; sourceTree = "<group>"; };
+		26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWBAuthorizeWebView.m; sourceTree = "<group>"; };
+		26E960E915AB5DA700A4C595 /* RequestBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestBaseViewController.h; sourceTree = "<group>"; };
+		26E960EA15AB5DA700A4C595 /* RequestBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestBaseViewController.m; sourceTree = "<group>"; };
+		26E960EB15AB5DA700A4C595 /* StatusPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusPostViewController.h; sourceTree = "<group>"; };
+		26E960EC15AB5DA700A4C595 /* StatusPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusPostViewController.m; sourceTree = "<group>"; };
+		26E960ED15AB5DA700A4C595 /* StatusPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusPostViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -756,6 +767,11 @@
 		262AD4A215AA7DD7000C2EF7 /* StreamView */ = {
 			isa = PBXGroup;
 			children = (
+				26E960E915AB5DA700A4C595 /* RequestBaseViewController.h */,
+				26E960EA15AB5DA700A4C595 /* RequestBaseViewController.m */,
+				26E960EB15AB5DA700A4C595 /* StatusPostViewController.h */,
+				26E960EC15AB5DA700A4C595 /* StatusPostViewController.m */,
+				26E960ED15AB5DA700A4C595 /* StatusPostViewController.xib */,
 				262AD4A315AA7DEA000C2EF7 /* NanbeigeStreamViewController.h */,
 				262AD4A415AA7DEA000C2EF7 /* NanbeigeStreamViewController.m */,
 			);
@@ -1031,6 +1047,8 @@
 				262AD62915AA8020000C2EF7 /* WBSendView.m */,
 				262AD62A15AA8020000C2EF7 /* WBUtil.h */,
 				262AD62B15AA8020000C2EF7 /* WBUtil.m */,
+				26E7CB9515AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.h */,
+				26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */,
 			);
 			path = SinaWeiBoSDK;
 			sourceTree = "<group>";
@@ -1565,6 +1583,7 @@
 				262AD78115AAE50F000C2EF7 /* small-button-normal.png in Resources */,
 				262AD78215AAE50F000C2EF7 /* small-button-normal@2x.png in Resources */,
 				262AD79C15AAE50F000C2EF7 /* ROCheckOrderCell.xib in Resources */,
+				26E960F015AB5DA700A4C595 /* StatusPostViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1647,6 +1666,9 @@
 				262AD7A115AAE50F000C2EF7 /* ROImageView.m in Sources */,
 				262AD7A215AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m in Sources */,
 				262AD7A315AAE50F000C2EF7 /* ROPublishPhotoInternal.m in Sources */,
+				26E7CB9715AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m in Sources */,
+				26E960EE15AB5DA700A4C595 /* RequestBaseViewController.m in Sources */,
+				26E960EF15AB5DA700A4C595 /* StatusPostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
