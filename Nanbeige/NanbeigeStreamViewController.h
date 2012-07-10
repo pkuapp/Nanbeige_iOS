@@ -7,15 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Renren.h"
-#import "WBSendView.h"
 
-@interface NanbeigeStreamViewController : UITableViewController <WBEngineDelegate, WBSendViewDelegate, RenrenDelegate> {
-	WBEngine *engine;
-	Renren *renren;
-	UIActivityIndicatorView *indicatorView;
+@interface NanbeigeStreamViewController : UITableViewController {
 }
-- (IBAction)onSendButtonPressed:(id)sender;
-- (IBAction)onRenrenSendButtonPressed:(id)sender;
 
 @end

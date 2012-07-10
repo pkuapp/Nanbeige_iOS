@@ -32,23 +32,7 @@
 @synthesize weiBoEngine;
 @synthesize renren;
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)dealloc
-{
-    [weiBoEngine setDelegate:nil];
-    [weiBoEngine release], weiBoEngine = nil;
-	
-	[renren release], renren = nil;
-    
-    [indicatorView release], indicatorView = nil;
-    
-    [super dealloc];
-}
+#pragma mark - View lifecycle
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -58,9 +42,6 @@
     }
     return self;
 }
-
-#pragma mark - View lifecycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -74,7 +55,26 @@
 	[self setupWeibo];
 	[self setupRenren];
 }
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    [indicatorView release], indicatorView = nil;
+}
+- (void)dealloc
+{
+    [weiBoEngine setDelegate:nil];
+    [weiBoEngine release], weiBoEngine = nil;
+	
+	[renren release], renren = nil;
+    
+    [indicatorView release], indicatorView = nil;
+    
+    [super dealloc];
+}
 
+#pragma mark Weibo Setup
 - (void)setupWeibo
 {
 	WBEngine *engine = [[WBEngine alloc] initWithAppKey:kWBSDKDemoAppKey appSecret:kWBSDKDemoAppSecret];
@@ -86,7 +86,6 @@
     [engine release];
 	
 	if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) {
-		// TODO
 		[self setWeiboLogoutButton];
 	}
 }
@@ -94,7 +93,6 @@
 {
 	weiboLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[weiboLogOutBtnOAuth setFrame:CGRectMake(250, 20, 50, 25)];
-	//[weiboLogOutBtnOAuth setBackgroundImage:[UIImage imageNamed:@"login_button_48.png"] forState:UIControlStateNormal];
 	[weiboLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
 	[weiboLogOutBtnOAuth addTarget:self action:@selector(onWeiboLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:weiboLogOutBtnOAuth];
@@ -104,12 +102,17 @@
     [weiBoEngine logOut];
 	[weiboLogOutBtnOAuth removeFromSuperview];
 }
+- (void)weiboLogIn
+{
+	[weiBoEngine logIn];
+}
+
+#pragma mark Renren Setup
 
 - (void)setupRenren
 {
     renren = [Renren sharedRenren];
 	if ([renren isSessionValid]) {
-		// TODO
 		[self setRenrenLogoutButton];
 	}
 }
@@ -117,7 +120,6 @@
 {
 	renrenLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[renrenLogOutBtnOAuth setFrame:CGRectMake(250, 65, 50, 25)];
-	//[renrenLogOutBtnOAuth setBackgroundImage:[UIImage imageNamed:@"login_button_48.png"] forState:UIControlStateNormal];
 	[renrenLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
 	[renrenLogOutBtnOAuth addTarget:self action:@selector(onRenrenLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:renrenLogOutBtnOAuth];
@@ -128,14 +130,39 @@
 	[self showAlert:@"登出成功！" withTag:kWBAlertViewLogOutTag];
 	[renrenLogOutBtnOAuth removeFromSuperview];
 }
-
-- (void)viewDidUnload
+- (void)renrenLogIn
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    [indicatorView release], indicatorView = nil;
+	NSHTTPCookieStorage *cookies;
+	cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+	NSArray* graphCookies = [cookies cookiesForURL:
+							 [NSURL URLWithString:@"http://graph.renren.com"]];
+	
+	for (NSHTTPCookie* cookie in graphCookies) {
+		[cookies deleteCookie:cookie];
+	}
+	NSArray* widgetCookies = [cookies cookiesForURL:[NSURL URLWithString:@"http://widget.renren.com"]];
+	
+	for (NSHTTPCookie* cookie in widgetCookies) {
+		[cookies deleteCookie:cookie];
+	}
+	[indicatorView startAnimating];
+	if (![self.renren isSessionValid]){
+		NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
+		[self.renren authorizationInNavigationWithPermisson:permissions andDelegate:self];
+	} else {
+		[indicatorView stopAnimating];
+		UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
+														   message:@"人人账号已登录！" 
+														  delegate:self
+												 cancelButtonTitle:@"确定" 
+												 otherButtonTitles:nil];
+		[alertView setTag:kWBAlertViewLogInTag];
+		[alertView show];
+		[alertView release];
+	}
 }
+
+#pragma mark Display Status
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -215,42 +242,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)weiboLogIn
-{
-	[weiBoEngine logIn];
-}
-
-- (void)renrenLogIn
-{
-	NSHTTPCookieStorage *cookies;
-	cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-	NSArray* graphCookies = [cookies cookiesForURL:
-							 [NSURL URLWithString:@"http://graph.renren.com"]];
-	
-	for (NSHTTPCookie* cookie in graphCookies) {
-		[cookies deleteCookie:cookie];
-	}
-	NSArray* widgetCookies = [cookies cookiesForURL:[NSURL URLWithString:@"http://widget.renren.com"]];
-	
-	for (NSHTTPCookie* cookie in widgetCookies) {
-		[cookies deleteCookie:cookie];
-	}
-	[indicatorView startAnimating];
-	if (![self.renren isSessionValid]){
-		[self.renren authorizationInNavigationWithPermisson:nil andDelegate:self];
-	} else {
-		// TODO login successfully!
-		[indicatorView stopAnimating];
-		UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
-														   message:@"人人账号已登录！" 
-														  delegate:self
-												 cancelButtonTitle:@"确定" 
-												 otherButtonTitles:nil];
-		[alertView setTag:kWBAlertViewLogInTag];
-		[alertView show];
-		[alertView release];
-	}
-}
+#pragma mark
 
 -(void)showAlert:(NSString*)message{
 	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
@@ -261,7 +253,6 @@
 	[alertView show];
     [alertView release];
 }
-
 -(void)showAlert:(NSString *)message
 		 withTag:(int)tag
 {
@@ -286,30 +277,25 @@
         [self showAlert:@"请先登出！"];
     }
 }
-
 - (void)engineDidLogIn:(WBEngine *)engine
 {
 	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
 	[self setWeiboLogoutButton];
 }
-
 - (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
 {
     [indicatorView stopAnimating];
     NSLog(@"didFailToLogInWithError: %@", error);
     [self showAlert:@"登录失败！"];
 }
-
 - (void)engineDidLogOut:(WBEngine *)engine
 {
 	[self showAlert:@"登出成功！" withTag:kWBAlertViewLogOutTag];
 }
-
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
     [self showAlert:@"未授权！"];
 }
-
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
     [self showAlert:@"登录失败！"];
@@ -322,14 +308,12 @@
 	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
 	[self setRenrenLogoutButton];
 }
-
 - (void)renren:(Renren *)renren loginFailWithError:(ROError*)error{
 	NSString *title = [NSString stringWithFormat:@"Error code:%d", [error code]];
 	NSString *description = [NSString stringWithFormat:@"%@", [error localizedDescription]];
 	UIAlertView *alertView =[[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] autorelease];
 	[alertView show];
 }
-
 - (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response{
 	NSDictionary* params = (NSDictionary *)response.rootObject;
     if (params!=nil) {
@@ -343,10 +327,8 @@
         [result release];
 	}
 }
-
 - (void)renren:(Renren *)renren requestFailWithError:(ROError*)error{
-	//Demo Test
-    NSString* errorCode = [NSString stringWithFormat:@"Error:%d",error.code];
+	NSString* errorCode = [NSString stringWithFormat:@"Error:%d",error.code];
     NSString* errorMsg = [error localizedDescription];
     
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:errorCode message:errorMsg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];

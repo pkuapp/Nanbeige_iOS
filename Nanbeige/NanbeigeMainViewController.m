@@ -156,10 +156,6 @@
     // Navigation logic may go here. Create and push another view controller.
 	NanbeigeItsViewController *itsViewController = [[NanbeigeItsViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.navigationController pushViewController:itsViewController animated:YES];
-	/*
-	 NSUInteger row = [indexPath row];
-	 NSString *rowValue = [[functionArray objectAtIndex:row] objectForKey:@"name"];
-	 */
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

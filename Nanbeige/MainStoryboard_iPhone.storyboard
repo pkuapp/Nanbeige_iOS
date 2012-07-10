@@ -36,65 +36,79 @@
             </objects>
             <point key="canvasLocation" x="1600" y="-1776"/>
         </scene>
-        <!--Nanbeige Its View Controller - IP网关-->
-        <scene sceneID="d5d-Kn-EeA">
+        <!--Nanbeige Renren Post View Controller - 人人吐槽-->
+        <scene sceneID="nW8-K8-74z">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yi9-hV-15g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Y2f-2S-ivV" customClass="NanbeigeItsViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WZ4-st-tgf">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X2o-ph-mG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="gVN-yo-VUf" customClass="NanbeigeRenrenPostViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4JZ-JD-hof">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="@颐和园路5号 #吐槽# " id="HcU-L6-DS7">
+                                <rect key="frame" x="20" y="20" width="280" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="renren-logo-dream.png" id="TYE-YE-pEX">
+                                <rect key="frame" x="20" y="203" width="280" height="144"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="IP网关" id="dSZ-8g-Or7"/>
+                    <navigationItem key="navigationItem" title="人人吐槽" id="9CT-Tr-XTe">
+                        <barButtonItem key="rightBarButtonItem" title="吐槽" id="i6F-1z-2Pk">
+                            <connections>
+                                <action selector="onPostButtonPressed:" destination="gVN-yo-VUf" id="9Ez-cb-Xjp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textToPost" destination="HcU-L6-DS7" id="aYd-mg-oP1"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2140" y="-1776"/>
+            <point key="canvasLocation" x="2143" y="-1239"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="h0p-41-cu8">
+        <!--Nanbeige Weibo Post View Controller - 微吐槽-->
+        <scene sceneID="IcV-to-mG5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2yk-a4-sFn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="eUi-en-t7O" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4BB-7j-CBC">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Mt-yq-Kni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="hoE-87-ggj" customClass="NanbeigeWeiboPostViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FqM-LA-lao">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="@颐和园路5号 #吐槽# " id="lzz-xU-U5L">
+                                <rect key="frame" x="20" y="20" width="280" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="weibo-logo-280x144.png" id="iLJ-kA-Boe">
+                                <rect key="frame" x="20" y="203" width="280" height="144"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Spw-Eg-4VY"/>
+                    <navigationItem key="navigationItem" title="微吐槽" id="gx2-In-fMD">
+                        <barButtonItem key="rightBarButtonItem" title="吐槽" id="Ucj-Xh-f36">
+                            <connections>
+                                <action selector="onPostButtonPressed:" destination="hoE-87-ggj" id="gga-77-1wk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textToPost" destination="lzz-xU-U5L" id="UNx-Xu-LSx"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2140" y="-1195"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="2uW-8P-nvU">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9rT-3b-Agq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="2r0-fr-5iC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4ir-LK-zWR">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="XDj-WZ-Kfl"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2530" y="-907"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="fdW-vB-KcU">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X0G-Rq-1XZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="IMV-Z0-vpR" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Nbi-p2-qWy">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="4QA-Xn-Mym"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2140" y="-621"/>
+            <point key="canvasLocation" x="2143" y="-658"/>
         </scene>
         <!--Navigation Controller - 信息流-->
         <scene sceneID="U6W-KN-1cs">
@@ -141,32 +155,19 @@
                         <barButtonItem key="leftBarButtonItem" title="人人吐槽" id="0Bm-a5-Tng">
                             <connections>
                                 <action selector="onRenrenSendButtonPressed:" destination="cmY-ax-mzU" id="rHW-EG-2A8"/>
+                                <segue destination="gVN-yo-VUf" kind="push" id="HNJ-JD-sWm"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="微吐槽" id="1sw-PG-31f">
                             <connections>
                                 <action selector="onSendButtonPressed:" destination="cmY-ax-mzU" id="RRu-qJ-oej"/>
+                                <segue destination="hoE-87-ggj" kind="push" id="Zcy-sn-WYw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1600" y="-948"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Gv1-iM-cVX">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f69-qv-f6B" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="IpL-QN-0fv" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hKd-Qa-Jo2">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="OhC-Os-leH"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2530" y="-1487"/>
         </scene>
         <!--Navigation Controller - 南北阁-->
         <scene sceneID="Q7Z-RS-Cjn">
@@ -306,7 +307,35 @@
                     <navigationItem key="navigationItem" title="设置" id="FeY-gg-bCa"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1600" y="-160"/>
+            <point key="canvasLocation" x="1600" y="300"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4Zu-GY-UVE">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fk3-eR-lES" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="BJA-zD-krb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="frY-X3-7fN">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2143" y="9"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="pFu-8L-Tzt">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d72-dr-KCZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="AvL-k2-92f" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W1c-3f-rSa">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2143" y="590"/>
         </scene>
         <!--Navigation Controller - 设置-->
         <scene sceneID="ZKE-9y-wvS">
@@ -322,7 +351,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1046" y="-160"/>
+            <point key="canvasLocation" x="1046" y="300"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -345,21 +374,32 @@
             <point key="canvasLocation" x="502" y="-948"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="renren-logo-dream.png" width="210" height="108"/>
+        <image name="weibo-logo-280x144.png" width="280" height="144"/>
+    </resources>
     <classes>
-        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
-        </class>
         <class className="NanbeigeMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
+        </class>
+        <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onPostButtonPressed:"/>
+                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
+            </relationships>
         </class>
         <class className="NanbeigeSettingsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSettingsViewController.h"/>
         </class>
         <class className="NanbeigeStreamViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
+        </class>
+        <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
             <relationships>
-                <relationship kind="action" name="onRenrenSendButtonPressed:"/>
-                <relationship kind="action" name="onSendButtonPressed:"/>
+                <relationship kind="action" name="onPostButtonPressed:"/>
+                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
             </relationships>
         </class>
     </classes>

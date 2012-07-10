@@ -289,9 +289,11 @@
 		262AD7A315AAE50F000C2EF7 /* ROPublishPhotoInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */; };
 		262AD81615AAFB50000C2EF7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */; };
 		26E7CB9715AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */; };
-		26E960EE15AB5DA700A4C595 /* RequestBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E960EA15AB5DA700A4C595 /* RequestBaseViewController.m */; };
-		26E960EF15AB5DA700A4C595 /* StatusPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E960EC15AB5DA700A4C595 /* StatusPostViewController.m */; };
-		26E960F015AB5DA700A4C595 /* StatusPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E960ED15AB5DA700A4C595 /* StatusPostViewController.xib */; };
+		26E960FB15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E960FA15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m */; };
+		26E96D7515AC1116005353D4 /* renren-logo-159x35.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E96D7415AC1115005353D4 /* renren-logo-159x35.png */; };
+		26E96D7715AC130B005353D4 /* renren-logo-dream.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E96D7615AC130A005353D4 /* renren-logo-dream.png */; };
+		26E96D7915AC156A005353D4 /* weibo-logo-280x144.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E96D7815AC1566005353D4 /* weibo-logo-280x144.png */; };
+		26E96D7F15AC1644005353D4 /* NanbeigeWeiboPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E96D7E15AC1643005353D4 /* NanbeigeWeiboPostViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -662,11 +664,13 @@
 		262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		26E7CB9515AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWBAuthorizeWebView.h; sourceTree = "<group>"; };
 		26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWBAuthorizeWebView.m; sourceTree = "<group>"; };
-		26E960E915AB5DA700A4C595 /* RequestBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestBaseViewController.h; sourceTree = "<group>"; };
-		26E960EA15AB5DA700A4C595 /* RequestBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestBaseViewController.m; sourceTree = "<group>"; };
-		26E960EB15AB5DA700A4C595 /* StatusPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusPostViewController.h; sourceTree = "<group>"; };
-		26E960EC15AB5DA700A4C595 /* StatusPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusPostViewController.m; sourceTree = "<group>"; };
-		26E960ED15AB5DA700A4C595 /* StatusPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusPostViewController.xib; sourceTree = "<group>"; };
+		26E960F915ABB07B00A4C595 /* NanbeigeRenrenPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeRenrenPostViewController.h; sourceTree = "<group>"; };
+		26E960FA15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeRenrenPostViewController.m; sourceTree = "<group>"; };
+		26E96D7415AC1115005353D4 /* renren-logo-159x35.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "renren-logo-159x35.png"; sourceTree = "<group>"; };
+		26E96D7615AC130A005353D4 /* renren-logo-dream.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "renren-logo-dream.png"; sourceTree = "<group>"; };
+		26E96D7815AC1566005353D4 /* weibo-logo-280x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo-logo-280x144.png"; sourceTree = "<group>"; };
+		26E96D7D15AC1643005353D4 /* NanbeigeWeiboPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWeiboPostViewController.h; sourceTree = "<group>"; };
+		26E96D7E15AC1643005353D4 /* NanbeigeWeiboPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWeiboPostViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -767,11 +771,10 @@
 		262AD4A215AA7DD7000C2EF7 /* StreamView */ = {
 			isa = PBXGroup;
 			children = (
-				26E960E915AB5DA700A4C595 /* RequestBaseViewController.h */,
-				26E960EA15AB5DA700A4C595 /* RequestBaseViewController.m */,
-				26E960EB15AB5DA700A4C595 /* StatusPostViewController.h */,
-				26E960EC15AB5DA700A4C595 /* StatusPostViewController.m */,
-				26E960ED15AB5DA700A4C595 /* StatusPostViewController.xib */,
+				26E96D7D15AC1643005353D4 /* NanbeigeWeiboPostViewController.h */,
+				26E96D7E15AC1643005353D4 /* NanbeigeWeiboPostViewController.m */,
+				26E960F915ABB07B00A4C595 /* NanbeigeRenrenPostViewController.h */,
+				26E960FA15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m */,
 				262AD4A315AA7DEA000C2EF7 /* NanbeigeStreamViewController.h */,
 				262AD4A415AA7DEA000C2EF7 /* NanbeigeStreamViewController.m */,
 			);
@@ -1074,6 +1077,7 @@
 		262AD60415AA8020000C2EF7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				26E96D7815AC1566005353D4 /* weibo-logo-280x144.png */,
 				262AD60515AA8020000C2EF7 /* bg.png */,
 				262AD60615AA8020000C2EF7 /* bg@2x.png */,
 				262AD60715AA8020000C2EF7 /* bg_land.png */,
@@ -1171,6 +1175,7 @@
 		262AD70315AAE50F000C2EF7 /* ROImages */ = {
 			isa = PBXGroup;
 			children = (
+				26E96D7415AC1115005353D4 /* renren-logo-159x35.png */,
 				262AD70415AAE50F000C2EF7 /* bottom-bar.png */,
 				262AD70515AAE50F000C2EF7 /* bottom-bar@2x.png */,
 				262AD70615AAE50F000C2EF7 /* close.png */,
@@ -1191,6 +1196,7 @@
 				262AD71515AAE50F000C2EF7 /* RepairButton@2x.png */,
 				262AD71615AAE50F000C2EF7 /* small-button-normal.png */,
 				262AD71715AAE50F000C2EF7 /* small-button-normal@2x.png */,
+				26E96D7615AC130A005353D4 /* renren-logo-dream.png */,
 			);
 			path = ROImages;
 			sourceTree = "<group>";
@@ -1583,7 +1589,9 @@
 				262AD78115AAE50F000C2EF7 /* small-button-normal.png in Resources */,
 				262AD78215AAE50F000C2EF7 /* small-button-normal@2x.png in Resources */,
 				262AD79C15AAE50F000C2EF7 /* ROCheckOrderCell.xib in Resources */,
-				26E960F015AB5DA700A4C595 /* StatusPostViewController.xib in Resources */,
+				26E96D7515AC1116005353D4 /* renren-logo-159x35.png in Resources */,
+				26E96D7715AC130B005353D4 /* renren-logo-dream.png in Resources */,
+				26E96D7915AC156A005353D4 /* weibo-logo-280x144.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1667,8 +1675,8 @@
 				262AD7A215AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m in Sources */,
 				262AD7A315AAE50F000C2EF7 /* ROPublishPhotoInternal.m in Sources */,
 				26E7CB9715AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m in Sources */,
-				26E960EE15AB5DA700A4C595 /* RequestBaseViewController.m in Sources */,
-				26E960EF15AB5DA700A4C595 /* StatusPostViewController.m in Sources */,
+				26E960FB15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m in Sources */,
+				26E96D7F15AC1644005353D4 /* NanbeigeWeiboPostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
