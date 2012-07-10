@@ -36,7 +36,7 @@
         
         [self.view addSubview:_navigationBar];
         
-        UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"人人网-开放平台"] autorelease];
+        UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"人人网 - 登录"] autorelease];
         navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(close)];
         
         [_navigationBar pushNavigationItem: navItem animated: NO];

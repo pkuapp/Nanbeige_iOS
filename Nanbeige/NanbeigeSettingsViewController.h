@@ -24,4 +24,7 @@
 @property (retain, nonatomic) WBEngine *weiBoEngine;
 @property (retain, nonatomic) Renren *renren;
 
+@property (retain, nonatomic) IBOutlet UITableViewCell *weiboCell;
+@property (retain, nonatomic) IBOutlet UITableViewCell *renrenCell;
+
 @end
