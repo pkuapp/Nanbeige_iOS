@@ -9,6 +9,7 @@
 #import "NanbeigeMainViewController.h"
 #import "NanbeigeMainCell.h"
 #import "NanbeigeItsViewController.h"
+#import "Environment.h"
 
 @interface NanbeigeMainViewController ()
 
@@ -36,12 +37,35 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
+	self.navigationController.navigationBar.backgroundColor = navBarBgColor;
+	self.tableView.backgroundColor = tableBgColor;
+	
 	// TODO
-	NSDictionary *itsDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"IP网关", @"name", @"its", @"image", nil];
-	NSDictionary *coursesDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"课程", @"name", @"courses", @"image", nil];
-	NSDictionary *roomsDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"空闲教室", @"name", @"rooms", @"image", nil];
-	NSDictionary *calendarDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"日程", @"name", @"calendar", @"image", nil];
-	NSDictionary *feedbackDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"反馈", @"name", @"feedback", @"image", nil];
+	NSDictionary *itsDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+							 @"IP网关", @"name",
+							 @"its", @"image", 
+							 @"ItsIdentifier", @"identifier", 
+							 nil];
+	NSDictionary *coursesDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								 @"课程", @"name", 
+								 @"courses", @"image", 
+								 @"CoursesIdentifier", @"identifier", 
+								 nil];
+	NSDictionary *roomsDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+							   @"空闲教室", @"name", 
+							   @"rooms", @"image", 
+							   @"RoomsIdentifier", @"identifier", 
+							   nil];
+	NSDictionary *calendarDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  @"日程", @"name", 
+								  @"calendar", @"image", 
+								  @"CalendarIdentifier", @"identifier", 
+								  nil];
+	NSDictionary *feedbackDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  @"反馈", @"name", 
+								  @"feedback", @"image", 
+								  @"FeedbackIdentifier", @"identifier", 
+								  nil];
 	
 	[self setFunctionArray:[[NSArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, nil]];
 }
@@ -96,16 +120,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *MainTableIdentifier = @"MainTableIdentifier";
-	NanbeigeMainCell *cell = [tableView dequeueReusableCellWithIdentifier: MainTableIdentifier];
+	NSUInteger row = [indexPath row];
+	NanbeigeMainCell *cell = [tableView dequeueReusableCellWithIdentifier: [[functionArray objectAtIndex:row] objectForKey:@"identifier"]];
 	if (nil == cell) {
-		cell = [[NanbeigeMainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MainTableIdentifier];
+		cell = [[NanbeigeMainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[[functionArray objectAtIndex:row] objectForKey:@"identifier"]];
 	}
 	
-	NSUInteger row = [indexPath row];
-	
-	cell.name = [[functionArray objectAtIndex:row] objectForKey:@"name"];
-	cell.image = [[functionArray objectAtIndex:row] objectForKey:@"image"];
+	//cell.name = [[functionArray objectAtIndex:row] objectForKey:@"name"];
+	//cell.image = [[functionArray objectAtIndex:row] objectForKey:@"image"];
     
     return cell;
 }
@@ -154,9 +176,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-	NanbeigeItsViewController *itsViewController = [[NanbeigeItsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	[self.navigationController pushViewController:itsViewController animated:YES];
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

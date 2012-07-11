@@ -33,6 +33,10 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	self.navigationController.navigationBar.backgroundColor = navBarBgColor;
+	self.tableView.backgroundColor = tableBgColor;
+	
 }
 
 - (void)viewDidUnload

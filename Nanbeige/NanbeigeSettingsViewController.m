@@ -53,6 +53,10 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	self.navigationController.navigationBar.backgroundColor = navBarBgColor;
+	self.tableView.backgroundColor = tableBgColor;
+	
 	indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	[indicatorView setCenter:CGPointMake(160, 240)];
 	[self.view addSubview:indicatorView];
@@ -135,6 +139,7 @@
 	requestParam.fields = [NSString stringWithFormat:@"uid,name"];
 	[self.renren getUsersInfo:requestParam andDelegate:self];
 	renrenCell.textLabel.text = @"人人账号:";
+	//TODO static data to decrease network connect
 	
 	renrenLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[renrenLogOutBtnOAuth setFrame:CGRectMake(250, 65, 50, 25)];
