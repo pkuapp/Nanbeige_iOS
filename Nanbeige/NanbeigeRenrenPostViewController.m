@@ -69,6 +69,10 @@
 	[indicatorView startAnimating];
 }
 
+- (IBAction)onCancelButtonPressed:(id)sender {
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 #pragma mark - Display Status
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -116,7 +120,7 @@
     [indicatorView stopAnimating];
     NSLog(@"%@", response.rootObject);
 	[self showAlert:@"人人吐槽成功！"];
-	[self.navigationController popViewControllerAnimated:YES];
+	[self dismissModalViewControllerAnimated:YES];
 }
 // 人人接口请求失败
 - (void)renren:(Renren *)renren requestFailWithError:(ROError*)error {

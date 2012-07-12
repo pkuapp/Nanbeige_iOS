@@ -109,6 +109,10 @@
 	[indicatorView startAnimating];
 }
 
+- (IBAction)onCancelButtonPressed:(id)sender {
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 #pragma mark
 
 -(void)showAlert:(NSString*)message{
@@ -140,7 +144,7 @@
     [indicatorView stopAnimating];
     NSLog(@"requestDidSucceedWithResult: %@", result);
 	[self showAlert:@"微博吐槽成功！"];
-	[self.navigationController popViewControllerAnimated:YES];
+	[self dismissModalViewControllerAnimated:YES];
 }
 	
 - (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error

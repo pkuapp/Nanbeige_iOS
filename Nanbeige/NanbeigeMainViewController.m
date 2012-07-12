@@ -44,30 +44,40 @@
 	NSDictionary *itsDict = [[NSDictionary alloc] initWithObjectsAndKeys:
 							 @"IP网关", @"name",
 							 @"its", @"image", 
-							 @"ItsIdentifier", @"identifier", 
+							 @"Line3Button2Identifier", @"identifier", 
 							 nil];
 	NSDictionary *coursesDict = [[NSDictionary alloc] initWithObjectsAndKeys:
 								 @"课程", @"name", 
 								 @"courses", @"image", 
-								 @"CoursesIdentifier", @"identifier", 
+								 @"Line3Button0Identifier", @"identifier", 
 								 nil];
 	NSDictionary *roomsDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-							   @"空闲教室", @"name", 
+							   @"自习室", @"name", 
 							   @"rooms", @"image", 
-							   @"RoomsIdentifier", @"identifier", 
+							   @"Line1Button0Identifier", @"identifier", 
 							   nil];
 	NSDictionary *calendarDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-								  @"日程", @"name", 
+								  @"校园黄页", @"name", 
 								  @"calendar", @"image", 
-								  @"CalendarIdentifier", @"identifier", 
+								  @"Line1Button0Identifier", @"identifier", 
 								  nil];
 	NSDictionary *feedbackDict = [[NSDictionary alloc] initWithObjectsAndKeys:
 								  @"反馈", @"name", 
 								  @"feedback", @"image", 
-								  @"FeedbackIdentifier", @"identifier", 
+								  @"Line1Button0Identifier", @"identifier", 
+								  nil];
+	NSDictionary *activityDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  @"活动", @"name", 
+								  @"Icon", @"image", 
+								  @"Line2Button0Identifier", @"identifier", 
+								  nil];
+	NSDictionary *homeworkDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  @"作业", @"name", 
+								  @"180-stickynote", @"image", 
+								  @"Line2Button2Identifier", @"identifier", 
 								  nil];
 	
-	[self setFunctionArray:[[NSArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, nil]];
+	[self setFunctionArray:[[NSArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil]];
 }
 
 - (void)viewDidUnload
@@ -91,13 +101,12 @@
 #pragma mark -
 #pragma mark Table View Attributes Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-		// TODO
-		return 74;
-		// TODO
-	} else {
-	    return 74;
+	NSUInteger row = [indexPath row];
+	NanbeigeMainCell *cell = [tableView dequeueReusableCellWithIdentifier: [[functionArray objectAtIndex:row] objectForKey:@"identifier"]];
+	if (nil == cell) {
+		cell = [[NanbeigeMainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[[functionArray objectAtIndex:row] objectForKey:@"identifier"]];
 	}
+	return cell.frame.size.height;
 }
 
 #pragma mark - Table view data source
@@ -178,4 +187,7 @@
     // Navigation logic may go here. Create and push another view controller.
 }
 
+- (void)dealloc {
+	[super dealloc];
+}
 @end

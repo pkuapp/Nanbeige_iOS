@@ -7,9 +7,46 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PABezelHUDDelegate.h"
+#import "AppUserDelegateProtocol.h"
+#import "ReachabilityProtocol.h"
+#import "Reachability.h"
+#import "Course.h"
 
-@interface NanbeigeAppDelegate : UIResponder <UIApplicationDelegate>
+@interface NanbeigeAppDelegate : UIResponder <ReachabilityProtocol,UIApplicationDelegate,UINavigationControllerDelegate,AppUserDelegateProtocol,AppUserDelegateProtocol,PABezelHUDDelegate> {
+	
+	NSManagedObjectContext *managedObjectContext;
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    NSString *persistentStorePath;
+    AppUser *appUser;
+    
+}
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, retain, readonly) NSOperationQueue *operationQueue;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSString *persistentStorePath;
+
+@property (nonatomic, retain)AppUser *appUser;
+@property (atomic, retain) Reachability *wifiTester;
+@property (atomic, retain) Reachability *internetTester;
+@property (atomic, retain) Reachability *globalTester;
+@property (atomic, retain) Reachability *freeTester;
+@property (atomic, retain) Reachability *localTester;
+@property (atomic) PKUNetStatus netStatus;
+@property (nonatomic) BOOL hasWifi;
+@property (nonatomic, retain)MBProgressHUD *progressHub;
+
+@property (nonatomic, retain, readonly) NSDictionary *test_data;
+
+
+- (void)logout;
+- (BOOL)authUserForAppWithUsername:(NSString *)username password:(NSString *)password deanCode:(NSString *)deanCode sessionid:(NSString *)sid error:(NSString **)stringError;
+- (BOOL)refreshAppSession;
+- (NSError *)updateAppUserProfile;
+- (NSError *)updateServerCourses;
+- (void)saveCourse:(Course *)_course withDict:(NSDictionary *)dict;
+- (void)netStatusDidChanged:(Reachability *)notice;
 
 @end

@@ -15,6 +15,7 @@
 	UIActivityIndicatorView *indicatorView;
 }
 - (IBAction)onPostButtonPressed:(id)sender;
+- (IBAction)onCancelButtonPressed:(id)sender;
 @property (retain, nonatomic) IBOutlet UITextView *textToPost;
 
 @end
