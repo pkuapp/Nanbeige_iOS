@@ -11,7 +11,8 @@
 
 @protocol AppUserDelegateProtocol <NSObject>
 @property(nonatomic, retain, readonly) AppUser *appUser;
-- (BOOL)authUserForAppWithUsername:(NSString *)username password:(NSString *)password deanCode:(NSString *)deanCode sessionid:(NSString *)sid error:(NSString *)stringError;
+- (BOOL)authUserForAppWithItsID:(NSString *)itsid itsPassword:(NSString *)itspassword sessionID:(NSString *)sid error:(NSString **)stringError;
+- (BOOL)authUserForAppWithCoursesID:(NSString *)coursesid coursesPassword:(NSString *)coursespassword coursesCode:(NSString *)coursescode sessionID:(NSString *)sid error:(NSString **)stringError;
 - (BOOL)refreshAppSession;
 - (void)updateAppUserProfile;
 - (void)updateServerCourses;

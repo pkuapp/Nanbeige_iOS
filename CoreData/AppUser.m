@@ -11,15 +11,19 @@
 
 
 @implementation AppUser
-@dynamic deanid;
-@dynamic realname;
-@dynamic password;
-@dynamic assignset;
-@dynamic courses;
-@dynamic localcourses;
+@dynamic coursesid;
+@dynamic coursesname;
+@dynamic coursespassword;
+@dynamic itsid;
+@dynamic itsname;
+@dynamic itspassword;
 @dynamic renrenid;
 @dynamic renrenname;
 @dynamic weiboid;
 @dynamic weiboname;
+
+@dynamic assignset;
+@dynamic courses;
+@dynamic localcourses;
 
 @end

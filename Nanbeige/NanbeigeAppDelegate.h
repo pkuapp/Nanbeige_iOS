@@ -49,7 +49,8 @@
 
 
 - (void)logout;
-- (BOOL)authUserForAppWithUsername:(NSString *)username password:(NSString *)password deanCode:(NSString *)deanCode sessionid:(NSString *)sid error:(NSString **)stringError;
+- (BOOL)authUserForAppWithItsID:(NSString *)itsid itsPassword:(NSString *)itspassword sessionID:(NSString *)sid error:(NSString **)stringError;
+- (BOOL)authUserForAppWithCoursesID:(NSString *)coursesid coursesPassword:(NSString *)coursespassword coursesCode:(NSString *)coursescode sessionID:(NSString *)sid error:(NSString **)stringError;
 - (BOOL)refreshAppSession;
 - (NSError *)updateAppUserProfile;
 - (NSError *)updateServerCourses;

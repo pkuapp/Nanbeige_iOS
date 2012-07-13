@@ -34,5 +34,6 @@
 @property (retain, nonatomic) UILabel *labelWarning;
 @property (retain, nonatomic) MBProgressHUD *progressHub;
 @property (nonatomic, assign) NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *delegate;
+@property (retain, nonatomic) IBOutlet UITableViewCell *connectFree;
 
 @end

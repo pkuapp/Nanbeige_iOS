@@ -104,7 +104,6 @@
 		262AD4A915AA7E06000C2EF7 /* NanbeigeSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD4A815AA7E06000C2EF7 /* NanbeigeSettingsViewController.m */; };
 		262AD4AD15AA7E26000C2EF7 /* NanbeigeMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD4AC15AA7E26000C2EF7 /* NanbeigeMainViewController.m */; };
 		262AD4B015AA7ED5000C2EF7 /* NanbeigeMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD4AF15AA7ED5000C2EF7 /* NanbeigeMainCell.m */; };
-		262AD4B415AA7F19000C2EF7 /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD4B315AA7F19000C2EF7 /* NanbeigeItsViewController.m */; };
 		262AD54A15AA7F4E000C2EF7 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 262AD4B615AA7F4E000C2EF7 /* 179-notepad.png */; };
 		262AD54B15AA7F4E000C2EF7 /* 179-notepad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 262AD4B715AA7F4E000C2EF7 /* 179-notepad@2x.png */; };
 		262AD54C15AA7F4E000C2EF7 /* 180-stickynote.png in Resources */ = {isa = PBXBuildFile; fileRef = 262AD4B815AA7F4E000C2EF7 /* 180-stickynote.png */; };
@@ -369,7 +368,9 @@
 		262AD7A215AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76115AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m */; };
 		262AD7A315AAE50F000C2EF7 /* ROPublishPhotoInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */; };
 		262AD81615AAFB50000C2EF7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */; };
-		2656497D15AEB491008818F0 /* NanbeigeItsLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2656497C15AEB491008818F0 /* NanbeigeItsLoginViewController.m */; };
+		26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */; };
+		26D5FA1615AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1515AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m */; };
+		26D5FA1C15AFFB930075B68D /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */; };
 		26E7CB9715AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */; };
 		26E960FB15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E960FA15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m */; };
 		26E96D7515AC1116005353D4 /* renren-logo-159x35.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E96D7415AC1115005353D4 /* renren-logo-159x35.png */; };
@@ -575,8 +576,6 @@
 		262AD4AC15AA7E26000C2EF7 /* NanbeigeMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeMainViewController.m; sourceTree = "<group>"; };
 		262AD4AE15AA7ED5000C2EF7 /* NanbeigeMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeMainCell.h; sourceTree = "<group>"; };
 		262AD4AF15AA7ED5000C2EF7 /* NanbeigeMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeMainCell.m; sourceTree = "<group>"; };
-		262AD4B215AA7F19000C2EF7 /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
-		262AD4B315AA7F19000C2EF7 /* NanbeigeItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeItsViewController.m; sourceTree = "<group>"; };
 		262AD4B615AA7F4E000C2EF7 /* 179-notepad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad.png"; sourceTree = "<group>"; };
 		262AD4B715AA7F4E000C2EF7 /* 179-notepad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad@2x.png"; sourceTree = "<group>"; };
 		262AD4B815AA7F4E000C2EF7 /* 180-stickynote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180-stickynote.png"; sourceTree = "<group>"; };
@@ -920,8 +919,12 @@
 		262AD76215AAE50F000C2EF7 /* ROPublishPhotoInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROPublishPhotoInternal.h; sourceTree = "<group>"; };
 		262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROPublishPhotoInternal.m; sourceTree = "<group>"; };
 		262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		2656497B15AEB491008818F0 /* NanbeigeItsLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsLoginViewController.h; sourceTree = "<group>"; };
-		2656497C15AEB491008818F0 /* NanbeigeItsLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeItsLoginViewController.m; sourceTree = "<group>"; };
+		26D5FA1115AFE2B20075B68D /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
+		26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeItsViewController.m; sourceTree = "<group>"; };
+		26D5FA1415AFF2B00075B68D /* NanbeigeLoginCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginCoursesViewController.h; sourceTree = "<group>"; };
+		26D5FA1515AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLoginCoursesViewController.m; sourceTree = "<group>"; };
+		26D5FA1A15AFFB930075B68D /* NanbeigeLoginItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginItsViewController.h; sourceTree = "<group>"; };
+		26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLoginItsViewController.m; sourceTree = "<group>"; };
 		26E7CB9515AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWBAuthorizeWebView.h; sourceTree = "<group>"; };
 		26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWBAuthorizeWebView.m; sourceTree = "<group>"; };
 		26E960F915ABB07B00A4C595 /* NanbeigeRenrenPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeRenrenPostViewController.h; sourceTree = "<group>"; };
@@ -1268,6 +1271,7 @@
 		262AD4AA15AA7E0C000C2EF7 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				26D5FA0A15AFE0410075B68D /* CoursesView */,
 				262AD4B115AA7F07000C2EF7 /* ItsView */,
 				262AD4AB15AA7E26000C2EF7 /* NanbeigeMainViewController.h */,
 				262AD4AC15AA7E26000C2EF7 /* NanbeigeMainViewController.m */,
@@ -1280,12 +1284,12 @@
 		262AD4B115AA7F07000C2EF7 /* ItsView */ = {
 			isa = PBXGroup;
 			children = (
-				262AD4B215AA7F19000C2EF7 /* NanbeigeItsViewController.h */,
-				262AD4B315AA7F19000C2EF7 /* NanbeigeItsViewController.m */,
+				26D5FA1115AFE2B20075B68D /* NanbeigeItsViewController.h */,
+				26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */,
 				2601D06015ADACEF0066C1FD /* NanbeigeIPGateHelper.h */,
 				2601D06115ADACEF0066C1FD /* NanbeigeIPGateHelper.m */,
-				2656497B15AEB491008818F0 /* NanbeigeItsLoginViewController.h */,
-				2656497C15AEB491008818F0 /* NanbeigeItsLoginViewController.m */,
+				26D5FA1A15AFFB930075B68D /* NanbeigeLoginItsViewController.h */,
+				26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */,
 			);
 			name = ItsView;
 			sourceTree = "<group>";
@@ -1829,6 +1833,15 @@
 			path = UploadPhotoDialog;
 			sourceTree = "<group>";
 		};
+		26D5FA0A15AFE0410075B68D /* CoursesView */ = {
+			isa = PBXGroup;
+			children = (
+				26D5FA1415AFF2B00075B68D /* NanbeigeLoginCoursesViewController.h */,
+				26D5FA1515AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m */,
+			);
+			name = CoursesView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2097,7 +2110,6 @@
 				262AD4A915AA7E06000C2EF7 /* NanbeigeSettingsViewController.m in Sources */,
 				262AD4AD15AA7E26000C2EF7 /* NanbeigeMainViewController.m in Sources */,
 				262AD4B015AA7ED5000C2EF7 /* NanbeigeMainCell.m in Sources */,
-				262AD4B415AA7F19000C2EF7 /* NanbeigeItsViewController.m in Sources */,
 				262AD63715AA8021000C2EF7 /* NSObject+SBJson.m in Sources */,
 				262AD63815AA8021000C2EF7 /* SBJsonParser.m in Sources */,
 				262AD63915AA8021000C2EF7 /* SBJsonStreamParser.m in Sources */,
@@ -2244,7 +2256,9 @@
 				2601D2B915AEA9BE0066C1FD /* MBProgressHUD.m in Sources */,
 				2601D2BA15AEA9BE0066C1FD /* ModalAlert.m in Sources */,
 				2601D2BB15AEA9BE0066C1FD /* RegexKitLite.m in Sources */,
-				2656497D15AEB491008818F0 /* NanbeigeItsLoginViewController.m in Sources */,
+				26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */,
+				26D5FA1615AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m in Sources */,
+				26D5FA1C15AFFB930075B68D /* NanbeigeLoginItsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

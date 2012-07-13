@@ -42,6 +42,7 @@
 @synthesize labelWarning;
 @synthesize progressHub;
 @synthesize delegate;
+@synthesize connectFree;
 
 #pragma mark - getter and setter Override
 
@@ -195,7 +196,7 @@
     
     if (![[dictDetail objectForKey:@"Type"] isEqualToString:@"NO"]) {
         
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
         NSString *accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:@"timeLeft"]];
         
@@ -270,7 +271,7 @@
     
     if (![[dictDetail objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
         
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
         NSString *accountTimeLeftString = [dictDetail objectForKey:@"timeLeft"];
         
@@ -306,34 +307,10 @@
 	
 }
 #pragma mark - private ControlEvent Setup
-
-- (void)configAutoDisconnectDidChanged:(UISwitch *)sender
-{
+- (IBAction)configAutoDisconnectDidChanged:(UISwitch *)sender {
     [gateStateDictionary setObject:[NSNumber numberWithBool:sender.on] forKey:_keyAutoDisconnect];
     
     [defaults setObject:gateStateDictionary forKey:_keyAccountState];
-}
--(void)configAlwaysGlobalDidChanged:(UISwitch *)sender
-{
-    [gateStateDictionary setObject:[NSNumber numberWithBool:sender.on] forKey:_keyAlwaysGlobal];
-    
-    [defaults setObject:gateStateDictionary forKey:_keyAccountState];
-    
-    [self.tableView beginUpdates];
-    
-    if (sender.on) {
-        
-        NSArray *deleteArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]];
-        
-        [self.tableView deleteRowsAtIndexPaths:deleteArray withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else {
-        
-        NSArray *insertArray = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]];
-        
-        [self.tableView insertRowsAtIndexPaths:insertArray withRowAnimation:UITableViewRowAnimationFade];
-    }
-    [self.tableView endUpdates];
 }
 
 #pragma mark - View Lifecycle
@@ -353,6 +330,7 @@
     [swAutoDisconnect release];
     [swAlwaysGlobal release];
     [gateStateDictionary release];
+	[connectFree release];
     [super dealloc];
 }
 - (void)viewDidLoad
@@ -365,10 +343,12 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.defaults = [NSUserDefaults standardUserDefaults];
+	NSLog(@"appUser: %@, itsid: %@", self.delegate.appUser, self.delegate.appUser.itsid);
+	if (self.delegate.appUser == nil || self.delegate.appUser.itsid == nil || self.delegate.appUser.itsid.length == 0) {
+		[self performSegueWithIdentifier:@"LoginItsSegue" sender:self];
+	}
 	
-	self.Username = self.delegate.appUser.deanid;//[defaults objectForKey:@"Username"];
-    self.Password = self.delegate.appUser.password;
+	self.defaults = [NSUserDefaults standardUserDefaults];
     
 	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
 	self.connector = [[NanbeigeIPGateHelper alloc] init];
@@ -378,6 +358,7 @@
 
 - (void)viewDidUnload
 {
+	[self setConnectFree:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -441,7 +422,17 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    progressHub.animationType = MBProgressHUDAnimationFade;
+{
+	progressHub.animationType = MBProgressHUDAnimationFade;
+	
+	self.Username = self.delegate.appUser.itsid;
+    self.Password = self.delegate.appUser.itspassword;
+	while (self.delegate.appUser == nil || self.delegate.appUser.itsid == nil || self.delegate.appUser.itsid.length == 0) {
+		[self performSegueWithIdentifier:@"LoginItsSegue" sender:self];
+		
+		self.Username = self.delegate.appUser.itsid;
+		self.Password = self.delegate.appUser.itspassword;
+	}
 	
     switch (indexPath.section) {
         case 0:
@@ -474,7 +465,6 @@
             break;
         case 3:
             break;
-        case 4:
         default:
             break;
 	}

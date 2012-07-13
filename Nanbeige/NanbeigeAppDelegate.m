@@ -108,7 +108,7 @@
         
         fetchRequest.entity = entity;
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deanid == %@",username];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursesid == %@",username];
         fetchRequest.predicate = predicate;
         
         appUser = [(AppUser *) [[self.managedObjectContext executeFetchRequest:fetchRequest error:NULL] lastObject] retain];
@@ -136,11 +136,31 @@
     
 }
 
-- (BOOL)authUserForAppWithUsername:(NSString *)username password:(NSString *)password deanCode:(NSString *)deanCode sessionid:(NSString *)sid error:(NSString **)stringError
+- (BOOL)authUserForAppWithItsID:(NSString *)itsid itsPassword:(NSString *)itspassword sessionID:(NSString *)sid error:(NSString **)stringError
+{
+	if (appUser == nil) {
+		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
+		NSLog(@"create appUser");
+	}
+	appUser.itsid = itsid;
+	appUser.itspassword = itspassword;
+	NSError *error;
+	if ([self.managedObjectContext save:&error]) {
+		return YES;
+	}
+	else {
+		NSString *des = [error description];
+		stringError = &des;
+	}
+	
+	return NO;
+}
+
+- (BOOL)authUserForAppWithCoursesID:(NSString *)coursesid coursesPassword:(NSString *)coursespassword coursesCode:(NSString *)coursescode sessionID:(NSString *)sid error:(NSString **)stringError
 {
     NSString *loginmessage;
 	
-    if ([username isEqualToString:test_username]) {
+    if ([coursesid isEqualToString:test_username]) {
         loginmessage = @"0";
     }
     else {
@@ -167,9 +187,9 @@
         
         ASIFormDataRequest *requestLogin = [ASIFormDataRequest requestWithURL:[NSURL URLWithString: urlLogin]];
         requestLogin.timeOutSeconds = 30;
-        [requestLogin setPostValue:username forKey:usernameKey];
-        [requestLogin setPostValue:password forKey:passwordKey];
-        [requestLogin setPostValue:deanCode forKey:validKey];
+        [requestLogin setPostValue:coursesid forKey:usernameKey];
+        [requestLogin setPostValue:coursespassword forKey:passwordKey];
+        [requestLogin setPostValue:coursescode forKey:validKey];
         [requestLogin setPostValue:sid forKey:sessionKey];
         
         [requestLogin startSynchronous];
@@ -192,8 +212,8 @@
         }
 		
 		
-        appUser.deanid = username;
-        appUser.password = password;
+        appUser.coursesid = coursesid;
+        appUser.coursespassword = coursespassword;
         NSError *error;
         if ([self.managedObjectContext save:&error]) {
             return YES;
@@ -213,8 +233,8 @@
     
     NSError *error = nil;
     
-    if ([self.appUser.deanid isEqualToString:test_username]) {
-        self.appUser.realname = @"TestAccount";
+    if ([self.appUser.coursesid isEqualToString:test_username]) {
+        self.appUser.coursesname = @"TestAccount";
         return error;
     }
     
@@ -223,7 +243,7 @@
     
     NSString *stringProfile = [requestProfile responseString];
     NSDictionary *dictProfile = [stringProfile JSONValue];
-    self.appUser.realname = [dictProfile objectForKey:@"realname"];
+    self.appUser.coursesname = [dictProfile objectForKey:@"realname"];
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"%@",[error localizedDescription]);
     }
@@ -270,7 +290,7 @@
     
     NSString *stringCourse;
     
-    if ([self.appUser.deanid isEqualToString:test_username]) {
+    if ([self.appUser.coursesid isEqualToString:test_username]) {
 		
         stringCourse = [self.test_data valueForKeyPath:@"user.json_courses"];
         NSLog(@"sdf%@",stringCourse);
