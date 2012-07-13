@@ -113,6 +113,10 @@
     if (textField == self.passwordTextField) {
         NSString *error;
 		[self.passwordTextField resignFirstResponder];
+		if ([passwordTextField.text isEqualToString:@"reset"]) {
+			passwordTextField.text = @"";
+			usernameTextField.text = @"";//reset!
+		}
 		if ([self.delegate authUserForAppWithItsID:usernameTextField.text itsPassword:passwordTextField.text sessionID:nil error:&error]) {
 			[self dismissModalViewControllerAnimated:YES];
 		} else {

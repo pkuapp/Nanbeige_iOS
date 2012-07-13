@@ -21,6 +21,7 @@
 @dynamic renrenname;
 @dynamic weiboid;
 @dynamic weiboname;
+@dynamic mainorder;
 
 @dynamic assignset;
 @dynamic courses;

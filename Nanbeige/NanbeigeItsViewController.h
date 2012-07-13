@@ -35,5 +35,7 @@
 @property (retain, nonatomic) MBProgressHUD *progressHub;
 @property (nonatomic, assign) NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *delegate;
 @property (retain, nonatomic) IBOutlet UITableViewCell *connectFree;
+@property (retain, nonatomic) IBOutlet UITableViewCell *connectGlobal;
+@property (retain, nonatomic) IBOutlet UITableViewCell *disconnectAll;
 
 @end

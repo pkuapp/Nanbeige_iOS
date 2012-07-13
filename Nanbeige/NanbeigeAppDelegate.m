@@ -136,6 +136,74 @@
     
 }
 
+-(BOOL)updateDefaultMainFunctionOrder:(NSMutableArray *)newFunctionOrder error:(NSString **)stringError
+{
+	if (appUser == nil) {
+		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
+		NSLog(@"create appUser");
+	}
+	appUser.mainorder = [newFunctionOrder componentsJoinedByString:@","];
+	NSError *error;
+	if ([self.managedObjectContext save:&error]) {
+		return YES;
+	} else {
+		NSString *des = [error description];
+		stringError = &des;
+	}
+	return NO;
+}
+
+-(NSArray *)defaultMainFunctionOrder
+{
+	if (appUser == nil) {
+		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
+		NSLog(@"create appUser");
+	}
+	NSError *error;
+	if ([self.managedObjectContext save:&error]) {
+		if (appUser.mainorder != nil)
+			return [appUser.mainorder componentsSeparatedByString:@","];
+	}
+	return nil;
+}
+
+-(BOOL)authUserForAppWithRenrenID:(NSString *)renrenid renrenName:(NSString *)renrenname error:(NSString **)stringError
+{
+	if (appUser == nil) {
+		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
+		NSLog(@"create appUser");
+	}
+	appUser.renrenid = renrenid;
+	appUser.renrenname = renrenname;
+	NSError *error;
+	if ([self.managedObjectContext save:&error]) {
+		return YES;
+	}
+	else {
+		NSString *des = [error description];
+		stringError = &des;
+	}
+	return NO;
+}
+-(BOOL)authUserForAppWithWeiboID:(NSString *)weiboid weiboName:(NSString *)weiboname error:(NSString **)stringError
+{
+	if (appUser == nil) {
+		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
+		NSLog(@"create appUser");
+	}
+	appUser.weiboid = weiboid;
+	appUser.weiboname = weiboname;
+	NSError *error;
+	if ([self.managedObjectContext save:&error]) {
+		return YES;
+	}
+	else {
+		NSString *des = [error description];
+		stringError = &des;
+	}
+	return NO;
+}
+
 - (BOOL)authUserForAppWithItsID:(NSString *)itsid itsPassword:(NSString *)itspassword sessionID:(NSString *)sid error:(NSString **)stringError
 {
 	if (appUser == nil) {

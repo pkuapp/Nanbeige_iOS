@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Line3Button2Identifier" rowHeight="133" id="aRq-hW-JCZ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItsExIdentifier" rowHeight="133" id="aRq-hW-JCZ">
                                 <rect key="frame" x="0.0" y="22" width="320" height="133"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -106,10 +106,10 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="Y3a-g9-RLQ" kind="push" id="NAi-Lh-Mjj"/>
+                                    <segue destination="Y3a-g9-RLQ" kind="push" identifier="ItsEnterSegue" id="NAi-Lh-Mjj"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Line3Button0Identifier" rowHeight="110" id="oY2-CB-6DO">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CoursesExIdentifier" rowHeight="110" id="oY2-CB-6DO">
                                 <rect key="frame" x="0.0" y="155" width="320" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -191,7 +191,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Line1Button0Identifier" rowHeight="58" id="8b0-zb-UhJ" customClass="NanbeigeMainCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoomsIdentifier" rowHeight="58" id="8b0-zb-UhJ">
                                 <rect key="frame" x="0.0" y="265" width="320" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -217,7 +217,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Line2Button0Identifier" rowHeight="79" id="Ep5-Hx-oVK">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityExIdentifier" rowHeight="79" id="Ep5-Hx-oVK">
                                 <rect key="frame" x="0.0" y="323" width="320" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -250,7 +250,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Line2Button2Identifier" rowHeight="93" id="wTm-u6-Hi5">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AssignmentExIdentifier" rowHeight="93" id="wTm-u6-Hi5">
                                 <rect key="frame" x="0.0" y="402" width="320" height="93"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -306,7 +306,17 @@
                             <outlet property="delegate" destination="T7Q-qL-CHf" id="nx4-QA-wqJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="南北阁" id="Ghq-hk-poq"/>
+                    <navigationItem key="navigationItem" title="南北阁" id="Ghq-hk-poq">
+                        <barButtonItem key="leftBarButtonItem" title="编辑" id="Kud-7j-NQQ">
+                            <connections>
+                                <action selector="editFunctionOrder:" destination="T7Q-qL-CHf" id="TVq-Vr-Jud"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="日历" id="OGw-dI-ZZr"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editFunctionButton" destination="Kud-7j-NQQ" id="ixW-FH-hQb"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1600" y="-1776"/>
@@ -436,7 +446,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="连接到..." id="knR-MR-qfy">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectFreeIdentifier" textLabel="Keo-uQ-C5P" style="IBUITableViewCellStyleDefault" id="1d9-2r-AzY">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectFreeIdentifier" textLabel="Keo-uQ-C5P" style="IBUITableViewCellStyleDefault" id="1d9-2r-AzY">
                                         <rect key="frame" x="0.0" y="102" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -447,14 +457,14 @@
                                                     <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectGlobalIdentifier" textLabel="var-gG-OTF" style="IBUITableViewCellStyleDefault" id="WJ3-2q-DDu">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectGlobalIdentifier" textLabel="var-gG-OTF" style="IBUITableViewCellStyleDefault" id="WJ3-2q-DDu">
                                         <rect key="frame" x="0.0" y="147" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -465,7 +475,7 @@
                                                     <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" red="0.50196081399917603" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
@@ -476,7 +486,7 @@
                             </tableViewSection>
                             <tableViewSection id="YaF-xu-eHQ">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DisconnectIdentifier" textLabel="8Ih-co-rIw" style="IBUITableViewCellStyleDefault" id="bpb-Rm-AtL">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DisconnectIdentifier" textLabel="8Ih-co-rIw" style="IBUITableViewCellStyleDefault" id="bpb-Rm-AtL">
                                         <rect key="frame" x="0.0" y="212" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -487,7 +497,7 @@
                                                     <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
@@ -558,6 +568,8 @@
                     <navigationItem key="navigationItem" title="IP网关" id="f2N-fD-B6d"/>
                     <connections>
                         <outlet property="connectFree" destination="1d9-2r-AzY" id="S4F-zl-UV8"/>
+                        <outlet property="connectGlobal" destination="WJ3-2q-DDu" id="yo6-Fs-Sd9"/>
+                        <outlet property="disconnectAll" destination="bpb-Rm-AtL" id="Lmv-uP-dxu"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -1288,6 +1300,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
             </relationships>
         </class>
         <class className="NanbeigeLoginItsViewController" superclassName="UITableViewController">
@@ -1298,11 +1312,12 @@
                 <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
             </relationships>
         </class>
-        <class className="NanbeigeMainCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainCell.h"/>
-        </class>
         <class className="NanbeigeMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="editFunctionOrder:"/>
+                <relationship kind="outlet" name="editFunctionButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>

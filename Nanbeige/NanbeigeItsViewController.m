@@ -43,6 +43,8 @@
 @synthesize progressHub;
 @synthesize delegate;
 @synthesize connectFree;
+@synthesize connectGlobal;
+@synthesize disconnectAll;
 
 #pragma mark - getter and setter Override
 
@@ -331,6 +333,8 @@
     [swAlwaysGlobal release];
     [gateStateDictionary release];
 	[connectFree release];
+	[connectGlobal release];
+	[disconnectAll release];
     [super dealloc];
 }
 - (void)viewDidLoad
@@ -343,7 +347,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	NSLog(@"appUser: %@, itsid: %@", self.delegate.appUser, self.delegate.appUser.itsid);
+	//NSLog(@"appUser: %@, itsid: %@", self.delegate.appUser, self.delegate.appUser.itsid);
 	if (self.delegate.appUser == nil || self.delegate.appUser.itsid == nil || self.delegate.appUser.itsid.length == 0) {
 		[self performSegueWithIdentifier:@"LoginItsSegue" sender:self];
 	}
@@ -354,11 +358,16 @@
 	self.connector = [[NanbeigeIPGateHelper alloc] init];
 	self.connector.delegate = self;
 	
+	[connectFree setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
+	[connectGlobal setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
+	[disconnectAll setBackgroundColor:[UIColor colorWithRed:176/255.0 green:92/255.0 blue:69/255.0 alpha:1.0]];
 }
 
 - (void)viewDidUnload
 {
 	[self setConnectFree:nil];
+	[self setConnectGlobal:nil];
+	[self setDisconnectAll:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -427,11 +436,9 @@
 	
 	self.Username = self.delegate.appUser.itsid;
     self.Password = self.delegate.appUser.itspassword;
-	while (self.delegate.appUser == nil || self.delegate.appUser.itsid == nil || self.delegate.appUser.itsid.length == 0) {
+	if (self.delegate.appUser == nil || self.delegate.appUser.itsid == nil || self.delegate.appUser.itsid.length == 0) {
 		[self performSegueWithIdentifier:@"LoginItsSegue" sender:self];
-		
-		self.Username = self.delegate.appUser.itsid;
-		self.Password = self.delegate.appUser.itspassword;
+		return ;
 	}
 	
     switch (indexPath.section) {
@@ -468,8 +475,7 @@
         default:
             break;
 	}
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    cell.selected = NO;
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)showProgressHubWithTitle:(NSString *)title{

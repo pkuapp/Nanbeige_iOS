@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSString * renrenname;
 @property (nonatomic, retain) NSString * weiboid;
 @property (nonatomic, retain) NSString * weiboname;
+@property (nonatomic, retain) NSString * mainorder;
 
 @property (nonatomic, retain) NSSet *assignset;
 @property (nonatomic, retain) NSSet *courses;

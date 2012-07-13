@@ -7,6 +7,7 @@
 //
 
 #import "ROBaseNavigationViewController.h"
+#import "Environment.h"
 
 @interface ROBaseNavigationViewController (Private) 
 
@@ -33,12 +34,13 @@
         
         _navigationBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _navigationBar.backgroundColor = navBarBgColor;
         
         [self.view addSubview:_navigationBar];
         
         UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"人人网 - 登录"] autorelease];
-        navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(close)];
-        
+        navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(close)];
+		
         [_navigationBar pushNavigationItem: navItem animated: NO];
     }
     return self;
