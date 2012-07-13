@@ -20,6 +20,10 @@
 @property (nonatomic, retain) NSSet *assignset;
 @property (nonatomic, retain) NSSet *courses;
 @property (nonatomic, retain) NSSet *localcourses;
+@property (nonatomic, retain) NSString * renrenid;
+@property (nonatomic, retain) NSString * renrenname;
+@property (nonatomic, retain) NSString * weiboid;
+@property (nonatomic, retain) NSString * weiboname;
 @end
 
 @interface AppUser (CoreDataGeneratedAccessors)

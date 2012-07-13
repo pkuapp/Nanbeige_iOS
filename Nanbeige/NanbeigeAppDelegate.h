@@ -11,7 +11,14 @@
 #import "AppUserDelegateProtocol.h"
 #import "ReachabilityProtocol.h"
 #import "Reachability.h"
-#import "Course.h"
+#import "AppCoreDataProtocol.h"
+
+@class SwitchViewController,NSPersistentStoreCoordinator,NSManagedObjectContext;
+@class FirstViewController;
+@class MainViewController;
+@class WelcomeViewController;
+@class AppUser;
+@class Course;
 
 @interface NanbeigeAppDelegate : UIResponder <ReachabilityProtocol,UIApplicationDelegate,UINavigationControllerDelegate,AppUserDelegateProtocol,AppUserDelegateProtocol,PABezelHUDDelegate> {
 	

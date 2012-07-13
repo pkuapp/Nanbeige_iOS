@@ -17,5 +17,9 @@
 @dynamic assignset;
 @dynamic courses;
 @dynamic localcourses;
+@dynamic renrenid;
+@dynamic renrenname;
+@dynamic weiboid;
+@dynamic weiboname;
 
 @end

@@ -8,6 +8,13 @@
 
 #import "NanbeigeItsViewController.h"
 #import "Environment.h"
+#import "NanbeigeAppDelegate.h"
+#import "ASIHTTPRequest.h"
+#import "SystemHelper.h"
+#import "RegexKitLite.h"
+#import "NanbeigeIPGateHelper.h"
+#import "ModalAlert.h"
+#import "AppUser.h"
 
 #define _keyAutoDisconnect @"AutoDisconnect"
 #define _keyAlwaysGlobal @"AlwaysGlobal"
@@ -359,10 +366,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
 	self.defaults = [NSUserDefaults standardUserDefaults];
-// TODO    self.Username = self.delegate.appUser.deanid;//[defaults objectForKey:@"Username"];
+	
+	self.Username = self.delegate.appUser.deanid;//[defaults objectForKey:@"Username"];
+    self.Password = self.delegate.appUser.password;
     
-// TODO    self.Password = self.delegate.appUser.password;
-    self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
 	self.connector = [[NanbeigeIPGateHelper alloc] init];
 	self.connector.delegate = self;
 	
