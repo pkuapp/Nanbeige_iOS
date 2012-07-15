@@ -98,9 +98,9 @@
 -(AppUser *)appUser
 {
     if (nil == appUser) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
-        NSString *username = [defaults stringForKey:@"appUser"];
+        //NSString *username = [defaults stringForKey:@"appUser"];
         
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
         
@@ -108,14 +108,14 @@
         
         fetchRequest.entity = entity;
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursesid == %@",username];
-        fetchRequest.predicate = predicate;
+        //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursesid == %@",username];
+        //fetchRequest.predicate = predicate;
         
         appUser = [(AppUser *) [[self.managedObjectContext executeFetchRequest:fetchRequest error:NULL] lastObject] retain];
         
         [fetchRequest release];
 		
-		//        NSLog(@"get appUser%@",appUser);
+		NSLog(@"get appUser%@",appUser);
 		
     }
     return appUser;
@@ -140,9 +140,9 @@
 {
 	if (appUser == nil) {
 		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
-		NSLog(@"create appUser");
+		NSLog(@"create appUser %@", appUser);
 	}
-	appUser.mainorder = [newFunctionOrder componentsJoinedByString:@","];
+	[appUser setMainorder:[newFunctionOrder componentsJoinedByString:@","]];
 	NSError *error;
 	if ([self.managedObjectContext save:&error]) {
 		return YES;
@@ -157,7 +157,7 @@
 {
 	if (appUser == nil) {
 		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
-		NSLog(@"create appUser");
+		NSLog(@"create appUser %@", appUser);
 	}
 	NSError *error;
 	if ([self.managedObjectContext save:&error]) {
@@ -171,7 +171,7 @@
 {
 	if (appUser == nil) {
 		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
-		NSLog(@"create appUser");
+		NSLog(@"create appUser %@", appUser);
 	}
 	appUser.renrenid = renrenid;
 	appUser.renrenname = renrenname;
@@ -189,8 +189,8 @@
 {
 	if (appUser == nil) {
 		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
-		NSLog(@"create appUser");
-	}
+		NSLog(@"create appUser %@", appUser);
+	}	
 	appUser.weiboid = weiboid;
 	appUser.weiboname = weiboname;
 	NSError *error;
@@ -208,8 +208,8 @@
 {
 	if (appUser == nil) {
 		appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
-		NSLog(@"create appUser");
-	}
+		NSLog(@"create appUser %@", appUser);
+	}	
 	appUser.itsid = itsid;
 	appUser.itspassword = itspassword;
 	NSError *error;
@@ -276,8 +276,8 @@
         if (appUser == nil) {
             
 			appUser = (AppUser *) [NSEntityDescription insertNewObjectForEntityForName:@"AppUser" inManagedObjectContext:self.managedObjectContext];
-            NSLog(@"create appUser");
-        }
+            NSLog(@"create appUser %@", appUser);
+		}
 		
 		
         appUser.coursesid = coursesid;

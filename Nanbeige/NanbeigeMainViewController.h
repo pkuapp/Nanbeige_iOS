@@ -7,15 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NanbeigeAppDelegate.h"
+#import "MBProgressHUD.h"
+#import "AppCoreDataProtocol.h"
+#import "AppUserDelegateProtocol.h"
+#import "PABezelHUDDelegate.h"
+#import "ReachabilityProtocol.h"
+#import "Reachability.h"
+#import "NanbeigeIPGateHelper.h"
+#import "Environment.h"
+#import "ModalAlert.h"
 #import "AppUser.h"
 
-@interface NanbeigeMainViewController : UITableViewController
+@interface NanbeigeMainViewController : UITableViewController {
+	NSMutableArray * functionArray;
+	NSArray * functionOrder;
+	NSMutableDictionary *nibsRegistered;
+}
 
-@property (strong, nonatomic) NSMutableArray * functionArray;
-@property (strong, nonatomic) NSMutableArray * functionOrder;
-@property (strong, nonatomic) NSMutableDictionary *nibsRegistered;
-@property (nonatomic, readonly) NanbeigeAppDelegate *delegate;
+@property (retain, nonatomic) NSMutableArray * functionArray;
+@property (retain, nonatomic) NSArray * functionOrder;
+@property (retain, nonatomic) NSMutableDictionary *nibsRegistered;
+@property (assign, nonatomic) NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *delegate;
 
 -(IBAction)editFunctionOrder:(id)sender;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *editFunctionButton;

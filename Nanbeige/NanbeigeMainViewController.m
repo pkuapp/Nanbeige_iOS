@@ -21,19 +21,18 @@
 
 @implementation NanbeigeMainViewController
 @synthesize editFunctionButton;
-@synthesize functionArray;
-@synthesize functionOrder;
-@synthesize nibsRegistered;
 @synthesize delegate;
+@synthesize functionOrder;
+@synthesize functionArray;
+@synthesize nibsRegistered;
 
 #pragma mark - getter and setter Override
 
-- (NanbeigeAppDelegate*)delegate
-{
-	if (nil == delegate) {
-        delegate = (NanbeigeAppDelegate*) [[UIApplication sharedApplication] delegate];
+- (NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *)delegate {
+    if (delegate == nil) {
+        delegate = (NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *)[UIApplication sharedApplication].delegate;
     }
-	return delegate;
+    return delegate;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -95,7 +94,7 @@
 								  @"Line2Button2Identifier", @"identifier", 
 								  nil];
 	
-	[self setFunctionArray:[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil]];
+	functionArray =[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil];
 	
 	nibsRegistered = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 					  @"NO", @"NanbeigeLine1Button0Cell",
@@ -105,16 +104,18 @@
 					  @"NO", @"NanbeigeLine3Button2Cell", 
 					  nil];
 	
-	// TODO
-	
-	functionOrder = [[self.delegate defaultMainFunctionOrder] mutableCopy];
-	if (functionOrder == nil || functionOrder.count < 7) {
-		functionOrder = [[NSMutableArray alloc] init];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableArray *newOrder = [[[defaults valueForKey:@"mainOrder"] componentsSeparatedByString:@","] mutableCopy];
+	if (newOrder == nil || newOrder.count < 7) {
+		newOrder = [[NSMutableArray alloc] init];
 		int cnt = functionArray.count;
 		for (int i = 0; i < cnt; i++) {
-			[functionOrder insertObject:[NSString stringWithFormat:@"%d", i] atIndex:functionOrder.count];
+			[newOrder addObject:[NSString stringWithFormat:@"%d", i]];
 		}
 	};
+	functionOrder = [[NSArray alloc] initWithArray:newOrder];
+	[newOrder release];
+	NSLog(@"order: %@", functionOrder);
 }
 
 + (NSString *)nibNameFromIdentifier:(NSString *)identifier
@@ -135,11 +136,13 @@
 
 - (void)viewDidUnload
 {
+	[self setFunctionOrder:nil];
+	[self setFunctionArray:nil];
+	[self setNibsRegistered:nil];
 	[self setEditFunctionButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-	[self setFunctionArray:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -159,7 +162,8 @@
 	NSUInteger functionIndex = [(NSString *)([functionOrder objectAtIndex:row]) integerValue];
 	NSString *identifier = [[functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
 	NSString *nibName = [[self class] nibNameFromIdentifier:identifier];
-		if ([[nibsRegistered objectForKey:nibName] isEqualToString:@"NO"]) {
+	
+	if ([[nibsRegistered objectForKey:nibName] isEqualToString:@"NO"]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
 		[tableView registerNib:nib forCellReuseIdentifier:identifier];
 		[nibsRegistered setValue:@"YES" forKey:nibName];
@@ -173,18 +177,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	//#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    //return 0;
 	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	//#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    //return 0;
-	return [self.functionArray count];
+	return [functionArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,7 +200,6 @@
 		[tableView registerNib:nib forCellReuseIdentifier:identifier];
 		[nibsRegistered setValue:@"YES" forKey:nibName];
 	}
-	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if (nil == cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -260,14 +257,19 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-	NSUInteger fromRow = [fromIndexPath row]; NSUInteger toRow = [toIndexPath row];
-	id object = [functionOrder objectAtIndex:fromRow]; [functionOrder removeObjectAtIndex:fromRow];
-	[functionOrder insertObject:object atIndex:toRow];
-	// update mainorder
-	NSString *error;
-	if (![self.delegate updateDefaultMainFunctionOrder:functionOrder error:&error]) {
-		NSLog(@"%@", error);
-	}
+	NSMutableArray *newOrder = [functionOrder mutableCopy];
+	NSUInteger fromRow = [fromIndexPath row];
+	NSUInteger toRow = [toIndexPath row];
+	id object = [newOrder objectAtIndex:fromRow];
+	[newOrder removeObjectAtIndex:fromRow];
+	[newOrder insertObject:object atIndex:toRow];
+	
+	NSString * neworderStr = [newOrder componentsJoinedByString:@","];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setValue:neworderStr forKey:@"mainOrder"];
+	
+	functionOrder = [[NSArray alloc] initWithArray:newOrder];
+	[newOrder release];
 }
 
 

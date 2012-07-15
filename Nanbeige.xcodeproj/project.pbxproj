@@ -377,6 +377,8 @@
 		2678C32315B04B80005E1D3E /* NanbeigeLine2Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C32215B04B80005E1D3E /* NanbeigeLine2Button2Cell.m */; };
 		2678C32615B04BB6005E1D3E /* NanbeigeLine3Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C32515B04BB6005E1D3E /* NanbeigeLine3Button0Cell.m */; };
 		2678C32915B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C32815B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m */; };
+		2678C37115B26ADA005E1D3E /* location.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2678C37015B26ADA005E1D3E /* location.plist */; };
+		2678C37415B26AE9005E1D3E /* test_data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2678C37315B26AE9005E1D3E /* test_data.plist */; };
 		26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */; };
 		26D5FA1615AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1515AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m */; };
 		26D5FA1C15AFFB930075B68D /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */; };
@@ -941,6 +943,8 @@
 		2678C32515B04BB6005E1D3E /* NanbeigeLine3Button0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine3Button0Cell.m; sourceTree = "<group>"; };
 		2678C32715B04BE2005E1D3E /* NanbeigeLine3Button2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLine3Button2Cell.h; sourceTree = "<group>"; };
 		2678C32815B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine3Button2Cell.m; sourceTree = "<group>"; };
+		2678C37015B26ADA005E1D3E /* location.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = location.plist; sourceTree = "<group>"; };
+		2678C37315B26AE9005E1D3E /* test_data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test_data.plist; sourceTree = "<group>"; };
 		26D5FA1115AFE2B20075B68D /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
 		26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeItsViewController.m; sourceTree = "<group>"; };
 		26D5FA1415AFF2B00075B68D /* NanbeigeLoginCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginCoursesViewController.h; sourceTree = "<group>"; };
@@ -1260,6 +1264,8 @@
 		262AD48E15AA7D5D000C2EF7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2678C37315B26AE9005E1D3E /* test_data.plist */,
+				2678C37015B26ADA005E1D3E /* location.plist */,
 				262AD48F15AA7D5D000C2EF7 /* Nanbeige-Info.plist */,
 				262AD49015AA7D5D000C2EF7 /* InfoPlist.strings */,
 				262AD49315AA7D5D000C2EF7 /* main.m */,
@@ -2142,6 +2148,8 @@
 				2678C31915B049BB005E1D3E /* NanbeigeLine2Button2Cell.xib in Resources */,
 				2678C31B15B04A60005E1D3E /* NanbeigeLine3Button0Cell.xib in Resources */,
 				2678C31D15B04ADB005E1D3E /* NanbeigeLine3Button2Cell.xib in Resources */,
+				2678C37115B26ADA005E1D3E /* location.plist in Resources */,
+				2678C37415B26AE9005E1D3E /* test_data.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
