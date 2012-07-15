@@ -10,5 +10,7 @@
 
 @interface NanbeigeStreamViewController : UITableViewController {
 }
+- (IBAction)renrenPost:(id)sender;
+- (IBAction)weiboPost:(id)sender;
 
 @end

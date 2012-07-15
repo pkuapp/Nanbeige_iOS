@@ -136,4 +136,36 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)dealloc {
+	[super dealloc];
+}
+
+-(void)showAlert:(NSString*)message{
+	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
+													   message:message
+													  delegate:nil
+											 cancelButtonTitle:@"确定"
+											 otherButtonTitles:nil];
+	[alertView show];
+    [alertView release];
+}
+- (IBAction)renrenPost:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:kRENRENIDKEY] == nil) {
+		[self showAlert:@"人人未授权！请到设置中授权"];
+		self.tabBarController.selectedIndex = 2;
+	} else {
+		[self performSegueWithIdentifier:@"weiboPostSegue" sender:self];
+	}
+}
+
+- (IBAction)weiboPost:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:kWEIBOIDKEY] == nil) {
+		[self showAlert:@"微博未授权！请到设置中授权"];
+		self.tabBarController.selectedIndex = 2;
+	} else {
+		[self performSegueWithIdentifier:@"renrenPostSegue" sender:self];
+	}
+}
 @end

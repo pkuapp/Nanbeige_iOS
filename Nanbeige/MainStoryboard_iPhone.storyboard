@@ -850,15 +850,19 @@
                     <navigationItem key="navigationItem" title="信息流" id="ZvE-6i-moI">
                         <barButtonItem key="leftBarButtonItem" title="人人吐槽" id="0Bm-a5-Tng">
                             <connections>
-                                <segue destination="gVN-yo-VUf" kind="modal" id="rN5-lM-EvF"/>
+                                <action selector="renrenPost:" destination="cmY-ax-mzU" id="0k2-2p-sXh"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="微吐槽" id="1sw-PG-31f">
                             <connections>
-                                <segue destination="hoE-87-ggj" kind="modal" id="G6S-zs-8bN"/>
+                                <action selector="weiboPost:" destination="cmY-ax-mzU" id="c4U-IG-ifa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="gVN-yo-VUf" kind="modal" identifier="renrenPostSegue" id="YFL-EG-JbE"/>
+                        <segue destination="hoE-87-ggj" kind="modal" identifier="weiboPostSegue" id="CX4-Sa-twT"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1600" y="-948"/>
@@ -883,6 +887,119 @@
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="1046" y="-1776"/>
+        </scene>
+        <!--Nanbeige Welcome View Controller-->
+        <scene sceneID="0EF-rq-Mbq">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wfX-9z-1dt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="wsl-6F-Kob" customClass="NanbeigeWelcomeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lhK-Uq-Gk9">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2kg-rQ-rDI">
+                                <rect key="frame" x="80" y="363" width="159" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="renren-logo-159x35.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="renrenLogin:" destination="wsl-6F-Kob" eventType="touchUpInside" id="kJl-gZ-wAe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wu4-Zh-LN2">
+                                <rect key="frame" x="72" y="406" width="174" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="login_button_32.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="weiboLogin:" destination="wsl-6F-Kob" eventType="touchUpInside" id="Ay4-lH-hiS"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="南北阁 0.1beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="u3G-zF-05P">
+                                <rect key="frame" x="103" y="118" width="114" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon@2x.png" id="Zhh-3d-P0m">
+                                <rect key="frame" x="115" y="20" width="90" height="90"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" minimumFontSize="17" id="hy9-LH-Cb8">
+                                <rect key="frame" x="74" y="250" width="172" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="wsl-6F-Kob" id="GH8-r6-RHe"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="南北阁账号" minimumFontSize="17" id="0G3-JA-UcT">
+                                <rect key="frame" x="74" y="211" width="172" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="wsl-6F-Kob" id="2h7-4v-9fp"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="m38-ZU-HXQ">
+                                <rect key="frame" x="165" y="289" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="登录">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="wsl-6F-Kob" eventType="touchUpInside" id="lo4-yM-M8a"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yGd-YM-F5g">
+                                <rect key="frame" x="83" y="289" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="注册">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signupButtonPressed:" destination="wsl-6F-Kob" eventType="touchUpInside" id="c4h-TV-Gd4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="loginButtonPressed" destination="m38-ZU-HXQ" id="uWK-p5-NgB"/>
+                        <outlet property="passwordTextField" destination="hy9-LH-Cb8" id="0lH-C7-I9O"/>
+                        <outlet property="renrenLogin" destination="2kg-rQ-rDI" id="DMe-2G-cZM"/>
+                        <outlet property="signupButtonPressed" destination="yGd-YM-F5g" id="Ok6-Fm-Vbu"/>
+                        <outlet property="usernameTextField" destination="0G3-JA-UcT" id="GlY-P0-bi3"/>
+                        <outlet property="weiboLogin" destination="wu4-Zh-LN2" id="nyf-pd-hTZ"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1600" y="-302"/>
         </scene>
         <!--Nanbeige Settings View Controller - 设置-->
         <scene sceneID="ynL-1e-Pin">
@@ -954,7 +1071,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="tJa-cw-41K" kind="modal" id="3Yq-fd-PMe"/>
+                                            <segue destination="tJa-cw-41K" kind="modal" identifier="LoginSegue" id="3Yq-fd-PMe"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell tag="4" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="xfB-NC-eO2" style="IBUITableViewCellStyleDefault" id="f4V-1z-1Xk">
@@ -975,7 +1092,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="p3H-i7-alO" kind="modal" id="cwD-Z1-nBK"/>
+                                            <segue destination="p3H-i7-alO" kind="modal" identifier="SignupSegue" id="cwD-Z1-nBK"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -990,7 +1107,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="重置仪表盘布局beta（重启后生效）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="71g-1f-MsJ">
-                                                    <rect key="frame" x="10" y="0.0" width="289" height="43"/>
+                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1034,10 +1151,17 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="设置" id="XIA-yK-YuN"/>
-                    <navigationItem key="navigationItem" title="设置" id="FeY-gg-bCa"/>
+                    <navigationItem key="navigationItem" title="设置" id="FeY-gg-bCa">
+                        <barButtonItem key="leftBarButtonItem" title="登出" id="bl5-wT-e92">
+                            <connections>
+                                <action selector="logoutAll:" destination="os1-XF-7GM" id="937-6h-dzc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="renrenCell" destination="FXU-7R-wof" id="KMe-4A-vlm"/>
                         <outlet property="weiboCell" destination="UaI-ow-sNf" id="ukc-DY-fWH"/>
+                        <segue destination="wsl-6F-Kob" kind="modal" identifier="WelcomeSegue" id="PNz-gb-qJt"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -1048,7 +1172,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cw5-Il-6vB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="p3H-i7-alO" customClass="NanbeigeSignupViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="B3K-GC-7zL">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="B3K-GC-7zL">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
@@ -1145,7 +1269,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJB-A4-zu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="tJa-cw-41K" customClass="NanbeigeLoginViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="nPR-fe-Xw5">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="nPR-fe-Xw5">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
@@ -1232,7 +1356,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Copyright © 2012 南北阁开发组" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="j3a-ZB-fnO">
-                                <rect key="frame" x="-35" y="229" width="391" height="33"/>
+                                <rect key="frame" x="0.0" y="229" width="320" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1342,6 +1466,8 @@
         <image name="Icon@2x.png" width="114" height="114"/>
         <image name="courses@2x.png" width="138" height="138"/>
         <image name="its@2x.png" width="138" height="138"/>
+        <image name="login_button_32.png" width="173" height="32"/>
+        <image name="renren-logo-159x35.png" width="159" height="35"/>
         <image name="renren-logo-dream.png" width="210" height="108"/>
         <image name="rooms@2x.png" width="138" height="138"/>
         <image name="weibo-logo-280x144.png" width="280" height="144"/>
@@ -1351,6 +1477,90 @@
         <image name="widget_3line_0btn.png" width="663" height="227"/>
         <image name="widget_3line_2btn.png" width="663" height="268"/>
     </resources>
+    <classes>
+        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeLoginItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginItsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeLoginViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="editFunctionOrder:"/>
+                <relationship kind="outlet" name="editFunctionButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="action" name="onPostButtonPressed:"/>
+                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logoutAll:"/>
+                <relationship kind="outlet" name="renrenCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="weiboCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeSignupViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSignupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="validcodeCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeStreamViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="renrenPost:"/>
+                <relationship kind="action" name="weiboPost:"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="action" name="onPostButtonPressed:"/>
+                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeWelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWelcomeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButtonPressed:"/>
+                <relationship kind="action" name="renrenLogin:"/>
+                <relationship kind="action" name="signupButtonPressed:"/>
+                <relationship kind="action" name="weiboLogin:"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

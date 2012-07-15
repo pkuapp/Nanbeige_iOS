@@ -33,17 +33,6 @@
 @synthesize renren;
 @synthesize weiboCell;
 @synthesize renrenCell;
-@synthesize delegate;
-
-#pragma mark - getter and setter Override
-
-- (NanbeigeAppDelegate*)delegate
-{
-	if (nil == delegate) {
-        delegate = (NanbeigeAppDelegate*) [[UIApplication sharedApplication] delegate];
-    }
-	return delegate;
-}
 
 #pragma mark - View lifecycle
 
@@ -65,8 +54,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.navigationController.navigationBar.backgroundColor = navBarBgColor;
-	self.tableView.backgroundColor = tableBgColor;
+//	self.navigationController.navigationBar.backgroundColor = navBarBgColor;
+//	self.tableView.backgroundColor = tableBgColor;
 	
 	indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	[indicatorView setCenter:CGPointMake(160, 240)];
@@ -123,6 +112,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	weiboCell.textLabel.text = [@"微博账号:"stringByAppendingString:
 								[defaults valueForKey:kWEIBOIDKEY]];
+	weiboCell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	weiboLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[weiboLogOutBtnOAuth setFrame:CGRectMake(250, 20, 50, 25)];
@@ -134,8 +124,12 @@
 {
 	[weiboLogOutBtnOAuth removeFromSuperview];
 	weiboCell.textLabel.text = @"连接微博账号";
+	weiboCell.selectionStyle = UITableViewCellSelectionStyleBlue;
 	
 	[weiBoEngine logOut];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults removeObjectForKey:kWEIBOIDKEY];
+	//[defaults removeObjectForKey:kWEIBONAMEKEY];
 }
 - (void)weiboLogIn
 {
@@ -161,6 +155,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	renrenCell.textLabel.text = [@"人人账号:"stringByAppendingString:
 								[defaults valueForKey:kRENRENNAMEKEY]];
+	renrenCell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	renrenLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[renrenLogOutBtnOAuth setFrame:CGRectMake(250, 65, 50, 25)];
@@ -173,8 +168,13 @@
 	[indicatorView startAnimating];
 	[renrenLogOutBtnOAuth removeFromSuperview];
 	renrenCell.textLabel.text = @"连接人人账号";
+	renrenCell.selectionStyle = UITableViewCellSelectionStyleBlue;
+	
 	[renren logout:self];
-	[self showAlert:@"登出成功！" withTag:kWBAlertViewLogOutTag];
+	//[self showAlert:@"人人登出成功！" withTag:kWBAlertViewLogOutTag];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults removeObjectForKey:kRENRENIDKEY];
+	[defaults removeObjectForKey:kRENRENNAMEKEY];
 	[indicatorView stopAnimating];
 }
 - (void)renrenLogIn
@@ -195,10 +195,9 @@
 	if (![self.renren isSessionValid]){
 		NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
 		[self.renren authorizationInNavigationWithPermisson:permissions andDelegate:self];
-		[indicatorView startAnimating];
 	} else {
 		UIAlertView* alertView = [[UIAlertView alloc]initWithTitle:nil 
-														   message:@"人人账号已登录！" 
+														   message:@"人人已登录！" 
 														  delegate:self
 												 cancelButtonTitle:@"确定" 
 												 otherButtonTitles:nil];
@@ -276,9 +275,11 @@
 		case 0:
 			switch (row) {
 				case 0:
+					if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) break;
 					[self weiboLogIn];
 					break;
 				case 1:
+					if ([renren isSessionValid]) break;
 					[self renrenLogIn];
 					break;
 				default:
@@ -329,13 +330,13 @@
 {
     [indicatorView stopAnimating];
     if ([engine isUserExclusive]) {
-        [self showAlert:@"请先登出！"];
+        [self showAlert:@"微博请先登出！"];
     }
 }
 - (void)engineDidLogIn:(WBEngine *)engine
 {
 	[indicatorView stopAnimating];
-	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
+	[self showAlert:@"微博登录成功！" withTag:kWBAlertViewLogInTag];
 	
 	//TODO
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -347,28 +348,29 @@
 {
 	[indicatorView stopAnimating];
     NSLog(@"didFailToLogInWithError: %@", error);
-    [self showAlert:@"登录失败！"];
+    [self showAlert:@"微博登录失败！"];
 }
 - (void)engineDidLogOut:(WBEngine *)engine
 {
 	[indicatorView stopAnimating];
-	[self showAlert:@"登出成功！" withTag:kWBAlertViewLogOutTag];
+	//[self showAlert:@"微博登出成功！" withTag:kWBAlertViewLogOutTag];
 }
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
 	[indicatorView stopAnimating];
-    [self showAlert:@"未授权！"];
+    [self showAlert:@"微博未授权！"];
 }
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
 	[indicatorView stopAnimating];
-    [self showAlert:@"登录失败！"];
+    [self showAlert:@"微博登录失败！"];
 }
 
 #pragma mark - RenrenDelegate methods
 
 -(void)renrenDidLogin:(Renren *)renren{
-	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
+	[indicatorView startAnimating];
+	[self showAlert:@"人人登录成功！" withTag:kWBAlertViewLogInTag];
 	ROUserInfoRequestParam *requestParam = [[[ROUserInfoRequestParam alloc] init] autorelease];
 	requestParam.fields = [NSString stringWithFormat:@"uid,name"];
 	[self.renren getUsersInfo:requestParam andDelegate:self];
@@ -419,4 +421,15 @@
     [alert release];
 }
 
+- (IBAction)logoutAll:(id)sender {
+	[self onWeiboLogOutButtonPressed];
+	[self onRenrenLogOutButtonPressed];
+	[self resetMainOrder];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults removeObjectForKey:kNANBEIGEIDKEY];
+	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
+	[self dismissModalViewControllerAnimated:YES];
+	//[self performSegueWithIdentifier:@"WelcomeSegue" sender:self];
+}
 @end

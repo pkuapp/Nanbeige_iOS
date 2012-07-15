@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "WBEngine.h"
 #import "Renren.h"
-#import "NanbeigeAppDelegate.h"
-#import "AppUser.h"
 
 @interface NanbeigeSettingsViewController : UITableViewController <WBEngineDelegate, RenrenDelegate> {
 	
@@ -20,8 +18,6 @@
 	
 	UIButton *weiboLogOutBtnOAuth;
 	UIButton *renrenLogOutBtnOAuth;
-	
-	NanbeigeAppDelegate *delegate;
 }
 
 @property (retain, nonatomic) WBEngine *weiBoEngine;
@@ -29,7 +25,6 @@
 
 @property (retain, nonatomic) IBOutlet UITableViewCell *weiboCell;
 @property (retain, nonatomic) IBOutlet UITableViewCell *renrenCell;
-
-@property (nonatomic, readonly) NanbeigeAppDelegate *delegate;
+- (IBAction)logoutAll:(id)sender;
 
 @end
