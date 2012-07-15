@@ -29,6 +29,7 @@
 @end
 
 @implementation NanbeigeSettingsViewController
+@synthesize nanbeigeCell;
 @synthesize weiBoEngine;
 @synthesize renren;
 @synthesize weiboCell;
@@ -63,9 +64,11 @@
 	
 	[self setupWeibo];
 	[self setupRenren];
+	[self setupNanbeige];
 }
 - (void)viewDidUnload
 {
+	[self setNanbeigeCell:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -83,6 +86,7 @@
 	[weiboCell release];
 	[renrenCell release];
 	
+	[nanbeigeCell release];
     [super dealloc];
 }
 
@@ -206,6 +210,39 @@
 	}
 }
 
+#pragma mark Nanbeige Setup
+- (void)setupNanbeige
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:kNANBEIGEIDKEY] != nil) {
+		[self setNanbeigeLogoutButton];
+	}
+}
+- (void)setNanbeigeLogoutButton
+{
+	//TODO
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	nanbeigeCell.textLabel.text = [@"南北阁账号:"stringByAppendingString:
+								[defaults valueForKey:kNANBEIGEIDKEY]];
+	nanbeigeCell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	nanbeigeLogOutBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[nanbeigeLogOutBtn setFrame:CGRectMake(250, 130, 50, 25)];
+	[nanbeigeLogOutBtn setTitle:@"退出" forState:UIControlStateNormal];
+	[nanbeigeLogOutBtn addTarget:self action:@selector(onNanbeigeLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:nanbeigeLogOutBtn];
+}
+- (void)onNanbeigeLogOutButtonPressed
+{
+	[nanbeigeLogOutBtn removeFromSuperview];
+	nanbeigeCell.textLabel.text = @"连接微博账号";
+	nanbeigeCell.selectionStyle = UITableViewCellSelectionStyleBlue;
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults removeObjectForKey:kNANBEIGEIDKEY];
+	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
+}
+
 #pragma mark Display Status
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -286,6 +323,18 @@
 			}
 			break;
 		case 1:
+			switch (row) {
+				case 0:
+					if ([[NSUserDefaults standardUserDefaults] valueForKey:kNANBEIGEIDKEY] != nil) break;
+					[self performSegueWithIdentifier:@"NanbeigeLoginSegue" sender:self];
+					break;
+				case 1:
+					[self performSegueWithIdentifier:@"NanbeigeSignupSegue" sender:self];
+					break;
+					
+				default:
+					break;
+			}
 			break;
 		case 2:
 			[self resetMainOrder];

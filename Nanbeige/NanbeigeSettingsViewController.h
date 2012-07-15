@@ -18,6 +18,7 @@
 	
 	UIButton *weiboLogOutBtnOAuth;
 	UIButton *renrenLogOutBtnOAuth;
+	UIButton *nanbeigeLogOutBtn;
 }
 
 @property (retain, nonatomic) WBEngine *weiBoEngine;
@@ -25,6 +26,7 @@
 
 @property (retain, nonatomic) IBOutlet UITableViewCell *weiboCell;
 @property (retain, nonatomic) IBOutlet UITableViewCell *renrenCell;
+@property (retain, nonatomic) IBOutlet UITableViewCell *nanbeigeCell;
 - (IBAction)logoutAll:(id)sender;
 
 @end

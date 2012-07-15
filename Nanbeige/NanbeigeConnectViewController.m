@@ -214,11 +214,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField == self.passwordTextField) {
         [self.passwordTextField resignFirstResponder];
-		
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
-		[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
-		[self didLogin];
+		[self loginButtonPressed:nil];
 		return NO;
     }
     else if (textField == self.usernameTextField) {
@@ -232,6 +228,20 @@
 }
 
 - (IBAction)loginButtonPressed:(id)sender {
+	if ([self.usernameTextField.text length] <= 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"用户名不能为空！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+		[self.usernameTextField becomeFirstResponder];
+		return ;
+    }
+	if ([self.passwordTextField.text length] <= 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码不能为空！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+		[self.passwordTextField becomeFirstResponder];
+		return ;
+    }
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
 	[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];

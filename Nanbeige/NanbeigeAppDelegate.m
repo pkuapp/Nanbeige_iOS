@@ -492,7 +492,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	//    NSLog(@"%@",[[NSBundle mainBundle] bundleIdentifier] );
-    [self generateCoreDataBase];
+    /*[self generateCoreDataBase];
 	
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -574,7 +574,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netStatusDidChanged:) name:kReachabilityChangedNotification object:nil];
     
     [self checkVersion];
-    return YES;
+    */return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

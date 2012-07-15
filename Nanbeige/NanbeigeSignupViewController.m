@@ -124,7 +124,7 @@
 		[self dismissModalViewControllerAnimated:YES];
 		return NO;
 	} else if (textField == self.passwordTextField) {
-        [self.validcodeCell becomeFirstResponder];
+        [self.validcodeTextField becomeFirstResponder];
 		return NO;
     }
     else if (textField == self.usernameTextField) {
