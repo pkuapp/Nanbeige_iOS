@@ -17,14 +17,6 @@
 @property (nonatomic, retain) NSString * coursesid;
 @property (nonatomic, retain) NSString * coursesname;
 @property (nonatomic, retain) NSString * coursespassword;
-@property (nonatomic, retain) NSString * itsid;
-@property (nonatomic, retain) NSString * itsname;
-@property (nonatomic, retain) NSString * itspassword;
-@property (nonatomic, retain) NSString * renrenid;
-@property (nonatomic, retain) NSString * renrenname;
-@property (nonatomic, retain) NSString * weiboid;
-@property (nonatomic, retain) NSString * weiboname;
-@property (nonatomic, retain) NSString * mainorder;
 
 @property (nonatomic, retain) NSSet *assignset;
 @property (nonatomic, retain) NSSet *courses;

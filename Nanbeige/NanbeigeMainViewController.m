@@ -22,7 +22,7 @@
 @implementation NanbeigeMainViewController
 @synthesize editFunctionButton;
 @synthesize delegate;
-@synthesize functionOrder;
+@synthesize functionOrder = _functionOrder;
 @synthesize functionArray;
 @synthesize nibsRegistered;
 
@@ -34,6 +34,26 @@
     }
     return delegate;
 }
+- (NSArray *)functionOrder
+{
+	if (_functionOrder == nil) {
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		NSMutableArray *newOrder = [[[defaults valueForKey:kMAINORDERKEY] componentsSeparatedByString:@","] mutableCopy];
+		if (newOrder == nil || newOrder.count < 7) {
+			newOrder = [[NSMutableArray alloc] init];
+			int cnt = functionArray.count;
+			for (int i = 0; i < cnt; i++) {
+				[newOrder addObject:[NSString stringWithFormat:@"%d", i]];
+			}
+		};
+		_functionOrder = [[NSArray alloc] initWithArray:newOrder];
+		[newOrder release];
+		NSLog(@"order: %@", _functionOrder);
+	}
+	return _functionOrder;
+}
+
+#pragma mark - View Lifecycle
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -104,18 +124,6 @@
 					  @"NO", @"NanbeigeLine3Button2Cell", 
 					  nil];
 	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSMutableArray *newOrder = [[[defaults valueForKey:@"mainOrder"] componentsSeparatedByString:@","] mutableCopy];
-	if (newOrder == nil || newOrder.count < 7) {
-		newOrder = [[NSMutableArray alloc] init];
-		int cnt = functionArray.count;
-		for (int i = 0; i < cnt; i++) {
-			[newOrder addObject:[NSString stringWithFormat:@"%d", i]];
-		}
-	};
-	functionOrder = [[NSArray alloc] initWithArray:newOrder];
-	[newOrder release];
-	NSLog(@"order: %@", functionOrder);
 }
 
 + (NSString *)nibNameFromIdentifier:(NSString *)identifier
@@ -159,7 +167,7 @@
 #pragma mark Table View Attributes Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUInteger row = [indexPath row];
-	NSUInteger functionIndex = [(NSString *)([functionOrder objectAtIndex:row]) integerValue];
+	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
 	NSString *identifier = [[functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
 	NSString *nibName = [[self class] nibNameFromIdentifier:identifier];
 	
@@ -189,7 +197,7 @@
 {
 	
 	NSUInteger row = [indexPath row];
-	NSUInteger functionIndex = [(NSString *)([functionOrder objectAtIndex:row]) integerValue];
+	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
 	NSString *identifier = [[functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
 	NSString *nibName = [[self class] nibNameFromIdentifier:identifier];
 	NSString *name = [[functionArray objectAtIndex:functionIndex] objectForKey:@"name"];
@@ -257,7 +265,7 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-	NSMutableArray *newOrder = [functionOrder mutableCopy];
+	NSMutableArray *newOrder = [self.functionOrder mutableCopy];
 	NSUInteger fromRow = [fromIndexPath row];
 	NSUInteger toRow = [toIndexPath row];
 	id object = [newOrder objectAtIndex:fromRow];
@@ -266,9 +274,9 @@
 	
 	NSString * neworderStr = [newOrder componentsJoinedByString:@","];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:neworderStr forKey:@"mainOrder"];
+	[defaults setValue:neworderStr forKey:kMAINORDERKEY];
 	
-	functionOrder = [[NSArray alloc] initWithArray:newOrder];
+	self.functionOrder = [[NSArray alloc] initWithArray:newOrder];
 	[newOrder release];
 }
 
@@ -288,7 +296,7 @@
 {
     // Navigation logic may go here. Create and push another view controller.
 	NSUInteger row = [indexPath row];
-	NSUInteger functionIndex = [(NSString *)([functionOrder objectAtIndex:row]) integerValue];
+	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
 	if (functionIndex == 0) {
 		[self performSegueWithIdentifier:@"ItsEnterSegue" sender:self];
 	}

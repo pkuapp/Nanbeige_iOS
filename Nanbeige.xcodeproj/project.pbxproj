@@ -379,6 +379,8 @@
 		2678C32915B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C32815B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m */; };
 		2678C37115B26ADA005E1D3E /* location.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2678C37015B26ADA005E1D3E /* location.plist */; };
 		2678C37415B26AE9005E1D3E /* test_data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2678C37315B26AE9005E1D3E /* test_data.plist */; };
+		2678C37D15B2B2FF005E1D3E /* NanbeigeSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C37C15B2B2FF005E1D3E /* NanbeigeSignupViewController.m */; };
+		2678C38015B2B30E005E1D3E /* NanbeigeLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C37F15B2B30E005E1D3E /* NanbeigeLoginViewController.m */; };
 		26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */; };
 		26D5FA1615AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1515AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m */; };
 		26D5FA1C15AFFB930075B68D /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */; };
@@ -945,6 +947,10 @@
 		2678C32815B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine3Button2Cell.m; sourceTree = "<group>"; };
 		2678C37015B26ADA005E1D3E /* location.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = location.plist; sourceTree = "<group>"; };
 		2678C37315B26AE9005E1D3E /* test_data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test_data.plist; sourceTree = "<group>"; };
+		2678C37B15B2B2FF005E1D3E /* NanbeigeSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeSignupViewController.h; sourceTree = "<group>"; };
+		2678C37C15B2B2FF005E1D3E /* NanbeigeSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeSignupViewController.m; sourceTree = "<group>"; };
+		2678C37E15B2B30E005E1D3E /* NanbeigeLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginViewController.h; sourceTree = "<group>"; };
+		2678C37F15B2B30E005E1D3E /* NanbeigeLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLoginViewController.m; sourceTree = "<group>"; };
 		26D5FA1115AFE2B20075B68D /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
 		26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeItsViewController.m; sourceTree = "<group>"; };
 		26D5FA1415AFF2B00075B68D /* NanbeigeLoginCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginCoursesViewController.h; sourceTree = "<group>"; };
@@ -1292,6 +1298,10 @@
 			children = (
 				262AD4A715AA7E06000C2EF7 /* NanbeigeSettingsViewController.h */,
 				262AD4A815AA7E06000C2EF7 /* NanbeigeSettingsViewController.m */,
+				2678C37B15B2B2FF005E1D3E /* NanbeigeSignupViewController.h */,
+				2678C37C15B2B2FF005E1D3E /* NanbeigeSignupViewController.m */,
+				2678C37E15B2B30E005E1D3E /* NanbeigeLoginViewController.h */,
+				2678C37F15B2B30E005E1D3E /* NanbeigeLoginViewController.m */,
 			);
 			name = SettingsView;
 			sourceTree = "<group>";
@@ -2319,6 +2329,8 @@
 				2678C32315B04B80005E1D3E /* NanbeigeLine2Button2Cell.m in Sources */,
 				2678C32615B04BB6005E1D3E /* NanbeigeLine3Button0Cell.m in Sources */,
 				2678C32915B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m in Sources */,
+				2678C37D15B2B2FF005E1D3E /* NanbeigeSignupViewController.m in Sources */,
+				2678C38015B2B30E005E1D3E /* NanbeigeLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,14 +14,6 @@
 @dynamic coursesid;
 @dynamic coursesname;
 @dynamic coursespassword;
-@dynamic itsid;
-@dynamic itsname;
-@dynamic itspassword;
-@dynamic renrenid;
-@dynamic renrenname;
-@dynamic weiboid;
-@dynamic weiboname;
-@dynamic mainorder;
 
 @dynamic assignset;
 @dynamic courses;

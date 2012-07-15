@@ -1,18 +1,19 @@
 //
-//  NanbeigeLoginItsViewController.m
+//  NanbeigeLoginViewController.m
 //  Nanbeige
 //
-//  Created by Wang Zhongyu on 12-7-13.
+//  Created by Wang Zhongyu on 12-7-15.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeLoginItsViewController.h"
+#import "NanbeigeLoginViewController.h"
+#import "Environment.h"
 
-@interface NanbeigeLoginItsViewController ()
+@interface NanbeigeLoginViewController ()
 
 @end
 
-@implementation NanbeigeLoginItsViewController
+@implementation NanbeigeLoginViewController
 @synthesize usernameTextField;
 @synthesize passwordTextField;
 @synthesize usernameCell;
@@ -31,10 +32,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+	
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
@@ -77,7 +78,7 @@
         usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         usernameTextField.enablesReturnKeyAutomatically = YES;
         usernameTextField.returnKeyType = UIReturnKeyNext;
-        usernameTextField.placeholder = @"网关账号";
+        usernameTextField.placeholder = @"南北阁账号";
         usernameTextField.delegate = self;
     }
     return  usernameTextField;
@@ -107,8 +108,8 @@
 		}
 		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setValue:usernameTextField.text forKey:kITSIDKEY];
-		[defaults setValue:passwordTextField.text forKey:kITSPASSWORDKEY];
+		[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
+		[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
 		[self dismissModalViewControllerAnimated:YES];
 		return NO;
     }

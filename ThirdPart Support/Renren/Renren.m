@@ -10,6 +10,7 @@
 #import "ROPublishPhotoRequestParam.h"
 #import "RORequest.h"
 #import "Renren.h"
+#import "Environment.h"
 
 @interface Renren(Private)
 

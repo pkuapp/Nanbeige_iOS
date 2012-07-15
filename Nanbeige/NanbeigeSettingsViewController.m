@@ -109,15 +109,20 @@
     self.weiBoEngine = engine;
     [engine release];
 	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) {
-		[self setWeiboLogoutButton];
+		if ([defaults valueForKey:kWEIBOIDKEY] != nil)
+			[self setWeiboLogoutButton];
+		else
+			[self.weiBoEngine logOut];
 	}
 }
 - (void)setWeiboLogoutButton
 {
 	//TODO
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	weiboCell.textLabel.text = [@"微博账号:"stringByAppendingString:
-								self.delegate.appUser.weiboid];
+								[defaults valueForKey:kWEIBOIDKEY]];
 	
 	weiboLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[weiboLogOutBtnOAuth setFrame:CGRectMake(250, 20, 50, 25)];
@@ -142,15 +147,20 @@
 - (void)setupRenren
 {
     renren = [Renren sharedRenren];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([renren isSessionValid]) {
-		[self setRenrenLogoutButton];
+		if ([defaults valueForKey:kRENRENNAMEKEY] != nil)
+			[self setRenrenLogoutButton];
+		else
+			[self.renren logout:self];
 	}
 }
 - (void)setRenrenLogoutButton
 {
 	//TODO
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	renrenCell.textLabel.text = [@"人人账号:"stringByAppendingString:
-								self.delegate.appUser.renrenname];
+								[defaults valueForKey:kRENRENNAMEKEY]];
 	
 	renrenLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[renrenLogOutBtnOAuth setFrame:CGRectMake(250, 65, 50, 25)];
@@ -208,6 +218,13 @@
 	} else {
 	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	}
+}
+
+- (void)resetMainOrder
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults removeObjectForKey:kMAINORDERKEY];
+	
 }
 
 /*
@@ -271,7 +288,9 @@
 		case 1:
 			break;
 		case 2:
+			[self resetMainOrder];
 			break;
+		case 3:
 		default:
 			break;
 	}
@@ -319,9 +338,9 @@
 	[self showAlert:@"登录成功！" withTag:kWBAlertViewLogInTag];
 	
 	//TODO
-	NSString *error;
-	[self.delegate authUserForAppWithWeiboID:[weiBoEngine userID] weiboName:nil error:&error];
-
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setValue:[weiBoEngine userID] forKey:kWEIBOIDKEY];
+	
 	[self setWeiboLogoutButton];
 }
 - (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
@@ -371,8 +390,9 @@
 			//renrenCell.textLabel.text = [renrenCell.textLabel.text stringByAppendingString:item.userId];
 			//renrenCell.textLabel.text = [renrenCell.textLabel.text stringByAppendingString:item.name];
 			
-			NSString *error;
-			[self.delegate authUserForAppWithRenrenID:item.userId renrenName:item.name error:&error];
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			[defaults setValue:item.name forKey:kRENRENNAMEKEY];
+			[defaults setValue:item.userId forKey:kRENRENIDKEY];
 		}
 		[self setRenrenLogoutButton];
 	} else {

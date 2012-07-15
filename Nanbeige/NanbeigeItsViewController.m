@@ -347,12 +347,11 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	//NSLog(@"appUser: %@, itsid: %@", self.delegate.appUser, self.delegate.appUser.itsid);
-	if (self.delegate.appUser == nil || self.delegate.appUser.itsid == nil || self.delegate.appUser.itsid.length == 0) {
-		[self performSegueWithIdentifier:@"LoginItsSegue" sender:self];
-	}
 	
 	self.defaults = [NSUserDefaults standardUserDefaults];
+	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
+		[self performSegueWithIdentifier:@"LoginItsSegue" sender:self];
+	}
     
 	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
 	self.connector = [[NanbeigeIPGateHelper alloc] init];
@@ -434,9 +433,9 @@
 {
 	progressHub.animationType = MBProgressHUDAnimationFade;
 	
-	self.Username = self.delegate.appUser.itsid;
-    self.Password = self.delegate.appUser.itspassword;
-	if (self.delegate.appUser == nil || self.delegate.appUser.itsid == nil || self.delegate.appUser.itsid.length == 0) {
+	self.Username = [self.defaults valueForKey:kITSIDKEY];
+    self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
+	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
 		[self performSegueWithIdentifier:@"LoginItsSegue" sender:self];
 		return ;
 	}

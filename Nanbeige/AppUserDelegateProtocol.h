@@ -16,11 +16,7 @@
 - (void)updateServerCourses;
 
 - (void)logout;
-- (BOOL)authUserForAppWithItsID:(NSString *)itsid itsPassword:(NSString *)itspassword sessionID:(NSString *)sid error:(NSString **)stringError;
 - (BOOL)authUserForAppWithCoursesID:(NSString *)coursesid coursesPassword:(NSString *)coursespassword coursesCode:(NSString *)coursescode sessionID:(NSString *)sid error:(NSString **)stringError;
-- (BOOL)authUserForAppWithRenrenID:(NSString *)renrenid renrenName:(NSString *)renrenname error:(NSString **)stringError;
-- (BOOL)authUserForAppWithWeiboID:(NSString *)weiboid weiboName:(NSString *)weiboname error:(NSString **)stringError;
--(BOOL)updateDefaultMainFunctionOrder:(NSMutableArray *)newFunctionOrder error:(NSString **)stringError;
--(NSArray *)defaultMainFunctionOrder;
+
 
 @end

@@ -38,6 +38,17 @@
 #define tableBgColor [[UIColor alloc] initWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]
 #define navBarBgColor [[UIColor alloc] initWithRed:110/255.0 green:110/255.0 blue:110/255.0 alpha:1.0]
 
+#define kMAINORDERKEY @"mainorder"
+#define kWEIBOIDKEY @"weiboid"
+#define kRENRENIDKEY @"renrenid"
+#define kWEIBONAMEKEY @"weiboname"
+#define kRENRENNAMEKEY @"renrenname"
+#define kITSIDKEY @"itsid"
+#define kITSPASSWORDKEY @"itspassword"
+
+#define kNANBEIGEIDKEY @"nanbeigeid"
+#define kNANBEIGEPASSWORDKEY @"nanbeigepassword"
+
 
 ///////////////////////////////
 #define test_username @"pkttus#42$"

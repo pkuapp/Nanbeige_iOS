@@ -18,11 +18,7 @@
 #import "ModalAlert.h"
 #import "AppUser.h"
 
-@interface NanbeigeMainViewController : UITableViewController {
-	NSMutableArray * functionArray;
-	NSArray * functionOrder;
-	NSMutableDictionary *nibsRegistered;
-}
+@interface NanbeigeMainViewController : UITableViewController
 
 @property (retain, nonatomic) NSMutableArray * functionArray;
 @property (retain, nonatomic) NSArray * functionOrder;

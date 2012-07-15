@@ -1,22 +1,25 @@
 //
-//  NanbeigeLoginItsViewController.m
+//  NanbeigeSignupViewController.m
 //  Nanbeige
 //
-//  Created by Wang Zhongyu on 12-7-13.
+//  Created by Wang Zhongyu on 12-7-15.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeLoginItsViewController.h"
+#import "NanbeigeSignupViewController.h"
+#import "Environment.h"
 
-@interface NanbeigeLoginItsViewController ()
+@interface NanbeigeSignupViewController ()
 
 @end
 
-@implementation NanbeigeLoginItsViewController
+@implementation NanbeigeSignupViewController
 @synthesize usernameTextField;
 @synthesize passwordTextField;
+@synthesize validcodeTextField;
 @synthesize usernameCell;
 @synthesize passwordCell;
+@synthesize validcodeCell;
 
 #pragma mark - View Lifecycle
 
@@ -31,15 +34,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+	
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
     [usernameCell.contentView addSubview: self.usernameTextField];
 	[passwordCell.contentView addSubview: self.passwordTextField];
+	[validcodeCell.contentView addSubview: self.validcodeTextField];
 	
 	[self.usernameTextField becomeFirstResponder];
 }
@@ -77,7 +81,7 @@
         usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         usernameTextField.enablesReturnKeyAutomatically = YES;
         usernameTextField.returnKeyType = UIReturnKeyNext;
-        usernameTextField.placeholder = @"网关账号";
+        usernameTextField.placeholder = @"南北阁账号";
         usernameTextField.delegate = self;
     }
     return  usernameTextField;
@@ -93,23 +97,34 @@
 		
         passwordTextField.enablesReturnKeyAutomatically = YES;
         
-        passwordTextField.returnKeyType = UIReturnKeyGo;
+        passwordTextField.returnKeyType = UIReturnKeyNext;
         passwordTextField.delegate = self;
     }
     return passwordTextField;
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (textField == self.passwordTextField) {
-        [self.passwordTextField resignFirstResponder];
-		if ([passwordTextField.text isEqualToString:@"reset"]) {
-			passwordTextField.text = @"";
-			usernameTextField.text = @"";//reset!
-		}
+- (UITextField *)validcodeTextField{
+    if (validcodeTextField == nil) {
+        validcodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(90, 11, 140, 20)];
+        validcodeTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setValue:usernameTextField.text forKey:kITSIDKEY];
-		[defaults setValue:passwordTextField.text forKey:kITSPASSWORDKEY];
+        validcodeTextField.borderStyle = UITextBorderStyleNone;
+        validcodeTextField.enablesReturnKeyAutomatically = YES;
+        validcodeTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		
+        validcodeTextField.keyboardType = UIKeyboardTypeASCIICapable;
+        validcodeTextField.returnKeyType = UIReturnKeyGo;
+        validcodeTextField.delegate = self;
+    }
+    return validcodeTextField;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.validcodeTextField) {
+        [self.validcodeTextField resignFirstResponder];
+		// TODO sign up the Username and Password
 		[self dismissModalViewControllerAnimated:YES];
+		return NO;
+	} else if (textField == self.passwordTextField) {
+        [self.validcodeCell becomeFirstResponder];
 		return NO;
     }
     else if (textField == self.usernameTextField) {
