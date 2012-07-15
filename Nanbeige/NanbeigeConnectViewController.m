@@ -1,12 +1,12 @@
 //
-//  NanbeigeSettingsViewController.m
+//  NanbeigeConnectViewController.m
 //  Nanbeige
 //
-//  Created by Wang Zhongyu on 12-7-9.
+//  Created by Wang Zhongyu on 12-7-15.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeSettingsViewController.h"
+#import "NanbeigeConnectViewController.h"
 #import "Environment.h"
 #import "ROConnect.h"
 
@@ -24,66 +24,157 @@
 #define kWBAlertViewLogOutTag 100
 #define kWBAlertViewLogInTag  101
 
-@interface NanbeigeSettingsViewController ()
+@interface NanbeigeConnectViewController () {
+	BOOL bGetRenrenName;
+    BOOL _isKeyboardHidden;
+	CGRect originalTextViewFrame;
+}
 
 @end
 
-@implementation NanbeigeSettingsViewController
-@synthesize weiBoEngine;
+@implementation NanbeigeConnectViewController
+@synthesize usernameTextField;
+@synthesize passwordTextField;
 @synthesize renren;
-@synthesize weiboCell;
-@synthesize renrenCell;
+@synthesize weiBoEngine;
 
-#pragma mark - View lifecycle
-
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
     return self;
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	
-//	self.navigationController.navigationBar.backgroundColor = navBarBgColor;
-//	self.tableView.backgroundColor = tableBgColor;
-	
+	// Do any additional setup after loading the view.
 	indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	[indicatorView setCenter:CGPointMake(160, 240)];
 	[self.view addSubview:indicatorView];
 	
+	bGetRenrenName = NO;
 	[self setupWeibo];
 	[self setupRenren];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:kWEIBOIDKEY] != nil || 
+		[defaults valueForKey:kRENRENIDKEY] != nil ||
+		[defaults valueForKey:kNANBEIGEIDKEY] != nil) {
+		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kNANBEIGEIDKEY] != nil) {
+			[defaults setValue:[defaults valueForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+			[defaults setValue:[defaults valueForKey:kNANBEIGEPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
+		}
+		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kRENRENIDKEY] != nil) {
+			[defaults setValue:[defaults valueForKey:kRENRENIDKEY] forKey:kACCOUNTIDKEY];
+		}
+		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kWEIBOIDKEY] != nil) {
+			[defaults setValue:[defaults valueForKey:kWEIBOIDKEY] forKey:kACCOUNTIDKEY];
+		}
+	}
 }
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     indicatorView = nil;
-	[self setWeiboCell:nil];
-	[self setRenrenCell:nil];
+	usernameTextField = nil;
+	passwordTextField = nil;
 }
 - (void)dealloc
 {
     [weiBoEngine setDelegate:nil];
     //[weiBoEngine release], weiBoEngine = nil;
 	//[renren release], renren = nil;
-    
     [indicatorView release];
-	[weiboCell release];
-	[renrenCell release];
+	[usernameTextField release];
+	[passwordTextField release];
 	
     [super dealloc];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+		//return YES;
+	} else {
+	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	}
+}
+
+- (void)didLogin
+{
+	[self dismissModalViewControllerAnimated:YES];
+	//[self performSegueWithIdentifier:@"DidLoginSegue" sender:self];
+}
+
+#pragma Keyboard Show and Hide
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    if (!CGRectContainsPoint(self.usernameTextField.frame,[touch locationInView:self.view])) {
+        if (!_isKeyboardHidden) {
+            [self.usernameTextField resignFirstResponder];
+        }
+    }
+	if (!CGRectContainsPoint(self.passwordTextField.frame,[touch locationInView:self.view])) {
+        if (!_isKeyboardHidden) {
+            [self.passwordTextField resignFirstResponder];
+        }
+    }
+}
+- (void)viewWillAppear:(BOOL)animated {
+    // Register notifications for when the keyboard appears 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)viewDidAppear:(BOOL)animated {
+	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) [self didLogin];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)keyboardWillShow:(NSNotification*)notification {
+	_isKeyboardHidden = NO;
+    [self moveViewForKeyboard:notification up:YES];
+}
+- (void)keyboardWillHide:(NSNotification*)notification {
+	_isKeyboardHidden = YES;
+    [self moveViewForKeyboard:notification up:NO];
+}
+- (void)moveViewForKeyboard:(NSNotification*)notification up:(BOOL)up {
+    NSDictionary *userInfo = [notification userInfo];
+    NSTimeInterval animationDuration;
+    UIViewAnimationCurve animationCurve;
+    CGRect keyboardRect;
+	
+    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    keyboardRect = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+	
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+	
+	if (up == YES) {
+        //CGFloat keyboardTop = keyboardRect.origin.y;
+        //CGRect newTextViewFrame = self.view.frame;
+        //originalTextViewFrame = self.view.frame;
+		//newTextViewFrame.size.height = keyboardTop - self.view.frame.origin.y - 20;
+		
+        //self.view.frame = newTextViewFrame;
+    } else {
+		// Keyboard is going away (down) - restore original frame
+        //self.view.frame = originalTextViewFrame;
+    }
+	
+    [UIView commitAnimations];
 }
 
 #pragma mark Weibo Setup
@@ -100,39 +191,10 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) {
 		if ([defaults valueForKey:kWEIBOIDKEY] != nil)
-			[self setWeiboLogoutButton];
+			;//[self showAlert:@"微博已登录但未保存用户id！"];
 		else
 			[self.weiBoEngine logOut];
 	}
-}
-- (void)setWeiboLogoutButton
-{
-	//TODO
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	weiboCell.textLabel.text = [@"微博账号:"stringByAppendingString:
-								[defaults valueForKey:kWEIBOIDKEY]];
-	weiboCell.selectionStyle = UITableViewCellSelectionStyleNone;
-	
-	weiboLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[weiboLogOutBtnOAuth setFrame:CGRectMake(250, 20, 50, 25)];
-	[weiboLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
-	[weiboLogOutBtnOAuth addTarget:self action:@selector(onWeiboLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:weiboLogOutBtnOAuth];
-}
-- (void)onWeiboLogOutButtonPressed
-{
-	[weiboLogOutBtnOAuth removeFromSuperview];
-	weiboCell.textLabel.text = @"连接微博账号";
-	weiboCell.selectionStyle = UITableViewCellSelectionStyleBlue;
-	
-	[weiBoEngine logOut];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults removeObjectForKey:kWEIBOIDKEY];
-	//[defaults removeObjectForKey:kWEIBONAMEKEY];
-}
-- (void)weiboLogIn
-{
-	[weiBoEngine logIn];
 }
 
 #pragma mark Renren Setup
@@ -143,41 +205,42 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([renren isSessionValid]) {
 		if ([defaults valueForKey:kRENRENNAMEKEY] != nil)
-			[self setRenrenLogoutButton];
+			;//[self showAlert:@"人人已登录但未保存用户id！"];
 		else
 			[self.renren logout:self];
 	}
 }
-- (void)setRenrenLogoutButton
-{
-	//TODO
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	renrenCell.textLabel.text = [@"人人账号:"stringByAppendingString:
-								[defaults valueForKey:kRENRENNAMEKEY]];
-	renrenCell.selectionStyle = UITableViewCellSelectionStyleNone;
-	
-	renrenLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[renrenLogOutBtnOAuth setFrame:CGRectMake(250, 65, 50, 25)];
-	[renrenLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
-	[renrenLogOutBtnOAuth addTarget:self action:@selector(onRenrenLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:renrenLogOutBtnOAuth];
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.passwordTextField) {
+        [self.passwordTextField resignFirstResponder];
+		
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
+		[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
+		[self didLogin];
+		return NO;
+    }
+    else if (textField == self.usernameTextField) {
+        [self.passwordTextField becomeFirstResponder];
+    }
+    return YES;
 }
-- (void)onRenrenLogOutButtonPressed
-{
-	[indicatorView startAnimating];
-	[renrenLogOutBtnOAuth removeFromSuperview];
-	renrenCell.textLabel.text = @"连接人人账号";
-	renrenCell.selectionStyle = UITableViewCellSelectionStyleBlue;
-	
-	[renren logout:self];
-	//[self showAlert:@"人人登出成功！" withTag:kWBAlertViewLogOutTag];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults removeObjectForKey:kRENRENIDKEY];
-	[defaults removeObjectForKey:kRENRENNAMEKEY];
-	[indicatorView stopAnimating];
+
+- (IBAction)signupButtonPressed:(id)sender {
+	[self showAlert:@"稍后开放注册，敬请期待！"];
 }
-- (void)renrenLogIn
-{
+
+- (IBAction)loginButtonPressed:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
+	[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
+	[defaults setValue:[defaults valueForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+	[defaults setValue:[defaults valueForKey:kNANBEIGEPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
+	[self didLogin];
+}
+
+- (IBAction)renrenLogin:(id)sender {
 	NSHTTPCookieStorage *cookies;
 	cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
 	NSArray* graphCookies = [cookies cookiesForURL:
@@ -206,95 +269,8 @@
 	}
 }
 
-#pragma mark Display Status
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-		//return YES;
-	} else {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	}
-}
-
-- (void)resetMainOrder
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults removeObjectForKey:kMAINORDERKEY];
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	NSUInteger section = [indexPath section];
-	NSUInteger row = [indexPath row];
-	switch (section) {
-		case 0:
-			switch (row) {
-				case 0:
-					if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) break;
-					[self weiboLogIn];
-					break;
-				case 1:
-					if ([renren isSessionValid]) break;
-					[self renrenLogIn];
-					break;
-				default:
-					break;
-			}
-			break;
-		case 1:
-			break;
-		case 2:
-			[self resetMainOrder];
-			break;
-		case 3:
-		default:
-			break;
-	}
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (IBAction)weiboLogin:(id)sender {
+	[weiBoEngine logIn];
 }
 
 #pragma mark
@@ -340,8 +316,8 @@
 	//TODO
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setValue:[weiBoEngine userID] forKey:kWEIBOIDKEY];
-	
-	[self setWeiboLogoutButton];
+	[defaults setValue:[defaults valueForKey:kWEIBOIDKEY] forKey:kACCOUNTIDKEY];
+	[self didLogin];
 }
 - (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
 {
@@ -352,7 +328,7 @@
 - (void)engineDidLogOut:(WBEngine *)engine
 {
 	[indicatorView stopAnimating];
-	//[self showAlert:@"微博登出成功！" withTag:kWBAlertViewLogOutTag];
+	[self showAlert:@"微博登出成功！" withTag:kWBAlertViewLogOutTag];
 }
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
@@ -373,7 +349,7 @@
 	ROUserInfoRequestParam *requestParam = [[[ROUserInfoRequestParam alloc] init] autorelease];
 	requestParam.fields = [NSString stringWithFormat:@"uid,name"];
 	[self.renren getUsersInfo:requestParam andDelegate:self];
-	renrenCell.textLabel.text = @"人人账号:";
+	bGetRenrenName = YES;
 }
 - (void)renren:(Renren *)renren loginFailWithError:(ROError*)error{
 	[indicatorView stopAnimating];
@@ -384,7 +360,7 @@
 }
 - (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response{
 	[indicatorView stopAnimating];
-	if ([renrenCell.textLabel.text isEqualToString:@"人人账号:"]) {
+	if (bGetRenrenName) {
 		NSArray *usersInfo = (NSArray *)(response.rootObject);
 		
 		for (ROUserResponseItem *item in usersInfo) {
@@ -394,8 +370,9 @@
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			[defaults setValue:item.name forKey:kRENRENNAMEKEY];
 			[defaults setValue:item.userId forKey:kRENRENIDKEY];
+			[defaults setValue:[defaults valueForKey:kRENRENIDKEY] forKey:kACCOUNTIDKEY];
+			[self didLogin];
 		}
-		[self setRenrenLogoutButton];
 	} else {
 		NSDictionary* params = (NSDictionary *)response.rootObject;
 		if (params!=nil) {
@@ -420,16 +397,4 @@
     [alert release];
 }
 
-- (IBAction)logoutAll:(id)sender {
-	[self onWeiboLogOutButtonPressed];
-	[self onRenrenLogOutButtonPressed];
-	[self resetMainOrder];
-	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults removeObjectForKey:kNANBEIGEIDKEY];
-	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
-	[defaults removeObjectForKey:kACCOUNTIDKEY];
-	[defaults removeObjectForKey:kACCOUNTPASSWORDKEY];
-	[self dismissModalViewControllerAnimated:YES];
-}
 @end

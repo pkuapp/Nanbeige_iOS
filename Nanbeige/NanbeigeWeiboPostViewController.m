@@ -22,7 +22,9 @@
 #define kWBAlertViewLogOutTag 100
 #define kWBAlertViewLogInTag  101
 
-@interface NanbeigeWeiboPostViewController ()
+@interface NanbeigeWeiboPostViewController () {
+	CGRect originalTextViewFrame;
+}
 
 @end
 
@@ -76,15 +78,6 @@
 	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	}
 }
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    _isKeyboardHidden = NO;
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-    _isKeyboardHidden = YES;
-}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     if (!CGRectContainsPoint(self.textToPost.frame,[touch locationInView:self.view])) {
@@ -92,6 +85,55 @@
             [self.textToPost resignFirstResponder];
         }
     }
+}
+- (void)viewWillAppear:(BOOL)animated {
+    // Register notifications for when the keyboard appears 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)keyboardWillShow:(NSNotification*)notification {
+	_isKeyboardHidden = NO;
+    [self moveTextViewForKeyboard:notification up:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification {
+	_isKeyboardHidden = YES;
+    [self moveTextViewForKeyboard:notification up:NO];
+}
+
+- (void)moveTextViewForKeyboard:(NSNotification*)notification up:(BOOL)up {
+    NSDictionary *userInfo = [notification userInfo];
+    NSTimeInterval animationDuration;
+    UIViewAnimationCurve animationCurve;
+    CGRect keyboardRect;
+	
+    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    keyboardRect = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+	
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+	
+	if (up == YES) {
+        CGFloat keyboardTop = keyboardRect.origin.y;
+        CGRect newTextViewFrame = textToPost.frame;
+        originalTextViewFrame = textToPost.frame;
+		newTextViewFrame.size.height = keyboardTop - textToPost.frame.origin.y - 20;
+		
+        textToPost.frame = newTextViewFrame;
+    } else {
+		// Keyboard is going away (down) - restore original frame
+        textToPost.frame = originalTextViewFrame;
+    }
+	
+    [UIView commitAnimations];
 }
 
 #pragma mark - IBAction

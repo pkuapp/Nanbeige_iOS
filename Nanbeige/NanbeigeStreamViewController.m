@@ -155,7 +155,7 @@
 		[self showAlert:@"人人未授权！请到设置中授权"];
 		self.tabBarController.selectedIndex = 2;
 	} else {
-		[self performSegueWithIdentifier:@"weiboPostSegue" sender:self];
+		[self performSegueWithIdentifier:@"RenrenPostSegue" sender:self];
 	}
 }
 
@@ -165,7 +165,7 @@
 		[self showAlert:@"微博未授权！请到设置中授权"];
 		self.tabBarController.selectedIndex = 2;
 	} else {
-		[self performSegueWithIdentifier:@"renrenPostSegue" sender:self];
+		[self performSegueWithIdentifier:@"WeiboPostSegue" sender:self];
 	}
 }
 @end

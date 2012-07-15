@@ -46,6 +46,8 @@
 #define kITSIDKEY @"itsid"
 #define kITSPASSWORDKEY @"itspassword"
 
+#define kACCOUNTIDKEY @"accoundid"
+#define kACCOUNTPASSWORDKEY @"accoundpassword"
 #define kNANBEIGEIDKEY @"nanbeigeid"
 #define kNANBEIGEPASSWORDKEY @"nanbeigepassword"
 
