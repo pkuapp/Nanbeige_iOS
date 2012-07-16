@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Environment.h"
+#import "NanbeigeItsViewController.h"
 
 @interface NanbeigeLoginItsViewController : UITableViewController <UITextFieldDelegate>
 - (IBAction)onCancelButtonPressed:(id)sender;

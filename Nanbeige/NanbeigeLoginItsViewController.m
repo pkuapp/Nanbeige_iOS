@@ -109,6 +109,7 @@
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		[defaults setValue:usernameTextField.text forKey:kITSIDKEY];
 		[defaults setValue:passwordTextField.text forKey:kITSPASSWORDKEY];
+		[defaults setValue:nil forKey:_keyAccountState];
 		[self dismissModalViewControllerAnimated:YES];
 		return NO;
     }

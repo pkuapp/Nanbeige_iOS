@@ -25,7 +25,6 @@
 #define kWBAlertViewLogInTag  101
 
 @interface NanbeigeSettingsViewController ()
-
 @end
 
 @implementation NanbeigeSettingsViewController
@@ -282,6 +281,10 @@
 	}
 }
 
+- (void)changeMainOrder
+{
+	[self performSegueWithIdentifier:@"changeMainOrderSegue" sender:self];
+}
 - (void)resetMainOrder
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -336,35 +339,27 @@
 	NSUInteger row = [indexPath row];
 	switch (section) {
 		case 0:
-			switch (row) {
-				case 0:
+			if (row == 0) {
 					if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) break;
 					[self weiboLogIn];
-					break;
-				case 1:
-					if ([renren isSessionValid]) break;
-					[self renrenLogIn];
-					break;
-				default:
-					break;
+			} else if (row == 1) {
+				if (![renren isSessionValid]) [self renrenLogIn];
 			}
 			break;
 		case 1:
-			switch (row) {
-				case 0:
-					if ([[NSUserDefaults standardUserDefaults] valueForKey:kNANBEIGEIDKEY] != nil) break;
+			if (row == 0) {
+				if ([[NSUserDefaults standardUserDefaults] valueForKey:kNANBEIGEIDKEY] == nil)
 					[self performSegueWithIdentifier:@"NanbeigeLoginSegue" sender:self];
-					break;
-				case 1:
-					[self performSegueWithIdentifier:@"NanbeigeSignupSegue" sender:self];
-					break;
-					
-				default:
-					break;
+			} else if (row == 1) {
+				[self performSegueWithIdentifier:@"NanbeigeSignupSegue" sender:self];
 			}
 			break;
 		case 2:
-			[self resetMainOrder];
+			if (row == 0) {
+				[self changeMainOrder];
+			} else if (row == 1) {
+				[self resetMainOrder];
+			}
 			break;
 		case 3:
 		default:

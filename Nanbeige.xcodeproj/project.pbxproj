@@ -384,6 +384,7 @@
 		2678C38315B2BCBD005E1D3E /* NanbeigeWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C38215B2BCBB005E1D3E /* NanbeigeWelcomeViewController.m */; };
 		2678C38A15B304CD005E1D3E /* NanbeigeConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C38915B304CA005E1D3E /* NanbeigeConnectViewController.m */; };
 		26A6B50A15B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A6B50915B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.m */; };
+		26A6B50E15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A6B50D15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.m */; };
 		26A6E98415B30BA20001B2E0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6E98215B30BA20001B2E0 /* Default.png */; };
 		26A6E98515B30BA20001B2E0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6E98315B30BA20001B2E0 /* Default@2x.png */; };
 		26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */; };
@@ -962,6 +963,8 @@
 		2678C38915B304CA005E1D3E /* NanbeigeConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeConnectViewController.m; sourceTree = "<group>"; };
 		26A6B50815B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeDetailGateInfoViewController.h; sourceTree = "<group>"; };
 		26A6B50915B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeDetailGateInfoViewController.m; sourceTree = "<group>"; };
+		26A6B50C15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeChangeMainOrderViewController.h; sourceTree = "<group>"; };
+		26A6B50D15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeChangeMainOrderViewController.m; sourceTree = "<group>"; };
 		26A6E98215B30BA20001B2E0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		26A6E98315B30BA20001B2E0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		26D5FA1115AFE2B20075B68D /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
@@ -1316,6 +1319,8 @@
 				2678C37C15B2B2FF005E1D3E /* NanbeigeSignupViewController.m */,
 				2678C37E15B2B30E005E1D3E /* NanbeigeLoginViewController.h */,
 				2678C37F15B2B30E005E1D3E /* NanbeigeLoginViewController.m */,
+				26A6B50C15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.h */,
+				26A6B50D15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.m */,
 			);
 			name = SettingsView;
 			sourceTree = "<group>";
@@ -2365,6 +2370,7 @@
 				2678C38315B2BCBD005E1D3E /* NanbeigeWelcomeViewController.m in Sources */,
 				2678C38A15B304CD005E1D3E /* NanbeigeConnectViewController.m in Sources */,
 				26A6B50A15B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.m in Sources */,
+				26A6B50E15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,20 @@
 #import "NanbeigeIPGateHelper.h"
 #import "Environment.h"
 #import "ModalAlert.h"
+#import "NanbeigeAppDelegate.h"
+#import "ASIHTTPRequest.h"
+#import "SystemHelper.h"
+#import "RegexKitLite.h"
+#import "NanbeigeDetailGateInfoViewController.h"
+
+#define _keyAutoDisconnect @"AutoDisconnect"
+#define _keyAlwaysGlobal @"AlwaysGlobal"
+#define _keyAccountState @"IPGateAccount"
+#define _keyIPGateBalance @"余额"
+#define _keyIPGateType @"Type"
+#define _keyIPGateTimeLeft @"timeLeft"
+#define _keyIPGateTimeConsumed @"Time"
+#define _keyIPGateUpdatedTime @"IPGateUpdatedTime"
 
 @interface NanbeigeItsViewController : UITableViewController<NanbeigeIPGateConnectDelegate,MBProgressHUDDelegate> { 
     BOOL _autoDisconnect;
@@ -24,21 +38,23 @@
 }
 @property (retain, nonatomic) NSString* Username;
 @property (retain, nonatomic) NSString* Password;
+
 @property (retain, nonatomic) NSMutableDictionary* gateStateDictionary;
-@property (assign) NanbeigeIPGateHelper* connector;
-@property (retain,nonatomic) UISwitch *swAutoDisconnect;
-@property (retain,nonatomic) UISwitch *swAlwaysGlobal;
 @property (retain, nonatomic) NSUserDefaults *defaults;
+@property (assign) NanbeigeIPGateHelper* connector;
 @property (assign, nonatomic) NSInteger numStatus;
+
 @property (retain, nonatomic) UILabel *labelStatus;
 @property (retain, nonatomic) UILabel *labelWarning;
 @property (retain, nonatomic) MBProgressHUD *progressHub;
 @property (nonatomic, assign) NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *delegate;
+
 @property (retain, nonatomic) IBOutlet UITableViewCell *connectFree;
 @property (retain, nonatomic) IBOutlet UITableViewCell *connectGlobal;
 @property (retain, nonatomic) IBOutlet UITableViewCell *disconnectAll;
-- (IBAction)detailGateInfoPressed:(id)sender;
 @property (retain, nonatomic) IBOutlet UIButton *detailGateInfo;
+
+- (IBAction)detailGateInfoPressed:(id)sender;
 - (IBAction)backToMainButtonPressed:(id)sender;
 
 @end

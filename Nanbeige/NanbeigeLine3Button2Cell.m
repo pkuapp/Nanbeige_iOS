@@ -9,6 +9,8 @@
 #import "NanbeigeLine3Button2Cell.h"
 
 @implementation NanbeigeLine3Button2Cell
+@synthesize statusLabel;
+@synthesize detailStatusLabel;
 @synthesize nameLabel;
 @synthesize imageView;
 @synthesize name;
@@ -47,7 +49,29 @@
 - (void)dealloc {
 	[imageView release];
 	[nameLabel release];
+    [statusLabel release];
+    [detailStatusLabel release];
 	[super dealloc];
 }
 
+-(void)showAlert:(NSString*)message{
+	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
+													   message:message
+													  delegate:nil
+											 cancelButtonTitle:@"确定"
+											 otherButtonTitles:nil];
+	[alertView show];
+    [alertView release];
+}
+- (IBAction)connectFree:(id)sender {
+	[self showAlert:@"连接免费！"];
+}
+
+- (IBAction)connectGlobal:(id)sender {
+	[self showAlert:@"连接收费！"];
+}
+
+- (IBAction)disconnectAll:(id)sender {
+	[self showAlert:@"断开连接！"];
+}
 @end

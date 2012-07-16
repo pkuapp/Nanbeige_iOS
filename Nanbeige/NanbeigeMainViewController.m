@@ -114,7 +114,7 @@
 								  @"Line2Button2Identifier", @"identifier", 
 								  nil];
 	
-	functionArray =[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil];
+	functionArray =[[NSArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil];
 	
 	nibsRegistered = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 					  @"NO", @"NanbeigeLine1Button0Cell",
@@ -123,7 +123,7 @@
 					  @"NO", @"NanbeigeLine3Button0Cell",
 					  @"NO", @"NanbeigeLine3Button2Cell", 
 					  nil];
-	
+
 }
 
 + (NSString *)nibNameFromIdentifier:(NSString *)identifier

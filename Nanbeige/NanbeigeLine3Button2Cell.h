@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NanbeigeItsViewController.h"
 
 @interface NanbeigeLine3Button2Cell : UITableViewCell
 @property (retain, nonatomic) IBOutlet UIImageView *imageView;
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;
 @property (copy, nonatomic) NSString *name;
 @property (copy, nonatomic) NSString *image;
+
+- (IBAction)connectFree:(id)sender;
+- (IBAction)connectGlobal:(id)sender;
+- (IBAction)disconnectAll:(id)sender;
+@property (retain, nonatomic) IBOutlet UILabel *statusLabel;
+@property (retain, nonatomic) IBOutlet UILabel *detailStatusLabel;
 
 @end
