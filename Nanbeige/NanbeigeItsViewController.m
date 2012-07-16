@@ -59,6 +59,7 @@
 	
     self.labelWarning.text = stringUpdateStatus;
     
+	[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
     switch (anumStatus) {
         case 0:
             self.labelStatus.text = @"当前网络状态未知";
@@ -135,6 +136,7 @@
 		} else {
 			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:@"timeLeft"]];
 		}
+		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
         [detailGateInfo setTitle:[@"可访问免费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
         self.numStatus = 2;
     }
@@ -186,6 +188,7 @@
 			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:@"timeLeft"]];
 		}
         
+		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
 		[detailGateInfo setTitle:[@"可访问收费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
         self.numStatus = 3;
 	}
@@ -251,9 +254,15 @@
 	[connectGlobal setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
 	[disconnectAll setBackgroundColor:[UIColor colorWithRed:176/255.0 green:92/255.0 blue:69/255.0 alpha:1.0]];
 	
+	[detailGateInfo setBackgroundColor:gateConnectedBtnColor];
 	detailGateInfo.titleLabel.textAlignment = UITextAlignmentCenter;
 	detailGateInfo.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
-	[detailGateInfo setTitle:@"当前网络状态未知\n用户状态未知" forState:UIControlStateNormal];
+	if ([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] != nil) {
+		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余：%@小时\n%@", [self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed], self.labelWarning.text] forState:UIControlStateNormal];
+	} else {
+		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余时间未知\n%@", self.labelWarning.text] forState:UIControlStateNormal];
+	}
+	//[detailGateInfo setTitle:@"当前网络状态未知\n用户状态未知" forState:UIControlStateNormal];
 	
 	bViewDidLoad = YES;
 	

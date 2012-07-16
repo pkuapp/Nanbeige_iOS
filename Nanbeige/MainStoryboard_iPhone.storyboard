@@ -304,15 +304,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="仪表盘" id="Ghq-hk-poq">
-                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="编辑" id="Kud-7j-NQQ">
+                        <barButtonItem key="rightBarButtonItem" title="日历" id="OGw-dI-ZZr">
                             <connections>
-                                <action selector="editFunctionOrder:" destination="T7Q-qL-CHf" id="TVq-Vr-Jud"/>
+                                <action selector="calendarButtonPressed:" destination="T7Q-qL-CHf" id="Fgh-45-d4e"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="日历" id="OGw-dI-ZZr"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="editFunctionButton" destination="Kud-7j-NQQ" id="ixW-FH-hQb"/>
                         <segue destination="CIL-D1-6Cb" kind="modal" identifier="ItsEnterSegue" id="8aD-1e-L38"/>
                     </connections>
                 </tableViewController>
@@ -439,8 +437,8 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="0.97254901959999995" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                            <state key="normal" title="当前网络状态未知\n用户状态未知">
-                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="网络状态未知\n用户状态未知">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="highlighted">
@@ -1581,115 +1579,6 @@
         <image name="widget_3line_0btn.png" width="663" height="227"/>
         <image name="widget_3line_2btn.png" width="663" height="268"/>
     </resources>
-    <classes>
-        <class className="NanbeigeChangeMainOrderViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChangeMainOrderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onChangeButtonPressed:"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeConnectViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeConnectViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginButtonPressed:"/>
-                <relationship kind="action" name="renrenLogin:"/>
-                <relationship kind="action" name="signupButtonPressed:"/>
-                <relationship kind="action" name="weiboLogin:"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeDetailGateInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeDetailGateInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backToMainButtonPressed:"/>
-                <relationship kind="action" name="detailGateInfoPressed:"/>
-                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="detailGateInfo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeLoginItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeLoginViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="editFunctionOrder:"/>
-                <relationship kind="outlet" name="editFunctionButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeSettingsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="logoutAll:"/>
-                <relationship kind="outlet" name="nanbeigeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="renrenCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="weiboCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeSignupViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSignupViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="validcodeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeStreamViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="renrenPost:"/>
-                <relationship kind="action" name="weiboPost:"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeWelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWelcomeViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

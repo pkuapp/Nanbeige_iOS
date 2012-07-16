@@ -126,6 +126,20 @@
 
 }
 
+
+-(void)showAlert:(NSString*)message{
+	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
+													   message:message
+													  delegate:nil
+											 cancelButtonTitle:@"确定"
+											 otherButtonTitles:nil];
+	[alertView show];
+    [alertView release];
+}
+- (IBAction)calendarButtonPressed:(id)sender {
+	[self showAlert:@"日历功能正在制作中，敬请期待！"];
+}
+
 + (NSString *)nibNameFromIdentifier:(NSString *)identifier
 {
 	NSString *nibName = @"Nanbeige";
@@ -299,6 +313,8 @@
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
 	if (functionIndex == 0) {
 		[self performSegueWithIdentifier:@"ItsEnterSegue" sender:self];
+	} else {
+		[self showAlert:@"功能正在制作中，敬请期待！"];
 	}
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

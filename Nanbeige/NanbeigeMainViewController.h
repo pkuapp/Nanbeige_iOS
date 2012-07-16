@@ -27,6 +27,7 @@
 
 -(IBAction)editFunctionOrder:(id)sender;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *editFunctionButton;
+- (IBAction)calendarButtonPressed:(id)sender;
 + (NSString *)nibNameFromIdentifier:(NSString *)identifier;
 
 @end
