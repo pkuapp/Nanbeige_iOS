@@ -165,9 +165,12 @@
     }
     else {
 		if ([self.connector.dictResult objectForKey:@"REASON"] == nil) {
-			self.progressHub.labelText = @"未知错误";
+			self.progressHub.labelText = @"网络错误，请稍后再试。";
 		} else {
 			self.progressHub.labelText = [self.connector.dictResult objectForKey:@"REASON"];
+			if ([self.progressHub.labelText hasSuffix:@"设在例外中"]) {
+				self.progressHub.labelText = @"您的IP地址不在学校范围内。";
+			}
 		}
         self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-no.png"]] autorelease];
         self.progressHub.mode = MBProgressHUDModeCustomView;
@@ -225,16 +228,6 @@
     }
     return self;
 }
-- (void)dealloc
-{
-    [Username release];
-    [Password release];
-    [connectFree release];
-	[connectGlobal release];
-	[disconnectAll release];
-	[detailGateInfo release];
-    [super dealloc];
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -247,8 +240,8 @@
 	
 	self.defaults = [NSUserDefaults standardUserDefaults];
     
-	self.connector = [[NanbeigeIPGateHelper alloc] init];
-	self.connector.delegate = self;
+	//self.connector = [[NanbeigeIPGateHelper alloc] init];
+	//self.connector.delegate = self;
 	
 	[connectFree setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
 	[connectGlobal setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
@@ -283,8 +276,20 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.Username = nil;
-    self.Password = nil;
+}
+- (void)dealloc
+{
+    [Username release];
+    [Password release];
+    [connectFree release];
+	[connectGlobal release];
+	[disconnectAll release];
+	[detailGateInfo release];
+	//progressHub.delegate = nil;
+	//[progressHub release];
+	//connector.delegate = nil;
+	//[connector release];
+    [super dealloc];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

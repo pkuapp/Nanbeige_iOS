@@ -14,6 +14,7 @@
 #import "ReachabilityProtocol.h"
 #import "Reachability.h"
 #import "NanbeigeIPGateHelper.h"
+#import "NanbeigeItsViewController.h"
 #import "Environment.h"
 #import "ModalAlert.h"
 #import "AppUser.h"
@@ -24,6 +25,9 @@
 @property (retain, nonatomic) NSArray * functionOrder;
 @property (retain, nonatomic) NSMutableDictionary *nibsRegistered;
 @property (assign, nonatomic) NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *delegate;
+
+@property (retain, nonatomic) NanbeigeItsViewController *nivc;
+@property (assign) NanbeigeIPGateHelper *connector;
 
 -(IBAction)editFunctionOrder:(id)sender;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *editFunctionButton;

@@ -25,6 +25,8 @@
 @synthesize functionOrder = _functionOrder;
 @synthesize functionArray;
 @synthesize nibsRegistered;
+@synthesize nivc;
+@synthesize connector;
 
 #pragma mark - getter and setter Override
 
@@ -123,7 +125,21 @@
 					  @"NO", @"NanbeigeLine3Button0Cell",
 					  @"NO", @"NanbeigeLine3Button2Cell", 
 					  nil];
-
+	self.connector = [[NanbeigeIPGateHelper alloc] init];
+}
+- (void)viewDidUnload
+{
+	[self setFunctionOrder:nil];
+	[self setFunctionArray:nil];
+	[self setNibsRegistered:nil];
+	[self setEditFunctionButton:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+	NSLog(@"%@", self.nivc);
 }
 
 
@@ -154,17 +170,6 @@
 		[editFunctionButton setTitle:@"完成"];
 	else
 		[editFunctionButton setTitle:@"编辑"];
-}
-
-- (void)viewDidUnload
-{
-	[self setFunctionOrder:nil];
-	[self setFunctionArray:nil];
-	[self setNibsRegistered:nil];
-	[self setEditFunctionButton:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -323,4 +328,19 @@
 	[editFunctionButton release];
 	[super dealloc];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:@"ItsEnterSegue"]) {
+		if (self.nivc == nil) {
+			NanbeigeItsViewController *destinationViewController = (NanbeigeItsViewController *)([((UINavigationController *)[segue destinationViewController]) topViewController]);
+			destinationViewController.connector = self.connector;
+			self.connector.delegate = destinationViewController;
+			self.nivc = destinationViewController;
+			[self.nivc retain];
+			[destinationViewController release];
+		}
+	}
+}
+
 @end

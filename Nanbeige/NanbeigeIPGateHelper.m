@@ -106,7 +106,7 @@
 - (void)connectFreeFinished:(ASIHTTPRequest *)Request
 {
     NSString *stringResponse = [Request responseString];
-    
+    NSLog(@"%@", self.delegate);
     if ([self connectionSucceed:stringResponse]) {
         [self.delegate connectFreeSuccess];        
     }
