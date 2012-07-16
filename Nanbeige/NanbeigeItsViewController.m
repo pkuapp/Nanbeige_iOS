@@ -129,15 +129,14 @@
     NSDictionary *dictDetail = self.connector.dictDetail;
     if (![[dictDetail objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
         NSString *accountTimeLeftString;
-		if ([[dictDetail objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]) {
-			accountTimeLeftString = [dictDetail objectForKey:_keyIPGateTimeLeft];
-		} else {
-			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:_keyIPGateTimeLeft]];
-		}
+		accountTimeLeftString = [NSString stringWithFormat:@"包月剩余：%@",[dictDetail objectForKey:_keyIPGateTimeLeft]];
 		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
         [detailGateInfo setTitle:[@"可访问免费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
+    } else {
+		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
+        [detailGateInfo setTitle:@"可访问免费地址" forState:UIControlStateNormal];
         self.numStatus = 2;
-    }
+	}
 	
     progressHub.animationType = MBProgressHUDAnimationZoom;
     self.progressHub.labelText = @"已连接到免费地址";
@@ -183,11 +182,7 @@
     NSDictionary *dictDetail = self.connector.dictDetail;    
     if (![[dictDetail objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
 		NSString *accountTimeLeftString;
-        if ([[dictDetail objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]) {
-			accountTimeLeftString = [dictDetail objectForKey:_keyIPGateTimeLeft];
-		} else {
-			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:_keyIPGateTimeLeft]];
-		}
+		accountTimeLeftString = [NSString stringWithFormat:@"包月剩余：%@",[dictDetail objectForKey:_keyIPGateTimeLeft]];
         
 		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
 		[detailGateInfo setTitle:[@"可访问收费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
@@ -247,20 +242,21 @@
 	[connectGlobal setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
 	[disconnectAll setBackgroundColor:[UIColor colorWithRed:176/255.0 green:92/255.0 blue:69/255.0 alpha:1.0]];
 	
+	bViewDidLoad = YES;
+	
+}
+- (void)viewWillAppear:(BOOL)animated
+{
 	[detailGateInfo setBackgroundColor:gateConnectedBtnColor];
 	detailGateInfo.titleLabel.textAlignment = UITextAlignmentCenter;
 	detailGateInfo.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
 	
 	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
-	if ([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] != nil) {
-		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余：%@小时\n%@", [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft], [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime]] forState:UIControlStateNormal];
+	if ([[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
+		[detailGateInfo setTitle:[NSString stringWithFormat:@"账户余额：%@\n%@", [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"%@元", [self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"未知", [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : @"更新时间：无"] forState:UIControlStateNormal];
 	} else {
-		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余时间未知\n%@", [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime]] forState:UIControlStateNormal];
+		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余：%@\n%@", [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知", [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : @"更新时间：无"] forState:UIControlStateNormal];
 	}
-	//[detailGateInfo setTitle:@"当前网络状态未知\n用户状态未知" forState:UIControlStateNormal];
-	
-	bViewDidLoad = YES;
-	
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -396,8 +392,8 @@
 		} else {
 			dvc.accountPackage = [self.gateStateDictionary objectForKey:_keyIPGateType] ? [self.gateStateDictionary objectForKey:_keyIPGateType] : @"未知";
 		}
-		dvc.accountAccuTime = [dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? @"未计时" : ([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] ? [NSString stringWithFormat: @"%@小时",[self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed]] : @"未知");
-		dvc.accountRemainTime = [dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? @"不限时" : ([self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [NSString stringWithFormat: @"%@小时",[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft]] : @"未知");
+		dvc.accountAccuTime = [dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? @"未包月" : ([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] : @"未知");
+		dvc.accountRemainTime = [dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? @"未包月" : ([self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知");
 		dvc.accountBalance = [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"%@元",[self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"未知";
 	}
 }

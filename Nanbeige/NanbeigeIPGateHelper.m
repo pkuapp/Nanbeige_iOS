@@ -63,22 +63,19 @@
         
         NSMutableDictionary *dictDetail =[NSMutableDictionary dictionaryWithDictionary:[stringResponse dictionaryByMatchingRegex:patternAccountDetail withKeysAndCaptures:@"Type",1,@"Time",2,@"Balance",3, nil]];
         
-        if (![[dictDetail objectForKey:@"Type"] isEqualToString:@"未包月"]) {
-            
+        if (![dictDetail objectForKey:@"Type"] || [[dictDetail objectForKey:@"Type"] isEqualToString:@"未包月"]) {
+			[dictDetail setObject:@"NO" forKey:@"Type"];
+			[dictDetail setObject:@"不限时" forKey:@"timeLeft"];
+			[dictDetail setObject:@"未计时" forKey:@"Time"];
+		} else if ([dictDetail objectForKey:@"Type"]) {
             NSArray *array = [[dictDetail objectForKey:@"Type"] captureComponentsMatchedByRegex:pTime];
-            
             if (array != nil) {
-                
                 float timeAll = [[array objectAtIndex:1] floatValue];
-                
                 float timeLeft = timeAll - [[dictDetail objectForKey:@"Time"] floatValue];
-                [dictDetail setObject:[NSString stringWithFormat:@"%1.2f",timeLeft] forKey:@"timeLeft"];
-            }
-            else
-                [dictDetail setObject:@"不限时" forKey:@"timeLeft"];
-            
+                [dictDetail setObject:[NSString stringWithFormat:@"%1.2f 小时",timeLeft] forKey:@"timeLeft"];
+				[dictDetail setObject:[NSString stringWithFormat:@"%1.2f 小时",[[dictDetail objectForKey:@"Time"] floatValue]] forKey:@"Time"];
+            } else [dictDetail setObject:@"不限时" forKey:@"timeLeft"];
         }
-        else [dictDetail setObject:@"NO" forKey:@"Type"];
         
         self.dictDetail = dictDetail;
         

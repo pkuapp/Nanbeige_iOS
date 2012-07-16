@@ -497,6 +497,8 @@
 	[self resetMainOrder];
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults removeObjectForKey:kITSIDKEY];
+	[defaults removeObjectForKey:kITSPASSWORDKEY];
 	[defaults removeObjectForKey:kNANBEIGEIDKEY];
 	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
 	[defaults removeObjectForKey:kACCOUNTIDKEY];
