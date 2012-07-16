@@ -83,7 +83,7 @@
 	NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 							 @"IP网关", @"name",
 							 @"its", @"image", 
-							 @"Line3Button2Identifier", @"identifier",
+							 @"Line1Button0Identifier", @"identifier",
 							 nil];
 	NSDictionary *coursesDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								 @"课程", @"name", 
@@ -116,7 +116,7 @@
 								  @"Line2Button2Identifier", @"identifier", 
 								  nil];
 	
-	functionArray =[[NSArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil];
+	functionArray =[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil];
 	
 	nibsRegistered = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 					  @"NO", @"NanbeigeLine1Button0Cell",
@@ -137,9 +137,28 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-	//NSLog(@"%@", self.nivc);
+	NSLog(@"%@;%@", [[self.functionArray objectAtIndex:0] objectForKey:@"identifier"], [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY]);
+	if ([[[self.functionArray objectAtIndex:0] objectForKey:@"identifier"] isEqualToString:@"Line3Button2Identifier"] && [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] == nil) {
+		NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+								 @"IP网关", @"name",
+								 @"its", @"image", 
+								 @"Line1Button0Identifier", @"identifier",
+								 nil];
+		[self.functionArray removeObjectAtIndex:0];
+		[self.functionArray insertObject:itsDict atIndex:0];
+		[self.tableView reloadData];
+	} else if ([[[self.functionArray objectAtIndex:0] objectForKey:@"identifier"] isEqualToString:@"Line1Button0Identifier"] && [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] != nil) {
+		NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+								 @"IP网关", @"name",
+								 @"its", @"image", 
+								 @"Line3Button2Identifier", @"identifier",
+								 nil];
+		[self.functionArray removeObjectAtIndex:0];
+		[self.functionArray insertObject:itsDict atIndex:0];
+		[self.tableView reloadData];
+	}
 }
 
 

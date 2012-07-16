@@ -102,14 +102,18 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField == self.passwordTextField) {
         [self.passwordTextField resignFirstResponder];
-		if ([passwordTextField.text isEqualToString:@"reset"]) {
-			passwordTextField.text = @"";
-			usernameTextField.text = @"";//reset!
-		}
-		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
 		[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
+		
+		if (!usernameTextField.text ||
+			[usernameTextField.text isEqualToString:@""] || 
+			!passwordTextField.text ||
+			[passwordTextField.text isEqualToString:@""]) {
+			[defaults removeObjectForKey:kNANBEIGEIDKEY];
+			[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
+		}
+		
 		[self dismissModalViewControllerAnimated:YES];
 		return NO;
     }

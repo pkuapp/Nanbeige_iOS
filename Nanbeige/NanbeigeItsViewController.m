@@ -309,6 +309,7 @@
     self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
 	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
 		[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		return ;
 	}
 	
@@ -378,10 +379,10 @@
 		
 		self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
 		
-		for (NSString *key in [self.gateStateDictionary allKeys]) {
+/*		for (NSString *key in [self.gateStateDictionary allKeys]) {
 			NSLog(@"%@ -> %@", [[self class] replaceUnicode:key], [[self class] replaceUnicode:[self.gateStateDictionary valueForKey:key]]);
 		}
-		
+*/		
 		dvc.accountStatus = [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime];
 		if (dvc.accountStatus == nil) dvc.accountStatus = self.labelWarning.text;
 		

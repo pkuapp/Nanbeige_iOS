@@ -21,7 +21,7 @@
 
 @interface NanbeigeMainViewController : UITableViewController
 
-@property (retain, nonatomic) NSArray * functionArray;
+@property (retain, nonatomic) NSMutableArray * functionArray;
 @property (retain, nonatomic) NSArray * functionOrder;
 @property (retain, nonatomic) NSMutableDictionary *nibsRegistered;
 @property (assign, nonatomic) NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *delegate;

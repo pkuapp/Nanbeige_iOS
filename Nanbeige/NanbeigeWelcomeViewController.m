@@ -37,6 +37,9 @@
 		[defaults valueForKey:kRENRENIDKEY] == nil &&
 		[defaults valueForKey:kNANBEIGEIDKEY] == nil) {
 		[defaults removeObjectForKey:kACCOUNTIDKEY];
+		[defaults removeObjectForKey:kACCOUNTPASSWORDKEY];
+		[defaults removeObjectForKey:kITSIDKEY];
+		[defaults removeObjectForKey:kITSPASSWORDKEY];
 	}
 		
 	if ([defaults valueForKey:kACCOUNTIDKEY] != nil) {
