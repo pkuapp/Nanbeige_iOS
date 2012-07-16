@@ -12,6 +12,7 @@
 	BOOL bViewDidLoad;
 }
 
++ (NSString *)replaceUnicode:(NSString *)unicodeStr;
 @end
 
 @implementation NanbeigeItsViewController
@@ -19,7 +20,7 @@
 @synthesize Username;
 @synthesize Password;
 @synthesize connector;
-@synthesize gateStateDictionary;
+@synthesize gateStateDictionary = _gateStateDictionary;
 @synthesize defaults;
 @synthesize numStatus;
 @synthesize labelStatus;
@@ -32,10 +33,6 @@
 
 #pragma mark - getter and setter Override
 
--(NSMutableDictionary *)gateStateDictionary
-{
-	return [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
-}
 - (NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *)delegate {
     if (delegate == nil) {
         delegate = (NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *)[UIApplication sharedApplication].delegate;
@@ -50,12 +47,13 @@
 }
 - (void)setNumStatus:(NSInteger)anumStatus{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"M月d日h:mm";
+    formatter.dateFormat = @"M月d日HH:mm";
     NSDate *dateUpdate = [NSDate date];
     NSString *stringUpdateStatus = [NSString stringWithFormat:@"更新于：%@",[formatter stringFromDate:dateUpdate]];
     
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
     [self.gateStateDictionary setObject:stringUpdateStatus forKey:_keyIPGateUpdatedTime];
-	[defaults setObject:gateStateDictionary forKey:_keyAccountState];
+	[defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
 	
     self.labelWarning.text = stringUpdateStatus;
     
@@ -129,12 +127,12 @@
 }
 - (void)connectFreeSuccess{
     NSDictionary *dictDetail = self.connector.dictDetail;
-    if (![[dictDetail objectForKey:@"Type"] isEqualToString:@"NO"]) {
+    if (![[dictDetail objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
         NSString *accountTimeLeftString;
-		if ([[dictDetail objectForKey:@"timeLeft"] isEqualToString:@"不限时"]) {
-			accountTimeLeftString = [dictDetail objectForKey:@"timeLeft"];
+		if ([[dictDetail objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]) {
+			accountTimeLeftString = [dictDetail objectForKey:_keyIPGateTimeLeft];
 		} else {
-			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:@"timeLeft"]];
+			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:_keyIPGateTimeLeft]];
 		}
 		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
         [detailGateInfo setTitle:[@"可访问免费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
@@ -168,7 +166,7 @@
 			self.progressHub.labelText = @"网络错误，请稍后再试。";
 		} else {
 			self.progressHub.labelText = [self.connector.dictResult objectForKey:@"REASON"];
-			if ([self.progressHub.labelText hasSuffix:@"设在例外中"]) {
+			if ([self.progressHub.labelText hasSuffix:@"在例外中"]) {
 				self.progressHub.labelText = @"您的IP地址不在学校范围内。";
 			}
 		}
@@ -185,10 +183,10 @@
     NSDictionary *dictDetail = self.connector.dictDetail;    
     if (![[dictDetail objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
 		NSString *accountTimeLeftString;
-        if ([[dictDetail objectForKey:@"timeLeft"] isEqualToString:@"不限时"]) {
-			accountTimeLeftString = [dictDetail objectForKey:@"timeLeft"];
+        if ([[dictDetail objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]) {
+			accountTimeLeftString = [dictDetail objectForKey:_keyIPGateTimeLeft];
 		} else {
-			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:@"timeLeft"]];
+			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:_keyIPGateTimeLeft]];
 		}
         
 		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
@@ -207,15 +205,17 @@
 }
 
 - (void)saveAccountState {
-	[gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictResult];
-    [self.defaults setObject:gateStateDictionary forKey:_keyAccountState];
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictResult];
+	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictDetail];
+    [self.defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
 }
 
 #pragma mark - private ControlEvent Setup
 - (IBAction)configAutoDisconnectDidChanged:(UISwitch *)sender {
-    [gateStateDictionary setObject:[NSNumber numberWithBool:sender.on] forKey:_keyAutoDisconnect];
-    
-    [defaults setObject:gateStateDictionary forKey:_keyAccountState];
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+    [self.gateStateDictionary setObject:[NSNumber numberWithBool:sender.on] forKey:_keyAutoDisconnect];
+    [defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
 }
 
 #pragma mark - View Lifecycle
@@ -250,10 +250,12 @@
 	[detailGateInfo setBackgroundColor:gateConnectedBtnColor];
 	detailGateInfo.titleLabel.textAlignment = UITextAlignmentCenter;
 	detailGateInfo.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+	
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
 	if ([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] != nil) {
-		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余：%@小时\n%@", [self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed], self.labelWarning.text] forState:UIControlStateNormal];
+		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余：%@小时\n%@", [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft], [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime]] forState:UIControlStateNormal];
 	} else {
-		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余时间未知\n%@", self.labelWarning.text] forState:UIControlStateNormal];
+		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余时间未知\n%@", [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime]] forState:UIControlStateNormal];
 	}
 	//[detailGateInfo setTitle:@"当前网络状态未知\n用户状态未知" forState:UIControlStateNormal];
 	
@@ -316,6 +318,7 @@
 	
     switch (indexPath.section) {
         case 0:
+			self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
             if ([[self.gateStateDictionary objectForKey:_keyAutoDisconnect] boolValue]) {
                 [self.connector disConnect];
                 _hasSilentCallback = YES;
@@ -355,34 +358,47 @@
 
 #pragma mark - Segue setup
 
++ (NSString *)replaceUnicode:(NSString *)unicodeStr {  
+    
+    NSString *tempStr1 = [unicodeStr stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"];  
+    NSString *tempStr2 = [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];  
+    NSString *tempStr3 = [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];  
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];  
+    NSString* returnStr = [NSPropertyListSerialization propertyListFromData:tempData  
+                                                           mutabilityOption:NSPropertyListImmutable   
+                                                                     format:NULL  
+                                                           errorDescription:NULL];  
+    //NSLog(@"Output = %@", returnStr);
+    return [returnStr stringByReplacingOccurrencesOfString:@"\\r\\n" withString:@"\n"];  
+}
+
 - (IBAction)detailGateInfoPressed:(id)sender {
 	[self performSegueWithIdentifier:@"DetailGateInfoSegue" sender:self];
-}
-- (IBAction)backToMainButtonPressed:(id)sender {
-	[self dismissModalViewControllerAnimated:YES];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	if ([segue.identifier isEqualToString:@"DetailGateInfoSegue"]) {
 		NanbeigeDetailGateInfoViewController *dvc = segue.destinationViewController;
-		dvc.accountStatus = self.labelWarning.text;
-		dvc.accountPackage = @"未知";
-		dvc.accountAccuTime = @"未知";
-		dvc.accountRemainTime = @"未知";
-		dvc.accountBalance = @"未知";
 		
-		if ([self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] != nil) {
-            if ([self.gateStateDictionary objectForKey:_keyIPGateType] == @"NO") {
-                dvc.accountPackage = @"10元国内地址任意游";
-            } else if ([[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]){
-                dvc.accountPackage = @"90元不限时";
-            } else {
-                dvc.accountPackage = [self.gateStateDictionary objectForKey:_keyIPGateType];
-            }
-			dvc.accountAccuTime = [NSString stringWithFormat: @"%@小时",[self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed]];
-			dvc.accountRemainTime = [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft];
-            dvc.accountBalance = [NSString stringWithFormat:@"%@元",[self.gateStateDictionary objectForKey:_keyIPGateBalance]];
+		self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+		
+		for (NSString *key in [self.gateStateDictionary allKeys]) {
+			NSLog(@"%@ -> %@", [[self class] replaceUnicode:key], [[self class] replaceUnicode:[self.gateStateDictionary valueForKey:key]]);
 		}
+		
+		dvc.accountStatus = [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime];
+		if (dvc.accountStatus == nil) dvc.accountStatus = self.labelWarning.text;
+		
+		if ([[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
+			dvc.accountPackage = @"10元国内地址任意游";
+		} else if ([[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]){
+			dvc.accountPackage = @"90元不限时";
+		} else {
+			dvc.accountPackage = [self.gateStateDictionary objectForKey:_keyIPGateType] ? [self.gateStateDictionary objectForKey:_keyIPGateType] : @"未知";
+		}
+		dvc.accountAccuTime = [dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? @"未计时" : ([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] ? [NSString stringWithFormat: @"%@小时",[self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed]] : @"未知");
+		dvc.accountRemainTime = [dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? @"不限时" : ([self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [NSString stringWithFormat: @"%@小时",[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft]] : @"未知");
+		dvc.accountBalance = [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"%@元",[self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"未知";
 	}
 }
 

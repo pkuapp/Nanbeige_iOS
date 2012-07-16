@@ -30,6 +30,13 @@
 #define _keyIPGateTimeLeft @"timeLeft"
 #define _keyIPGateTimeConsumed @"Time"
 #define _keyIPGateUpdatedTime @"IPGateUpdatedTime"
+#define _keyIPGateConnectNumber @"连接数"
+#define _keyIPGateConnectRange @"连接范围"
+#define _keyIPGateSUCCESS @"SUCCESS"
+#define _keyIPGateIP @"IP"
+#define _keyIPGateConnectStatus @"连接状态"
+#define _keyIPGateAccountName @"用户名"
+#define _keyIPGateDebt @"欠费"
 
 @interface NanbeigeItsViewController : UITableViewController<NanbeigeIPGateConnectDelegate,MBProgressHUDDelegate> { 
     BOOL _autoDisconnect;
@@ -55,6 +62,5 @@
 @property (retain, nonatomic) IBOutlet UIButton *detailGateInfo;
 
 - (IBAction)detailGateInfoPressed:(id)sender;
-- (IBAction)backToMainButtonPressed:(id)sender;
 
 @end

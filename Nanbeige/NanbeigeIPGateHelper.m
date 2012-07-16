@@ -72,7 +72,7 @@
                 float timeAll = [[array objectAtIndex:1] floatValue];
                 
                 float timeLeft = timeAll - [[dictDetail objectForKey:@"Time"] floatValue];
-                [dictDetail setObject:[NSString stringWithFormat:@"包月剩余%1.2f小时",timeLeft] forKey:@"timeLeft"];
+                [dictDetail setObject:[NSString stringWithFormat:@"%1.2f",timeLeft] forKey:@"timeLeft"];
             }
             else
                 [dictDetail setObject:@"不限时" forKey:@"timeLeft"];

@@ -50,7 +50,7 @@
 		};
 		_functionOrder = [[NSArray alloc] initWithArray:newOrder];
 		[newOrder release];
-		NSLog(@"order: %@", _functionOrder);
+		//NSLog(@"order: %@", _functionOrder);
 	}
 	return _functionOrder;
 }
@@ -139,7 +139,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-	NSLog(@"%@", self.nivc);
+	//NSLog(@"%@", self.nivc);
 }
 
 
@@ -317,7 +317,8 @@
 	NSUInteger row = [indexPath row];
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
 	if (functionIndex == 0) {
-		[self performSegueWithIdentifier:@"ItsEnterSegue" sender:self];
+		if (self.nivc == nil) [self performSegueWithIdentifier:@"ItsEnterSegue" sender:self];
+		else [self.navigationController pushViewController:self.nivc animated:YES];
 	} else {
 		[self showAlert:@"功能正在制作中，敬请期待！"];
 	}
@@ -326,20 +327,20 @@
 
 - (void)dealloc {
 	[editFunctionButton release];
+	[nivc release];
+	[connector release];
 	[super dealloc];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	if ([segue.identifier isEqualToString:@"ItsEnterSegue"]) {
-		if (self.nivc == nil) {
-			NanbeigeItsViewController *destinationViewController = (NanbeigeItsViewController *)([((UINavigationController *)[segue destinationViewController]) topViewController]);
-			destinationViewController.connector = self.connector;
-			self.connector.delegate = destinationViewController;
-			self.nivc = destinationViewController;
-			[self.nivc retain];
-			[destinationViewController release];
-		}
+		NanbeigeItsViewController *destinationViewController = (NanbeigeItsViewController *)[segue destinationViewController];
+		destinationViewController.connector = self.connector;
+		self.connector.delegate = destinationViewController;
+		self.nivc = destinationViewController;
+		[self.nivc retain];
+		[destinationViewController release];
 	}
 }
 
