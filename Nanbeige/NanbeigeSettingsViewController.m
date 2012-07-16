@@ -62,19 +62,22 @@
 	[indicatorView setCenter:CGPointMake(160, 240)];
 	[self.view addSubview:indicatorView];
 	
+	weiboLogOutBtnOAuth = nil;
+	renrenLogOutBtnOAuth = nil;
+	nanbeigeLogOutBtn = nil;
 	[self setupWeibo];
 	[self setupRenren];
 	[self setupNanbeige];
 }
 - (void)viewDidUnload
 {
-	[self setNanbeigeCell:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     indicatorView = nil;
 	[self setWeiboCell:nil];
 	[self setRenrenCell:nil];
+	[self setNanbeigeCell:nil];
 }
 - (void)dealloc
 {
@@ -85,9 +88,15 @@
     [indicatorView release];
 	[weiboCell release];
 	[renrenCell release];
-	
 	[nanbeigeCell release];
+	
     [super dealloc];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+	[self setWeiboDisplay];
+	[self setRenrenDisplay];
+	[self setNanbeigeDisplay];
 }
 
 #pragma mark Weibo Setup
@@ -100,7 +109,9 @@
     [engine setIsUserExclusive:NO];
     self.weiBoEngine = engine;
     [engine release];
-	
+}
+-(void)setWeiboDisplay
+{
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) {
 		if ([defaults valueForKey:kWEIBOIDKEY] != nil)
@@ -117,15 +128,18 @@
 								[defaults valueForKey:kWEIBOIDKEY]];
 	weiboCell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
-	weiboLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[weiboLogOutBtnOAuth setFrame:CGRectMake(250, 20, 50, 25)];
-	[weiboLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
-	[weiboLogOutBtnOAuth addTarget:self action:@selector(onWeiboLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:weiboLogOutBtnOAuth];
+	if (weiboLogOutBtnOAuth == nil) {
+		weiboLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[weiboLogOutBtnOAuth setFrame:CGRectMake(250, 20, 50, 25)];
+		[weiboLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
+		[weiboLogOutBtnOAuth addTarget:self action:@selector(onWeiboLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:weiboLogOutBtnOAuth];
+	}
 }
 - (void)onWeiboLogOutButtonPressed
 {
 	[weiboLogOutBtnOAuth removeFromSuperview];
+	weiboLogOutBtnOAuth = nil;
 	weiboCell.textLabel.text = @"连接微博账号";
 	weiboCell.selectionStyle = UITableViewCellSelectionStyleBlue;
 	
@@ -144,6 +158,9 @@
 - (void)setupRenren
 {
     renren = [Renren sharedRenren];
+}
+-(void)setRenrenDisplay
+{
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([renren isSessionValid]) {
 		if ([defaults valueForKey:kRENRENNAMEKEY] != nil)
@@ -160,16 +177,19 @@
 								[defaults valueForKey:kRENRENNAMEKEY]];
 	renrenCell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
-	renrenLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[renrenLogOutBtnOAuth setFrame:CGRectMake(250, 65, 50, 25)];
-	[renrenLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
-	[renrenLogOutBtnOAuth addTarget:self action:@selector(onRenrenLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:renrenLogOutBtnOAuth];
+	if (renrenLogOutBtnOAuth == nil) {
+		renrenLogOutBtnOAuth = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[renrenLogOutBtnOAuth setFrame:CGRectMake(250, 65, 50, 25)];
+		[renrenLogOutBtnOAuth setTitle:@"退出" forState:UIControlStateNormal];
+		[renrenLogOutBtnOAuth addTarget:self action:@selector(onRenrenLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:renrenLogOutBtnOAuth];
+	}
 }
 - (void)onRenrenLogOutButtonPressed
 {
 	[indicatorView startAnimating];
 	[renrenLogOutBtnOAuth removeFromSuperview];
+	renrenLogOutBtnOAuth = nil;
 	renrenCell.textLabel.text = @"连接人人账号";
 	renrenCell.selectionStyle = UITableViewCellSelectionStyleBlue;
 	
@@ -213,6 +233,10 @@
 #pragma mark Nanbeige Setup
 - (void)setupNanbeige
 {
+	
+}
+- (void)setNanbeigeDisplay
+{
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([defaults valueForKey:kNANBEIGEIDKEY] != nil) {
 		[self setNanbeigeLogoutButton];
@@ -226,16 +250,19 @@
 								[defaults valueForKey:kNANBEIGEIDKEY]];
 	nanbeigeCell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
-	nanbeigeLogOutBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[nanbeigeLogOutBtn setFrame:CGRectMake(250, 130, 50, 25)];
-	[nanbeigeLogOutBtn setTitle:@"退出" forState:UIControlStateNormal];
-	[nanbeigeLogOutBtn addTarget:self action:@selector(onNanbeigeLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-	[self.view addSubview:nanbeigeLogOutBtn];
+	if (nanbeigeLogOutBtn == nil) {
+		nanbeigeLogOutBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[nanbeigeLogOutBtn setFrame:CGRectMake(250, 130, 50, 25)];
+		[nanbeigeLogOutBtn setTitle:@"退出" forState:UIControlStateNormal];
+		[nanbeigeLogOutBtn addTarget:self action:@selector(onNanbeigeLogOutButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:nanbeigeLogOutBtn];
+	}
 }
 - (void)onNanbeigeLogOutButtonPressed
 {
 	[nanbeigeLogOutBtn removeFromSuperview];
-	nanbeigeCell.textLabel.text = @"连接微博账号";
+	nanbeigeLogOutBtn = nil;
+	nanbeigeCell.textLabel.text = @"连接南北阁账号";
 	nanbeigeCell.selectionStyle = UITableViewCellSelectionStyleBlue;
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

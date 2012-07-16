@@ -32,7 +32,14 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:kWEIBOIDKEY] == nil && 
+		[defaults valueForKey:kRENRENIDKEY] == nil &&
+		[defaults valueForKey:kNANBEIGEIDKEY] == nil) {
+		[defaults removeObjectForKey:kACCOUNTIDKEY];
+	}
+		
+	if ([defaults valueForKey:kACCOUNTIDKEY] != nil) {
 		[self performSegueWithIdentifier:@"HasLoginSegue" sender:self];
 	} else {
 		[self performSegueWithIdentifier:@"LoginSegue" sender:self];	

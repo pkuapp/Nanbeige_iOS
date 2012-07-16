@@ -1264,18 +1264,15 @@
 		262AD48D15AA7D5D000C2EF7 /* Nanbeige */ = {
 			isa = PBXGroup;
 			children = (
-				2601D2C415AEADC00066C1FD /* DelegateProtocal */,
+				26A6B50615B31E1F006FA15D /* WelcomeView */,
 				262AD4AA15AA7E0C000C2EF7 /* MainView */,
 				262AD4A215AA7DD7000C2EF7 /* StreamView */,
 				262AD4A615AA7DF5000C2EF7 /* SettingsView */,
-				2678C38115B2BCB9005E1D3E /* NanbeigeWelcomeViewController.h */,
-				2678C38215B2BCBB005E1D3E /* NanbeigeWelcomeViewController.m */,
-				2678C38815B304C6005E1D3E /* NanbeigeConnectViewController.h */,
-				2678C38915B304CA005E1D3E /* NanbeigeConnectViewController.m */,
 				262AD4A015AA7D93000C2EF7 /* MainStoryboard_iPad.storyboard */,
 				262AD49E15AA7D86000C2EF7 /* MainStoryboard_iPhone.storyboard */,
 				262AD49615AA7D5D000C2EF7 /* NanbeigeAppDelegate.h */,
 				262AD49715AA7D5D000C2EF7 /* NanbeigeAppDelegate.m */,
+				2601D2C415AEADC00066C1FD /* DelegateProtocal */,
 				262AD48E15AA7D5D000C2EF7 /* Supporting Files */,
 			);
 			path = Nanbeige;
@@ -1906,6 +1903,17 @@
 				2678C31C15B04ADB005E1D3E /* NanbeigeLine3Button2Cell.xib */,
 			);
 			name = MainTableCell;
+			sourceTree = "<group>";
+		};
+		26A6B50615B31E1F006FA15D /* WelcomeView */ = {
+			isa = PBXGroup;
+			children = (
+				2678C38115B2BCB9005E1D3E /* NanbeigeWelcomeViewController.h */,
+				2678C38215B2BCBB005E1D3E /* NanbeigeWelcomeViewController.m */,
+				2678C38815B304C6005E1D3E /* NanbeigeConnectViewController.h */,
+				2678C38915B304CA005E1D3E /* NanbeigeConnectViewController.m */,
+			);
+			name = WelcomeView;
 			sourceTree = "<group>";
 		};
 		26D5FA0A15AFE0410075B68D /* CoursesView */ = {

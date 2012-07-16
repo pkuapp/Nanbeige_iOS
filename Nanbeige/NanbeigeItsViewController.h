@@ -37,5 +37,8 @@
 @property (retain, nonatomic) IBOutlet UITableViewCell *connectFree;
 @property (retain, nonatomic) IBOutlet UITableViewCell *connectGlobal;
 @property (retain, nonatomic) IBOutlet UITableViewCell *disconnectAll;
+- (IBAction)detailGateInfoPressed:(id)sender;
+@property (retain, nonatomic) IBOutlet UIButton *detailGateInfo;
+- (IBAction)backToMainButtonPressed:(id)sender;
 
 @end

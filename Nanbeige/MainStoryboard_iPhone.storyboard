@@ -105,9 +105,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="Y3a-g9-RLQ" kind="push" identifier="ItsEnterSegue" id="NAi-Lh-Mjj"/>
-                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CoursesExIdentifier" rowHeight="110" id="oY2-CB-6DO">
                                 <rect key="frame" x="0.0" y="155" width="320" height="110"/>
@@ -316,6 +313,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="editFunctionButton" destination="Kud-7j-NQQ" id="ixW-FH-hQb"/>
+                        <segue destination="CIL-D1-6Cb" kind="modal" identifier="ItsEnterSegue" id="8aD-1e-L38"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -400,7 +398,23 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-2332"/>
+            <point key="canvasLocation" x="2515" y="-2332"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aQD-tq-wfs">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mhz-hj-BI1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="CIL-D1-6Cb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Kcl-DE-nwh">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y3a-g9-RLQ" kind="relationship" relationship="rootViewController" id="Rmb-qG-Tkw"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="2143" y="-1776"/>
         </scene>
         <!--Nanbeige Its View Controller - IP网关-->
         <scene sceneID="A3L-J4-bX8">
@@ -408,46 +422,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bc3-CC-xdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Y3a-g9-RLQ" customClass="NanbeigeItsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="WUT-SL-iux">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                        <button key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="bz2-Op-E0M">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.97254901959999995" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <state key="normal" title="当前网络状态未知\n用户状态未知">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="detailGateInfoPressed:" destination="Y3a-g9-RLQ" eventType="touchUpInside" id="Qws-k1-nVW"/>
+                            </connections>
+                        </button>
                         <sections>
-                            <tableViewSection id="pTP-JN-qTa">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IPGateStatusIdentifier" textLabel="JJP-aG-BrE" detailTextLabel="jmq-W9-x3n" style="IBUITableViewCellStyleValue1" id="84f-7p-dnd">
-                                        <rect key="frame" x="0.0" y="10" width="320" height="46"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="网关账户" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JJP-aG-BrE">
-                                                    <rect key="frame" x="10" y="11" width="68" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="包月剩余72.23小时" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jmq-W9-x3n">
-                                                    <rect key="frame" x="125" y="11" width="145" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <connections>
-                                            <segue destination="yil-Q7-q5m" kind="push" id="9vv-DP-zC5"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="连接到..." id="knR-MR-qfy">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectFreeIdentifier" textLabel="Keo-uQ-C5P" style="IBUITableViewCellStyleDefault" id="1d9-2r-AzY">
-                                        <rect key="frame" x="0.0" y="102" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="81" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -465,7 +463,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectGlobalIdentifier" textLabel="var-gG-OTF" style="IBUITableViewCellStyleDefault" id="WJ3-2q-DDu">
-                                        <rect key="frame" x="0.0" y="147" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="126" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -487,7 +485,7 @@
                             <tableViewSection id="YaF-xu-eHQ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DisconnectIdentifier" textLabel="8Ih-co-rIw" style="IBUITableViewCellStyleDefault" id="bpb-Rm-AtL">
-                                        <rect key="frame" x="0.0" y="212" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="191" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -509,7 +507,7 @@
                             <tableViewSection id="npT-tK-zYN">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConfigIdentifier" id="J9T-1u-UGp">
-                                        <rect key="frame" x="0.0" y="278" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="257" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -534,7 +532,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectIdentifier" textLabel="HIq-zv-mft" style="IBUITableViewCellStyleDefault" id="1a6-6y-aT6">
-                                        <rect key="frame" x="0.0" y="323" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="302" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -550,14 +548,8 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <connections>
-                                            <segue destination="KlT-c9-lbv" kind="modal" identifier="LoginItsSegue" id="BqZ-yD-B4M"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
-                            </tableViewSection>
-                            <tableViewSection id="dTZ-ev-eHN">
-                                <cells/>
                             </tableViewSection>
                         </sections>
                         <connections>
@@ -565,15 +557,24 @@
                             <outlet property="delegate" destination="Y3a-g9-RLQ" id="yxx-Pj-bHK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="IP网关" id="f2N-fD-B6d"/>
+                    <navigationItem key="navigationItem" title="IP网关" id="f2N-fD-B6d">
+                        <barButtonItem key="leftBarButtonItem" title="仪表盘" id="9sD-Ne-hXc">
+                            <connections>
+                                <action selector="backToMainButtonPressed:" destination="Y3a-g9-RLQ" id="7Ez-U3-ATZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="connectFree" destination="1d9-2r-AzY" id="S4F-zl-UV8"/>
                         <outlet property="connectGlobal" destination="WJ3-2q-DDu" id="yo6-Fs-Sd9"/>
+                        <outlet property="detailGateInfo" destination="bz2-Op-E0M" id="79Q-6f-DmJ"/>
                         <outlet property="disconnectAll" destination="bpb-Rm-AtL" id="Lmv-uP-dxu"/>
+                        <segue destination="yil-Q7-q5m" kind="push" identifier="DetailGateInfoSegue" id="yHJ-Pm-LdA"/>
+                        <segue destination="KlT-c9-lbv" kind="modal" identifier="ItsLoginSegue" id="3NP-l8-2BJ"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-1776"/>
+            <point key="canvasLocation" x="2515" y="-1776"/>
         </scene>
         <!--Table View Controller - 网关账户-->
         <scene sceneID="Jvb-ch-4CT">
@@ -581,7 +582,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptU-kW-FT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="yil-Q7-q5m" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="N5P-Sy-lrj">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
@@ -702,7 +703,7 @@
                     <navigationItem key="navigationItem" title="网关账户" id="XZp-PC-9y7"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2684" y="-2066"/>
+            <point key="canvasLocation" x="3056" y="-2066"/>
         </scene>
         <!--Nanbeige Renren Post View Controller-->
         <scene sceneID="nW8-K8-74z">
@@ -1366,7 +1367,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="0HX-pK-4Ml" kind="modal" modalTransitionStyle="partialCurl" id="MNY-gR-QaY"/>
+                                    <segue destination="0HX-pK-4Ml" kind="modal" identifier="AboutMoreSegue" modalTransitionStyle="partialCurl" id="MNY-gR-QaY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="南北阁 0.1beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="tT3-yz-1WU">

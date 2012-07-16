@@ -30,6 +30,7 @@
 @end
 
 @implementation NanbeigeItsViewController
+@synthesize detailGateInfo;
 @synthesize Username;
 @synthesize Password;
 @synthesize connector;
@@ -72,24 +73,28 @@
 	
     self.labelWarning.text = stringUpdateStatus;
     
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    //UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     
     switch (anumStatus) {
         case 0:
             self.labelStatus.text = @"当前网络状态未知";
-            cell.textLabel.text = @"网络状态未知";
+			[detailGateInfo setTitle:[detailGateInfo.titleLabel.text stringByReplacingOccurrencesOfRegex:@".*\n" withString:@"网络状态未知\n"] forState:UIControlStateNormal];
+            //cell.textLabel.text = @"网络状态未知";
             break;
         case 1:
             self.labelStatus.text = @"当前可访问校园网";
-            cell.textLabel.text = @"可访问校园网";
+			[detailGateInfo setTitle:[detailGateInfo.titleLabel.text stringByReplacingOccurrencesOfRegex:@".*\n" withString:@"可访问校园网\n"] forState:UIControlStateNormal];
+            //cell.textLabel.text = @"可访问校园网";
             break;
         case 2:
             self.labelStatus.text = @"当前可访问校园网、免费网址";
-            cell.textLabel.text = @"可访问免费网址";
+			[detailGateInfo setTitle:[detailGateInfo.titleLabel.text stringByReplacingOccurrencesOfRegex:@".*\n" withString:@"可访问免费网址\n"] forState:UIControlStateNormal];
+            //cell.textLabel.text = @"可访问免费网址";
             break;
         case 3:
             self.labelStatus.text = @"当前可访问校园网、免费网址、收费网址";
-            cell.textLabel.text = @"可访问收费网址";
+			[detailGateInfo setTitle:[detailGateInfo.titleLabel.text stringByReplacingOccurrencesOfRegex:@".*\n" withString:@"可访问收费网址\n"] forState:UIControlStateNormal];
+            //cell.textLabel.text = @"可访问收费网址";
             break;
         default:
             break;
@@ -192,24 +197,31 @@
 
 - (void)connectFreeSuccess{
     
-    UITableViewCell *cell;
+    //UITableViewCell *cell;
 	
     NSDictionary *dictDetail = self.connector.dictDetail;
     
     if (![[dictDetail objectForKey:@"Type"] isEqualToString:@"NO"]) {
         
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        //cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
-        NSString *accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:@"timeLeft"]];
+		NSString *accountTimeLeftString;
+		if ([[dictDetail objectForKey:@"timeLeft"] isEqualToString:@"不限时"]) {
+			accountTimeLeftString = [dictDetail objectForKey:@"timeLeft"];
+		} else {
+			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:@"timeLeft"]];
+		}
         
-        cell.detailTextLabel.text = accountTimeLeftString;
+        //cell.detailTextLabel.text = accountTimeLeftString;
         
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        //cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
 		//        cell.imageView.image = [UIImage imageNamed:@"status-2"];
         
-        cell.textLabel.text = @"可访问免费地址";
-        
+        //cell.textLabel.text = @"可访问免费地址";
+		
+        [detailGateInfo setTitle:[@"可访问免费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
+		
         self.numStatus = 2;
         
 		//        NSLog(@"%@",dictDetail);
@@ -267,23 +279,29 @@
 
 - (void)connectGlobalSuccess {
     
-    UITableViewCell *cell;
+    //UITableViewCell *cell;
     
     NSDictionary *dictDetail = self.connector.dictDetail;
     
     if (![[dictDetail objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
         
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        //cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
-        NSString *accountTimeLeftString = [dictDetail objectForKey:@"timeLeft"];
+		NSString *accountTimeLeftString;
+        if ([[dictDetail objectForKey:@"timeLeft"] isEqualToString:@"不限时"]) {
+			accountTimeLeftString = [dictDetail objectForKey:@"timeLeft"];
+		} else {
+			accountTimeLeftString = [NSString stringWithFormat:@"包月剩余%@小时",[dictDetail objectForKey:@"timeLeft"]];
+		}
         
-        cell.detailTextLabel.text = accountTimeLeftString;
+        //cell.detailTextLabel.text = accountTimeLeftString;
         
-        cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        //cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         
 		//        cell.imageView.image = [UIImage imageNamed:@"status-2"];
         
-        cell.textLabel.text = @"可访问收费地址";
+        //cell.textLabel.text = @"可访问收费地址";
+		[detailGateInfo setTitle:[@"可访问收费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
         
         self.numStatus = 3;
 		//        NSLog(@"%@",dictDetail);
@@ -335,6 +353,7 @@
 	[connectFree release];
 	[connectGlobal release];
 	[disconnectAll release];
+	[detailGateInfo release];
     [super dealloc];
 }
 - (void)viewDidLoad
@@ -360,6 +379,10 @@
 	[connectFree setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
 	[connectGlobal setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
 	[disconnectAll setBackgroundColor:[UIColor colorWithRed:176/255.0 green:92/255.0 blue:69/255.0 alpha:1.0]];
+	
+	detailGateInfo.titleLabel.textAlignment = UITextAlignmentCenter;
+	detailGateInfo.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+	[detailGateInfo setTitle:@"当前网络状态未知\n用户状态未知" forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload
@@ -367,6 +390,7 @@
 	[self setConnectFree:nil];
 	[self setConnectGlobal:nil];
 	[self setDisconnectAll:nil];
+	[self setDetailGateInfo:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -442,8 +466,6 @@
 	
     switch (indexPath.section) {
         case 0:
-			break;
-        case 1:
             if ([[self.gateStateDictionary objectForKey:_keyAutoDisconnect] boolValue]) {
                 [self.connector disConnect];
                 _hasSilentCallback = YES;
@@ -465,11 +487,14 @@
                 [self showProgressHubWithTitle:@"正连接到收费地址"];
             }
             break;
-        case 2:
+        case 1:
             [self.connector disConnect];
             [self showProgressHubWithTitle:@"正断开全部连接"];
             break;
-        case 3:
+        case 2:
+			if (indexPath.row == 1) {
+				[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
+			}
             break;
         default:
             break;
@@ -484,4 +509,10 @@
     [self.progressHub show:YES];
 }
 
+- (IBAction)detailGateInfoPressed:(id)sender {
+	[self performSegueWithIdentifier:@"DetailGateInfoSegue" sender:self];
+}
+- (IBAction)backToMainButtonPressed:(id)sender {
+	[self dismissModalViewControllerAnimated:YES];
+}
 @end
