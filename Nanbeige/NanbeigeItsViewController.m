@@ -15,6 +15,7 @@
 #import "NanbeigeIPGateHelper.h"
 #import "ModalAlert.h"
 #import "AppUser.h"
+#import "NanbeigeDetailGateInfoViewController.h"
 
 #define _keyAutoDisconnect @"AutoDisconnect"
 #define _keyAlwaysGlobal @"AlwaysGlobal"
@@ -470,20 +471,11 @@
                 [self.connector disConnect];
                 _hasSilentCallback = YES;
             }
-            
-            if ([[self.gateStateDictionary objectForKey:@"AlwaysGlobal"] boolValue] && indexPath.row == 0) {
-                [self.connector connectGlobal];
-                
-                [self showProgressHubWithTitle:@"正连接到收费地址"];
-				
-            }
-            else if (indexPath.row == 0) {
+            if (indexPath.row == 0) {
                 [self.connector connectFree];
                 [self showProgressHubWithTitle:@"正连接到免费地址"];
-            }
-            else if (indexPath.row == 1){
+            } else if (indexPath.row == 1){
                 [self.connector connectGlobal];
-				
                 [self showProgressHubWithTitle:@"正连接到收费地址"];
             }
             break;
@@ -491,7 +483,7 @@
             [self.connector disConnect];
             [self showProgressHubWithTitle:@"正断开全部连接"];
             break;
-        case 2:
+        case 3:
 			if (indexPath.row == 1) {
 				[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
 			}
@@ -515,4 +507,30 @@
 - (IBAction)backToMainButtonPressed:(id)sender {
 	[self dismissModalViewControllerAnimated:YES];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:@"DetailGateInfoSegue"]) {
+		NanbeigeDetailGateInfoViewController *dvc = segue.destinationViewController;
+		dvc.accountStatus = self.labelWarning.text;
+		dvc.accountPackage = @"未知";
+		dvc.accountAccuTime = @"未知";
+		dvc.accountRemainTime = @"未知";
+		dvc.accountBalance = @"未知";
+		
+		if ([self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] != nil) {
+            if ([self.gateStateDictionary objectForKey:_keyIPGateType] == @"NO") {
+                dvc.accountPackage = @"10元国内地址任意游";
+            } else if ([[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]){
+                dvc.accountPackage = @"90元不限时";
+            } else {
+                dvc.accountPackage = [self.gateStateDictionary objectForKey:_keyIPGateType];
+            }
+			dvc.accountAccuTime = [NSString stringWithFormat: @"%@小时",[self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed]];
+			dvc.accountRemainTime = [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft];
+            dvc.accountBalance = [NSString stringWithFormat:@"%@元",[self.gateStateDictionary objectForKey:_keyIPGateBalance]];
+		}
+	}
+}
+
 @end

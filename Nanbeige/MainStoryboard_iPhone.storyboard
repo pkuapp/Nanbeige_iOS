@@ -504,10 +504,13 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="5jP-07-79T">
+                                <cells/>
+                            </tableViewSection>
                             <tableViewSection id="npT-tK-zYN">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConfigIdentifier" id="J9T-1u-UGp">
-                                        <rect key="frame" x="0.0" y="257" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="277" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -531,8 +534,8 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConnectIdentifier" textLabel="HIq-zv-mft" style="IBUITableViewCellStyleDefault" id="1a6-6y-aT6">
-                                        <rect key="frame" x="0.0" y="302" width="320" height="45"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItsLoginIdentifier" textLabel="HIq-zv-mft" style="IBUITableViewCellStyleDefault" id="1a6-6y-aT6">
+                                        <rect key="frame" x="0.0" y="322" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -576,12 +579,12 @@
             </objects>
             <point key="canvasLocation" x="2515" y="-1776"/>
         </scene>
-        <!--Table View Controller - 网关账户-->
+        <!--Nanbeige Detail Gate Info View Controller - 网关账户-->
         <scene sceneID="Jvb-ch-4CT">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptU-kW-FT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="yil-Q7-q5m" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="N5P-Sy-lrj">
+                <tableViewController id="yil-Q7-q5m" customClass="NanbeigeDetailGateInfoViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="N5P-Sy-lrj">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
@@ -701,6 +704,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="网关账户" id="XZp-PC-9y7"/>
+                    <connections>
+                        <outlet property="accuTimeCell" destination="Jp0-kO-dzo" id="xiU-WW-btX"/>
+                        <outlet property="balanceCell" destination="PX9-LG-ivz" id="F4w-vY-PjQ"/>
+                        <outlet property="packageCell" destination="jnQ-Ok-zFH" id="tmB-km-yVs"/>
+                        <outlet property="remainTimeCell" destination="CEP-0G-yQl" id="1FF-zw-t7S"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="3056" y="-2066"/>
