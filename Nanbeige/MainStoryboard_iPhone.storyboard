@@ -106,11 +106,11 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CoursesExIdentifier" rowHeight="110" id="oY2-CB-6DO">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CoursesExIdentifier" rowHeight="110" id="oY2-CB-6DO">
                                 <rect key="frame" x="0.0" y="155" width="320" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="widget_3line_0btn.png" id="Op6-f7-pAt">
@@ -187,6 +187,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="R9G-nc-9ot" kind="push" identifier="AssignmentEnterSegue" id="0I6-sN-chv"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoomsIdentifier" rowHeight="58" id="8b0-zb-UhJ">
                                 <rect key="frame" x="0.0" y="265" width="320" height="58"/>
@@ -331,7 +334,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-2332"/>
+            <point key="canvasLocation" x="2655" y="-3987"/>
         </scene>
         <!--Nanbeige Login Its View Controller - 登录网关账号-->
         <scene sceneID="xSj-ac-kQt">
@@ -405,7 +408,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2655" y="-2332"/>
+            <point key="canvasLocation" x="3167" y="-3980"/>
         </scene>
         <!--Nanbeige Its View Controller - IP网关-->
         <scene sceneID="A3L-J4-bX8">
@@ -563,7 +566,55 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-1776"/>
+            <point key="canvasLocation" x="2143" y="-3404"/>
+        </scene>
+        <!--Nanbeige Assignment View Controller-->
+        <scene sceneID="Hi2-Wp-7gG">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dwg-ml-iBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="R9G-nc-9ot" customClass="NanbeigeAssignmentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n2c-vk-oaD">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="csx-uI-YCP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="R9G-nc-9ot" id="HuH-nF-CMK"/>
+                                    <outlet property="delegate" destination="R9G-nc-9ot" id="pnd-S0-iPY"/>
+                                </connections>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="jpn-aY-fLj">
+                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="新增" id="A71-mE-Hi1"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="jKw-cJ-dWV"/>
+                                    <barButtonItem title="拍照" id="dxs-0x-1FS"/>
+                                </items>
+                                <color key="tintColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RuF-vC-Nej">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="4SG-yf-mbH">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="未完成"/>
+                                <segment title="已完成"/>
+                            </segments>
+                            <color key="tintColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
+                        </segmentedControl>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2143" y="-2715"/>
         </scene>
         <!--Nanbeige Detail Gate Info View Controller - 网关账户-->
         <scene sceneID="Jvb-ch-4CT">
@@ -698,7 +749,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2655" y="-1776"/>
+            <point key="canvasLocation" x="2655" y="-3404"/>
         </scene>
         <!--Nanbeige Renren Post View Controller-->
         <scene sceneID="nW8-K8-74z">
@@ -1082,7 +1133,7 @@
                                         <rect key="frame" x="0.0" y="230" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="更改仪表盘布局" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iyD-Ea-92z">
@@ -1100,7 +1151,7 @@
                                         <rect key="frame" x="0.0" y="275" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="重置仪表盘布局" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="71g-1f-MsJ">
@@ -1558,116 +1609,6 @@
         <image name="widget_3line_0btn.png" width="663" height="227"/>
         <image name="widget_3line_2btn.png" width="663" height="268"/>
     </resources>
-    <classes>
-        <class className="NanbeigeChangeMainOrderViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChangeMainOrderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onChangeButtonPressed:"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeConnectViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeConnectViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginButtonPressed:"/>
-                <relationship kind="action" name="renrenLogin:"/>
-                <relationship kind="action" name="signupButtonPressed:"/>
-                <relationship kind="action" name="weiboLogin:"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeDetailGateInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeDetailGateInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backToMainButtonPressed:"/>
-                <relationship kind="action" name="detailGateInfoPressed:"/>
-                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="detailGateInfo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeLoginItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeLoginViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="calendarButtonPressed:"/>
-                <relationship kind="action" name="editFunctionOrder:"/>
-                <relationship kind="outlet" name="editFunctionButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeSettingsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="logoutAll:"/>
-                <relationship kind="outlet" name="nanbeigeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="renrenCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="weiboCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeSignupViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSignupViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="validcodeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeStreamViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="renrenPost:"/>
-                <relationship kind="action" name="weiboPost:"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeWelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWelcomeViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

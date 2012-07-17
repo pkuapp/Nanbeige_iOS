@@ -12,7 +12,6 @@
 	BOOL bViewDidLoad;
 }
 
-+ (NSString *)replaceUnicode:(NSString *)unicodeStr;
 @end
 
 @implementation NanbeigeItsViewController
@@ -57,28 +56,22 @@
 	
     self.labelWarning.text = stringUpdateStatus;
     
-	[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
-    switch (anumStatus) {
+	switch (anumStatus) {
         case 0:
             self.labelStatus.text = @"当前网络状态未知";
-			[detailGateInfo setTitle:[detailGateInfo.titleLabel.text stringByReplacingOccurrencesOfRegex:@".*\n" withString:@"网络状态未知\n"] forState:UIControlStateNormal];
-            break;
+			break;
         case 1:
             self.labelStatus.text = @"当前可访问校园网";
-			[detailGateInfo setTitle:[detailGateInfo.titleLabel.text stringByReplacingOccurrencesOfRegex:@".*\n" withString:@"可访问校园网\n"] forState:UIControlStateNormal];
-            break;
+			break;
         case 2:
             self.labelStatus.text = @"当前可访问校园网、免费网址";
-			[detailGateInfo setTitle:[detailGateInfo.titleLabel.text stringByReplacingOccurrencesOfRegex:@".*\n" withString:@"可访问免费网址\n"] forState:UIControlStateNormal];
-            break;
+			break;
         case 3:
             self.labelStatus.text = @"当前可访问校园网、免费网址、收费网址";
-			[detailGateInfo setTitle:[detailGateInfo.titleLabel.text stringByReplacingOccurrencesOfRegex:@".*\n" withString:@"可访问收费网址\n"] forState:UIControlStateNormal];
-            break;
+			break;
         default:
             break;
     }
-    [self.tableView reloadData];
     numStatus = anumStatus;
 }
 - (UILabel *)labelStatus{
@@ -106,113 +99,6 @@
     return labelWarning;
 }
 
-#pragma mark - IPGateDelegate setup
-
-- (void)didConnectToIPGate{
-}
-- (void)didLoseConnectToIpGate{
-}
-- (void)disconnectSuccess{
-    if (_hasSilentCallback) {
-        _hasSilentCallback = NO;
-        return;
-    }
-    self.numStatus = 1;
-    [self.progressHub hide:NO];
-    self.progressHub.labelText = @"已断开全部连接";
-    self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-yes.png"]] autorelease];
-    self.progressHub.mode = MBProgressHUDModeCustomView;
-    [self.progressHub show:YES];
-    [self.progressHub hide:YES afterDelay:1];
-}
-- (void)connectFreeSuccess{
-    NSDictionary *dictDetail = self.connector.dictDetail;
-    if (![[dictDetail objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
-        NSString *accountTimeLeftString;
-		accountTimeLeftString = [NSString stringWithFormat:@"包月剩余：%@",[dictDetail objectForKey:_keyIPGateTimeLeft]];
-		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
-        [detailGateInfo setTitle:[@"可访问免费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
-    } else {
-		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
-        [detailGateInfo setTitle:@"可访问免费地址" forState:UIControlStateNormal];
-        self.numStatus = 2;
-	}
-	
-    progressHub.animationType = MBProgressHUDAnimationZoom;
-    self.progressHub.labelText = @"已连接到免费地址";
-    self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-yes.png"]] autorelease];
-    self.progressHub.mode = MBProgressHUDModeCustomView;
-    [self.progressHub hide:YES afterDelay:0.5];
-    NSLog(@"ConnectToFreeDone");
-	
-    [self saveAccountState];
-}
-- (void)connectFailed
-{
-    if (self.connector.error == IPGateErrorOverCount) {
-        self.progressHub.mode = MBProgressHUDModeIndeterminate;
-        self.progressHub.labelText = @"连接数超过预定值";
-        if ([ModalAlert confirm:@"断开别处的连接" withMessage:@"断开别处的连接才能在此处建立连接"]){
-            _hasSilentCallback = YES;
-            [self.connector disConnect];
-            self.progressHub.labelText = @"正在断开重连";
-            [self.connector reConnect];
-        }
-        else [self.progressHub hide:YES afterDelay:0.5];
-    }
-    else {
-		if ([self.connector.dictResult objectForKey:@"REASON"] == nil) {
-			self.progressHub.labelText = @"网络错误，请稍后再试。";
-		} else {
-			self.progressHub.labelText = [self.connector.dictResult objectForKey:@"REASON"];
-			if ([self.progressHub.labelText hasSuffix:@"在例外中"]) {
-				self.progressHub.labelText = @"您的IP地址不在学校范围内。";
-			}
-		}
-        self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-no.png"]] autorelease];
-        self.progressHub.mode = MBProgressHUDModeCustomView;
-        [self.progressHub hide:YES afterDelay:0.5];
-        NSLog(@"Reason %@",[self.connector.dictResult objectForKey:@"REASON"]);
-    }
-    if (self.connector.error != IPGateErrorTimeout) {
-		//[self saveAccountState];
-    }
-}
-- (void)connectGlobalSuccess {
-    NSDictionary *dictDetail = self.connector.dictDetail;    
-    if (![[dictDetail objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
-		NSString *accountTimeLeftString;
-		accountTimeLeftString = [NSString stringWithFormat:@"包月剩余：%@",[dictDetail objectForKey:_keyIPGateTimeLeft]];
-        
-		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
-		[detailGateInfo setTitle:[@"可访问收费地址\n" stringByAppendingString:accountTimeLeftString] forState:UIControlStateNormal];
-        self.numStatus = 3;
-	}
-	
-	progressHub.animationType = MBProgressHUDAnimationZoom;
-	self.progressHub.labelText = @"已连接到收费地址";
-	self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-yes.png"]] autorelease];
-	self.progressHub.mode = MBProgressHUDModeCustomView;
-	[self.progressHub hide:YES afterDelay:0.5];
-	
-    [self saveAccountState];
-    NSLog(@"ConnectToGlobalDone");
-}
-
-- (void)saveAccountState {
-	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
-	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictResult];
-	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictDetail];
-    [self.defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
-}
-
-#pragma mark - private ControlEvent Setup
-- (IBAction)configAutoDisconnectDidChanged:(UISwitch *)sender {
-	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
-    [self.gateStateDictionary setObject:[NSNumber numberWithBool:sender.on] forKey:_keyAutoDisconnect];
-    [defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
-}
-
 #pragma mark - View Lifecycle
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -226,10 +112,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+	
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
@@ -238,25 +124,16 @@
 	//self.connector = [[NanbeigeIPGateHelper alloc] init];
 	//self.connector.delegate = self;
 	
-	[connectFree setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
-	[connectGlobal setBackgroundColor:[UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]];
-	[disconnectAll setBackgroundColor:[UIColor colorWithRed:176/255.0 green:92/255.0 blue:69/255.0 alpha:1.0]];
+	[connectFree setBackgroundColor:gateConnectCellColor];
+	[connectGlobal setBackgroundColor:gateConnectCellColor];
+	[disconnectAll setBackgroundColor:gateDisconnectCellColor];
 	
 	bViewDidLoad = YES;
 	
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-	[detailGateInfo setBackgroundColor:gateConnectedBtnColor];
-	detailGateInfo.titleLabel.textAlignment = UITextAlignmentCenter;
-	detailGateInfo.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
-	
-	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
-	if ([[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
-		[detailGateInfo setTitle:[NSString stringWithFormat:@"账户余额：%@\n%@", [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"%@元", [self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"未知", [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : @"更新时间：无"] forState:UIControlStateNormal];
-	} else {
-		[detailGateInfo setTitle:[NSString stringWithFormat:@"包月剩余：%@\n%@", [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知", [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : @"更新时间：无"] forState:UIControlStateNormal];
-	}
+	[self changeDetailGateInfo:nil isConnecting:NO];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -267,6 +144,8 @@
 }
 - (void)viewDidUnload
 {
+	[self setUsername:nil];
+	[self setPassword:nil];
 	[self setConnectFree:nil];
 	[self setConnectGlobal:nil];
 	[self setDisconnectAll:nil];
@@ -297,6 +176,129 @@
 	} else {
 	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	}
+}
+
+#pragma mark - Display
+- (void)changeDetailGateInfo:(NSString *)title 
+			   isConnecting:(BOOL)bConnecting
+{
+	detailGateInfo.titleLabel.textAlignment = UITextAlignmentCenter;
+	detailGateInfo.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+	
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	
+	NSString *timeLeftString = [NSString stringWithFormat:@"包月剩余：%@",[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知"];
+	NSString *balanceString = [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"账户余额：%@元", [self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"账户余额：未知";
+	
+	if (bConnecting) {
+		[detailGateInfo setBackgroundColor:gateConnectingBtnColor];
+		if (![[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
+			[detailGateInfo setTitle:[NSString stringWithFormat:@"%@\n%@", title, timeLeftString]
+							forState:UIControlStateNormal];
+		} else {
+			[detailGateInfo setTitle:[NSString stringWithFormat:@"%@\n%@", title, balanceString]
+							forState:UIControlStateNormal];
+		}
+	} else {
+		[detailGateInfo setBackgroundColor:gateConnectedBtnColor];
+		NSString *updateTimeString = [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : @"更新时间：无";
+		if (![[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
+			[detailGateInfo setTitle:[NSString stringWithFormat:@"%@\n%@", timeLeftString, updateTimeString]
+							forState:UIControlStateNormal];
+		} else {
+			[detailGateInfo setTitle:[NSString stringWithFormat:@"%@\n%@", balanceString, updateTimeString]
+							forState:UIControlStateNormal];
+		}
+	}
+}
+- (void)changeProgressHub:(NSString *)title
+				isSuccess:(BOOL)bSuccess
+{
+	progressHub.animationType = MBProgressHUDAnimationZoom;
+    self.progressHub.labelText = title;
+    if (bSuccess) {
+		self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-yes"]] autorelease];
+	} else {
+		self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-no"]] autorelease];
+	}
+    self.progressHub.mode = MBProgressHUDModeCustomView;
+    [self.progressHub hide:YES afterDelay:1];
+}
+- (void)showProgressHubWithTitle:(NSString *)title{
+    self.progressHub.mode = MBProgressHUDModeIndeterminate;
+    self.progressHub.delegate = self;
+    self.progressHub.labelText = title;
+    [self.progressHub show:YES];
+}
+
+#pragma mark - IPGateDelegate setup
+
+- (void)didConnectToIPGate{
+}
+- (void)didLoseConnectToIpGate{
+}
+- (void)disconnectSuccess{
+    if (_hasSilentCallback) {
+        _hasSilentCallback = NO;
+        return;
+    }
+	self.numStatus = 1;
+    [self changeDetailGateInfo:@"当前可访问校园网" isConnecting:YES];
+	[self changeProgressHub:@"已断开全部连接" isSuccess:YES];
+	
+    NSLog(@"DisconnectDone");
+}
+- (void)connectFreeSuccess{
+	self.numStatus = 2;
+    [self saveAccountState];
+	[self changeDetailGateInfo:@"可访问免费地址" isConnecting:YES];
+	[self changeProgressHub:@"已连接到免费地址" isSuccess:YES];
+    
+    NSLog(@"ConnectToFreeDone");
+	
+}
+- (void)connectGlobalSuccess {
+	self.numStatus = 3;
+    [self saveAccountState];
+	[self changeDetailGateInfo:@"可访问收费地址" isConnecting:YES];
+	[self changeProgressHub:@"已连接到收费地址" isSuccess:YES];
+	
+    NSLog(@"ConnectToGlobalDone");
+}
+- (void)connectFailed
+{
+    if (self.connector.error == IPGateErrorOverCount) {
+        self.progressHub.mode = MBProgressHUDModeIndeterminate;
+        self.progressHub.labelText = @"连接数超过预定值";
+        if ([ModalAlert confirm:@"断开别处的连接" withMessage:@"断开别处的连接才能在此处建立连接"]){
+            _hasSilentCallback = YES;
+            [self.connector disConnect];
+            self.progressHub.labelText = @"正在断开重连";
+            [self.connector reConnect];
+        } else [self.progressHub hide:YES afterDelay:0.5];
+    } else {
+		if ([self.connector.dictResult objectForKey:@"REASON"] == nil) {
+			[self changeProgressHub:@"网络错误，请稍后再试。" isSuccess:NO];
+		} else if ([[self.connector.dictResult objectForKey:@"REASON"] hasSuffix:@"在例外中"]) {
+			[self changeProgressHub:@"您的IP地址不在学校范围内。"  isSuccess:NO];
+		} else {
+			[self changeProgressHub:[self.connector.dictResult objectForKey:@"REASON"] isSuccess:NO];
+		}
+        NSLog(@"Reason %@",[self.connector.dictResult objectForKey:@"REASON"]);
+    }
+}
+- (void)saveAccountState {
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictResult];
+	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictDetail];
+    [self.defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
+}
+
+#pragma mark - private ControlEvent Setup
+- (IBAction)configAutoDisconnectDidChanged:(UISwitch *)sender {
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+    [self.gateStateDictionary setObject:[NSNumber numberWithBool:sender.on] forKey:_keyAutoDisconnect];
+    [defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
 }
 
 #pragma mark - Table view delegate
@@ -343,31 +345,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-
-#pragma mark
-
-- (void)showProgressHubWithTitle:(NSString *)title{
-    self.progressHub.mode = MBProgressHUDModeIndeterminate;
-    self.progressHub.delegate = self;
-    self.progressHub.labelText = title;
-    [self.progressHub show:YES];
-}
-
 #pragma mark - Segue setup
-
-+ (NSString *)replaceUnicode:(NSString *)unicodeStr {  
-    
-    NSString *tempStr1 = [unicodeStr stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"];  
-    NSString *tempStr2 = [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];  
-    NSString *tempStr3 = [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];  
-    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];  
-    NSString* returnStr = [NSPropertyListSerialization propertyListFromData:tempData  
-                                                           mutabilityOption:NSPropertyListImmutable   
-                                                                     format:NULL  
-                                                           errorDescription:NULL];  
-    //NSLog(@"Output = %@", returnStr);
-    return [returnStr stringByReplacingOccurrencesOfString:@"\\r\\n" withString:@"\n"];  
-}
 
 - (IBAction)detailGateInfoPressed:(id)sender {
 	[self performSegueWithIdentifier:@"DetailGateInfoSegue" sender:self];
@@ -379,23 +357,37 @@
 		
 		self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
 		
-/*		for (NSString *key in [self.gateStateDictionary allKeys]) {
-			NSLog(@"%@ -> %@", [[self class] replaceUnicode:key], [[self class] replaceUnicode:[self.gateStateDictionary valueForKey:key]]);
-		}
-*/		
-		dvc.accountStatus = [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime];
-		if (dvc.accountStatus == nil) dvc.accountStatus = self.labelWarning.text;
-		
 		if ([[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
 			dvc.accountPackage = @"10元国内地址任意游";
 		} else if ([[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]){
 			dvc.accountPackage = @"90元不限时";
 		} else {
-			dvc.accountPackage = [self.gateStateDictionary objectForKey:_keyIPGateType] ? [self.gateStateDictionary objectForKey:_keyIPGateType] : @"未知";
+			dvc.accountPackage = 
+			[self.gateStateDictionary objectForKey:_keyIPGateType] ? 
+				[self.gateStateDictionary objectForKey:_keyIPGateType] : 
+				@"未知";
 		}
-		dvc.accountAccuTime = [dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? @"未包月" : ([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] : @"未知");
-		dvc.accountRemainTime = [dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? @"未包月" : ([self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知");
-		dvc.accountBalance = [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"%@元",[self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"未知";
+		
+		dvc.accountStatus = 
+		[self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? 
+			[self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : 
+			self.labelWarning.text;
+		dvc.accountAccuTime = 
+		[dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? 
+			@"未包月" : 
+			([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] ? 
+				 [self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] : 
+				 @"未知");
+		dvc.accountRemainTime = 
+		[dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ?
+			@"未包月" : 
+			([self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? 
+				 [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : 
+				 @"未知");
+		dvc.accountBalance = 
+		[self.gateStateDictionary objectForKey:_keyIPGateBalance] ? 
+			[NSString stringWithFormat:@"%@元",[self.gateStateDictionary objectForKey:_keyIPGateBalance]] : 
+			@"未知";
 	}
 }
 

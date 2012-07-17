@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NanbeigeItsViewController.h"
 
 @interface NanbeigeLine3Button2Cell : UITableViewCell
 @property (retain, nonatomic) IBOutlet UIImageView *imageView;
@@ -20,5 +19,6 @@
 - (IBAction)disconnectAll:(id)sender;
 @property (retain, nonatomic) IBOutlet UILabel *statusLabel;
 @property (retain, nonatomic) IBOutlet UILabel *detailStatusLabel;
+@property (retain, nonatomic) IBOutlet UIButton *statusBackground;
 
 @end

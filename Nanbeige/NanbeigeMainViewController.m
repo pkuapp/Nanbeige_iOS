@@ -50,7 +50,6 @@
 		};
 		_functionOrder = [[NSArray alloc] initWithArray:newOrder];
 		[newOrder release];
-		//NSLog(@"order: %@", _functionOrder);
 	}
 	return _functionOrder;
 }
@@ -84,36 +83,43 @@
 							 @"IP网关", @"name",
 							 @"its", @"image", 
 							 @"Line1Button0Identifier", @"identifier",
+							 @"NanbeigeLine1Button0Cell", @"nibname",
 							 nil];
 	NSDictionary *coursesDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								 @"课程", @"name", 
 								 @"courses", @"image", 
 								 @"Line3Button0Identifier", @"identifier", 
+								 @"NanbeigeLine3Button0Cell", @"nibname",
 								 nil];
 	NSDictionary *roomsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 							   @"自习室", @"name", 
 							   @"rooms", @"image", 
 							   @"Line1Button0Identifier", @"identifier", 
+							   @"NanbeigeLine1Button0Cell", @"nibname",
 							   nil];
 	NSDictionary *calendarDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"校园黄页", @"name", 
 								  @"calendar", @"image", 
 								  @"Line1Button0Identifier", @"identifier", 
+								  @"NanbeigeLine1Button0Cell", @"nibname",
 								  nil];
 	NSDictionary *feedbackDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"反馈", @"name", 
 								  @"feedback", @"image", 
-								  @"Line1Button0Identifier", @"identifier", 
+								  @"Line1Button0Identifier", @"identifier",
+								  @"NanbeigeLine1Button0Cell", @"nibname",
 								  nil];
 	NSDictionary *activityDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"活动", @"name", 
 								  @"Icon", @"image", 
 								  @"Line2Button0Identifier", @"identifier", 
+								  @"NanbeigeLine2Button0Cell", @"nibname",
 								  nil];
 	NSDictionary *homeworkDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"作业", @"name", 
 								  @"180-stickynote", @"image", 
 								  @"Line2Button2Identifier", @"identifier", 
+								  @"NanbeigeLine2Button2Cell", @"nibname",
 								  nil];
 	
 	functionArray =[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil];
@@ -139,12 +145,12 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-	NSLog(@"%@;%@", [[self.functionArray objectAtIndex:0] objectForKey:@"identifier"], [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY]);
 	if ([[[self.functionArray objectAtIndex:0] objectForKey:@"identifier"] isEqualToString:@"Line3Button2Identifier"] && [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] == nil) {
 		NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								 @"IP网关", @"name",
 								 @"its", @"image", 
 								 @"Line1Button0Identifier", @"identifier",
+								 @"NanbeigeLine1Button0Cell", @"nibname",
 								 nil];
 		[self.functionArray removeObjectAtIndex:0];
 		[self.functionArray insertObject:itsDict atIndex:0];
@@ -154,6 +160,7 @@
 								 @"IP网关", @"name",
 								 @"its", @"image", 
 								 @"Line3Button2Identifier", @"identifier",
+								 @"NanbeigeLine3Button2Cell", @"nibname",
 								 nil];
 		[self.functionArray removeObjectAtIndex:0];
 		[self.functionArray insertObject:itsDict atIndex:0];
@@ -173,14 +180,6 @@
 }
 - (IBAction)calendarButtonPressed:(id)sender {
 	[self showAlert:@"日历功能正在制作中，敬请期待！"];
-}
-
-+ (NSString *)nibNameFromIdentifier:(NSString *)identifier
-{
-	NSString *nibName = @"Nanbeige";
-	nibName = [nibName stringByAppendingString:[identifier substringToIndex:12]];
-	nibName = [nibName stringByAppendingString:@"Cell"];
-	return nibName;
 }
 
 -(IBAction)editFunctionOrder:(id)sender{
@@ -207,7 +206,7 @@
 	NSUInteger row = [indexPath row];
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
 	NSString *identifier = [[functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
-	NSString *nibName = [[self class] nibNameFromIdentifier:identifier];
+	NSString *nibName = [[functionArray objectAtIndex:functionIndex] objectForKey:@"nibname"];
 	
 	if ([[nibsRegistered objectForKey:nibName] isEqualToString:@"NO"]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
@@ -237,7 +236,7 @@
 	NSUInteger row = [indexPath row];
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
 	NSString *identifier = [[functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
-	NSString *nibName = [[self class] nibNameFromIdentifier:identifier];
+	NSString *nibName = [[functionArray objectAtIndex:functionIndex] objectForKey:@"nibname"];
 	NSString *name = [[functionArray objectAtIndex:functionIndex] objectForKey:@"name"];
 	NSString *image = [[functionArray objectAtIndex:functionIndex] objectForKey:@"image"];
 	

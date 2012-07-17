@@ -11,6 +11,7 @@
 @implementation NanbeigeLine3Button2Cell
 @synthesize statusLabel;
 @synthesize detailStatusLabel;
+@synthesize statusBackground;
 @synthesize nameLabel;
 @synthesize imageView;
 @synthesize name;
@@ -51,6 +52,7 @@
 	[nameLabel release];
     [statusLabel release];
     [detailStatusLabel release];
+    [statusBackground release];
 	[super dealloc];
 }
 
@@ -64,14 +66,17 @@
     [alertView release];
 }
 - (IBAction)connectFree:(id)sender {
-	[self showAlert:@"连接免费！"];
+	[self showAlert:@"Press Button 1"];
 }
 
 - (IBAction)connectGlobal:(id)sender {
-	[self showAlert:@"连接收费！"];
+	[self showAlert:@"Press Button 2"];
 }
 
 - (IBAction)disconnectAll:(id)sender {
-	[self showAlert:@"断开连接！"];
+	[self showAlert:@"Press Button 3"];
+}
+- (IBAction)touchUnreachable:(id)sender {
+	[self showAlert:@"Press Button 4"];
 }
 @end

@@ -404,6 +404,12 @@
 		26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */; };
 		26D5FA1615AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1515AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m */; };
 		26D5FA1C15AFFB930075B68D /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */; };
+		26E2CB5C15B50BD100F8FA3D /* widget_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E2CB5B15B50BD100F8FA3D /* widget_point.png */; };
+		26E2CB6415B54B9F00F8FA3D /* NanbeigeAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E2CB6315B54B9F00F8FA3D /* NanbeigeAssignmentViewController.m */; };
+		26E2CB6815B54E3400F8FA3D /* NanbeigeAssignmentNoImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E2CB6715B54E3400F8FA3D /* NanbeigeAssignmentNoImageCell.m */; };
+		26E2CB6B15B54E5500F8FA3D /* NanbeigeAssignmentImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E2CB6A15B54E5400F8FA3D /* NanbeigeAssignmentImageCell.m */; };
+		26E2CB6D15B54E7500F8FA3D /* NanbeigeAssignmentImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E2CB6C15B54E7500F8FA3D /* NanbeigeAssignmentImageCell.xib */; };
+		26E2CB6F15B54E9800F8FA3D /* NanbeigeAssignmentNoImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E2CB6E15B54E9800F8FA3D /* NanbeigeAssignmentNoImageCell.xib */; };
 		26E7CB9715AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */; };
 		26E960FB15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E960FA15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m */; };
 		26E96D7515AC1116005353D4 /* renren-logo-159x35.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E96D7415AC1115005353D4 /* renren-logo-159x35.png */; };
@@ -1154,6 +1160,15 @@
 		26D5FA1515AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLoginCoursesViewController.m; sourceTree = "<group>"; };
 		26D5FA1A15AFFB930075B68D /* NanbeigeLoginItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginItsViewController.h; sourceTree = "<group>"; };
 		26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLoginItsViewController.m; sourceTree = "<group>"; };
+		26E2CB5B15B50BD100F8FA3D /* widget_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_point.png; sourceTree = "<group>"; };
+		26E2CB6215B54B9F00F8FA3D /* NanbeigeAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentViewController.h; sourceTree = "<group>"; };
+		26E2CB6315B54B9F00F8FA3D /* NanbeigeAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentViewController.m; sourceTree = "<group>"; };
+		26E2CB6615B54E3400F8FA3D /* NanbeigeAssignmentNoImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentNoImageCell.h; sourceTree = "<group>"; };
+		26E2CB6715B54E3400F8FA3D /* NanbeigeAssignmentNoImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentNoImageCell.m; sourceTree = "<group>"; };
+		26E2CB6915B54E5400F8FA3D /* NanbeigeAssignmentImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentImageCell.h; sourceTree = "<group>"; };
+		26E2CB6A15B54E5400F8FA3D /* NanbeigeAssignmentImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentImageCell.m; sourceTree = "<group>"; };
+		26E2CB6C15B54E7500F8FA3D /* NanbeigeAssignmentImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeAssignmentImageCell.xib; sourceTree = "<group>"; };
+		26E2CB6E15B54E9800F8FA3D /* NanbeigeAssignmentNoImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeAssignmentNoImageCell.xib; sourceTree = "<group>"; };
 		26E7CB9515AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWBAuthorizeWebView.h; sourceTree = "<group>"; };
 		26E7CB9615AB1BA800C3901F /* NanbeigeWBAuthorizeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWBAuthorizeWebView.m; sourceTree = "<group>"; };
 		26E960F915ABB07B00A4C595 /* NanbeigeRenrenPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeRenrenPostViewController.h; sourceTree = "<group>"; };
@@ -1510,6 +1525,7 @@
 			isa = PBXGroup;
 			children = (
 				2678C31515B042D0005E1D3E /* MainTableCell */,
+				26E2CB5E15B545ED00F8FA3D /* AssignmentView */,
 				26D5FA0A15AFE0410075B68D /* CoursesView */,
 				262AD4B115AA7F07000C2EF7 /* ItsView */,
 				262AD4AB15AA7E26000C2EF7 /* NanbeigeMainViewController.h */,
@@ -1536,6 +1552,7 @@
 		262AD4B515AA7F4E000C2EF7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				26E2CB5B15B50BD100F8FA3D /* widget_point.png */,
 				26A6B54D15B41B16006FA15D /* 24-person.png */,
 				26A6B54E15B41B16006FA15D /* 24-person@2x.png */,
 				26A6B54F15B41B16006FA15D /* 37x-Checkmark.png */,
@@ -2283,6 +2300,29 @@
 			name = CoursesView;
 			sourceTree = "<group>";
 		};
+		26E2CB5E15B545ED00F8FA3D /* AssignmentView */ = {
+			isa = PBXGroup;
+			children = (
+				26E2CB6515B54DCA00F8FA3D /* AssignmentTableCell */,
+				26E2CB6215B54B9F00F8FA3D /* NanbeigeAssignmentViewController.h */,
+				26E2CB6315B54B9F00F8FA3D /* NanbeigeAssignmentViewController.m */,
+			);
+			name = AssignmentView;
+			sourceTree = "<group>";
+		};
+		26E2CB6515B54DCA00F8FA3D /* AssignmentTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				26E2CB6615B54E3400F8FA3D /* NanbeigeAssignmentNoImageCell.h */,
+				26E2CB6715B54E3400F8FA3D /* NanbeigeAssignmentNoImageCell.m */,
+				26E2CB6E15B54E9800F8FA3D /* NanbeigeAssignmentNoImageCell.xib */,
+				26E2CB6915B54E5400F8FA3D /* NanbeigeAssignmentImageCell.h */,
+				26E2CB6A15B54E5400F8FA3D /* NanbeigeAssignmentImageCell.m */,
+				26E2CB6C15B54E7500F8FA3D /* NanbeigeAssignmentImageCell.xib */,
+			);
+			name = AssignmentTableCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2558,6 +2598,9 @@
 				26A6B69315B41B17006FA15D /* Welcome-button-active@2x.png in Resources */,
 				26A6B69415B41B17006FA15D /* Welcome-button.png in Resources */,
 				26A6B69515B41B17006FA15D /* Welcome-button@2x.png in Resources */,
+				26E2CB5C15B50BD100F8FA3D /* widget_point.png in Resources */,
+				26E2CB6D15B54E7500F8FA3D /* NanbeigeAssignmentImageCell.xib in Resources */,
+				26E2CB6F15B54E9800F8FA3D /* NanbeigeAssignmentNoImageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2733,6 +2776,9 @@
 				2678C38A15B304CD005E1D3E /* NanbeigeConnectViewController.m in Sources */,
 				26A6B50A15B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.m in Sources */,
 				26A6B50E15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.m in Sources */,
+				26E2CB6415B54B9F00F8FA3D /* NanbeigeAssignmentViewController.m in Sources */,
+				26E2CB6815B54E3400F8FA3D /* NanbeigeAssignmentNoImageCell.m in Sources */,
+				26E2CB6B15B54E5500F8FA3D /* NanbeigeAssignmentImageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

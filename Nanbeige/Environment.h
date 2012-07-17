@@ -40,6 +40,9 @@
 #define gateConnectingBtnColor [[UIColor alloc] initWithRed:255/255.0 green:248/255.0 blue:176/255.0 alpha:1.0]
 #define gateConnectedBtnColor [[UIColor alloc] initWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1.0]
 
+#define gateConnectCellColor [UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]
+#define gateDisconnectCellColor [UIColor colorWithRed:176/255.0 green:92/255.0 blue:69/255.0 alpha:1.0]
+
 #define kMAINORDERKEY @"mainorder"
 #define kWEIBOIDKEY @"weiboid"
 #define kRENRENIDKEY @"renrenid"
