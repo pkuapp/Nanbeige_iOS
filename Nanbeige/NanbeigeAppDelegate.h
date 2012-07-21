@@ -30,22 +30,22 @@
 }
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, retain, readonly) NSOperationQueue *operationQueue;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSString *persistentStorePath;
+@property (nonatomic, strong, readonly) NSOperationQueue *operationQueue;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSString *persistentStorePath;
 
-@property (nonatomic, retain)AppUser *appUser;
-@property (atomic, retain) Reachability *wifiTester;
-@property (atomic, retain) Reachability *internetTester;
-@property (atomic, retain) Reachability *globalTester;
-@property (atomic, retain) Reachability *freeTester;
-@property (atomic, retain) Reachability *localTester;
+@property (nonatomic, strong)AppUser *appUser;
+@property (atomic, strong) Reachability *wifiTester;
+@property (atomic, strong) Reachability *internetTester;
+@property (atomic, strong) Reachability *globalTester;
+@property (atomic, strong) Reachability *freeTester;
+@property (atomic, strong) Reachability *localTester;
 @property (atomic) PKUNetStatus netStatus;
 @property (nonatomic) BOOL hasWifi;
-@property (nonatomic, retain)MBProgressHUD *progressHub;
+@property (nonatomic, strong)MBProgressHUD *progressHub;
 
-@property (nonatomic, retain, readonly) NSDictionary *test_data;
+@property (nonatomic, strong, readonly) NSDictionary *test_data;
 
 
 - (void)logout;

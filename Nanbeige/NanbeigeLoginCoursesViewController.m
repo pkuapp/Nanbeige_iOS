@@ -422,21 +422,6 @@
 	}
 }
 
-- (void)dealloc {
-    NSFileManager *imgManager = [NSFileManager defaultManager];
-    [imgManager removeItemAtPath:pathImg error:nil];
-    [self.Username release];
-    [self.UserPwd release];
-    [self.validCode release];
-    [firstImg release];
-    [sessionid release];
-    [_requestImg clearDelegatesAndCancel];
-    [_requestImg release];
-    [HUD release];
-    [tableView release];
-    [super dealloc];
-}
-
 - (IBAction)onCancelButtonPressed:(id)sender {
 	[self dismissModalViewControllerAnimated:YES];
 }

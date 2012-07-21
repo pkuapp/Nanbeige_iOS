@@ -46,11 +46,7 @@
 	[self setTextToPost:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    [indicatorView release], indicatorView = nil;
-}
-- (void)dealloc {
-	[textToPost release];
-	[super dealloc];
+	indicatorView = nil;
 }
 
 #pragma mark - IBAction
@@ -60,7 +56,6 @@
 	if ([self.textToPost.text length] <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"状态不能为空！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 	// set parameters and post
@@ -154,7 +149,6 @@
 											 cancelButtonTitle:@"确定"
 											 otherButtonTitles:nil];
 	[alertView show];
-    [alertView release];
 }
 
 #pragma mark - RenrenDelegate
@@ -169,7 +163,7 @@
 // 人人接口请求失败
 - (void)renren:(Renren *)renren requestFailWithError:(ROError*)error {
     [indicatorView stopAnimating];
-    NSLog(@"%@", [error localizedDescription]);
+    NSLog(@"%@", error);
 	[self showAlert:@"人人吐槽失败，请稍后再试"];
 }
 

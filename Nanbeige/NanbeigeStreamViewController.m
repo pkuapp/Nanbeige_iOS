@@ -136,10 +136,6 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)dealloc {
-	[super dealloc];
-}
-
 -(void)showAlert:(NSString*)message{
 	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
 													   message:message
@@ -147,7 +143,6 @@
 											 cancelButtonTitle:@"确定"
 											 otherButtonTitles:nil];
 	[alertView show];
-    [alertView release];
 }
 - (IBAction)renrenPost:(id)sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

@@ -78,19 +78,6 @@
 	[self setRenrenCell:nil];
 	[self setNanbeigeCell:nil];
 }
-- (void)dealloc
-{
-    [weiBoEngine setDelegate:nil];
-    //[weiBoEngine release], weiBoEngine = nil;
-	//[renren release], renren = nil;
-    
-    [indicatorView release];
-	[weiboCell release];
-	[renrenCell release];
-	[nanbeigeCell release];
-	
-    [super dealloc];
-}
 - (void)viewDidAppear:(BOOL)animated
 {
 	[self setWeiboDisplay];
@@ -107,7 +94,6 @@
     [engine setRedirectURI:@"https://api.weibo.com/oauth2/default.html"];
     [engine setIsUserExclusive:NO];
     self.weiBoEngine = engine;
-    [engine release];
 }
 -(void)setWeiboDisplay
 {
@@ -225,7 +211,6 @@
 												 otherButtonTitles:nil];
 		[alertView setTag:kWBAlertViewLogInTag];
 		[alertView show];
-		[alertView release];
 	}
 }
 
@@ -377,7 +362,6 @@
 											 cancelButtonTitle:@"确定"
 											 otherButtonTitles:nil];
 	[alertView show];
-    [alertView release];
 }
 -(void)showAlert:(NSString *)message
 		 withTag:(int)tag
@@ -389,7 +373,6 @@
 											 otherButtonTitles:nil];
     [alertView setTag:tag];
 	[alertView show];
-	[alertView release];
 }
 
 #pragma mark - WBEngineDelegate Methods
@@ -441,7 +424,7 @@
 -(void)renrenDidLogin:(Renren *)renren{
 	[indicatorView startAnimating];
 	[self showAlert:@"人人登录成功！" withTag:kWBAlertViewLogInTag];
-	ROUserInfoRequestParam *requestParam = [[[ROUserInfoRequestParam alloc] init] autorelease];
+	ROUserInfoRequestParam *requestParam = [[ROUserInfoRequestParam alloc] init];
 	requestParam.fields = [NSString stringWithFormat:@"uid,name"];
 	[self.renren getUsersInfo:requestParam andDelegate:self];
 	renrenCell.textLabel.text = @"人人账号:";
@@ -450,7 +433,7 @@
 	[indicatorView stopAnimating];
 	NSString *title = [NSString stringWithFormat:@"Error code:%d", [error code]];
 	NSString *description = [NSString stringWithFormat:@"%@", [error localizedDescription]];
-	UIAlertView *alertView =[[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] autorelease];
+	UIAlertView *alertView =[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
 	[alertView show];
 }
 - (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response{
@@ -477,7 +460,6 @@
 				[result appendString:msg];
 			}
 			[self showAlert:result];
-			[result release];
 		}
 	}
 }
@@ -488,7 +470,6 @@
     
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:errorCode message:errorMsg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 - (IBAction)logoutAll:(id)sender {

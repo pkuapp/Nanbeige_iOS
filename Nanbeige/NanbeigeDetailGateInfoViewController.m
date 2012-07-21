@@ -150,12 +150,4 @@
      [detailViewController release];
      */
 }
-
-- (void)dealloc {
-	[packageCell release];
-	[accuTimeCell release];
-	[remainTimeCell release];
-	[balanceCell release];
-	[super dealloc];
-}
 @end

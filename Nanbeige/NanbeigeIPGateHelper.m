@@ -225,13 +225,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"numberListenRetry"];
-    [self removeObserver:self forKeyPath:@"isConnected"];
-    [super dealloc];
-}
-
 #pragma mark - KVO
 //
 //-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -328,7 +321,7 @@
         result = [[responseArray objectAtIndex:1] dictionaryByMatchingRegex:patternDisconnectSuccess withKeysAndCaptures:@"SUCCESS",1,@"IP",2,@"连接数",3, nil];
     }
     else {
-        result = [[[NSDictionary alloc] initWithObjectsAndKeys:@"NO",@"SUCCESS", nil] autorelease];
+        result = [[NSDictionary alloc] initWithObjectsAndKeys:@"NO",@"SUCCESS", nil];
     }
     return result;
 }

@@ -47,15 +47,6 @@
 	}
 }
 
-- (void)dealloc {
-	[imageView release];
-	[nameLabel release];
-    [statusLabel release];
-    [detailStatusLabel release];
-    [statusBackground release];
-	[super dealloc];
-}
-
 -(void)showAlert:(NSString*)message{
 	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
 													   message:message
@@ -63,7 +54,6 @@
 											 cancelButtonTitle:@"确定"
 											 otherButtonTitles:nil];
 	[alertView show];
-    [alertView release];
 }
 - (IBAction)connectFree:(id)sender {
 	[self showAlert:@"Press Button 1"];

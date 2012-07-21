@@ -78,16 +78,16 @@ typedef enum IPGateResult{
     BOOL isConnected;
     
 }
-@property (assign) NSString *stringRange;
-@property (assign) id<NanbeigeIPGateConnectDelegate> delegate;
-@property (retain, nonatomic)ASIHTTPRequest* request;
+@property (strong) NSString *stringRange;
+@property (strong) id<NanbeigeIPGateConnectDelegate> delegate;
+@property (strong, nonatomic)ASIHTTPRequest* request;
 @property BOOL isConnected;
 @property NSInteger numberListenRetry;
 @property (assign, atomic) IPGateConnectError error;
 @property (assign, atomic) IPGateConnectingStatus connectingStatus;
 @property (assign, atomic) IPGateResult connectionResult;
-@property (retain, atomic) NSDictionary *dictResult;
-@property (retain, atomic) NSDictionary *dictDetail;
+@property (strong, atomic) NSDictionary *dictResult;
+@property (strong, atomic) NSDictionary *dictDetail;
 
 
 - (void)connectFree;

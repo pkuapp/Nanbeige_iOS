@@ -39,7 +39,7 @@
 - (NSDictionary *)test_data {
     if (test_data == nil) {
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test_data" ofType:@"plist"]];
-        test_data = [dict retain];
+        test_data = dict;
     }
     return test_data;
 }
@@ -111,9 +111,7 @@
         //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursesid == %@",username];
         //fetchRequest.predicate = predicate;
         
-        appUser = [(AppUser *) [[self.managedObjectContext executeFetchRequest:fetchRequest error:NULL] lastObject] retain];
-        
-        [fetchRequest release];
+        appUser = (AppUser *) [[self.managedObjectContext executeFetchRequest:fetchRequest error:NULL] lastObject];
 		
 		NSLog(@"get appUser%@",appUser);
 		
@@ -200,10 +198,10 @@
         }
         else {
             NSString *des = [error description];
-            stringError = &des;
+            *stringError = des;
         }
     }
-    NSString *stringResult = [[self parsedLoginError:loginmessage] retain];
+    NSString *stringResult = [self parsedLoginError:loginmessage];
     *stringError = stringResult;
     return NO;
 }
@@ -246,7 +244,10 @@
         id object = [dictCourse objectForKey:key];
         if (object != [NSNull null]) {
             @try {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 [_course performSelector:sel_getUid([selector UTF8String]) withObject:[dictCourse objectForKey:key]];
+#pragma clang diagnostic pop
             }
             @catch (NSException *exception) {
                 NSLog(@"Failed to update key %@",key);
@@ -428,7 +429,8 @@
         }
         
         Course *ccourse = (Course *)[NSEntityDescription insertNewObjectForEntityForName:@"Course" inManagedObjectContext:context];
-        for (NSString *key in [dict keyEnumerator]) {
+        for (NSString *_key in [dict keyEnumerator]) {
+			NSString *key = _key;
             id object = [dict objectForKey:key];
             if ([key isEqualToString:@"cname"]) {
                 key = @"name";
@@ -436,7 +438,10 @@
             }
             NSString *selector = [NSString stringWithFormat:@"setPrimitive%@:",key];
             if (object != [NSNull null]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 [ccourse performSelector:sel_getUid([selector UTF8String]) withObject:object];
+#pragma clang diagnostic pop
             }
             
         }
@@ -474,19 +479,9 @@
 
 - (NSString *)persistentStorePath {
     if (persistentStorePath == nil) {
-        persistentStorePath = [pathSQLCore retain];
+        persistentStorePath = pathSQLCore;
     }
     return persistentStorePath;
-}
-
-- (void)dealloc
-{
-    [operationQueue release];
-    [persistentStorePath release];
-    [persistentStoreCoordinator release];
-    [managedObjectContext release];
-	[_window release];
-    [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

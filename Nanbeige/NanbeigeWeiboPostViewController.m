@@ -59,13 +59,9 @@
 - (void)viewDidUnload
 {
 	[self setTextToPost:nil];
+	indicatorView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    [indicatorView release], indicatorView = nil;
-}
-- (void)dealloc {
-	[textToPost release];
-	[super dealloc];
 }
 
 #pragma mark - Display Status
@@ -143,7 +139,6 @@
 	if ([self.textToPost.text length] <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"状态不能为空！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     
 	// post
@@ -164,7 +159,6 @@
 											 cancelButtonTitle:@"确定"
 											 otherButtonTitles:nil];
 	[alertView show];
-    [alertView release];
 }
 
 #pragma mark - WBEngineDelegate Methods

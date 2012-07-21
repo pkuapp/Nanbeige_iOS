@@ -27,7 +27,7 @@
 @property (assign, nonatomic) NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *delegate;
 
 @property (retain, nonatomic) NanbeigeItsViewController *nivc;
-@property (assign) NanbeigeIPGateHelper *connector;
+@property (strong, nonatomic) NanbeigeIPGateHelper *connector;
 
 -(IBAction)editFunctionOrder:(id)sender;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *editFunctionButton;

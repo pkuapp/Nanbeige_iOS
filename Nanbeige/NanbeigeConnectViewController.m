@@ -85,17 +85,6 @@
 	usernameTextField = nil;
 	passwordTextField = nil;
 }
-- (void)dealloc
-{
-    [weiBoEngine setDelegate:nil];
-    //[weiBoEngine release], weiBoEngine = nil;
-	//[renren release], renren = nil;
-    [indicatorView release];
-	[usernameTextField release];
-	[passwordTextField release];
-	
-    [super dealloc];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -186,7 +175,6 @@
     [engine setRedirectURI:@"https://api.weibo.com/oauth2/default.html"];
     [engine setIsUserExclusive:NO];
     self.weiBoEngine = engine;
-    [engine release];
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]) {
@@ -231,14 +219,12 @@
 	if ([self.usernameTextField.text length] <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"用户名不能为空！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
-        [alert release];
 		[self.usernameTextField becomeFirstResponder];
 		return ;
     }
 	if ([self.passwordTextField.text length] <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码不能为空！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
-        [alert release];
 		[self.passwordTextField becomeFirstResponder];
 		return ;
     }
@@ -275,7 +261,6 @@
 												 otherButtonTitles:nil];
 		[alertView setTag:kWBAlertViewLogInTag];
 		[alertView show];
-		[alertView release];
 	}
 }
 
@@ -292,7 +277,6 @@
 											 cancelButtonTitle:@"确定"
 											 otherButtonTitles:nil];
 	[alertView show];
-    [alertView release];
 }
 -(void)showAlert:(NSString *)message
 		 withTag:(int)tag
@@ -304,7 +288,6 @@
 											 otherButtonTitles:nil];
     [alertView setTag:tag];
 	[alertView show];
-	[alertView release];
 }
 
 #pragma mark - WBEngineDelegate Methods
@@ -356,7 +339,7 @@
 -(void)renrenDidLogin:(Renren *)renren{
 	[indicatorView startAnimating];
 	[self showAlert:@"人人登录成功！" withTag:kWBAlertViewLogInTag];
-	ROUserInfoRequestParam *requestParam = [[[ROUserInfoRequestParam alloc] init] autorelease];
+	ROUserInfoRequestParam *requestParam = [[ROUserInfoRequestParam alloc] init];
 	requestParam.fields = [NSString stringWithFormat:@"uid,name"];
 	[self.renren getUsersInfo:requestParam andDelegate:self];
 	bGetRenrenName = YES;
@@ -365,7 +348,7 @@
 	[indicatorView stopAnimating];
 	NSString *title = [NSString stringWithFormat:@"Error code:%d", [error code]];
 	NSString *description = [NSString stringWithFormat:@"%@", [error localizedDescription]];
-	UIAlertView *alertView =[[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] autorelease];
+	UIAlertView *alertView =[[UIAlertView alloc] initWithTitle:title message:description delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
 	[alertView show];
 }
 - (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response{
@@ -393,7 +376,6 @@
 				[result appendString:msg];
 			}
 			[self showAlert:result];
-			[result release];
 		}
 	}
 }
@@ -404,7 +386,6 @@
     
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:errorCode message:errorMsg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 @end

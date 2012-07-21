@@ -154,20 +154,6 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-- (void)dealloc
-{
-    [Username release];
-    [Password release];
-    [connectFree release];
-	[connectGlobal release];
-	[disconnectAll release];
-	[detailGateInfo release];
-	//progressHub.delegate = nil;
-	//[progressHub release];
-	//connector.delegate = nil;
-	//[connector release];
-    [super dealloc];
-}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -217,9 +203,9 @@
 	progressHub.animationType = MBProgressHUDAnimationZoom;
     self.progressHub.labelText = title;
     if (bSuccess) {
-		self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-yes"]] autorelease];
+		self.progressHub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-yes"]];
 	} else {
-		self.progressHub.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-no"]] autorelease];
+		self.progressHub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-no"]];
 	}
     self.progressHub.mode = MBProgressHUDModeCustomView;
     [self.progressHub hide:YES afterDelay:1];

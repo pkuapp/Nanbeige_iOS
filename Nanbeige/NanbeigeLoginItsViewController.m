@@ -53,13 +53,6 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-- (void)dealloc {
-	[usernameTextField release];
-	[passwordTextField release];
-	[usernameCell release];
-	[passwordCell release];
-	[super dealloc];
-}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);

@@ -92,7 +92,7 @@
     BOOL sortKeys, humanReadable;
 }
 
-@property (nonatomic, assign) __weak SBJsonStreamWriterState *state; // Internal
+@property (nonatomic, assign) SBJsonStreamWriterState *state; // Internal
 @property (nonatomic, readonly, retain) NSMutableArray *stateStack; // Internal 
 
 /**

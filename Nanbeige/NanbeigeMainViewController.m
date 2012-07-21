@@ -49,7 +49,6 @@
 			}
 		};
 		_functionOrder = [[NSArray alloc] initWithArray:newOrder];
-		[newOrder release];
 	}
 	return _functionOrder;
 }
@@ -176,7 +175,6 @@
 											 cancelButtonTitle:@"确定"
 											 otherButtonTitles:nil];
 	[alertView show];
-    [alertView release];
 }
 - (IBAction)calendarButtonPressed:(id)sender {
 	[self showAlert:@"日历功能正在制作中，敬请期待！"];
@@ -314,7 +312,6 @@
 	[defaults setValue:neworderStr forKey:kMAINORDERKEY];
 	
 	self.functionOrder = [[NSArray alloc] initWithArray:newOrder];
-	[newOrder release];
 }
 
 
@@ -343,13 +340,6 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)dealloc {
-	[editFunctionButton release];
-	[nivc release];
-	[connector release];
-	[super dealloc];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	if ([segue.identifier isEqualToString:@"ItsEnterSegue"]) {
@@ -357,8 +347,6 @@
 		destinationViewController.connector = self.connector;
 		self.connector.delegate = destinationViewController;
 		self.nivc = destinationViewController;
-		[self.nivc retain];
-		[destinationViewController release];
 	}
 }
 

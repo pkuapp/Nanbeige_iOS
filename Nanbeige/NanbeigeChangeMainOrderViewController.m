@@ -49,7 +49,6 @@
 	[self.tableView setEditing:!self.tableView.editing animated:YES];
 	
 	oldorderStr = [[NSUserDefaults standardUserDefaults] valueForKey:kMAINORDERKEY];
-	[oldorderStr retain];
 }
 
 - (void)viewDidUnload
@@ -110,7 +109,6 @@
 	[newOrder removeObjectAtIndex:fromRow];
 	[newOrder insertObject:object atIndex:toRow];
 	self.functionOrder = [[NSArray alloc] initWithArray:newOrder];
-	[newOrder release];
 }
 
 // Override to support conditional rearranging of the table view.
@@ -173,21 +171,14 @@
      */
 }
 
-- (void)dealloc {
-	[cancelButton release];
-	[changeButton release];
-	[super dealloc];
-}
 - (IBAction)onChangeButtonPressed:(id)sender {
 	NSString * neworderStr = [functionOrder componentsJoinedByString:@","];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setValue:neworderStr forKey:kMAINORDERKEY];
 	
 	if (![neworderStr isEqualToString:oldorderStr]) {
-		[oldorderStr release];
 		[self dismissModalViewControllerAnimated:YES];
 	} else {
-		[oldorderStr release];
 		[self.navigationController popViewControllerAnimated:YES];
 	}
 }

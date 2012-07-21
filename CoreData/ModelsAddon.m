@@ -12,9 +12,6 @@
 
 @synthesize startclass,endclass,type,course;
 
-- (void)dealloc {
-    [super dealloc];
-}
 @end
 
 @implementation DayVector
@@ -56,7 +53,7 @@
             
         }
     }
-    return [temparray autorelease];
+    return temparray;
 }
 
 - (NSDictionary *)dictEventForDay:(NSInteger)day inWeek:(NSInteger)week
@@ -68,7 +65,10 @@
 - (NSInteger)dayCodeForDay:(NSInteger)day
 {
     const char* dayx = [[NSString stringWithFormat:@"day%d",day] UTF8String];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     NSInteger code = [[self performSelector:sel_getUid(dayx)] intValue];
+#pragma clang diagnostic pop
     return code;
 }
 
@@ -130,7 +130,7 @@
     }
     else if (!singleWeek && vector.doubleType == doubleTypeSingle) return nil;
         
-    NSMutableDictionary* tempDict = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary* tempDict = [[NSMutableDictionary alloc] init];
     
     float startHour = [Course starthourForClass:vector.startclass];
     float endHour = [Course starthourForClass:vector.endclass] + 5.0 / 6.0;

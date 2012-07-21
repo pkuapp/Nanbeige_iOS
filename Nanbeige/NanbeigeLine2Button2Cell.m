@@ -44,10 +44,4 @@
 	}
 }
 
-- (void)dealloc {
-	[imageView release];
-	[nameLabel release];
-	[super dealloc];
-}
-
 @end
