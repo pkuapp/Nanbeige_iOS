@@ -22,6 +22,7 @@
 @synthesize assignmentTableView;
 @synthesize coursesPicker;
 @synthesize assignmentIndex;
+@synthesize initWithCamera;
 @synthesize assignments;
 @synthesize assignment = _assignment;
 @synthesize weeksData;
@@ -67,7 +68,6 @@
 - (IBAction)onConfirmCourses:(id)sender {
 	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]]];
 	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] resignFirstResponder];
-	[self.assignment setObject:[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] forKey:kASSIGNMENTCOURSE];
 }
 
 - (void)viewDidUnload
@@ -80,7 +80,11 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-	[self.assignmentTableView reloadData];
+	[self.assignmentTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+	if (initWithCamera) {
+		initWithCamera = NO;
+		[self getMediaFromSource:UIImagePickerControllerSourceTypeCamera];
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

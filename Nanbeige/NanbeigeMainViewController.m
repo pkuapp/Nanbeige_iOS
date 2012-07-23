@@ -13,13 +13,16 @@
 #import "NanbeigeLine2Button2Cell.h"
 #import "NanbeigeLine3Button0Cell.h"
 #import "NanbeigeLine3Button2Cell.h"
+#import "NanbeigeCreateAssignmentViewController.h"
 
-@interface NanbeigeMainViewController ()
+@interface NanbeigeMainViewController () {
+    BOOL _autoDisconnect;
+    BOOL _hasSilentCallback;
+}
 
 @end
 
 @implementation NanbeigeMainViewController
-@synthesize editFunctionButton;
 @synthesize delegate;
 @synthesize functionOrder = _functionOrder;
 @synthesize functionArray;
@@ -27,6 +30,13 @@
 @synthesize nivc;
 @synthesize connector;
 @synthesize navc;
+@synthesize progressHub;
+@synthesize gateStateDictionary;
+@synthesize defaults;
+@synthesize numStatus;
+@synthesize itsCell;
+@synthesize Username;
+@synthesize Password;
 
 #pragma mark - getter and setter Override
 
@@ -36,10 +46,15 @@
     }
     return delegate;
 }
+- (MBProgressHUD *)progressHub{
+    if (progressHub == nil) {
+        progressHub = self.delegate.progressHub;
+    }
+    return progressHub;
+}
 - (NSArray *)functionOrder
 {
 	if (_functionOrder == nil) {
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		NSMutableArray *newOrder = [[[defaults valueForKey:kMAINORDERKEY] componentsSeparatedByString:@","] mutableCopy];
 		if (newOrder == nil || newOrder.count < 7) {
 			newOrder = [[NSMutableArray alloc] init];
@@ -131,13 +146,13 @@
 					  @"NO", @"NanbeigeLine3Button2Cell", 
 					  nil];
 	self.connector = [[NanbeigeIPGateHelper alloc] init];
+	self.defaults = [NSUserDefaults standardUserDefaults];
 }
 - (void)viewDidUnload
 {
 	[self setFunctionOrder:nil];
 	[self setFunctionArray:nil];
 	[self setNibsRegistered:nil];
-	[self setEditFunctionButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -165,6 +180,8 @@
 		[self.functionArray insertObject:itsDict atIndex:0];
 		[self.tableView reloadData];
 	}
+	
+	self.connector.delegate = self;
 }
 
 
@@ -178,14 +195,6 @@
 }
 - (IBAction)calendarButtonPressed:(id)sender {
 	[self showAlert:@"日历功能正在制作中，敬请期待！"];
-}
-
--(IBAction)editFunctionOrder:(id)sender{
-	[self.tableView setEditing:!self.tableView.editing animated:YES];
-	if (self.tableView.editing)
-		[editFunctionButton setTitle:@"完成"];
-	else
-		[editFunctionButton setTitle:@"编辑"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -257,72 +266,80 @@
 	} else if ([nibName isEqualToString:@"NanbeigeLine2Button2Cell"]) {
 		((NanbeigeLine2Button2Cell*) cell).name = name;
 		((NanbeigeLine2Button2Cell*) cell).image = image;
+		((NanbeigeLine2Button2Cell*) cell).delegate = self;
 	} else if ([nibName isEqualToString:@"NanbeigeLine3Button0Cell"]) {
 		((NanbeigeLine3Button0Cell*) cell).name = name;
 		((NanbeigeLine3Button0Cell*) cell).image = image;
 	} else if ([nibName isEqualToString:@"NanbeigeLine3Button2Cell"]) {
+		itsCell = (NanbeigeLine3Button2Cell*) cell;
 		((NanbeigeLine3Button2Cell*) cell).name = name;
 		((NanbeigeLine3Button2Cell*) cell).image = image;
+		((NanbeigeLine3Button2Cell*) cell).delegate = self;
 	}
 	
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - NanbeigeLine2Button2DelegateProtocol
+- (void)onButton1Pressed:(id)sender
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	return UITableViewCellEditingStyleNone;
+	[self performSegueWithIdentifier:@"CreateAssignmentSegue" sender:self];
 }
 
-
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)onButton2Pressed:(id)sender
 {
-	NSMutableArray *newOrder = [self.functionOrder mutableCopy];
-	NSUInteger fromRow = [fromIndexPath row];
-	NSUInteger toRow = [toIndexPath row];
-	id object = [newOrder objectAtIndex:fromRow];
-	[newOrder removeObjectAtIndex:fromRow];
-	[newOrder insertObject:object atIndex:toRow];
-	
-	NSString * neworderStr = [newOrder componentsJoinedByString:@","];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:neworderStr forKey:kMAINORDERKEY];
-	
-	self.functionOrder = [[NSArray alloc] initWithArray:newOrder];
+	[self performSegueWithIdentifier:@"CreateAssignmentWithCameraSegue" sender:self];
 }
 
-
-
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - NanbeigeItsWidgetDelegateProtocol
+- (void)connectFree:(id)sender
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+	self.Username = [self.defaults valueForKey:kITSIDKEY];
+    self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
+	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
+		[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
+		return ;
+	}
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	if ([[self.gateStateDictionary objectForKey:_keyAutoDisconnect] boolValue]) {
+		[self.connector disConnect];
+		_hasSilentCallback = YES;
+	}
+	[self.connector connectFree];
+	[self showProgressHubWithTitle:@"正连接到免费地址"];
 }
 
+- (void)connectGlobal:(id)sender
+{
+	self.Username = [self.defaults valueForKey:kITSIDKEY];
+    self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
+	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
+		[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
+		return ;
+	}
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	if ([[self.gateStateDictionary objectForKey:_keyAutoDisconnect] boolValue]) {
+		[self.connector disConnect];
+		_hasSilentCallback = YES;
+	}
+	[self.connector connectGlobal];
+	[self showProgressHubWithTitle:@"正连接到收费地址"];}
+
+- (void)disconnectAll:(id)sender
+{
+	self.Username = [self.defaults valueForKey:kITSIDKEY];
+    self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
+	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
+		[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
+		return ;
+	}
+	[self.connector disConnect];
+	[self showProgressHubWithTitle:@"正断开全部连接"];
+}
+- (void)detailGateInfo:(id)sender
+{
+	[self performSegueWithIdentifier:@"DetailGateInfoSegue" sender:self];
+}
 
 #pragma mark - Table view delegate
 
@@ -353,7 +370,172 @@
 	} else if ([segue.identifier isEqualToString:@"AssignmentEnterSegue"]) {
 		NanbeigeAssignmentViewController *destinationViewController = (NanbeigeAssignmentViewController *)[segue destinationViewController];
 		self.navc = destinationViewController;
+	} else if ([segue.identifier isEqualToString:@"CreateAssignmentSegue"] || [segue.identifier isEqualToString:@"CreateAssignmentWithCameraSegue"]) {
+		UINavigationController *nc = segue.destinationViewController;
+		NanbeigeCreateAssignmentViewController *ncavc = (NanbeigeCreateAssignmentViewController *)(nc.topViewController);
+#warning 传递课表
+		ncavc.coursesData = TEMPCOURSES;
+		ncavc.initWithCamera = [segue.identifier isEqualToString:@"CreateAssignmentWithCameraSegue"];
+		ncavc.assignmentIndex = -1;
+	} else if ([segue.identifier isEqualToString:@"DetailGateInfoSegue"]) {
+		NanbeigeDetailGateInfoViewController *dvc = segue.destinationViewController;
+		
+		self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+		
+		if ([[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
+			dvc.accountPackage = @"10元国内地址任意游";
+		} else if ([[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] isEqualToString:@"不限时"]){
+			dvc.accountPackage = @"90元不限时";
+		} else {
+			dvc.accountPackage = 
+			[self.gateStateDictionary objectForKey:_keyIPGateType] ? 
+			[self.gateStateDictionary objectForKey:_keyIPGateType] : 
+			@"未知";
+		}
+		
+		dvc.accountStatus = 
+		[self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? 
+		[self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : 
+		@"账户状态未知";
+		dvc.accountAccuTime = 
+		[dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ? 
+		@"未包月" : 
+		([self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] ? 
+		 [self.gateStateDictionary objectForKey:_keyIPGateTimeConsumed] : 
+		 @"未知");
+		dvc.accountRemainTime = 
+		[dvc.accountPackage isEqualToString:@"10元国内地址任意游"] ?
+		@"未包月" : 
+		([self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? 
+		 [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : 
+		 @"未知");
+		dvc.accountBalance = 
+		[self.gateStateDictionary objectForKey:_keyIPGateBalance] ? 
+		[NSString stringWithFormat:@"%@元",[self.gateStateDictionary objectForKey:_keyIPGateBalance]] : 
+		@"未知";
 	}
+}
+
+#pragma mark - Its Connect Display
+- (void)setNumStatus:(NSInteger)anumStatus{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"M月d日HH:mm";
+    NSDate *dateUpdate = [NSDate date];
+    NSString *stringUpdateStatus = [NSString stringWithFormat:@"更新于：%@",[formatter stringFromDate:dateUpdate]];
+    
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+    [self.gateStateDictionary setObject:stringUpdateStatus forKey:_keyIPGateUpdatedTime];
+	[defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
+	
+    numStatus = anumStatus;
+}
+- (void)changeProgressHub:(NSString *)title
+				isSuccess:(BOOL)bSuccess
+{
+	progressHub.animationType = MBProgressHUDAnimationZoom;
+    self.progressHub.labelText = title;
+    if (bSuccess) {
+		self.progressHub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-yes"]];
+	} else {
+		self.progressHub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-no"]];
+	}
+    self.progressHub.mode = MBProgressHUDModeCustomView;
+    [self.progressHub hide:YES afterDelay:1];
+}
+- (void)showProgressHubWithTitle:(NSString *)title{
+    self.progressHub.mode = MBProgressHUDModeIndeterminate;
+    self.progressHub.delegate = self;
+    self.progressHub.labelText = title;
+    [self.progressHub show:YES];
+}
+- (void)changeDetailGateInfo:(NSString *)title 
+				isConnecting:(BOOL)bConnecting
+{
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	
+	NSString *timeLeftString = [NSString stringWithFormat:@"(包月剩余：%@)",[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知"];
+	NSString *balanceString = [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"账户余额：%@元", [self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"账户余额：未知";
+	
+	if (bConnecting) {
+		itsCell.statusLabel.text = @"已连接";
+		[itsCell.statusBackground setBackgroundColor:gateConnectingBtnColor]; 
+		if (![[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
+			itsCell.detailStatusLabel.text = timeLeftString;
+		} else {
+			itsCell.detailStatusLabel.text = balanceString;
+		}
+	} else {
+		[itsCell.statusBackground setBackgroundColor:gateConnectedBtnColor];
+		NSString *updateTimeString = [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : @"更新时间：无";
+		if (![[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
+			itsCell.detailStatusLabel.text = updateTimeString;
+		} else {
+			itsCell.detailStatusLabel.text = updateTimeString;
+		}
+	}
+}
+
+#pragma mark - IPGateDelegate setup
+
+- (void)didConnectToIPGate{
+}
+- (void)didLoseConnectToIpGate{
+}
+- (void)disconnectSuccess{
+    if (_hasSilentCallback) {
+        _hasSilentCallback = NO;
+        return;
+    }
+	self.numStatus = 1;
+    [self changeDetailGateInfo:@"当前可访问校园网" isConnecting:YES];
+	[self changeProgressHub:@"已断开全部连接" isSuccess:YES];
+	
+    NSLog(@"DisconnectDone");
+}
+- (void)connectFreeSuccess{
+	self.numStatus = 2;
+    [self saveAccountState];
+	[self changeDetailGateInfo:@"可访问免费地址" isConnecting:YES];
+	[self changeProgressHub:@"已连接到免费地址" isSuccess:YES];
+    
+    NSLog(@"ConnectToFreeDone");
+	
+}
+- (void)connectGlobalSuccess {
+	self.numStatus = 3;
+    [self saveAccountState];
+	[self changeDetailGateInfo:@"可访问收费地址" isConnecting:YES];
+	[self changeProgressHub:@"已连接到收费地址" isSuccess:YES];
+	
+    NSLog(@"ConnectToGlobalDone");
+}
+- (void)connectFailed
+{
+    if (self.connector.error == IPGateErrorOverCount) {
+        self.progressHub.mode = MBProgressHUDModeIndeterminate;
+        self.progressHub.labelText = @"连接数超过预定值";
+        if ([ModalAlert confirm:@"断开别处的连接" withMessage:@"断开别处的连接才能在此处建立连接"]){
+            _hasSilentCallback = YES;
+            [self.connector disConnect];
+            self.progressHub.labelText = @"正在断开重连";
+            [self.connector reConnect];
+        } else [self.progressHub hide:YES afterDelay:0.5];
+    } else {
+		if ([self.connector.dictResult objectForKey:@"REASON"] == nil) {
+			[self changeProgressHub:@"网络错误，请稍后再试。" isSuccess:NO];
+		} else if ([[self.connector.dictResult objectForKey:@"REASON"] hasSuffix:@"在例外中"]) {
+			[self changeProgressHub:@"您的IP地址不在学校范围内。"  isSuccess:NO];
+		} else {
+			[self changeProgressHub:[self.connector.dictResult objectForKey:@"REASON"] isSuccess:NO];
+		}
+        NSLog(@"Reason %@",[self.connector.dictResult objectForKey:@"REASON"]);
+    }
+}
+- (void)saveAccountState {
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictResult];
+	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictDetail];
+    [self.defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
 }
 
 @end

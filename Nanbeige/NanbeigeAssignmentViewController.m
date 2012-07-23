@@ -234,6 +234,7 @@
 	NanbeigeCreateAssignmentViewController *ncavc = (NanbeigeCreateAssignmentViewController *)(nc.topViewController);
 #warning 传递课表
 	ncavc.coursesData = TEMPCOURSES;
+	ncavc.initWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
 #warning 确定编辑课程是完成列表还是未完成列表
 		ncavc.assignmentIndex = assignmentSelect;

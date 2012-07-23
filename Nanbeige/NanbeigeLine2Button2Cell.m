@@ -13,6 +13,7 @@
 @synthesize imageView;
 @synthesize name;
 @synthesize image;
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -44,4 +45,15 @@
 	}
 }
 
+- (IBAction)onButton1Pressed:(id)sender {
+	if ([self.delegate respondsToSelector:@selector(onButton1Pressed:)]) {
+		[self.delegate onButton1Pressed:sender];
+	}
+}
+
+- (IBAction)onButton2Pressed:(id)sender {
+	if ([self.delegate respondsToSelector:@selector(onButton2Pressed:)]) {
+		[self.delegate onButton2Pressed:sender];
+	}
+}
 @end

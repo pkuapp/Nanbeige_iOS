@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSArray *weeksData;
 @property (strong, nonatomic) NSArray *coursesData;
 @property (nonatomic) int assignmentIndex;
+@property (nonatomic) BOOL initWithCamera;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *coursesPicker;
 @property (weak, nonatomic) IBOutlet UIToolbar *coursesToolbar;

@@ -16,6 +16,7 @@
 @synthesize imageView;
 @synthesize name;
 @synthesize image;
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -47,26 +48,27 @@
 	}
 }
 
--(void)showAlert:(NSString*)message{
-	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
-													   message:message
-													  delegate:nil
-											 cancelButtonTitle:@"确定"
-											 otherButtonTitles:nil];
-	[alertView show];
-}
 - (IBAction)connectFree:(id)sender {
-	[self showAlert:@"Press Button 1"];
+	if ([self.delegate respondsToSelector:@selector(connectFree:)]) {
+		[self.delegate connectFree:sender];
+	}
 }
 
 - (IBAction)connectGlobal:(id)sender {
-	[self showAlert:@"Press Button 2"];
+	if ([self.delegate respondsToSelector:@selector(connectGlobal:)]) {
+		[self.delegate connectGlobal:sender];
+	}
 }
 
 - (IBAction)disconnectAll:(id)sender {
-	[self showAlert:@"Press Button 3"];
+	if ([self.delegate respondsToSelector:@selector(disconnectAll:)]) {
+		[self.delegate disconnectAll:sender];
+	}
 }
-- (IBAction)touchUnreachable:(id)sender {
-	[self showAlert:@"Press Button 4"];
+
+- (IBAction)detailGateInfo:(id)sender {
+	if ([self.delegate respondsToSelector:@selector(detailGateInfo:)]) {
+		[self.delegate detailGateInfo:sender];
+	}
 }
 @end

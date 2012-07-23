@@ -106,11 +106,11 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CoursesExIdentifier" rowHeight="110" id="oY2-CB-6DO">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CoursesExIdentifier" rowHeight="110" id="oY2-CB-6DO">
                                 <rect key="frame" x="0.0" y="155" width="320" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="109"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="widget_3line_0btn.png" id="Op6-f7-pAt">
@@ -187,9 +187,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="R9G-nc-9ot" kind="push" identifier="AssignmentEnterSegue" id="0I6-sN-chv"/>
-                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RoomsIdentifier" rowHeight="58" id="8b0-zb-UhJ">
                                 <rect key="frame" x="0.0" y="265" width="320" height="58"/>
@@ -315,6 +312,10 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Y3a-g9-RLQ" kind="push" identifier="ItsEnterSegue" id="bRx-DI-TvE"/>
+                        <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentSegue" id="R2x-pA-P8y"/>
+                        <segue destination="R9G-nc-9ot" kind="push" identifier="AssignmentEnterSegue" id="lVV-gW-QAM"/>
+                        <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentWithCameraSegue" id="Yqn-fv-amI"/>
+                        <segue destination="yil-Q7-q5m" kind="push" identifier="DetailGateInfoSegue" id="iBD-dN-4lH"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -862,7 +863,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </pickerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="y91-8j-Pva">
-                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
+                                <rect key="frame" x="2" y="459" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="KHc-KM-Le2"/>
@@ -904,7 +905,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="Jvb-ch-4CT">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptU-kW-FT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="yil-Q7-q5m" customClass="NanbeigeDetailGateInfoViewController" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="yil-Q7-q5m" customClass="NanbeigeDetailGateInfoViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="N5P-Sy-lrj">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1025,6 +1026,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="网关账户" id="XZp-PC-9y7"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accuTimeCell" destination="Jp0-kO-dzo" id="xiU-WW-btX"/>
                         <outlet property="balanceCell" destination="PX9-LG-ivz" id="F4w-vY-PjQ"/>
@@ -2039,6 +2041,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kkG-IZ-C1L"/>
+        <segue reference="iBD-dN-4lH"/>
+        <segue reference="Yqn-fv-amI"/>
     </inferredMetricsTieBreakers>
 </document>
