@@ -37,6 +37,7 @@
 		2601D2BB15AEA9BE0066C1FD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D2AF15AEA9BE0066C1FD /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2601D2C115AEAB610066C1FD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2601D2C015AEAB600066C1FD /* MapKit.framework */; };
 		2601D2C315AEAB6E0066C1FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2601D2C215AEAB6E0066C1FD /* CoreLocation.framework */; };
+		2612272115BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */; };
 		262AD48815AA7D5D000C2EF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48715AA7D5D000C2EF7 /* UIKit.framework */; };
 		262AD48A15AA7D5D000C2EF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48915AA7D5D000C2EF7 /* Foundation.framework */; };
 		262AD48C15AA7D5D000C2EF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48B15AA7D5D000C2EF7 /* CoreGraphics.framework */; };
@@ -166,6 +167,7 @@
 		262AD7A215AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76115AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		262AD7A315AAE50F000C2EF7 /* ROPublishPhotoInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		262AD81615AAFB50000C2EF7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */; };
+		262C42B215BC3D28004BBECA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262C42B115BC3D28004BBECA /* MediaPlayer.framework */; };
 		2678C31115B0359C005E1D3E /* NanbeigeLine1Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C31015B0359C005E1D3E /* NanbeigeLine1Button0Cell.m */; };
 		2678C31415B035C3005E1D3E /* NanbeigeLine1Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2678C31315B035C3005E1D3E /* NanbeigeLine1Button0Cell.xib */; };
 		2678C31715B04907005E1D3E /* NanbeigeLine2Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2678C31615B04907005E1D3E /* NanbeigeLine2Button0Cell.xib */; };
@@ -346,6 +348,7 @@
 		26A6B69515B41B17006FA15D /* Welcome-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5EE15B41B17006FA15D /* Welcome-button@2x.png */; };
 		26A6E98415B30BA20001B2E0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6E98215B30BA20001B2E0 /* Default.png */; };
 		26A6E98515B30BA20001B2E0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6E98315B30BA20001B2E0 /* Default@2x.png */; };
+		26B9667115BC1C830081002C /* NanbeigeAssignmentDeadlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */; };
 		26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */; };
 		26D5FA1615AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1515AFF2B00075B68D /* NanbeigeLoginCoursesViewController.m */; };
 		26D5FA1C15AFFB930075B68D /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */; };
@@ -424,6 +427,8 @@
 		2601D2AF15AEA9BE0066C1FD /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		2601D2C015AEAB600066C1FD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2601D2C215AEAB6E0066C1FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2612271F15BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeCreateAssignmentViewController.h; sourceTree = "<group>"; };
+		2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeCreateAssignmentViewController.m; sourceTree = "<group>"; };
 		262AD48315AA7D5D000C2EF7 /* Nanbeige.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nanbeige.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		262AD48715AA7D5D000C2EF7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		262AD48915AA7D5D000C2EF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -785,6 +790,7 @@
 		262AD76215AAE50F000C2EF7 /* ROPublishPhotoInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROPublishPhotoInternal.h; sourceTree = "<group>"; };
 		262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROPublishPhotoInternal.m; sourceTree = "<group>"; };
 		262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		262C42B115BC3D28004BBECA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		2678C30F15B0359C005E1D3E /* NanbeigeLine1Button0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLine1Button0Cell.h; sourceTree = "<group>"; };
 		2678C31015B0359C005E1D3E /* NanbeigeLine1Button0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine1Button0Cell.m; sourceTree = "<group>"; };
 		2678C31315B035C3005E1D3E /* NanbeigeLine1Button0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeLine1Button0Cell.xib; sourceTree = "<group>"; };
@@ -983,6 +989,8 @@
 		26A6B5F315B41B17006FA15D /* widget_3line_2btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_3line_2btn.png; sourceTree = "<group>"; };
 		26A6E98215B30BA20001B2E0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		26A6E98315B30BA20001B2E0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		26B9666F15BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentDeadlineViewController.h; sourceTree = "<group>"; };
+		26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentDeadlineViewController.m; sourceTree = "<group>"; };
 		26D5FA1115AFE2B20075B68D /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
 		26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeItsViewController.m; sourceTree = "<group>"; };
 		26D5FA1415AFF2B00075B68D /* NanbeigeLoginCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginCoursesViewController.h; sourceTree = "<group>"; };
@@ -1014,6 +1022,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				262C42B215BC3D28004BBECA /* MediaPlayer.framework in Frameworks */,
 				2601D2C315AEAB6E0066C1FD /* CoreLocation.framework in Frameworks */,
 				2601D2C115AEAB610066C1FD /* MapKit.framework in Frameworks */,
 				262AD81615AAFB50000C2EF7 /* libsqlite3.dylib in Frameworks */,
@@ -1140,6 +1149,7 @@
 		262AD48615AA7D5D000C2EF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				262C42B115BC3D28004BBECA /* MediaPlayer.framework */,
 				2601D2C215AEAB6E0066C1FD /* CoreLocation.framework */,
 				2601D2C015AEAB600066C1FD /* MapKit.framework */,
 				262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */,
@@ -2003,6 +2013,10 @@
 				26E2CB6515B54DCA00F8FA3D /* AssignmentTableCell */,
 				26E2CB6215B54B9F00F8FA3D /* NanbeigeAssignmentViewController.h */,
 				26E2CB6315B54B9F00F8FA3D /* NanbeigeAssignmentViewController.m */,
+				2612271F15BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.h */,
+				2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */,
+				26B9666F15BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.h */,
+				26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */,
 			);
 			name = AssignmentView;
 			sourceTree = "<group>";
@@ -2421,6 +2435,8 @@
 				26E2CB6415B54B9F00F8FA3D /* NanbeigeAssignmentViewController.m in Sources */,
 				26E2CB6815B54E3400F8FA3D /* NanbeigeAssignmentNoImageCell.m in Sources */,
 				26E2CB6B15B54E5500F8FA3D /* NanbeigeAssignmentImageCell.m in Sources */,
+				2612272115BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m in Sources */,
+				26B9667115BC1C830081002C /* NanbeigeAssignmentDeadlineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

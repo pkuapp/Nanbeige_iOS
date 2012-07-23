@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface NanbeigeAssignmentNoImageCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *assignmentName;
+@property (weak, nonatomic) IBOutlet UILabel *courseName;
+@property (weak, nonatomic) IBOutlet UILabel *assignmentTime;
 
 @end

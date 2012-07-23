@@ -14,10 +14,11 @@
 #import "ReachabilityProtocol.h"
 #import "Reachability.h"
 #import "NanbeigeIPGateHelper.h"
-#import "NanbeigeItsViewController.h"
 #import "Environment.h"
 #import "ModalAlert.h"
 #import "AppUser.h"
+#import "NanbeigeItsViewController.h"
+#import "NanbeigeAssignmentViewController.h"
 
 @interface NanbeigeMainViewController : UITableViewController
 
@@ -28,6 +29,7 @@
 
 @property (retain, nonatomic) NanbeigeItsViewController *nivc;
 @property (strong, nonatomic) NanbeigeIPGateHelper *connector;
+@property (strong, nonatomic) NanbeigeAssignmentViewController *navc;
 
 -(IBAction)editFunctionOrder:(id)sender;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *editFunctionButton;

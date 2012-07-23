@@ -572,30 +572,29 @@
         <scene sceneID="Hi2-Wp-7gG">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dwg-ml-iBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="R9G-nc-9ot" customClass="NanbeigeAssignmentViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="R9G-nc-9ot" customClass="NanbeigeAssignmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n2c-vk-oaD">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="csx-uI-YCP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="72A-2d-N3C">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="R9G-nc-9ot" id="HuH-nF-CMK"/>
+                                    <outlet property="dataSource" destination="R9G-nc-9ot" id="H7D-ej-Xkf"/>
+                                    <outlet property="delegate" destination="R9G-nc-9ot" id="lsh-Vy-Vvh"/>
+                                </connections>
+                            </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="csx-uI-YCP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="R9G-nc-9ot" id="L5F-xV-5M7"/>
                                     <outlet property="delegate" destination="R9G-nc-9ot" id="pnd-S0-iPY"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="jpn-aY-fLj">
-                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem title="新增" id="A71-mE-Hi1"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="jKw-cJ-dWV"/>
-                                    <barButtonItem title="拍照" id="dxs-0x-1FS"/>
-                                </items>
-                                <color key="tintColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -609,12 +608,297 @@
                                 <segment title="已完成"/>
                             </segments>
                             <color key="tintColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onAssignmentCompleteChanged:" destination="R9G-nc-9ot" eventType="valueChanged" id="n6X-a9-qqr"/>
+                            </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="新增" id="ABO-w1-NW0">
+                            <connections>
+                                <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentSegue" id="XCJ-0s-Ogk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="assignmentsTableView" destination="csx-uI-YCP" id="25G-wd-fvO"/>
+                        <outlet property="completeAssignmentsTableView" destination="72A-2d-N3C" id="IYy-UZ-G6v"/>
+                        <outlet property="completeSegmentedControl" destination="4SG-yf-mbH" id="CKV-4m-lke"/>
+                        <segue destination="ehN-NR-OG8" kind="modal" identifier="ModifyAssignmentSegue" id="kkG-IZ-C1L"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2143" y="-2715"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="k6z-a8-cS9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6c-91-qGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="ehN-NR-OG8" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="e9Q-bc-bhf">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="EKb-pH-FnZ" kind="relationship" relationship="rootViewController" id="lcm-lY-C2b"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="2655" y="-2715"/>
+        </scene>
+        <!--Nanbeige Assignment Deadline View Controller-->
+        <scene sceneID="8df-Id-jg0">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ce-HP-s3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="lcF-gu-4RP" customClass="NanbeigeAssignmentDeadlineViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BAi-C7-ki4">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="截止于所选这周的课堂上" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="VSB-aF-kCM">
+                                <rect key="frame" x="20" y="20" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="C8M-LO-cBq">
+                                <rect key="frame" x="0.0" y="49" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="364649282.42419398">
+                                    <!--2012-07-22 11:28:02 +0000-->
+                                </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                    <!--1970-01-01 11:00:00 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                    <!--2037-12-31 11:00:00 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="zh-Hans_HK"/>
+                                <timeZone key="timeZone" name="America/Los_Angeles">
+                                    <data key="data">
+VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
+y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
+5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
+8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
+AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
+DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
+HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
+KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
+OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
+Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
+VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
+Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
+cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
+f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
+</data>
+                                </timeZone>
+                            </datePicker>
+                            <pickerView contentMode="scaleToFill" id="7eN-Bi-lce">
+                                <rect key="frame" x="0.0" y="49" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="lcF-gu-4RP" id="4at-51-aOc"/>
+                                    <outlet property="delegate" destination="lcF-gu-4RP" id="2LX-29-H0m"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yVL-Xp-7eD">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="0Tk-W3-xU4">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="课上"/>
+                                <segment title="时刻"/>
+                            </segments>
+                            <color key="tintColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onModeChange:" destination="lcF-gu-4RP" eventType="valueChanged" id="LG5-Qt-suT"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="确认" id="Q3V-mC-j53">
+                            <connections>
+                                <action selector="onConfirm:" destination="lcF-gu-4RP" id="g0x-gb-UNz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="C8M-LO-cBq" id="8mZ-op-1N9"/>
+                        <outlet property="deadlinePicker" destination="7eN-Bi-lce" id="fsQ-jN-ISl"/>
+                        <outlet property="modeLabel" destination="VSB-aF-kCM" id="dxJ-xH-JDn"/>
+                        <outlet property="modeSegmentedControl" destination="0Tk-W3-xU4" id="T99-mp-lCs"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3592" y="-2715"/>
+        </scene>
+        <!--Nanbeige Create Assignment View Controller - 新增作业计划-->
+        <scene sceneID="X3Z-N0-Jeu">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oKO-9u-A3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="EKb-pH-FnZ" customClass="NanbeigeCreateAssignmentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3cD-ND-Tfs">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xoH-em-3xc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="1aF-2X-wXW">
+                                    <rect key="frame" x="0.0" y="234" width="320" height="320"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="D1n-SM-kXc">
+                                            <rect key="frame" x="20" y="20" width="280" height="280"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AssignmentDescriptionIdentifier" id="4cy-Cz-nzL">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="作业要求" minimumFontSize="17" id="KgA-RB-OYh">
+                                                    <rect key="frame" x="10" y="6" width="280" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AssignmentImageIdentifier" textLabel="Z1J-cR-hLc" style="IBUITableViewCellStyleDefault" id="Zmb-2z-1cc">
+                                        <rect key="frame" x="0.0" y="91" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="添加照片 beta ( 只支持一张 )" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z1J-cR-hLc">
+                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AssignmentTimeIdentifier" id="wmN-fh-Q2m">
+                                        <rect key="frame" x="0.0" y="135" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="截止日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="p2G-px-E5x">
+                                                    <rect key="frame" x="20" y="11" width="68" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.44705882349999998" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="下周课上" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Lny-1d-MN7">
+                                                    <rect key="frame" x="96" y="10" width="200" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AssignmentCourseIdentifier" id="QRr-UM-bw4">
+                                        <rect key="frame" x="0.0" y="179" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="所属课程" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="f4D-7o-RbY">
+                                                    <rect key="frame" x="20" y="11" width="68" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.44705882352941173" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="课程名称" minimumFontSize="17" id="lV1-K2-mF4">
+                                                    <rect key="frame" x="96" y="10" width="200" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EKb-pH-FnZ" id="TVX-Yi-nDU"/>
+                                    <outlet property="delegate" destination="EKb-pH-FnZ" id="nvN-Q3-cvg"/>
+                                </connections>
+                            </tableView>
+                            <pickerView contentMode="scaleToFill" id="zyS-6f-nGv">
+                                <rect key="frame" x="0.0" y="460" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EKb-pH-FnZ" id="Ta9-xA-PIm"/>
+                                    <outlet property="delegate" destination="EKb-pH-FnZ" id="peV-GK-nD3"/>
+                                </connections>
+                            </pickerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="y91-8j-Pva">
+                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="KHc-KM-Le2"/>
+                                    <barButtonItem title="确认" id="mVd-Uc-A6N">
+                                        <connections>
+                                            <action selector="onConfirmCourses:" destination="EKb-pH-FnZ" id="2Yp-73-WLe"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="新增作业计划" id="Bqf-jM-e81">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="E0m-Ol-g6J"/>
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="TtD-wz-oMH">
+                            <connections>
+                                <action selector="onCancel:" destination="EKb-pH-FnZ" id="C7q-cw-1il"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="确认" id="9BB-7y-IiF">
+                            <connections>
+                                <action selector="onConfirm:" destination="EKb-pH-FnZ" id="5GJ-Lj-ugN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="assignmentTableView" destination="xoH-em-3xc" id="8X5-LO-D4f"/>
+                        <outlet property="coursesPicker" destination="zyS-6f-nGv" id="uRA-X4-bL0"/>
+                        <outlet property="coursesToolbar" destination="y91-8j-Pva" id="k5H-IR-r0w"/>
+                        <outlet property="imageView" destination="D1n-SM-kXc" id="4XE-Z1-tns"/>
+                        <segue destination="lcF-gu-4RP" kind="push" identifier="DeadlineSegue" id="GvP-oK-ULi"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3167" y="-2715"/>
         </scene>
         <!--Nanbeige Detail Gate Info View Controller - 网关账户-->
         <scene sceneID="Jvb-ch-4CT">
@@ -1609,9 +1893,152 @@
         <image name="widget_3line_0btn.png" width="663" height="227"/>
         <image name="widget_3line_2btn.png" width="663" height="268"/>
     </resources>
+    <classes>
+        <class className="NanbeigeAssignmentDeadlineViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAssignmentDeadlineViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onConfirm:"/>
+                <relationship kind="action" name="onModeChange:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="deadlinePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="modeSegmentedControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeAssignmentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAssignmentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onAssignmentCompleteChanged:"/>
+                <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeChangeMainOrderViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChangeMainOrderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="action" name="onChangeButtonPressed:"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeConnectViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeConnectViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="loginButtonPressed:"/>
+                <relationship kind="action" name="renrenLogin:"/>
+                <relationship kind="action" name="signupButtonPressed:"/>
+                <relationship kind="action" name="weiboLogin:"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeCreateAssignmentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeCreateAssignmentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancel:"/>
+                <relationship kind="action" name="onConfirm:"/>
+                <relationship kind="outlet" name="assignmentTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="coursesPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="coursesToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeDetailGateInfoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeDetailGateInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="detailGateInfoPressed:"/>
+                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="detailGateInfo" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeLoginItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginItsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeLoginViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="calendarButtonPressed:"/>
+                <relationship kind="action" name="editFunctionOrder:"/>
+                <relationship kind="outlet" name="editFunctionButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="action" name="onPostButtonPressed:"/>
+                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logoutAll:"/>
+                <relationship kind="outlet" name="nanbeigeCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="renrenCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="weiboCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeSignupViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSignupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="validcodeCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeStreamViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="renrenPost:"/>
+                <relationship kind="action" name="weiboPost:"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="action" name="onPostButtonPressed:"/>
+                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeWelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWelcomeViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="kkG-IZ-C1L"/>
+    </inferredMetricsTieBreakers>
 </document>

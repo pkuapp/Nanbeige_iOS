@@ -9,6 +9,9 @@
 #import "NanbeigeAssignmentNoImageCell.h"
 
 @implementation NanbeigeAssignmentNoImageCell
+@synthesize assignmentName;
+@synthesize courseName;
+@synthesize assignmentTime;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

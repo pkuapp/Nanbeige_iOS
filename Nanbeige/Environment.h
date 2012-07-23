@@ -56,6 +56,22 @@
 #define kNANBEIGEIDKEY @"nanbeigeid"
 #define kNANBEIGEPASSWORDKEY @"nanbeigepassword"
 
+#define kASSIGNMENTS @"assignments"
+#define kCOMPLETEASSIGNMENTS @"complete_assignments"
+#define kASSIGNMENTHASIMAGE @"assignment_hasimage"
+#define kASSIGNMENTIMAGE @"assignment_image"
+#define kASSIGNMENTCOURSE @"assignment_course"
+#define kASSIGNMENTDESCRIPTION @"assignment_description"
+#define kASSIGNMENTDDLSTR @"assignment_ddl_str"
+
+#define kASSIGNMENTDDLMODE @"assignment_ddl_mode"
+#define kASSIGNMENTDDLDATE @"assignment_ddl_date"
+#define kASSIGNMENTDDLWEEKS @"assignment_ddl_weeks"
+#define ONCLASS 0
+#define ONDATE 1
+
+#define ASSIGNMENTDDLWEAKS [[NSArray alloc] initWithObjects:@"本周", @"下周", @"2周后", @"3周后", @"4周后", @"5周后", @"6周后", @"7周后", @"8周后", @"9周后", @"10周后", @"11周后", @"12周后", @"13周后", @"14周后", @"15周后", @"16周后", @"17周后", @"18周后", @"19周后", @"20周后", @"26周后", @"52周后", @"猴年马月", nil];
+#define TEMPCOURSES [[NSArray alloc] initWithObjects:@"毛概", @"地概", @"信概", @"计概", nil];
 
 ///////////////////////////////
 #define test_username @"pkttus#42$"

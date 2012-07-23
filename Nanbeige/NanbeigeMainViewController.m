@@ -7,7 +7,6 @@
 //
 
 #import "NanbeigeMainViewController.h"
-#import "NanbeigeItsViewController.h"
 #import "Environment.h"
 #import "NanbeigeLine1Button0Cell.h"
 #import "NanbeigeLine2Button0Cell.h"
@@ -27,6 +26,7 @@
 @synthesize nibsRegistered;
 @synthesize nivc;
 @synthesize connector;
+@synthesize navc;
 
 #pragma mark - getter and setter Override
 
@@ -334,6 +334,9 @@
 	if (functionIndex == 0) {
 		if (self.nivc == nil) [self performSegueWithIdentifier:@"ItsEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.nivc animated:YES];
+	} else if (functionIndex == 6) {
+		if (self.navc == nil) [self performSegueWithIdentifier:@"AssignmentEnterSegue" sender:self];
+		else [self.navigationController pushViewController:self.navc animated:YES];
 	} else {
 		[self showAlert:@"功能正在制作中，敬请期待！"];
 	}
@@ -347,6 +350,9 @@
 		destinationViewController.connector = self.connector;
 		self.connector.delegate = destinationViewController;
 		self.nivc = destinationViewController;
+	} else if ([segue.identifier isEqualToString:@"AssignmentEnterSegue"]) {
+		NanbeigeAssignmentViewController *destinationViewController = (NanbeigeAssignmentViewController *)[segue destinationViewController];
+		self.navc = destinationViewController;
 	}
 }
 

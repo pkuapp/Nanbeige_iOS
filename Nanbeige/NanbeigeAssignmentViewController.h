@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NanbeigeAssignmentViewController : UIViewController <UITableViewDelegate>
+@interface NanbeigeAssignmentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (strong, nonatomic) NSMutableArray *assignments;
+@property (strong, nonatomic) NSMutableArray *completeAssignments;
+@property (strong, nonatomic) NSMutableDictionary *nibsRegistered;
+@property (strong, nonatomic) NSMutableDictionary *completeNibsRegistered;
+@property (weak, nonatomic) IBOutlet UITableView *assignmentsTableView;
+@property (weak, nonatomic) IBOutlet UITableView *completeAssignmentsTableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *completeSegmentedControl;
+- (IBAction)onAssignmentCompleteChanged:(id)sender;
 
 @end
