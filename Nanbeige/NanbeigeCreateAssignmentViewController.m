@@ -29,7 +29,7 @@
 @synthesize weeksData;
 @synthesize coursesData;
 @synthesize coursesToolbar;
-@synthesize lastChosenMediaType, image, imageFrame, imagePickerUsed, movieURL, moviePlayerController;
+@synthesize lastChosenMediaType, image, imageFrame, imagePickerUsed;
 
 -(NSMutableDictionary *)assignment
 {
@@ -329,23 +329,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     self.lastChosenMediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([lastChosenMediaType isEqual:(NSString *)kUTTypeImage]) {
 	    self.image = [info objectForKey:UIImagePickerControllerEditedImage];
-    } else if ([lastChosenMediaType isEqual:(NSString *)kUTTypeMovie]) {
-        self.movieURL = [info objectForKey:UIImagePickerControllerMediaURL];
     }
 	// end picker
     [picker dismissModalViewControllerAnimated:YES];   
 	if ([lastChosenMediaType isEqual:(NSString *)kUTTypeImage]) {
 		imageView.image = image;
         imageView.hidden = NO;
-        moviePlayerController.view.hidden = YES;
-    } else if ([lastChosenMediaType isEqual:(NSString *)kUTTypeMovie]) {
-        [self.moviePlayerController.view removeFromSuperview];
-        self.moviePlayerController = [[MPMoviePlayerController alloc]
-                                      initWithContentURL:movieURL];
-        moviePlayerController.view.frame = imageFrame;
-        moviePlayerController.view.clipsToBounds = YES;
-        [self.view addSubview:moviePlayerController.view];
-        imageView.hidden = YES;
     }
 }
 
@@ -364,10 +353,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
                            availableMediaTypesForSourceType:sourceType];
     if ([UIImagePickerController isSourceTypeAvailable:
          sourceType] && [mediaTypes count] > 0) {
-        NSArray *mediaTypes = [UIImagePickerController
-                               availableMediaTypesForSourceType:sourceType];
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.mediaTypes = mediaTypes;
+        picker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
         picker.delegate = self;
         picker.allowsEditing = YES;
         picker.sourceType = sourceType;

@@ -180,8 +180,10 @@
 		[self.functionArray insertObject:itsDict atIndex:0];
 		[self.tableView reloadData];
 	}
-	
 	self.connector.delegate = self;
+	if (itsCell) {
+		[self changeDetailGateInfo:nil isConnecting:NO];
+	}
 }
 
 
@@ -275,6 +277,7 @@
 		((NanbeigeLine3Button2Cell*) cell).name = name;
 		((NanbeigeLine3Button2Cell*) cell).image = image;
 		((NanbeigeLine3Button2Cell*) cell).delegate = self;
+		[self changeDetailGateInfo:nil isConnecting:NO];
 	}
 	
     return cell;
@@ -350,7 +353,10 @@
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
 	if (functionIndex == 0) {
 		if (self.nivc == nil) [self performSegueWithIdentifier:@"ItsEnterSegue" sender:self];
-		else [self.navigationController pushViewController:self.nivc animated:YES];
+		else {
+			self.connector.delegate = self.nivc;
+			[self.navigationController pushViewController:self.nivc animated:YES];
+		}
 	} else if (functionIndex == 6) {
 		if (self.navc == nil) [self performSegueWithIdentifier:@"AssignmentEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.navc animated:YES];
@@ -365,6 +371,7 @@
 	if ([segue.identifier isEqualToString:@"ItsEnterSegue"]) {
 		NanbeigeItsViewController *destinationViewController = (NanbeigeItsViewController *)[segue destinationViewController];
 		destinationViewController.connector = self.connector;
+		destinationViewController.mainViewController = self;
 		self.connector.delegate = destinationViewController;
 		self.nivc = destinationViewController;
 	} else if ([segue.identifier isEqualToString:@"AssignmentEnterSegue"]) {
@@ -453,25 +460,28 @@
 {
 	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
 	
-	NSString *timeLeftString = [NSString stringWithFormat:@"(包月剩余：%@)",[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知"];
-	NSString *balanceString = [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"账户余额：%@元", [self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"账户余额：未知";
+	NSString *timeLeftString = [NSString stringWithFormat:@"（包月剩余：%@）",[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知"];
+	NSString *balanceString = [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"（账户余额：%@元）", [self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"（账户余额：未知）";
 	
+	if (![[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
+		itsCell.detailStatusLabel.text = timeLeftString;
+	} else {
+		itsCell.detailStatusLabel.text = balanceString;
+	}
 	if (bConnecting) {
 		itsCell.statusLabel.text = @"已连接";
 		[itsCell.statusBackground setBackgroundColor:gateConnectingBtnColor]; 
-		if (![[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
-			itsCell.detailStatusLabel.text = timeLeftString;
-		} else {
-			itsCell.detailStatusLabel.text = balanceString;
-		}
 	} else {
 		[itsCell.statusBackground setBackgroundColor:gateConnectedBtnColor];
-		NSString *updateTimeString = [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] ? [self.gateStateDictionary objectForKey:_keyIPGateUpdatedTime] : @"更新时间：无";
-		if (![[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
-			itsCell.detailStatusLabel.text = updateTimeString;
-		} else {
-			itsCell.detailStatusLabel.text = updateTimeString;
-		}
+	}
+	
+	if (self.numStatus == 0) {
+		itsCell.statusLabel.text = @"状态未知";
+		itsCell.detailStatusLabel.text = [NSString stringWithFormat:@"    %@", itsCell.detailStatusLabel.text];
+	} else if (self.numStatus == 1) {
+		itsCell.statusLabel.text = @"未连接";
+	} else if (self.numStatus >= 2) {
+		itsCell.statusLabel.text = @"已连接";
 	}
 }
 

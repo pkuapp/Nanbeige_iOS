@@ -84,7 +84,6 @@ numberOfRowsInComponent:(NSInteger)component
 - (IBAction)onConfirm:(id)sender {
 	
 	if ([modeSegmentedControl selectedSegmentIndex] == 0) {
-#warning 截止日期周数
 		[assignment setObject:[NSNumber numberWithInt:ONCLASS] forKey:kASSIGNMENTDDLMODE];
 		NSInteger row = [deadlinePicker selectedRowInComponent:0];
 		[assignment setObject:[NSNumber numberWithInt:row] forKey:kASSIGNMENTDDLWEEKS];

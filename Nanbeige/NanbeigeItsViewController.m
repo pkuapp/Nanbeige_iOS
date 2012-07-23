@@ -29,6 +29,7 @@
 @synthesize connectFree;
 @synthesize connectGlobal;
 @synthesize disconnectAll;
+@synthesize mainViewController;
 
 #pragma mark - getter and setter Override
 
@@ -73,6 +74,9 @@
             break;
     }
     numStatus = anumStatus;
+	if ([self.mainViewController respondsToSelector:@selector(setNumStatus:)]) {
+		[self.mainViewController setNumStatus:anumStatus];
+	}
 }
 - (UILabel *)labelStatus{
     if (labelStatus == nil) {

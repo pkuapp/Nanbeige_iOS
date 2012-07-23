@@ -1598,9 +1598,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="KJ7-oZ-rj9">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4L-jI-hwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="5iG-hD-g5x" customClass="NanbeigeChangeMainOrderViewController" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="5iG-hD-g5x" customClass="NanbeigeChangeMainOrderViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4wE-Su-wdG">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
@@ -1620,6 +1620,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cancelButton" destination="UdC-1h-Wrn" id="n2q-mt-xJJ"/>
                         <outlet property="changeButton" destination="fcK-ZW-sWy" id="1T2-Sq-ct8"/>
@@ -1735,9 +1736,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="tzG-CO-2lz">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="be0-Sh-XyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="nbq-Em-CIq" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="nbq-Em-CIq" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lgJ-7g-Whd">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon@2x.png" id="Dqx-n8-a8O">
@@ -1784,6 +1785,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" red="0.90145985401459849" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="关于南北阁" id="Z6w-nu-iWN"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1600" y="497"/>
@@ -1986,8 +1988,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
             <relationships>
                 <relationship kind="action" name="calendarButtonPressed:"/>
-                <relationship kind="action" name="editFunctionOrder:"/>
-                <relationship kind="outlet" name="editFunctionButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">

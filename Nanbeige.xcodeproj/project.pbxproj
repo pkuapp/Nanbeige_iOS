@@ -167,7 +167,6 @@
 		262AD7A215AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76115AAE50F000C2EF7 /* ROPublishPhotoDialogModel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		262AD7A315AAE50F000C2EF7 /* ROPublishPhotoInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		262AD81615AAFB50000C2EF7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */; };
-		262C42B215BC3D28004BBECA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262C42B115BC3D28004BBECA /* MediaPlayer.framework */; };
 		262C433815BD3B38004BBECA /* TableViewPullAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 262C42FD15BD3B38004BBECA /* TableViewPullAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		262C433915BD3B38004BBECA /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 262C430115BD3B38004BBECA /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		262C433B15BD3B38004BBECA /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 262C430415BD3B38004BBECA /* blackArrow.png */; };
@@ -800,7 +799,6 @@
 		262AD76215AAE50F000C2EF7 /* ROPublishPhotoInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROPublishPhotoInternal.h; sourceTree = "<group>"; };
 		262AD76315AAE50F000C2EF7 /* ROPublishPhotoInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROPublishPhotoInternal.m; sourceTree = "<group>"; };
 		262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		262C42B115BC3D28004BBECA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		262C42FC15BD3B38004BBECA /* TableViewPullAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewPullAppDelegate.h; sourceTree = "<group>"; };
 		262C42FD15BD3B38004BBECA /* TableViewPullAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewPullAppDelegate.m; sourceTree = "<group>"; };
 		262C430015BD3B38004BBECA /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -1044,7 +1042,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				262C42B215BC3D28004BBECA /* MediaPlayer.framework in Frameworks */,
 				2601D2C315AEAB6E0066C1FD /* CoreLocation.framework in Frameworks */,
 				2601D2C115AEAB610066C1FD /* MapKit.framework in Frameworks */,
 				262AD81615AAFB50000C2EF7 /* libsqlite3.dylib in Frameworks */,
@@ -1171,7 +1168,6 @@
 		262AD48615AA7D5D000C2EF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				262C42B115BC3D28004BBECA /* MediaPlayer.framework */,
 				2601D2C215AEAB6E0066C1FD /* CoreLocation.framework */,
 				2601D2C015AEAB600066C1FD /* MapKit.framework */,
 				262AD81515AAFB4F000C2EF7 /* libsqlite3.dylib */,
@@ -1197,14 +1193,14 @@
 		262AD48D15AA7D5D000C2EF7 /* Nanbeige */ = {
 			isa = PBXGroup;
 			children = (
-				26A6B50615B31E1F006FA15D /* WelcomeView */,
-				262AD4AA15AA7E0C000C2EF7 /* MainView */,
-				262AD4A215AA7DD7000C2EF7 /* StreamView */,
-				262AD4A615AA7DF5000C2EF7 /* SettingsView */,
 				262AD4A015AA7D93000C2EF7 /* MainStoryboard_iPad.storyboard */,
 				262AD49E15AA7D86000C2EF7 /* MainStoryboard_iPhone.storyboard */,
 				262AD49615AA7D5D000C2EF7 /* NanbeigeAppDelegate.h */,
 				262AD49715AA7D5D000C2EF7 /* NanbeigeAppDelegate.m */,
+				26A6B50615B31E1F006FA15D /* WelcomeView */,
+				262AD4AA15AA7E0C000C2EF7 /* MainView */,
+				262AD4A215AA7DD7000C2EF7 /* StreamView */,
+				262AD4A615AA7DF5000C2EF7 /* SettingsView */,
 				2601D2C415AEADC00066C1FD /* DelegateProtocal */,
 				262AD48E15AA7D5D000C2EF7 /* Supporting Files */,
 			);

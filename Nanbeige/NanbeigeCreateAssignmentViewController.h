@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MediaPlayer/MediaPlayer.h>
 
 @interface NanbeigeCreateAssignmentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 - (IBAction)onCancel:(id)sender;
@@ -24,9 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *coursesPicker;
 @property (weak, nonatomic) IBOutlet UIToolbar *coursesToolbar;
 
-@property (strong, nonatomic) MPMoviePlayerController *moviePlayerController;
 @property (strong, nonatomic) UIImage *image;
-@property (strong, nonatomic) NSURL *movieURL;
 @property (copy, nonatomic) NSString *lastChosenMediaType;
 @property (assign, nonatomic) CGRect imageFrame;
 @property (assign, nonatomic) BOOL imagePickerUsed;
