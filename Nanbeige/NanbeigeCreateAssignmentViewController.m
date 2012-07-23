@@ -23,6 +23,7 @@
 @synthesize coursesPicker;
 @synthesize assignmentIndex;
 @synthesize initWithCamera;
+@synthesize bComplete;
 @synthesize assignments;
 @synthesize assignment = _assignment;
 @synthesize weeksData;
@@ -35,8 +36,9 @@
 	if (_assignment == nil) {
 		if (assignmentIndex == -1)
 			_assignment = [[NSMutableDictionary alloc] init];
-		else 
+		else {
 			_assignment = [[assignments objectAtIndex:assignmentIndex] mutableCopy];
+		}
 	}
 	return _assignment;
 }
@@ -57,7 +59,12 @@
 	nibNames = [[NSArray alloc] initWithObjects:@"AssignmentDescriptionIdentifier", @"AssignmentImageIdentifier", @"AssignmentTimeIdentifier", @"AssignmentCourseIdentifier", nil];
 	assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
 	if (assignments == nil) assignments = [[NSMutableArray alloc] init];
-	if (assignmentIndex != -1) self.title = @"修改作业计划";
+	if (assignmentIndex != -1) {
+		self.title = @"修改作业计划";
+		if (bComplete) {
+			assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
+		}
+	}
 	weeksData = ASSIGNMENTDDLWEAKS;
 	
 	if ([self.assignment objectForKey:kASSIGNMENTHASIMAGE]) {
@@ -293,10 +300,15 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	
 	if (assignmentIndex == -1) {
 		[assignments addObject:self.assignment];
+		[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
 	} else {
 		[assignments replaceObjectAtIndex:assignmentIndex withObject:self.assignment];
+		if (bComplete) {
+			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kCOMPLETEASSIGNMENTS];
+		} else {
+			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
+		}
 	}
-	[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
 	
 	[self dismissModalViewControllerAnimated:YES];
 }

@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSMutableDictionary *assignment;
 @property (strong, nonatomic) NSArray *weeksData;
 @property (strong, nonatomic) NSArray *coursesData;
+@property (nonatomic) BOOL bComplete;
 @property (nonatomic) int assignmentIndex;
 @property (nonatomic) BOOL initWithCamera;
 

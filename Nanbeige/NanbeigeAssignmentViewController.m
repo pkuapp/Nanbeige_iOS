@@ -83,11 +83,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-	if ([self.completeSegmentedControl selectedSegmentIndex] == 0) {
-		self.assignments = [[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS];
-	} else {
-		self.completeAssignments = [[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS];
-	}
+	self.assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
+	self.completeAssignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -109,11 +106,12 @@
 	
 	NSUInteger row = [indexPath row];
 	NSString *nibName = @"NanbeigeAssignmentNoImageCell";
-	NSString *identifier = @"CellIdentifier";
+	NSString *identifier = @"NoImageCellIdentifier";
 	
 	if ([tableView isEqual:self.assignmentsTableView]) {
-		if ([[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE]) {
+		if ([[[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
 			nibName = @"NanbeigeAssignmentImageCell";
+			identifier = @"ImageCellIdentifier";
 		}
 		
 		if (![[self.nibsRegistered objectForKey:nibName] isEqualToString:@"YES"]) {
@@ -125,8 +123,9 @@
 		
 		return cell.frame.size.height;
 	} else {
-		if ([[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE]) {
+		if ([[[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
 			nibName = @"NanbeigeAssignmentImageCell";
+			identifier = @"ImageCellIdentifier";
 		}
 		
 		if (![[self.completeNibsRegistered objectForKey:nibName] isEqualToString:@"YES"]) {
@@ -160,11 +159,12 @@
 	
 	NSUInteger row = [indexPath row];
 	NSString *nibName = @"NanbeigeAssignmentNoImageCell";
-	NSString *identifier = @"CellIdentifier";
+	NSString *identifier = @"NoImageCellIdentifier";
 	
 	if ([tableView isEqual:self.assignmentsTableView]) {
-		if ([[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE]) {
+		if ([[[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
 			nibName = @"NanbeigeAssignmentImageCell";
+			identifier = @"ImageCellIdentifier";
 		}
 		
 		if (![[self.nibsRegistered objectForKey:nibName] isEqualToString:@"YES"]) {
@@ -181,10 +181,15 @@
 			//[[(NanbeigeAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
 		}
 		
+		[[(id)cell changeCompleteButton] setBackgroundColor:notCompleteAssignmentCellColor];
+		[(id)cell setDelegate:self];
+		[(id)cell setAssignmentIndex:row];
+		
 		return cell;
 	} else {
-		if ([[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE]) {
+		if ([[[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
 			nibName = @"NanbeigeAssignmentImageCell";
+			identifier = @"ImageCellIdentifier";
 		}
 		
 		if (![[self.completeNibsRegistered objectForKey:nibName] isEqualToString:@"YES"]) {
@@ -201,7 +206,28 @@
 			//[[(NanbeigeAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
 		}
 		
+		[[(id)cell changeCompleteButton] setBackgroundColor:completeAssignmentCellColor];
+		[(id)cell setDelegate:self];
+		[(id)cell setAssignmentIndex:row];
+		
 		return cell;
+	}
+}
+
+- (void)changeComplete:(id)sender
+{
+	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) {
+		[self.completeAssignments addObject:[self.assignments objectAtIndex:[sender assignmentIndex]]];
+		[self.assignments removeObjectAtIndex:[sender assignmentIndex]];
+		[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
+		[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
+		[self.assignmentsTableView reloadData];
+	} else if ([completeSegmentedControl selectedSegmentIndex] == COMPLETE) {
+		[self.assignments addObject:[self.completeAssignments objectAtIndex:[sender assignmentIndex]]];
+		[self.completeAssignments removeObjectAtIndex:[sender assignmentIndex]];
+		[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
+		[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
+		[self.completeAssignmentsTableView reloadData];
 	}
 }
 
@@ -236,8 +262,8 @@
 	ncavc.coursesData = TEMPCOURSES;
 	ncavc.initWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
-#warning 确定编辑课程是完成列表还是未完成列表
 		ncavc.assignmentIndex = assignmentSelect;
+		ncavc.bComplete = ([completeSegmentedControl selectedSegmentIndex] == COMPLETE);
 	} else {
 		ncavc.assignmentIndex = -1;
 	}
@@ -254,7 +280,7 @@
 }
 
 - (IBAction)onAssignmentCompleteChanged:(id)sender {
-	if ([completeSegmentedControl selectedSegmentIndex] == 0) {
+	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) {
 		[self.assignmentsTableView reloadData];
 		[self.assignmentsTableView setHidden:NO];
 		[self.completeAssignmentsTableView setHidden:YES];
@@ -264,4 +290,5 @@
 		[self.assignmentsTableView setHidden:YES];
 	}
 }
+		
 @end

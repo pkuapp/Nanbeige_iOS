@@ -43,6 +43,9 @@
 #define gateConnectCellColor [UIColor colorWithRed:80/255.0 green:160/255.0 blue:90/255.0 alpha:1.0]
 #define gateDisconnectCellColor [UIColor colorWithRed:176/255.0 green:92/255.0 blue:69/255.0 alpha:1.0]
 
+#define notCompleteAssignmentCellColor [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0]
+#define completeAssignmentCellColor [UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1.0]
+
 #define kMAINORDERKEY @"mainorder"
 #define kWEIBOIDKEY @"weiboid"
 #define kRENRENIDKEY @"renrenid"
@@ -69,6 +72,8 @@
 #define kASSIGNMENTDDLWEEKS @"assignment_ddl_weeks"
 #define ONCLASS 0
 #define ONDATE 1
+#define NOTCOMPLETE 0
+#define COMPLETE 1
 
 #define ASSIGNMENTDDLWEAKS [[NSArray alloc] initWithObjects:@"本周", @"下周", @"2周后", @"3周后", @"4周后", @"5周后", @"6周后", @"7周后", @"8周后", @"9周后", @"10周后", @"11周后", @"12周后", @"13周后", @"14周后", @"15周后", @"16周后", @"17周后", @"18周后", @"19周后", @"20周后", @"26周后", @"52周后", @"猴年马月", nil];
 #define TEMPCOURSES [[NSArray alloc] initWithObjects:@"毛概", @"地概", @"信概", @"计概", nil];

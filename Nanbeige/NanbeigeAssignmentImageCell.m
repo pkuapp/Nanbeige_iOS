@@ -13,6 +13,9 @@
 @synthesize assignmentName;
 @synthesize assignmentImage;
 @synthesize assignmentTime;
+@synthesize delegate;
+@synthesize assignmentIndex;
+@synthesize changeCompleteButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -30,4 +33,9 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)changeComplete:(id)sender {
+	if ([self.delegate respondsToSelector:@selector(changeComplete:)]) {
+		[self.delegate changeComplete:self];
+	}
+}
 @end
