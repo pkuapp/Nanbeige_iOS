@@ -193,6 +193,7 @@
 		2678C38015B2B30E005E1D3E /* NanbeigeLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C37F15B2B30E005E1D3E /* NanbeigeLoginViewController.m */; };
 		2678C38315B2BCBD005E1D3E /* NanbeigeWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C38215B2BCBB005E1D3E /* NanbeigeWelcomeViewController.m */; };
 		2678C38A15B304CD005E1D3E /* NanbeigeConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C38915B304CA005E1D3E /* NanbeigeConnectViewController.m */; };
+		2684427C15BFE1AB0012C8C3 /* NanbeigePickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684427B15BFE1AB0012C8C3 /* NanbeigePickerLabel.m */; };
 		26A6B50A15B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A6B50915B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.m */; };
 		26A6B50E15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A6B50D15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.m */; };
 		26A6B5F415B41B17006FA15D /* 24-person.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B54D15B41B16006FA15D /* 24-person.png */; };
@@ -836,6 +837,8 @@
 		2678C38215B2BCBB005E1D3E /* NanbeigeWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWelcomeViewController.m; sourceTree = "<group>"; };
 		2678C38815B304C6005E1D3E /* NanbeigeConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeConnectViewController.h; sourceTree = "<group>"; };
 		2678C38915B304CA005E1D3E /* NanbeigeConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeConnectViewController.m; sourceTree = "<group>"; };
+		2684427A15BFE1AB0012C8C3 /* NanbeigePickerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigePickerLabel.h; sourceTree = "<group>"; };
+		2684427B15BFE1AB0012C8C3 /* NanbeigePickerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigePickerLabel.m; sourceTree = "<group>"; };
 		26A6B50815B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeDetailGateInfoViewController.h; sourceTree = "<group>"; };
 		26A6B50915B3BA5F006FA15D /* NanbeigeDetailGateInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeDetailGateInfoViewController.m; sourceTree = "<group>"; };
 		26A6B50C15B3F473006FA15D /* NanbeigeChangeMainOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeChangeMainOrderViewController.h; sourceTree = "<group>"; };
@@ -2095,6 +2098,8 @@
 				2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */,
 				26B9666F15BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.h */,
 				26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */,
+				2684427A15BFE1AB0012C8C3 /* NanbeigePickerLabel.h */,
+				2684427B15BFE1AB0012C8C3 /* NanbeigePickerLabel.m */,
 			);
 			name = AssignmentView;
 			sourceTree = "<group>";
@@ -2525,6 +2530,7 @@
 				26B9667115BC1C830081002C /* NanbeigeAssignmentDeadlineViewController.m in Sources */,
 				262C433815BD3B38004BBECA /* TableViewPullAppDelegate.m in Sources */,
 				262C433915BD3B38004BBECA /* EGORefreshTableHeaderView.m in Sources */,
+				2684427C15BFE1AB0012C8C3 /* NanbeigePickerLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

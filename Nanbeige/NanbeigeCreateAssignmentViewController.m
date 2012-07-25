@@ -9,6 +9,7 @@
 #import "NanbeigeCreateAssignmentViewController.h"
 #import "NanbeigeAssignmentDeadlineViewController.h"
 #import "Environment.h"
+#import "NanbeigePickerLabel.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 
 @interface NanbeigeCreateAssignmentViewController () {
