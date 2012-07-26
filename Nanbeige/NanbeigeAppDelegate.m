@@ -90,6 +90,7 @@
         progressHub.userInteractionEnabled = NO;
         progressHub.opacity = 0.618;
         progressHub.animationType = MBProgressHUDAnimationZoom;
+		progressHub.taskInProgress = NO;
         [self.window addSubview:progressHub];
     }
     return progressHub;

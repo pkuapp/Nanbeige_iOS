@@ -216,9 +216,16 @@
 }
 - (void)showProgressHubWithTitle:(NSString *)title{
     self.progressHub.mode = MBProgressHUDModeIndeterminate;
+	self.progressHub.transform = CGAffineTransformIdentity;
     self.progressHub.delegate = self;
     self.progressHub.labelText = title;
     [self.progressHub show:YES];
+	self.progressHub.taskInProgress = YES;
+}
+#pragma mark - MBProgressHUD Delegate
+- (void)hudWasHidden:(MBProgressHUD *)hud
+{
+	self.progressHub.taskInProgress = NO;
 }
 
 #pragma mark - IPGateDelegate setup
@@ -275,6 +282,7 @@
 			[self changeProgressHub:[self.connector.dictResult objectForKey:@"REASON"] isSuccess:NO];
 		}
         NSLog(@"Reason %@",[self.connector.dictResult objectForKey:@"REASON"]);
+		self.connector.dictResult = nil;
     }
 }
 - (void)saveAccountState {
@@ -295,18 +303,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	progressHub.animationType = MBProgressHUDAnimationFade;
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	self.Username = [self.defaults valueForKey:kITSIDKEY];
     self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
 	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
 		[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		return ;
 	}
 	
     switch (indexPath.section) {
         case 0:
+			if (self.progressHub.taskInProgress) return ;
 			self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
             if ([[self.gateStateDictionary objectForKey:_keyAutoDisconnect] boolValue]) {
                 [self.connector disConnect];
@@ -321,6 +329,7 @@
             }
             break;
         case 1:
+			if (self.progressHub.taskInProgress) return ;
             [self.connector disConnect];
             [self showProgressHubWithTitle:@"正断开全部连接"];
             break;
@@ -332,7 +341,6 @@
         default:
             break;
 	}
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Segue setup

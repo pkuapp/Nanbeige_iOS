@@ -283,6 +283,12 @@
     return cell;
 }
 
+#pragma mark - MBProgressHUD Delegate
+- (void)hudWasHidden:(MBProgressHUD *)hud
+{
+	self.progressHub.taskInProgress = NO;
+}
+
 #pragma mark - NanbeigeLine2Button2DelegateProtocol
 - (void)onButton1Pressed:(id)sender
 {
@@ -297,6 +303,7 @@
 #pragma mark - NanbeigeItsWidgetDelegateProtocol
 - (void)connectFree:(id)sender
 {
+	if (self.progressHub.taskInProgress) return ;
 	self.Username = [self.defaults valueForKey:kITSIDKEY];
     self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
 	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
@@ -314,6 +321,7 @@
 
 - (void)connectGlobal:(id)sender
 {
+	if (self.progressHub.taskInProgress) return ;
 	self.Username = [self.defaults valueForKey:kITSIDKEY];
     self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
 	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
@@ -330,6 +338,7 @@
 
 - (void)disconnectAll:(id)sender
 {
+	if (self.progressHub.taskInProgress) return ;
 	self.Username = [self.defaults valueForKey:kITSIDKEY];
     self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
 	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {
@@ -451,9 +460,11 @@
 }
 - (void)showProgressHubWithTitle:(NSString *)title{
     self.progressHub.mode = MBProgressHUDModeIndeterminate;
+	self.progressHub.transform = CGAffineTransformIdentity;
     self.progressHub.delegate = self;
     self.progressHub.labelText = title;
     [self.progressHub show:YES];
+	self.progressHub.taskInProgress = YES;
 }
 - (void)changeDetailGateInfo:(NSString *)title 
 				isConnecting:(BOOL)bConnecting
@@ -539,6 +550,7 @@
 			[self changeProgressHub:[self.connector.dictResult objectForKey:@"REASON"] isSuccess:NO];
 		}
         NSLog(@"Reason %@",[self.connector.dictResult objectForKey:@"REASON"]);
+		self.connector.dictResult = nil;
     }
 }
 - (void)saveAccountState {
