@@ -73,9 +73,12 @@
 	}
 	
 }
-- (IBAction)onConfirmCourses:(id)sender {
+- (IBAction)onConfirmCoursesBeforeResignFirstResponder:(id)sender {
 	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]]];
 	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] resignFirstResponder];
+}
+- (void)onConfirmCoursesAfterResignFirstResponder:(id)sender {
+	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]]];
 }
 
 - (void)viewDidUnload
@@ -186,6 +189,7 @@ numberOfRowsInComponent:(NSInteger)component
 		}
 		[[[cell.contentView subviews] objectAtIndex:1] setInputView:self.coursesPicker];
 		[[[cell.contentView subviews] objectAtIndex:1] setInputAccessoryView:self.coursesToolbar];
+		[[[cell.contentView subviews] objectAtIndex:1] setDelegate:self];
 	}
 	
     return cell;

@@ -29,4 +29,6 @@
 @property (assign, nonatomic) BOOL imagePickerUsed;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+- (void)onConfirmCoursesAfterResignFirstResponder:(id)sender;
+
 @end

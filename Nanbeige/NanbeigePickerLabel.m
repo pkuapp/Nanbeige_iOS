@@ -9,9 +9,44 @@
 #import "NanbeigePickerLabel.h"
 
 @implementation NanbeigePickerLabel
-@synthesize inputView;
-@synthesize inputAccessoryView;
+@synthesize inputView = _inputView;
+@synthesize inputAccessoryView = _inputAccessoryView;
+@synthesize popoverController = _popoverController;
+@synthesize delegate;
 
+- (void)setInputView:(UIView *)inputView
+{
+	if (_inputView != inputView) {
+		_inputView = inputView;
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			
+			UIViewController *popoverContent = [[UIViewController alloc] init];
+			UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
+			popoverContent.view = view;
+			_inputView.frame = CGRectMake(0, 0, 320, 216);
+			if (_inputView.superview) [_inputView removeFromSuperview];
+			[view addSubview:_inputView];
+			
+			self.popoverController = [[UIPopoverController alloc] initWithContentViewController:popoverContent];
+			self.popoverController.delegate = self;
+		}
+	}
+}
+- (UIView *)inputView
+{
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		return nil;
+	} else {
+		return _inputView;
+	}
+}
+- (UIView *)inputAccessoryView {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		return nil;
+	} else {
+		return _inputAccessoryView;
+	}
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -23,10 +58,20 @@
 }
 
 - (BOOL)becomeFirstResponder {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		CGSize pickerSize = [_inputView sizeThatFits:CGSizeZero];
+		CGRect frame = _inputView.frame;
+		frame.size = pickerSize;
+		_inputView.frame = frame;
+		self.popoverController.popoverContentSize = pickerSize;
+		[self.popoverController presentPopoverFromRect:self.frame inView:self permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+		return NO;
+	}
 	return [super becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder {
+	[(NanbeigeCreateAssignmentViewController *)self.delegate onConfirmCoursesAfterResignFirstResponder:self];
 	return [super resignFirstResponder];
 }
 
@@ -48,6 +93,13 @@
 }
 
 - (void)deleteBackward {
+}
+
+#pragma mark -
+#pragma mark UIPopoverControllerDelegate Protocol Methods
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+	[self resignFirstResponder];
 }
 
 /*

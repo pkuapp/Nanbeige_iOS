@@ -870,7 +870,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="KHc-KM-Le2"/>
                                     <barButtonItem title="确认" id="mVd-Uc-A6N">
                                         <connections>
-                                            <action selector="onConfirmCourses:" destination="EKb-pH-FnZ" id="2Yp-73-WLe"/>
+                                            <action selector="onConfirmCoursesBeforeResignFirstResponder:" destination="EKb-pH-FnZ" id="fQc-0b-67J"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NanbeigeCreateAssignmentViewController.h"
 
-@interface NanbeigePickerLabel : UILabel <UIKeyInput>
+@interface NanbeigePickerLabel : UILabel <UIKeyInput, UIPopoverControllerDelegate>
 
 @property (strong, nonatomic) UIView *inputView;
 @property (strong, nonatomic) UIView *inputAccessoryView;
+@property (strong, nonatomic) UIPopoverController *popoverController;
+@property (weak, nonatomic) id delegate;
 
 @end
