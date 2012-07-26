@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) UIBarButtonItem *splitViewBarButtonItem;
+@property (strong, nonatomic) NSDictionary *course;
 - (IBAction)renrenPost:(id)sender;
 - (IBAction)weiboPost:(id)sender;
 

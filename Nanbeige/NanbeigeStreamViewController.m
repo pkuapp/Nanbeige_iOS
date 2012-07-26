@@ -8,6 +8,8 @@
 
 #import "NanbeigeStreamViewController.h"
 #import "Environment.h"
+#import "ASIHTTPRequest.h"
+#import "NanbeigeStreamDetailViewController.h"
 
 @interface NanbeigeStreamViewController ()
 
@@ -15,6 +17,17 @@
 
 @implementation NanbeigeStreamViewController
 @synthesize tableView = _tableView;
+@synthesize streams = _streams;
+
+#pragma mark - Setter and Getter methods
+
+- (NSMutableArray *)streams
+{
+	if (_streams == nil) {
+		_streams = [[NSMutableArray alloc] init];
+	}
+	return _streams;
+}
 
 #pragma mark - View Lifecycle
 
@@ -66,25 +79,24 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.streams.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    
+    static NSString *identifier = @"Cell";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+	if (nil == cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+	}
+	cell.textLabel.text = [[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMTITLE];
+    cell.detailTextLabel.text = [[[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMDETAIL] stringValue];
+	
     return cell;
 }
 
@@ -136,10 +148,16 @@
 	//  put here just for demo
 	_reloading = YES;
 	
+	NSURL *url = [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"];
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+	[request setDelegate:self];
+	[request setTimeOutSeconds:20];
+	[request startAsynchronous];
 }
 
 - (void)doneLoadingTableViewData{
 	
+	[self.tableView reloadData];
 	//  model should call this when its done loading
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
@@ -169,7 +187,7 @@
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
 	
 	[self reloadTableViewDataSource];
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+	//[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
 	
 }
 
@@ -189,14 +207,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+	if (self.splitViewController) {
+		id nsdvc = [self.splitViewController.viewControllers lastObject];
+		if (![nsdvc isKindOfClass:[NanbeigeStreamDetailViewController class]]) {
+			nsdvc = nil;
+		}
+		[nsdvc setCourse:[self.streams objectAtIndex:indexPath.row]];
+	}
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -226,5 +243,20 @@
 	} else {
 		[self performSegueWithIdentifier:@"WeiboPostSegue" sender:self];
 	}
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+	NSData *responseData = [request responseData];
+	id res = [NSJSONSerialization JSONObjectWithData:responseData
+											 options:NSJSONWritingPrettyPrinted
+											   error:nil];
+	self.streams = res;
+	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+}
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+	NSError *error = [request error];
+	NSLog(@"%@", error);
 }
 @end

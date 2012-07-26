@@ -17,6 +17,7 @@
 }
 	
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *streams;
 - (IBAction)renrenPost:(id)sender;
 - (IBAction)weiboPost:(id)sender;
 
