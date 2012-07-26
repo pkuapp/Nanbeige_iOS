@@ -133,6 +133,7 @@
 	[disconnectAll setBackgroundColor:gateDisconnectCellColor];
 	
 	bViewDidLoad = YES;
+	self.title = TITLE_ITS;
 	
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -161,8 +162,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-		//return YES;
+	    return YES;
 	} else {
 	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	}

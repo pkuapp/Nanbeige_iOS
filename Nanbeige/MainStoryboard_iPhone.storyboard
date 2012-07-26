@@ -1142,54 +1142,51 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="tintColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="cmY-ax-mzU" kind="relationship" relationship="rootViewController" id="RRg-iy-JMr"/>
+                        <segue destination="aEl-L1-1Fk" kind="relationship" relationship="rootViewController" id="lPa-6P-D2A"/>
                     </connections>
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="1046" y="-948"/>
         </scene>
         <!--Nanbeige Stream View Controller - 信息流-->
-        <scene sceneID="4JD-wf-NCU">
+        <scene sceneID="qc2-n8-bCL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LeN-Bt-5hH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="cmY-ax-mzU" customClass="NanbeigeStreamViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZNa-aX-718">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S9Z-aE-l9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="aEl-L1-1Fk" customClass="NanbeigeStreamViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cjs-J3-aSM">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StreamIdentifier" id="fmy-Oz-vWp">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="cmY-ax-mzU" id="Br8-b2-wjO"/>
-                            <outlet property="delegate" destination="cmY-ax-mzU" id="3Zr-ab-UOG"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="信息流" id="ZvE-6i-moI">
-                        <barButtonItem key="leftBarButtonItem" title="人人吐槽" id="0Bm-a5-Tng">
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="myp-Zo-dPt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="aEl-L1-1Fk" id="G6c-Bw-4vH"/>
+                                    <outlet property="delegate" destination="aEl-L1-1Fk" id="jSh-Be-a6B"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="信息流" id="8a9-Hj-YfP">
+                        <barButtonItem key="leftBarButtonItem" title="人人吐槽" id="xFJ-64-OPJ">
                             <connections>
-                                <action selector="renrenPost:" destination="cmY-ax-mzU" id="0k2-2p-sXh"/>
+                                <action selector="renrenPost:" destination="aEl-L1-1Fk" id="NS5-4K-IMW"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="微吐槽" id="1sw-PG-31f">
+                        <barButtonItem key="rightBarButtonItem" title="微吐槽" id="uUJ-8r-eac">
                             <connections>
-                                <action selector="weiboPost:" destination="cmY-ax-mzU" id="c4U-IG-ifa"/>
+                                <action selector="weiboPost:" destination="aEl-L1-1Fk" id="0QV-KU-cOS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="gVN-yo-VUf" kind="modal" identifier="RenrenPostSegue" id="YFL-EG-JbE"/>
-                        <segue destination="hoE-87-ggj" kind="modal" identifier="WeiboPostSegue" modalTransitionStyle="flipHorizontal" id="CX4-Sa-twT"/>
+                        <outlet property="tableView" destination="myp-Zo-dPt" id="ebq-Ak-jaC"/>
+                        <segue destination="gVN-yo-VUf" kind="modal" identifier="RenrenPostSegue" id="qkn-qg-Dfo"/>
+                        <segue destination="hoE-87-ggj" kind="modal" identifier="WeiboPostSegue" id="bWh-Lc-zHo"/>
                     </connections>
-                </tableViewController>
+                </viewController>
             </objects>
             <point key="canvasLocation" x="1600" y="-948"/>
         </scene>
@@ -1733,11 +1730,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2655" y="497"/>
         </scene>
-        <!--View Controller - 关于南北阁-->
+        <!--Nanbeige About View Controller - 关于南北阁-->
         <scene sceneID="tzG-CO-2lz">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="be0-Sh-XyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController hidesBottomBarWhenPushed="YES" id="nbq-Em-CIq" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="nbq-Em-CIq" customClass="NanbeigeAboutViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lgJ-7g-Whd">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1863,11 +1860,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-36" y="-1224"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Nanbeige Tab Bar Controller-->
         <scene sceneID="15">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
-                <tabBarController id="4" sceneMemberID="viewController">
+                <tabBarController id="4" customClass="NanbeigeTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
@@ -1904,7 +1901,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="iBD-dN-4lH"/>
-        <segue reference="Yqn-fv-amI"/>
+        <segue reference="yHJ-Pm-LdA"/>
+        <segue reference="kkG-IZ-C1L"/>
     </inferredMetricsTieBreakers>
 </document>

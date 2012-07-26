@@ -27,6 +27,8 @@
 @synthesize completeNibsRegistered = _completeNibsRegistered;
 @synthesize completeSegmentedControl;
 
+#pragma mark - Setter and Getter methods
+
 - (NSMutableArray *)assignments
 {
 	if (_assignments == nil) {
@@ -70,7 +72,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 #warning 用伪数据测试
-	
+	self.title = TITLE_ASSIGNMENT;
 }
 
 - (void)viewDidUnload
@@ -97,7 +99,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	    return YES;
+	} else {
+	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	}
 }
 
 #pragma mark -

@@ -32,6 +32,12 @@
 //Global Color here. Will move to other place in future build
 #define navigationBgColor nil //[[UIColor alloc] initWithRed:228/255.0 green:231/255.0 blue:233/255.0 alpha:1.0]
 
+#define TITLE_MAIN @"仪表盘"
+#define TITLE_STREAM @"信息流"
+#define TITLE_SETTINGS @"设置"
+#define TITLE_ABOUT @"关于南北阁"
+#define TITLE_ITS @"IP网关"
+#define TITLE_ASSIGNMENT @"作业"
 
 //#define tableBgColor [[UIColor alloc] initWithRed:239/255.0 green:234/255.0 blue:222/255.0 alpha:1.0]
 //#define navBarBgColor [[UIColor alloc] initWithRed:77/255.0 green:77/255.0 blue:77/255.0 alpha:1.0]

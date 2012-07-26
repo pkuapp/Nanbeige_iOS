@@ -14,15 +14,9 @@
 @end
 
 @implementation NanbeigeStreamViewController
+@synthesize tableView = _tableView;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
@@ -47,10 +41,12 @@
 	//  update the last update date
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
+	self.title = TITLE_STREAM;
 }
 
 - (void)viewDidUnload
 {
+	[self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -59,13 +55,13 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-		//return YES;
+	    return YES;
 	} else {
 	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	}
 }
-/*
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -91,7 +87,7 @@
     
     return cell;
 }
-*/
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

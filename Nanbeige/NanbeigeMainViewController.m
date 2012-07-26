@@ -38,6 +38,7 @@
 @synthesize Username;
 @synthesize Password;
 
+
 #pragma mark - getter and setter Override
 
 - (NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *)delegate {
@@ -147,6 +148,7 @@
 					  nil];
 	self.connector = [[NanbeigeIPGateHelper alloc] init];
 	self.defaults = [NSUserDefaults standardUserDefaults];
+	self.title = TITLE_MAIN;
 }
 - (void)viewDidUnload
 {
@@ -202,8 +204,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-		//return YES;
+	    return YES;
 	} else {
 	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	}
