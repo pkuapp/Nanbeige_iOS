@@ -32,7 +32,6 @@
 		2601D2B615AEA9BE0066C1FD /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D2A315AEA9BE0066C1FD /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2601D2B715AEA9BE0066C1FD /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D2A515AEA9BE0066C1FD /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2601D2B815AEA9BE0066C1FD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D2A815AEA9BE0066C1FD /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		2601D2B915AEA9BE0066C1FD /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D2AB15AEA9BE0066C1FD /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2601D2BA15AEA9BE0066C1FD /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D2AD15AEA9BE0066C1FD /* ModalAlert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2601D2BB15AEA9BE0066C1FD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D2AF15AEA9BE0066C1FD /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2601D2C115AEAB610066C1FD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2601D2C015AEAB600066C1FD /* MapKit.framework */; };
@@ -177,6 +176,7 @@
 		262C434015BD3B38004BBECA /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 262C430915BD3B38004BBECA /* grayArrow@2x.png */; };
 		262C434415BD3B38004BBECA /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 262C430D15BD3B38004BBECA /* whiteArrow.png */; };
 		262C434515BD3B38004BBECA /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 262C430E15BD3B38004BBECA /* whiteArrow@2x.png */; };
+		265D205D15C067B0006353E9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 265D205C15C067B0006353E9 /* MBProgressHUD.m */; };
 		2678C31115B0359C005E1D3E /* NanbeigeLine1Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C31015B0359C005E1D3E /* NanbeigeLine1Button0Cell.m */; };
 		2678C31415B035C3005E1D3E /* NanbeigeLine1Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2678C31315B035C3005E1D3E /* NanbeigeLine1Button0Cell.xib */; };
 		2678C31715B04907005E1D3E /* NanbeigeLine2Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2678C31615B04907005E1D3E /* NanbeigeLine2Button0Cell.xib */; };
@@ -429,8 +429,6 @@
 		2601D2A615AEA9BE0066C1FD /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		2601D2A715AEA9BE0066C1FD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		2601D2A815AEA9BE0066C1FD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		2601D2AA15AEA9BE0066C1FD /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		2601D2AB15AEA9BE0066C1FD /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		2601D2AC15AEA9BE0066C1FD /* ModalAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalAlert.h; sourceTree = "<group>"; };
 		2601D2AD15AEA9BE0066C1FD /* ModalAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalAlert.m; sourceTree = "<group>"; };
 		2601D2AE15AEA9BE0066C1FD /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
@@ -812,6 +810,8 @@
 		262C430915BD3B38004BBECA /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		262C430D15BD3B38004BBECA /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		262C430E15BD3B38004BBECA /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		265D205B15C067B0006353E9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		265D205C15C067B0006353E9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		2678C30F15B0359C005E1D3E /* NanbeigeLine1Button0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLine1Button0Cell.h; sourceTree = "<group>"; };
 		2678C31015B0359C005E1D3E /* NanbeigeLine1Button0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine1Button0Cell.m; sourceTree = "<group>"; };
 		2678C31315B035C3005E1D3E /* NanbeigeLine1Button0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeLine1Button0Cell.xib; sourceTree = "<group>"; };
@@ -1124,8 +1124,8 @@
 		2601D2A915AEA9BE0066C1FD /* others */ = {
 			isa = PBXGroup;
 			children = (
-				2601D2AA15AEA9BE0066C1FD /* MBProgressHUD.h */,
-				2601D2AB15AEA9BE0066C1FD /* MBProgressHUD.m */,
+				265D205B15C067B0006353E9 /* MBProgressHUD.h */,
+				265D205C15C067B0006353E9 /* MBProgressHUD.m */,
 				2601D2AC15AEA9BE0066C1FD /* ModalAlert.h */,
 				2601D2AD15AEA9BE0066C1FD /* ModalAlert.m */,
 				2601D2AE15AEA9BE0066C1FD /* RegexKitLite.h */,
@@ -2506,7 +2506,6 @@
 				2601D2B615AEA9BE0066C1FD /* ASIInputStream.m in Sources */,
 				2601D2B715AEA9BE0066C1FD /* ASINetworkQueue.m in Sources */,
 				2601D2B815AEA9BE0066C1FD /* Reachability.m in Sources */,
-				2601D2B915AEA9BE0066C1FD /* MBProgressHUD.m in Sources */,
 				2601D2BA15AEA9BE0066C1FD /* ModalAlert.m in Sources */,
 				2601D2BB15AEA9BE0066C1FD /* RegexKitLite.m in Sources */,
 				26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */,
@@ -2531,6 +2530,7 @@
 				262C433815BD3B38004BBECA /* TableViewPullAppDelegate.m in Sources */,
 				262C433915BD3B38004BBECA /* EGORefreshTableHeaderView.m in Sources */,
 				2684427C15BFE1AB0012C8C3 /* NanbeigePickerLabel.m in Sources */,
+				265D205D15C067B0006353E9 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
