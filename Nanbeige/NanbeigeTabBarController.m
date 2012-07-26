@@ -72,13 +72,11 @@
 		if ([defaults valueForKey:kWEIBOIDKEY] == nil && 
 			[defaults valueForKey:kRENRENIDKEY] == nil &&
 			[defaults valueForKey:kNANBEIGEIDKEY] == nil) {
-			[defaults removeObjectForKey:kACCOUNTIDKEY];
-			[defaults removeObjectForKey:kACCOUNTPASSWORDKEY];
-			[defaults removeObjectForKey:kITSIDKEY];
-			[defaults removeObjectForKey:kITSPASSWORDKEY];
+			NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+			[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];;
 		}
 		
-		if ([defaults valueForKey:kACCOUNTIDKEY] == nil) {
+		if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] == nil) {
 			[self performSegueWithIdentifier:@"LoginSegue" sender:self];	
 		}
 	}
