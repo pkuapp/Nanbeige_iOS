@@ -37,6 +37,10 @@
 		2601D2C115AEAB610066C1FD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2601D2C015AEAB600066C1FD /* MapKit.framework */; };
 		2601D2C315AEAB6E0066C1FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2601D2C215AEAB6E0066C1FD /* CoreLocation.framework */; };
 		2612272115BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */; };
+		261727C015C1B0D600B12A0B /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727BF15C1B0D600B12A0B /* Default-Portrait~ipad.png */; };
+		261727C315C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */; };
+		261727C515C1B0DE00B12A0B /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C415C1B0DE00B12A0B /* Default-Landscape~ipad.png */; };
+		261727C715C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C615C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png */; };
 		262AD48815AA7D5D000C2EF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48715AA7D5D000C2EF7 /* UIKit.framework */; };
 		262AD48A15AA7D5D000C2EF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48915AA7D5D000C2EF7 /* Foundation.framework */; };
 		262AD48C15AA7D5D000C2EF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48B15AA7D5D000C2EF7 /* CoreGraphics.framework */; };
@@ -441,6 +445,10 @@
 		2601D2C215AEAB6E0066C1FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2612271F15BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeCreateAssignmentViewController.h; sourceTree = "<group>"; };
 		2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeCreateAssignmentViewController.m; sourceTree = "<group>"; };
+		261727BF15C1B0D600B12A0B /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		261727C415C1B0DE00B12A0B /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		261727C615C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		262AD48315AA7D5D000C2EF7 /* Nanbeige.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nanbeige.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		262AD48715AA7D5D000C2EF7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		262AD48915AA7D5D000C2EF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1300,6 +1308,10 @@
 		262AD4B515AA7F4E000C2EF7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				261727C615C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png */,
+				261727C415C1B0DE00B12A0B /* Default-Landscape~ipad.png */,
+				261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */,
+				261727BF15C1B0D600B12A0B /* Default-Portrait~ipad.png */,
 				267D211F15C1A5B700648217 /* Default@2x.png */,
 				267D211C15C1A5B200648217 /* Default.png */,
 				26E2CB5B15B50BD100F8FA3D /* widget_point.png */,
@@ -2426,6 +2438,10 @@
 				262C434515BD3B38004BBECA /* whiteArrow@2x.png in Resources */,
 				267D211D15C1A5B200648217 /* Default.png in Resources */,
 				267D212015C1A5B700648217 /* Default@2x.png in Resources */,
+				261727C015C1B0D600B12A0B /* Default-Portrait~ipad.png in Resources */,
+				261727C315C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png in Resources */,
+				261727C515C1B0DE00B12A0B /* Default-Landscape~ipad.png in Resources */,
+				261727C715C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
