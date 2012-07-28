@@ -11,10 +11,16 @@
 #import "NanbeigeAssignmentNoImageCell.h"
 #import "NanbeigeAssignmentImageCell.h"
 #import "Environment.h"
+#import "JTTableViewGestureRecognizer.h"
+#import "UIColor+JTGestureBasedTableViewHelper.h"
 
-@interface NanbeigeAssignmentViewController () {
+@interface NanbeigeAssignmentViewController () <JTTableViewGestureEditingRowDelegate>
+{
 	int assignmentSelect;
 }
+@property (nonatomic, strong) JTTableViewGestureRecognizer *assignmentsTableViewRecognizer;
+@property (nonatomic, strong) JTTableViewGestureRecognizer *completeAssignmentsTableViewRecognizer;
+@property (nonatomic, strong) id grabbedObject;
 
 @end
 
@@ -26,6 +32,9 @@
 @synthesize completeAssignmentsTableView = _completeAssignmentsTableView;
 @synthesize completeNibsRegistered = _completeNibsRegistered;
 @synthesize completeSegmentedControl;
+@synthesize assignmentsTableViewRecognizer;
+@synthesize completeAssignmentsTableViewRecognizer;
+@synthesize grabbedObject;
 
 #pragma mark - Setter and Getter methods
 
@@ -58,6 +67,53 @@
 	return _completeNibsRegistered;
 }
 
+- (NSMutableArray *)nowAssignments
+{
+	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
+		return self.assignments;
+	else 
+		return self.completeAssignments;
+}
+- (NSMutableArray *)otherAssignments
+{
+	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
+		return self.completeAssignments;
+	else 
+		return self.assignments;
+}
+- (UITableView *)nowAssignmentsTableView
+{
+	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
+		return self.assignmentsTableView;
+	else 
+		return self.completeAssignmentsTableView;
+}
+- (UITableView *)otherAssignmentsTableView
+{
+	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
+		return self.completeAssignmentsTableView;
+	else 
+		return self.assignmentsTableView;
+}
+- (NSMutableArray *)assignmentsOfTableView:(UITableView *)tableView
+{
+	if ([tableView isEqual:self.assignmentsTableView]) 
+		return self.assignments;
+	else if ([tableView isEqual:self.completeAssignmentsTableView])
+		return self.completeAssignments;
+	return nil;
+}
+- (NSMutableDictionary *)nibsRegisteredOfTableView:(UITableView *)tableView
+{
+	if ([tableView isEqual:self.assignmentsTableView]) 
+		return self.nibsRegistered;
+	else if ([tableView isEqual:self.completeAssignmentsTableView])
+		return self.completeNibsRegistered;
+	return nil;
+}
+
+#pragma mark - View Lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -73,6 +129,8 @@
 	// Do any additional setup after loading the view.
 #warning 用伪数据测试
 	self.title = TITLE_ASSIGNMENT;
+	self.assignmentsTableViewRecognizer = [self.assignmentsTableView enableGestureTableViewWithDelegate:self];
+	self.completeAssignmentsTableViewRecognizer = [self.completeAssignmentsTableView enableGestureTableViewWithDelegate:self];
 }
 
 - (void)viewDidUnload
@@ -90,11 +148,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-	if ([self.completeSegmentedControl selectedSegmentIndex] == 0) {
-		[self.assignmentsTableView reloadData];
-	} else {
-		[self.completeAssignmentsTableView reloadData];
-	}
+	[[self nowAssignmentsTableView] reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -114,35 +168,19 @@
 	NSString *nibName = @"NanbeigeAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
-	if ([tableView isEqual:self.assignmentsTableView]) {
-		if ([[[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
-			nibName = @"NanbeigeAssignmentImageCell";
-			identifier = @"ImageCellIdentifier";
-		}
-		
-		if (![[self.nibsRegistered objectForKey:nibName] isEqualToString:@"YES"]) {
-			UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-			[tableView registerNib:nib forCellReuseIdentifier:identifier];
-			[self.nibsRegistered setValue:@"YES" forKey:nibName];
-		}
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-		
-		return cell.frame.size.height;
-	} else {
-		if ([[[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
-			nibName = @"NanbeigeAssignmentImageCell";
-			identifier = @"ImageCellIdentifier";
-		}
-		
-		if (![[self.completeNibsRegistered objectForKey:nibName] isEqualToString:@"YES"]) {
-			UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-			[tableView registerNib:nib forCellReuseIdentifier:identifier];
-			[self.completeNibsRegistered setValue:@"YES" forKey:nibName];
-		}
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-		
-		return cell.frame.size.height;
+	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
+		nibName = @"NanbeigeAssignmentImageCell";
+		identifier = @"ImageCellIdentifier";
 	}
+	
+	if (![[[self nibsRegisteredOfTableView:tableView] objectForKey:nibName] isEqualToString:@"YES"]) {
+		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+		[tableView registerNib:nib forCellReuseIdentifier:identifier];
+		[[self nibsRegisteredOfTableView:tableView] setValue:@"YES" forKey:nibName];
+	}
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+	
+	return cell.frame.size.height;
 }
 
 #pragma mark - Table view data source
@@ -167,74 +205,49 @@
 	NSString *nibName = @"NanbeigeAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
-	if ([tableView isEqual:self.assignmentsTableView]) {
-		if ([[[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
-			nibName = @"NanbeigeAssignmentImageCell";
-			identifier = @"ImageCellIdentifier";
-		}
-		
-		if (![[self.nibsRegistered objectForKey:nibName] isEqualToString:@"YES"]) {
-			UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-			[tableView registerNib:nib forCellReuseIdentifier:identifier];
-			[self.nibsRegistered setValue:@"YES" forKey:nibName];
-		}
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-		
-		[(id)cell courseName].text = [[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTCOURSE];
-		[(id)cell assignmentName].text = [[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTDESCRIPTION];
-		[(id)cell assignmentTime].text = [[self.assignments objectAtIndex:row] objectForKey:kASSIGNMENTDDLSTR];
-		if ([nibName isEqualToString:@"NanbeigeAssignmentImageCell"]) {
-			//[[(NanbeigeAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
-		}
-		
-		[[(id)cell changeCompleteButton] setBackgroundColor:notCompleteAssignmentCellColor];
-		[(id)cell setDelegate:self];
-		[(id)cell setAssignmentIndex:row];
-		
-		return cell;
-	} else {
-		if ([[[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
-			nibName = @"NanbeigeAssignmentImageCell";
-			identifier = @"ImageCellIdentifier";
-		}
-		
-		if (![[self.completeNibsRegistered objectForKey:nibName] isEqualToString:@"YES"]) {
-			UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
-			[tableView registerNib:nib forCellReuseIdentifier:identifier];
-			[self.completeNibsRegistered setValue:@"YES" forKey:nibName];
-		}
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-		
-		[(id)cell courseName].text = [[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTCOURSE];
-		[(id)cell assignmentName].text = [[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTDESCRIPTION];
-		[(id)cell assignmentTime].text = [[self.completeAssignments objectAtIndex:row] objectForKey:kASSIGNMENTDDLSTR];
-		if ([nibName isEqualToString:@"NanbeigeAssignmentImageCell"]) {
-			//[[(NanbeigeAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
-		}
-		
-		[[(id)cell changeCompleteButton] setBackgroundColor:completeAssignmentCellColor];
-		[(id)cell setDelegate:self];
-		[(id)cell setAssignmentIndex:row];
-		
-		return cell;
+	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
+		nibName = @"NanbeigeAssignmentImageCell";
+		identifier = @"ImageCellIdentifier";
 	}
+	
+	if (![[[self nibsRegisteredOfTableView:tableView] objectForKey:nibName] isEqualToString:@"YES"]) {
+		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+		[tableView registerNib:nib forCellReuseIdentifier:identifier];
+		[[self nibsRegisteredOfTableView:tableView] setValue:@"YES" forKey:nibName];
+	}
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+	
+	[(id)cell courseName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTCOURSE];
+	[(id)cell assignmentName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTDESCRIPTION];
+	[(id)cell assignmentTime].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTDDLSTR];
+	if ([nibName isEqualToString:@"NanbeigeAssignmentImageCell"]) {
+		//[[(NanbeigeAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
+	}
+	
+	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTCOMPLETE] boolValue]) {
+		[[(id)cell changeCompleteButton] setBackgroundColor:completeAssignmentCellColor];
+	} else {
+		[[(id)cell changeCompleteButton] setBackgroundColor:notCompleteAssignmentCellColor];
+	}	
+	[(id)cell setDelegate:self];
+	[(id)cell setAssignmentIndex:row];
+	
+	return cell;
 }
 
 - (void)changeComplete:(id)sender
 {
-	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) {
-		[self.completeAssignments addObject:[self.assignments objectAtIndex:[sender assignmentIndex]]];
-		[self.assignments removeObjectAtIndex:[sender assignmentIndex]];
-		[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
-		[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
-		[self.assignmentsTableView reloadData];
-	} else if ([completeSegmentedControl selectedSegmentIndex] == COMPLETE) {
-		[self.assignments addObject:[self.completeAssignments objectAtIndex:[sender assignmentIndex]]];
-		[self.completeAssignments removeObjectAtIndex:[sender assignmentIndex]];
-		[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
-		[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
-		[self.completeAssignmentsTableView reloadData];
-	}
+	NSMutableDictionary *assignment = [[[self nowAssignments] objectAtIndex:[sender assignmentIndex]] mutableCopy];
+	[assignment setObject:[NSNumber numberWithBool:[completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE] forKey:kASSIGNMENTCOMPLETE];
+	[[self nowAssignments] removeObjectAtIndex:[sender assignmentIndex]];
+	[[self otherAssignments] addObject:assignment];
+	
+	[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
+	[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
+	
+	[[self nowAssignmentsTableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sender assignmentIndex] inSection:0]] withRowAnimation:[completeSegmentedControl selectedSegmentIndex] == COMPLETE ? UITableViewRowAnimationLeft : UITableViewRowAnimationRight];
+	
+    [[self nowAssignmentsTableView] performSelector:@selector(reloadData) withObject:nil afterDelay:JTTableViewRowAnimationDuration];
 }
 
 /*
@@ -286,15 +299,89 @@
 }
 
 - (IBAction)onAssignmentCompleteChanged:(id)sender {
-	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) {
-		[self.assignmentsTableView reloadData];
-		[self.assignmentsTableView setHidden:NO];
-		[self.completeAssignmentsTableView setHidden:YES];
-	} else {
-		[self.completeAssignmentsTableView reloadData];
-		[self.completeAssignmentsTableView setHidden:NO];
-		[self.assignmentsTableView setHidden:YES];
-	}
+	[[self nowAssignmentsTableView] reloadData];
+	[[self nowAssignmentsTableView] setHidden:NO];
+	[[self otherAssignmentsTableView] setHidden:YES];
+}
+
+#pragma mark JTTableViewGestureEditingRowDelegate
+
+- (void)gestureRecognizer:(JTTableViewGestureRecognizer *)gestureRecognizer didEnterEditingState:(JTTableViewCellEditingState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell;
+	cell = [[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath];
+	
+    switch (state) {
+        case JTTableViewCellEditingStateLeft:
+            break;
+        case JTTableViewCellEditingStateRight:
+            break;
+		case JTTableViewCellEditingStateMiddle:
+			break;
+        default:
+            break;
+    }
+}
+
+// This is needed to be implemented to let our delegate choose whether the panning gesture should work
+- (BOOL)gestureRecognizer:(JTTableViewGestureRecognizer *)gestureRecognizer canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)gestureRecognizer:(JTTableViewGestureRecognizer *)gestureRecognizer commitEditingState:(JTTableViewCellEditingState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableView *tableView = gestureRecognizer.tableView;
+    [tableView beginUpdates];
+    if (state == JTTableViewCellEditingStateLeft) {
+        // An example to discard the cell at JTTableViewCellEditingStateLeft
+		if ([[[[self nowAssignments] objectAtIndex:indexPath.row] objectForKey:kASSIGNMENTCOMPLETE] boolValue]) {
+			NSMutableDictionary *assignment = [[[self nowAssignments] objectAtIndex:indexPath.row] mutableCopy];
+			[assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTCOMPLETE];
+			[[self nowAssignments] removeObjectAtIndex:indexPath.row];
+			[[self otherAssignments] addObject:assignment];
+			
+			[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
+			[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
+			
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+		} else {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"确认删除作业: 「%@」", [(id)[[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath] assignmentName].text] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+			[alert setTag:indexPath.row];
+			[alert show];
+		}
+    } else if (state == JTTableViewCellEditingStateRight) {
+        // An example to retain the cell at commiting at JTTableViewCellEditingStateRight
+		if (![[[[self nowAssignments] objectAtIndex:indexPath.row] objectForKey:kASSIGNMENTCOMPLETE] boolValue]) {
+			NSMutableDictionary *assignment = [[[self nowAssignments] objectAtIndex:indexPath.row] mutableCopy];
+			[assignment setObject:[NSNumber numberWithBool:YES] forKey:kASSIGNMENTCOMPLETE];
+			[[self nowAssignments] removeObjectAtIndex:indexPath.row];
+			[[self otherAssignments] addObject:assignment];
+			
+			[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
+			[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
+			
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
+		} else {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"确认删除作业: 「%@」", [(id)[[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath] assignmentName].text] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+			[alert setTag:indexPath.row];
+			[alert show];
+		}
+    } else {
+        // JTTableViewCellEditingStateMiddle shouldn't really happen in
+        // - [JTTableViewGestureDelegate gestureRecognizer:commitEditingState:forRowAtIndexPath:]
+    }
+    [tableView endUpdates];
+	
+    // Row color needs update after datasource changes, reload it.
+    [tableView performSelector:@selector(reloadVisibleRowsExceptIndexPath:) withObject:indexPath afterDelay:JTTableViewRowAnimationDuration];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == 1) {
+		[[self nowAssignments] removeObjectAtIndex:alertView.tag];
+		[[self nowAssignmentsTableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:alertView.tag inSection:0]] withRowAnimation:[completeSegmentedControl selectedSegmentIndex] == COMPLETE ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
+		[[NSUserDefaults standardUserDefaults] setObject:[self nowAssignments] forKey:[completeSegmentedControl selectedSegmentIndex] == COMPLETE ? kCOMPLETEASSIGNMENTS : kASSIGNMENTS];
+	}	
 }
 		
 @end

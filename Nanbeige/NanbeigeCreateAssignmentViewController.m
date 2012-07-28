@@ -68,7 +68,7 @@
 	}
 	weeksData = ASSIGNMENTDDLWEAKS;
 	
-	if ([self.assignment objectForKey:kASSIGNMENTHASIMAGE]) {
+	if ([[self.assignment objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
 		self.imageView.image = [NSKeyedUnarchiver unarchiveObjectWithData:[self.assignment objectForKey:kASSIGNMENTIMAGE]];
 	}
 	
@@ -308,6 +308,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	}
 	
 	if (assignmentIndex == -1) {
+		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTCOMPLETE];
 		[assignments addObject:self.assignment];
 		[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
 	} else {

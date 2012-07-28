@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NanbeigeAssignmentNoImageCell.h"
 
-@interface NanbeigeAssignmentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NanbeigeAssignmentCellDelegate>
+@interface NanbeigeAssignmentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NanbeigeAssignmentCellDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) NSMutableArray *assignments;
 @property (strong, nonatomic) NSMutableArray *completeAssignments;
 @property (strong, nonatomic) NSMutableDictionary *nibsRegistered;

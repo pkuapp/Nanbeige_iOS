@@ -41,7 +41,7 @@
 		  withBarButtonItem:(UIBarButtonItem *)barButtonItem
 	   forPopoverController:(UIPopoverController *)pc
 {
-	barButtonItem.title = [[(UINavigationController *)[self selectedViewController] topViewController] title];
+	barButtonItem.title = @"仪表盘";//[[(UINavigationController *)[self selectedViewController] topViewController] title];
 	[self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
 }
 - (void)splitViewController:(UISplitViewController *)svc
@@ -67,6 +67,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+	[super viewDidAppear:animated];
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		if ([defaults valueForKey:kWEIBOIDKEY] == nil && 

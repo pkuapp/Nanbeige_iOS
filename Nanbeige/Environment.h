@@ -71,8 +71,9 @@
 #define kASSIGNMENTIMAGE @"assignment_image"
 #define kASSIGNMENTCOURSE @"assignment_course"
 #define kASSIGNMENTDESCRIPTION @"assignment_description"
-#define kASSIGNMENTDDLSTR @"assignment_ddl_str"
+#define kASSIGNMENTCOMPLETE @"assignment_complete"
 
+#define kASSIGNMENTDDLSTR @"assignment_ddl_str"
 #define kASSIGNMENTDDLMODE @"assignment_ddl_mode"
 #define kASSIGNMENTDDLDATE @"assignment_ddl_date"
 #define kASSIGNMENTDDLWEEKS @"assignment_ddl_weeks"

@@ -258,5 +258,6 @@
 {
 	NSError *error = [request error];
 	NSLog(@"%@", error);
+	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 }
 @end
