@@ -1,0 +1,33 @@
+{
+	"grouped": true,
+	"title": "用 Email 地址登录",
+    "controllerName": "NanbeigeEmailLoginViewController",
+	"sections": [
+				 {
+				 "elements": [
+							  {
+							  "type":"QEntryElement",
+							  "placeholder":"Email",
+							  "bind":"textValue:email",
+							  "autocorrectionType":"No"
+							  },
+							  {
+							  "type":"QEntryElement",
+							  "placeholder":"密码",
+							  "secureTextEntry":true,
+							  "bind":"textValue:password"
+							  }
+							  ]
+				 },
+				 {
+				 "title":"还未注册？",
+				 "elements":[
+							 {
+							 "type":"NanbeigeLabelButtonElement",
+							 "title":"用 Email 地址注册",
+							 "controllerAction":"onEmailSignup:"
+							 }
+							 ]
+				 }
+				 ]
+}

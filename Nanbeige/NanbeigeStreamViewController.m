@@ -41,13 +41,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.navigationController.navigationBar.backgroundColor = navBarBgColor;
-	self.tableView.backgroundColor = tableBgColor;
+	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	self.tableView.backgroundColor = tableBgColor1;
 
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
 		view.delegate = self;
-		[view setBackgroundColor:tableBgColor];
+		[view setBackgroundColor:tableBgColor1];
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
 	}

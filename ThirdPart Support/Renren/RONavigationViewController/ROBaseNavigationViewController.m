@@ -34,7 +34,7 @@
         
         _navigationBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _navigationBar.backgroundColor = navBarBgColor;
+        _navigationBar.tintColor = navBarBgColor1;
         
         [self.view addSubview:_navigationBar];
         

@@ -64,9 +64,9 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([defaults valueForKey:kWEIBOIDKEY] != nil || 
 		[defaults valueForKey:kRENRENIDKEY] != nil ||
-		[defaults valueForKey:kNANBEIGEIDKEY] != nil) {
-		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kNANBEIGEIDKEY] != nil) {
-			[defaults setValue:[defaults valueForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+		[defaults valueForKey:kNANBEIGEEMAILKEY] != nil) {
+		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kNANBEIGEEMAILKEY] != nil) {
+			[defaults setValue:[defaults valueForKey:kNANBEIGEEMAILKEY] forKey:kACCOUNTIDKEY];
 			[defaults setValue:[defaults valueForKey:kNANBEIGEPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
 		}
 		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kRENRENIDKEY] != nil) {
@@ -404,9 +404,9 @@
 	}
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
+	[defaults setValue:usernameTextField.text forKey:kNANBEIGEEMAILKEY];
 	[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
-	[defaults setValue:[defaults valueForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+	[defaults setValue:[defaults valueForKey:kNANBEIGEEMAILKEY] forKey:kACCOUNTIDKEY];
 	[defaults setValue:[defaults valueForKey:kNANBEIGEPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
 	[self didLogin];
 }

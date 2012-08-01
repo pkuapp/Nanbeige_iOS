@@ -1,0 +1,32 @@
+{
+	"grouped": true,
+	"title": "用 Email 地址注册",
+    "controllerName": "NanbeigeEmailSignupViewController",
+	"sections": [
+				 {
+				 "elements": [
+							  {
+							  "type":"QEntryElement",
+							  "placeholder":"Email",
+							  "bind":"textValue:email",
+							  "autocorrectionType":"No"
+							  },
+							  {
+							  "type":"QEntryElement",
+							  "placeholder":"昵称",
+							  "bind":"textValue:nickname"
+							  }
+							  ]
+				 },
+				 {
+				 "elements":[
+							 {
+							 "type":"QEntryElement",
+							 "placeholder":"密码",
+							 "secureTextEntry":true,
+							 "bind":"textValue:password"
+							 }
+							 ]
+				 }
+				 ]
+}

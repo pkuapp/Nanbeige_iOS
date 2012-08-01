@@ -100,14 +100,14 @@
     if (textField == self.passwordTextField) {
         [self.passwordTextField resignFirstResponder];
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
+		[defaults setValue:usernameTextField.text forKey:kNANBEIGEEMAILKEY];
 		[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
 		
 		if (!usernameTextField.text ||
 			[usernameTextField.text isEqualToString:@""] || 
 			!passwordTextField.text ||
 			[passwordTextField.text isEqualToString:@""]) {
-			[defaults removeObjectForKey:kNANBEIGEIDKEY];
+			[defaults removeObjectForKey:kNANBEIGEEMAILKEY];
 			[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
 		}
 		

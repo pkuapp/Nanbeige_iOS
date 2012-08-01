@@ -1,0 +1,40 @@
+{
+	"grouped": true,
+	"title": "完成",
+    "controllerName": "NanbeigeConfirmLoginViewController",
+	"sections": [
+				 
+				 {
+				 "title":"你的身份",
+				 "bind":"iterate:identity",
+				 "elementTemplate": {
+				 "type":"NanbeigeLabelLeftDetailElement",
+				 "bind":"title:title, value:value",
+				 }
+				 },
+				 {
+				 "title":"你的登录凭证",
+				 "bind":"iterate:loginaccount",
+				 "elementTemplate": {
+				 "type":"NanbeigeLabelLeftDetailElement",
+				 "bind":"title:title, value:value",
+				 }
+				 },
+				 {
+				 "bind":"iterate:connectaccount",
+				 "elementTemplate": {
+				 "type":"NanbeigeLabelButtonElement",
+				 "bind":"title:title, value:value",
+				 }
+				 },
+				 {
+				 "elements": [
+							  {
+							  "type":"NanbeigeLabelButtonCenterElement",
+							  "title":"开始使用南北阁",
+							  "controllerAction":"onConfirmLogin:"
+							  }
+							  ]
+				 }
+				 ]
+}

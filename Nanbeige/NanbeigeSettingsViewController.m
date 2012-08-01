@@ -224,7 +224,7 @@
 - (void)setNanbeigeDisplay
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if ([defaults valueForKey:kNANBEIGEIDKEY] != nil) {
+	if ([defaults valueForKey:kNANBEIGEEMAILKEY] != nil) {
 		[self setNanbeigeLogoutButton];
 	}
 }
@@ -233,7 +233,7 @@
 	//TODO
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	nanbeigeCell.textLabel.text = [@"南北阁账号:"stringByAppendingString:
-								[defaults valueForKey:kNANBEIGEIDKEY]];
+								[defaults valueForKey:kNANBEIGEEMAILKEY]];
 	nanbeigeCell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	if (nanbeigeLogOutBtn == nil) {
@@ -252,7 +252,7 @@
 	nanbeigeCell.selectionStyle = UITableViewCellSelectionStyleBlue;
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults removeObjectForKey:kNANBEIGEIDKEY];
+	[defaults removeObjectForKey:kNANBEIGEEMAILKEY];
 	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
 }
 
@@ -334,7 +334,7 @@
 			break;
 		case 1:
 			if (row == 0) {
-				if ([[NSUserDefaults standardUserDefaults] valueForKey:kNANBEIGEIDKEY] == nil)
+				if ([[NSUserDefaults standardUserDefaults] valueForKey:kNANBEIGEEMAILKEY] == nil)
 					[self performSegueWithIdentifier:@"NanbeigeLoginSegue" sender:self];
 			} else if (row == 1) {
 				[self performSegueWithIdentifier:@"NanbeigeSignupSegue" sender:self];
@@ -481,7 +481,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults removeObjectForKey:kITSIDKEY];
 	[defaults removeObjectForKey:kITSPASSWORDKEY];
-	[defaults removeObjectForKey:kNANBEIGEIDKEY];
+	[defaults removeObjectForKey:kNANBEIGEEMAILKEY];
 	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
 	[defaults removeObjectForKey:kACCOUNTIDKEY];
 	[defaults removeObjectForKey:kACCOUNTPASSWORDKEY];

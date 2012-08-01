@@ -72,7 +72,7 @@
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		if ([defaults valueForKey:kWEIBOIDKEY] == nil && 
 			[defaults valueForKey:kRENRENIDKEY] == nil &&
-			[defaults valueForKey:kNANBEIGEIDKEY] == nil) {
+			[defaults valueForKey:kNANBEIGEEMAILKEY] == nil) {
 			NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
 			[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];;
 		}

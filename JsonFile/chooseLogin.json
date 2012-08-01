@@ -1,0 +1,32 @@
+{
+	"grouped": true,
+	"title": "欢迎使用南北阁",
+    "controllerName": "NanbeigeChooseLoginViewController",
+	"sections": [
+				 {
+				 "title":"登录南北阁",
+				 "elements": [
+							  {
+							  "type":"NanbeigeLabelButtonElement",
+							  "title":"人人网",
+							  "controllerAction":"onRenrenLogin:"
+							  },
+							  {
+							  "type":"NanbeigeLabelButtonElement",
+							  "title":"新浪微博",
+							  "controllerAction":"onWeiboLogin:"
+							  }
+							  ]
+				 },
+				 {
+				 "title":"也可使用",
+				 "elements":[
+							 {
+							 "type":"NanbeigeLabelButtonElement",
+							 "title":"Email 地址",
+							 "controllerAction":"onEmailLogin:"
+							 }
+							 ]
+				 }
+				 ]
+}

@@ -1,0 +1,15 @@
+{
+	"grouped": true,
+	"title": "选择你的学校",
+    "controllerName": "NanbeigeChooseSchoolViewController",
+	"sections": [
+				 {
+				 "bind":"iterate:university",
+				 "elementTemplate": {
+					"type":"NanbeigeLabelButtonElement",
+					"bind":"title:name, value:id",
+					"controllerAction":"onChooseSchool:"
+					}
+				 }
+				 ]
+}

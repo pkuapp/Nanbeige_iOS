@@ -35,14 +35,15 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([defaults valueForKey:kWEIBOIDKEY] == nil && 
 		[defaults valueForKey:kRENRENIDKEY] == nil &&
-		[defaults valueForKey:kNANBEIGEIDKEY] == nil) {
-		NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-		[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];;
+		[defaults valueForKey:kNANBEIGEEMAILKEY] == nil) {
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kACCOUNTIDKEY];
 	}
 	
 	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
 		[self performSegueWithIdentifier:@"HasLoginSegue" sender:self];
 	} else {
+		NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+		[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 		[self performSegueWithIdentifier:@"LoginSegue" sender:self];	
 	}
 }
