@@ -55,6 +55,7 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
 	self.title = TITLE_STREAM;
+	self.streams = [[NSUserDefaults standardUserDefaults] valueForKey:kCOURSES];
 }
 
 - (void)viewDidUnload
@@ -252,6 +253,7 @@
 											 options:NSJSONWritingPrettyPrinted
 											   error:nil];
 	self.streams = res;
+	[[NSUserDefaults standardUserDefaults] setValue:res forKey:kCOURSES];
 	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 }
 - (void)requestFailed:(ASIHTTPRequest *)request

@@ -1,44 +1,27 @@
 //
 //  Course.m
-//  iOSOne
+//  Nanbeige
 //
-//  Created by 昊天 吴 on 12-4-23.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by ZongZiWang on 12-8-1.
+//  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
 #import "Course.h"
 #import "AppUser.h"
-#import "Assignment.h"
-#import "Comment.h"
-#import "School.h"
+#import "Lesson.h"
 
 
 @implementation Course
 
-@dynamic place;
-@dynamic day4;
-@dynamic time;
-@dynamic courseid;
-@dynamic day2;
-@dynamic day7;
-@dynamic txType;
-@dynamic name;
-@dynamic time_test;
-@dynamic day5;
-@dynamic teachername;
-@dynamic id;
-@dynamic SchoolCode;
-@dynamic day3;
-@dynamic day1;
+@dynamic semester_id;
 @dynamic credit;
-@dynamic rawplace;
-@dynamic day6;
-@dynamic Coursetype;
-@dynamic classnum;
-@dynamic serverUser;
-@dynamic localUser;
-@dynamic school;
-@dynamic localAssignment;
-@dynamic commentset;
+@dynamic courseid;
+@dynamic ta;
+@dynamic week;
+@dynamic teacher;
+@dynamic orig_id;
+@dynamic name;
+@dynamic lessonset;
+@dynamic appuser;
 
 @end

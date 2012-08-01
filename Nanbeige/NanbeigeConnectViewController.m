@@ -9,6 +9,7 @@
 #import "NanbeigeConnectViewController.h"
 #import "Environment.h"
 #import "ROConnect.h"
+#import "ASIFormDataRequest.h"
 
 #define kWBSDKDemoAppKey @"1362082242"
 #define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"
@@ -28,6 +29,7 @@
 	BOOL bGetRenrenName;
     BOOL _isKeyboardHidden;
 	CGRect originalTextViewFrame;
+	ASIFormDataRequest *loginRequest;
 }
 
 @end
@@ -227,12 +229,15 @@
 		[self.passwordTextField becomeFirstResponder];
 		return ;
     }
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
-	[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
-	[defaults setValue:[defaults valueForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-	[defaults setValue:[defaults valueForKey:kNANBEIGEPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
-	[self didLogin];
+	
+	loginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginEmail];
+	
+	[loginRequest addPostValue:usernameTextField.text forKey:kAPIEMAIL];
+	[loginRequest addPostValue:passwordTextField.text forKey:kAPIPASSWORD];
+	[loginRequest setDelegate:self];
+	[loginRequest setTimeOutSeconds:20];
+	[loginRequest startAsynchronous];
+	
 }
 
 - (IBAction)renrenLogin:(id)sender {
@@ -386,5 +391,31 @@
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:errorCode message:errorMsg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alert show];
 }
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+	NSData *responseData = [request responseData];
+	id res = [NSJSONSerialization JSONObjectWithData:responseData
+											 options:NSJSONWritingPrettyPrinted
+											   error:nil];
+	if ([res objectForKey:kAPIERROR]) {
+		[self showAlert:[res objectForKey:kAPIERROR]];
+		return ;
+	}
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
+	[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
+	[defaults setValue:[defaults valueForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+	[defaults setValue:[defaults valueForKey:kNANBEIGEPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
+	[self didLogin];
+}
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+	NSError *error = [request error];
+	NSLog(@"%@", error);
+	[self showAlert:@"网络连接错误"];
+}
+
 
 @end

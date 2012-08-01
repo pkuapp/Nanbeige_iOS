@@ -8,10 +8,8 @@
 
 #import "NanbeigeLoginCoursesViewController.h"
 #import "NanbeigeAppDelegate.h"
-#import "AppUser.h"
 #import "ASIFormDataRequest.h"
 #import "ASIHTTPRequest.h"
-#import "Course.h"
 #import "Environment.h"
 #import "MBProgressHUD.h"
 #import "SBJson.h"

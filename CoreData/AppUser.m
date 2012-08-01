@@ -1,22 +1,19 @@
 //
 //  AppUser.m
-//  iOSOne
+//  Nanbeige
 //
-//  Created by  on 11-10-6.
-//  Copyright (c) 2011年 __MyCompanyName__. All rights reserved.
+//  Created by ZongZiWang on 12-8-1.
+//  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
 #import "AppUser.h"
-
+#import "Course.h"
 
 
 @implementation AppUser
-@dynamic coursesid;
-@dynamic coursesname;
-@dynamic coursespassword;
 
-@dynamic assignset;
-@dynamic courses;
-@dynamic localcourses;
+@dynamic appuserid;
+@dynamic nickname;
+@dynamic courseset;
 
 @end

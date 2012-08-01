@@ -16,7 +16,6 @@
 #import "NanbeigeIPGateHelper.h"
 #import "Environment.h"
 #import "ModalAlert.h"
-#import "AppUser.h"
 #import "NanbeigeItsViewController.h"
 #import "NanbeigeAssignmentViewController.h"
 #import "NanbeigeLine2Button2Cell.h"

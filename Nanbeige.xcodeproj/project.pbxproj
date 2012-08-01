@@ -14,14 +14,6 @@
 		2601D1CA15AE9DE20066C1FD /* widget_2line_0btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2601D1C515AE9DE20066C1FD /* widget_2line_0btn.png */; };
 		2601D1CB15AE9DE20066C1FD /* widget_1line_0btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2601D1C615AE9DE20066C1FD /* widget_1line_0btn.png */; };
 		2601D1CC15AE9DE20066C1FD /* widget_3line_2btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2601D1C715AE9DE20066C1FD /* widget_3line_2btn.png */; };
-		2601D1DE15AEA36E0066C1FD /* AppUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1CE15AEA36E0066C1FD /* AppUser.m */; };
-		2601D1DF15AEA36E0066C1FD /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1D015AEA36E0066C1FD /* Assignment.m */; };
-		2601D1E015AEA36E0066C1FD /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1D215AEA36E0066C1FD /* Comment.m */; };
-		2601D1E115AEA36E0066C1FD /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1D415AEA36E0066C1FD /* Course.m */; };
-		2601D1E215AEA36E0066C1FD /* ModelsAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1D615AEA36E0066C1FD /* ModelsAddon.m */; };
-		2601D1E315AEA36E0066C1FD /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1D815AEA36E0066C1FD /* Place.m */; };
-		2601D1E415AEA36E0066C1FD /* Reply.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1DA15AEA36E0066C1FD /* Reply.m */; };
-		2601D1E515AEA36E0066C1FD /* School.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1DC15AEA36E0066C1FD /* School.m */; };
 		2601D1E615AEA36E0066C1FD /* SNSData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 2601D1DD15AEA36E0066C1FD /* SNSData.xcdatamodel */; };
 		2601D2B015AEA9BE0066C1FD /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D29415AEA9BE0066C1FD /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2601D2B115AEA9BE0066C1FD /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D29715AEA9BE0066C1FD /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -41,6 +33,9 @@
 		261727C315C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */; };
 		261727C515C1B0DE00B12A0B /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C415C1B0DE00B12A0B /* Default-Landscape~ipad.png */; };
 		261727C715C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C615C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png */; };
+		26283EB415C7EC16003C1BC7 /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 26283EB315C7EC16003C1BC7 /* Lesson.m */; };
+		26283EBF15C800D1003C1BC7 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 26283EBE15C800D1003C1BC7 /* Course.m */; };
+		26283EC215C8E67B003C1BC7 /* AppUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 26283EC115C8E67B003C1BC7 /* AppUser.m */; };
 		262AD48815AA7D5D000C2EF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48715AA7D5D000C2EF7 /* UIKit.framework */; };
 		262AD48A15AA7D5D000C2EF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48915AA7D5D000C2EF7 /* Foundation.framework */; };
 		262AD48C15AA7D5D000C2EF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262AD48B15AA7D5D000C2EF7 /* CoreGraphics.framework */; };
@@ -402,22 +397,6 @@
 		2601D1C515AE9DE20066C1FD /* widget_2line_0btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_2line_0btn.png; sourceTree = "<group>"; };
 		2601D1C615AE9DE20066C1FD /* widget_1line_0btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_1line_0btn.png; sourceTree = "<group>"; };
 		2601D1C715AE9DE20066C1FD /* widget_3line_2btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_3line_2btn.png; sourceTree = "<group>"; };
-		2601D1CD15AEA36E0066C1FD /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUser.h; path = CoreData/AppUser.h; sourceTree = "<group>"; };
-		2601D1CE15AEA36E0066C1FD /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUser.m; path = CoreData/AppUser.m; sourceTree = "<group>"; };
-		2601D1CF15AEA36E0066C1FD /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = CoreData/Assignment.h; sourceTree = "<group>"; };
-		2601D1D015AEA36E0066C1FD /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = CoreData/Assignment.m; sourceTree = "<group>"; };
-		2601D1D115AEA36E0066C1FD /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = CoreData/Comment.h; sourceTree = "<group>"; };
-		2601D1D215AEA36E0066C1FD /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = CoreData/Comment.m; sourceTree = "<group>"; };
-		2601D1D315AEA36E0066C1FD /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = CoreData/Course.h; sourceTree = "<group>"; };
-		2601D1D415AEA36E0066C1FD /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = CoreData/Course.m; sourceTree = "<group>"; };
-		2601D1D515AEA36E0066C1FD /* ModelsAddon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelsAddon.h; path = CoreData/ModelsAddon.h; sourceTree = "<group>"; };
-		2601D1D615AEA36E0066C1FD /* ModelsAddon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelsAddon.m; path = CoreData/ModelsAddon.m; sourceTree = "<group>"; };
-		2601D1D715AEA36E0066C1FD /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = CoreData/Place.h; sourceTree = "<group>"; };
-		2601D1D815AEA36E0066C1FD /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = CoreData/Place.m; sourceTree = "<group>"; };
-		2601D1D915AEA36E0066C1FD /* Reply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reply.h; path = CoreData/Reply.h; sourceTree = "<group>"; };
-		2601D1DA15AEA36E0066C1FD /* Reply.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reply.m; path = CoreData/Reply.m; sourceTree = "<group>"; };
-		2601D1DB15AEA36E0066C1FD /* School.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = School.h; path = CoreData/School.h; sourceTree = "<group>"; };
-		2601D1DC15AEA36E0066C1FD /* School.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = School.m; path = CoreData/School.m; sourceTree = "<group>"; };
 		2601D1DD15AEA36E0066C1FD /* SNSData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = SNSData.xcdatamodel; path = CoreData/SNSData.xcdatamodel; sourceTree = "<group>"; };
 		2601D29315AEA9BE0066C1FD /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		2601D29415AEA9BE0066C1FD /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
@@ -453,6 +432,12 @@
 		261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		261727C415C1B0DE00B12A0B /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		261727C615C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		26283EB215C7EC16003C1BC7 /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lesson.h; path = CoreData/Lesson.h; sourceTree = "<group>"; };
+		26283EB315C7EC16003C1BC7 /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = CoreData/Lesson.m; sourceTree = "<group>"; };
+		26283EBD15C800D1003C1BC7 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = CoreData/Course.h; sourceTree = "<group>"; };
+		26283EBE15C800D1003C1BC7 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = CoreData/Course.m; sourceTree = "<group>"; };
+		26283EC015C8E67B003C1BC7 /* AppUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUser.h; path = CoreData/AppUser.h; sourceTree = "<group>"; };
+		26283EC115C8E67B003C1BC7 /* AppUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUser.m; path = CoreData/AppUser.m; sourceTree = "<group>"; };
 		262AD48315AA7D5D000C2EF7 /* Nanbeige.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nanbeige.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		262AD48715AA7D5D000C2EF7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		262AD48915AA7D5D000C2EF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1103,23 +1088,13 @@
 		2601D07115ADAF6A0066C1FD /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				2601D1CD15AEA36E0066C1FD /* AppUser.h */,
-				2601D1CE15AEA36E0066C1FD /* AppUser.m */,
-				2601D1CF15AEA36E0066C1FD /* Assignment.h */,
-				2601D1D015AEA36E0066C1FD /* Assignment.m */,
-				2601D1D115AEA36E0066C1FD /* Comment.h */,
-				2601D1D215AEA36E0066C1FD /* Comment.m */,
-				2601D1D315AEA36E0066C1FD /* Course.h */,
-				2601D1D415AEA36E0066C1FD /* Course.m */,
-				2601D1D515AEA36E0066C1FD /* ModelsAddon.h */,
-				2601D1D615AEA36E0066C1FD /* ModelsAddon.m */,
-				2601D1D715AEA36E0066C1FD /* Place.h */,
-				2601D1D815AEA36E0066C1FD /* Place.m */,
-				2601D1D915AEA36E0066C1FD /* Reply.h */,
-				2601D1DA15AEA36E0066C1FD /* Reply.m */,
-				2601D1DB15AEA36E0066C1FD /* School.h */,
-				2601D1DC15AEA36E0066C1FD /* School.m */,
 				2601D1DD15AEA36E0066C1FD /* SNSData.xcdatamodel */,
+				26283EC015C8E67B003C1BC7 /* AppUser.h */,
+				26283EC115C8E67B003C1BC7 /* AppUser.m */,
+				26283EBD15C800D1003C1BC7 /* Course.h */,
+				26283EBE15C800D1003C1BC7 /* Course.m */,
+				26283EB215C7EC16003C1BC7 /* Lesson.h */,
+				26283EB315C7EC16003C1BC7 /* Lesson.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -2554,14 +2529,6 @@
 				26E96D7F15AC1644005353D4 /* NanbeigeWeiboPostViewController.m in Sources */,
 				2601D06215ADACEF0066C1FD /* NanbeigeIPGateHelper.m in Sources */,
 				2601D0E715AE62CB0066C1FD /* SystemHelper.m in Sources */,
-				2601D1DE15AEA36E0066C1FD /* AppUser.m in Sources */,
-				2601D1DF15AEA36E0066C1FD /* Assignment.m in Sources */,
-				2601D1E015AEA36E0066C1FD /* Comment.m in Sources */,
-				2601D1E115AEA36E0066C1FD /* Course.m in Sources */,
-				2601D1E215AEA36E0066C1FD /* ModelsAddon.m in Sources */,
-				2601D1E315AEA36E0066C1FD /* Place.m in Sources */,
-				2601D1E415AEA36E0066C1FD /* Reply.m in Sources */,
-				2601D1E515AEA36E0066C1FD /* School.m in Sources */,
 				2601D1E615AEA36E0066C1FD /* SNSData.xcdatamodel in Sources */,
 				2601D2B015AEA9BE0066C1FD /* ASIAuthenticationDialog.m in Sources */,
 				2601D2B115AEA9BE0066C1FD /* ASIDataCompressor.m in Sources */,
@@ -2603,6 +2570,9 @@
 				26665E4415C3CE7700E4FF9E /* JTTableViewGestureRecognizer.m in Sources */,
 				26665E4615C3CE7700E4FF9E /* TransformableTableViewCell.m in Sources */,
 				26665E4715C3CE7700E4FF9E /* UIColor+JTGestureBasedTableViewHelper.m in Sources */,
+				26283EB415C7EC16003C1BC7 /* Lesson.m in Sources */,
+				26283EBF15C800D1003C1BC7 /* Course.m in Sources */,
+				26283EC215C8E67B003C1BC7 /* AppUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

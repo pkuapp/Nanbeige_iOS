@@ -11,12 +11,9 @@
 #import <CoreData/CoreData.h>
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
-#import "AppUser.h"
 #import "SBJson.h"
 #import "AppUserDelegateProtocol.h"
 #import "SystemHelper.h"
-#import "School.h"
-#import "Course.h"
 #import "ModalAlert.h"
 
 @interface NanbeigeAppDelegate(Private)
@@ -44,7 +41,7 @@
     return test_data;
 }
 #pragma mark Private method
-
+/*
 - (NSString *)parsedLoginError:(NSString *)loginmessage {
     if ([loginmessage rangeOfString:@"图形"].location != NSNotFound) {
 		//        NSLog(@"%d",[loginmessage rangeOfRegex:@"图形"].location);
@@ -82,7 +79,7 @@
     [request startAsynchronous];
 }
 
-
+*/
 #pragma mark - UserControl Setup
 - (MBProgressHUD *)progressHub {
     if (progressHub == nil) {
@@ -95,7 +92,7 @@
     }
     return progressHub;
 }
-
+/*
 -(AppUser *)appUser
 {
     if (nil == appUser) {
@@ -380,7 +377,7 @@
 }
 
 - (void)generateCoreDataBase {
-    /**/
+    
     NSFileManager *fmanager = [NSFileManager defaultManager];
     [fmanager removeItemAtPath:pathsql2 error:nil];
     
@@ -450,9 +447,9 @@
         ccourse.school = [schoolDict objectForKey:ccourse.SchoolCode];
         
     }
-    if (![context save:&error]) NSLog(@"%@",[error localizedDescription]);/**/
+    if (![context save:&error]) NSLog(@"%@",[error localizedDescription]);
 }
-
+*/
 #pragma mark - Core Data Setup
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
