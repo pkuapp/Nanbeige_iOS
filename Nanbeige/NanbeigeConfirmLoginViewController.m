@@ -7,10 +7,13 @@
 //
 
 #import "NanbeigeConfirmLoginViewController.h"
+#import "NanbeigeAccountManager.h"
 #import "Environment.h"
-#import "ASIFormDataRequest.h"
 
-@interface NanbeigeConfirmLoginViewController ()
+@interface NanbeigeConfirmLoginViewController () <AccountManagerDelegate> {
+	NanbeigeAccountManager *accountManager;
+	NSMutableDictionary *actionSheetDict;
+}
 
 @end
 
@@ -20,7 +23,7 @@
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
-	self.quickDialogTableView.bounces = YES;
+    self.quickDialogTableView.bounces = YES;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -32,10 +35,22 @@
 	return self;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	    return YES;
+	} else {
+	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	}
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	
+	accountManager = [[NanbeigeAccountManager alloc] initWithViewController:self];
+	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -46,9 +61,15 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAME];
+	[self refreshDisplay];
+}
+
+- (void)refreshDataSource
+{
+	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY];
 	if (!nickname) nickname = @"未命名";
-	NSString *university = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYNAME];
+	NSString *university = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYNAMEKEY];
+	if (!university) university = @"未选校";
 	
 	NSMutableArray *loginaccount = [[NSMutableArray alloc] init];
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
@@ -56,34 +77,56 @@
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY])
 		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Email", @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY], @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到南北阁", @"title", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到南北阁", @"title", @"onEmailLogin:", @"controllerAction", nil]];
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY])
 		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"人人网", @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY], @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到人人网", @"title", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到人人网", @"title", @"onRenrenLogin:", @"controllerAction", nil]];
 	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOIDKEY])
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"新浪微博", @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOIDKEY], @"value", nil]];
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY])
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"新浪微博", @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY], @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到新浪微博", @"title", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到新浪微博", @"title", @"onWeiboLogin:", @"controllerAction", nil]];
 	
 	NSDictionary *dict = @{
-		@"identity": @[
-			@{ @"title" : @"昵称", @"value" : nickname } ,
-			@{ @"title" : @"学校", @"value" : university } ] ,
-		@"loginaccount" : loginaccount,
-		@"connectaccount" : connectaccount};
+	@"identity": @[
+	@{ @"title" : @"昵称", @"value" : nickname } ,
+	@{ @"title" : @"学校", @"value" : university } ] ,
+	@"loginaccount" : loginaccount,
+	@"connectaccount" : connectaccount};
 	[self.root bindToObject:dict];
+	
+}
+- (void)refreshDisplay
+{
+	[self refreshDataSource];
+	[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)onEmailLogin:(id)sender
 {
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    return YES;
-	} else {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	}
+	[self performSegueWithIdentifier:@"EmailLoginSegue" sender:self];
+}
+- (void)onWeiboLogin:(id)sender
+{
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
+	[accountManager weiboLogin];
+}
+- (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
+{
+	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, weibo_token);
+	[self refreshDisplay];
+}
+- (void)onRenrenLogin:(id)sender
+{
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
+	[accountManager renrenLogin];
+}
+- (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
+{
+	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, renren_token);
+	[self refreshDisplay];
 }
 
 - (void)onConfirmLogin:(id)sender
@@ -95,23 +138,42 @@
 		[self loading:YES];
 		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 		
-		ASIFormDataRequest *editRequest = [[ASIFormDataRequest alloc] initWithURL:urlAPIUserEdit];
-		[editRequest setDelegate:self];
-		[editRequest setTimeOutSeconds:20];
+		NSString *password = nil;
+		NSString *nickname = nil;
+		NSNumber *university_id = nil;
+		NSString *weibo_token = nil;
+		
 		if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITUNIVERSITY_ID] boolValue]) {
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITUNIVERSITY_ID];
-			[editRequest addPostValue:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYID] forKey:kAPIUNIVERSITY_ID];
+			university_id = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY];
 		}
 		if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITWEIBO_TOKEN] boolValue]) {
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITWEIBO_TOKEN];
-			[editRequest addPostValue:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY] forKey:kAPIWEIBO_TOKEN];
+			weibo_token = [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY];
+		}
+		if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITNICKNAME] boolValue]) {
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITNICKNAME];
+			nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY];
+		}
+		if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITPASSWORD] boolValue]) {
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITPASSWORD];
+			password = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEPASSWORDKEY];
 		}
 		
-		[editRequest startAsynchronous];
+		[accountManager emailEditWithPassword:password Nickname:nickname UniversityID:university_id WeiboToken:weibo_token];
+		
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
 		[self dismissModalViewControllerAnimated:YES];
 	}
+}
+
+- (void)didEmailEdit {
+	[self loading:NO];
+	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 -(void)showAlert:(NSString*)message{
@@ -121,24 +183,10 @@
 					  cancelButtonTitle:@"确定"
 					  otherButtonTitles:nil] show];
 }
-- (void)requestFinished:(ASIHTTPRequest *)request
+- (void)requestError:(NSString *)errorString
 {
 	[self loading:NO];
-	NSData *responseData = [request responseData];
-	id res = [NSJSONSerialization JSONObjectWithData:responseData
-											 options:NSJSONWritingPrettyPrinted
-											   error:nil];
-	NSLog(@"%@", res);
-	
-	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-	[self dismissModalViewControllerAnimated:YES];
+	[self showAlert:errorString];
 }
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-	[self loading:NO];
-	
-	NSError *error = [request error];
-	NSLog(@"%@", error);
-	[self showAlert:[error description]];
-}
+
 @end

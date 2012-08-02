@@ -23,9 +23,14 @@
 #define urlCourseAll @"http://www.pkucada.org:8082/Server/course/all"
 #define urlCourseCategory @"http://www.pkucada.org:8082/Server/course/category"
 
+#define DEFAULT_TIMEOUT 20
 #define urlAPIUserLoginEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/email/"]
+#define urlAPIUserLoginWeibo [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/weibo/"]
+#define urlAPIUserLogout [NSURL URLWithString:@"http://api.pkuapp.com:333/user/logout/"]
 #define urlAPIUserRegEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/email/"]
 #define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:333/user/edit/"]
+#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
+#define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
 #define kAPIEMAIL @"email"
 #define kAPIPASSWORD @"password"
 #define kAPINICKNAME @"nickname"
@@ -33,10 +38,10 @@
 #define kAPIUNIVERSITY @"university"
 #define kAPIUNIVERSITY_ID @"university_id"
 #define kAPIWEIBO_TOKEN @"weibo_token"
-#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
-#define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
 #define kAPIID @"id"
-#define kAPIName @"name"
+#define kAPINAME @"name"
+#define kAPITOKEN @"token"
+#define kAPISCREEN_NAME @"screen_name"
 
 #define pathLocation [NSHomeDirectory() stringByAppendingString:@"/Documents/location.plist"]
 #define pathUserPlist [NSHomeDirectory() stringByAppendingString:@"/Documents/User.plist"]
@@ -80,20 +85,20 @@
 #define kITSPASSWORDKEY @"itspassword"
 
 #define kACCOUNTIDKEY @"accoundid"
-#define kACCOUNTPASSWORDKEY @"accoundpassword"
+#define kACCOUNTNICKNAMEKEY @"accountnickname"
 #define kACCOUNTEDIT @"accountedit"
 #define kACCOUNTEDITUNIVERSITY_ID @"accountedituniversity_id"
 #define kACCOUNTEDITWEIBO_TOKEN @"accounteditweibo_token"
 #define kACCOUNTEDITNICKNAME @"accounteditnickname"
 #define kACCOUNTEDITPASSWORD @"accounteditpassword"
 
-#define kUNIVERSITYID @"universityid"
-#define kUNIVERSITYNAME @"universityname"
+#define kUNIVERSITYIDKEY @"universityid"
+#define kUNIVERSITYNAMEKEY @"universityname"
 
 #define kNANBEIGEEMAILKEY @"nanbeigeemail"
 #define kNANBEIGEPASSWORDKEY @"nanbeigepassword"
 #define kNANBEIGEIDKEY @"nanbeigeid"
-#define kNANBEIGENICKNAME @"nickname"
+#define kNANBEIGENICKNAMEKEY @"nickname"
 
 #define kASSIGNMENTS @"assignments"
 #define kCOMPLETEASSIGNMENTS @"complete_assignments"
@@ -125,3 +130,5 @@
 
 #define kWBSDKDemoAppKey @"1362082242"
 #define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"
+
+#define CONNECTMETHODS @{@"连接到人人网":@"onRenrenLogin:", @"连接到新浪微博":@"onWeiboLogin:", @"连接到南北阁":@"onEmailLogin:"}

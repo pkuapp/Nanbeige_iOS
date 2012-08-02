@@ -152,7 +152,7 @@
 	NSURL *url = [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
-	[request setTimeOutSeconds:20];
+	[request setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[request startAsynchronous];
 }
 

@@ -86,6 +86,7 @@
  * @return 当前session有效,返回YES,否则, NO.
  */
 -(BOOL)isSessionValid;
+-(void)delUserSessionInfo;
 
 /*
  * 取得登录用户的userID

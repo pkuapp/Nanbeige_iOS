@@ -484,7 +484,6 @@
 	[defaults removeObjectForKey:kNANBEIGEEMAILKEY];
 	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
 	[defaults removeObjectForKey:kACCOUNTIDKEY];
-	[defaults removeObjectForKey:kACCOUNTPASSWORDKEY];
 	[self dismissModalViewControllerAnimated:YES];
 }
 @end

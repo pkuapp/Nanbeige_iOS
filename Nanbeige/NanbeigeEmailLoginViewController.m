@@ -8,11 +8,12 @@
 
 #import "NanbeigeEmailLoginViewController.h"
 #import "Environment.h"
-#import "ASIFormDataRequest.h"
+#import "NanbeigeAccountManager.h"
 
-@interface NanbeigeEmailLoginViewController () {
+@interface NanbeigeEmailLoginViewController () <AccountManagerDelegate> {
 	NSString *email;
 	NSString *password;
+	NanbeigeAccountManager *accountManager;
 }
 
 @end
@@ -41,6 +42,11 @@
 	// Do any additional setup after loading the view.
 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:self action:@selector(onLogin:)];
 	self.navigationItem.rightBarButtonItem = loginButton;
+	
+	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	
+	accountManager = [[NanbeigeAccountManager alloc] initWithViewController:self];
+	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -81,13 +87,7 @@
 		return ;
     }
 	
-	ASIFormDataRequest *loginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginEmail];
-	
-	[loginRequest addPostValue:email forKey:kAPIEMAIL];
-	[loginRequest addPostValue:password forKey:kAPIPASSWORD];
-	[loginRequest setDelegate:self];
-	[loginRequest setTimeOutSeconds:20];
-	[loginRequest startAsynchronous];
+	[accountManager emailLoginWithEmail:email Password:password];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
@@ -95,14 +95,25 @@
 
 - (void)chooseSchool
 {
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
-	[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
+	if (![[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
+		self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
+		[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
+	} else {
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
+		[self dismissModalViewControllerAnimated:YES];
+	}
 }
 - (void)confirmLogin
 {
-	
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
-	[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
+	if (![[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
+		self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
+		[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
+	} else {
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
+		[self dismissModalViewControllerAnimated:YES];
+	}
 }
 - (void)onEmailSignup:(id)sender
 {
@@ -110,52 +121,22 @@
 	[self performSegueWithIdentifier:@"EmailSignupSegue" sender:self];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request
+- (void)didEmailLoginWithID:(NSNumber *)nanbeigeid
+				   Nickname:(NSString *)nickname
+			   UniversityID:(NSNumber *)university_id
+			 UniversityName:(NSString *)university_name
 {
 	[self loading:NO];
-	NSData *responseData = [request responseData];
-	id res = [NSJSONSerialization JSONObjectWithData:responseData
-											 options:NSJSONWritingPrettyPrinted
-											   error:nil];
-	NSLog(@"%@", res);
-	if ([res objectForKey:kAPIERROR]) {
-		[self showAlert:[res objectForKey:kAPIERROR]];
-		return ;
-	}
-	
-	NSString *nickname = [res objectForKey:kAPINICKNAME];
-	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
-	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:email forKey:kNANBEIGEEMAILKEY];
-	[defaults setValue:password forKey:kNANBEIGEPASSWORDKEY];
-	[defaults setValue:nickname forKey:kNANBEIGENICKNAME];
-	[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
-	
-	if ([res objectForKey:kAPIUNIVERSITY] && [[res objectForKey:kAPIUNIVERSITY] isKindOfClass:[NSDictionary class]]) {
-		[defaults setValue:[[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPIID] forKey:kUNIVERSITYID];
-		[defaults setValue:[[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPIName] forKey:kUNIVERSITYNAME];
+	if (university_id) {
 		[self confirmLogin];
-	} else [self chooseSchool];
+	} else {
+		[self chooseSchool];
+	}
 }
-- (void)requestFailed:(ASIHTTPRequest *)request
+- (void)requestError:(NSString *)errorString
 {
 	[self loading:NO];
-	NSData *responseData = [request responseData];
-	if (responseData) {
-		id res = [NSJSONSerialization JSONObjectWithData:responseData
-												 options:NSJSONWritingPrettyPrinted
-												   error:nil];
-		NSLog(@"%@", res);
-		if ([res objectForKey:kAPIERROR]) {
-			[self showAlert:[res objectForKey:kAPIERROR]];
-			return ;
-		}
-	}
-	
-	NSError *error = [request error];
-	NSLog(@"%@", error);
-	[self showAlert:[error description]];
+	[self showAlert:errorString];
 }
 
 

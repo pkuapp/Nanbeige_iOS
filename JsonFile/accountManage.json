@@ -24,7 +24,7 @@
 				 "bind":"iterate:connectaccount",
 				 "elementTemplate": {
 				 "type":"NanbeigeLabelButtonElement",
-				 "bind":"title:title, value:value",
+				 "bind":"title:title, value:value, controllerAction:controllerAction",
 				 }
 				 },
 				 {

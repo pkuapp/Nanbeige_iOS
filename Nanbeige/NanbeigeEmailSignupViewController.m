@@ -89,7 +89,7 @@
 	[signupRequest addPostValue:nickname forKey:kAPINICKNAME];
 	[signupRequest addPostValue:password forKey:kAPIPASSWORD];
 	[signupRequest setDelegate:self];
-	[signupRequest setTimeOutSeconds:20];
+	[signupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[signupRequest startAsynchronous];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -110,12 +110,18 @@
 	}
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:email forKey:kNANBEIGEEMAILKEY];
-	[defaults setValue:password forKey:kNANBEIGEPASSWORDKEY];
-	[defaults setValue:nickname forKey:kNANBEIGENICKNAME];
-	[defaults setValue:[res objectForKey:kAPIID] forKey:kNANBEIGEIDKEY];
+	[defaults setObject:email forKey:kNANBEIGEEMAILKEY];
+	[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
+	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+	[defaults setObject:[res objectForKey:kAPIID] forKey:kNANBEIGEIDKEY];
 	
-	[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
+	if (![[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
+		[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
+	} else {
+		[defaults setObject:[res objectForKey:kAPIID] forKey:kACCOUNTIDKEY];
+		[defaults setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
+		[self dismissModalViewControllerAnimated:YES];
+	}
 }
 - (void)requestFailed:(ASIHTTPRequest *)request
 {

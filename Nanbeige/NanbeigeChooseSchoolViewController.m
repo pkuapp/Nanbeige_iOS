@@ -42,7 +42,7 @@
 	ASIHTTPRequest *universityRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIUniversity];
 	
 	[universityRequest setDelegate:self];
-	[universityRequest setTimeOutSeconds:20];
+	[universityRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[universityRequest startAsynchronous];
 	
 	[self loading:YES];
@@ -67,8 +67,8 @@
 {
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
 	int universityid = [[[[dict objectForKey:@"university"] objectAtIndex:index] objectForKey:kAPIID] intValue];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:universityid] forKey:kUNIVERSITYID];
-	[[NSUserDefaults standardUserDefaults] setObject:[[[dict objectForKey:@"university"] objectAtIndex:index] objectForKey:kAPIName] forKey:kUNIVERSITYNAME];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:universityid] forKey:kUNIVERSITYIDKEY];
+	[[NSUserDefaults standardUserDefaults] setObject:[[[dict objectForKey:@"university"] objectAtIndex:index] objectForKey:kAPINAME] forKey:kUNIVERSITYNAMEKEY];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITUNIVERSITY_ID];

@@ -12,8 +12,13 @@
 
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
     QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller];
+    
+	for (UIView *subView in cell.contentView.subviews) {
+		if (![subView isEqual:cell.textLabel]) [subView removeFromSuperview];
+	}
     cell.accessoryType = UITableViewCellAccessoryNone;
-    return cell;
+	
+	return cell;
 }
 
 @end

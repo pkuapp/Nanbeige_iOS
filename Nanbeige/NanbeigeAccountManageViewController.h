@@ -7,12 +7,7 @@
 //
 
 #import "QuickDialogController.h"
-#import "Renren.h"
-#import "WBEngine.h"
 
-@interface NanbeigeAccountManageViewController : QuickDialogController <UIActionSheetDelegate, WBEngineDelegate, RenrenDelegate>
-
-@property (strong, nonatomic) WBEngine *weiBoEngine;
-@property (strong, nonatomic) Renren *renrenEngine;
+@interface NanbeigeAccountManageViewController : QuickDialogController <UIActionSheetDelegate>
 
 @end
