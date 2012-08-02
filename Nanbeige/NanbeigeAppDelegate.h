@@ -13,19 +13,14 @@
 #import "Reachability.h"
 #import "AppCoreDataProtocol.h"
 
-@class SwitchViewController,NSPersistentStoreCoordinator,NSManagedObjectContext;
-@class FirstViewController;
-@class MainViewController;
-@class WelcomeViewController;
-@class AppUser;
-@class Course;
+@class NSPersistentStoreCoordinator,NSManagedObjectContext;
 
-@interface NanbeigeAppDelegate : UIResponder <ReachabilityProtocol,UIApplicationDelegate,UINavigationControllerDelegate,AppUserDelegateProtocol,AppUserDelegateProtocol,PABezelHUDDelegate> {
+@interface NanbeigeAppDelegate : UIResponder <ReachabilityProtocol,UIApplicationDelegate,PABezelHUDDelegate> {
 	
 	NSManagedObjectContext *managedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSString *persistentStorePath;
-    AppUser *appUser;
+    //AppUser *appUser;
     
 }
 
@@ -47,7 +42,7 @@
 
 @property (nonatomic, strong, readonly) NSDictionary *test_data;
 
-
+/*
 - (void)logout;
 - (BOOL)authUserForAppWithCoursesID:(NSString *)coursesid coursesPassword:(NSString *)coursespassword coursesCode:(NSString *)coursescode sessionID:(NSString *)sid error:(NSString **)stringError;
 
@@ -56,5 +51,6 @@
 - (NSError *)updateServerCourses;
 - (void)saveCourse:(Course *)_course withDict:(NSDictionary *)dict;
 - (void)netStatusDidChanged:(Reachability *)notice;
+*/
 
 @end

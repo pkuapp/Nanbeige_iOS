@@ -162,38 +162,6 @@
     [authorize startAuthorize];
 }
 
-- (void)logInWithParentViewController:(UIViewController *)viewController
-{
-    if ([self isLoggedIn])
-    {
-        if ([delegate respondsToSelector:@selector(engineAlreadyLoggedIn:)])
-        {
-            [delegate engineAlreadyLoggedIn:self];
-        }
-        if (isUserExclusive)
-        {
-            return;
-        }
-    }
-    
-    WBAuthorize *auth = [[WBAuthorize alloc] initWithAppKey:appKey appSecret:appSecret];
-    [auth setRootViewController:rootViewController];
-    [auth setDelegate:self];
-    self.authorize = auth;
-    [auth release];
-    
-    if ([redirectURI length] > 0)
-    {
-        [authorize setRedirectURI:redirectURI];
-    }
-    else
-    {
-        [authorize setRedirectURI:@"http://"];
-    }
-    
-    [authorize startAuthorizeWithParentViewController:viewController];
-}
-
 - (void)logInUsingUserID:(NSString *)theUserID password:(NSString *)thePassword
 {
     self.userID = theUserID;

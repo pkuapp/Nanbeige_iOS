@@ -95,7 +95,6 @@
 // Log in using OAuth Web authorization.
 // If succeed, engineDidLogIn will be called.
 - (void)logIn;
-- (void)logInWithParentViewController:(UIViewController *)viewController;
 
 // Log in using OAuth Client authorization.
 // If succeed, engineDidLogIn will be called.
