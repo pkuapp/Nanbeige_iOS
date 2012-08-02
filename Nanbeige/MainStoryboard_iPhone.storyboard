@@ -1205,7 +1205,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1046" y="-2939"/>
+            <point key="canvasLocation" x="502" y="-2376"/>
         </scene>
         <!--Nanbeige Confirm Login View Controller-->
         <scene sceneID="eDe-bz-6lx">
@@ -1219,7 +1219,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="YYN-rM-0GB"/>
                     <connections>
-                        <segue destination="jco-gq-ySe" kind="push" identifier="EmailLoginSegue" id="Glh-gg-csn"/>
+                        <segue destination="BCF-Wf-MCZ" kind="modal" identifier="EmailLoginSegue" id="8gD-hD-7cK"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1482,9 +1482,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="Phc-Vt-dKH"/>
                     <connections>
-                        <segue destination="jco-gq-ySe" kind="push" identifier="EmailLoginSegue" id="2Tb-MB-l9P"/>
                         <segue destination="a3y-BC-ZQj" kind="push" identifier="ChooseSchoolSegue" id="X9T-Ph-6ij"/>
                         <segue destination="xpV-9r-sUx" kind="push" identifier="ConfirmLoginSegue" id="b90-Ci-eOA"/>
+                        <segue destination="BCF-Wf-MCZ" kind="modal" identifier="EmailLoginSegue" id="K5v-mQ-ejc"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1501,12 +1501,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="CYw-cm-fdB"/>
-                    <connections>
-                        <segue destination="a3y-BC-ZQj" kind="push" identifier="ChooseSchoolSegue" id="WLw-gr-ptv"/>
-                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="502" y="-2939"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gab-DZ-6JA">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lA8-Uy-Ee1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="BCF-Wf-MCZ" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="auN-c1-eia">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="jco-gq-ySe" kind="relationship" relationship="rootViewController" id="Ocl-pY-BRK"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-36" y="-2376"/>
         </scene>
         <!--Nanbeige Email Login View Controller-->
         <scene sceneID="56t-8L-7ZF">
@@ -1521,12 +1534,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="0vS-Gt-0Zy"/>
                     <connections>
                         <segue destination="FtI-zX-6tu" kind="push" identifier="EmailSignupSegue" id="Za6-eq-QvU"/>
-                        <segue destination="a3y-BC-ZQj" kind="push" identifier="ChooseSchoolSegue" id="rjG-hq-QfI"/>
-                        <segue destination="xpV-9r-sUx" kind="push" identifier="ConfirmLoginSegue" id="dEE-Hu-jdp"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="502" y="-2376"/>
+            <point key="canvasLocation" x="-36" y="-2939"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C6b-b4-Uv2">
@@ -1574,11 +1585,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-36" y="-948"/>
         </scene>
-        <!--Nanbeige Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="15">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
-                <tabBarController id="4" customClass="NanbeigeTabBarController" sceneMemberID="viewController">
+                <tabBarController id="4" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
@@ -1721,9 +1732,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="NanbeigeTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeTabBarController.h"/>
-        </class>
         <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
             <relationships>
@@ -1745,9 +1753,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="b90-Ci-eOA"/>
-        <segue reference="X9T-Ph-6ij"/>
-        <segue reference="Glh-gg-csn"/>
+        <segue reference="xsT-0j-IAw"/>
+        <segue reference="8gD-hD-7cK"/>
         <segue reference="iBD-dN-4lH"/>
         <segue reference="Yqn-fv-amI"/>
     </inferredMetricsTieBreakers>

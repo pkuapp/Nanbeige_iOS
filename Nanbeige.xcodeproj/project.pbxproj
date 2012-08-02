@@ -94,7 +94,6 @@
 		262AD49415AA7D5D000C2EF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD49315AA7D5D000C2EF7 /* main.m */; };
 		262AD49815AA7D5D000C2EF7 /* NanbeigeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD49715AA7D5D000C2EF7 /* NanbeigeAppDelegate.m */; };
 		262AD49F15AA7D86000C2EF7 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 262AD49E15AA7D86000C2EF7 /* MainStoryboard_iPhone.storyboard */; };
-		262AD4A115AA7D93000C2EF7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 262AD4A015AA7D93000C2EF7 /* MainStoryboard_iPad.storyboard */; };
 		262AD4A515AA7DEA000C2EF7 /* NanbeigeStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD4A415AA7DEA000C2EF7 /* NanbeigeStreamViewController.m */; };
 		262AD4AD15AA7E26000C2EF7 /* NanbeigeMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD4AC15AA7E26000C2EF7 /* NanbeigeMainViewController.m */; };
 		262AD63715AA8021000C2EF7 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AD5E215AA8020000C2EF7 /* NSObject+SBJson.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -251,8 +250,6 @@
 		2678C32315B04B80005E1D3E /* NanbeigeLine2Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C32215B04B80005E1D3E /* NanbeigeLine2Button2Cell.m */; };
 		2678C32615B04BB6005E1D3E /* NanbeigeLine3Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C32515B04BB6005E1D3E /* NanbeigeLine3Button0Cell.m */; };
 		2678C32915B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C32815B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m */; };
-		2678C37115B26ADA005E1D3E /* location.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2678C37015B26ADA005E1D3E /* location.plist */; };
-		2678C37415B26AE9005E1D3E /* test_data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2678C37315B26AE9005E1D3E /* test_data.plist */; };
 		2678C38315B2BCBD005E1D3E /* NanbeigeWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2678C38215B2BCBB005E1D3E /* NanbeigeWelcomeViewController.m */; };
 		267D211D15C1A5B200648217 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 267D211C15C1A5B200648217 /* Default.png */; };
 		267D212015C1A5B700648217 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 267D211F15C1A5B700648217 /* Default@2x.png */; };
@@ -447,7 +444,6 @@
 		26A6B69415B41B17006FA15D /* Welcome-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5ED15B41B17006FA15D /* Welcome-button.png */; };
 		26A6B69515B41B17006FA15D /* Welcome-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5EE15B41B17006FA15D /* Welcome-button@2x.png */; };
 		26AB037515C1960F00539AB5 /* NanbeigeStreamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AB037415C1960E00539AB5 /* NanbeigeStreamDetailViewController.m */; };
-		26AB037A15C1A2C800539AB5 /* NanbeigeTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AB037915C1A2C800539AB5 /* NanbeigeTabBarController.m */; };
 		26B9667115BC1C830081002C /* NanbeigeAssignmentDeadlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */; };
 		26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */; };
 		26D5FA1C15AFFB930075B68D /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */; };
@@ -639,7 +635,6 @@
 		262AD49615AA7D5D000C2EF7 /* NanbeigeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NanbeigeAppDelegate.h; sourceTree = "<group>"; };
 		262AD49715AA7D5D000C2EF7 /* NanbeigeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAppDelegate.m; sourceTree = "<group>"; };
 		262AD49E15AA7D86000C2EF7 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		262AD4A015AA7D93000C2EF7 /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		262AD4A315AA7DEA000C2EF7 /* NanbeigeStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeStreamViewController.h; sourceTree = "<group>"; };
 		262AD4A415AA7DEA000C2EF7 /* NanbeigeStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeStreamViewController.m; sourceTree = "<group>"; };
 		262AD4AB15AA7E26000C2EF7 /* NanbeigeMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeMainViewController.h; sourceTree = "<group>"; };
@@ -1045,8 +1040,6 @@
 		2678C32515B04BB6005E1D3E /* NanbeigeLine3Button0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine3Button0Cell.m; sourceTree = "<group>"; };
 		2678C32715B04BE2005E1D3E /* NanbeigeLine3Button2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLine3Button2Cell.h; sourceTree = "<group>"; };
 		2678C32815B04BE2005E1D3E /* NanbeigeLine3Button2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine3Button2Cell.m; sourceTree = "<group>"; };
-		2678C37015B26ADA005E1D3E /* location.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = location.plist; sourceTree = "<group>"; };
-		2678C37315B26AE9005E1D3E /* test_data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test_data.plist; sourceTree = "<group>"; };
 		2678C38115B2BCB9005E1D3E /* NanbeigeWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWelcomeViewController.h; sourceTree = "<group>"; };
 		2678C38215B2BCBB005E1D3E /* NanbeigeWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWelcomeViewController.m; sourceTree = "<group>"; };
 		267D211C15C1A5B200648217 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
@@ -1275,8 +1268,6 @@
 		26AB037315C1960E00539AB5 /* NanbeigeStreamDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeStreamDetailViewController.h; sourceTree = "<group>"; };
 		26AB037415C1960E00539AB5 /* NanbeigeStreamDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeStreamDetailViewController.m; sourceTree = "<group>"; };
 		26AB037715C1994A00539AB5 /* NanbeigeSplitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeSplitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
-		26AB037815C1A2C800539AB5 /* NanbeigeTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeTabBarController.h; sourceTree = "<group>"; };
-		26AB037915C1A2C800539AB5 /* NanbeigeTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeTabBarController.m; sourceTree = "<group>"; };
 		26B9666F15BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentDeadlineViewController.h; sourceTree = "<group>"; };
 		26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentDeadlineViewController.m; sourceTree = "<group>"; };
 		26D5FA1115AFE2B20075B68D /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
@@ -1577,7 +1568,6 @@
 				269F9E2F15CA4D7600EC2499 /* PreferenceView */,
 				2601D2C415AEADC00066C1FD /* DelegateProtocal */,
 				262AD48E15AA7D5D000C2EF7 /* Supporting Files */,
-				262AD4A015AA7D93000C2EF7 /* MainStoryboard_iPad.storyboard */,
 				262AD49E15AA7D86000C2EF7 /* MainStoryboard_iPhone.storyboard */,
 				262AD49615AA7D5D000C2EF7 /* NanbeigeAppDelegate.h */,
 				262AD49715AA7D5D000C2EF7 /* NanbeigeAppDelegate.m */,
@@ -1590,8 +1580,6 @@
 		262AD48E15AA7D5D000C2EF7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2678C37315B26AE9005E1D3E /* test_data.plist */,
-				2678C37015B26ADA005E1D3E /* location.plist */,
 				262AD48F15AA7D5D000C2EF7 /* Nanbeige-Info.plist */,
 				262AD49015AA7D5D000C2EF7 /* InfoPlist.strings */,
 				262AD49315AA7D5D000C2EF7 /* main.m */,
@@ -2554,8 +2542,6 @@
 				269F9DD415C8FFA200EC2499 /* JsonFile */,
 				2678C38115B2BCB9005E1D3E /* NanbeigeWelcomeViewController.h */,
 				2678C38215B2BCBB005E1D3E /* NanbeigeWelcomeViewController.m */,
-				26AB037815C1A2C800539AB5 /* NanbeigeTabBarController.h */,
-				26AB037915C1A2C800539AB5 /* NanbeigeTabBarController.m */,
 				269F9DD715C9127B00EC2499 /* NanbeigeChooseLoginViewController.h */,
 				269F9DD815C9127B00EC2499 /* NanbeigeChooseLoginViewController.m */,
 				269F9DD015C8FD4500EC2499 /* NanbeigeEmailLoginViewController.h */,
@@ -2657,7 +2643,6 @@
 			files = (
 				262AD49215AA7D5D000C2EF7 /* InfoPlist.strings in Resources */,
 				262AD49F15AA7D86000C2EF7 /* MainStoryboard_iPhone.storyboard in Resources */,
-				262AD4A115AA7D93000C2EF7 /* MainStoryboard_iPad.storyboard in Resources */,
 				262AD64415AA8021000C2EF7 /* Localizable.strings in Resources */,
 				262AD64515AA8021000C2EF7 /* bg.png in Resources */,
 				262AD64615AA8021000C2EF7 /* bg@2x.png in Resources */,
@@ -2712,8 +2697,6 @@
 				2678C31915B049BB005E1D3E /* NanbeigeLine2Button2Cell.xib in Resources */,
 				2678C31B15B04A60005E1D3E /* NanbeigeLine3Button0Cell.xib in Resources */,
 				2678C31D15B04ADB005E1D3E /* NanbeigeLine3Button2Cell.xib in Resources */,
-				2678C37115B26ADA005E1D3E /* location.plist in Resources */,
-				2678C37415B26AE9005E1D3E /* test_data.plist in Resources */,
 				26A6B5F415B41B17006FA15D /* 24-person.png in Resources */,
 				26A6B5F515B41B17006FA15D /* 24-person@2x.png in Resources */,
 				26A6B5F615B41B17006FA15D /* 37x-Checkmark.png in Resources */,
@@ -3013,7 +2996,6 @@
 				2684427C15BFE1AB0012C8C3 /* NanbeigePickerLabel.m in Sources */,
 				265D205D15C067B0006353E9 /* MBProgressHUD.m in Sources */,
 				26AB037515C1960F00539AB5 /* NanbeigeStreamDetailViewController.m in Sources */,
-				26AB037A15C1A2C800539AB5 /* NanbeigeTabBarController.m in Sources */,
 				26665E4415C3CE7700E4FF9E /* JTTableViewGestureRecognizer.m in Sources */,
 				26665E4615C3CE7700E4FF9E /* TransformableTableViewCell.m in Sources */,
 				26665E4715C3CE7700E4FF9E /* UIColor+JTGestureBasedTableViewHelper.m in Sources */,
@@ -3150,7 +3132,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -3169,7 +3151,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

@@ -41,7 +41,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:self action:@selector(onLogin:)];
+	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
 	self.navigationItem.rightBarButtonItem = loginButton;
+	self.navigationItem.leftBarButtonItem = closeButton;
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	
@@ -93,28 +95,11 @@
     [self loading:YES];
 }
 
-- (void)chooseSchool
-{
-	if (![[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
-		self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
-		[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
-	} else {
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
-		[self dismissModalViewControllerAnimated:YES];
-	}
+- (void)close
+{	
+	[self dismissModalViewControllerAnimated:YES];
 }
-- (void)confirmLogin
-{
-	if (![[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
-		self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
-		[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
-	} else {
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
-		[self dismissModalViewControllerAnimated:YES];
-	}
-}
+
 - (void)onEmailSignup:(id)sender
 {
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:nil action:nil];
@@ -127,11 +112,17 @@
 			 UniversityName:(NSString *)university_name
 {
 	[self loading:NO];
-	if (university_id) {
-		[self confirmLogin];
-	} else {
-		[self chooseSchool];
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
 	}
+	id parentVC = self.navigationController.presentingViewController;
+	if ([parentVC isKindOfClass:[UINavigationController class]])
+		parentVC = [parentVC topViewController];
+	if ([parentVC respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:)]) {
+		[parentVC didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name];
+	}
+	[self close];
 }
 - (void)requestError:(NSString *)errorString
 {

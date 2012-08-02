@@ -115,13 +115,11 @@
 	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
 	[defaults setObject:[res objectForKey:kAPIID] forKey:kNANBEIGEIDKEY];
 	
-	if (![[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
-		[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
-	} else {
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
 		[defaults setObject:[res objectForKey:kAPIID] forKey:kACCOUNTIDKEY];
 		[defaults setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
-		[self dismissModalViewControllerAnimated:YES];
 	}
+	[self dismissModalViewControllerAnimated:YES];
 }
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
