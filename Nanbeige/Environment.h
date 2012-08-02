@@ -123,6 +123,5 @@
 ///////////////////////////////
 #define test_username @"pkttus#42$"
 
-#define ChooseLoginTableViewHeaders @[@"登录南北阁",@"也可使用"]
-#define ChooseLoginTableViewValues @[@[@"人人网", @"新浪微博"],@[@"Email地址"]]
-#define ChooseLoginTableViewSelectSegues @[@[@"EmailLoginSegue",@"EmailLoginSegue"],@[@"EmailLoginSegue"]]
+#define kWBSDKDemoAppKey @"1362082242"
+#define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"

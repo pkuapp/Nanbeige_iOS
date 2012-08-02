@@ -18,8 +18,8 @@
 #import <Foundation/Foundation.h>
 
 #import "WBRequest.h"
-//#import "WBAuthorizeWebView.h"
-#import "NanbeigeWBAuthorizeWebView.h"
+#import "WBAuthorizeWebView.h"
+#import "NanbeigeWeiboLoginViewController.h"
 
 @class WBAuthorize;
 
@@ -33,7 +33,7 @@
 
 @end
 
-@interface WBAuthorize : NSObject <NanbeigeWBAuthorizeWebViewDelegate, WBRequestDelegate> 
+@interface WBAuthorize : NSObject <WBAuthorizeWebViewDelegate, NanbeigeWeiboLoginDelegate, WBRequestDelegate>
 {
     
     NSString    *appKey;

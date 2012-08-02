@@ -93,13 +93,21 @@
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.tableView.backgroundColor = tableBgColor1;
 	
-	// TODO
 	NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 							 @"IP网关", @"name",
 							 @"its", @"image", 
 							 @"Line1Button0Identifier", @"identifier",
 							 @"NanbeigeLine1Button0Cell", @"nibname",
 							 nil];
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] != nil) {
+		itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+								 @"IP网关", @"name",
+								 @"its", @"image",
+								 @"Line3Button2Identifier", @"identifier",
+								 @"NanbeigeLine3Button2Cell", @"nibname",
+								 nil];
+	}
+	
 	NSDictionary *coursesDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								 @"课程", @"name", 
 								 @"courses", @"image", 

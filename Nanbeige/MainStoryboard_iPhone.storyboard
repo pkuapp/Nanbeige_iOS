@@ -318,7 +318,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1600" y="-1776"/>
+            <point key="canvasLocation" x="1600" y="-1596"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KGt-Uk-zxi">
@@ -334,7 +334,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2655" y="-3987"/>
+            <point key="canvasLocation" x="2687" y="-3987"/>
         </scene>
         <!--Nanbeige Login Its View Controller - 登录网关账号-->
         <scene sceneID="xSj-ac-kQt">
@@ -408,7 +408,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="3167" y="-3980"/>
+            <point key="canvasLocation" x="3149" y="-3987"/>
         </scene>
         <!--Nanbeige Its View Controller - IP网关-->
         <scene sceneID="A3L-J4-bX8">
@@ -643,7 +643,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2655" y="-2715"/>
+            <point key="canvasLocation" x="2687" y="-2715"/>
         </scene>
         <!--Nanbeige Assignment Deadline View Controller-->
         <scene sceneID="8df-Id-jg0">
@@ -735,7 +735,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3592" y="-2715"/>
+            <point key="canvasLocation" x="3632" y="-2715"/>
         </scene>
         <!--Nanbeige Create Assignment View Controller - 新增作业计划-->
         <scene sceneID="X3Z-N0-Jeu">
@@ -1035,7 +1035,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2655" y="-3404"/>
+            <point key="canvasLocation" x="2687" y="-3404"/>
         </scene>
         <!--Nanbeige Renren Post View Controller-->
         <scene sceneID="nW8-K8-74z">
@@ -1205,7 +1205,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="771" y="-2371"/>
+            <point key="canvasLocation" x="1046" y="-2939"/>
         </scene>
         <!--Nanbeige Confirm Login View Controller-->
         <scene sceneID="eDe-bz-6lx">
@@ -1220,7 +1220,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="YYN-rM-0GB"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1172" y="-2371"/>
+            <point key="canvasLocation" x="1046" y="-2382"/>
         </scene>
         <!--Navigation Controller - 仪表盘-->
         <scene sceneID="Q7Z-RS-Cjn">
@@ -1241,388 +1241,43 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1046" y="-1776"/>
+            <point key="canvasLocation" x="1046" y="-1596"/>
         </scene>
-        <!--Nanbeige Connect View Controller-->
-        <scene sceneID="0EF-rq-Mbq">
+        <!--Nanbeige Preference View Controller-->
+        <scene sceneID="Cdo-oD-Zee">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wfX-9z-1dt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="wsl-6F-Kob" customClass="NanbeigeConnectViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lhK-Uq-Gk9">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hi5-Yr-KfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="j82-iK-bsc" customClass="NanbeigePreferenceViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wO8-Fv-fgm">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2kg-rQ-rDI">
-                                <rect key="frame" x="80" y="363" width="159" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="renren-logo-159x35.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="renrenLogin:" destination="wsl-6F-Kob" eventType="touchUpInside" id="kJl-gZ-wAe"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wu4-Zh-LN2">
-                                <rect key="frame" x="72" y="406" width="174" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="login_button_32.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="weiboLogin:" destination="wsl-6F-Kob" eventType="touchUpInside" id="Ay4-lH-hiS"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="南北阁 0.1beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="u3G-zF-05P">
-                                <rect key="frame" x="103" y="118" width="114" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon@2x.png" id="Zhh-3d-P0m">
-                                <rect key="frame" x="115" y="20" width="90" height="90"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" minimumFontSize="17" id="hy9-LH-Cb8">
-                                <rect key="frame" x="74" y="207" width="172" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="wsl-6F-Kob" id="GH8-r6-RHe"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="南北阁账号" minimumFontSize="17" id="0G3-JA-UcT">
-                                <rect key="frame" x="74" y="168" width="172" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="wsl-6F-Kob" id="2h7-4v-9fp"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="m38-ZU-HXQ">
-                                <rect key="frame" x="165" y="251" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="登录">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginButtonPressed:" destination="wsl-6F-Kob" eventType="touchUpInside" id="lo4-yM-M8a"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yGd-YM-F5g">
-                                <rect key="frame" x="83" y="251" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="注册">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="signupButtonPressed:" destination="wsl-6F-Kob" eventType="touchUpInside" id="c4h-TV-Gd4"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cVe-dV-wfd"/>
+                    <navigationItem key="navigationItem" id="pnw-3m-JmY"/>
                     <connections>
-                        <outlet property="passwordTextField" destination="hy9-LH-Cb8" id="rgG-YN-cm6"/>
-                        <outlet property="usernameTextField" destination="0G3-JA-UcT" id="MRx-cW-Pr4"/>
+                        <segue destination="nbq-Em-CIq" kind="push" identifier="AboutSegue" id="2go-Dx-ZCt"/>
+                        <segue destination="5iG-hD-g5x" kind="push" identifier="ChangeMainOrderSegue" id="dpO-9x-2RB"/>
+                        <segue destination="bGv-iP-NDt" kind="push" identifier="AccountManageSegue" id="nWW-tI-jCv"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="502" y="-1596"/>
-        </scene>
-        <!--Nanbeige Settings View Controller - 设置-->
-        <scene sceneID="ynL-1e-Pin">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8mZ-A8-fVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="os1-XF-7GM" customClass="NanbeigeSettingsViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="1Wo-Gr-rjy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection id="ft7-X2-Kij">
-                                <cells>
-                                    <tableViewCell tag="1" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="zhL-uu-idK" style="IBUITableViewCellStyleDefault" id="UaI-ow-sNf">
-                                        <rect key="frame" x="0.0" y="10" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="连接微博账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zhL-uu-idK">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell tag="2" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="hmC-9h-cy3" style="IBUITableViewCellStyleDefault" id="FXU-7R-wof">
-                                        <rect key="frame" x="0.0" y="55" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="连接人人账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hmC-9h-cy3">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="NS9-Fj-AvQ">
-                                <cells>
-                                    <tableViewCell tag="3" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="2uN-pS-7GK" style="IBUITableViewCellStyleDefault" id="XaU-e9-65L">
-                                        <rect key="frame" x="0.0" y="120" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="登录南北阁账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2uN-pS-7GK">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell tag="4" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="xfB-NC-eO2" style="IBUITableViewCellStyleDefault" id="f4V-1z-1Xk">
-                                        <rect key="frame" x="0.0" y="165" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="注册南北阁账号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xfB-NC-eO2">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="qz5-j6-3kE">
-                                <cells>
-                                    <tableViewCell tag="5" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="iyD-Ea-92z" style="IBUITableViewCellStyleDefault" id="lwx-C7-J2D">
-                                        <rect key="frame" x="0.0" y="230" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="更改仪表盘布局" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iyD-Ea-92z">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell tag="5" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="71g-1f-MsJ" style="IBUITableViewCellStyleDefault" id="49h-yF-CqP">
-                                        <rect key="frame" x="0.0" y="275" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="重置仪表盘布局" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="71g-1f-MsJ">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="owS-F7-LPp">
-                                <cells>
-                                    <tableViewCell tag="5" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="poA-Tx-Vdo" style="IBUITableViewCellStyleDefault" id="9fa-h0-Vvl">
-                                        <rect key="frame" x="0.0" y="340" width="320" height="46"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="关于南北阁" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="poA-Tx-Vdo">
-                                                    <rect key="frame" x="10" y="0.0" width="260" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <connections>
-                                            <segue destination="nbq-Em-CIq" kind="push" id="MAC-Sz-NUC"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="os1-XF-7GM" id="4RP-aT-PmJ"/>
-                            <outlet property="delegate" destination="os1-XF-7GM" id="EUb-h3-4UD"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="设置" id="XIA-yK-YuN"/>
-                    <navigationItem key="navigationItem" title="设置" id="FeY-gg-bCa">
-                        <barButtonItem key="leftBarButtonItem" title="登出" id="bl5-wT-e92">
-                            <connections>
-                                <action selector="logoutAll:" destination="os1-XF-7GM" id="937-6h-dzc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="nanbeigeCell" destination="XaU-e9-65L" id="37c-kY-9aV"/>
-                        <outlet property="renrenCell" destination="FXU-7R-wof" id="KMe-4A-vlm"/>
-                        <outlet property="weiboCell" destination="UaI-ow-sNf" id="ukc-DY-fWH"/>
-                        <segue destination="JoU-QB-Ph6" kind="modal" identifier="NanbeigeSignupSegue" id="Im8-ax-T3B"/>
-                        <segue destination="0S5-Bp-941" kind="modal" identifier="NanbeigeLoginSegue" id="flS-Ax-O07"/>
-                        <segue destination="5iG-hD-g5x" kind="push" identifier="changeMainOrderSegue" id="LeW-pT-hfi"/>
-                    </connections>
-                </tableViewController>
-            </objects>
             <point key="canvasLocation" x="1600" y="-72"/>
         </scene>
-        <!--Nanbeige Signup View Controller - 注册南北阁账号-->
-        <scene sceneID="nYx-O2-ovC">
+        <!--Nanbeige Account Manage View Controller-->
+        <scene sceneID="wJr-wX-Vh1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cw5-Il-6vB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="p3H-i7-alO" customClass="NanbeigeSignupViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="B3K-GC-7zL">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Btr-Zn-ohZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController hidesBottomBarWhenPushed="YES" id="bGv-iP-NDt" customClass="NanbeigeAccountManageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hT7-EN-LW3">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection id="YJ8-Th-7ht">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="409-p5-aZ8" style="IBUITableViewCellStyleDefault" id="5Gj-G7-9m5">
-                                        <rect key="frame" x="0.0" y="10" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="用户名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="409-p5-aZ8">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7UU-Xr-dVn" style="IBUITableViewCellStyleDefault" id="AWo-wL-IpQ">
-                                        <rect key="frame" x="0.0" y="55" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7UU-Xr-dVn">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="EQC-Ko-p02" style="IBUITableViewCellStyleDefault" id="ERh-14-Hj4">
-                                        <rect key="frame" x="0.0" y="99" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="验证码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EQC-Ko-p02">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="p3H-i7-alO" id="QGv-yU-yYJ"/>
-                            <outlet property="delegate" destination="p3H-i7-alO" id="yBg-He-hZX"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="注册南北阁账号" id="0fH-IB-FrJ">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="454-BR-M3o">
-                            <connections>
-                                <action selector="onCancelButtonPressed:" destination="p3H-i7-alO" id="3jc-Sl-VA5"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="passwordCell" destination="AWo-wL-IpQ" id="rU4-fn-gSj"/>
-                        <outlet property="usernameCell" destination="5Gj-G7-9m5" id="Ct8-Ei-0kc"/>
-                        <outlet property="validcodeCell" destination="ERh-14-Hj4" id="LGb-eZ-6Td"/>
-                    </connections>
-                </tableViewController>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="062-ar-HqJ"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
             </objects>
-            <point key="canvasLocation" x="2655" y="-72"/>
+            <point key="canvasLocation" x="2143" y="-72"/>
         </scene>
         <!--Nanbeige Change Main Order View Controller - 更改仪表盘布局-->
         <scene sceneID="KJ7-oZ-rj9">
@@ -1657,122 +1312,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="1055"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="UNu-Lh-nFK">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Uo-c3-Z4g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" id="JoU-QB-Ph6" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="hIE-78-uC4">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="p3H-i7-alO" kind="relationship" relationship="rootViewController" id="j7y-7s-Ac8"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="2143" y="-72"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="eXT-1k-0jv">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u2u-mg-20O" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" id="0S5-Bp-941" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="nCn-jx-tEA">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="tJa-cw-41K" kind="relationship" relationship="rootViewController" id="gKz-xB-ciZ"/>
-                    </connections>
-                </navigationController>
-            </objects>
             <point key="canvasLocation" x="2143" y="497"/>
         </scene>
-        <!--Nanbeige Login View Controller - 登录南北阁账号-->
-        <scene sceneID="rFM-OC-rFQ">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rJB-A4-zu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="tJa-cw-41K" customClass="NanbeigeLoginViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="nPR-fe-Xw5">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection id="Yd8-jo-eEU">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="uyz-OW-RwR" style="IBUITableViewCellStyleDefault" id="eLT-R8-pAg">
-                                        <rect key="frame" x="0.0" y="10" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="用户名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uyz-OW-RwR">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="oB2-2e-9Y4" style="IBUITableViewCellStyleDefault" id="dfe-Qg-lCp">
-                                        <rect key="frame" x="0.0" y="55" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oB2-2e-9Y4">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="tJa-cw-41K" id="qvc-s9-vDQ"/>
-                            <outlet property="delegate" destination="tJa-cw-41K" id="EMk-Rc-tRn"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="登录南北阁账号" id="JDO-ag-YRn">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="uog-CH-VTR">
-                            <connections>
-                                <action selector="onCancelButtonPressed:" destination="tJa-cw-41K" id="Ae3-7P-g1l"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="passwordCell" destination="dfe-Qg-lCp" id="eqz-Xf-J1J"/>
-                        <outlet property="usernameCell" destination="eLT-R8-pAg" id="VjV-yf-e2F"/>
-                    </connections>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="2655" y="497"/>
-        </scene>
-        <!--Nanbeige About View Controller - 关于南北阁-->
+        <!--View Controller - 关于南北阁-->
         <scene sceneID="tzG-CO-2lz">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="be0-Sh-XyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController hidesBottomBarWhenPushed="YES" id="nbq-Em-CIq" customClass="NanbeigeAboutViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="nbq-Em-CIq" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lgJ-7g-Whd">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon@2x.png" id="Dqx-n8-a8O">
-                                <rect key="frame" x="115" y="20" width="90" height="90"/>
+                                <rect key="frame" x="115" y="44" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Copyright © 2012 南北阁开发组" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="j3a-ZB-fnO">
@@ -1790,7 +1342,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KBX-wX-ocd">
-                                <rect key="frame" x="124" y="310" width="72" height="37"/>
+                                <rect key="frame" x="124" y="299" width="72" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="更多">
@@ -1805,7 +1357,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="南北阁 0.1beta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="tT3-yz-1WU">
-                                <rect key="frame" x="103" y="125" width="114" height="21"/>
+                                <rect key="frame" x="103" y="142" width="114" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1818,7 +1370,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1600" y="497"/>
+            <point key="canvasLocation" x="1046" y="497"/>
         </scene>
         <!--Navigation Controller - 设置-->
         <scene sceneID="ZKE-9y-wvS">
@@ -1828,10 +1380,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <tabBarItem key="tabBarItem" title="设置" id="ig8-A9-kws"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="jRt-2F-l7l">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="os1-XF-7GM" kind="relationship" relationship="rootViewController" id="s5n-HT-1IO"/>
+                        <segue destination="j82-iK-bsc" kind="relationship" relationship="rootViewController" id="zk8-Wx-VLr"/>
                     </connections>
                 </navigationController>
             </objects>
@@ -1859,7 +1410,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="ago-rE-zId"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1046" y="497"/>
+            <point key="canvasLocation" x="1600" y="497"/>
         </scene>
         <!--Nanbeige Choose Login View Controller-->
         <scene sceneID="9Zb-K4-OuV">
@@ -1877,7 +1428,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-36" y="-2376"/>
+            <point key="canvasLocation" x="502" y="-1596"/>
         </scene>
         <!--Nanbeige Email Signup View Controller-->
         <scene sceneID="fpt-Vb-7Tw">
@@ -1895,7 +1446,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="367" y="-2939"/>
+            <point key="canvasLocation" x="502" y="-2939"/>
         </scene>
         <!--Nanbeige Email Login View Controller-->
         <scene sceneID="56t-8L-7ZF">
@@ -1915,7 +1466,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="367" y="-2376"/>
+            <point key="canvasLocation" x="502" y="-2376"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C6b-b4-Uv2">
@@ -1930,7 +1481,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-36" y="-1811"/>
+            <point key="canvasLocation" x="-48" y="-1596"/>
         </scene>
         <!--Nanbeige Welcome View Controller-->
         <scene sceneID="hHo-Yi-xbg">
@@ -1956,13 +1507,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <segue destination="wsl-6F-Kob" kind="modal" identifier="OldLoginSegue" modalTransitionStyle="flipHorizontal" id="LoI-It-8x1"/>
                         <segue destination="4" kind="custom" identifier="HasLoginSegue" customClass="NanbeigeWelcomeSegue" id="MrE-V7-g1E"/>
                         <segue destination="BlL-XN-y7z" kind="modal" identifier="LoginSegue" id="uMj-Xf-fTE"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-36" y="-1224"/>
+            <point key="canvasLocation" x="-36" y="-948"/>
         </scene>
         <!--Nanbeige Tab Bar Controller-->
         <scene sceneID="15">
@@ -1990,8 +1540,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="Icon@2x.png" width="114" height="114"/>
         <image name="courses@2x.png" width="138" height="138"/>
         <image name="its@2x.png" width="138" height="138"/>
-        <image name="login_button_32.png" width="173" height="32"/>
-        <image name="renren-logo-159x35.png" width="159" height="35"/>
         <image name="rooms@2x.png" width="138" height="138"/>
         <image name="widget_1line_0btn.png" width="663" height="121"/>
         <image name="widget_2line_0btn.png" width="663" height="163"/>
@@ -1999,181 +1547,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="widget_3line_0btn.png" width="663" height="227"/>
         <image name="widget_3line_2btn.png" width="663" height="268"/>
     </resources>
-    <classes>
-        <class className="NanbeigeAboutViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAboutViewController.h"/>
-        </class>
-        <class className="NanbeigeAssignmentDeadlineViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAssignmentDeadlineViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onConfirm:"/>
-                <relationship kind="action" name="onModeChange:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="deadlinePicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="modeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeAssignmentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAssignmentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onAssignmentCompleteChanged:"/>
-                <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeChangeMainOrderViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChangeMainOrderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onChangeButtonPressed:"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeChooseLoginViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChooseLoginViewController.h"/>
-        </class>
-        <class className="NanbeigeChooseSchoolViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChooseSchoolViewController.h"/>
-        </class>
-        <class className="NanbeigeConfirmLoginViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeConfirmLoginViewController.h"/>
-        </class>
-        <class className="NanbeigeConnectViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeConnectViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginButtonPressed:"/>
-                <relationship kind="action" name="renrenLogin:"/>
-                <relationship kind="action" name="signupButtonPressed:"/>
-                <relationship kind="action" name="weiboLogin:"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeCreateAssignmentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeCreateAssignmentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancel:"/>
-                <relationship kind="action" name="onConfirm:"/>
-                <relationship kind="outlet" name="assignmentTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="coursesPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="coursesToolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeDetailGateInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeDetailGateInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeEmailLoginViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeEmailLoginViewController.h"/>
-        </class>
-        <class className="NanbeigeEmailSignupViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeEmailSignupViewController.h"/>
-        </class>
-        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="detailGateInfoPressed:"/>
-                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="detailGateInfo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeLoginItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeLoginViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="calendarButtonPressed:"/>
-            </relationships>
-        </class>
-        <class className="NanbeigePickerLabel" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigePickerLabel.h"/>
-        </class>
-        <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeSettingsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="logoutAll:"/>
-                <relationship kind="outlet" name="nanbeigeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="renrenCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="weiboCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeSignupViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSignupViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="validcodeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeStreamViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="renrenPost:"/>
-                <relationship kind="action" name="weiboPost:"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeTabBarController.h"/>
-        </class>
-        <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeWelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWelcomeViewController.h"/>
-        </class>
-        <class className="QuickDialogController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuickDialogController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="rjG-hq-QfI"/>
-        <segue reference="dEE-Hu-jdp"/>
-        <segue reference="yHJ-Pm-LdA"/>
-        <segue reference="kkG-IZ-C1L"/>
+        <segue reference="WLw-gr-ptv"/>
+        <segue reference="xsT-0j-IAw"/>
+        <segue reference="iBD-dN-4lH"/>
+        <segue reference="Yqn-fv-amI"/>
     </inferredMetricsTieBreakers>
 </document>

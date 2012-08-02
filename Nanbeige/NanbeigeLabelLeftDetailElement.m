@@ -14,6 +14,7 @@
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
     QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller withStyle:UITableViewCellStyleValue1];
 	
+	[self.titleLabel removeFromSuperview];
 	self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 11, 68, 21)];
 	self.titleLabel.textAlignment = UITextAlignmentRight;
 	self.titleLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -24,6 +25,7 @@
 	cell.textLabel.text = nil;
 	[cell.contentView addSubview:self.titleLabel];
 	
+	[self.valueLabel removeFromSuperview];
 	self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(96, 10, 200, 21)];
 	self.valueLabel.textAlignment = UITextAlignmentLeft;
 	self.valueLabel.font = [UIFont boldSystemFontOfSize:17];

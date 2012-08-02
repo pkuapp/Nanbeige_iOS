@@ -88,6 +88,7 @@
 
 - (void)onConfirmLogin:(id)sender
 {
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDIT] boolValue]) {
 		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDIT];
 		
@@ -107,7 +108,6 @@
 		}
 		
 		[editRequest startAsynchronous];
-		[[(QElement *)sender getCellForTableView:self.quickDialogTableView controller:self] setSelected:NO];
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
 		[self dismissModalViewControllerAnimated:YES];

@@ -1,0 +1,40 @@
+{
+	"grouped": true,
+	"title": "偏好设置",
+    "controllerName": "NanbeigePreferenceViewController",
+	"sections": [
+				 {
+				 "elements": [
+							  {
+							  "type":"NanbeigeLabelButtonElement",
+							  "title":"账号管理",
+							  "controllerAction":"onAccountManage:"
+							  }
+							  ]
+				 },
+				 {
+				 "elements":[
+							 {
+							 "type":"NanbeigeLabelButtonElement",
+							 "title":"更改仪表盘布局",
+							 "controllerAction":"onChangeMainOrder:"
+							 },
+							 {
+							 "type":"NanbeigeLabelButtonElement",
+							 "title":"重置仪表盘布局",
+							 "controllerAction":"onResetMainOrder:"
+							 }
+							 ]
+				 },
+				 {
+				 "elements":[
+							 {
+							 "type":"NanbeigeLabelButtonElement",
+							 "key":"onAbout",
+							 "title":"关于南北阁",
+							 "controllerAction":"onAbout:"
+							 }
+							 ]
+				 }
+				 ]
+}

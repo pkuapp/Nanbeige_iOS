@@ -1,7 +1,7 @@
 {
 	"grouped": true,
-	"title": "完成",
-    "controllerName": "NanbeigeConfirmLoginViewController",
+	"title": "账号管理",
+    "controllerName": "NanbeigeAccountManageViewController",
 	"sections": [
 				 
 				 {
@@ -31,9 +31,8 @@
 				 "elements": [
 							  {
 							  "type":"NanbeigeLabelButtonCenterElement",
-							  "key":"onConfirmLogin",
-							  "title":"开始使用南北阁",
-							  "controllerAction":"onConfirmLogin:"
+							  "title":"登出账号",
+							  "controllerAction":"onLogout:"
 							  }
 							  ]
 				 }

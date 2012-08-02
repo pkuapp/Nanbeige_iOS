@@ -46,6 +46,7 @@
 	functionArray = [[NSArray alloc] initWithArray:nmvc.functionArray];
 	functionOrder = [[NSArray alloc] initWithArray:nmvc.functionOrder];
 	
+	self.tableView.backgroundColor = tableBgColor2;
 	[self.tableView setEditing:!self.tableView.editing animated:YES];
 	
 	oldorderStr = [[NSUserDefaults standardUserDefaults] valueForKey:kMAINORDERKEY];

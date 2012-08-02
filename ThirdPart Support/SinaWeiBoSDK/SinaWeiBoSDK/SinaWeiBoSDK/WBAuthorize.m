@@ -18,6 +18,7 @@
 #import "WBAuthorize.h"
 #import "WBRequest.h"
 #import "WBSDKGlobal.h"
+#import "NanbeigeWeiboLoginViewController.h"
 
 #define kWBAuthorizeURL     @"https://api.weibo.com/oauth2/authorize"
 #define kWBAccessTokenURL   @"https://api.weibo.com/oauth2/access_token"
@@ -117,7 +118,6 @@
 }
 
 #pragma mark - WBAuthorize Public Methods
-
 - (void)startAuthorize
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:appKey, @"client_id",
@@ -128,12 +128,17 @@
                                            params:params
                                        httpMethod:@"GET"];
     
-    //WBAuthorizeWebView *webView = [[WBAuthorizeWebView alloc] init];
-    NanbeigeWBAuthorizeWebView *webView = [[NanbeigeWBAuthorizeWebView alloc] init];
-    [webView setDelegate:self];
+	NanbeigeWeiboLoginViewController *weiboLoginVC = [[NanbeigeWeiboLoginViewController alloc] init];
+	weiboLoginVC.delegate = self;
+    weiboLoginVC.requestURL = [NSURL URLWithString:urlString];
+	[self.rootViewController presentModalViewController:weiboLoginVC animated:YES];
+	/*
+    WBAuthorizeWebView *webView = [[WBAuthorizeWebView alloc] init];
+	[webView setDelegate:self];
     [webView loadRequestWithURL:[NSURL URLWithString:urlString]];
     [webView show:YES];
     [webView release];
+	*/
 }
 
 - (void)startAuthorizeUsingUserID:(NSString *)userID password:(NSString *)password
@@ -141,9 +146,23 @@
     [self requestAccessTokenWithUserID:userID password:password];
 }
 
-#pragma mark - NanbeigeWBAuthorizeWebViewDelegate Methods
+#pragma mark - NanbeigeWeiboLoginDelegate Methods
 
-- (void)authorizeWebView:(NanbeigeWBAuthorizeWebView *)webView didReceiveAuthorizeCode:(NSString *)code
+- (void)authorizeViewController:(UIViewController *)viewController didReceiveAuthorizeCode:(NSString *)code
+{
+    [viewController dismissModalViewControllerAnimated:YES];
+    
+    // if not canceled
+    if (![code isEqualToString:@"21330"])
+    {
+        [self requestAccessTokenWithAuthorizeCode:code];
+    }
+}
+
+
+#pragma mark - WBAuthorizeWebViewDelegate Methods
+
+- (void)authorizeWebView:(WBAuthorizeWebView *)webView didReceiveAuthorizeCode:(NSString *)code
 {
     [webView hide:YES];
     
