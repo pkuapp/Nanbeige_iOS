@@ -27,6 +27,7 @@
 		2601D2BB15AEA9BE0066C1FD /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2601D2AF15AEA9BE0066C1FD /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2601D2C115AEAB610066C1FD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2601D2C015AEAB600066C1FD /* MapKit.framework */; };
 		2601D2C315AEAB6E0066C1FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2601D2C215AEAB6E0066C1FD /* CoreLocation.framework */; };
+		260C6DE215CBBA2100B86C2C /* chooseCampus.json in Resources */ = {isa = PBXBuildFile; fileRef = 260C6DE115CBBA2100B86C2C /* chooseCampus.json */; };
 		2612272115BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */; };
 		261727C015C1B0D600B12A0B /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727BF15C1B0D600B12A0B /* Default-Portrait~ipad.png */; };
 		261727C315C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */; };
@@ -502,6 +503,7 @@
 		2601D2AF15AEA9BE0066C1FD /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		2601D2C015AEAB600066C1FD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2601D2C215AEAB6E0066C1FD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		260C6DE115CBBA2100B86C2C /* chooseCampus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = chooseCampus.json; path = JsonFile/chooseCampus.json; sourceTree = SOURCE_ROOT; };
 		2612271F15BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeCreateAssignmentViewController.h; sourceTree = "<group>"; };
 		2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeCreateAssignmentViewController.m; sourceTree = "<group>"; };
 		261727BF15C1B0D600B12A0B /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -2486,6 +2488,7 @@
 				269F9DF015C928CC00EC2499 /* emailSignup.json */,
 				269F9DD515C900EA00EC2499 /* emailLogin.json */,
 				269F9E0015C9456000EC2499 /* confirmLogin.json */,
+				260C6DE115CBBA2100B86C2C /* chooseCampus.json */,
 			);
 			name = JsonFile;
 			sourceTree = "<group>";
@@ -2882,6 +2885,7 @@
 				269F9E0115C9456000EC2499 /* confirmLogin.json in Resources */,
 				269F9E3B15CA527300EC2499 /* accountManage.json in Resources */,
 				269F9E3C15CA527300EC2499 /* preference.json in Resources */,
+				260C6DE215CBBA2100B86C2C /* chooseCampus.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3111,11 +3115,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		260C6DDE15CB9E5700B86C2C /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		260C6DDF15CB9E5700B86C2C /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Nanbeige/Nanbeige-Prefix.pch";
+				INFOPLIST_FILE = "Nanbeige/Nanbeige-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
 		262AD49915AA7D5D000C2EF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3131,6 +3176,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3141,7 +3187,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -3150,6 +3197,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -3198,6 +3247,7 @@
 			buildConfigurations = (
 				262AD49915AA7D5D000C2EF7 /* Debug */,
 				262AD49A15AA7D5D000C2EF7 /* Release */,
+				260C6DDE15CB9E5700B86C2C /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3207,6 +3257,7 @@
 			buildConfigurations = (
 				262AD49C15AA7D5D000C2EF7 /* Debug */,
 				262AD49D15AA7D5D000C2EF7 /* Release */,
+				260C6DDF15CB9E5700B86C2C /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

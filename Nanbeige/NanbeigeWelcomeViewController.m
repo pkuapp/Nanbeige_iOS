@@ -43,8 +43,11 @@
 	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
 		[self performSegueWithIdentifier:@"HasLoginSegue" sender:self];
 	} else {
-		NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-		[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+		id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
+		NSDictionary *emptySettings = (workaround51Crash != nil)
+		? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
+		: [NSDictionary dictionary];
+		[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
 		[self performSegueWithIdentifier:@"LoginSegue" sender:self];	
 	}
 }

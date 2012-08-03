@@ -66,33 +66,35 @@
 
 - (void)refreshDataSource
 {
-	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY];
-	if (!nickname) nickname = @"未命名";
+	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTNICKNAMEKEY];
+	if (!nickname) nickname = sDEFAULTNICKNAME;
 	NSString *university = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYNAMEKEY];
-	if (!university) university = @"未选校";
+	if (!university) university = sDEFAULTUNIVERSITY;
+	NSString *campus = [[NSUserDefaults standardUserDefaults] objectForKey:kCAMPUSNAMEKEY];
+	if (campus) university = [university stringByAppendingFormat:@" %@", campus];
 	
 	NSMutableArray *loginaccount = [[NSMutableArray alloc] init];
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY])
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"Email", @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY], @"value", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY], @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到南北阁", @"title", @"onEmailLogin:", @"controllerAction", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onEmailLogin:", @"controllerAction", nil]];
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY])
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"人人网", @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY], @"value", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY], @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到人人网", @"title", @"onRenrenLogin:", @"controllerAction", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTRENREN, @"title", @"onRenrenLogin:", @"controllerAction", nil]];
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY])
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"新浪微博", @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY], @"value", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY], @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"连接到新浪微博", @"title", @"onWeiboLogin:", @"controllerAction", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTWEIBO, @"title", @"onWeiboLogin:", @"controllerAction", nil]];
 	
 	NSDictionary *dict = @{
 	@"identity": @[
-	@{ @"title" : @"昵称", @"value" : nickname } ,
-	@{ @"title" : @"学校", @"value" : university } ] ,
+	@{ @"title" : sNICKNAME, @"value" : nickname } ,
+	@{ @"title" : sUNIVERSITY, @"value" : university } ] ,
 	@"loginaccount" : loginaccount,
 	@"connectaccount" : connectaccount};
 	[self.root bindToObject:dict];
@@ -157,7 +159,7 @@
 	[[[UIAlertView alloc] initWithTitle:nil
 								message:message
 							   delegate:nil
-					  cancelButtonTitle:@"确定"
+					  cancelButtonTitle:sCONFIRM
 					  otherButtonTitles:nil] show];
 }
 - (void)requestError:(NSString *)errorString

@@ -32,6 +32,7 @@
 - (void)didEmailSignupWithID:(NSNumber *)ID;
 
 - (void)didUniversitiesReceived:(NSArray *)universities;
+- (void)didUniversityReceived:(NSDictionary *)university;
 
 @end
 
@@ -62,5 +63,6 @@
 - (BOOL)isRenrenSessionValid;
 
 - (void)requestUniversities;
+- (void)requestUniversitie:(NSNumber *)university_id;
 
 @end

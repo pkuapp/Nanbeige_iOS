@@ -318,7 +318,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1600" y="-1596"/>
+            <point key="canvasLocation" x="1592" y="-2235"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KGt-Uk-zxi">
@@ -334,7 +334,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2687" y="-3987"/>
+            <point key="canvasLocation" x="2689" y="-2235"/>
         </scene>
         <!--Nanbeige Login Its View Controller - 登录网关账号-->
         <scene sceneID="xSj-ac-kQt">
@@ -408,7 +408,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="3149" y="-3987"/>
+            <point key="canvasLocation" x="3167" y="-2235"/>
         </scene>
         <!--Nanbeige Its View Controller - IP网关-->
         <scene sceneID="A3L-J4-bX8">
@@ -566,7 +566,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-3404"/>
+            <point key="canvasLocation" x="2135" y="-2235"/>
         </scene>
         <!--Nanbeige Assignment View Controller-->
         <scene sceneID="Hi2-Wp-7gG">
@@ -627,7 +627,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-2715"/>
+            <point key="canvasLocation" x="2135" y="-2865"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="k6z-a8-cS9">
@@ -643,7 +643,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2687" y="-2715"/>
+            <point key="canvasLocation" x="2689" y="-2865"/>
         </scene>
         <!--Nanbeige Assignment Deadline View Controller-->
         <scene sceneID="8df-Id-jg0">
@@ -735,7 +735,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3632" y="-2715"/>
+            <point key="canvasLocation" x="3632" y="-2865"/>
         </scene>
         <!--Nanbeige Create Assignment View Controller - 新增作业计划-->
         <scene sceneID="X3Z-N0-Jeu">
@@ -899,7 +899,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3167" y="-2715"/>
+            <point key="canvasLocation" x="3167" y="-2865"/>
         </scene>
         <!--Nanbeige Detail Gate Info View Controller - 网关账户-->
         <scene sceneID="Jvb-ch-4CT">
@@ -1035,7 +1035,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2687" y="-3404"/>
+            <point key="canvasLocation" x="2135" y="-1650"/>
         </scene>
         <!--Nanbeige Renren Post View Controller-->
         <scene sceneID="nW8-K8-74z">
@@ -1081,7 +1081,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-1224"/>
+            <point key="canvasLocation" x="2689" y="-1224"/>
         </scene>
         <!--Nanbeige Weibo Post View Controller-->
         <scene sceneID="IcV-to-mG5">
@@ -1128,7 +1128,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-673"/>
+            <point key="canvasLocation" x="2689" y="-673"/>
         </scene>
         <!--Navigation Controller - 信息流-->
         <scene sceneID="U6W-KN-1cs">
@@ -1145,7 +1145,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1046" y="-948"/>
+            <point key="canvasLocation" x="1592" y="-948"/>
         </scene>
         <!--Nanbeige Stream View Controller - 信息流-->
         <scene sceneID="qc2-n8-bCL">
@@ -1187,7 +1187,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1600" y="-948"/>
+            <point key="canvasLocation" x="2135" y="-948"/>
         </scene>
         <!--Nanbeige Choose School View Controller-->
         <scene sceneID="xS0-vd-m66">
@@ -1202,10 +1202,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="a2F-XT-z6e"/>
                     <connections>
                         <segue destination="xpV-9r-sUx" kind="push" identifier="ConfirmLoginSegue" id="xsT-0j-IAw"/>
+                        <segue destination="5pG-vj-gOj" kind="push" identifier="ChooseCampusSegue" id="Pcr-w3-viA"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="502" y="-2376"/>
+            <point key="canvasLocation" x="494" y="818"/>
         </scene>
         <!--Nanbeige Confirm Login View Controller-->
         <scene sceneID="eDe-bz-6lx">
@@ -1223,7 +1224,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1046" y="-2376"/>
+            <point key="canvasLocation" x="1592" y="818"/>
         </scene>
         <!--Navigation Controller - 仪表盘-->
         <scene sceneID="Q7Z-RS-Cjn">
@@ -1244,7 +1245,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1046" y="-1596"/>
+            <point key="canvasLocation" x="1038" y="-2235"/>
         </scene>
         <!--Nanbeige Preference View Controller-->
         <scene sceneID="Cdo-oD-Zee">
@@ -1264,7 +1265,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1600" y="-72"/>
+            <point key="canvasLocation" x="1592" y="-328"/>
         </scene>
         <!--Nanbeige Account Manage View Controller-->
         <scene sceneID="wJr-wX-Vh1">
@@ -1279,48 +1280,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="062-ar-HqJ"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="CSs-69-GQC" kind="modal" identifier="EmailLoginSegue" id="XRq-Gl-RIX"/>
-                        <segue destination="1eb-P9-Vae" kind="push" identifier="ChooseSchoolSegue" id="HgY-8f-0Dw"/>
+                        <segue destination="BCF-Wf-MCZ" kind="modal" identifier="EmailLoginSegue" id="3qE-Hy-ApR"/>
+                        <segue destination="a3y-BC-ZQj" kind="push" identifier="ChooseSchoolSegue" id="FPY-Gf-sB6"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="-72"/>
-        </scene>
-        <!--Nanbeige Email Login View Controller-->
-        <scene sceneID="P30-5m-lx3">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="34Z-r8-hrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="r7s-Yb-JGK" customClass="NanbeigeEmailLoginViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3xz-1Y-we2">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="3JQ-4r-rRi"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <segue destination="sAn-Qy-4gG" kind="push" identifier="EmailSignupSegue" id="o7q-cy-zFf"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2897" y="-72"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="8f6-K7-U1R">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Smz-ER-h3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" id="CSs-69-GQC" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="ed7-le-Hxi"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="L0i-C8-oEN">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="r7s-Yb-JGK" kind="relationship" relationship="rootViewController" id="1QV-fT-jfb"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="2520" y="-72"/>
+            <point key="canvasLocation" x="1592" y="242"/>
         </scene>
         <!--Nanbeige Change Main Order View Controller - 更改仪表盘布局-->
         <scene sceneID="KJ7-oZ-rj9">
@@ -1355,38 +1320,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2143" y="497"/>
-        </scene>
-        <!--Nanbeige Choose School View Controller-->
-        <scene sceneID="Ufa-1W-AhG">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Esw-Fj-iik" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="1eb-P9-Vae" customClass="NanbeigeChooseSchoolViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Zcp-Vq-6f9">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="MWP-0v-L38"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2520" y="497"/>
-        </scene>
-        <!--Nanbeige Email Signup View Controller-->
-        <scene sceneID="vap-xV-Myu">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CS1-TU-Ufm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="sAn-Qy-4gG" customClass="NanbeigeEmailSignupViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Rqh-DY-oGe">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="q46-xc-Svl"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2897" y="497"/>
+            <point key="canvasLocation" x="2135" y="-328"/>
         </scene>
         <!--View Controller - 关于南北阁-->
         <scene sceneID="tzG-CO-2lz">
@@ -1444,7 +1378,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1046" y="497"/>
+            <point key="canvasLocation" x="2135" y="242"/>
         </scene>
         <!--Navigation Controller - 设置-->
         <scene sceneID="ZKE-9y-wvS">
@@ -1460,7 +1394,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1046" y="-72"/>
+            <point key="canvasLocation" x="1038" y="-328"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Yr8-H3-0Cv">
@@ -1484,7 +1418,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="ago-rE-zId"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1600" y="497"/>
+            <point key="canvasLocation" x="2689" y="242"/>
         </scene>
         <!--Nanbeige Choose Login View Controller-->
         <scene sceneID="9Zb-K4-OuV">
@@ -1504,7 +1438,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="502" y="-1596"/>
+            <point key="canvasLocation" x="494" y="242"/>
         </scene>
         <!--Nanbeige Email Signup View Controller-->
         <scene sceneID="fpt-Vb-7Tw">
@@ -1519,7 +1453,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="CYw-cm-fdB"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="502" y="-2939"/>
+            <point key="canvasLocation" x="3232" y="818"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gab-DZ-6JA">
@@ -1535,7 +1469,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-36" y="-2376"/>
+            <point key="canvasLocation" x="2135" y="818"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="vQg-na-eW4">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="seo-T9-rE2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="5pG-vj-gOj" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UOR-e5-U4A">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9tW-Hf-IV2"/>
+                    <connections>
+                        <segue destination="xpV-9r-sUx" kind="push" identifier="ConfirmLoginSegue" id="xkq-Ws-o3f"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1038" y="1142"/>
         </scene>
         <!--Nanbeige Email Login View Controller-->
         <scene sceneID="56t-8L-7ZF">
@@ -1553,7 +1505,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-36" y="-2939"/>
+            <point key="canvasLocation" x="2689" y="818"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C6b-b4-Uv2">
@@ -1568,7 +1520,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-36" y="-1596"/>
+            <point key="canvasLocation" x="-22" y="242"/>
         </scene>
         <!--Nanbeige Welcome View Controller-->
         <scene sceneID="hHo-Yi-xbg">
@@ -1634,144 +1586,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="widget_3line_0btn.png" width="663" height="227"/>
         <image name="widget_3line_2btn.png" width="663" height="268"/>
     </resources>
-    <classes>
-        <class className="NanbeigeAccountManageViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAccountManageViewController.h"/>
-        </class>
-        <class className="NanbeigeAssignmentDeadlineViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAssignmentDeadlineViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onConfirm:"/>
-                <relationship kind="action" name="onModeChange:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="deadlinePicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="modeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeAssignmentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAssignmentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onAssignmentCompleteChanged:"/>
-                <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeChangeMainOrderViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChangeMainOrderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onChangeButtonPressed:"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeChooseLoginViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChooseLoginViewController.h"/>
-        </class>
-        <class className="NanbeigeChooseSchoolViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChooseSchoolViewController.h"/>
-        </class>
-        <class className="NanbeigeConfirmLoginViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeConfirmLoginViewController.h"/>
-        </class>
-        <class className="NanbeigeCreateAssignmentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeCreateAssignmentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancel:"/>
-                <relationship kind="action" name="onConfirm:"/>
-                <relationship kind="outlet" name="assignmentTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="coursesPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="coursesToolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeDetailGateInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeDetailGateInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeEmailLoginViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeEmailLoginViewController.h"/>
-        </class>
-        <class className="NanbeigeEmailSignupViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeEmailSignupViewController.h"/>
-        </class>
-        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="detailGateInfoPressed:"/>
-                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="detailGateInfo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeLoginItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="calendarButtonPressed:"/>
-            </relationships>
-        </class>
-        <class className="NanbeigePickerLabel" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigePickerLabel.h"/>
-        </class>
-        <class className="NanbeigePreferenceViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigePreferenceViewController.h"/>
-        </class>
-        <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeStreamViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="renrenPost:"/>
-                <relationship kind="action" name="weiboPost:"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="NanbeigeWelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWelcomeViewController.h"/>
-        </class>
-        <class className="QuickDialogController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuickDialogController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="xsT-0j-IAw"/>
+        <segue reference="FPY-Gf-sB6"/>
+        <segue reference="xkq-Ws-o3f"/>
         <segue reference="8gD-hD-7cK"/>
-        <segue reference="iBD-dN-4lH"/>
-        <segue reference="Yqn-fv-amI"/>
+        <segue reference="XCJ-0s-Ogk"/>
+        <segue reference="yHJ-Pm-LdA"/>
     </inferredMetricsTieBreakers>
 </document>

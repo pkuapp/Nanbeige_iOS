@@ -25,6 +25,7 @@
 	ASIFormDataRequest *editRequest;
 	ASIFormDataRequest *logoutRequest;
 	ASIFormDataRequest *signupRequest;
+	ASIHTTPRequest *universitiesRequest;
 	ASIHTTPRequest *universityRequest;
 }
 
@@ -205,7 +206,15 @@
 
 - (void)requestUniversities
 {
-	universityRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIUniversity];
+	universitiesRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIUniversity];
+	
+	[universitiesRequest setDelegate:self];
+	[universitiesRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[universitiesRequest startAsynchronous];
+}
+- (void) requestUniversitie:(NSNumber *)university_id
+{
+	universityRequest = [[ASIHTTPRequest alloc] initWithURL:[urlAPIUniversity URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/", university_id]]];
 	
 	[universityRequest setDelegate:self];
 	[universityRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
@@ -247,6 +256,8 @@
 		[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
 		[defaults setValue:university_id forKey:kUNIVERSITYIDKEY];
 		[defaults setValue:university_name forKey:kUNIVERSITYNAMEKEY];
+		[defaults removeObjectForKey:kCAMPUSIDKEY];
+		[defaults removeObjectForKey:kCAMPUSNAMEKEY];
 		
 		if ([self.delegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:)]) {
 			[self.delegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name];
@@ -269,9 +280,14 @@
 			[self.delegate didEmailSignupWithID:nanbeigeid];
 		}
 	}
-	if ([request isEqual:universityRequest]) {
+	if ([request isEqual:universitiesRequest]) {
 		if ([self.delegate respondsToSelector:@selector(didUniversitiesReceived:)]) {
 			[self.delegate didUniversitiesReceived:res];
+		}
+	}
+	if ([request isEqual:universityRequest]) {
+		if ([self.delegate respondsToSelector:@selector(didUniversityReceived:)]) {
+			[self.delegate didUniversityReceived:res];
 		}
 	}
 	

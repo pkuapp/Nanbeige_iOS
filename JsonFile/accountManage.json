@@ -31,8 +31,8 @@
 				 "elements": [
 							  {
 							  "type":"NanbeigeLabelButtonCenterElement",
-							  "title":"登出账号",
-							  "controllerAction":"onLogout:"
+							  "title":"登出",
+							  "controllerAction":"onLaunchActionSheet:"
 							  }
 							  ]
 				 }

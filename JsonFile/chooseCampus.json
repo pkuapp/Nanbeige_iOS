@@ -4,12 +4,12 @@
     "controllerName": "NanbeigeChooseSchoolViewController",
 	"sections": [
 				 {
-				 "bind":"iterate:university",
+				 "bind":"iterate:campuses",
 				 "elementTemplate": {
-					"type":"NanbeigeLabelButtonElement",
-					"bind":"title:name",
-					"controllerAction":"onChooseSchool:"
-					}
+				 "type":"NanbeigeLabelButtonElement",
+				 "bind":"title:name",
+				 "controllerAction":"onChooseCampus:"
+				 }
 				 }
 				 ]
 }

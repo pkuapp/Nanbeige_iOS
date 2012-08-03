@@ -46,6 +46,14 @@
 	
 	[self loading:YES];
 }
+- (void)didUniversitiesReceived:(NSArray *)universities
+{
+	[self loading:NO];
+	
+	dict = @{@"university":universities};
+	[self.root bindToObject:dict];
+    [self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+}
 
 - (void)viewDidUnload
 {
@@ -65,12 +73,36 @@
 - (void)onChooseSchool:(id)sender
 {
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
-	int universityid = [[[[dict objectForKey:@"university"] objectAtIndex:index] objectForKey:kAPIID] intValue];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:universityid] forKey:kUNIVERSITYIDKEY];
+	NSNumber *universityid = [[[dict objectForKey:@"university"] objectAtIndex:index] objectForKey:kAPIID];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[universityid intValue]] forKey:kUNIVERSITYIDKEY];
 	[[NSUserDefaults standardUserDefaults] setObject:[[[dict objectForKey:@"university"] objectAtIndex:index] objectForKey:kAPINAME] forKey:kUNIVERSITYNAMEKEY];
+	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kCAMPUSIDKEY];
+	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kCAMPUSNAMEKEY];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITUNIVERSITY_ID];
+	
+	[accountManager requestUniversitie:[[[dict objectForKey:kAPIUNIVERSITY] objectAtIndex:index] objectForKey:kAPIID]];
+}
+- (void)didUniversityReceived:(NSDictionary *)university
+{
+	if ([university isKindOfClass:[NSDictionary class]] && [[university objectForKey:kAPICAMPUSES] count] > 1) {
+		
+		self.root = [[QRootElement alloc] initWithJSONFile:@"chooseCampus"];
+		[self.root bindToObject:university];
+		[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+	} else {
+		if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
+			[self.navigationController popViewControllerAnimated:YES];
+		} else {
+			[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
+		}
+	}
+}
+
+- (void)onChooseCampus:(id)sender
+{
+	[[NSUserDefaults standardUserDefaults] setObject:[sender title] forKey:kCAMPUSNAMEKEY];
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
 		[self.navigationController popViewControllerAnimated:YES];
 	} else {
@@ -84,14 +116,6 @@
 							   delegate:nil
 					  cancelButtonTitle:@"确定"
 					  otherButtonTitles:nil] show];
-}
-- (void)didUniversitiesReceived:(NSArray *)universities
-{
-	[self loading:NO];
-	
-	dict = @{@"university":universities};
-	[self.root bindToObject:dict];
-    [self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
 }
 - (void)requestError:(NSString *)errorString
 {

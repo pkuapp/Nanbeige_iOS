@@ -37,6 +37,7 @@
 #define kAPIERROR @"error"
 #define kAPIUNIVERSITY @"university"
 #define kAPIUNIVERSITY_ID @"university_id"
+#define kAPICAMPUSES @"campuses"
 #define kAPIWEIBO_TOKEN @"weibo_token"
 #define kAPIID @"id"
 #define kAPINAME @"name"
@@ -94,6 +95,8 @@
 
 #define kUNIVERSITYIDKEY @"universityid"
 #define kUNIVERSITYNAMEKEY @"universityname"
+#define kCAMPUSNAMEKEY @"campusname"
+#define kCAMPUSIDKEY @"campusid"
 
 #define kNANBEIGEEMAILKEY @"nanbeigeemail"
 #define kNANBEIGEPASSWORDKEY @"nanbeigepassword"
@@ -131,4 +134,25 @@
 #define kWBSDKDemoAppKey @"1362082242"
 #define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"
 
-#define CONNECTMETHODS @{@"连接到人人网":@"onRenrenLogin:", @"连接到新浪微博":@"onWeiboLogin:", @"连接到南北阁":@"onEmailLogin:"}
+#define sRENREN @"人人网"
+#define sWEIBO @"新浪微博"
+#define sEMAIL @"Email"
+#define sLOGOUT @"登出"
+#define sNICKNAME @"昵称"
+#define sUNIVERSITY @"学校"
+#define sDEFAULTNICKNAME @"未命名"
+#define sDEFAULTUNIVERSITY @"未选校"
+#define sEDITPASSWORD @"修改密码"
+#define sEDITNICKNAME @"修改昵称"
+#define sCONFIRM @"确认"
+#define sCANCEL @"取消"
+#define sCONNECTRENREN [@"连接到" stringByAppendingString:sRENREN]
+#define sCONNECTWEIBO [@"连接到" stringByAppendingString:sWEIBO]
+#define sCONNECTEMAIL [@"绑定" stringByAppendingString:sEMAIL]
+#define sDISCONNECTRENREN [NSString stringWithFormat:@"断开%@连接", sRENREN]
+#define sDISCONNECTWEIBO [NSString stringWithFormat:@"断开%@连接", sWEIBO]
+#define sDISCONNECTEMAIL [NSString stringWithFormat:@"取消%@绑定", sEMAIL]
+
+#define dictLABEL2CONNECT @{sCONNECTRENREN:@"onRenrenLogin:", sCONNECTWEIBO:@"onWeiboLogin:", sCONNECTEMAIL:@"onEmailLogin:"}
+#define dictLABEL2ACTIONSHEET @{sLOGOUT:sLOGOUT, sEMAIL:sDISCONNECTEMAIL, sRENREN:sDISCONNECTRENREN, sWEIBO:sDISCONNECTWEIBO}
+#define dictACTIONSHEET2DISCONNECT @{sLOGOUT:@1, sDISCONNECTEMAIL:@2, sDISCONNECTRENREN:@3, sDISCONNECTWEIBO:@4, sEDITPASSWORD:@5, sEDITNICKNAME:@6}
