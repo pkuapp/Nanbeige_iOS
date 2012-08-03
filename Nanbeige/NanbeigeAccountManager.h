@@ -10,6 +10,9 @@
 @protocol AccountManagerDelegate <NSObject>
 
 @optional
+
+- (void)requestError:(NSString *)errorString;
+
 - (void)didWeiboLoginWithUserID:(NSString *)user_id
 					   UserName:(NSString *)user_name
 					 WeiboToken:(NSString *)weibo_token;
@@ -19,7 +22,6 @@
 					   UserName:(NSString *)user_name
 					 RenrenToken:(NSString *)renren_token;
 - (void)didRenrenLogout;
-- (void)requestError:(NSString *)errorString;
 
 - (void)didEmailLoginWithID:(NSNumber *)ID
 			  Nickname:(NSString *)nickname
@@ -27,6 +29,9 @@
 		UniversityName:(NSString *)university_name;
 - (void)didEmailLogout;
 - (void)didEmailEdit;
+- (void)didEmailSignupWithID:(NSNumber *)ID;
+
+- (void)didUniversitiesReceived:(NSArray *)universities;
 
 @end
 
@@ -44,6 +49,9 @@
 			UniversityID:(NSNumber *)university_id
 			  WeiboToken:(NSString *)weibo_token;
 - (void)emailLogout;
+- (void)emailSignupWithEmail:(NSString *)email
+					Password:(NSString *)password
+					Nickname:(NSString *)nickname;
 
 - (void)weiboLogin;
 - (void)weiboLogout;
@@ -52,5 +60,7 @@
 - (void)renrenLogin;
 - (void)renrenLogout;
 - (BOOL)isRenrenSessionValid;
+
+- (void)requestUniversities;
 
 @end

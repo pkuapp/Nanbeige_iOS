@@ -9,7 +9,7 @@
 				 "bind":"iterate:identity",
 				 "elementTemplate": {
 				 "type":"NanbeigeLabelLeftDetailElement",
-				 "bind":"title:title, value:value",
+				 "bind":"title:title, value:value, controllerAction:controllerAction",
 				 }
 				 },
 				 {
@@ -17,7 +17,7 @@
 				 "bind":"iterate:loginaccount",
 				 "elementTemplate": {
 				 "type":"NanbeigeLabelLeftDetailElement",
-				 "bind":"title:title, value:value",
+				 "bind":"title:title, value:value, controllerAction:controllerAction",
 				 }
 				 },
 				 {

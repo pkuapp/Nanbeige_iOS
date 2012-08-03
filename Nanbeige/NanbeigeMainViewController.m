@@ -169,6 +169,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
 	if ([[[self.functionArray objectAtIndex:0] objectForKey:@"identifier"] isEqualToString:@"Line3Button2Identifier"] && [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] == nil) {
 		NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								 @"IP网关", @"name",
@@ -386,6 +387,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+	[super prepareForSegue:segue sender:sender];
 	if ([segue.identifier isEqualToString:@"ItsEnterSegue"]) {
 		NanbeigeItsViewController *destinationViewController = (NanbeigeItsViewController *)[segue destinationViewController];
 		destinationViewController.connector = self.connector;

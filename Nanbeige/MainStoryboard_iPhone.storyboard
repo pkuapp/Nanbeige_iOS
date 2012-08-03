@@ -1280,6 +1280,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="CSs-69-GQC" kind="modal" identifier="EmailLoginSegue" id="XRq-Gl-RIX"/>
+                        <segue destination="1eb-P9-Vae" kind="push" identifier="ChooseSchoolSegue" id="HgY-8f-0Dw"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1355,6 +1356,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="2143" y="497"/>
+        </scene>
+        <!--Nanbeige Choose School View Controller-->
+        <scene sceneID="Ufa-1W-AhG">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Esw-Fj-iik" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="1eb-P9-Vae" customClass="NanbeigeChooseSchoolViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zcp-Vq-6f9">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MWP-0v-L38"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2520" y="497"/>
         </scene>
         <!--Nanbeige Email Signup View Controller-->
         <scene sceneID="vap-xV-Myu">

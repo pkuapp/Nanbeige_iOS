@@ -32,6 +32,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+	[super viewDidAppear:animated];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([defaults valueForKey:kWEIBOIDKEY] == nil && 
 		[defaults valueForKey:kRENRENIDKEY] == nil &&

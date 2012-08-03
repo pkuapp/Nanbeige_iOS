@@ -143,11 +143,13 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
 	self.assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
 	self.completeAssignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+	[super viewDidAppear:animated];
 	[[self nowAssignmentsTableView] reloadData];
 }
 
@@ -275,6 +277,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+	[super prepareForSegue:segue sender:sender];
 	UINavigationController *nc = segue.destinationViewController;
 	NanbeigeCreateAssignmentViewController *ncavc = (NanbeigeCreateAssignmentViewController *)(nc.topViewController);
 #warning 传递课表

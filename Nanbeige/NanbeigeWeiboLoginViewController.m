@@ -21,8 +21,6 @@
 {
 	self = [super init];
 	if (self) {
-        self.view = [[UIView alloc] initWithFrame:[self calcFrameBefore]];
-		
         self.navigationBar = [[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)];
         
         self.navigationBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
@@ -55,32 +53,6 @@
 - (void)close
 {
 	[self dismissModalViewControllerAnimated:YES];
-}
-
-- (CGRect)calcFrameBefore
-{
-	self.orientation = (UIDeviceOrientation)[UIApplication sharedApplication].statusBarOrientation;
-	CGRect bounds = [[UIScreen mainScreen] applicationFrame];
-    CGRect resultFrame = CGRectZero;
-	if (self.orientation == UIDeviceOrientationLandscapeLeft) {
-		resultFrame.origin.x = -bounds.size.width;
-        resultFrame.origin.y = 0.0f;
-	} else if (self.orientation == UIDeviceOrientationLandscapeRight) {
-        resultFrame.origin.x = bounds.size.width;
-        resultFrame.origin.y = 0.0f;
-    } else if (self.orientation == UIDeviceOrientationPortrait) {
-        resultFrame.origin.x = 0.0f;
-        resultFrame.origin.y = bounds.size.height;
-    } else if (self.orientation == UIDeviceOrientationPortraitUpsideDown) {
-        resultFrame.origin.x = 0.0f;
-        resultFrame.origin.y = -bounds.size.height;
-    } else {
-        resultFrame.origin.x = bounds.origin.x;
-        resultFrame.origin.y = bounds.origin.y;
-    }
-    resultFrame.size.width = bounds.size.width;
-    resultFrame.size.height = bounds.size.height;
-	return resultFrame;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

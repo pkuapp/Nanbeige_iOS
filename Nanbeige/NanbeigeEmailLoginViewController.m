@@ -7,8 +7,8 @@
 //
 
 #import "NanbeigeEmailLoginViewController.h"
+#import "NanbeigeEmailSignupViewController.h"
 #import "Environment.h"
-#import "NanbeigeAccountManager.h"
 
 @interface NanbeigeEmailLoginViewController () <AccountManagerDelegate> {
 	NSString *email;
@@ -100,6 +100,14 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	[super prepareForSegue:segue sender:sender];
+	if ([segue.identifier isEqualToString:@"EmailSignupSegue"]) {
+		NanbeigeEmailSignupViewController *destinationVC = segue.destinationViewController;
+		destinationVC.accountManagerDelegate = self.accountManagerDelegate;
+	}
+}
 - (void)onEmailSignup:(id)sender
 {
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:nil action:nil];
@@ -116,11 +124,8 @@
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
 	}
-	id parentVC = self.navigationController.presentingViewController;
-	if ([parentVC isKindOfClass:[UINavigationController class]])
-		parentVC = [parentVC topViewController];
-	if ([parentVC respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:)]) {
-		[parentVC didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name];
+	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:)]) {
+		[self.accountManagerDelegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name];
 	}
 	[self close];
 }

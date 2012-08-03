@@ -15,6 +15,8 @@
 #import "WBEngine.h"
 
 @interface NanbeigeAccountManager () <RenrenDelegate, WBEngineDelegate> {
+	NSUserDefaults *defaults;
+	
 	WBEngine *weiBoEngine;
 	Renren *renrenEngine;
 	
@@ -22,6 +24,8 @@
 	ASIFormDataRequest *weiboLoginRequest;
 	ASIFormDataRequest *editRequest;
 	ASIFormDataRequest *logoutRequest;
+	ASIFormDataRequest *signupRequest;
+	ASIHTTPRequest *universityRequest;
 }
 
 @end
@@ -39,6 +43,8 @@
 		[weiBoEngine setDelegate:self];
 		[weiBoEngine setRedirectURI:@"https://api.weibo.com/oauth2/default.html"];
 		[weiBoEngine setIsUserExclusive:NO];
+		
+		defaults = [NSUserDefaults standardUserDefaults];
 	}
 	return self;
 }
@@ -56,8 +62,8 @@
 - (void)emailLoginWithEmail:(NSString *)email
 			  Password:(NSString *)password
 {
-	[[NSUserDefaults standardUserDefaults] setObject:email forKey:kNANBEIGEEMAILKEY];
-	[[NSUserDefaults standardUserDefaults] setObject:password forKey:kNANBEIGEPASSWORDKEY];
+	[defaults setObject:email forKey:kNANBEIGEEMAILKEY];
+	[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
 	
 	emailLoginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginEmail];
 	
@@ -70,7 +76,7 @@
 }
 - (void)emailLoginWithWeiboToken:(NSString *)weibo_token
 {
-	[[NSUserDefaults standardUserDefaults] setObject:weibo_token forKey:kWEIBOTOKENKEY];
+	[defaults setObject:weibo_token forKey:kWEIBOTOKENKEY];
 	
 	weiboLoginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginWeibo];
 	
@@ -85,37 +91,74 @@
 			  WeiboToken:(NSString *)weibo_token
 {
 	editRequest = [[ASIFormDataRequest alloc] initWithURL:urlAPIUserEdit];
-	if (password) {
-		[editRequest addPostValue:password forKey:kAPIPASSWORD];
-		[[NSUserDefaults standardUserDefaults] setObject:password forKey:kNANBEIGEPASSWORDKEY];
+	
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDIT];
+	if (!university_id && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITUNIVERSITY_ID] boolValue]) {
+		university_id = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY];
 	}
-	if (nickname) {
-		[editRequest addPostValue:nickname forKey:kAPINICKNAME];
-		[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+	if (!weibo_token && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITWEIBO_TOKEN] boolValue]) {
+		weibo_token = [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY];
 	}
+	if (!nickname && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITNICKNAME] boolValue]) {
+		nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY];
+	}
+	if (!password && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITPASSWORD] boolValue]) {
+		password = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEPASSWORDKEY];
+	}
+	
 	if (university_id) {
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITUNIVERSITY_ID];
 		[editRequest addPostValue:university_id forKey:kAPIUNIVERSITY_ID];
-		[[NSUserDefaults standardUserDefaults] setObject:university_id forKey:kUNIVERSITYIDKEY];
+		[defaults setObject:university_id forKey:kUNIVERSITYIDKEY];
 	}
 	if (weibo_token) {
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITWEIBO_TOKEN];
 		[editRequest addPostValue:weibo_token forKey:kAPIWEIBO_TOKEN];
-		[[NSUserDefaults standardUserDefaults] setObject:weibo_token forKey:kWEIBOTOKENKEY];
+		[defaults setObject:weibo_token forKey:kWEIBOTOKENKEY];
 	}
+	if (nickname) {
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITNICKNAME];
+		[editRequest addPostValue:nickname forKey:kAPINICKNAME];
+		[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+	}
+	if (password) {
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITPASSWORD];
+		[editRequest addPostValue:password forKey:kAPIPASSWORD];
+		[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
+	}
+	
 	[editRequest setDelegate:self];
 	[editRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[editRequest startAsynchronous];
 }
 - (void)emailLogout
 {
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kNANBEIGEEMAILKEY];
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kNANBEIGEIDKEY];
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kNANBEIGENICKNAMEKEY];
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kNANBEIGEPASSWORDKEY];
+	[defaults removeObjectForKey:kNANBEIGEEMAILKEY];
+	[defaults removeObjectForKey:kNANBEIGEIDKEY];
+	[defaults removeObjectForKey:kNANBEIGENICKNAMEKEY];
+	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
 	
 	logoutRequest = [[ASIFormDataRequest alloc] initWithURL:urlAPIUserLogout];
 	[logoutRequest setDelegate:self];
 	[logoutRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[logoutRequest startAsynchronous];
+}
+- (void)emailSignupWithEmail:(NSString *)email
+					Password:(NSString *)password
+					Nickname:(NSString *)nickname
+{
+	[defaults setObject:email forKey:kNANBEIGEEMAILKEY];
+	[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
+	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+
+	signupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegEmail];
+	
+	[signupRequest addPostValue:email forKey:kAPIEMAIL];
+	[signupRequest addPostValue:nickname forKey:kAPINICKNAME];
+	[signupRequest addPostValue:password forKey:kAPIPASSWORD];
+	[signupRequest setDelegate:self];
+	[signupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[signupRequest startAsynchronous];
 }
 
 #pragma mark - Renren Login, Logout
@@ -123,16 +166,16 @@
 - (void)renrenLogin
 {
 	[renrenEngine delUserSessionInfo];
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"access_Token"];
+	[defaults removeObjectForKey:@"access_Token"];
 	NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
 	[renrenEngine authorizationInNavigationWithPermisson:permissions
 											 andDelegate:self];
 }
 - (void)renrenLogout
 {
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kRENRENIDKEY];
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kRENRENNAMEKEY];
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kRENRENTOKENKEY];
+	[defaults removeObjectForKey:kRENRENIDKEY];
+	[defaults removeObjectForKey:kRENRENNAMEKEY];
+	[defaults removeObjectForKey:kRENRENTOKENKEY];
 	[renrenEngine logout:self];
 }
 - (BOOL)isRenrenSessionValid
@@ -148,14 +191,25 @@
 }
 - (void)weiboLogout
 {
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kWEIBOIDKEY];
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kWEIBONAMEKEY];
-	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kWEIBOTOKENKEY];
+	[defaults removeObjectForKey:kWEIBOIDKEY];
+	[defaults removeObjectForKey:kWEIBONAMEKEY];
+	[defaults removeObjectForKey:kWEIBOTOKENKEY];
 	[weiBoEngine logOut];
 }
 - (BOOL)isWeiboSessionValid
 {
 	return ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]);
+}
+
+#pragma mark - University API
+
+- (void)requestUniversities
+{
+	universityRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIUniversity];
+	
+	[universityRequest setDelegate:self];
+	[universityRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[universityRequest startAsynchronous];
 }
 
 #pragma mark - ASIHTTPRequestDelegate
@@ -167,6 +221,13 @@
 											 options:NSJSONWritingPrettyPrinted
 											   error:nil];
 	NSLog(@"%@", res);
+	
+	if ([res isKindOfClass:[NSDictionary class]] && [res objectForKey:kAPIERROR]) {
+		if ([self.delegate respondsToSelector:@selector(requestError:)]) {
+			[self.delegate requestError:[res objectForKey:kAPIERROR]];
+		}
+		return ;
+	}
 	
 	if ([request isEqual:emailLoginRequest] || [request isEqual:weiboLoginRequest]) {
 		NSString *nickname = nil;
@@ -182,7 +243,6 @@
 			university_name = [[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPINAME];
 		}
 		
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		[defaults setValue:nickname forKey:kNANBEIGENICKNAMEKEY];
 		[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
 		[defaults setValue:university_id forKey:kUNIVERSITYIDKEY];
@@ -200,6 +260,18 @@
 	if ([request isEqual:logoutRequest]) {
 		if ([self.delegate respondsToSelector:@selector(didEmailLogout)]) {
 			[self.delegate didEmailLogout];
+		}
+	}
+	if ([request isEqual:signupRequest]) {
+		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+		[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+		if ([self.delegate respondsToSelector:@selector(didEmailSignupWithID:)]) {
+			[self.delegate didEmailSignupWithID:nanbeigeid];
+		}
+	}
+	if ([request isEqual:universityRequest]) {
+		if ([self.delegate respondsToSelector:@selector(didUniversitiesReceived:)]) {
+			[self.delegate didUniversitiesReceived:res];
 		}
 	}
 	
@@ -231,10 +303,10 @@
 // Log in successfully.
 - (void)engineDidLogIn:(WBEngine *)engine
 {
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITWEIBO_TOKEN];
-	[[NSUserDefaults standardUserDefaults] setObject:[weiBoEngine accessToken] forKey:kWEIBOTOKENKEY];
-	[[NSUserDefaults standardUserDefaults] setObject:[weiBoEngine userID] forKey:kWEIBOIDKEY];
+	[defaults setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
+	[defaults setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITWEIBO_TOKEN];
+	[defaults setObject:[weiBoEngine accessToken] forKey:kWEIBOTOKENKEY];
+	[defaults setObject:[weiBoEngine userID] forKey:kWEIBOIDKEY];
 	
 	NSDictionary *params = @{ @"uid" : [weiBoEngine userID] };
 	[weiBoEngine loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil];
@@ -283,7 +355,7 @@
 {
 	NSLog(@"%@", result);
 	if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISCREEN_NAME]) {
-		[[NSUserDefaults standardUserDefaults] setObject:[result objectForKey:kAPISCREEN_NAME] forKey:kWEIBONAMEKEY];
+		[defaults setObject:[result objectForKey:kAPISCREEN_NAME] forKey:kWEIBONAMEKEY];
 		if ([self.delegate respondsToSelector:@selector(didWeiboLoginWithUserID:UserName:WeiboToken:)]) {
 			[self.delegate didWeiboLoginWithUserID:[weiBoEngine userID] UserName:[result objectForKey:kAPISCREEN_NAME] WeiboToken:[weiBoEngine accessToken]];
 		}
@@ -299,7 +371,6 @@
 - (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response
 {
 	if ([response.rootObject isKindOfClass:[NSArray class]]) {
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		[defaults setValue:[renrenEngine accessToken] forKey:kRENRENTOKENKEY];
 		NSArray *usersInfo = (NSArray *)(response.rootObject);
 		for (ROUserResponseItem *item in usersInfo) {

@@ -133,34 +133,11 @@
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDIT] boolValue]) {
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDIT];
 		
 		[self loading:YES];
 		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 		
-		NSString *password = nil;
-		NSString *nickname = nil;
-		NSNumber *university_id = nil;
-		NSString *weibo_token = nil;
-		
-		if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITUNIVERSITY_ID] boolValue]) {
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITUNIVERSITY_ID];
-			university_id = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY];
-		}
-		if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITWEIBO_TOKEN] boolValue]) {
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITWEIBO_TOKEN];
-			weibo_token = [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY];
-		}
-		if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITNICKNAME] boolValue]) {
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITNICKNAME];
-			nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY];
-		}
-		if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITPASSWORD] boolValue]) {
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITPASSWORD];
-			password = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEPASSWORDKEY];
-		}
-		
-		[accountManager emailEditWithPassword:password Nickname:nickname UniversityID:university_id WeiboToken:weibo_token];
+		[accountManager emailEditWithPassword:nil Nickname:nil UniversityID:nil WeiboToken:nil];
 		
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];

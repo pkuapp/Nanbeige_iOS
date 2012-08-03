@@ -8,12 +8,13 @@
 
 #import "NanbeigeEmailSignupViewController.h"
 #import "Environment.h"
-#import "ASIFormDataRequest.h"
+#import "NanbeigeAccountManager.h"
 
-@interface NanbeigeEmailSignupViewController () {
+@interface NanbeigeEmailSignupViewController () <AccountManagerDelegate> {
 	NSString *email;
 	NSString *nickname;
 	NSString *password;
+	NanbeigeAccountManager *accountManager;
 }
 
 @end
@@ -42,6 +43,9 @@
 	// Do any additional setup after loading the view.
 	UIBarButtonItem *signupButton = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleBordered target:self action:@selector(onSignup:)];
 	self.navigationItem.rightBarButtonItem = signupButton;
+	
+	accountManager = [[NanbeigeAccountManager alloc] initWithViewController:self];
+	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -83,62 +87,29 @@
 		return ;
     }
 	
-	ASIFormDataRequest *signupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegEmail];
-	
-	[signupRequest addPostValue:email forKey:kAPIEMAIL];
-	[signupRequest addPostValue:nickname forKey:kAPINICKNAME];
-	[signupRequest addPostValue:password forKey:kAPIPASSWORD];
-	[signupRequest setDelegate:self];
-	[signupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
-	[signupRequest startAsynchronous];
+	[accountManager emailSignupWithEmail:email Password:password Nickname:nickname];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request
+- (void)didEmailSignupWithID:(NSNumber *)nanbeigeid
 {
 	[self loading:NO];
-	NSData *responseData = [request responseData];
-	id res = [NSJSONSerialization JSONObjectWithData:responseData
-											 options:NSJSONWritingPrettyPrinted
-											   error:nil];
-	NSLog(@"%@", res);
-	if ([res objectForKey:kAPIERROR]) {
-		[self showAlert:[res objectForKey:kAPIERROR]];
-		return ;
-	}
-	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:email forKey:kNANBEIGEEMAILKEY];
-	[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
-	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
-	[defaults setObject:[res objectForKey:kAPIID] forKey:kNANBEIGEIDKEY];
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
-		[defaults setObject:[res objectForKey:kAPIID] forKey:kACCOUNTIDKEY];
-		[defaults setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:nanbeigeid forKey:kACCOUNTIDKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
+	}
+	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:)]) {
+		[self.accountManagerDelegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:nil UniversityName:nil];
 	}
 	[self dismissModalViewControllerAnimated:YES];
 }
-- (void)requestFailed:(ASIHTTPRequest *)request
+- (void)requestError:(NSString *)errorString
 {
 	[self loading:NO];
-	NSData *responseData = [request responseData];
-	if (responseData) {
-		id res = [NSJSONSerialization JSONObjectWithData:responseData
-												 options:NSJSONWritingPrettyPrinted
-												   error:nil];
-		NSLog(@"%@", res);
-		if ([res objectForKey:kAPIERROR]) {
-			[self showAlert:[res objectForKey:kAPIERROR]];
-			return ;
-		}
-	}
-	
-	NSError *error = [request error];
-	NSLog(@"%@", error);
-	[self showAlert:[error description]];
+	[self showAlert:errorString];
 }
 
 @end

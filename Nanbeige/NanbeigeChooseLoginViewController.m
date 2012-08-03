@@ -9,6 +9,7 @@
 #import "NanbeigeChooseLoginViewController.h"
 #import "Environment.h"
 #import "NanbeigeAccountManager.h"
+#import "NanbeigeEmailLoginViewController.h"
 
 @interface NanbeigeChooseLoginViewController () <AccountManagerDelegate> {
 	NanbeigeAccountManager *accountManager;
@@ -53,8 +54,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-	[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+	[super viewWillAppear:animated];
+
+	//Only clean defaults when Login Methods show to choose
+	id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
+	NSDictionary *emptySettings = (workaround51Crash != nil)
+	? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
+	: [NSDictionary dictionary];
+	[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -66,6 +73,16 @@
 	}
 }
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	[super prepareForSegue:segue sender:sender];
+	if ([segue.identifier isEqualToString:@"EmailLoginSegue"]) {
+		UINavigationController *navVC = segue.destinationViewController;
+		NanbeigeEmailLoginViewController *destinationVC = (NanbeigeEmailLoginViewController *)navVC.topViewController;
+		destinationVC.accountManagerDelegate = self;
+	}
+}
 - (void)onEmailLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];

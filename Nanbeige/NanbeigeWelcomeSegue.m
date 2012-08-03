@@ -12,7 +12,6 @@
 @implementation NanbeigeWelcomeSegue
 
 -(void) perform{
-	
 	transition = [[DoorsTransition alloc] init];
 	[[HMGLTransitionManager sharedTransitionManager] setTransition:transition];
 	

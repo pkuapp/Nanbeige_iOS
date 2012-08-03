@@ -7,7 +7,10 @@
 //
 
 #import "QuickDialogController.h"
+#import "NanbeigeAccountManager.h"
 
 @interface NanbeigeEmailSignupViewController : QuickDialogController
+
+@property (strong, nonatomic) id<AccountManagerDelegate> accountManagerDelegate;
 
 @end

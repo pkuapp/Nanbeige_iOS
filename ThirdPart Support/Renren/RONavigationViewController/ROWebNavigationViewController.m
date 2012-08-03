@@ -36,12 +36,12 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        self.webView = [[[UIWebView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44)] autorelease];
+        self.webView = [[[UIWebView alloc] initWithFrame:CGRectMake(0, self.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-self.navigationBar.frame.size.height)] autorelease];
         self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:self.webView];
         //        [self.webView release];
         
-        self.indicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
+        self.indicatorView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
         self.indicatorView.hidesWhenStopped = YES;
         self.indicatorView.center = self.webView.center;
         [self.view addSubview:self.indicatorView];
@@ -149,6 +149,7 @@
     request.HTTPMethod = @"POST";
     [self.webView loadRequest:request];
     self.webView.delegate = self;
+	self.indicatorView.hidden = NO;
     [self.indicatorView startAnimating];
     
 }

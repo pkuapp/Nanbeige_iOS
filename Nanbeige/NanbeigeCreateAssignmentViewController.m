@@ -91,6 +91,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+	[super viewDidAppear:animated];
 	[self.assignmentTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
 	if (initWithCamera) {
 		initWithCamera = NO;
@@ -325,6 +326,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+	[super prepareForSegue:segue sender:sender];
 	if ([segue.identifier isEqualToString:@"DeadlineSegue"]) {
 		NanbeigeAssignmentDeadlineViewController *nadvc = segue.destinationViewController;
 		nadvc.assignment = self.assignment;

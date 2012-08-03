@@ -138,10 +138,12 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
 	[self changeDetailGateInfo:nil isConnecting:NO];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+	[super viewDidAppear:animated];
 	if (bViewDidLoad && ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0)) {
 		[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
 		bViewDidLoad = NO;
@@ -350,6 +352,7 @@
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+	[super prepareForSegue:segue sender:sender];
 	if ([segue.identifier isEqualToString:@"DetailGateInfoSegue"]) {
 		NanbeigeDetailGateInfoViewController *dvc = segue.destinationViewController;
 		

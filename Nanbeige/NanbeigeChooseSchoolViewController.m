@@ -8,10 +8,11 @@
 
 #import "NanbeigeChooseSchoolViewController.h"
 #import "Environment.h"
-#import "ASIHttpRequest.h"
+#import "NanbeigeAccountManager.h"
 
-@interface NanbeigeChooseSchoolViewController () {
+@interface NanbeigeChooseSchoolViewController () <AccountManagerDelegate> {
 	NSDictionary *dict;
+	NanbeigeAccountManager *accountManager;
 }
 
 @end
@@ -39,11 +40,9 @@
 	// Do any additional setup after loading the view.
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
-	ASIHTTPRequest *universityRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIUniversity];
-	
-	[universityRequest setDelegate:self];
-	[universityRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
-	[universityRequest startAsynchronous];
+	accountManager = [[NanbeigeAccountManager alloc] initWithViewController:self];
+	accountManager.delegate = self;
+	[accountManager requestUniversities];
 	
 	[self loading:YES];
 }
@@ -72,7 +71,11 @@
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITUNIVERSITY_ID];
-	[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
+		[self.navigationController popViewControllerAnimated:YES];
+	} else {
+		[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
+	}
 }
 
 -(void)showAlert:(NSString*)message{
@@ -82,26 +85,18 @@
 					  cancelButtonTitle:@"确定"
 					  otherButtonTitles:nil] show];
 }
-- (void)requestFinished:(ASIHTTPRequest *)request
+- (void)didUniversitiesReceived:(NSArray *)universities
 {
 	[self loading:NO];
-	NSData *responseData = [request responseData];
-	id res = [NSJSONSerialization JSONObjectWithData:responseData
-											 options:NSJSONWritingPrettyPrinted
-											   error:nil];
-	NSLog(@"%@", res);
 	
-	dict = @{@"university":res};
+	dict = @{@"university":universities};
 	[self.root bindToObject:dict];
     [self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
 }
-- (void)requestFailed:(ASIHTTPRequest *)request
+- (void)requestError:(NSString *)errorString
 {
 	[self loading:NO];
-	
-	NSError *error = [request error];
-	NSLog(@"%@", error);
-	[self showAlert:[error description]];
+	[self showAlert:errorString];
 }
 
 @end
