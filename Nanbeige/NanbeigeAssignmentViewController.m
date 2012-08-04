@@ -127,7 +127,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-#warning 用伪数据测试
 	self.title = TITLE_ASSIGNMENT;
 	self.assignmentsTableViewRecognizer = [self.assignmentsTableView enableGestureTableViewWithDelegate:self];
 	self.completeAssignmentsTableViewRecognizer = [self.completeAssignmentsTableView enableGestureTableViewWithDelegate:self];

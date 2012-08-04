@@ -22,6 +22,7 @@
 	
 	ASIFormDataRequest *emailLoginRequest;
 	ASIFormDataRequest *weiboLoginRequest;
+	ASIFormDataRequest *renrenLoginRequest;
 	ASIFormDataRequest *editRequest;
 	ASIFormDataRequest *logoutRequest;
 	ASIFormDataRequest *signupRequest;
@@ -86,16 +87,28 @@
 	[weiboLoginRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[weiboLoginRequest startAsynchronous];
 }
+- (void)emailLoginWithRenrenToken:(NSString *)renren_token
+{
+	[defaults setObject:renren_token forKey:kRENRENTOKENKEY];
+	
+	renrenLoginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginRenren];
+	
+	[renrenLoginRequest addPostValue:renren_token forKey:kAPITOKEN];
+	[renrenLoginRequest setDelegate:self];
+	[renrenLoginRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[renrenLoginRequest startAsynchronous];
+}
+
 - (void)emailEditWithPassword:(NSString *)password
-				Nickname:(NSString *)nickname
-			UniversityID:(NSNumber *)university_id
-			  WeiboToken:(NSString *)weibo_token
+					 Nickname:(NSString *)nickname
+					 CampusID:(NSNumber *)campus_id
+				   WeiboToken:(NSString *)weibo_token
 {
 	editRequest = [[ASIFormDataRequest alloc] initWithURL:urlAPIUserEdit];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDIT];
-	if (!university_id && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITUNIVERSITY_ID] boolValue]) {
-		university_id = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY];
+	if (!campus_id && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITCAMPUS_ID] boolValue]) {
+		campus_id = [[NSUserDefaults standardUserDefaults] objectForKey:kCAMPUSIDKEY];
 	}
 	if (!weibo_token && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITWEIBO_TOKEN] boolValue]) {
 		weibo_token = [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY];
@@ -107,10 +120,10 @@
 		password = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEPASSWORDKEY];
 	}
 	
-	if (university_id) {
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITUNIVERSITY_ID];
-		[editRequest addPostValue:university_id forKey:kAPIUNIVERSITY_ID];
-		[defaults setObject:university_id forKey:kUNIVERSITYIDKEY];
+	if (campus_id) {
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITCAMPUS_ID];
+		[editRequest addPostValue:campus_id forKey:kAPICAMPUS_ID];
+		[defaults setObject:campus_id forKey:kCAMPUSIDKEY];
 	}
 	if (weibo_token) {
 		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITWEIBO_TOKEN];
@@ -238,11 +251,13 @@
 		return ;
 	}
 	
-	if ([request isEqual:emailLoginRequest] || [request isEqual:weiboLoginRequest]) {
-		NSString *nickname = nil;
+	if ([request isEqual:emailLoginRequest] || [request isEqual:weiboLoginRequest] || [request isEqual:renrenLoginRequest]) {
 		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+		NSString *nickname = nil;
 		NSNumber *university_id = nil;
 		NSString *university_name = nil;
+		NSNumber *campus_id = nil;
+		NSString *campus_name = nil;
 		
 		if ([[res objectForKey:kAPINICKNAME] isKindOfClass:[NSString class]]) {
 			nickname = [res objectForKey:kAPINICKNAME];
@@ -251,16 +266,21 @@
 			university_id = [[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPIID];
 			university_name = [[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPINAME];
 		}
-		
+		if ([res objectForKey:kAPICAMPUS] && [[res objectForKey:kAPICAMPUS] isKindOfClass:[NSDictionary class]]) {
+			campus_id = [[res objectForKey:kAPICAMPUS] objectForKey:kAPIID];
+			campus_name = [[res objectForKey:kAPICAMPUS] objectForKey:kAPINAME];
+		}
 		[defaults setValue:nickname forKey:kNANBEIGENICKNAMEKEY];
 		[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
 		[defaults setValue:university_id forKey:kUNIVERSITYIDKEY];
 		[defaults setValue:university_name forKey:kUNIVERSITYNAMEKEY];
+		[defaults setValue:campus_id forKey:kCAMPUSIDKEY];
+		[defaults setValue:campus_name forKey:kCAMPUSNAMEKEY];
 		[defaults removeObjectForKey:kCAMPUSIDKEY];
 		[defaults removeObjectForKey:kCAMPUSNAMEKEY];
 		
-		if ([self.delegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:)]) {
-			[self.delegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name];
+		if ([self.delegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
+			[self.delegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
 		}
 	}
 	if ([request isEqual:editRequest]) {

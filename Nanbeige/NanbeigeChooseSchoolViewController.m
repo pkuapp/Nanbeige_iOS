@@ -9,10 +9,12 @@
 #import "NanbeigeChooseSchoolViewController.h"
 #import "Environment.h"
 #import "NanbeigeAccountManager.h"
+#import "NanbeigeChooseCampusViewController.h"
 
 @interface NanbeigeChooseSchoolViewController () <AccountManagerDelegate> {
 	NSDictionary *dict;
 	NanbeigeAccountManager *accountManager;
+	NSDictionary *university;
 }
 
 @end
@@ -44,6 +46,8 @@
 	accountManager.delegate = self;
 	[accountManager requestUniversities];
 	
+	university = nil;
+	
 	[self loading:YES];
 }
 - (void)didUniversitiesReceived:(NSArray *)universities
@@ -53,6 +57,14 @@
 	dict = @{@"university":universities};
 	[self.root bindToObject:dict];
     [self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	if (university) {
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 - (void)viewDidUnload
@@ -79,34 +91,30 @@
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kCAMPUSIDKEY];
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kCAMPUSNAMEKEY];
 	
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITUNIVERSITY_ID];
-	
-	[accountManager requestUniversitie:[[[dict objectForKey:kAPIUNIVERSITY] objectAtIndex:index] objectForKey:kAPIID]];
-}
-- (void)didUniversityReceived:(NSDictionary *)university
-{
-	if ([university isKindOfClass:[NSDictionary class]] && [[university objectForKey:kAPICAMPUSES] count] > 1) {
+	university = [[dict objectForKey:@"university"] objectAtIndex:index];
+	if ([[university objectForKey:kAPICAMPUSES] count] == 1) {
 		
-		self.root = [[QRootElement alloc] initWithJSONFile:@"chooseCampus"];
-		[self.root bindToObject:university];
-		[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
-	} else {
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITCAMPUS_ID];
+		
+		NSNumber *campus_id = [[[university objectForKey:kAPICAMPUSES] objectAtIndex:0] objectForKey:kAPIID];
+		[[NSUserDefaults standardUserDefaults] setObject:campus_id forKey:kCAMPUSIDKEY];
+		
 		if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
 			[self.navigationController popViewControllerAnimated:YES];
 		} else {
 			[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
 		}
+	} else {
+		[self performSegueWithIdentifier:@"ChooseCampusSegue" sender:self];
 	}
 }
 
-- (void)onChooseCampus:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	[[NSUserDefaults standardUserDefaults] setObject:[sender title] forKey:kCAMPUSNAMEKEY];
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
-		[self.navigationController popViewControllerAnimated:YES];
-	} else {
-		[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
+	if ([segue.identifier isEqualToString:@"ChooseCampusSegue"]) {
+		NanbeigeChooseCampusViewController *chooseCampusVC = segue.destinationViewController;
+		chooseCampusVC.university = university;
 	}
 }
 

@@ -1471,11 +1471,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2135" y="818"/>
         </scene>
-        <!--View Controller-->
+        <!--Nanbeige Choose Campus View Controller-->
         <scene sceneID="vQg-na-eW4">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="seo-T9-rE2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="5pG-vj-gOj" sceneMemberID="viewController">
+                <viewController id="5pG-vj-gOj" customClass="NanbeigeChooseCampusViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UOR-e5-U4A">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1487,7 +1487,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1038" y="1142"/>
+            <point key="canvasLocation" x="1038" y="818"/>
         </scene>
         <!--Nanbeige Email Login View Controller-->
         <scene sceneID="56t-8L-7ZF">

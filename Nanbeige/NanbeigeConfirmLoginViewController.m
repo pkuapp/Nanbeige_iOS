@@ -139,7 +139,7 @@
 		[self loading:YES];
 		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 		
-		[accountManager emailEditWithPassword:nil Nickname:nil UniversityID:nil WeiboToken:nil];
+		[accountManager emailEditWithPassword:nil Nickname:nil CampusID:nil WeiboToken:nil];
 		
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];

@@ -118,14 +118,16 @@
 				   Nickname:(NSString *)nickname
 			   UniversityID:(NSNumber *)university_id
 			 UniversityName:(NSString *)university_name
+				   CampusID:(NSNumber *)campus_id
+				 CampusName:(NSString *)campus_name
 {
 	[self loading:NO];
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
 	}
-	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:)]) {
-		[self.accountManagerDelegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name];
+	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
+		[self.accountManagerDelegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
 	}
 	[self close];
 }

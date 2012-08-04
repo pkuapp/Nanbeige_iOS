@@ -24,19 +24,21 @@
 #define urlCourseCategory @"http://www.pkucada.org:8082/Server/course/category"
 
 #define DEFAULT_TIMEOUT 20
-#define urlAPIUserLoginEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/email/"]
-#define urlAPIUserLoginWeibo [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/weibo/"]
-#define urlAPIUserLogout [NSURL URLWithString:@"http://api.pkuapp.com:333/user/logout/"]
-#define urlAPIUserRegEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/email/"]
-#define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:333/user/edit/"]
-#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
-#define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
+#define urlAPIUserLoginEmail [NSURL URLWithString:@"http://api.pkuapp.com:334/user/login/email/"]
+#define urlAPIUserLoginWeibo [NSURL URLWithString:@"http://api.pkuapp.com:334/user/login/weibo/"]
+#define urlAPIUserLoginRenren [NSURL URLWithString:@"http://api.pkuapp.com:334/user/login/renren/"]
+#define urlAPIUserLogout [NSURL URLWithString:@"http://api.pkuapp.com:334/user/logout/"]
+#define urlAPIUserRegEmail [NSURL URLWithString:@"http://api.pkuapp.com:334/user/reg/email/"]
+#define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:334/user/edit/"]
+#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:334/course/"]
+#define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:334/university/"]
 #define kAPIEMAIL @"email"
 #define kAPIPASSWORD @"password"
 #define kAPINICKNAME @"nickname"
 #define kAPIERROR @"error"
 #define kAPIUNIVERSITY @"university"
-#define kAPIUNIVERSITY_ID @"university_id"
+#define kAPICAMPUS @"campus"
+#define kAPICAMPUS_ID @"campus_id"
 #define kAPICAMPUSES @"campuses"
 #define kAPIWEIBO_TOKEN @"weibo_token"
 #define kAPIID @"id"
@@ -88,7 +90,7 @@
 #define kACCOUNTIDKEY @"accoundid"
 #define kACCOUNTNICKNAMEKEY @"accountnickname"
 #define kACCOUNTEDIT @"accountedit"
-#define kACCOUNTEDITUNIVERSITY_ID @"accountedituniversity_id"
+#define kACCOUNTEDITCAMPUS_ID @"accounteditcampus_id"
 #define kACCOUNTEDITWEIBO_TOKEN @"accounteditweibo_token"
 #define kACCOUNTEDITNICKNAME @"accounteditnickname"
 #define kACCOUNTEDITPASSWORD @"accounteditpassword"

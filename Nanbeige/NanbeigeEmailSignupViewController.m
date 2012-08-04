@@ -101,8 +101,8 @@
 		[[NSUserDefaults standardUserDefaults] setObject:nanbeigeid forKey:kACCOUNTIDKEY];
 		[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
 	}
-	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:)]) {
-		[self.accountManagerDelegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:nil UniversityName:nil];
+	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
+		[self.accountManagerDelegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:nil UniversityName:nil CampusID:nil CampusName:nil];
 	}
 	[self dismissModalViewControllerAnimated:YES];
 }

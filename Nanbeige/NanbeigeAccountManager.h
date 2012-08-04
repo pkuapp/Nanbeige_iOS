@@ -24,9 +24,18 @@
 - (void)didRenrenLogout;
 
 - (void)didEmailLoginWithID:(NSNumber *)ID
-			  Nickname:(NSString *)nickname
-		  UniversityID:(NSNumber *)university_id
-		UniversityName:(NSString *)university_name;
+				   Nickname:(NSString *)nickname
+			   UniversityID:(NSNumber *)university_id
+			 UniversityName:(NSString *)university_name
+				   CampusID:(NSNumber *)campus_id
+				 CampusName:(NSString *)campus_name;
+- (void)didEmailLoginWithEmail:(NSString *)email
+					WeiboToken:(NSString *)weibo_token
+					 WeiboName:(NSString *)weibo_name
+				   RenrenToken:(NSString *)renren_token
+					RenrenName:(NSString *)renren_name
+				CourseImported:(BOOL)course_imported
+					FirstLogin:(BOOL)first_login;
 - (void)didEmailLogout;
 - (void)didEmailEdit;
 - (void)didEmailSignupWithID:(NSNumber *)ID;
@@ -45,10 +54,11 @@
 - (void)emailLoginWithEmail:(NSString *)email
 			  Password:(NSString *)password;
 - (void)emailLoginWithWeiboToken:(NSString *)weibo_token;
+- (void)emailLoginWithRenrenToken:(NSString *)renren_token;
 - (void)emailEditWithPassword:(NSString *)password
-				Nickname:(NSString *)nickname
-			UniversityID:(NSNumber *)university_id
-			  WeiboToken:(NSString *)weibo_token;
+					 Nickname:(NSString *)nickname
+					 CampusID:(NSNumber *)campus_id
+				   WeiboToken:(NSString *)weibo_token;
 - (void)emailLogout;
 - (void)emailSignupWithEmail:(NSString *)email
 					Password:(NSString *)password

@@ -105,12 +105,14 @@
 }
 - (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
 {
+#warning 等待服务器完成人人网token使用流程
+	//[accountManager emailLoginWithRenrenToken:renren_token];
 	[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
 }
 
-- (void)didEmailLoginWithID:(NSNumber *)ID Nickname:(NSString *)nickname UniversityID:(NSNumber *)university_id UniversityName:(NSString *)university_name
+- (void)didEmailLoginWithID:(NSNumber *)ID Nickname:(NSString *)nickname UniversityID:(NSNumber *)university_id UniversityName:(NSString *)university_name CampusID:(NSNumber *)campus_id CampusName:(NSString *)campus_name
 {
-	if (university_id) {
+	if (campus_id) {
 		[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
 	} else {
 		[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
