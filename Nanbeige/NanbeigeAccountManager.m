@@ -225,7 +225,7 @@
 	[universitiesRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[universitiesRequest startAsynchronous];
 }
-- (void) requestUniversitie:(NSNumber *)university_id
+- (void) requestUniversity:(NSNumber *)university_id
 {
 	universityRequest = [[ASIHTTPRequest alloc] initWithURL:[urlAPIUniversity URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/", university_id]]];
 	
@@ -276,8 +276,6 @@
 		[defaults setValue:university_name forKey:kUNIVERSITYNAMEKEY];
 		[defaults setValue:campus_id forKey:kCAMPUSIDKEY];
 		[defaults setValue:campus_name forKey:kCAMPUSNAMEKEY];
-		[defaults removeObjectForKey:kCAMPUSIDKEY];
-		[defaults removeObjectForKey:kCAMPUSNAMEKEY];
 		
 		if ([self.delegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
 			[self.delegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
@@ -306,6 +304,7 @@
 		}
 	}
 	if ([request isEqual:universityRequest]) {
+		[defaults setObject:res forKey:kTEMPUNIVERSITY];
 		if ([self.delegate respondsToSelector:@selector(didUniversityReceived:)]) {
 			[self.delegate didUniversityReceived:res];
 		}

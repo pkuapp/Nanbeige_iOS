@@ -9,7 +9,6 @@
 #import "NanbeigeStreamViewController.h"
 #import "Environment.h"
 #import "ASIHTTPRequest.h"
-#import "NanbeigeStreamDetailViewController.h"
 
 @interface NanbeigeStreamViewController ()
 
@@ -42,7 +41,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
-	self.tableView.backgroundColor = tableBgColor1;
+	self.tableView.backgroundColor = tableBgColor2;
 
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
@@ -55,7 +54,7 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
 	self.title = TITLE_STREAM;
-	self.streams = [[NSUserDefaults standardUserDefaults] valueForKey:kCOURSES];
+	self.streams = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPCOURSES];
 }
 
 - (void)viewDidUnload
@@ -208,13 +207,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (self.splitViewController) {
-		id nsdvc = [self.splitViewController.viewControllers lastObject];
-		if (![nsdvc isKindOfClass:[NanbeigeStreamDetailViewController class]]) {
-			nsdvc = nil;
-		}
-		[nsdvc setCourse:[self.streams objectAtIndex:indexPath.row]];
-	}
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -253,7 +245,7 @@
 											 options:NSJSONWritingPrettyPrinted
 											   error:nil];
 	self.streams = res;
-	[[NSUserDefaults standardUserDefaults] setValue:res forKey:kCOURSES];
+	[[NSUserDefaults standardUserDefaults] setValue:res forKey:kTEMPCOURSES];
 	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 }
 - (void)requestFailed:(ASIHTTPRequest *)request

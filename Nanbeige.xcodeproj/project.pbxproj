@@ -445,8 +445,19 @@
 		26A6B69315B41B17006FA15D /* Welcome-button-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5EC15B41B17006FA15D /* Welcome-button-active@2x.png */; };
 		26A6B69415B41B17006FA15D /* Welcome-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5ED15B41B17006FA15D /* Welcome-button.png */; };
 		26A6B69515B41B17006FA15D /* Welcome-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5EE15B41B17006FA15D /* Welcome-button@2x.png */; };
-		26AB037515C1960F00539AB5 /* NanbeigeStreamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AB037415C1960E00539AB5 /* NanbeigeStreamDetailViewController.m */; };
 		26B9667115BC1C830081002C /* NanbeigeAssignmentDeadlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */; };
+		26D1DAF915D2153400A24308 /* NanbeigeCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DAF815D2153400A24308 /* NanbeigeCoursesViewController.m */; };
+		26D1DAFC15D2174E00A24308 /* NanbeigeTimeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DAFB15D2174E00A24308 /* NanbeigeTimeTable.m */; };
+		26D1DB4515D22C6800A24308 /* SYPaginator.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26D1DB2415D22C6800A24308 /* SYPaginator.strings */; };
+		26D1DB4615D22C6800A24308 /* SYPaginatorResources-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26D1DB3315D22C6800A24308 /* SYPaginatorResources-Info.plist */; };
+		26D1DB4715D22C6800A24308 /* NSBundle+SYPaginator.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DB3815D22C6800A24308 /* NSBundle+SYPaginator.m */; };
+		26D1DB4815D22C6800A24308 /* SYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DB3A15D22C6800A24308 /* SYPageControl.m */; };
+		26D1DB4915D22C6800A24308 /* SYPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DB3C15D22C6800A24308 /* SYPageView.m */; };
+		26D1DB4A15D22C6800A24308 /* SYPaginatorResources-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26D1DB3E15D22C6800A24308 /* SYPaginatorResources-Info.plist */; };
+		26D1DB4B15D22C6800A24308 /* SYPaginatorScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DB4015D22C6800A24308 /* SYPaginatorScrollView.m */; };
+		26D1DB4C15D22C6800A24308 /* SYPaginatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DB4215D22C6800A24308 /* SYPaginatorView.m */; };
+		26D1DB4D15D22C6800A24308 /* SYPaginatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DB4415D22C6800A24308 /* SYPaginatorViewController.m */; };
+		26D1DB4E15D22C9800A24308 /* SYPaginatorResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 26D1DB1C15D22B6500A24308 /* SYPaginatorResources.bundle */; };
 		26D5FA1315AFE2B20075B68D /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */; };
 		26D5FA1C15AFFB930075B68D /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D5FA1B15AFFB930075B68D /* NanbeigeLoginItsViewController.m */; };
 		26E2CB5C15B50BD100F8FA3D /* widget_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E2CB5B15B50BD100F8FA3D /* widget_point.png */; };
@@ -461,6 +472,37 @@
 		26E96D7915AC156A005353D4 /* weibo-logo-280x144.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E96D7815AC1566005353D4 /* weibo-logo-280x144.png */; };
 		26E96D7F15AC1644005353D4 /* NanbeigeWeiboPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E96D7E15AC1643005353D4 /* NanbeigeWeiboPostViewController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		26D1DB1915D22B6500A24308 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26D1DB1115D22B6500A24308 /* SYPaginator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2C4DF531509621B00ABF21F;
+			remoteInfo = SYPaginator;
+		};
+		26D1DB1B15D22B6500A24308 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26D1DB1115D22B6500A24308 /* SYPaginator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2D19608151928EB006BB5AD;
+			remoteInfo = SYPaginatorResources;
+		};
+		26D1DB1D15D22B8200A24308 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26D1DB1115D22B6500A24308 /* SYPaginator.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B2D19607151928EB006BB5AD;
+			remoteInfo = SYPaginatorResources;
+		};
+		26D1DB1F15D22B8700A24308 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26D1DB1115D22B6500A24308 /* SYPaginator.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B2C4DF521509621B00ABF21F;
+			remoteInfo = SYPaginator;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2601D06015ADACEF0066C1FD /* NanbeigeIPGateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeIPGateHelper.h; sourceTree = "<group>"; };
@@ -1270,11 +1312,45 @@
 		26A6B5F315B41B17006FA15D /* widget_3line_2btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_3line_2btn.png; sourceTree = "<group>"; };
 		26A6E98215B30BA20001B2E0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		26A6E98315B30BA20001B2E0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		26AB037315C1960E00539AB5 /* NanbeigeStreamDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeStreamDetailViewController.h; sourceTree = "<group>"; };
-		26AB037415C1960E00539AB5 /* NanbeigeStreamDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeStreamDetailViewController.m; sourceTree = "<group>"; };
 		26AB037715C1994A00539AB5 /* NanbeigeSplitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeSplitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 		26B9666F15BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentDeadlineViewController.h; sourceTree = "<group>"; };
 		26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentDeadlineViewController.m; sourceTree = "<group>"; };
+		26D1DAF715D2153400A24308 /* NanbeigeCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeCoursesViewController.h; sourceTree = "<group>"; };
+		26D1DAF815D2153400A24308 /* NanbeigeCoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeCoursesViewController.m; sourceTree = "<group>"; };
+		26D1DAFA15D2174E00A24308 /* NanbeigeTimeTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeTimeTable.h; sourceTree = "<group>"; };
+		26D1DAFB15D2174E00A24308 /* NanbeigeTimeTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeTimeTable.m; sourceTree = "<group>"; };
+		26D1DB1115D22B6500A24308 /* SYPaginator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SYPaginator.xcodeproj; sourceTree = "<group>"; };
+		26D1DB2515D22C6800A24308 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2615D22C6800A24308 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2715D22C6800A24308 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2815D22C6800A24308 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2915D22C6800A24308 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2A15D22C6800A24308 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2B15D22C6800A24308 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2C15D22C6800A24308 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2D15D22C6800A24308 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2E15D22C6800A24308 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB2F15D22C6800A24308 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB3015D22C6800A24308 /* pt_PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_PT; path = pt_PT.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB3115D22C6800A24308 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB3215D22C6800A24308 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB3315D22C6800A24308 /* SYPaginatorResources-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SYPaginatorResources-Info.plist"; sourceTree = "<group>"; };
+		26D1DB3415D22C6800A24308 /* zh_Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_Hans; path = zh_Hans.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB3515D22C6800A24308 /* zh_Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_Hant; path = zh_Hant.lproj/SYPaginator.strings; sourceTree = "<group>"; };
+		26D1DB3715D22C6800A24308 /* NSBundle+SYPaginator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+SYPaginator.h"; sourceTree = "<group>"; };
+		26D1DB3815D22C6800A24308 /* NSBundle+SYPaginator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+SYPaginator.m"; sourceTree = "<group>"; };
+		26D1DB3915D22C6800A24308 /* SYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPageControl.h; sourceTree = "<group>"; };
+		26D1DB3A15D22C6800A24308 /* SYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPageControl.m; sourceTree = "<group>"; };
+		26D1DB3B15D22C6800A24308 /* SYPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPageView.h; sourceTree = "<group>"; };
+		26D1DB3C15D22C6800A24308 /* SYPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPageView.m; sourceTree = "<group>"; };
+		26D1DB3D15D22C6800A24308 /* SYPaginator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPaginator.h; sourceTree = "<group>"; };
+		26D1DB3E15D22C6800A24308 /* SYPaginatorResources-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SYPaginatorResources-Info.plist"; sourceTree = "<group>"; };
+		26D1DB3F15D22C6800A24308 /* SYPaginatorScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPaginatorScrollView.h; sourceTree = "<group>"; };
+		26D1DB4015D22C6800A24308 /* SYPaginatorScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPaginatorScrollView.m; sourceTree = "<group>"; };
+		26D1DB4115D22C6800A24308 /* SYPaginatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPaginatorView.h; sourceTree = "<group>"; };
+		26D1DB4215D22C6800A24308 /* SYPaginatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPaginatorView.m; sourceTree = "<group>"; };
+		26D1DB4315D22C6800A24308 /* SYPaginatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPaginatorViewController.h; sourceTree = "<group>"; };
+		26D1DB4415D22C6800A24308 /* SYPaginatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPaginatorViewController.m; sourceTree = "<group>"; };
 		26D5FA1115AFE2B20075B68D /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
 		26D5FA1215AFE2B20075B68D /* NanbeigeItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeItsViewController.m; sourceTree = "<group>"; };
 		26D5FA1A15AFFB930075B68D /* NanbeigeLoginItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginItsViewController.h; sourceTree = "<group>"; };
@@ -1602,8 +1678,6 @@
 				26E960FA15ABB07B00A4C595 /* NanbeigeRenrenPostViewController.m */,
 				262AD4A315AA7DEA000C2EF7 /* NanbeigeStreamViewController.h */,
 				262AD4A415AA7DEA000C2EF7 /* NanbeigeStreamViewController.m */,
-				26AB037315C1960E00539AB5 /* NanbeigeStreamDetailViewController.h */,
-				26AB037415C1960E00539AB5 /* NanbeigeStreamDetailViewController.m */,
 			);
 			name = StreamView;
 			sourceTree = "<group>";
@@ -1611,6 +1685,7 @@
 		262AD4AA15AA7E0C000C2EF7 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				26D1DAF615D213FD00A24308 /* CoursesView */,
 				2678C31515B042D0005E1D3E /* MainTableCell */,
 				26E2CB5E15B545ED00F8FA3D /* AssignmentView */,
 				262AD4B115AA7F07000C2EF7 /* ItsView */,
@@ -1974,6 +2049,7 @@
 		262AD5DE15AA8020000C2EF7 /* ThirdPart Support */ = {
 			isa = PBXGroup;
 			children = (
+				26D1DAE015D212D100A24308 /* SYPaginator */,
 				269F9E0D15C9754700EC2499 /* HMGLTransitions */,
 				26283ECC15C8EFAE003C1BC7 /* libQuickDialog */,
 				26283ECE15C8EFAE003C1BC7 /* quickdialog */,
@@ -2566,6 +2642,66 @@
 			name = WelcomeView;
 			sourceTree = "<group>";
 		};
+		26D1DAE015D212D100A24308 /* SYPaginator */ = {
+			isa = PBXGroup;
+			children = (
+				26D1DB2315D22C6800A24308 /* Resources */,
+				26D1DB3615D22C6800A24308 /* SYPaginator */,
+				26D1DB1115D22B6500A24308 /* SYPaginator.xcodeproj */,
+			);
+			path = SYPaginator;
+			sourceTree = "<group>";
+		};
+		26D1DAF615D213FD00A24308 /* CoursesView */ = {
+			isa = PBXGroup;
+			children = (
+				26D1DAF715D2153400A24308 /* NanbeigeCoursesViewController.h */,
+				26D1DAF815D2153400A24308 /* NanbeigeCoursesViewController.m */,
+				26D1DAFA15D2174E00A24308 /* NanbeigeTimeTable.h */,
+				26D1DAFB15D2174E00A24308 /* NanbeigeTimeTable.m */,
+			);
+			name = CoursesView;
+			sourceTree = "<group>";
+		};
+		26D1DB1215D22B6500A24308 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				26D1DB1A15D22B6500A24308 /* libSYPaginator.a */,
+				26D1DB1C15D22B6500A24308 /* SYPaginatorResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		26D1DB2315D22C6800A24308 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				26D1DB2415D22C6800A24308 /* SYPaginator.strings */,
+				26D1DB3315D22C6800A24308 /* SYPaginatorResources-Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		26D1DB3615D22C6800A24308 /* SYPaginator */ = {
+			isa = PBXGroup;
+			children = (
+				26D1DB3715D22C6800A24308 /* NSBundle+SYPaginator.h */,
+				26D1DB3815D22C6800A24308 /* NSBundle+SYPaginator.m */,
+				26D1DB3915D22C6800A24308 /* SYPageControl.h */,
+				26D1DB3A15D22C6800A24308 /* SYPageControl.m */,
+				26D1DB3B15D22C6800A24308 /* SYPageView.h */,
+				26D1DB3C15D22C6800A24308 /* SYPageView.m */,
+				26D1DB3D15D22C6800A24308 /* SYPaginator.h */,
+				26D1DB3E15D22C6800A24308 /* SYPaginatorResources-Info.plist */,
+				26D1DB3F15D22C6800A24308 /* SYPaginatorScrollView.h */,
+				26D1DB4015D22C6800A24308 /* SYPaginatorScrollView.m */,
+				26D1DB4115D22C6800A24308 /* SYPaginatorView.h */,
+				26D1DB4215D22C6800A24308 /* SYPaginatorView.m */,
+				26D1DB4315D22C6800A24308 /* SYPaginatorViewController.h */,
+				26D1DB4415D22C6800A24308 /* SYPaginatorViewController.m */,
+			);
+			path = SYPaginator;
+			sourceTree = "<group>";
+		};
 		26E2CB5E15B545ED00F8FA3D /* AssignmentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2609,6 +2745,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				26D1DB2015D22B8700A24308 /* PBXTargetDependency */,
+				26D1DB1E15D22B8200A24308 /* PBXTargetDependency */,
 			);
 			name = Nanbeige;
 			productName = Nanbeige;
@@ -2633,16 +2771,54 @@
 				en,
 				"zh-Hans",
 				"zh-Hant",
+				de,
+				es,
+				fr,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nl,
+				pt,
+				pt_PT,
+				ru,
+				sv,
+				zh_Hans,
+				zh_Hant,
 			);
 			mainGroup = 262AD47815AA7D5D000C2EF7;
 			productRefGroup = 262AD48415AA7D5D000C2EF7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 26D1DB1215D22B6500A24308 /* Products */;
+					ProjectRef = 26D1DB1115D22B6500A24308 /* SYPaginator.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				262AD48215AA7D5D000C2EF7 /* Nanbeige */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		26D1DB1A15D22B6500A24308 /* libSYPaginator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSYPaginator.a;
+			remoteRef = 26D1DB1915D22B6500A24308 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26D1DB1C15D22B6500A24308 /* SYPaginatorResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SYPaginatorResources.bundle;
+			remoteRef = 26D1DB1B15D22B6500A24308 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		262AD48115AA7D5D000C2EF7 /* Resources */ = {
@@ -2891,6 +3067,10 @@
 				269F9E3B15CA527300EC2499 /* accountManage.json in Resources */,
 				269F9E3C15CA527300EC2499 /* preference.json in Resources */,
 				260C6DE215CBBA2100B86C2C /* chooseCampus.json in Resources */,
+				26D1DB4515D22C6800A24308 /* SYPaginator.strings in Resources */,
+				26D1DB4615D22C6800A24308 /* SYPaginatorResources-Info.plist in Resources */,
+				26D1DB4A15D22C6800A24308 /* SYPaginatorResources-Info.plist in Resources */,
+				26D1DB4E15D22C9800A24308 /* SYPaginatorResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3004,7 +3184,6 @@
 				262C433915BD3B38004BBECA /* EGORefreshTableHeaderView.m in Sources */,
 				2684427C15BFE1AB0012C8C3 /* NanbeigePickerLabel.m in Sources */,
 				265D205D15C067B0006353E9 /* MBProgressHUD.m in Sources */,
-				26AB037515C1960F00539AB5 /* NanbeigeStreamDetailViewController.m in Sources */,
 				26665E4415C3CE7700E4FF9E /* JTTableViewGestureRecognizer.m in Sources */,
 				26665E4615C3CE7700E4FF9E /* TransformableTableViewCell.m in Sources */,
 				26665E4715C3CE7700E4FF9E /* UIColor+JTGestureBasedTableViewHelper.m in Sources */,
@@ -3094,10 +3273,31 @@
 				2649E6E715CA8E52006FDABF /* User.m in Sources */,
 				2649E6ED15CAE264006FDABF /* NanbeigeAccountManager.m in Sources */,
 				2615251415CD86680066DD3B /* NanbeigeChooseCampusViewController.m in Sources */,
+				26D1DAF915D2153400A24308 /* NanbeigeCoursesViewController.m in Sources */,
+				26D1DAFC15D2174E00A24308 /* NanbeigeTimeTable.m in Sources */,
+				26D1DB4715D22C6800A24308 /* NSBundle+SYPaginator.m in Sources */,
+				26D1DB4815D22C6800A24308 /* SYPageControl.m in Sources */,
+				26D1DB4915D22C6800A24308 /* SYPageView.m in Sources */,
+				26D1DB4B15D22C6800A24308 /* SYPaginatorScrollView.m in Sources */,
+				26D1DB4C15D22C6800A24308 /* SYPaginatorView.m in Sources */,
+				26D1DB4D15D22C6800A24308 /* SYPaginatorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		26D1DB1E15D22B8200A24308 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SYPaginatorResources;
+			targetProxy = 26D1DB1D15D22B8200A24308 /* PBXContainerItemProxy */;
+		};
+		26D1DB2015D22B8700A24308 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SYPaginator;
+			targetProxy = 26D1DB1F15D22B8700A24308 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		262AD49015AA7D5D000C2EF7 /* InfoPlist.strings */ = {
@@ -3116,6 +3316,29 @@
 				262AD62D15AA8020000C2EF7 /* zh-Hant */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		26D1DB2415D22C6800A24308 /* SYPaginator.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				26D1DB2515D22C6800A24308 /* de */,
+				26D1DB2615D22C6800A24308 /* en */,
+				26D1DB2715D22C6800A24308 /* es */,
+				26D1DB2815D22C6800A24308 /* fr */,
+				26D1DB2915D22C6800A24308 /* id */,
+				26D1DB2A15D22C6800A24308 /* it */,
+				26D1DB2B15D22C6800A24308 /* ja */,
+				26D1DB2C15D22C6800A24308 /* ko */,
+				26D1DB2D15D22C6800A24308 /* ms */,
+				26D1DB2E15D22C6800A24308 /* nl */,
+				26D1DB2F15D22C6800A24308 /* pt */,
+				26D1DB3015D22C6800A24308 /* pt_PT */,
+				26D1DB3115D22C6800A24308 /* ru */,
+				26D1DB3215D22C6800A24308 /* sv */,
+				26D1DB3415D22C6800A24308 /* zh_Hans */,
+				26D1DB3515D22C6800A24308 /* zh_Hant */,
+			);
+			name = SYPaginator.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

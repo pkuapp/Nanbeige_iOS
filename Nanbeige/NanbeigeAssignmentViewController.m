@@ -280,7 +280,7 @@
 	UINavigationController *nc = segue.destinationViewController;
 	NanbeigeCreateAssignmentViewController *ncavc = (NanbeigeCreateAssignmentViewController *)(nc.topViewController);
 #warning 传递课表
-	ncavc.coursesData = TEMPCOURSES;
+	ncavc.coursesData = [[NSUserDefaults standardUserDefaults] objectForKey:kTEMPCOURSES];
 	ncavc.initWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
 		ncavc.assignmentIndex = assignmentSelect;

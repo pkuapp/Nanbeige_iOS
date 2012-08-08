@@ -24,14 +24,14 @@
 #define urlCourseCategory @"http://www.pkucada.org:8082/Server/course/category"
 
 #define DEFAULT_TIMEOUT 20
-#define urlAPIUserLoginEmail [NSURL URLWithString:@"http://api.pkuapp.com:334/user/login/email/"]
-#define urlAPIUserLoginWeibo [NSURL URLWithString:@"http://api.pkuapp.com:334/user/login/weibo/"]
-#define urlAPIUserLoginRenren [NSURL URLWithString:@"http://api.pkuapp.com:334/user/login/renren/"]
-#define urlAPIUserLogout [NSURL URLWithString:@"http://api.pkuapp.com:334/user/logout/"]
-#define urlAPIUserRegEmail [NSURL URLWithString:@"http://api.pkuapp.com:334/user/reg/email/"]
-#define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:334/user/edit/"]
-#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:334/course/"]
-#define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:334/university/"]
+#define urlAPIUserLoginEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/email/"]
+#define urlAPIUserLoginWeibo [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/weibo/"]
+#define urlAPIUserLoginRenren [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/renren/"]
+#define urlAPIUserLogout [NSURL URLWithString:@"http://api.pkuapp.com:333/user/logout/"]
+#define urlAPIUserRegEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/email/"]
+#define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:333/user/edit/"]
+#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
+#define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
 #define kAPIEMAIL @"email"
 #define kAPIPASSWORD @"password"
 #define kAPINICKNAME @"nickname"
@@ -45,6 +45,25 @@
 #define kAPINAME @"name"
 #define kAPITOKEN @"token"
 #define kAPISCREEN_NAME @"screen_name"
+#define kAPICOUNT @"count"
+#define kAPIMORNING @"morning"
+#define kAPIAFTERNOON @"afternoon"
+#define kAPIEVENING @"evening"
+#define kAPITOTAL @"total"
+#define kAPIDETAIL @"detail"
+#define kAPISTART @"start"
+#define kAPIEND @"end"
+#define kAPINUMBER @"number"
+#define kAPISEPARATORS @"separators"
+#define kAPICREDIT @"credit"
+#define kAPILESSONS @"lessons"
+#define kAPIDAY @"day"
+#define kAPILOCATION @"location"
+#define kAPIWEEK @"week"
+#define kAPIORIG_ID @"orig_id"
+#define kAPISEMESTER_ID @"semester_id"
+#define kAPITA @"ta"
+#define kAPITEACHER @"teacher"
 
 #define pathLocation [NSHomeDirectory() stringByAppendingString:@"/Documents/location.plist"]
 #define pathUserPlist [NSHomeDirectory() stringByAppendingString:@"/Documents/User.plist"]
@@ -68,6 +87,7 @@
 #define tableBgColor1 [[UIColor alloc] initWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1.0]
 #define tableBgColor2 [[UIColor alloc] initWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]
 #define navBarBgColor1 [[UIColor alloc] initWithRed:110/255.0 green:110/255.0 blue:110/255.0 alpha:1.0]
+#define separatorColor1 [[UIColor alloc] initWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0]
 #define gateConnectingBtnColor [[UIColor alloc] initWithRed:255/255.0 green:248/255.0 blue:176/255.0 alpha:1.0]
 #define gateConnectedBtnColor [[UIColor alloc] initWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1.0]
 
@@ -125,10 +145,17 @@
 #define kSTREAMTITLE @"name"
 #define kSTREAMDETAIL @"credit"
 
-#define kCOURSES @"courses"
+#define TIMETABLEPAGEGAPWIDTH 16.0f
+#define TIMETABLEPAGENUMBER 999
+#define TIMETABLEPAGEINDEX 498
+#define TIMETABLEHEIGHT 367
+#define TIMETABLEWIDTH 320
+#define TIMETABLESEPARATORHEIGHT 2
 
 #define ASSIGNMENTDDLWEAKS [[NSArray alloc] initWithObjects:@"本周", @"下周", @"2周后", @"3周后", @"4周后", @"5周后", @"6周后", @"7周后", @"8周后", @"9周后", @"10周后", @"11周后", @"12周后", @"13周后", @"14周后", @"15周后", @"16周后", @"17周后", @"18周后", @"19周后", @"20周后", @"26周后", @"52周后", @"猴年马月", nil];
-#define TEMPCOURSES [[NSArray alloc] initWithObjects:@"毛概", @"地概", @"信概", @"计概", nil];
+#define kTEMPCOURSES @"tempcourses"
+#define kTEMPUNIVERSITIES @"tempuniversities"
+#define kTEMPUNIVERSITY @"tempuniversity"
 
 ///////////////////////////////
 #define test_username @"pkttus#42$"

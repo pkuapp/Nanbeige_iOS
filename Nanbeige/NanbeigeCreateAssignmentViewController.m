@@ -74,11 +74,11 @@
 	
 }
 - (IBAction)onConfirmCoursesBeforeResignFirstResponder:(id)sender {
-	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]]];
+	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] objectForKey:kAPINAME]];
 	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] resignFirstResponder];
 }
 - (void)onConfirmCoursesAfterResignFirstResponder:(id)sender {
-	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]]];
+	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] objectForKey:kAPINAME]];
 }
 
 - (void)viewDidUnload
@@ -124,7 +124,7 @@ numberOfRowsInComponent:(NSInteger)component
 			 titleForRow:(NSInteger)row
 			forComponent:(NSInteger)component
 {
-	return [coursesData objectAtIndex:row];
+	return [[coursesData objectAtIndex:row] objectForKey:kAPINAME];
 }
 
 #pragma mark - Table view data source
@@ -186,7 +186,7 @@ numberOfRowsInComponent:(NSInteger)component
 			[[[cell.contentView subviews] objectAtIndex:1] setText:[self.assignment valueForKey:kASSIGNMENTCOURSE]];
 		} else {
 #warning 选择课程列表中的课程
-			[[[cell.contentView subviews] objectAtIndex:1] setText:@"毛概"];
+			[[[cell.contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:0] objectForKey:kAPINAME]];
 		}
 		[[[cell.contentView subviews] objectAtIndex:1] setInputView:self.coursesPicker];
 		[[[cell.contentView subviews] objectAtIndex:1] setInputAccessoryView:self.coursesToolbar];

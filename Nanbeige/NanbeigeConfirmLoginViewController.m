@@ -66,7 +66,7 @@
 
 - (void)refreshDataSource
 {
-	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTNICKNAMEKEY];
+	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY];
 	if (!nickname) nickname = sDEFAULTNICKNAME;
 	NSString *university = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYNAMEKEY];
 	if (!university) university = sDEFAULTUNIVERSITY;
@@ -134,6 +134,10 @@
 - (void)onConfirmLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
+	
+#warning 获取该学校信息
+	[accountManager requestUniversity:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
+	
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDIT] boolValue]) {
 		
 		[self loading:YES];

@@ -73,6 +73,6 @@
 - (BOOL)isRenrenSessionValid;
 
 - (void)requestUniversities;
-- (void)requestUniversitie:(NSNumber *)university_id;
+- (void)requestUniversity:(NSNumber *)university_id;
 
 @end

@@ -62,7 +62,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	if (university) {
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY] && university) {
 		[self.navigationController popViewControllerAnimated:YES];
 	}
 }

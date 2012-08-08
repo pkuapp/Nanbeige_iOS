@@ -376,6 +376,8 @@
 			self.connector.delegate = self.nivc;
 			[self.navigationController pushViewController:self.nivc animated:YES];
 		}
+	} else if (functionIndex == 1) {
+		[self performSegueWithIdentifier:@"CoursesEnterSegue" sender:self];
 	} else if (functionIndex == 6) {
 		if (self.navc == nil) [self performSegueWithIdentifier:@"AssignmentEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.navc animated:YES];
@@ -401,7 +403,7 @@
 		UINavigationController *nc = segue.destinationViewController;
 		NanbeigeCreateAssignmentViewController *ncavc = (NanbeigeCreateAssignmentViewController *)(nc.topViewController);
 #warning 传递课表
-		ncavc.coursesData = TEMPCOURSES;
+		ncavc.coursesData = [[NSUserDefaults standardUserDefaults] objectForKey:kTEMPCOURSES];
 		ncavc.initWithCamera = [segue.identifier isEqualToString:@"CreateAssignmentWithCameraSegue"];
 		ncavc.assignmentIndex = -1;
 	} else if ([segue.identifier isEqualToString:@"DetailGateInfoSegue"]) {
