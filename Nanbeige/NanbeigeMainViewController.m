@@ -90,7 +90,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.tableView.backgroundColor = tableBgColor1;
 	
 	NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
@@ -170,6 +169,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	if ([[[self.functionArray objectAtIndex:0] objectForKey:@"identifier"] isEqualToString:@"Line3Button2Identifier"] && [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] == nil) {
 		NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								 @"IP网关", @"name",

@@ -21,6 +21,8 @@
 @synthesize assignment;
 @synthesize pickerData;
 
+#pragma mark - View Lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,6 +59,8 @@
     // Release any retained subviews of the main view.
 }
 
+#pragma mark - Display
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -66,24 +70,7 @@
 	}
 }
 
-#pragma mark - Picker Data Source Methods
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-	return 1;
-}
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
-{
-	return [pickerData count];
-}
-
-#pragma mark Picker Delegate Methods
-- (NSString *)pickerView:(UIPickerView *)pickerView
-			 titleForRow:(NSInteger)row
-			forComponent:(NSInteger)component
-{
-	return [pickerData objectAtIndex:row];
-}
+#pragma mark - Button controllerAction
 
 - (IBAction)onConfirm:(id)sender {
 	
@@ -97,6 +84,7 @@ numberOfRowsInComponent:(NSInteger)component
 	}
 	[self.navigationController popViewControllerAnimated:YES];
 }
+
 - (IBAction)onModeChange:(UISegmentedControl *)sender {
 	if (sender.selectedSegmentIndex == 0) {
 		modeLabel.text = @"截止于所选这周的课堂上";
@@ -108,4 +96,26 @@ numberOfRowsInComponent:(NSInteger)component
 		deadlinePicker.hidden = YES;
 	}
 }
+
+#pragma mark - Picker Data Source Methods
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+	return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView
+numberOfRowsInComponent:(NSInteger)component
+{
+	return [pickerData count];
+}
+
+#pragma mark Picker Delegate Methods
+
+- (NSString *)pickerView:(UIPickerView *)pickerView
+			 titleForRow:(NSInteger)row
+			forComponent:(NSInteger)component
+{
+	return [pickerData objectAtIndex:row];
+}
+
 @end

@@ -19,12 +19,16 @@
 
 @implementation NanbeigeChooseLoginViewController
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = NO;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -64,16 +68,6 @@
 	[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    return YES;
-	} else {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	}
-}
-
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	[super prepareForSegue:segue sender:sender];
@@ -83,6 +77,28 @@
 		destinationVC.accountManagerDelegate = self;
 	}
 }
+
+#pragma mark - Display
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	    return YES;
+	} else {
+	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	}
+}
+
+-(void)showAlert:(NSString*)message{
+	[[[UIAlertView alloc] initWithTitle:nil
+								message:message
+							   delegate:nil
+					  cancelButtonTitle:@"确定"
+					  otherButtonTitles:nil] show];
+}
+
+#pragma mark - Button controllerAction
+
 - (void)onEmailLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
@@ -99,18 +115,39 @@
 	[accountManager renrenLogin];
 }
 
+#pragma mark - AccountManagerDelegate Weibo
+
 - (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
 {
 	[accountManager emailLoginWithWeiboToken:weibo_token];
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 	[self loading:YES];
 }
+
+- (void)didWeiboSignupWithID:(NSNumber *)ID
+{
+	[accountManager emailLoginWithWeiboToken:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY]];
+}
+
+#pragma mark - AccountManagerDelegate Renren
+
 - (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
 {
 #warning 等待服务器完成人人网token使用流程
-	//[accountManager emailLoginWithRenrenToken:renren_token];
+	/*
+	[accountManager emailLoginWithRenrenToken:renren_token];
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
+	 */
 	[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
 }
+
+- (void)didRenrenSignupWithID:(NSNumber *)ID
+{
+	[accountManager emailLoginWithRenrenToken:[[NSUserDefaults standardUserDefaults] objectForKey:kRENRENTOKENKEY]];
+}
+
+#pragma mark - AccountManagerDelegate Email
 
 - (void)didEmailLoginWithID:(NSNumber *)ID Nickname:(NSString *)nickname UniversityID:(NSNumber *)university_id UniversityName:(NSString *)university_name CampusID:(NSNumber *)campus_id CampusName:(NSString *)campus_name
 {
@@ -122,13 +159,8 @@
 	}
 }
 
--(void)showAlert:(NSString*)message{
-	[[[UIAlertView alloc] initWithTitle:nil
-								message:message
-							   delegate:nil
-					  cancelButtonTitle:@"确定"
-					  otherButtonTitles:nil] show];
-}
+#pragma mark - AccountManagerDelegate Error
+
 - (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
 {
 	[self loading:NO];
@@ -144,14 +176,16 @@
 			[self loading:YES];
 			return ;
 		}
+	} else if ([[request url] isEqual:urlAPIUserLoginRenren]) {
+		if ([errorCode isEqualToString:sERRORUSERNOTFOUND]) {
+			[accountManager renrenSignupWithToken:[[NSUserDefaults standardUserDefaults] objectForKey:kRENRENTOKENKEY] Nickname:[[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY]];
+			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+			[self loading:YES];
+			return ;
+		}
 	}
 	[self loading:NO];
 	[self showAlert:errorCode];
-}
-
-- (void)didWeiboSignupWithID:(NSNumber *)ID
-{
-	[accountManager emailLoginWithWeiboToken:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY]];
 }
 
 @end

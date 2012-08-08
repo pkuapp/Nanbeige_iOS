@@ -217,6 +217,10 @@
 	return [_pages objectForKey:[NSNumber numberWithInteger:self.currentPageIndex]];
 }
 
+- (void)removePageControlFromSuperview
+{
+	[_pageControl removeFromSuperview];
+}
 
 #pragma mark - Actions
 

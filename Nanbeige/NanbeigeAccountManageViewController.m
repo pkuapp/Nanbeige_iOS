@@ -21,12 +21,16 @@
 
 @implementation NanbeigeAccountManageViewController
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = YES;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -35,15 +39,6 @@
 		self.root = [[QRootElement alloc] initWithJSONFile:@"accountManage"];
 	}
 	return self;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    return YES;
-	} else {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	}
 }
 
 - (void)viewDidLoad
@@ -66,6 +61,52 @@
 	[super viewWillAppear:animated];
 	[self refreshDisplay];
 }
+
+#pragma mark - Display
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	    return YES;
+	} else {
+	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	}
+}
+
+-(void)showAlert:(NSString*)message{
+	[[[UIAlertView alloc] initWithTitle:nil
+								message:message
+							   delegate:nil
+					  cancelButtonTitle:sCONFIRM
+					  otherButtonTitles:nil] show];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if ([alertView isEqual:nicknameEditAlert]) {
+		if (buttonIndex == 1) {
+			NSString *nickname = [[alertView textFieldAtIndex:0] text];
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITNICKNAME];
+			[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+			[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
+			[self refreshDisplay];
+		}
+	}
+	if ([alertView isEqual:passwordEditAlert]) {
+		if (buttonIndex == 1) {
+			NSString *password = [[alertView textFieldAtIndex:0] text];
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITPASSWORD];
+			[[NSUserDefaults standardUserDefaults] setObject:password forKey:kNANBEIGEPASSWORDKEY];
+			[self refreshDisplay];
+		}
+	}
+}
+
+#pragma mark - Refresh
 
 - (void)refreshDataSource
 {
@@ -103,6 +144,7 @@
 	[self.root bindToObject:dict];
 
 }
+
 - (void)refreshDisplay
 {
 	[self refreshDataSource];
@@ -114,10 +156,8 @@
 		[accountManager emailEditWithPassword:nil Nickname:nil CampusID:nil WeiboToken:nil];
 	}
 }
-- (void)didEmailEdit
-{
-	[self loading:NO];
-}
+
+#pragma mark - Button controllerAction
 
 - (void)onEditNickname:(id)sender
 {	
@@ -126,6 +166,7 @@
 	nicknameEditAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
 	[nicknameEditAlert show];
 }
+
 - (void)onEditPassword:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
@@ -133,28 +174,7 @@
 	passwordEditAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
 	[passwordEditAlert show];
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([alertView isEqual:nicknameEditAlert]) {
-		if (buttonIndex == 1) {
-			NSString *nickname = [[alertView textFieldAtIndex:0] text];
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITNICKNAME];
-			[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
-			[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
-			[self refreshDisplay];
-		}
-	}
-	if ([alertView isEqual:passwordEditAlert]) {
-		if (buttonIndex == 1) {
-			NSString *password = [[alertView textFieldAtIndex:0] text];
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITPASSWORD];
-			[[NSUserDefaults standardUserDefaults] setObject:password forKey:kNANBEIGEPASSWORDKEY];
-			[self refreshDisplay];
-		}
-	}
-}
+
 - (void)onEditUniversity:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
@@ -165,25 +185,49 @@
 {
 	[self performSegueWithIdentifier:@"EmailLoginSegue" sender:self];
 }
+
 - (void)onWeiboLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	[accountManager weiboLogin];
 }
-- (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
-{
-	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, weibo_token);
-	[self refreshDisplay];
-}
+
 - (void)onRenrenLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	[accountManager renrenLogin];
 }
-- (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
+
+- (void)onLaunchActionSheet:(id)sender
 {
-	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, renren_token);
-	[self refreshDisplay];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
+	NSString *disconnectOrLogout = [dictLABEL2ACTIONSHEET objectForKey:[sender title]];
+	NSString *otherButtonTitle = nil;
+	if ([disconnectOrLogout isEqualToString:sDISCONNECTEMAIL]) {
+		otherButtonTitle = sEDITPASSWORD;
+	}
+	
+	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:nil
+													  delegate:self
+											 cancelButtonTitle:sCANCEL
+										destructiveButtonTitle:disconnectOrLogout
+											 otherButtonTitles:otherButtonTitle, nil];
+	[menu showInView:self.view];
+}
+
+- (void)onLogout:(id)sender
+{
+	[self onRenrenLogout:sender];
+	[self onWeiboLogout:sender];
+	[self onEmailLogout:sender];
+	
+	
+	id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
+	NSDictionary *emptySettings = (workaround51Crash != nil)
+	? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
+	: [NSDictionary dictionary];
+	[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - ActionSheetDelegate Setup
@@ -215,22 +259,8 @@
 	}
 }
 
-- (void)onLaunchActionSheet:(id)sender
-{
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	NSString *disconnectOrLogout = [dictLABEL2ACTIONSHEET objectForKey:[sender title]];
-	NSString *otherButtonTitle = nil;
-	if ([disconnectOrLogout isEqualToString:sDISCONNECTEMAIL]) {
-		otherButtonTitle = sEDITPASSWORD;
-	}
-	
-	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:nil
-													  delegate:self
-											 cancelButtonTitle:sCANCEL
-										destructiveButtonTitle:disconnectOrLogout
-											 otherButtonTitles:otherButtonTitle, nil];
-	[menu showInView:self.view];
-}
+#pragma mark - ActionSheet Button controllerAction
+
 - (void)onRenrenLogout:(id)sender
 {
 	[accountManager renrenLogout];
@@ -259,28 +289,31 @@
 	[self onEmailLogout:sender];
 }
 
-- (void)onLogout:(id)sender
+#pragma mark - AccountManagerDelegate Weibo
+
+- (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
 {
-	[self onRenrenLogout:sender];
-	[self onWeiboLogout:sender];
-	[self onEmailLogout:sender];
-	
-	
-	id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
-	NSDictionary *emptySettings = (workaround51Crash != nil)
-	? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
-	: [NSDictionary dictionary];
-	[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
-	[self dismissModalViewControllerAnimated:YES];
+	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, weibo_token);
+	[self refreshDisplay];
 }
 
--(void)showAlert:(NSString*)message{
-	[[[UIAlertView alloc] initWithTitle:nil
-								message:message
-							   delegate:nil
-					  cancelButtonTitle:sCONFIRM
-					  otherButtonTitles:nil] show];
+#pragma mark - AccountManagerDelegate Renren
+
+- (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
+{
+	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, renren_token);
+	[self refreshDisplay];
 }
+
+#pragma mark - AccountManagerDelegate Email
+
+- (void)didEmailEdit
+{
+	[self loading:NO];
+}
+
+#pragma mark - AccountManagerDelegate Error
+
 - (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
 {
 	[self loading:NO];

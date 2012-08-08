@@ -21,6 +21,8 @@
 @synthesize cancelButton;
 @synthesize changeButton;
 
+#pragma mark - View Lifecycle
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -60,6 +62,8 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+
+#pragma mark - Display
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -176,6 +180,8 @@
      */
 }
 
+#pragma mark - Button controllerAction
+
 - (IBAction)onChangeButtonPressed:(id)sender {
 	NSString * neworderStr = [functionOrder componentsJoinedByString:@","];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -191,4 +197,5 @@
 - (IBAction)onCancelButtonPressed:(id)sender {
 	[self.navigationController popViewControllerAnimated:YES];
 }
+
 @end

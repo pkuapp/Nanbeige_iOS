@@ -21,11 +21,15 @@
 
 @implementation NanbeigeChooseSchoolViewController
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -50,6 +54,8 @@
 	
 	[self loading:YES];
 }
+
+
 - (void)didUniversitiesReceived:(NSArray *)universities
 {
 	[self loading:NO];
@@ -73,6 +79,16 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:@"ChooseCampusSegue"]) {
+		NanbeigeChooseCampusViewController *chooseCampusVC = segue.destinationViewController;
+		chooseCampusVC.university = university;
+	}
+}
+
+#pragma mark - Display
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -81,6 +97,16 @@
 	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	}
 }
+
+-(void)showAlert:(NSString*)message{
+	[[[UIAlertView alloc] initWithTitle:nil
+								message:message
+							   delegate:nil
+					  cancelButtonTitle:@"确定"
+					  otherButtonTitles:nil] show];
+}
+
+#pragma mark - Button controllerAction
 
 - (void)onChooseSchool:(id)sender
 {
@@ -110,21 +136,8 @@
 	}
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	if ([segue.identifier isEqualToString:@"ChooseCampusSegue"]) {
-		NanbeigeChooseCampusViewController *chooseCampusVC = segue.destinationViewController;
-		chooseCampusVC.university = university;
-	}
-}
+#pragma mark - AccountManagerDelegate Error
 
--(void)showAlert:(NSString*)message{
-	[[[UIAlertView alloc] initWithTitle:nil
-								message:message
-							   delegate:nil
-					  cancelButtonTitle:@"确定"
-					  otherButtonTitles:nil] show];
-}
 - (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
 {
 	[self loading:NO];

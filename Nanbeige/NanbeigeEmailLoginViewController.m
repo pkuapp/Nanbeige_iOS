@@ -20,12 +20,16 @@
 
 @implementation NanbeigeEmailLoginViewController
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = NO;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -57,6 +61,17 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	[super prepareForSegue:segue sender:sender];
+	if ([segue.identifier isEqualToString:@"EmailSignupSegue"]) {
+		NanbeigeEmailSignupViewController *destinationVC = segue.destinationViewController;
+		destinationVC.accountManagerDelegate = self.accountManagerDelegate;
+	}
+}
+
+#pragma mark - Display
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -68,11 +83,13 @@
 
 -(void)showAlert:(NSString*)message{
 	[[[UIAlertView alloc] initWithTitle:nil
-							   message:message
-							  delegate:nil
-					 cancelButtonTitle:@"确定"
-					 otherButtonTitles:nil] show];
+								message:message
+							   delegate:nil
+					  cancelButtonTitle:@"确定"
+					  otherButtonTitles:nil] show];
 }
+
+#pragma mark - Button controllerAction
 
 - (void)onLogin:(UIBarButtonItem *)sender {
 	NSMutableDictionary *loginInfo = [[NSMutableDictionary alloc] init];
@@ -100,14 +117,8 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	[super prepareForSegue:segue sender:sender];
-	if ([segue.identifier isEqualToString:@"EmailSignupSegue"]) {
-		NanbeigeEmailSignupViewController *destinationVC = segue.destinationViewController;
-		destinationVC.accountManagerDelegate = self.accountManagerDelegate;
-	}
-}
+#pragma mark - AccountManagerDelegate Email
+
 - (void)onEmailSignup:(id)sender
 {
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:nil action:nil];
@@ -131,6 +142,9 @@
 	}
 	[self close];
 }
+
+#pragma mark - AccountManagerDelegate Error
+
 - (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
 {
 	[self loading:NO];

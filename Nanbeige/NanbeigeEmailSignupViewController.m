@@ -21,12 +21,16 @@
 
 @implementation NanbeigeEmailSignupViewController
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = NO;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -54,6 +58,8 @@
     // Release any retained subviews of the main view.
 }
 
+#pragma mark - Display
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -70,6 +76,8 @@
 					  cancelButtonTitle:@"确定"
 					  otherButtonTitles:nil] show];
 }
+
+#pragma mark - Button controllerAction
 
 - (void)onSignup:(UIBarButtonItem *)sender {
 	NSMutableDictionary *signupInfo = [[NSMutableDictionary alloc] init];
@@ -93,6 +101,8 @@
     [self loading:YES];
 }
 
+#pragma mark - AccountManagerDelegate Email
+
 - (void)didEmailSignupWithID:(NSNumber *)nanbeigeid
 {
 	[self loading:NO];
@@ -106,6 +116,9 @@
 	}
 	[self dismissModalViewControllerAnimated:YES];
 }
+
+#pragma mark - AccountManagerDelegate Error
+
 - (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
 {
 	[self loading:NO];

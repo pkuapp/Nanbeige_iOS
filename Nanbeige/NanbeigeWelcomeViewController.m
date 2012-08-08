@@ -15,6 +15,8 @@
 
 @implementation NanbeigeWelcomeViewController
 
+#pragma mark - View Lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,6 +59,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
+
+#pragma mark - Display
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

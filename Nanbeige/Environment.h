@@ -63,6 +63,7 @@
 #define kAPIDAY @"day"
 #define kAPILOCATION @"location"
 #define kAPIWEEK @"week"
+#define kAPIWEEKS @"weeks"
 #define kAPIORIG_ID @"orig_id"
 #define kAPISEMESTER_ID @"semester_id"
 #define kAPITA @"ta"
@@ -88,9 +89,15 @@
 //#define navBarBgColor [[UIColor alloc] initWithRed:77/255.0 green:77/255.0 blue:77/255.0 alpha:1.0]
 #define labelLeftColor [[UIColor alloc] initWithRed:0/255.0 green:114/255.0 blue:225/255.0 alpha:1.0]
 #define tableBgColor1 [[UIColor alloc] initWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1.0]
-#define tableBgColor2 [[UIColor alloc] initWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]
+#define tableBgColor2 [[UIColor alloc] initWithRed:237/255.0 green:237/255.0 blue:237/255.0 alpha:1.0]
+#define tableBgColor3 [[UIColor alloc] initWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 #define navBarBgColor1 [[UIColor alloc] initWithRed:110/255.0 green:110/255.0 blue:110/255.0 alpha:1.0]
-#define separatorColor1 [[UIColor alloc] initWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0]
+#define navBarBgColor2 [[UIColor alloc] initWithRed:225/255.0 green:220/255.0 blue:0/255.0 alpha:1.0]
+#define navBarTextColor2 [[UIColor alloc] initWithRed:132/255.0 green:193/255.0 blue:249/255.0 alpha:1.0]
+#define tabBarBgColor1 [[UIColor alloc] initWithRed:55/255.0 green:119/255.0 blue:138/255.0 alpha:1.0]
+#define separatorColor1 [[UIColor alloc] initWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0]
+#define separatorColor2 [[UIColor alloc] initWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]
+#define timeColor1 [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0]
 #define gateConnectingBtnColor [[UIColor alloc] initWithRed:255/255.0 green:248/255.0 blue:176/255.0 alpha:1.0]
 #define gateConnectedBtnColor [[UIColor alloc] initWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1.0]
 
@@ -153,7 +160,9 @@
 #define TIMETABLEPAGEINDEX 498
 #define TIMETABLEHEIGHT 367
 #define TIMETABLEWIDTH 320
-#define TIMETABLESEPARATORHEIGHT 2
+#define TIMETABLELEFTPADDING 30
+#define TIMETABLESEPARATORHEIGHT 1
+#define kSHOWTIME @"showtime"
 
 #define ASSIGNMENTDDLWEAKS [[NSArray alloc] initWithObjects:@"本周", @"下周", @"2周后", @"3周后", @"4周后", @"5周后", @"6周后", @"7周后", @"8周后", @"9周后", @"10周后", @"11周后", @"12周后", @"13周后", @"14周后", @"15周后", @"16周后", @"17周后", @"18周后", @"19周后", @"20周后", @"26周后", @"52周后", @"猴年马月", nil];
 #define kTEMPCOURSES @"tempcourses"

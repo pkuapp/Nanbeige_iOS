@@ -14,6 +14,8 @@
 @synthesize popoverController = _popoverController;
 @synthesize delegate;
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setInputView:(UIView *)inputView
 {
 	if (_inputView != inputView) {
@@ -48,6 +50,8 @@
 	}
 }
 
+#pragma mark - View Lifecycle
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -75,15 +79,13 @@
 	return [super resignFirstResponder];
 }
 
-#pragma mark -
-#pragma mark Respond to touch and become first responder.
+#pragma mark - Respond to touch and become first responder.
 
 - (BOOL)canBecomeFirstResponder {
 	return YES;
 }
 
-#pragma mark -
-#pragma mark UIKeyInput Protocol Methods
+#pragma mark - UIKeyInput Protocol Methods
 
 - (BOOL)hasText {
 	return YES;
@@ -95,8 +97,7 @@
 - (void)deleteBackward {
 }
 
-#pragma mark -
-#pragma mark UIPopoverControllerDelegate Protocol Methods
+#pragma mark - UIPopoverControllerDelegate Protocol Methods
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 	[self resignFirstResponder];

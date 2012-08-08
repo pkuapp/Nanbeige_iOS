@@ -55,6 +55,8 @@ typedef enum {
 - (SYPageView *)dequeueReusablePageWithIdentifier:(NSString *)identifier;
 - (SYPageView *)currentPage;
 
+- (void)removePageControlFromSuperview;
+
 @end
 
 

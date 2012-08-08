@@ -15,4 +15,6 @@
 @property (strong, nonatomic) NSDictionary *university;
 @property (strong, nonatomic) NSArray *courses;
 
+- (id)initWithDate:(NSDate *)date;
+
 @end

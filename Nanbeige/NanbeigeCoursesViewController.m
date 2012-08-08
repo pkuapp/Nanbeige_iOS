@@ -50,36 +50,31 @@
 	return self;
 }
 
+#pragma mark - View Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	NSDate *today = [NSDate date];
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"yyyy年MM月dd日";
-	NSString *todayDate = [formatter stringFromDate:today];
-	self.tabBarController.title = todayDate;
-	
 	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
 	
 	_paginatorView.frame = self.view.bounds;
+	[self.view setBackgroundColor:tableBgColor2];
 	[self.view addSubview:_paginatorView];
 	
 	self.paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
-	[_paginatorView setCurrentPageIndex:0 animated:YES];
+	[_paginatorView removePageControlFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	self.tabBarController.navigationController.navigationBar.tintColor = navBarBgColor2;
+	self.tabBarController.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor2, UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 1)]};
+	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	[self onTodayButtonPressed:nil];
-}
-
-- (void)onTodayButtonPressed:(id)sender
-{
-	[_paginatorView setCurrentPageIndex:TIMETABLEPAGEINDEX animated:YES];
 }
 
 - (void)viewDidUnload
@@ -89,9 +84,22 @@
 	self.paginatorView = nil;
 }
 
+#pragma mark - Display
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	    return YES;
+	} else {
+	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	}
+}
+
+#pragma mark - Button controllerAction
+
+- (void)onTodayButtonPressed:(id)sender
+{
+	[_paginatorView setCurrentPageIndex:TIMETABLEPAGEINDEX animated:YES];
 }
 
 #pragma mark - Private
@@ -112,22 +120,23 @@
 
 
 - (SYPageView *)paginatorView:(SYPaginatorView *)paginatorView viewForPageAtIndex:(NSInteger)pageIndex; {
-	static NSString *identifier = @"timeTableIdentifier";
+	NSString *identifier = [[NSDate dateWithTimeIntervalSinceNow:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)] description];
 	
 	NanbeigeTimeTable *view = (NanbeigeTimeTable *)[paginatorView dequeueReusablePageWithIdentifier:identifier];
 	if (!view) {
-		view = [[NanbeigeTimeTable alloc] initWithReuseIdentifier:identifier];
+		view = [[NanbeigeTimeTable alloc] initWithDate:[NSDate dateWithTimeIntervalSinceNow:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)]];
 	}
-	view.date = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)];
 	
 	return view;
 }
+
+#pragma mark - SYPaginatorViewDelegate
 
 - (void)paginatorView:(SYPaginatorView *)paginatorView didScrollToPageAtIndex:(NSInteger)pageIndex
 {
 	NSDate *day = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"yyyy年MM月dd日";
+	formatter.dateFormat = @"第w周 E MM月dd日";
 	NSString *dayDate = [formatter stringFromDate:day];
 	self.tabBarController.title = dayDate;
 }

@@ -32,6 +32,8 @@
 @synthesize coursesToolbar;
 @synthesize lastChosenMediaType, image, imageFrame, imagePickerUsed;
 
+#pragma mark - Setter and Getter Methods
+
 -(NSMutableDictionary *)assignment
 {
 	if (_assignment == nil) {
@@ -43,6 +45,8 @@
 	}
 	return _assignment;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -73,13 +77,6 @@
 	}
 	
 }
-- (IBAction)onConfirmCoursesBeforeResignFirstResponder:(id)sender {
-	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] objectForKey:kAPINAME]];
-	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] resignFirstResponder];
-}
-- (void)onConfirmCoursesAfterResignFirstResponder:(id)sender {
-	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] objectForKey:kAPINAME]];
-}
 
 - (void)viewDidUnload
 {
@@ -99,6 +96,17 @@
 	}
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	[super prepareForSegue:segue sender:sender];
+	if ([segue.identifier isEqualToString:@"DeadlineSegue"]) {
+		NanbeigeAssignmentDeadlineViewController *nadvc = segue.destinationViewController;
+		nadvc.assignment = self.assignment;
+	}
+}
+
+#pragma mark - Display
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -108,7 +116,54 @@
 	}
 }
 
+#pragma mark - Button controllerAction
+
+- (IBAction)onCancel:(id)sender {
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)onConfirm:(id)sender {
+	
+	[self.assignment setObject:[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView.subviews objectAtIndex:0] text] forKey:kASSIGNMENTDESCRIPTION];
+	NSString *deadlineString = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].contentView subviews] objectAtIndex:1] text];
+	[self.assignment setObject:deadlineString forKey:kASSIGNMENTDDLSTR];
+	NSString *course = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] text];
+	[self.assignment setObject:course forKey:kASSIGNMENTCOURSE];
+	
+	if (imageView.image.size.width && imageView.image.size.height) {
+		[self.assignment setObject:[NSNumber numberWithBool:YES] forKey:kASSIGNMENTHASIMAGE];
+		NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:imageView.image];
+		[self.assignment setObject:imageData forKey:kASSIGNMENTIMAGE];
+	} else {
+		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTHASIMAGE];
+	}
+	
+	if (assignmentIndex == -1) {
+		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTCOMPLETE];
+		[assignments addObject:self.assignment];
+		[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
+	} else {
+		[assignments replaceObjectAtIndex:assignmentIndex withObject:self.assignment];
+		if (bComplete) {
+			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kCOMPLETEASSIGNMENTS];
+		} else {
+			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
+		}
+	}
+	
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)onConfirmCoursesBeforeResignFirstResponder:(id)sender {
+	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] objectForKey:kAPINAME]];
+	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] resignFirstResponder];
+}
+- (void)onConfirmCoursesAfterResignFirstResponder:(id)sender {
+	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] objectForKey:kAPINAME]];
+}
+
 #pragma mark - Picker Data Source Methods
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
 	return 1;
@@ -120,6 +175,7 @@ numberOfRowsInComponent:(NSInteger)component
 }
 
 #pragma mark Picker Delegate Methods
+
 - (NSString *)pickerView:(UIPickerView *)pickerView
 			 titleForRow:(NSInteger)row
 			forComponent:(NSInteger)component
@@ -220,6 +276,7 @@ numberOfRowsInComponent:(NSInteger)component
  */
 
 #pragma mark - ActionSheetDelegate Setup
+
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -240,6 +297,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 			break;
 	}
 }
+
 - (void) performActionSheet
 {
 	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"添加照片" 
@@ -288,53 +346,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (IBAction)onCancel:(id)sender {
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-- (IBAction)onConfirm:(id)sender {
-	
-	[self.assignment setObject:[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView.subviews objectAtIndex:0] text] forKey:kASSIGNMENTDESCRIPTION];
-	NSString *deadlineString = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].contentView subviews] objectAtIndex:1] text];
-	[self.assignment setObject:deadlineString forKey:kASSIGNMENTDDLSTR];
-	NSString *course = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] text];
-	[self.assignment setObject:course forKey:kASSIGNMENTCOURSE];
-	
-	if (imageView.image.size.width && imageView.image.size.height) {
-		[self.assignment setObject:[NSNumber numberWithBool:YES] forKey:kASSIGNMENTHASIMAGE];
-		NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:imageView.image];
-		[self.assignment setObject:imageData forKey:kASSIGNMENTIMAGE];
-	} else {
-		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTHASIMAGE];
-	}
-	
-	if (assignmentIndex == -1) {
-		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTCOMPLETE];
-		[assignments addObject:self.assignment];
-		[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
-	} else {
-		[assignments replaceObjectAtIndex:assignmentIndex withObject:self.assignment];
-		if (bComplete) {
-			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kCOMPLETEASSIGNMENTS];
-		} else {
-			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
-		}
-	}
-	
-	[self dismissModalViewControllerAnimated:YES];
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	[super prepareForSegue:segue sender:sender];
-	if ([segue.identifier isEqualToString:@"DeadlineSegue"]) {
-		NanbeigeAssignmentDeadlineViewController *nadvc = segue.destinationViewController;
-		nadvc.assignment = self.assignment;
-	}
-}
-
-#pragma mark  -
-#pragma mark UIImagePickerController delegate methods
+#pragma mark - UIImagePickerController delegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker 
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	// get last chosen photo or video
@@ -356,8 +368,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark  -
-#pragma mark Setup UIImagePickerController
+#pragma mark - Setup UIImagePickerController
 
 - (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType {
 	// get Media from camera or photo library

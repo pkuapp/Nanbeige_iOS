@@ -37,6 +37,7 @@
 @implementation NanbeigeAccountManager
 
 #pragma mark - Initialization Methods
+
 - (id)init
 {
 	self = [super init];
@@ -306,12 +307,19 @@
 			campus_id = [[res objectForKey:kAPICAMPUS] objectForKey:kAPIID];
 			campus_name = [[res objectForKey:kAPICAMPUS] objectForKey:kAPINAME];
 		}
-		[defaults setValue:nickname forKey:kNANBEIGENICKNAMEKEY];
-		[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
-		[defaults setValue:university_id forKey:kUNIVERSITYIDKEY];
-		[defaults setValue:university_name forKey:kUNIVERSITYNAMEKEY];
-		[defaults setValue:campus_id forKey:kCAMPUSIDKEY];
-		[defaults setValue:campus_name forKey:kCAMPUSNAMEKEY];
+		
+		if (nickname && ![defaults objectForKey:kNANBEIGENICKNAMEKEY])
+			[defaults setValue:nickname forKey:kNANBEIGENICKNAMEKEY];
+		if (nanbeigeid && ![defaults objectForKey:kNANBEIGEIDKEY])
+			[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
+		if (university_id && ![defaults objectForKey:kUNIVERSITYIDKEY])
+			[defaults setValue:university_id forKey:kUNIVERSITYIDKEY];
+		if (university_name && ![defaults objectForKey:kUNIVERSITYNAMEKEY])
+			[defaults setValue:university_name forKey:kUNIVERSITYNAMEKEY];
+		if (campus_id && ![defaults objectForKey:kCAMPUSIDKEY])
+			[defaults setValue:campus_id forKey:kCAMPUSIDKEY];
+		if (campus_name && ![defaults objectForKey:kCAMPUSNAMEKEY])
+			[defaults setValue:campus_name forKey:kCAMPUSNAMEKEY];
 		
 		if ([self.delegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
 			[self.delegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];

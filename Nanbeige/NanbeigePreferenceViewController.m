@@ -15,12 +15,16 @@
 
 @implementation NanbeigePreferenceViewController
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = NO;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -53,6 +57,8 @@
     // Release any retained subviews of the main view.
 }
 
+#pragma mark - Button controllerAction
+
 - (void)onAccountManage:(id)sender
 {
 	[self performSegueWithIdentifier:@"AccountManageSegue" sender:self];
@@ -62,11 +68,13 @@
 {
 	[self performSegueWithIdentifier:@"ChangeMainOrderSegue" sender:self];
 }
+
 - (void)onResetMainOrder:(id)sender
 {
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kMAINORDERKEY];
 	[self dismissModalViewControllerAnimated:YES];
 }
+
 - (void)onAbout:(id)sender
 {
 	[self performSegueWithIdentifier:@"AboutSegue" sender:self];

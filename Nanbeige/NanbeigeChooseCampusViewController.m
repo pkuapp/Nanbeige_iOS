@@ -15,11 +15,15 @@
 
 @implementation NanbeigeChooseCampusViewController
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -44,6 +48,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
+
+#pragma mark - Button controllerAction
 
 - (void)onChooseCampus:(id)sender
 {

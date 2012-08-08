@@ -19,12 +19,16 @@
 
 @implementation NanbeigeConfirmLoginViewController
 
+#pragma mark - Setter and Getter Methods
+
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = YES;
 }
+
+#pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -33,15 +37,6 @@
 		self.root = [[QRootElement alloc] initWithJSONFile:@"confirmLogin"];
 	}
 	return self;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    return YES;
-	} else {
-	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	}
 }
 
 - (void)viewDidLoad
@@ -63,6 +58,27 @@
 {
 	[self refreshDisplay];
 }
+
+#pragma mark - Display
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	    return YES;
+	} else {
+	    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	}
+}
+
+-(void)showAlert:(NSString*)message{
+	[[[UIAlertView alloc] initWithTitle:nil
+								message:message
+							   delegate:nil
+					  cancelButtonTitle:@"确定"
+					  otherButtonTitles:nil] show];
+}
+
+#pragma mark - Refresh
 
 - (void)refreshDataSource
 {
@@ -106,6 +122,8 @@
 	[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 3)] withRowAnimation:UITableViewRowAnimationFade];
 }
 
+#pragma mark - Button controllerAction
+
 - (void)onEmailLogin:(id)sender
 {
 	[self performSegueWithIdentifier:@"EmailLoginSegue" sender:self];
@@ -115,20 +133,11 @@
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	[accountManager weiboLogin];
 }
-- (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
-{
-	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, weibo_token);
-	[self refreshDisplay];
-}
+
 - (void)onRenrenLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	[accountManager renrenLogin];
-}
-- (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
-{
-	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, renren_token);
-	[self refreshDisplay];
 }
 
 - (void)onConfirmLogin:(id)sender
@@ -152,6 +161,24 @@
 	}
 }
 
+#pragma mark - AccountManagerDelegate Weibo
+
+- (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
+{
+	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, weibo_token);
+	[self refreshDisplay];
+}
+
+#pragma mark - AccountManagerDelegate Renren
+
+- (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
+{
+	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, renren_token);
+	[self refreshDisplay];
+}
+
+#pragma mark - AccountManagerDelegate Email
+
 - (void)didEmailEdit {
 	[self loading:NO];
 	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
@@ -159,13 +186,8 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
--(void)showAlert:(NSString*)message{
-	[[[UIAlertView alloc] initWithTitle:nil
-								message:message
-							   delegate:nil
-					  cancelButtonTitle:sCONFIRM
-					  otherButtonTitles:nil] show];
-}
+#pragma mark - AccountManagerDelegate Error
+
 - (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
 {
 	[self loading:NO];
