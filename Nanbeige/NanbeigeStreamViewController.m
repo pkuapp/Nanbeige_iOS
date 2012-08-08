@@ -8,9 +8,12 @@
 
 #import "NanbeigeStreamViewController.h"
 #import "Environment.h"
-#import "ASIHTTPRequest.h"
+#import "NanbeigeAccountManager.h"
 
-@interface NanbeigeStreamViewController ()
+@interface NanbeigeStreamViewController () <AccountManagerDelegate> {
+	NanbeigeAccountManager *accountManager;
+}
+
 
 @end
 
@@ -54,7 +57,10 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
 	self.title = TITLE_STREAM;
-	self.streams = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPCOURSES];
+	self.streams = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPSTREAMS];
+	
+	accountManager = [[NanbeigeAccountManager alloc] initWithViewController:self];
+	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -65,6 +71,8 @@
     // e.g. self.myOutlet = nil;
 }
 
+#pragma mark - Display
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -74,6 +82,14 @@
 	}
 }
 
+-(void)showAlert:(NSString*)message{
+	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil
+													   message:message
+													  delegate:nil
+											 cancelButtonTitle:@"确定"
+											 otherButtonTitles:nil];
+	[alertView show];
+}
 
 #pragma mark - Table view data source
 
@@ -92,7 +108,7 @@
     static NSString *identifier = @"Cell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if (nil == cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
 	}
 	cell.textLabel.text = [[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMTITLE];
     cell.detailTextLabel.text = [[[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMDETAIL] stringValue];
@@ -148,11 +164,7 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-	NSURL *url = [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"];
-	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-	[request setDelegate:self];
-	[request setTimeOutSeconds:DEFAULT_TIMEOUT];
-	[request startAsynchronous];
+	[accountManager requestBuildingsWithCampusID:[NSNumber numberWithInt:8]];
 }
 
 - (void)doneLoadingTableViewData{
@@ -208,16 +220,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[accountManager requestRoomsWithBuildingID:[[self.streams objectAtIndex:indexPath.row] objectForKey:kAPIID] Date:nil];
 }
 
--(void)showAlert:(NSString*)message{
-	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
-													   message:message
-													  delegate:nil
-											 cancelButtonTitle:@"确定"
-											 otherButtonTitles:nil];
-	[alertView show];
-}
+#pragma mark - Button controllerAction
+
 - (IBAction)renrenPost:(id)sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([defaults valueForKey:kRENRENIDKEY] == nil) {
@@ -238,20 +245,25 @@
 	}
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request
+#pragma mark - AccountManagerDelegate Others
+
+- (void)didBuildingsReceived:(NSArray *)buildings
 {
-	NSData *responseData = [request responseData];
-	id res = [NSJSONSerialization JSONObjectWithData:responseData
-											 options:NSJSONWritingPrettyPrinted
-											   error:nil];
-	self.streams = res;
-	[[NSUserDefaults standardUserDefaults] setValue:res forKey:kTEMPCOURSES];
+	self.streams = [buildings mutableCopy];
+	[[NSUserDefaults standardUserDefaults] setValue:buildings forKey:kTEMPSTREAMS];
 	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 }
-- (void)requestFailed:(ASIHTTPRequest *)request
+
+- (void)didRoomsReceived:(NSArray *)rooms
 {
-	NSError *error = [request error];
-	NSLog(@"%@", error);
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+	[[NSUserDefaults standardUserDefaults] setValue:rooms forKey:kTEMPROOMS];
+	[self showAlert:[rooms description]];
 }
+
+- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
+{
+	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+	[self showAlert:errorString];
+}
+
 @end

@@ -569,17 +569,31 @@
             </objects>
             <point key="canvasLocation" x="2135" y="-2235"/>
         </scene>
-        <!--View Controller - 已选课程-->
+        <!--Nanbeige Selected Courses View Controller - 已选课程-->
         <scene sceneID="3ur-NH-AbW">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIc-9p-HMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="I89-P4-RaH" sceneMemberID="viewController">
+                <viewController id="I89-P4-RaH" customClass="NanbeigeSelectedCoursesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hwL-zc-5Dn">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2G3-ye-ynz">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="I89-P4-RaH" id="rpi-O3-0r9"/>
+                                    <outlet property="delegate" destination="I89-P4-RaH" id="pdj-pO-Osz"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="已选课程" image="180-stickynote.png" id="CDo-P0-BKx"/>
+                    <connections>
+                        <outlet property="tableView" destination="2G3-ye-ynz" id="9N0-sR-0Jw"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2689" y="-4016"/>
@@ -620,7 +634,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1z-Z2-7i1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" id="ugW-R4-veT" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="nWq-OR-vGQ"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="7w6-nl-Jqg">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1656,6 +1670,147 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="widget_3line_0btn.png" width="663" height="227"/>
         <image name="widget_3line_2btn.png" width="663" height="268"/>
     </resources>
+    <classes>
+        <class className="NanbeigeAccountManageViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAccountManageViewController.h"/>
+        </class>
+        <class className="NanbeigeAssignmentDeadlineViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAssignmentDeadlineViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onConfirm:"/>
+                <relationship kind="action" name="onModeChange:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="deadlinePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="modeSegmentedControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeAssignmentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeAssignmentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onAssignmentCompleteChanged:"/>
+                <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeChangeMainOrderViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChangeMainOrderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="action" name="onChangeButtonPressed:"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeChooseCampusViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChooseCampusViewController.h"/>
+        </class>
+        <class className="NanbeigeChooseLoginViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChooseLoginViewController.h"/>
+        </class>
+        <class className="NanbeigeChooseSchoolViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeChooseSchoolViewController.h"/>
+        </class>
+        <class className="NanbeigeConfirmLoginViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeConfirmLoginViewController.h"/>
+        </class>
+        <class className="NanbeigeCoursesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeCoursesViewController.h"/>
+        </class>
+        <class className="NanbeigeCreateAssignmentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeCreateAssignmentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancel:"/>
+                <relationship kind="action" name="onConfirm:"/>
+                <relationship kind="outlet" name="assignmentTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="coursesPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="coursesToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeDetailGateInfoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeDetailGateInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeEmailLoginViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeEmailLoginViewController.h"/>
+        </class>
+        <class className="NanbeigeEmailSignupViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeEmailSignupViewController.h"/>
+        </class>
+        <class className="NanbeigeItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeItsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="detailGateInfoPressed:"/>
+                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="detailGateInfo" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeLoginItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeLoginItsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="calendarButtonPressed:"/>
+            </relationships>
+        </class>
+        <class className="NanbeigePickerLabel" superclassName="UILabel">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigePickerLabel.h"/>
+        </class>
+        <class className="NanbeigePreferenceViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigePreferenceViewController.h"/>
+        </class>
+        <class className="NanbeigeRenrenPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRenrenPostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="action" name="onPostButtonPressed:"/>
+                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeSelectedCoursesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeSelectedCoursesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeStreamViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeStreamViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="renrenPost:"/>
+                <relationship kind="action" name="weiboPost:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeWeiboPostViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWeiboPostViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="action" name="onPostButtonPressed:"/>
+                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeWelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeWelcomeViewController.h"/>
+        </class>
+        <class className="QuickDialogController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuickDialogController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

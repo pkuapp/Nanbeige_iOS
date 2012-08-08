@@ -30,6 +30,9 @@
 	ASIFormDataRequest *renrenSignupRequest;
 	ASIHTTPRequest *universitiesRequest;
 	ASIHTTPRequest *universityRequest;
+	ASIHTTPRequest *coursesRequest;
+	ASIHTTPRequest *buildingsRequest;
+	ASIHTTPRequest *roomsRequest;
 }
 
 @end
@@ -264,6 +267,35 @@
 	[universityRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[universityRequest startAsynchronous];
 }
+- (void)requestCourses
+{
+	coursesRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPICourse];
+	
+	[coursesRequest setDelegate:self];
+	[coursesRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[coursesRequest startAsynchronous];
+}
+- (void)requestBuildingsWithCampusID:(NSNumber *)campus_id
+{
+	buildingsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingWithCampus_ID, campus_id]]];
+	
+	[buildingsRequest setDelegate:self];
+	[buildingsRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[buildingsRequest startAsynchronous];
+}
+- (void)requestRoomsWithBuildingID:(NSNumber *)building_id
+							  Date:(NSDate *)date
+{
+	if (date) {
+		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingRoomWithBuilding_IDAndDate, building_id, date]]];
+	} else {
+		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingRoomWithBuilding_ID, building_id]]];
+	}
+		
+	[roomsRequest setDelegate:self];
+	[roomsRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[roomsRequest startAsynchronous];
+}
 
 #pragma mark - ASIHTTPRequestDelegate
 
@@ -365,6 +397,21 @@
 		[defaults setObject:res forKey:kTEMPUNIVERSITY];
 		if ([self.delegate respondsToSelector:@selector(didUniversityReceived:)]) {
 			[self.delegate didUniversityReceived:res];
+		}
+	}
+	if ([request isEqual:coursesRequest]) {
+		if ([self.delegate respondsToSelector:@selector(didCoursesReceived:)]) {
+			[self.delegate didCoursesReceived:res];
+		}
+	}
+	if ([request isEqual:buildingsRequest]) {
+		if ([self.delegate respondsToSelector:@selector(didBuildingsReceived:)]) {
+			[self.delegate didBuildingsReceived:res];
+		}
+	}
+	if ([request isEqual:roomsRequest]) {
+		if ([self.delegate respondsToSelector:@selector(didRoomsReceived:)]) {
+			[self.delegate didRoomsReceived:res];
 		}
 	}
 	

@@ -471,6 +471,7 @@
 		26E96D7715AC130B005353D4 /* renren-logo-dream.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E96D7615AC130A005353D4 /* renren-logo-dream.png */; };
 		26E96D7915AC156A005353D4 /* weibo-logo-280x144.png in Resources */ = {isa = PBXBuildFile; fileRef = 26E96D7815AC1566005353D4 /* weibo-logo-280x144.png */; };
 		26E96D7F15AC1644005353D4 /* NanbeigeWeiboPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E96D7E15AC1643005353D4 /* NanbeigeWeiboPostViewController.m */; };
+		26F215CF15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F215CE15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1371,6 +1372,8 @@
 		26E96D7815AC1566005353D4 /* weibo-logo-280x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo-logo-280x144.png"; sourceTree = "<group>"; };
 		26E96D7D15AC1643005353D4 /* NanbeigeWeiboPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWeiboPostViewController.h; sourceTree = "<group>"; };
 		26E96D7E15AC1643005353D4 /* NanbeigeWeiboPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWeiboPostViewController.m; sourceTree = "<group>"; };
+		26F215CD15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeSelectedCoursesViewController.h; sourceTree = "<group>"; };
+		26F215CE15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeSelectedCoursesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2657,6 +2660,8 @@
 			children = (
 				26D1DAF715D2153400A24308 /* NanbeigeCoursesViewController.h */,
 				26D1DAF815D2153400A24308 /* NanbeigeCoursesViewController.m */,
+				26F215CD15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.h */,
+				26F215CE15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.m */,
 				26D1DAFA15D2174E00A24308 /* NanbeigeTimeTable.h */,
 				26D1DAFB15D2174E00A24308 /* NanbeigeTimeTable.m */,
 			);
@@ -3281,6 +3286,7 @@
 				26D1DB4B15D22C6800A24308 /* SYPaginatorScrollView.m in Sources */,
 				26D1DB4C15D22C6800A24308 /* SYPaginatorView.m in Sources */,
 				26D1DB4D15D22C6800A24308 /* SYPaginatorViewController.m in Sources */,
+				26F215CF15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

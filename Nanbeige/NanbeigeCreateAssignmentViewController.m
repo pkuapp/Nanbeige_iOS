@@ -227,7 +227,7 @@ numberOfRowsInComponent:(NSInteger)component
 	} else if ([identifier isEqualToString:@"AssignmentTimeIdentifier"]) {
 		if ([[self.assignment objectForKey:kASSIGNMENTDDLMODE] isEqualToNumber:[NSNumber numberWithInt:ONDATE]]) {
 			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-			formatter.dateFormat = @"yyyy年MM月dd日 hh:mm";
+			formatter.dateFormat = @"M月d日 E hh:mm";
 			[[[cell.contentView subviews] objectAtIndex:1] setText:[formatter stringFromDate:[self.assignment objectForKey:kASSIGNMENTDDLDATE]]];
 		} else {
 			[self.assignment setObject:[NSNumber numberWithInt:ONCLASS] forKey:kASSIGNMENTDDLMODE];

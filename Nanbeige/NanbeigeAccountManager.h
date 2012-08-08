@@ -47,6 +47,9 @@
 
 - (void)didUniversitiesReceived:(NSArray *)universities;
 - (void)didUniversityReceived:(NSDictionary *)university;
+- (void)didCoursesReceived:(NSArray *)courses;
+- (void)didBuildingsReceived:(NSArray *)buildings;
+- (void)didRoomsReceived:(NSArray *)rooms;
 
 @end
 
@@ -83,5 +86,9 @@
 
 - (void)requestUniversities;
 - (void)requestUniversity:(NSNumber *)university_id;
+- (void)requestCourses;
+- (void)requestBuildingsWithCampusID:(NSNumber *)campus_id;
+- (void)requestRoomsWithBuildingID:(NSNumber *)building_id
+							  Date:(NSDate *)date;
 
 @end

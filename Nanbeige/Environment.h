@@ -32,8 +32,11 @@
 #define urlAPIUserRegWeibo [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/weibo/"]
 #define urlAPIUserRegRenren [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/renren/"]
 #define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:333/user/edit/"]
-#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
 #define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
+#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
+#define formatAPIStudyBuildingWithCampus_ID @"http://api.pkuapp.com:333/study/building/?campus_id=%@"
+#define formatAPIStudyBuildingRoomWithBuilding_ID @"http://api.pkuapp.com:333/study/building/%@/room/"
+#define formatAPIStudyBuildingRoomWithBuilding_IDAndDate @"http://api.pkuapp.com:333/study/building/%@/room/?date=%@"
 #define kAPIEMAIL @"email"
 #define kAPIPASSWORD @"password"
 #define kAPINICKNAME @"nickname"
@@ -152,9 +155,6 @@
 #define NOTCOMPLETE 0
 #define COMPLETE 1
 
-#define kSTREAMTITLE @"name"
-#define kSTREAMDETAIL @"credit"
-
 #define TIMETABLEPAGEGAPWIDTH 16.0f
 #define TIMETABLEPAGENUMBER 999
 #define TIMETABLEPAGEINDEX 498
@@ -168,6 +168,12 @@
 #define kTEMPCOURSES @"tempcourses"
 #define kTEMPUNIVERSITIES @"tempuniversities"
 #define kTEMPUNIVERSITY @"tempuniversity"
+#define kTEMPBUILDINGS @"tempbuildings"
+#define kTEMPROOMS @"temprooms"
+
+#define kTEMPSTREAMS kTEMPBUILDINGS
+#define kSTREAMTITLE @"name"
+#define kSTREAMDETAIL @"id"
 
 ///////////////////////////////
 #define test_username @"pkttus#42$"

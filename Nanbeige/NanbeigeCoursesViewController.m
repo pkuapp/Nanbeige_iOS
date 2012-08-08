@@ -57,9 +57,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
-	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
-	
 	_paginatorView.frame = self.view.bounds;
 	[self.view setBackgroundColor:tableBgColor2];
 	[self.view addSubview:_paginatorView];
@@ -74,6 +71,10 @@
 	self.tabBarController.navigationController.navigationBar.tintColor = navBarBgColor2;
 	self.tabBarController.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor2, UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 1)]};
 	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
+	
+	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
+	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
+	
 	[self onTodayButtonPressed:nil];
 }
 
@@ -136,7 +137,7 @@
 {
 	NSDate *day = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"第w周 E MM月dd日";
+	formatter.dateFormat = @"第w周 E M月d日";
 	NSString *dayDate = [formatter stringFromDate:day];
 	self.tabBarController.title = dayDate;
 }
