@@ -102,6 +102,8 @@
 - (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
 {
 	[accountManager emailLoginWithWeiboToken:weibo_token];
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
 }
 - (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
 {
@@ -112,11 +114,44 @@
 
 - (void)didEmailLoginWithID:(NSNumber *)ID Nickname:(NSString *)nickname UniversityID:(NSNumber *)university_id UniversityName:(NSString *)university_name CampusID:(NSNumber *)campus_id CampusName:(NSString *)campus_name
 {
-	if (campus_id) {
+	[self loading:NO];
+	if (university_id) {
 		[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
 	} else {
 		[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
 	}
+}
+
+-(void)showAlert:(NSString*)message{
+	[[[UIAlertView alloc] initWithTitle:nil
+								message:message
+							   delegate:nil
+					  cancelButtonTitle:@"确定"
+					  otherButtonTitles:nil] show];
+}
+- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
+{
+	[self loading:NO];
+	[self showAlert:errorString];
+}
+
+- (void)didRequest:(ASIHTTPRequest *)request FailWithErrorCode:(NSString *)errorCode
+{
+	if ([[request url] isEqual:urlAPIUserLoginWeibo]) {
+		if ([errorCode isEqualToString:sERRORUSERNOTFOUND]) {
+			[accountManager weiboSignupWithToken:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY] Nickname:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY]];
+			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+			[self loading:YES];
+			return ;
+		}
+	}
+	[self loading:NO];
+	[self showAlert:errorCode];
+}
+
+- (void)didWeiboSignupWithID:(NSNumber *)ID
+{
+	[accountManager emailLoginWithWeiboToken:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY]];
 }
 
 @end

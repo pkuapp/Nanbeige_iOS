@@ -25,7 +25,9 @@
 	ASIFormDataRequest *renrenLoginRequest;
 	ASIFormDataRequest *editRequest;
 	ASIFormDataRequest *logoutRequest;
-	ASIFormDataRequest *signupRequest;
+	ASIFormDataRequest *emailSignupRequest;
+	ASIFormDataRequest *weiboSingupRequest;
+	ASIFormDataRequest *renrenSignupRequest;
 	ASIHTTPRequest *universitiesRequest;
 	ASIHTTPRequest *universityRequest;
 }
@@ -165,14 +167,14 @@
 	[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
 	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
 
-	signupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegEmail];
+	emailSignupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegEmail];
 	
-	[signupRequest addPostValue:email forKey:kAPIEMAIL];
-	[signupRequest addPostValue:nickname forKey:kAPINICKNAME];
-	[signupRequest addPostValue:password forKey:kAPIPASSWORD];
-	[signupRequest setDelegate:self];
-	[signupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
-	[signupRequest startAsynchronous];
+	[emailSignupRequest addPostValue:email forKey:kAPIEMAIL];
+	[emailSignupRequest addPostValue:nickname forKey:kAPINICKNAME];
+	[emailSignupRequest addPostValue:password forKey:kAPIPASSWORD];
+	[emailSignupRequest setDelegate:self];
+	[emailSignupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[emailSignupRequest startAsynchronous];
 }
 
 #pragma mark - Renren Login, Logout
@@ -192,6 +194,20 @@
 	[defaults removeObjectForKey:kRENRENTOKENKEY];
 	[renrenEngine logout:self];
 }
+- (void)renrenSignupWithToken:(NSString *)token
+					Nickname:(NSString *)nickname
+{
+	[defaults setObject:token forKey:kRENRENTOKENKEY];
+	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+	
+	renrenSignupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegRenren];
+	
+	[renrenSignupRequest addPostValue:token forKey:kAPITOKEN];
+	[renrenSignupRequest addPostValue:nickname forKey:kAPINICKNAME];
+	[renrenSignupRequest setDelegate:self];
+	[renrenSignupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[renrenSignupRequest startAsynchronous];
+}
 - (BOOL)isRenrenSessionValid
 {
 	return [renrenEngine isSessionValid];
@@ -209,6 +225,20 @@
 	[defaults removeObjectForKey:kWEIBONAMEKEY];
 	[defaults removeObjectForKey:kWEIBOTOKENKEY];
 	[weiBoEngine logOut];
+}
+- (void)weiboSignupWithToken:(NSString *)token
+					Nickname:(NSString *)nickname
+{
+	[defaults setObject:token forKey:kWEIBOTOKENKEY];
+	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+	
+	weiboSingupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegWeibo];
+	
+	[weiboSingupRequest addPostValue:token forKey:kAPITOKEN];
+	[weiboSingupRequest addPostValue:nickname forKey:kAPINICKNAME];
+	[weiboSingupRequest setDelegate:self];
+	[weiboSingupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
+	[weiboSingupRequest startAsynchronous];
 }
 - (BOOL)isWeiboSessionValid
 {
@@ -244,9 +274,15 @@
 											   error:nil];
 	NSLog(@"%@", res);
 	
-	if ([res isKindOfClass:[NSDictionary class]] && [res objectForKey:kAPIERROR]) {
-		if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-			[self.delegate requestError:[res objectForKey:kAPIERROR]];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) {
+		if ([res objectForKey:kAPIERROR]) {
+			if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+				[self.delegate didRequest:request FailWithError:[res objectForKey:kAPIERROR]];
+			}
+		} else if ([res objectForKey:kAPIERROR_CODE]){
+			if ([self.delegate respondsToSelector:@selector(didRequest:FailWithErrorCode:)]) {
+				[self.delegate didRequest:request FailWithErrorCode:[res objectForKey:kAPIERROR_CODE]];
+			}
 		}
 		return ;
 	}
@@ -291,11 +327,25 @@
 			[self.delegate didEmailLogout];
 		}
 	}
-	if ([request isEqual:signupRequest]) {
+	if ([request isEqual:emailSignupRequest]) {
 		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
 		[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
 		if ([self.delegate respondsToSelector:@selector(didEmailSignupWithID:)]) {
 			[self.delegate didEmailSignupWithID:nanbeigeid];
+		}
+	}
+	if ([request isEqual:renrenSignupRequest]) {
+		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+		[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+		if ([self.delegate respondsToSelector:@selector(didRenrenSignupWithID:)]) {
+			[self.delegate didRenrenSignupWithID:nanbeigeid];
+		}
+	}
+	if ([request isEqual:weiboSingupRequest]) {
+		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+		[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+		if ([self.delegate respondsToSelector:@selector(didWeiboSignupWithID:)]) {
+			[self.delegate didWeiboSignupWithID:nanbeigeid];
 		}
 	}
 	if ([request isEqual:universitiesRequest]) {
@@ -318,17 +368,21 @@
 		id res = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONWritingPrettyPrinted error:nil];
 		NSLog(@"%@", res);
 		if ([res objectForKey:kAPIERROR]) {
-			if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-				[self.delegate requestError:[res objectForKey:kAPIERROR]];
+			if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+				[self.delegate didRequest:request FailWithError:[res objectForKey:kAPIERROR]];
 			}
 			return ;
+		} else if ([res objectForKey:kAPIERROR_CODE]){
+			if ([self.delegate respondsToSelector:@selector(didRequest:FailWithErrorCode:)]) {
+				[self.delegate didRequest:request FailWithErrorCode:[res objectForKey:kAPIERROR_CODE]];
+			}
 		}
 	}
 	
 	NSError *error = [request error];
 	NSLog(@"%@", error);
-	if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-		[self.delegate requestError:[error description]];
+	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self.delegate didRequest:request FailWithError:[error description]];
 	}
 }
 
@@ -353,8 +407,8 @@
 // 2) Your app has not been authorized by Sina yet.
 - (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
 {
-	if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-		[self.delegate requestError:[error description]];
+	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self.delegate didRequest:nil FailWithError:[error description]];
 	}
 }
 
@@ -370,20 +424,20 @@
 // you may receive the following four callbacks.
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
-	if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-		[self.delegate requestError:@"微博未授权"];
+	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self.delegate didRequest:nil FailWithError:@"微博未授权"];
 	}
 }
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
-	if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-		[self.delegate requestError:@"微博授权已过期"];
+	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self.delegate didRequest:nil FailWithError:@"微博授权已过期"];
 	}
 }
 - (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error
 {
-	if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-		[self.delegate requestError:[error description]];
+	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self.delegate didRequest:nil FailWithError:[error description]];
 	}
 }
 - (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
@@ -436,8 +490,8 @@
  */
 - (void)renren:(Renren *)renren requestFailWithError:(ROError*)error
 {
-	if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-		[self.delegate requestError:[error localizedDescription]];
+	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self.delegate didRequest:nil FailWithError:[error localizedDescription]];
 	}
 }
 
@@ -469,8 +523,8 @@
  */
 - (void)renren:(Renren *)renren loginFailWithError:(ROError*)error
 {
-	if ([self.delegate respondsToSelector:@selector(requestError:)]) {
-		[self.delegate requestError:[error localizedDescription]];
+	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self.delegate didRequest:nil FailWithError:[error localizedDescription]];
 	}
 }
 

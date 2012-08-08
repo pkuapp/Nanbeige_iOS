@@ -125,7 +125,7 @@
 					  cancelButtonTitle:@"确定"
 					  otherButtonTitles:nil] show];
 }
-- (void)requestError:(NSString *)errorString
+- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
 {
 	[self loading:NO];
 	[self showAlert:errorString];

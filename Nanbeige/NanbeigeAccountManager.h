@@ -7,21 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ASIHTTPRequest.h"
+
 @protocol AccountManagerDelegate <NSObject>
 
 @optional
 
-- (void)requestError:(NSString *)errorString;
+- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString;
+- (void)didRequest:(ASIHTTPRequest *)request FailWithErrorCode:(NSString *)errorCode;
 
 - (void)didWeiboLoginWithUserID:(NSString *)user_id
 					   UserName:(NSString *)user_name
 					 WeiboToken:(NSString *)weibo_token;
 - (void)didWeiboLogout;
+- (void)didWeiboSignupWithID:(NSNumber *)ID;
 
 - (void)didRenrenLoginWithUserID:(NSNumber *)user_id
 					   UserName:(NSString *)user_name
 					 RenrenToken:(NSString *)renren_token;
 - (void)didRenrenLogout;
+- (void)didRenrenSignupWithID:(NSNumber *)ID;
 
 - (void)didEmailLoginWithID:(NSNumber *)ID
 				   Nickname:(NSString *)nickname
@@ -66,10 +71,14 @@
 
 - (void)weiboLogin;
 - (void)weiboLogout;
+- (void)weiboSignupWithToken:(NSString *)token
+					Nickname:(NSString *)nickname;
 - (BOOL)isWeiboSessionValid;
 
 - (void)renrenLogin;
 - (void)renrenLogout;
+- (void)renrenSignupWithToken:(NSString *)token
+					Nickname:(NSString *)nickname;
 - (BOOL)isRenrenSessionValid;
 
 - (void)requestUniversities;

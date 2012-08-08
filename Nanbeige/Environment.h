@@ -29,6 +29,8 @@
 #define urlAPIUserLoginRenren [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/renren/"]
 #define urlAPIUserLogout [NSURL URLWithString:@"http://api.pkuapp.com:333/user/logout/"]
 #define urlAPIUserRegEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/email/"]
+#define urlAPIUserRegWeibo [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/weibo/"]
+#define urlAPIUserRegRenren [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/renren/"]
 #define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:333/user/edit/"]
 #define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
 #define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
@@ -36,6 +38,7 @@
 #define kAPIPASSWORD @"password"
 #define kAPINICKNAME @"nickname"
 #define kAPIERROR @"error"
+#define kAPIERROR_CODE @"error_code"
 #define kAPIUNIVERSITY @"university"
 #define kAPICAMPUS @"campus"
 #define kAPICAMPUS_ID @"campus_id"
@@ -162,6 +165,8 @@
 
 #define kWBSDKDemoAppKey @"1362082242"
 #define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"
+
+#define sERRORUSERNOTFOUND @"UserNotFound"
 
 #define sRENREN @"人人网"
 #define sWEIBO @"新浪微博"
