@@ -345,7 +345,7 @@
 			
 			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 		} else {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"确认删除作业: 「%@」", [(id)[[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath] assignmentName].text] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"确认删除作业: 「%@」", [(id)[[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath] assignmentName].text] message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
 			[alert setTag:indexPath.row];
 			[alert show];
 		}
@@ -362,7 +362,7 @@
 			
 			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
 		} else {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"确认删除作业: 「%@」", [(id)[[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath] assignmentName].text] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"确认删除作业: 「%@」", [(id)[[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath] assignmentName].text] message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
 			[alert setTag:indexPath.row];
 			[alert show];
 		}

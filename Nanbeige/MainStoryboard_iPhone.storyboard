@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="0bp-IX-U3c">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -316,6 +315,7 @@
                         <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentWithCameraSegue" id="Yqn-fv-amI"/>
                         <segue destination="yil-Q7-q5m" kind="push" identifier="DetailGateInfoSegue" id="iBD-dN-4lH"/>
                         <segue destination="ugW-R4-veT" kind="push" identifier="CoursesEnterSegue" id="HAR-ck-MSF"/>
+                        <segue destination="PRZ-eR-Bt6" kind="push" identifier="RoomsEnterSegue" id="nfF-gJ-ICc"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -596,7 +596,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2689" y="-4016"/>
+            <point key="canvasLocation" x="3167" y="-3500"/>
         </scene>
         <!--View Controller - 蹭课-->
         <scene sceneID="xum-cs-fmA">
@@ -611,7 +611,22 @@
                     <tabBarItem key="tabBarItem" title="蹭课" image="265-download.png" id="L2c-D2-W2n"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2689" y="-3433"/>
+            <point key="canvasLocation" x="3632" y="-3500"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5CD-AV-rTt">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mlz-Nx-XKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Q2G-KM-Kq9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Q6I-7e-pRH">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZCQ-UU-0C9"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2689" y="-4096"/>
         </scene>
         <!--Nanbeige Courses View Controller - 课程表-->
         <scene sceneID="SFv-Cq-FeB">
@@ -626,7 +641,87 @@
                     <tabBarItem key="tabBarItem" title="课程表" image="96-book.png" id="hrf-uH-kGY"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2689" y="-4598"/>
+            <point key="canvasLocation" x="2689" y="-3500"/>
+        </scene>
+        <!--Nanbeige Rooms View Controller-->
+        <scene sceneID="wme-IW-XQm">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tp2-vU-2tN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController hidesBottomBarWhenPushed="YES" id="PRZ-eR-Bt6" customClass="NanbeigeRoomsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Frq-ec-fYN">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YHO-uo-fEc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="PRZ-eR-Bt6" id="eqJ-mo-xH3"/>
+                                    <outlet property="delegate" destination="PRZ-eR-Bt6" id="PIH-1j-7wl"/>
+                                </connections>
+                            </tableView>
+                            <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="J9X-gu-2d5">
+                                <rect key="frame" x="0.0" y="200" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="366197771.510993">
+                                    <!--2012-08-09 09:36:11 +0000-->
+                                </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                    <!--1970-01-01 11:00:00 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                    <!--2037-12-31 11:00:00 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="zh_CN"/>
+                                <timeZone key="timeZone" name="America/Los_Angeles">
+                                    <data key="data">
+VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
+y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
+5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
+8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
+AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
+DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
+HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
+KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
+OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
+Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
+VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
+Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
+cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
+f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
+</data>
+                                </timeZone>
+                            </datePicker>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="p5m-ox-VyG">
+                                <rect key="frame" x="0.0" y="156" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rVY-4i-fbd"/>
+                                    <barButtonItem title="确认" id="Yzt-ts-go2">
+                                        <connections>
+                                            <action selector="onConfrimDatePick:" destination="PRZ-eR-Bt6" id="kzb-7P-5Qs"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Atg-JE-hfg"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="datePicker" destination="J9X-gu-2d5" id="ghj-xV-o0Y"/>
+                        <outlet property="tableView" destination="YHO-uo-fEc" id="DGM-fK-72n"/>
+                        <outlet property="toolbar" destination="p5m-ox-VyG" id="7ff-dx-JI2"/>
+                        <segue destination="Q2G-KM-Kq9" kind="push" identifier="RoomsDetailSegue" id="eJx-04-NjJ"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2135" y="-4096"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="5Rj-XE-4cg">
@@ -647,7 +742,7 @@
                     </connections>
                 </tabBarController>
             </objects>
-            <point key="canvasLocation" x="2135" y="-4016"/>
+            <point key="canvasLocation" x="2135" y="-3500"/>
         </scene>
         <!--Nanbeige Assignment View Controller-->
         <scene sceneID="Hi2-Wp-7gG">
@@ -754,7 +849,7 @@
                                 <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
                                     <!--2037-12-31 11:00:00 +0000-->
                                 </date>
-                                <locale key="locale" localeIdentifier="zh-Hans_HK"/>
+                                <locale key="locale" localeIdentifier="zh_CN"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
                                     <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
@@ -1780,6 +1875,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="onCancelButtonPressed:"/>
                 <relationship kind="action" name="onPostButtonPressed:"/>
                 <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NanbeigeRoomsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeRoomsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onConfrimDatePick:"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="NanbeigeSelectedCoursesViewController" superclassName="UIViewController">

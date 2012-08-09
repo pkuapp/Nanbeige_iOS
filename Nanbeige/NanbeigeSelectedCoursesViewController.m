@@ -93,7 +93,7 @@
 	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil
 													   message:message
 													  delegate:nil
-											 cancelButtonTitle:@"确定"
+											 cancelButtonTitle:sCONFIRM
 											 otherButtonTitles:nil];
 	[alertView show];
 }

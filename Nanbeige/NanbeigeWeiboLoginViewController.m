@@ -30,7 +30,7 @@
         [self.view addSubview:self.navigationBar];
         
         UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"连接到新浪微博"];
-        navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(close)];
+        navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:sCANCEL style:UIBarButtonItemStylePlain target:self action:@selector(close)];
 
         [self.navigationBar pushNavigationItem: navItem animated: NO];
 		

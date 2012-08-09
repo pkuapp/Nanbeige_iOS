@@ -45,7 +45,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:self action:@selector(onLogin:)];
-	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
+	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
 	self.navigationItem.rightBarButtonItem = loginButton;
 	self.navigationItem.leftBarButtonItem = closeButton;
 	
@@ -85,7 +85,7 @@
 	[[[UIAlertView alloc] initWithTitle:nil
 								message:message
 							   delegate:nil
-					  cancelButtonTitle:@"确定"
+					  cancelButtonTitle:sCONFIRM
 					  otherButtonTitles:nil] show];
 }
 

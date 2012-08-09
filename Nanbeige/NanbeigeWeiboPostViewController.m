@@ -7,6 +7,7 @@
 //
 
 #import "NanbeigeWeiboPostViewController.h"
+#import "Environment.h"
 
 #define kWBSDKDemoAppKey @"1362082242"
 #define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"
@@ -136,7 +137,7 @@
 - (IBAction)onPostButtonPressed:(id)sender {
 	// check text length
 	if ([self.textToPost.text length] <= 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"状态不能为空！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"状态不能为空！" message:nil delegate:nil cancelButtonTitle:sCONFIRM otherButtonTitles:nil];
         [alert show];
     }
     
@@ -155,7 +156,7 @@
 	UIAlertView* alertView =[[UIAlertView alloc] initWithTitle:nil 
 													   message:message
 													  delegate:nil
-											 cancelButtonTitle:@"确定"
+											 cancelButtonTitle:sCONFIRM
 											 otherButtonTitles:nil];
 	[alertView show];
 }

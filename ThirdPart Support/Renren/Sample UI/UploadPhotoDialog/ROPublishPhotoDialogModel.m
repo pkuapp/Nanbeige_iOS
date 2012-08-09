@@ -97,7 +97,7 @@
 {
     self.caption = _internal.captionTextView.text;
     if (self.caption.length > 140) {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"照片描述不能超过140字符" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"照片描述不能超过140字符" delegate:self cancelButtonTitle:sCONFIRM otherButtonTitles:nil];
         [alert show];
         [alert release];
         return;
@@ -161,7 +161,7 @@
         default:
             break;
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:errorAlertString delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:errorAlertString delegate:self cancelButtonTitle:sCONFIRM otherButtonTitles:nil];
     [alert show];
     [alert release];
 }

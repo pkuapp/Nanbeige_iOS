@@ -87,6 +87,8 @@
 #define TITLE_ABOUT @"关于南北阁"
 #define TITLE_ITS @"IP网关"
 #define TITLE_ASSIGNMENT @"作业"
+#define FORMAT_TITLE_ROOMS @"教学楼・%@"
+#define LIMIT_ROOM_STRING_LENGTH 20
 
 //#define tableBgColor [[UIColor alloc] initWithRed:239/255.0 green:234/255.0 blue:222/255.0 alpha:1.0]
 //#define navBarBgColor [[UIColor alloc] initWithRed:77/255.0 green:77/255.0 blue:77/255.0 alpha:1.0]
@@ -94,12 +96,17 @@
 #define tableBgColor1 [[UIColor alloc] initWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1.0]
 #define tableBgColor2 [[UIColor alloc] initWithRed:237/255.0 green:237/255.0 blue:237/255.0 alpha:1.0]
 #define tableBgColor3 [[UIColor alloc] initWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
+#define tableBgColor4 [[UIColor alloc] initWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0]
 #define navBarBgColor1 [[UIColor alloc] initWithRed:110/255.0 green:110/255.0 blue:110/255.0 alpha:1.0]
 #define navBarBgColor2 [[UIColor alloc] initWithRed:225/255.0 green:220/255.0 blue:0/255.0 alpha:1.0]
 #define navBarTextColor2 [[UIColor alloc] initWithRed:132/255.0 green:193/255.0 blue:249/255.0 alpha:1.0]
 #define tabBarBgColor1 [[UIColor alloc] initWithRed:55/255.0 green:119/255.0 blue:138/255.0 alpha:1.0]
 #define separatorColor1 [[UIColor alloc] initWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0]
 #define separatorColor2 [[UIColor alloc] initWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]
+#define separatorColor3 [[UIColor alloc] initWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1.0]
+#define separatorColor4 [[UIColor alloc] initWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1.0]
+#define separatorColor5 [[UIColor alloc] initWithRed:138/255.0 green:138/255.0 blue:138/255.0 alpha:1.0]
+#define separatorColor6 [[UIColor alloc] initWithRed:168/255.0 green:168/255.0 blue:168/255.0 alpha:1.0]
 #define timeColor1 [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0]
 #define gateConnectingBtnColor [[UIColor alloc] initWithRed:255/255.0 green:248/255.0 blue:176/255.0 alpha:1.0]
 #define gateConnectedBtnColor [[UIColor alloc] initWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1.0]

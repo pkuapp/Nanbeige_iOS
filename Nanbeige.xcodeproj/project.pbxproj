@@ -445,6 +445,17 @@
 		26A6B69315B41B17006FA15D /* Welcome-button-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5EC15B41B17006FA15D /* Welcome-button-active@2x.png */; };
 		26A6B69415B41B17006FA15D /* Welcome-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5ED15B41B17006FA15D /* Welcome-button.png */; };
 		26A6B69515B41B17006FA15D /* Welcome-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A6B5EE15B41B17006FA15D /* Welcome-button@2x.png */; };
+		26A8B4E215D39599009D4118 /* NanbeigeRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A8B4E115D39599009D4118 /* NanbeigeRoomsViewController.m */; };
+		26A8B50315D39F36009D4118 /* GCRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A8B4F915D39F36009D4118 /* GCRetractableSectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		26A8B50415D39F36009D4118 /* DownAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B4FB15D39F36009D4118 /* DownAccessory.png */; };
+		26A8B50515D39F36009D4118 /* DownAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B4FC15D39F36009D4118 /* DownAccessory@2x.png */; };
+		26A8B50615D39F36009D4118 /* DownAccessoryWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B4FD15D39F36009D4118 /* DownAccessoryWhite.png */; };
+		26A8B50715D39F36009D4118 /* DownAccessoryWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B4FE15D39F36009D4118 /* DownAccessoryWhite@2x.png */; };
+		26A8B50815D39F36009D4118 /* UpAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B4FF15D39F36009D4118 /* UpAccessory.png */; };
+		26A8B50915D39F36009D4118 /* UpAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B50015D39F36009D4118 /* UpAccessory@2x.png */; };
+		26A8B50A15D39F36009D4118 /* UpAccessoryWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B50115D39F36009D4118 /* UpAccessoryWhite.png */; };
+		26A8B50B15D39F36009D4118 /* UpAccessoryWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B50215D39F36009D4118 /* UpAccessoryWhite@2x.png */; };
+		26A8B50E15D3A1C3009D4118 /* GCArraySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A8B50D15D3A1C3009D4118 /* GCArraySectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26B9667115BC1C830081002C /* NanbeigeAssignmentDeadlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */; };
 		26D1DAF915D2153400A24308 /* NanbeigeCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DAF815D2153400A24308 /* NanbeigeCoursesViewController.m */; };
 		26D1DAFC15D2174E00A24308 /* NanbeigeTimeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DAFB15D2174E00A24308 /* NanbeigeTimeTable.m */; };
@@ -1313,6 +1324,20 @@
 		26A6B5F315B41B17006FA15D /* widget_3line_2btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_3line_2btn.png; sourceTree = "<group>"; };
 		26A6E98215B30BA20001B2E0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		26A6E98315B30BA20001B2E0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		26A8B4E015D39599009D4118 /* NanbeigeRoomsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeRoomsViewController.h; sourceTree = "<group>"; };
+		26A8B4E115D39599009D4118 /* NanbeigeRoomsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeRoomsViewController.m; sourceTree = "<group>"; };
+		26A8B4F815D39F36009D4118 /* GCRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCRetractableSectionController.h; sourceTree = "<group>"; };
+		26A8B4F915D39F36009D4118 /* GCRetractableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCRetractableSectionController.m; sourceTree = "<group>"; };
+		26A8B4FB15D39F36009D4118 /* DownAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DownAccessory.png; sourceTree = "<group>"; };
+		26A8B4FC15D39F36009D4118 /* DownAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DownAccessory@2x.png"; sourceTree = "<group>"; };
+		26A8B4FD15D39F36009D4118 /* DownAccessoryWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DownAccessoryWhite.png; sourceTree = "<group>"; };
+		26A8B4FE15D39F36009D4118 /* DownAccessoryWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DownAccessoryWhite@2x.png"; sourceTree = "<group>"; };
+		26A8B4FF15D39F36009D4118 /* UpAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpAccessory.png; sourceTree = "<group>"; };
+		26A8B50015D39F36009D4118 /* UpAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UpAccessory@2x.png"; sourceTree = "<group>"; };
+		26A8B50115D39F36009D4118 /* UpAccessoryWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpAccessoryWhite.png; sourceTree = "<group>"; };
+		26A8B50215D39F36009D4118 /* UpAccessoryWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UpAccessoryWhite@2x.png"; sourceTree = "<group>"; };
+		26A8B50C15D3A1C3009D4118 /* GCArraySectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCArraySectionController.h; sourceTree = "<group>"; };
+		26A8B50D15D3A1C3009D4118 /* GCArraySectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCArraySectionController.m; sourceTree = "<group>"; };
 		26AB037715C1994A00539AB5 /* NanbeigeSplitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeSplitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 		26B9666F15BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentDeadlineViewController.h; sourceTree = "<group>"; };
 		26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentDeadlineViewController.m; sourceTree = "<group>"; };
@@ -1688,6 +1713,7 @@
 		262AD4AA15AA7E0C000C2EF7 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				26A8B4DF15D3956C009D4118 /* RoomsView */,
 				26D1DAF615D213FD00A24308 /* CoursesView */,
 				2678C31515B042D0005E1D3E /* MainTableCell */,
 				26E2CB5E15B545ED00F8FA3D /* AssignmentView */,
@@ -2052,6 +2078,7 @@
 		262AD5DE15AA8020000C2EF7 /* ThirdPart Support */ = {
 			isa = PBXGroup;
 			children = (
+				26A8B4F715D39F36009D4118 /* GCRetractableSectionController */,
 				26D1DAE015D212D100A24308 /* SYPaginator */,
 				269F9E0D15C9754700EC2499 /* HMGLTransitions */,
 				26283ECC15C8EFAE003C1BC7 /* libQuickDialog */,
@@ -2645,6 +2672,42 @@
 			name = WelcomeView;
 			sourceTree = "<group>";
 		};
+		26A8B4DF15D3956C009D4118 /* RoomsView */ = {
+			isa = PBXGroup;
+			children = (
+				26A8B4E015D39599009D4118 /* NanbeigeRoomsViewController.h */,
+				26A8B4E115D39599009D4118 /* NanbeigeRoomsViewController.m */,
+			);
+			name = RoomsView;
+			sourceTree = "<group>";
+		};
+		26A8B4F715D39F36009D4118 /* GCRetractableSectionController */ = {
+			isa = PBXGroup;
+			children = (
+				26A8B50C15D3A1C3009D4118 /* GCArraySectionController.h */,
+				26A8B50D15D3A1C3009D4118 /* GCArraySectionController.m */,
+				26A8B4F815D39F36009D4118 /* GCRetractableSectionController.h */,
+				26A8B4F915D39F36009D4118 /* GCRetractableSectionController.m */,
+				26A8B4FA15D39F36009D4118 /* Images */,
+			);
+			path = GCRetractableSectionController;
+			sourceTree = "<group>";
+		};
+		26A8B4FA15D39F36009D4118 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				26A8B4FB15D39F36009D4118 /* DownAccessory.png */,
+				26A8B4FC15D39F36009D4118 /* DownAccessory@2x.png */,
+				26A8B4FD15D39F36009D4118 /* DownAccessoryWhite.png */,
+				26A8B4FE15D39F36009D4118 /* DownAccessoryWhite@2x.png */,
+				26A8B4FF15D39F36009D4118 /* UpAccessory.png */,
+				26A8B50015D39F36009D4118 /* UpAccessory@2x.png */,
+				26A8B50115D39F36009D4118 /* UpAccessoryWhite.png */,
+				26A8B50215D39F36009D4118 /* UpAccessoryWhite@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		26D1DAE015D212D100A24308 /* SYPaginator */ = {
 			isa = PBXGroup;
 			children = (
@@ -3076,6 +3139,14 @@
 				26D1DB4615D22C6800A24308 /* SYPaginatorResources-Info.plist in Resources */,
 				26D1DB4A15D22C6800A24308 /* SYPaginatorResources-Info.plist in Resources */,
 				26D1DB4E15D22C9800A24308 /* SYPaginatorResources.bundle in Resources */,
+				26A8B50415D39F36009D4118 /* DownAccessory.png in Resources */,
+				26A8B50515D39F36009D4118 /* DownAccessory@2x.png in Resources */,
+				26A8B50615D39F36009D4118 /* DownAccessoryWhite.png in Resources */,
+				26A8B50715D39F36009D4118 /* DownAccessoryWhite@2x.png in Resources */,
+				26A8B50815D39F36009D4118 /* UpAccessory.png in Resources */,
+				26A8B50915D39F36009D4118 /* UpAccessory@2x.png in Resources */,
+				26A8B50A15D39F36009D4118 /* UpAccessoryWhite.png in Resources */,
+				26A8B50B15D39F36009D4118 /* UpAccessoryWhite@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3287,6 +3358,9 @@
 				26D1DB4C15D22C6800A24308 /* SYPaginatorView.m in Sources */,
 				26D1DB4D15D22C6800A24308 /* SYPaginatorViewController.m in Sources */,
 				26F215CF15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.m in Sources */,
+				26A8B4E215D39599009D4118 /* NanbeigeRoomsViewController.m in Sources */,
+				26A8B50315D39F36009D4118 /* GCRetractableSectionController.m in Sources */,
+				26A8B50E15D3A1C3009D4118 /* GCArraySectionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

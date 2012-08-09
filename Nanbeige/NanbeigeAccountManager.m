@@ -287,7 +287,9 @@
 							  Date:(NSDate *)date
 {
 	if (date) {
-		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingRoomWithBuilding_IDAndDate, building_id, date]]];
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		formatter.dateFormat = @"yyyy-MM-dd";
+		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingRoomWithBuilding_IDAndDate, building_id, [formatter stringFromDate:date]]]];
 	} else {
 		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingRoomWithBuilding_ID, building_id]]];
 	}

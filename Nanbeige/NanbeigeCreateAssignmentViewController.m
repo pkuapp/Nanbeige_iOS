@@ -302,7 +302,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"添加照片" 
 													  delegate:self 
-											 cancelButtonTitle:@"取消" 
+											 cancelButtonTitle:sCANCEL 
 										destructiveButtonTitle:nil 
 											 otherButtonTitles:@"拍照", @"选取照片", @"选取最近一张照片", nil];
 	[menu showInView:self.view];
