@@ -44,6 +44,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	self.tabBarController.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
 	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
@@ -65,7 +66,6 @@
 {
 	[super viewWillAppear:animated];
 	
-	self.tabBarController.navigationController.navigationBar.tintColor = navBarBgColor2;
 	self.tabBarController.navigationItem.rightBarButtonItem = nil;
 	self.tabBarController.title = @"已选课程";
 	self.tableView.backgroundColor = tableBgColor3;

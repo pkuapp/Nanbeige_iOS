@@ -117,7 +117,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return self.buildings.count;
+	return retractableControllers.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -168,6 +168,7 @@
 - (void)reloadRooms
 {
 	retractableControllers = [[NSMutableArray alloc] init];
+	if (self.buildings.count != self.rooms.count) return ;
 	for (int index = 0; index < self.buildings.count; index++) {
 		
 		NSMutableArray *roomNames = [[NSMutableArray alloc] init];

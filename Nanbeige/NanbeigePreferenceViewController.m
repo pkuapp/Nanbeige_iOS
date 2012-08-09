@@ -49,6 +49,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
 }
 
 - (void)viewDidUnload

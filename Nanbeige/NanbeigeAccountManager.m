@@ -248,6 +248,17 @@
 {
 	return ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]);
 }
+- (void)weiboRequestHomeTimeline
+{
+	if (![self isWeiboSessionValid]) {
+		if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+			[self.delegate didRequest:nil FailWithError:@"微博未授权或已过期！"];
+		}
+	} else {
+		NSDictionary *params = nil;
+		[weiBoEngine loadRequestWithMethodName:@"statuses/home_timeline.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil];
+	}
+}
 
 #pragma mark - University API
 
@@ -504,6 +515,11 @@
 		[defaults setObject:[result objectForKey:kAPISCREEN_NAME] forKey:kWEIBONAMEKEY];
 		if ([self.delegate respondsToSelector:@selector(didWeiboLoginWithUserID:UserName:WeiboToken:)]) {
 			[self.delegate didWeiboLoginWithUserID:[weiBoEngine userID] UserName:[result objectForKey:kAPISCREEN_NAME] WeiboToken:[weiBoEngine accessToken]];
+		}
+	}
+	if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISTATUSES]) {
+		if ([self.delegate respondsToSelector:@selector(didWeiboHomeTimelineReceived:)]) {
+			[self.delegate didWeiboHomeTimelineReceived:[result objectForKey:kAPISTATUSES]];
 		}
 	}
 }

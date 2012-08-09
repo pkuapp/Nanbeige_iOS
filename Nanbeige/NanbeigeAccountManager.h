@@ -21,6 +21,7 @@
 					 WeiboToken:(NSString *)weibo_token;
 - (void)didWeiboLogout;
 - (void)didWeiboSignupWithID:(NSNumber *)ID;
+- (void)didWeiboHomeTimelineReceived:(NSArray *)home_timeline;
 
 - (void)didRenrenLoginWithUserID:(NSNumber *)user_id
 					   UserName:(NSString *)user_name
@@ -76,6 +77,7 @@
 - (void)weiboLogout;
 - (void)weiboSignupWithToken:(NSString *)token
 					Nickname:(NSString *)nickname;
+- (void)weiboRequestHomeTimeline;
 - (BOOL)isWeiboSessionValid;
 
 - (void)renrenLogin;

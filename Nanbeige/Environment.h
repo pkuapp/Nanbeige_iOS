@@ -51,6 +51,7 @@
 #define kAPINAME @"name"
 #define kAPITOKEN @"token"
 #define kAPISCREEN_NAME @"screen_name"
+#define kAPISTATUSES @"statuses"
 #define kAPICOUNT @"count"
 #define kAPIMORNING @"morning"
 #define kAPIAFTERNOON @"afternoon"
@@ -97,9 +98,7 @@
 #define tableBgColor2 [[UIColor alloc] initWithRed:237/255.0 green:237/255.0 blue:237/255.0 alpha:1.0]
 #define tableBgColor3 [[UIColor alloc] initWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 #define tableBgColor4 [[UIColor alloc] initWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0]
-#define navBarBgColor1 [[UIColor alloc] initWithRed:110/255.0 green:110/255.0 blue:110/255.0 alpha:1.0]
-#define navBarBgColor2 [[UIColor alloc] initWithRed:225/255.0 green:220/255.0 blue:0/255.0 alpha:1.0]
-#define navBarTextColor2 [[UIColor alloc] initWithRed:132/255.0 green:193/255.0 blue:249/255.0 alpha:1.0]
+#define navBarBgColor1 [[UIColor alloc] initWithRed:225/255.0 green:220/255.0 blue:0/255.0 alpha:1.0]
 #define tabBarBgColor1 [[UIColor alloc] initWithRed:55/255.0 green:119/255.0 blue:138/255.0 alpha:1.0]
 #define separatorColor1 [[UIColor alloc] initWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0]
 #define separatorColor2 [[UIColor alloc] initWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]
@@ -178,9 +177,10 @@
 #define kTEMPBUILDINGS @"tempbuildings"
 #define kTEMPROOMS @"temprooms"
 
-#define kTEMPSTREAMS kTEMPBUILDINGS
-#define kSTREAMTITLE @"name"
-#define kSTREAMDETAIL @"id"
+#define kTEMPSTREAMS @"tempstreams"
+#define kSTREAMTITLE @"text"
+#define kSTREAMDETAIL @"user"
+#define kSTREAMDETAILMORE @"screen_name"
 
 ///////////////////////////////
 #define test_username @"pkttus#42$"

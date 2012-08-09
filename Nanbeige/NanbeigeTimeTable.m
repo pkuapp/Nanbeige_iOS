@@ -112,7 +112,7 @@
 		_timeTable.dataSource = self;
 		[self addSubview:_timeTable];
 		
-		rowHeight = TIMETABLEHEIGHT / [[[[_university objectForKey:kAPILESSONS] objectForKey:kAPICOUNT] objectForKey:kAPITOTAL] integerValue];
+		rowHeight = TIMETABLEHEIGHT / [[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] count];
 	}
 	return self;
 }
@@ -153,7 +153,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [[[[_university objectForKey:kAPILESSONS] objectForKey:kAPICOUNT] objectForKey:kAPITOTAL] integerValue];
+	return [[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

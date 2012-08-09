@@ -30,6 +30,7 @@
 @synthesize nivc;
 @synthesize connector;
 @synthesize navc;
+@synthesize nrvc;
 @synthesize progressHub;
 @synthesize gateStateDictionary;
 @synthesize defaults;
@@ -91,6 +92,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
 	self.tableView.backgroundColor = tableBgColor1;
+	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
+	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
 	
 	NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 							 @"IP网关", @"name",
@@ -172,7 +176,7 @@
 {
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
-	self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor whiteColor], UITextAttributeTextShadowColor: [UIColor blackColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)]};
+	self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)]};
 	if ([[[self.functionArray objectAtIndex:0] objectForKey:@"identifier"] isEqualToString:@"Line3Button2Identifier"] && [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] == nil) {
 		NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								 @"IP网关", @"name",
@@ -209,6 +213,8 @@
 		destinationViewController.mainViewController = self;
 		self.connector.delegate = destinationViewController;
 		self.nivc = destinationViewController;
+	} else if ([segue.identifier isEqualToString:@"RoomsEnterSegue"]) {
+		self.nrvc = segue.destinationViewController;
 	} else if ([segue.identifier isEqualToString:@"AssignmentEnterSegue"]) {
 		NanbeigeAssignmentViewController *destinationViewController = (NanbeigeAssignmentViewController *)[segue destinationViewController];
 		self.navc = destinationViewController;
@@ -374,7 +380,8 @@
 	} else if (functionIndex == 1) {
 		[self performSegueWithIdentifier:@"CoursesEnterSegue" sender:self];
 	} else if (functionIndex == 2) {
-		[self performSegueWithIdentifier:@"RoomsEnterSegue" sender:self];
+		if (self.nrvc == nil) [self performSegueWithIdentifier:@"RoomsEnterSegue" sender:self];
+		else [self.navigationController pushViewController:self.nrvc animated:YES];
 	} else if (functionIndex == 6) {
 		if (self.navc == nil) [self performSegueWithIdentifier:@"AssignmentEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.navc animated:YES];

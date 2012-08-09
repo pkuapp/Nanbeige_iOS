@@ -18,6 +18,7 @@
 #import "ModalAlert.h"
 #import "NanbeigeItsViewController.h"
 #import "NanbeigeAssignmentViewController.h"
+#import "NanbeigeRoomsViewController.h"
 #import "NanbeigeLine2Button2Cell.h"
 #import "NanbeigeLine3Button2Cell.h"
 
@@ -39,6 +40,7 @@
 @property (retain, nonatomic) NSString* Password;
 
 @property (strong, nonatomic) NanbeigeAssignmentViewController *navc;
+@property (strong, nonatomic) NanbeigeRoomsViewController *nrvc;
 
 - (IBAction)calendarButtonPressed:(id)sender;
 @end

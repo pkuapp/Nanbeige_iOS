@@ -43,8 +43,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.tableView.backgroundColor = tableBgColor3;
+	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
 
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
@@ -111,7 +112,7 @@
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
 	}
 	cell.textLabel.text = [[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMTITLE];
-    cell.detailTextLabel.text = [[[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMDETAIL] stringValue];
+    cell.detailTextLabel.text = [[[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMDETAIL] objectForKey:kSTREAMDETAILMORE];
 	
     return cell;
 }
@@ -164,7 +165,7 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-	[accountManager requestBuildingsWithCampusID:[NSNumber numberWithInt:8]];
+	[accountManager weiboRequestHomeTimeline];
 }
 
 - (void)doneLoadingTableViewData{
@@ -220,7 +221,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	[accountManager requestRoomsWithBuildingID:[[self.streams objectAtIndex:indexPath.row] objectForKey:kAPIID] Date:nil];
+	[self showAlert:[[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMTITLE]];
 }
 
 #pragma mark - Button controllerAction
@@ -247,17 +248,11 @@
 
 #pragma mark - AccountManagerDelegate Others
 
-- (void)didBuildingsReceived:(NSArray *)buildings
+- (void)didWeiboHomeTimelineReceived:(NSArray *)home_timeline
 {
-	self.streams = [buildings mutableCopy];
-	[[NSUserDefaults standardUserDefaults] setValue:buildings forKey:kTEMPSTREAMS];
+	self.streams = [home_timeline mutableCopy];
+	[[NSUserDefaults standardUserDefaults] setObject:home_timeline forKey:kTEMPSTREAMS];
 	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-}
-
-- (void)didRoomsReceived:(NSArray *)rooms
-{
-	[[NSUserDefaults standardUserDefaults] setValue:rooms forKey:kTEMPROOMS];
-	[self showAlert:[rooms description]];
 }
 
 - (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString

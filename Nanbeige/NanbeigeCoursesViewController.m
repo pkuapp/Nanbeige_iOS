@@ -57,6 +57,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
+	self.tabBarController.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
+	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
+	
 	_paginatorView.frame = self.view.bounds;
 	[self.view setBackgroundColor:tableBgColor2];
 	[self.view addSubview:_paginatorView];
@@ -68,8 +71,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	self.tabBarController.navigationController.navigationBar.tintColor = navBarBgColor2;
-	self.tabBarController.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor2, UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
+	self.tabBarController.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
 	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	
 	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
