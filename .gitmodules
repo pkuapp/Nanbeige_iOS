@@ -25,6 +25,4 @@
 [submodule "QuickDialog"]
 	path = QuickDialog
 	url = https://github.com/pkuapp/QuickDialog.git
-[submodule "MagicalRecord"]
-	path = MagicalRecord
-	url = https://github.com/magicalpanda/MagicalRecord.git
+
