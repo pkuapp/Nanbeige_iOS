@@ -1,0 +1,31 @@
+{
+	"grouped": true,
+	"title": "导入课程",
+    "controllerName": "NanbeigeCourseGrabberViewController",
+	"sections": [
+				 {
+				 "elements": [
+							  {
+							  "type":"QEntryElement",
+							  "placeholder":"用户名",
+							  "bind":"textValue:username",
+							  "autocorrectionType":"No"
+							  },
+							  {
+							  "type":"QEntryElement",
+							  "placeholder":"密码",
+							  "secureTextEntry":true,
+							  "bind":"textValue:password"
+							  }
+							  ]
+				 },
+				 {
+				 "bind":"iterate:captcha",
+				 "elementTemplate": {
+				 "type":"QEntryElement",
+				 "bind":"textValue:captcha, placeholder:placeholder",
+				 "autocorrectionType":"No"
+				 }
+				 }
+				 ]
+}
