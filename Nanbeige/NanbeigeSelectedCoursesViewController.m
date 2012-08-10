@@ -8,10 +8,10 @@
 
 #import "NanbeigeSelectedCoursesViewController.h"
 #import "Environment.h"
-#import "NanbeigeAccountManager.h"
+#import "NanbeigeCourseManager.h"
 
-@interface NanbeigeSelectedCoursesViewController () <AccountManagerDelegate> {
-	NanbeigeAccountManager *accountManager;
+@interface NanbeigeSelectedCoursesViewController () <CourseManagerDelegate> {
+	NanbeigeCourseManager *courseManager;
 }
 
 @end
@@ -58,8 +58,8 @@
 	
 	self.courses = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPCOURSES];
 
-	accountManager = [[NanbeigeAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
+	courseManager = [[NanbeigeCourseManager alloc] init];
+	courseManager.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -131,7 +131,7 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-	[accountManager requestCourses];
+	[courseManager requestCourses];
 }
 
 - (void)doneLoadingTableViewData{

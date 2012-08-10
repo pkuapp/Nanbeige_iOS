@@ -49,7 +49,6 @@
 - (void)didUniversitiesReceived:(NSArray *)universities;
 - (void)didUniversityReceived:(NSDictionary *)university
 					   WithID:(NSNumber *)university_id;
-- (void)didCoursesReceived:(NSArray *)courses;
 - (void)didBuildingsReceived:(NSArray *)buildings
 				WithCampusID:(NSNumber *)campus_id;
 - (void)didRoomsReceived:(NSArray *)rooms
@@ -91,7 +90,6 @@
 
 - (void)requestUniversities;
 - (void)requestUniversityWithID:(NSNumber *)university_id;
-- (void)requestCourses;
 - (void)requestBuildingsWithCampusID:(NSNumber *)campus_id;
 - (void)requestRoomsWithBuildingID:(NSNumber *)building_id
 							  Date:(NSDate *)date;

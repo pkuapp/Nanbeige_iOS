@@ -569,6 +569,36 @@
             </objects>
             <point key="canvasLocation" x="2135" y="-2235"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GGW-pt-tzH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SRi-0q-WNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="F7l-33-SaR" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Eq-7C-55s">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ucu-jJ-cSS" kind="relationship" relationship="rootViewController" id="r2L-MG-264"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="3167" y="-4096"/>
+        </scene>
+        <!--Nanbeige Course Grabber View Controller-->
+        <scene sceneID="7pE-7R-Tp0">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3A-zD-Bmw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="ucu-jJ-cSS" customClass="NanbeigeCourseGrabberViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U9W-Wd-oej">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="e6g-zk-bbA"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3632" y="-4096"/>
+        </scene>
         <!--Nanbeige Selected Courses View Controller - 我的课程-->
         <scene sceneID="3ur-NH-AbW">
             <objects>
@@ -739,6 +769,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="uzP-Ew-1j3" kind="relationship" relationship="viewControllers" id="UbN-n9-Bhq"/>
                         <segue destination="I89-P4-RaH" kind="relationship" relationship="viewControllers" id="F0h-At-JxZ"/>
                         <segue destination="D1f-FY-Gxq" kind="relationship" relationship="viewControllers" id="S2n-bv-cgY"/>
+                        <segue destination="F7l-33-SaR" kind="modal" identifier="CourseGrabberSegue" id="yWw-S9-H1j"/>
                     </connections>
                 </tabBarController>
             </objects>
@@ -1807,6 +1838,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="NanbeigeConfirmLoginViewController" superclassName="QuickDialogController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeConfirmLoginViewController.h"/>
+        </class>
+        <class className="NanbeigeCourseGrabberViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeCourseGrabberViewController.h"/>
         </class>
         <class className="NanbeigeCoursesViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NanbeigeCoursesViewController.h"/>

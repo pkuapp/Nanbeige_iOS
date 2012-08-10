@@ -30,7 +30,6 @@
 	ASIFormDataRequest *renrenSignupRequest;
 	ASIHTTPRequest *universitiesRequest;
 	ASIHTTPRequest *universityRequest;
-	ASIHTTPRequest *coursesRequest;
 	ASIHTTPRequest *buildingsRequest;
 	ASIHTTPRequest *roomsRequest;
 }
@@ -404,25 +403,6 @@
 	[defaults setObject:res forKey:kTEMPUNIVERSITY];
 	if ([self.delegate respondsToSelector:@selector(didUniversityReceived:WithID:)]) {
 		[self.delegate didUniversityReceived:res WithID:[NSNumber numberWithInteger:request.tag]];
-	}
-}
-
-- (void)requestCourses
-{
-	coursesRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPICourse];
-	[coursesRequest setDidFinishSelector:@selector(courseRequestFinished:)];
-	
-	[coursesRequest setDelegate:self];
-	[coursesRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
-	[coursesRequest startAsynchronous];
-}
-- (void)courseRequestFinished:(ASIHTTPRequest *)request
-{
-	id res = [self resultFromRequest:request];
-	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
-	
-	if ([self.delegate respondsToSelector:@selector(didCoursesReceived:)]) {
-		[self.delegate didCoursesReceived:res];
 	}
 }
 

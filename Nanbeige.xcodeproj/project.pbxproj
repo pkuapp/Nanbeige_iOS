@@ -30,10 +30,6 @@
 		260C6DE215CBBA2100B86C2C /* chooseCampus.json in Resources */ = {isa = PBXBuildFile; fileRef = 260C6DE115CBBA2100B86C2C /* chooseCampus.json */; };
 		2612272115BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */; };
 		2615251415CD86680066DD3B /* NanbeigeChooseCampusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2615251315CD86680066DD3B /* NanbeigeChooseCampusViewController.m */; };
-		261727C015C1B0D600B12A0B /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727BF15C1B0D600B12A0B /* Default-Portrait~ipad.png */; };
-		261727C315C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */; };
-		261727C515C1B0DE00B12A0B /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C415C1B0DE00B12A0B /* Default-Landscape~ipad.png */; };
-		261727C715C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 261727C615C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png */; };
 		26283F4215C8EFAE003C1BC7 /* DOAutocompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 26283ED015C8EFAE003C1BC7 /* DOAutocompleteTextField.m */; };
 		26283F4315C8EFAE003C1BC7 /* NSMutableArray+IMSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 26283ED215C8EFAE003C1BC7 /* NSMutableArray+IMSExtensions.m */; };
 		26283F4415C8EFAE003C1BC7 /* NSMutableArray+MoveObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 26283ED415C8EFAE003C1BC7 /* NSMutableArray+MoveObject.m */; };
@@ -460,6 +456,8 @@
 		26AAED3215D3F58E00A05686 /* NanbeigeCourseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AAED3115D3F58E00A05686 /* NanbeigeCourseManager.m */; };
 		26AAED3515D3F82B00A05686 /* NanbeigeEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AAED3415D3F82B00A05686 /* NanbeigeEventManager.m */; };
 		26AAED3815D3FAAC00A05686 /* NanbeigeWikiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AAED3715D3FAAC00A05686 /* NanbeigeWikiManager.m */; };
+		26AAED3B15D4D3C900A05686 /* NanbeigeCourseGrabberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AAED3A15D4D3C900A05686 /* NanbeigeCourseGrabberViewController.m */; };
+		26AAED3E15D4DAC800A05686 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 26AAED3D15D4DAC800A05686 /* courseGrabber.json */; };
 		26B9667115BC1C830081002C /* NanbeigeAssignmentDeadlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */; };
 		26D1DAF915D2153400A24308 /* NanbeigeCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DAF815D2153400A24308 /* NanbeigeCoursesViewController.m */; };
 		26D1DAFC15D2174E00A24308 /* NanbeigeTimeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DAFB15D2174E00A24308 /* NanbeigeTimeTable.m */; };
@@ -567,10 +565,6 @@
 		2612272015BAB5D000B6D9D4 /* NanbeigeCreateAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeCreateAssignmentViewController.m; sourceTree = "<group>"; };
 		2615251215CD86680066DD3B /* NanbeigeChooseCampusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeChooseCampusViewController.h; sourceTree = "<group>"; };
 		2615251315CD86680066DD3B /* NanbeigeChooseCampusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeChooseCampusViewController.m; sourceTree = "<group>"; };
-		261727BF15C1B0D600B12A0B /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		261727C415C1B0DE00B12A0B /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		261727C615C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		26283ECD15C8EFAE003C1BC7 /* libQuickDialog-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libQuickDialog-Prefix.pch"; sourceTree = "<group>"; };
 		26283ECF15C8EFAE003C1BC7 /* DOAutocompleteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOAutocompleteTextField.h; sourceTree = "<group>"; };
 		26283ED015C8EFAE003C1BC7 /* DOAutocompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOAutocompleteTextField.m; sourceTree = "<group>"; };
@@ -1350,6 +1344,9 @@
 		26AAED3415D3F82B00A05686 /* NanbeigeEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeEventManager.m; sourceTree = "<group>"; };
 		26AAED3615D3FAAB00A05686 /* NanbeigeWikiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWikiManager.h; sourceTree = "<group>"; };
 		26AAED3715D3FAAC00A05686 /* NanbeigeWikiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWikiManager.m; sourceTree = "<group>"; };
+		26AAED3915D4D3C800A05686 /* NanbeigeCourseGrabberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeCourseGrabberViewController.h; sourceTree = "<group>"; };
+		26AAED3A15D4D3C900A05686 /* NanbeigeCourseGrabberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeCourseGrabberViewController.m; sourceTree = "<group>"; };
+		26AAED3D15D4DAC800A05686 /* courseGrabber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseGrabber.json; sourceTree = "<group>"; };
 		26AB037715C1994A00539AB5 /* NanbeigeSplitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeSplitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 		26B9666F15BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentDeadlineViewController.h; sourceTree = "<group>"; };
 		26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentDeadlineViewController.m; sourceTree = "<group>"; };
@@ -1753,10 +1750,6 @@
 		262AD4B515AA7F4E000C2EF7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				261727C615C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png */,
-				261727C415C1B0DE00B12A0B /* Default-Landscape~ipad.png */,
-				261727C215C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png */,
-				261727BF15C1B0D600B12A0B /* Default-Portrait~ipad.png */,
 				267D211F15C1A5B700648217 /* Default@2x.png */,
 				267D211C15C1A5B200648217 /* Default.png */,
 				26E2CB5B15B50BD100F8FA3D /* widget_point.png */,
@@ -2724,16 +2717,24 @@
 			children = (
 				2649E6EB15CAE25D006FDABF /* NanbeigeAccountManager.h */,
 				2649E6EC15CAE262006FDABF /* NanbeigeAccountManager.m */,
-				26AAED2D15D3F3E200A05686 /* NanbeigeAssignmentManager.h */,
-				26AAED2E15D3F3E200A05686 /* NanbeigeAssignmentManager.m */,
 				26AAED3015D3F58E00A05686 /* NanbeigeCourseManager.h */,
 				26AAED3115D3F58E00A05686 /* NanbeigeCourseManager.m */,
+				26AAED2D15D3F3E200A05686 /* NanbeigeAssignmentManager.h */,
+				26AAED2E15D3F3E200A05686 /* NanbeigeAssignmentManager.m */,
 				26AAED3315D3F82B00A05686 /* NanbeigeEventManager.h */,
 				26AAED3415D3F82B00A05686 /* NanbeigeEventManager.m */,
 				26AAED3615D3FAAB00A05686 /* NanbeigeWikiManager.h */,
 				26AAED3715D3FAAC00A05686 /* NanbeigeWikiManager.m */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		26AAED3C15D4DAB700A05686 /* JsonFile */ = {
+			isa = PBXGroup;
+			children = (
+				26AAED3D15D4DAC800A05686 /* courseGrabber.json */,
+			);
+			name = JsonFile;
 			sourceTree = "<group>";
 		};
 		26D1DAE015D212D100A24308 /* SYPaginator */ = {
@@ -2749,8 +2750,11 @@
 		26D1DAF615D213FD00A24308 /* CoursesView */ = {
 			isa = PBXGroup;
 			children = (
+				26AAED3C15D4DAB700A05686 /* JsonFile */,
 				26D1DAF715D2153400A24308 /* NanbeigeCoursesViewController.h */,
 				26D1DAF815D2153400A24308 /* NanbeigeCoursesViewController.m */,
+				26AAED3915D4D3C800A05686 /* NanbeigeCourseGrabberViewController.h */,
+				26AAED3A15D4D3C900A05686 /* NanbeigeCourseGrabberViewController.m */,
 				26F215CD15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.h */,
 				26F215CE15D2BCD9005157EC /* NanbeigeSelectedCoursesViewController.m */,
 				26D1DAFA15D2174E00A24308 /* NanbeigeTimeTable.h */,
@@ -3150,10 +3154,6 @@
 				262C434515BD3B38004BBECA /* whiteArrow@2x.png in Resources */,
 				267D211D15C1A5B200648217 /* Default.png in Resources */,
 				267D212015C1A5B700648217 /* Default@2x.png in Resources */,
-				261727C015C1B0D600B12A0B /* Default-Portrait~ipad.png in Resources */,
-				261727C315C1B0DC00B12A0B /* Default-Portrait@2x~ipad.png in Resources */,
-				261727C515C1B0DE00B12A0B /* Default-Landscape~ipad.png in Resources */,
-				261727C715C1B0EA00B12A0B /* Default-Landscape@2x~ipad.png in Resources */,
 				26665E4515C3CE7700E4FF9E /* LICENSE in Resources */,
 				269F9DD615C900EA00EC2499 /* emailLogin.json in Resources */,
 				269F9DF115C928CC00EC2499 /* chooseLogin.json in Resources */,
@@ -3175,6 +3175,7 @@
 				26A8B50915D39F36009D4118 /* UpAccessory@2x.png in Resources */,
 				26A8B50A15D39F36009D4118 /* UpAccessoryWhite.png in Resources */,
 				26A8B50B15D39F36009D4118 /* UpAccessoryWhite@2x.png in Resources */,
+				26AAED3E15D4DAC800A05686 /* courseGrabber.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3393,6 +3394,7 @@
 				26AAED3215D3F58E00A05686 /* NanbeigeCourseManager.m in Sources */,
 				26AAED3515D3F82B00A05686 /* NanbeigeEventManager.m in Sources */,
 				26AAED3815D3FAAC00A05686 /* NanbeigeWikiManager.m in Sources */,
+				26AAED3B15D4D3C900A05686 /* NanbeigeCourseGrabberViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3492,6 +3494,7 @@
 				INFOPLIST_FILE = "Nanbeige/Nanbeige-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;
@@ -3559,6 +3562,7 @@
 				INFOPLIST_FILE = "Nanbeige/Nanbeige-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3576,6 +3580,7 @@
 				INFOPLIST_FILE = "Nanbeige/Nanbeige-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

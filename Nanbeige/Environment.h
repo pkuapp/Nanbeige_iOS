@@ -33,12 +33,20 @@
 #define urlAPIUserRegRenren [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/renren/"]
 #define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:333/user/edit/"]
 #define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
-#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
 #define formatAPIStudyBuildingWithCampus_ID @"http://api.pkuapp.com:333/study/building/?campus_id=%@"
 #define formatAPIStudyBuildingRoomWithBuilding_ID @"http://api.pkuapp.com:333/study/building/%@/room/"
 #define formatAPIStudyBuildingRoomWithBuilding_IDAndDate @"http://api.pkuapp.com:333/study/building/%@/room/?date=%@"
+#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
+#define urlAPICourseGrabber [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/"]
+#define urlAPICourseGrabberCaptcha [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/captcha/"]
+#define urlAPICourseGrabberStart [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/start/"]
+#define formatAPICourseComment @"http://api.pkuapp.com:333/course/%@/comment/"
+#define formatAPICourseCommentAdd @"http://api.pkuapp.com:333/course/%@/comment/add/"
+
 #define kAPIEMAIL @"email"
+#define kAPIUSERNAME @"username"
 #define kAPIPASSWORD @"password"
+#define kAPICAPTCHA @"captcha"
 #define kAPINICKNAME @"nickname"
 #define kAPIERROR @"error"
 #define kAPIERROR_CODE @"error_code"
@@ -47,6 +55,7 @@
 #define kAPICAMPUS_ID @"campus_id"
 #define kAPICAMPUSES @"campuses"
 #define kAPIWEIBO_TOKEN @"weibo_token"
+#define kAPICOURSE_IMPORTED @"course_imported"
 #define kAPIID @"id"
 #define kAPINAME @"name"
 #define kAPITOKEN @"token"
@@ -72,6 +81,13 @@
 #define kAPISEMESTER_ID @"semester_id"
 #define kAPITA @"ta"
 #define kAPITEACHER @"teacher"
+#define kAPIAVAILABLE @"available"
+#define kAPIREQUIRE_CAPTCHA @"require_captcha"
+
+#define sERRORAUTHERROR @"AuthError"
+#define sERRORCAPTCHAERROR @"CaptchaError"
+#define sERRORUNKNOWNERROR @"UnknownError"
+#define sERRORUSERNOTFOUND @"UserNotFound"
 
 #define pathLocation [NSHomeDirectory() stringByAppendingString:@"/Documents/location.plist"]
 #define pathUserPlist [NSHomeDirectory() stringByAppendingString:@"/Documents/User.plist"]
@@ -118,6 +134,8 @@
 #define completeAssignmentCellColor [UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1.0]
 
 #define kMAINORDERKEY @"mainorder"
+#define kCOURSE_IMPORTED @"course_imported"
+
 #define kWEIBOIDKEY @"weiboid"
 #define kWEIBONAMEKEY @"weiboname"
 #define kWEIBOTOKENKEY @"weibo_token"
@@ -163,8 +181,8 @@
 #define COMPLETE 1
 
 #define TIMETABLEPAGEGAPWIDTH 16.0f
-#define TIMETABLEPAGENUMBER 999
-#define TIMETABLEPAGEINDEX 498
+#define TIMETABLEPAGENUMBER 9999
+#define TIMETABLEPAGEINDEX 4999
 #define TIMETABLEHEIGHT 367
 #define TIMETABLEWIDTH 320
 #define TIMETABLELEFTPADDING 30
@@ -188,8 +206,6 @@
 
 #define kWBSDKDemoAppKey @"1362082242"
 #define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"
-
-#define sERRORUSERNOTFOUND @"UserNotFound"
 
 #define sRENREN @"人人网"
 #define sWEIBO @"新浪微博"

@@ -10,7 +10,10 @@
 #import "NanbeigeTimeTable.h"
 #import "Environment.h"
 
-@interface NanbeigeCoursesViewController ()
+@interface NanbeigeCoursesViewController () {
+	BOOL bViewDidLoad;
+	NSDate *today;
+}
 
 @end
 
@@ -59,13 +62,18 @@
 	
 	self.tabBarController.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
 	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
+	self.view.BackgroundColor = tableBgColor2;
 	
 	_paginatorView.frame = self.view.bounds;
-	[self.view setBackgroundColor:tableBgColor2];
+	_paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
+	_paginatorView.numberOfPagesToPreload = 0;
+	[_paginatorView removePageControlFromSuperview];
 	[self.view addSubview:_paginatorView];
 	
-	self.paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
-	[_paginatorView removePageControlFromSuperview];
+	today = [NSDate date];
+	[self onTodayButtonPressed:nil];
+	
+	bViewDidLoad = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,7 +85,20 @@
 	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
 	
-	[self onTodayButtonPressed:nil];
+	NSDate *day = [today dateByAddingTimeInterval:60*60*24*([_paginatorView currentPageIndex] - TIMETABLEPAGEINDEX)];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"第w周 E M月d日";
+	NSString *dayDate = [formatter stringFromDate:day];
+	self.tabBarController.title = dayDate;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	if (bViewDidLoad && ![[[NSUserDefaults standardUserDefaults] objectForKey:kCOURSE_IMPORTED] boolValue]) {
+		[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
+		bViewDidLoad = NO;
+	}
 }
 
 - (void)viewDidUnload
@@ -123,11 +144,11 @@
 
 
 - (SYPageView *)paginatorView:(SYPaginatorView *)paginatorView viewForPageAtIndex:(NSInteger)pageIndex; {
-	NSString *identifier = [[NSDate dateWithTimeIntervalSinceNow:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)] description];
+	NSString *identifier = [[today dateByAddingTimeInterval:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)] description];
 	
 	NanbeigeTimeTable *view = (NanbeigeTimeTable *)[paginatorView dequeueReusablePageWithIdentifier:identifier];
 	if (!view) {
-		view = [[NanbeigeTimeTable alloc] initWithDate:[NSDate dateWithTimeIntervalSinceNow:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)]];
+		view = [[NanbeigeTimeTable alloc] initWithDate:[today dateByAddingTimeInterval:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)]];
 	}
 	
 	return view;
@@ -137,11 +158,14 @@
 
 - (void)paginatorView:(SYPaginatorView *)paginatorView didScrollToPageAtIndex:(NSInteger)pageIndex
 {
-	NSDate *day = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)];
+	NSDate *day = [today dateByAddingTimeInterval:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"第w周 E M月d日";
 	NSString *dayDate = [formatter stringFromDate:day];
 	self.tabBarController.title = dayDate;
+	
+	NanbeigeTimeTable *view = (NanbeigeTimeTable *)[paginatorView pageForIndex:pageIndex];
+	[view.timeTable reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end

@@ -55,16 +55,6 @@
 	[self loading:YES];
 }
 
-
-- (void)didUniversitiesReceived:(NSArray *)universities
-{
-	[self loading:NO];
-	
-	dict = @{@"university":universities};
-	[self.root bindToObject:dict];
-    [self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
@@ -134,6 +124,17 @@
 	} else {
 		[self performSegueWithIdentifier:@"ChooseCampusSegue" sender:self];
 	}
+}
+
+#pragma mark - AccountManagerDelegate Others
+
+- (void)didUniversitiesReceived:(NSArray *)universities
+{
+	[self loading:NO];
+	
+	dict = @{@"university":universities};
+	[self.root bindToObject:dict];
+    [self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
 }
 
 #pragma mark - AccountManagerDelegate Error
