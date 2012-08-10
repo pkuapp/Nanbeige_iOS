@@ -1,3 +1,30 @@
+[submodule "AFNetworking"]
+	path = AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
+[submodule "json-framework"]
+	path = json-framework
+	url = https://github.com/stig/json-framework.git
+[submodule "fmdb"]
+	path = fmdb
+	url = https://github.com/ccgus/fmdb.git
+[submodule "MBProgressHUD"]
+	path = MBProgressHUD
+	url = https://github.com/jdg/MBProgressHUD.git
+[submodule "EGOTableViewPullRefresh"]
+	path = EGOTableViewPullRefresh
+	url = https://github.com/enormego/EGOTableViewPullRefresh.git
+[submodule "SYPaginator"]
+	path = SYPaginator
+	url = https://github.com/Synthetic/SYPaginator.git
+[submodule "HMGLTransitions"]
+	path = HMGLTransitions
+	url = https://github.com/Split82/HMGLTransitions.git
+[submodule "asi-http-request"]
+	path = asi-http-request
+	url = https://github.com/pokeb/asi-http-request.git
+[submodule "QuickDialog"]
+	path = QuickDialog
+	url = https://github.com/pkuapp/QuickDialog.git
 [submodule "MagicalRecord"]
 	path = MagicalRecord
 	url = https://github.com/magicalpanda/MagicalRecord.git
