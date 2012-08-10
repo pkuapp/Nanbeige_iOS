@@ -408,7 +408,7 @@
 
 - (void)requestBuildingsWithCampusID:(NSNumber *)campus_id
 {
-	buildingsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingWithCampus_ID, campus_id]]];
+	buildingsRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIStudyBuildingWithCampus_ID(campus_id)];
 	[buildingsRequest setDidFinishSelector:@selector(buildingsRequestFinished:)];
 	
 	buildingsRequest.tag = [campus_id integerValue];
@@ -432,9 +432,9 @@
 	if (date) {
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 		formatter.dateFormat = @"yyyy-MM-dd";
-		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingRoomWithBuilding_IDAndDate, building_id, [formatter stringFromDate:date]]]];
+		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIStudyBuildingRoomWithBuilding_IDAndDate(building_id, date)];
 	} else {
-		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingRoomWithBuilding_ID, building_id]]];
+		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIStudyBuildingRoomWithBuilding_ID(building_id)];
 	}
 	[roomsRequest setDidFinishSelector:@selector(roomsRequestFinished:)];
 		

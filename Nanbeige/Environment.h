@@ -33,15 +33,25 @@
 #define urlAPIUserRegRenren [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/renren/"]
 #define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:333/user/edit/"]
 #define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
-#define formatAPIStudyBuildingWithCampus_ID @"http://api.pkuapp.com:333/study/building/?campus_id=%@"
-#define formatAPIStudyBuildingRoomWithBuilding_ID @"http://api.pkuapp.com:333/study/building/%@/room/"
-#define formatAPIStudyBuildingRoomWithBuilding_IDAndDate @"http://api.pkuapp.com:333/study/building/%@/room/?date=%@"
+#define urlAPIStudyBuildingWithCampus_ID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/study/building/?campus_id=%@", (id)]]
+#define urlAPIStudyBuildingRoomWithBuilding_ID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/study/building/%@/room/", (id)]]
+#define urlAPIStudyBuildingRoomWithBuilding_IDAndDate(id,date) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/study/building/%@/room/?date=%@", (id), (date)]]
 #define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
 #define urlAPICourseGrabber [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/"]
 #define urlAPICourseGrabberCaptcha [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/captcha/"]
 #define urlAPICourseGrabberStart [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/start/"]
-#define formatAPICourseComment @"http://api.pkuapp.com:333/course/%@/comment/"
-#define formatAPICourseCommentAdd @"http://api.pkuapp.com:333/course/%@/comment/add/"
+#define urlAPICourseCommentWithCourse_ID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/%@/comment/", (id)]]
+#define urlAPICourseCommentAddWithCourse_ID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/%@/comment/add/", (id)]]
+#define urlAPICourseAssignment [NSURL URLWithString:@"http://api.pkuapp.com:333/course/assignment/"]
+#define urlAPICourseAssignmentFinishWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/assignment/%@/finish/", (id)]]
+#define urlAPICourseAssignmentDeleteWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/assignment/%@/delete/", (id)]]
+#define urlAPICourseAssignmentModifyWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/assignment/%@/modify/", (id)]]
+#define urlAPICourseAssignmentAdd [NSURL URLWithString:@"http://api.pkuapp.com:333/course/assignment/add/"]
+#define urlAPIEvent [NSURL URLWithString:@"http://api.pkuapp.com:333/event/"]
+#define urlAPIEventCategory [NSURL URLWithString:@"http://api.pkuapp.com:333/event/category/"]
+#define urlAPIEventWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/event/%@/", (id)]]
+#define urlAPIEventFollowWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/event/%@/follow/", (id)]]
+#define urlAPIEventFollowing [NSURL URLWithString:@"http://api.pkuapp.com:333/event/following/"]
 
 #define kAPIEMAIL @"email"
 #define kAPIUSERNAME @"username"
@@ -83,6 +93,14 @@
 #define kAPITEACHER @"teacher"
 #define kAPIAVAILABLE @"available"
 #define kAPIREQUIRE_CAPTCHA @"require_captcha"
+#define kAPIFINISHED @"finished"
+#define kAPICOURSE_ID @"course_id"
+#define kAPIDUE @"due"
+#define kAPICONTENT @"content"
+#define kAPIKEYWORD @"keyword"
+#define kAPICATEGORY_ID @"category_id"
+#define kAPIAFTER @"after"
+#define kAPIBEFORE @"before"
 
 #define sERRORAUTHERROR @"AuthError"
 #define sERRORCAPTCHAERROR @"CaptchaError"

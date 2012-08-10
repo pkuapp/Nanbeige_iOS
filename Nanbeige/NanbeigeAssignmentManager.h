@@ -29,13 +29,13 @@
 
 - (void)requestAssignments;
 - (void)finishAssignmentWithID:(NSNumber *)assignment_id
-					  Finished:(BOOL)finished;
+					  Finished:(NSNumber *)finished;
 - (void)deleteAssignmentWithID:(NSNumber *)assignment_id;
 - (void)modifyAssignmentWithID:(NSNumber *)assignment_id
 					 Course_ID:(NSNumber *)course_id
 					   DueTime:(NSDate *)due
 					   Content:(NSString *)content
-					  Finished:(BOOL)finished;
+					  Finished:(NSNumber *)finished;
 - (void)addAssignmentWithCourse_ID:(NSNumber *)course_id
 						   DueTime:(NSDate *)due
 						   Content:(NSString *)content;
