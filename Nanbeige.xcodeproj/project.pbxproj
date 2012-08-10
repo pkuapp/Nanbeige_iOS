@@ -456,6 +456,10 @@
 		26A8B50A15D39F36009D4118 /* UpAccessoryWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B50115D39F36009D4118 /* UpAccessoryWhite.png */; };
 		26A8B50B15D39F36009D4118 /* UpAccessoryWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A8B50215D39F36009D4118 /* UpAccessoryWhite@2x.png */; };
 		26A8B50E15D3A1C3009D4118 /* GCArraySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A8B50D15D3A1C3009D4118 /* GCArraySectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		26AAED2F15D3F3E200A05686 /* NanbeigeAssignmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AAED2E15D3F3E200A05686 /* NanbeigeAssignmentManager.m */; };
+		26AAED3215D3F58E00A05686 /* NanbeigeCourseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AAED3115D3F58E00A05686 /* NanbeigeCourseManager.m */; };
+		26AAED3515D3F82B00A05686 /* NanbeigeEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AAED3415D3F82B00A05686 /* NanbeigeEventManager.m */; };
+		26AAED3815D3FAAC00A05686 /* NanbeigeWikiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AAED3715D3FAAC00A05686 /* NanbeigeWikiManager.m */; };
 		26B9667115BC1C830081002C /* NanbeigeAssignmentDeadlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */; };
 		26D1DAF915D2153400A24308 /* NanbeigeCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DAF815D2153400A24308 /* NanbeigeCoursesViewController.m */; };
 		26D1DAFC15D2174E00A24308 /* NanbeigeTimeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D1DAFB15D2174E00A24308 /* NanbeigeTimeTable.m */; };
@@ -1338,6 +1342,14 @@
 		26A8B50215D39F36009D4118 /* UpAccessoryWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UpAccessoryWhite@2x.png"; sourceTree = "<group>"; };
 		26A8B50C15D3A1C3009D4118 /* GCArraySectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCArraySectionController.h; sourceTree = "<group>"; };
 		26A8B50D15D3A1C3009D4118 /* GCArraySectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCArraySectionController.m; sourceTree = "<group>"; };
+		26AAED2D15D3F3E200A05686 /* NanbeigeAssignmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentManager.h; sourceTree = "<group>"; };
+		26AAED2E15D3F3E200A05686 /* NanbeigeAssignmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentManager.m; sourceTree = "<group>"; };
+		26AAED3015D3F58E00A05686 /* NanbeigeCourseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeCourseManager.h; sourceTree = "<group>"; };
+		26AAED3115D3F58E00A05686 /* NanbeigeCourseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeCourseManager.m; sourceTree = "<group>"; };
+		26AAED3315D3F82B00A05686 /* NanbeigeEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeEventManager.h; sourceTree = "<group>"; };
+		26AAED3415D3F82B00A05686 /* NanbeigeEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeEventManager.m; sourceTree = "<group>"; };
+		26AAED3615D3FAAB00A05686 /* NanbeigeWikiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWikiManager.h; sourceTree = "<group>"; };
+		26AAED3715D3FAAC00A05686 /* NanbeigeWikiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWikiManager.m; sourceTree = "<group>"; };
 		26AB037715C1994A00539AB5 /* NanbeigeSplitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeSplitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 		26B9666F15BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeAssignmentDeadlineViewController.h; sourceTree = "<group>"; };
 		26B9667015BC1C820081002C /* NanbeigeAssignmentDeadlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeAssignmentDeadlineViewController.m; sourceTree = "<group>"; };
@@ -1671,6 +1683,7 @@
 		262AD48D15AA7D5D000C2EF7 /* Nanbeige */ = {
 			isa = PBXGroup;
 			children = (
+				26AAED2C15D3F39F00A05686 /* API */,
 				26A6B50615B31E1F006FA15D /* WelcomeView */,
 				262AD4AA15AA7E0C000C2EF7 /* MainView */,
 				262AD4A215AA7DD7000C2EF7 /* StreamView */,
@@ -1680,8 +1693,6 @@
 				262AD49E15AA7D86000C2EF7 /* MainStoryboard_iPhone.storyboard */,
 				262AD49615AA7D5D000C2EF7 /* NanbeigeAppDelegate.h */,
 				262AD49715AA7D5D000C2EF7 /* NanbeigeAppDelegate.m */,
-				2649E6EB15CAE25D006FDABF /* NanbeigeAccountManager.h */,
-				2649E6EC15CAE262006FDABF /* NanbeigeAccountManager.m */,
 			);
 			path = Nanbeige;
 			sourceTree = "<group>";
@@ -2708,6 +2719,23 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		26AAED2C15D3F39F00A05686 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2649E6EB15CAE25D006FDABF /* NanbeigeAccountManager.h */,
+				2649E6EC15CAE262006FDABF /* NanbeigeAccountManager.m */,
+				26AAED2D15D3F3E200A05686 /* NanbeigeAssignmentManager.h */,
+				26AAED2E15D3F3E200A05686 /* NanbeigeAssignmentManager.m */,
+				26AAED3015D3F58E00A05686 /* NanbeigeCourseManager.h */,
+				26AAED3115D3F58E00A05686 /* NanbeigeCourseManager.m */,
+				26AAED3315D3F82B00A05686 /* NanbeigeEventManager.h */,
+				26AAED3415D3F82B00A05686 /* NanbeigeEventManager.m */,
+				26AAED3615D3FAAB00A05686 /* NanbeigeWikiManager.h */,
+				26AAED3715D3FAAC00A05686 /* NanbeigeWikiManager.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		26D1DAE015D212D100A24308 /* SYPaginator */ = {
 			isa = PBXGroup;
 			children = (
@@ -3361,6 +3389,10 @@
 				26A8B4E215D39599009D4118 /* NanbeigeRoomsViewController.m in Sources */,
 				26A8B50315D39F36009D4118 /* GCRetractableSectionController.m in Sources */,
 				26A8B50E15D3A1C3009D4118 /* GCArraySectionController.m in Sources */,
+				26AAED2F15D3F3E200A05686 /* NanbeigeAssignmentManager.m in Sources */,
+				26AAED3215D3F58E00A05686 /* NanbeigeCourseManager.m in Sources */,
+				26AAED3515D3F82B00A05686 /* NanbeigeEventManager.m in Sources */,
+				26AAED3815D3FAAC00A05686 /* NanbeigeWikiManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

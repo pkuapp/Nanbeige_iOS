@@ -47,10 +47,13 @@
 - (void)didEmailSignupWithID:(NSNumber *)ID;
 
 - (void)didUniversitiesReceived:(NSArray *)universities;
-- (void)didUniversityReceived:(NSDictionary *)university;
+- (void)didUniversityReceived:(NSDictionary *)university
+					   WithID:(NSNumber *)university_id;
 - (void)didCoursesReceived:(NSArray *)courses;
-- (void)didBuildingsReceived:(NSArray *)buildings;
-- (void)didRoomsReceived:(NSArray *)rooms;
+- (void)didBuildingsReceived:(NSArray *)buildings
+				WithCampusID:(NSNumber *)campus_id;
+- (void)didRoomsReceived:(NSArray *)rooms
+		  WithBuildingID:(NSNumber *)building_id;
 
 @end
 
@@ -75,19 +78,19 @@
 
 - (void)weiboLogin;
 - (void)weiboLogout;
+- (BOOL)isWeiboSessionValid;
 - (void)weiboSignupWithToken:(NSString *)token
 					Nickname:(NSString *)nickname;
 - (void)weiboRequestHomeTimeline;
-- (BOOL)isWeiboSessionValid;
 
 - (void)renrenLogin;
 - (void)renrenLogout;
-- (void)renrenSignupWithToken:(NSString *)token
-					Nickname:(NSString *)nickname;
 - (BOOL)isRenrenSessionValid;
+- (void)renrenSignupWithToken:(NSString *)token
+					 Nickname:(NSString *)nickname;
 
 - (void)requestUniversities;
-- (void)requestUniversity:(NSNumber *)university_id;
+- (void)requestUniversityWithID:(NSNumber *)university_id;
 - (void)requestCourses;
 - (void)requestBuildingsWithCampusID:(NSNumber *)campus_id;
 - (void)requestRoomsWithBuildingID:(NSNumber *)building_id

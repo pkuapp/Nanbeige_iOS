@@ -88,6 +88,7 @@
 #define TITLE_ABOUT @"关于南北阁"
 #define TITLE_ITS @"IP网关"
 #define TITLE_ASSIGNMENT @"作业"
+#define TITLE_SELECTED_COURSE @"我的课程"
 #define FORMAT_TITLE_ROOMS @"教学楼・%@"
 #define LIMIT_ROOM_STRING_LENGTH 20
 

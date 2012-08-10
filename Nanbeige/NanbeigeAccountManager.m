@@ -74,19 +74,20 @@
 	[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
 	
 	emailLoginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginEmail];
+	[emailLoginRequest setDidFinishSelector:@selector(emailLoginRequestFinished:)];
 	
 	[emailLoginRequest addPostValue:email forKey:kAPIEMAIL];
 	[emailLoginRequest addPostValue:password forKey:kAPIPASSWORD];
 	[emailLoginRequest setDelegate:self];
 	[emailLoginRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[emailLoginRequest startAsynchronous];
-	
 }
 - (void)emailLoginWithWeiboToken:(NSString *)weibo_token
 {
 	[defaults setObject:weibo_token forKey:kWEIBOTOKENKEY];
 	
 	weiboLoginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginWeibo];
+	[weiboLoginRequest setDidFinishSelector:@selector(emailLoginRequestFinished:)];
 	
 	[weiboLoginRequest addPostValue:weibo_token forKey:kAPITOKEN];
 	[weiboLoginRequest setDelegate:self];
@@ -98,11 +99,53 @@
 	[defaults setObject:renren_token forKey:kRENRENTOKENKEY];
 	
 	renrenLoginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginRenren];
+	[renrenLoginRequest setDidFinishSelector:@selector(emailLoginRequestFinished:)];
 	
 	[renrenLoginRequest addPostValue:renren_token forKey:kAPITOKEN];
 	[renrenLoginRequest setDelegate:self];
 	[renrenLoginRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[renrenLoginRequest startAsynchronous];
+}
+- (void)emailLoginRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+	NSString *nickname = nil;
+	NSNumber *university_id = nil;
+	NSString *university_name = nil;
+	NSNumber *campus_id = nil;
+	NSString *campus_name = nil;
+	
+	if ([[res objectForKey:kAPINICKNAME] isKindOfClass:[NSString class]]) {
+		nickname = [res objectForKey:kAPINICKNAME];
+	}
+	if ([res objectForKey:kAPIUNIVERSITY] && [[res objectForKey:kAPIUNIVERSITY] isKindOfClass:[NSDictionary class]]) {
+		university_id = [[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPIID];
+		university_name = [[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPINAME];
+	}
+	if ([res objectForKey:kAPICAMPUS] && [[res objectForKey:kAPICAMPUS] isKindOfClass:[NSDictionary class]]) {
+		campus_id = [[res objectForKey:kAPICAMPUS] objectForKey:kAPIID];
+		campus_name = [[res objectForKey:kAPICAMPUS] objectForKey:kAPINAME];
+	}
+	
+	if (nickname && ![defaults objectForKey:kNANBEIGENICKNAMEKEY])
+		[defaults setValue:nickname forKey:kNANBEIGENICKNAMEKEY];
+	if (nanbeigeid && ![defaults objectForKey:kNANBEIGEIDKEY])
+		[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
+	if (university_id && ![defaults objectForKey:kUNIVERSITYIDKEY])
+		[defaults setValue:university_id forKey:kUNIVERSITYIDKEY];
+	if (university_name && ![defaults objectForKey:kUNIVERSITYNAMEKEY])
+		[defaults setValue:university_name forKey:kUNIVERSITYNAMEKEY];
+	if (campus_id && ![defaults objectForKey:kCAMPUSIDKEY])
+		[defaults setValue:campus_id forKey:kCAMPUSIDKEY];
+	if (campus_name && ![defaults objectForKey:kCAMPUSNAMEKEY])
+		[defaults setValue:campus_name forKey:kCAMPUSNAMEKEY];
+	
+	if ([self.delegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
+		[self.delegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
+	}
 }
 
 - (void)emailEditWithPassword:(NSString *)password
@@ -111,6 +154,7 @@
 				   WeiboToken:(NSString *)weibo_token
 {
 	editRequest = [[ASIFormDataRequest alloc] initWithURL:urlAPIUserEdit];
+	[editRequest setDidFinishSelector:@selector(editRequestFinished:)];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDIT];
 	if (!campus_id && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITCAMPUS_ID] boolValue]) {
@@ -151,6 +195,16 @@
 	[editRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[editRequest startAsynchronous];
 }
+- (void)editRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	if ([self.delegate respondsToSelector:@selector(didEmailEdit)]) {
+		[self.delegate didEmailEdit];
+	}
+}
+
 - (void)emailLogout
 {
 	[defaults removeObjectForKey:kNANBEIGEEMAILKEY];
@@ -159,10 +213,22 @@
 	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
 	
 	logoutRequest = [[ASIFormDataRequest alloc] initWithURL:urlAPIUserLogout];
+	[logoutRequest setDidFinishSelector:@selector(logoutRequestFinished:)];
+	
 	[logoutRequest setDelegate:self];
 	[logoutRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[logoutRequest startAsynchronous];
 }
+- (void)logoutRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	if ([self.delegate respondsToSelector:@selector(didEmailLogout)]) {
+		[self.delegate didEmailLogout];
+	}
+}
+
 - (void)emailSignupWithEmail:(NSString *)email
 					Password:(NSString *)password
 					Nickname:(NSString *)nickname
@@ -172,6 +238,7 @@
 	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
 
 	emailSignupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegEmail];
+	[emailSignupRequest setDidFinishSelector:@selector(signupRequestFinished:)];
 	
 	[emailSignupRequest addPostValue:email forKey:kAPIEMAIL];
 	[emailSignupRequest addPostValue:nickname forKey:kAPINICKNAME];
@@ -179,6 +246,17 @@
 	[emailSignupRequest setDelegate:self];
 	[emailSignupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[emailSignupRequest startAsynchronous];
+}
+- (void)signupRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+	[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+	if ([self.delegate respondsToSelector:@selector(didEmailSignupWithID:)]) {
+		[self.delegate didEmailSignupWithID:nanbeigeid];
+	}
 }
 
 #pragma mark - Renren Login, Logout
@@ -198,6 +276,11 @@
 	[defaults removeObjectForKey:kRENRENTOKENKEY];
 	[renrenEngine logout:self];
 }
+- (BOOL)isRenrenSessionValid
+{
+	return [renrenEngine isSessionValid];
+}
+
 - (void)renrenSignupWithToken:(NSString *)token
 					Nickname:(NSString *)nickname
 {
@@ -205,6 +288,7 @@
 	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
 	
 	renrenSignupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegRenren];
+	[renrenSignupRequest setDidFinishSelector:@selector(renrenSignupRequestFinished:)];
 	
 	[renrenSignupRequest addPostValue:token forKey:kAPITOKEN];
 	[renrenSignupRequest addPostValue:nickname forKey:kAPINICKNAME];
@@ -212,9 +296,16 @@
 	[renrenSignupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[renrenSignupRequest startAsynchronous];
 }
-- (BOOL)isRenrenSessionValid
+- (void)renrenSignupRequestFinished:(ASIHTTPRequest *)request
 {
-	return [renrenEngine isSessionValid];
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+	[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+	if ([self.delegate respondsToSelector:@selector(didRenrenSignupWithID:)]) {
+		[self.delegate didRenrenSignupWithID:nanbeigeid];
+	}
 }
 
 #pragma mark - Weibo Login, Logout
@@ -230,6 +321,11 @@
 	[defaults removeObjectForKey:kWEIBOTOKENKEY];
 	[weiBoEngine logOut];
 }
+- (BOOL)isWeiboSessionValid
+{
+	return ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]);
+}
+
 - (void)weiboSignupWithToken:(NSString *)token
 					Nickname:(NSString *)nickname
 {
@@ -237,6 +333,7 @@
 	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
 	
 	weiboSingupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegWeibo];
+	[weiboSingupRequest setDidFinishSelector:@selector(weiboSignupRequestFinished:)];
 	
 	[weiboSingupRequest addPostValue:token forKey:kAPITOKEN];
 	[weiboSingupRequest addPostValue:nickname forKey:kAPINICKNAME];
@@ -244,10 +341,18 @@
 	[weiboSingupRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[weiboSingupRequest startAsynchronous];
 }
-- (BOOL)isWeiboSessionValid
+- (void)weiboSignupRequestFinished:(ASIHTTPRequest *)request
 {
-	return ([weiBoEngine isLoggedIn] && ![weiBoEngine isAuthorizeExpired]);
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+	[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+	if ([self.delegate respondsToSelector:@selector(didWeiboSignupWithID:)]) {
+		[self.delegate didWeiboSignupWithID:nanbeigeid];
+	}
 }
+
 - (void)weiboRequestHomeTimeline
 {
 	if (![self isWeiboSessionValid]) {
@@ -265,35 +370,82 @@
 - (void)requestUniversities
 {
 	universitiesRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPIUniversity];
+	[universitiesRequest setDidFinishSelector:@selector(universitiesRequestFinished:)];
 	
 	[universitiesRequest setDelegate:self];
 	[universitiesRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[universitiesRequest startAsynchronous];
 }
-- (void) requestUniversity:(NSNumber *)university_id
+- (void)universitiesRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	if ([self.delegate respondsToSelector:@selector(didUniversitiesReceived:)]) {
+		[self.delegate didUniversitiesReceived:res];
+	}
+}
+
+- (void)requestUniversityWithID:(NSNumber *)university_id
 {
 	universityRequest = [[ASIHTTPRequest alloc] initWithURL:[urlAPIUniversity URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/", university_id]]];
+	[universityRequest setDidFinishSelector:@selector(universityRequestFinished:)];
 	
+	universityRequest.tag = [university_id integerValue];
 	[universityRequest setDelegate:self];
 	[universityRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[universityRequest startAsynchronous];
 }
+- (void)universityRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	[defaults setObject:res forKey:kTEMPUNIVERSITY];
+	if ([self.delegate respondsToSelector:@selector(didUniversityReceived:WithID:)]) {
+		[self.delegate didUniversityReceived:res WithID:[NSNumber numberWithInteger:request.tag]];
+	}
+}
+
 - (void)requestCourses
 {
 	coursesRequest = [[ASIHTTPRequest alloc] initWithURL:urlAPICourse];
+	[coursesRequest setDidFinishSelector:@selector(courseRequestFinished:)];
 	
 	[coursesRequest setDelegate:self];
 	[coursesRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[coursesRequest startAsynchronous];
 }
+- (void)courseRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	if ([self.delegate respondsToSelector:@selector(didCoursesReceived:)]) {
+		[self.delegate didCoursesReceived:res];
+	}
+}
+
 - (void)requestBuildingsWithCampusID:(NSNumber *)campus_id
 {
 	buildingsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingWithCampus_ID, campus_id]]];
+	[buildingsRequest setDidFinishSelector:@selector(buildingsRequestFinished:)];
 	
+	buildingsRequest.tag = [campus_id integerValue];
 	[buildingsRequest setDelegate:self];
 	[buildingsRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[buildingsRequest startAsynchronous];
 }
+- (void)buildingsRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	if ([self.delegate respondsToSelector:@selector(didBuildingsReceived:WithCampusID:)]) {
+		[self.delegate didBuildingsReceived:res WithCampusID:[NSNumber numberWithInteger:request.tag]];
+	}
+}
+
 - (void)requestRoomsWithBuildingID:(NSNumber *)building_id
 							  Date:(NSDate *)date
 {
@@ -304,15 +456,26 @@
 	} else {
 		roomsRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:formatAPIStudyBuildingRoomWithBuilding_ID, building_id]]];
 	}
+	[roomsRequest setDidFinishSelector:@selector(roomsRequestFinished:)];
 		
+	roomsRequest.tag = [building_id integerValue];
 	[roomsRequest setDelegate:self];
 	[roomsRequest setTimeOutSeconds:DEFAULT_TIMEOUT];
 	[roomsRequest startAsynchronous];
 }
+- (void)roomsRequestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
+	
+	if ([self.delegate respondsToSelector:@selector(didRoomsReceived:WithBuildingID:)]) {
+		[self.delegate didRoomsReceived:res WithBuildingID:[NSNumber numberWithInteger:request.tag]];
+	}
+}
 
-#pragma mark - ASIHTTPRequestDelegate
+#pragma mark - Private
 
-- (void)requestFinished:(ASIHTTPRequest *)request
+- (id)resultFromRequest:(ASIHTTPRequest *)request
 {
 	NSData *responseData = [request responseData];
 	id res = [NSJSONSerialization JSONObjectWithData:responseData
@@ -330,104 +493,20 @@
 				[self.delegate didRequest:request FailWithErrorCode:[res objectForKey:kAPIERROR_CODE]];
 			}
 		}
-		return ;
 	}
+	return res;
+}
+
+#pragma mark - ASIHTTPRequestDelegate
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+	id res = [self resultFromRequest:request];
+	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
 	
-	if ([request isEqual:emailLoginRequest] || [request isEqual:weiboLoginRequest] || [request isEqual:renrenLoginRequest]) {
-		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
-		NSString *nickname = nil;
-		NSNumber *university_id = nil;
-		NSString *university_name = nil;
-		NSNumber *campus_id = nil;
-		NSString *campus_name = nil;
-		
-		if ([[res objectForKey:kAPINICKNAME] isKindOfClass:[NSString class]]) {
-			nickname = [res objectForKey:kAPINICKNAME];
-		}
-		if ([res objectForKey:kAPIUNIVERSITY] && [[res objectForKey:kAPIUNIVERSITY] isKindOfClass:[NSDictionary class]]) {
-			university_id = [[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPIID];
-			university_name = [[res objectForKey:kAPIUNIVERSITY] objectForKey:kAPINAME];
-		}
-		if ([res objectForKey:kAPICAMPUS] && [[res objectForKey:kAPICAMPUS] isKindOfClass:[NSDictionary class]]) {
-			campus_id = [[res objectForKey:kAPICAMPUS] objectForKey:kAPIID];
-			campus_name = [[res objectForKey:kAPICAMPUS] objectForKey:kAPINAME];
-		}
-		
-		if (nickname && ![defaults objectForKey:kNANBEIGENICKNAMEKEY])
-			[defaults setValue:nickname forKey:kNANBEIGENICKNAMEKEY];
-		if (nanbeigeid && ![defaults objectForKey:kNANBEIGEIDKEY])
-			[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
-		if (university_id && ![defaults objectForKey:kUNIVERSITYIDKEY])
-			[defaults setValue:university_id forKey:kUNIVERSITYIDKEY];
-		if (university_name && ![defaults objectForKey:kUNIVERSITYNAMEKEY])
-			[defaults setValue:university_name forKey:kUNIVERSITYNAMEKEY];
-		if (campus_id && ![defaults objectForKey:kCAMPUSIDKEY])
-			[defaults setValue:campus_id forKey:kCAMPUSIDKEY];
-		if (campus_name && ![defaults objectForKey:kCAMPUSNAMEKEY])
-			[defaults setValue:campus_name forKey:kCAMPUSNAMEKEY];
-		
-		if ([self.delegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
-			[self.delegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
-		}
+	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self.delegate didRequest:request FailWithError:[[request url] absoluteString]];
 	}
-	if ([request isEqual:editRequest]) {
-		if ([self.delegate respondsToSelector:@selector(didEmailEdit)]) {
-			[self.delegate didEmailEdit];
-		}
-	}
-	if ([request isEqual:logoutRequest]) {
-		if ([self.delegate respondsToSelector:@selector(didEmailLogout)]) {
-			[self.delegate didEmailLogout];
-		}
-	}
-	if ([request isEqual:emailSignupRequest]) {
-		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
-		[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
-		if ([self.delegate respondsToSelector:@selector(didEmailSignupWithID:)]) {
-			[self.delegate didEmailSignupWithID:nanbeigeid];
-		}
-	}
-	if ([request isEqual:renrenSignupRequest]) {
-		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
-		[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
-		if ([self.delegate respondsToSelector:@selector(didRenrenSignupWithID:)]) {
-			[self.delegate didRenrenSignupWithID:nanbeigeid];
-		}
-	}
-	if ([request isEqual:weiboSingupRequest]) {
-		NSNumber *nanbeigeid = [res objectForKey:kAPIID];
-		[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
-		if ([self.delegate respondsToSelector:@selector(didWeiboSignupWithID:)]) {
-			[self.delegate didWeiboSignupWithID:nanbeigeid];
-		}
-	}
-	if ([request isEqual:universitiesRequest]) {
-		if ([self.delegate respondsToSelector:@selector(didUniversitiesReceived:)]) {
-			[self.delegate didUniversitiesReceived:res];
-		}
-	}
-	if ([request isEqual:universityRequest]) {
-		[defaults setObject:res forKey:kTEMPUNIVERSITY];
-		if ([self.delegate respondsToSelector:@selector(didUniversityReceived:)]) {
-			[self.delegate didUniversityReceived:res];
-		}
-	}
-	if ([request isEqual:coursesRequest]) {
-		if ([self.delegate respondsToSelector:@selector(didCoursesReceived:)]) {
-			[self.delegate didCoursesReceived:res];
-		}
-	}
-	if ([request isEqual:buildingsRequest]) {
-		if ([self.delegate respondsToSelector:@selector(didBuildingsReceived:)]) {
-			[self.delegate didBuildingsReceived:res];
-		}
-	}
-	if ([request isEqual:roomsRequest]) {
-		if ([self.delegate respondsToSelector:@selector(didRoomsReceived:)]) {
-			[self.delegate didRoomsReceived:res];
-		}
-	}
-	
 }
 - (void)requestFailed:(ASIHTTPRequest *)request
 {

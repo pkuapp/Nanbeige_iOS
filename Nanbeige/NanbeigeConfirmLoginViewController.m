@@ -145,7 +145,7 @@
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	
 #warning 获取该学校信息
-	[accountManager requestUniversity:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
+	[accountManager requestUniversityWithID:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
 	
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDIT] boolValue]) {
 		

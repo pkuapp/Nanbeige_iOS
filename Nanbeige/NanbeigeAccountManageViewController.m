@@ -311,7 +311,7 @@
 {
 	[self loading:NO];
 #warning 获取该学校信息
-	[accountManager requestUniversity:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
+	[accountManager requestUniversityWithID:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
 }
 
 #pragma mark - AccountManagerDelegate Error

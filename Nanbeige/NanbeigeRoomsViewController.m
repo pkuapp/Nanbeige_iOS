@@ -275,6 +275,7 @@
 #pragma mark - AccountManagerDelegate Others
 
 - (void)didBuildingsReceived:(NSArray *)buildings
+				WithCampusID:(NSNumber *)campus_id
 {
 	self.buildings = buildings;
 	[[NSUserDefaults standardUserDefaults] setValue:buildings forKey:kTEMPBUILDINGS];
@@ -285,6 +286,7 @@
 }
 
 - (void)didRoomsReceived:(NSArray *)rooms
+		  WithBuildingID:(NSNumber *)building_id
 {
 	[self.rooms addObject:rooms];
 	[self syncNextRooms];

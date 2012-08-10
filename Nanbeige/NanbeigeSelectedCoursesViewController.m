@@ -67,7 +67,7 @@
 	[super viewWillAppear:animated];
 	
 	self.tabBarController.navigationItem.rightBarButtonItem = nil;
-	self.tabBarController.title = @"已选课程";
+	self.tabBarController.title = TITLE_SELECTED_COURSE;
 	self.tableView.backgroundColor = tableBgColor3;
 }
 
