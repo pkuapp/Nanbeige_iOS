@@ -46,8 +46,7 @@
 	if (self) {
 		renrenEngine = [Renren sharedRenren];
 		
-		weiBoEngine = [[WBEngine alloc] initWithAppKey:kWBSDKDemoAppKey appSecret:kWBSDKDemoAppSecret];
-		[weiBoEngine setDelegate:self];
+        [weiBoEngine setDelegate:self];
 		[weiBoEngine setRedirectURI:@"https://api.weibo.com/oauth2/default.html"];
 		[weiBoEngine setIsUserExclusive:NO];
 		
@@ -517,71 +516,7 @@
 #pragma mark - WBEngineDelegate
 
 // Log in successfully.
-- (void)engineDidLogIn:(WBEngine *)engine
-{
-	[defaults setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
-	[defaults setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITWEIBO_TOKEN];
-	[defaults setObject:[weiBoEngine accessToken] forKey:kWEIBOTOKENKEY];
-	[defaults setObject:[weiBoEngine userID] forKey:kWEIBOIDKEY];
-	
-	NSDictionary *params = @{ @"uid" : [weiBoEngine userID] };
-	[weiBoEngine loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil];
-}
 
-// Failed to log in.
-// Possible reasons are:
-// 1) Either username or password is wrong;
-// 2) Your app has not been authorized by Sina yet.
-- (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
-{
-	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
-		[self.delegate didRequest:nil FailWithError:[error description]];
-	}
-}
-
-// Log out successfully.
-- (void)engineDidLogOut:(WBEngine *)engine
-{
-	if ([self.delegate respondsToSelector:@selector(didWeiboLogout)]) {
-		[self.delegate didWeiboLogout];
-	}
-}
-
-// When you use the WBEngine's request methods,
-// you may receive the following four callbacks.
-- (void)engineNotAuthorized:(WBEngine *)engine
-{
-	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
-		[self.delegate didRequest:nil FailWithError:@"微博未授权"];
-	}
-}
-- (void)engineAuthorizeExpired:(WBEngine *)engine
-{
-	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
-		[self.delegate didRequest:nil FailWithError:@"微博授权已过期"];
-	}
-}
-- (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error
-{
-	if ([self.delegate respondsToSelector:@selector(didRequest:FailWithError:)]) {
-		[self.delegate didRequest:nil FailWithError:[error description]];
-	}
-}
-- (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
-{
-	NSLog(@"%@", result);
-	if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISCREEN_NAME]) {
-		[defaults setObject:[result objectForKey:kAPISCREEN_NAME] forKey:kWEIBONAMEKEY];
-		if ([self.delegate respondsToSelector:@selector(didWeiboLoginWithUserID:UserName:WeiboToken:)]) {
-			[self.delegate didWeiboLoginWithUserID:[weiBoEngine userID] UserName:[result objectForKey:kAPISCREEN_NAME] WeiboToken:[weiBoEngine accessToken]];
-		}
-	}
-	if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISTATUSES]) {
-		if ([self.delegate respondsToSelector:@selector(didWeiboHomeTimelineReceived:)]) {
-			[self.delegate didWeiboHomeTimelineReceived:[result objectForKey:kAPISTATUSES]];
-		}
-	}
-}
 
 #pragma mark - RenrenDelegate
 /**

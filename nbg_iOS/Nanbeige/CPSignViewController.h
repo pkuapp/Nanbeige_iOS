@@ -7,7 +7,10 @@
 //
 
 #import "QuickDialogController.h"
+#import "WBEngine+addon.h"
 
-@interface CPSignViewController : QuickDialogController
+@protocol WBEngineDelegate;
 
+@interface CPSignViewController : QuickDialogController  <WBEngineDelegate>
+@property (nonatomic, strong) WBEngine *weibo;
 @end

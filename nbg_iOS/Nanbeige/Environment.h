@@ -222,8 +222,7 @@
 ///////////////////////////////
 #define test_username @"pkttus#42$"
 
-#define kWBSDKDemoAppKey @"1362082242"
-#define kWBSDKDemoAppSecret @"26a3e4f3e784bd183aeac3d58440f19f"
+
 
 #define sRENREN @"人人网"
 #define sWEIBO @"新浪微博"

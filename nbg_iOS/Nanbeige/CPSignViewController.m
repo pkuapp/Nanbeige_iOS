@@ -11,6 +11,8 @@
 #import "CPAccountManager.h"
 #import "CPSigninEmailViewController.h"
 
+
+
 @interface CPSignViewController () <CPAccountManagerDelegate> {
 	CPAccountManager *accountManager;
 }
@@ -28,6 +30,11 @@
     self.quickDialogTableView.bounces = NO;
 }
 
+- (WBEngine *)weibo {
+
+    return [WBEngine sharedWBEngine];
+}
+
 #pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -35,6 +42,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"chooseLogin"];
+        self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 	}
 	return self;
 }
@@ -101,28 +109,76 @@
 
 - (void)onEmailLogin:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	[self performSegueWithIdentifier:@"EmailLoginSegue" sender:self];
 }
 - (void)onWeiboLogin:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	[accountManager weiboLogin];
+    WBEngine *weibo = [WBEngine sharedWBEngine];
+    weibo.delegate = self;
+    weibo.isUserExclusive = NO;
+    weibo.redirectURI = @"https://api.weibo.com/oauth2/default.html";
+    [weibo logIn];
+
 }
+- (void)engineDidLogIn:(WBEngine *)engine
+{
+	
+	NSDictionary *params = @{ @"uid" : self.weibo.userID };
+    
+	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
+    success:^(WBRequest *request, id result) {
+        if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISCREEN_NAME]) {
+            //		[defaults setObject:[result objectForKey:kAPISCREEN_NAME] forKey:kWEIBONAMEKEY];
+            if ([self respondsToSelector:@selector(didWeiboLoginWithUserID:UserName:WeiboToken:)]) {
+
+                [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+                [self loading:YES];
+            }
+        }
+        if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISTATUSES]) {
+            if ([self respondsToSelector:@selector(didWeiboHomeTimelineReceived:)]) {
+                [self didWeiboHomeTimelineReceived:[result objectForKey:kAPISTATUSES]];
+            }
+        }
+    }
+    fail:^(WBRequest *request, NSError *error) {
+        if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
+            [self didRequest:nil FailWithError:[error description]];
+        }
+    }];
+}
+
+// Failed to log in.
+// Possible reasons are:
+// 1) Either username or password is wrong;
+// 2) Your app has not been authorized by Sina yet.
+- (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
+{
+	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self didRequest:nil FailWithError:[error description]];
+	}
+}
+
+// When you use the WBEngine's request methods,
+// you may receive the following four callbacks.
+- (void)engineNotAuthorized:(WBEngine *)engine
+{
+	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self didRequest:nil FailWithError:@"微博未授权"];
+	}
+}
+- (void)engineAuthorizeExpired:(WBEngine *)engine
+{
+	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
+		[self didRequest:nil FailWithError:@"微博授权已过期"];
+	}
+}
+
 - (void)onRenrenLogin:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	[accountManager renrenLogin];
 }
 
-#pragma mark - AccountManagerDelegate Weibo
-
-- (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
-{
-	[accountManager emailLoginWithWeiboToken:weibo_token];
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
-}
 
 - (void)didWeiboSignupWithID:(NSNumber *)ID
 {
