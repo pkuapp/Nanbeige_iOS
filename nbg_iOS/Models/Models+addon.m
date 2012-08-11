@@ -6,17 +6,25 @@
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
-#import "ModelsAddon.h"
+#import "Models+addon.h"
 #import <CoreData/CoreData.h>
 
-static User *sharedAppUserObject = nil;
-
-@implementation User (ModelsAddon)
-
-+ (User *)sharedAppUser{
-    if (!sharedAppUserObject) {
-        sharedAppUserObject = [User findAll].count ? [[User findAll] objectAtIndex:1] : nil;
-    }
-    return sharedAppUserObject;
-}
-@end
+//static User *sharedAppUserObject = nil;
+//
+//@implementation User (addon)
+//
+//+ (User *)sharedAppUser{
+//    if (!sharedAppUserObject) {
+//        sharedAppUserObject = [User findAll].count ? [[User findAll] objectAtIndex:1] : nil;
+//    }
+//    return sharedAppUserObject;
+//}
+//
+//+ (void)updateSharedAppUserProfile:(NSDictionary *)dict {
+//    
+//}
+//
+//- (void)updateUserProfile:(NSDictionary *)dict {
+//    
+//}
+//@end

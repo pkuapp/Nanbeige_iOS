@@ -17,7 +17,7 @@ static WBEngine *sharedWBEngineOject = nil;
 
 @implementation WBEngine (Customized)
 
-@dynamic handler;
+
 
 + (WBEngine *)sharedWBEngine {
     if (!sharedWBEngineOject) {

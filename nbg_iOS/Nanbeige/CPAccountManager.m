@@ -513,9 +513,6 @@
 }
 
 
-#pragma mark - WBEngineDelegate
-
-// Log in successfully.
 
 
 #pragma mark - RenrenDelegate

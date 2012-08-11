@@ -11,7 +11,6 @@
 
 @interface WBEngine (Customized)
 
-@property (atomic, strong) CPBlockHandler *handler;
 + (WBEngine *)sharedWBEngine;
 
 - (void)loadRequestWithMethodName:(NSString *)methodName

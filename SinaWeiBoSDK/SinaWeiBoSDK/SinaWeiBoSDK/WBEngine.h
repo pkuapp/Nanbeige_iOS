@@ -21,6 +21,7 @@
 #import "WBAuthorize.h"
 
 @class WBEngine;
+@class CPBlockHandler;
 
 @protocol WBEngineDelegate <NSObject>
 
@@ -76,6 +77,7 @@
     
     UIViewController *rootViewController;
 }
+@property (atomic, strong) CPBlockHandler *handler;
 
 @property (nonatomic, retain) NSString *appKey;
 @property (nonatomic, retain) NSString *appSecret;

@@ -16,7 +16,6 @@
         <attribute name="ta" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="teacher" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lesson" inverseName="course" inverseEntity="Lesson" syncable="YES"/>
-        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="courses" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Lesson" representedClassName="Lesson" syncable="YES">
         <attribute name="day" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -31,21 +30,10 @@
         <attribute name="week_end" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="week_start" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
-    <entity name="User" representedClassName="User" syncable="YES">
-        <attribute name="campus" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="campus_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="realname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="university" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="university_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="weibo_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="user" inverseEntity="Course" syncable="YES"/>
-    </entity>
     <elements>
-        <element name="Assignment" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="Course" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="Lesson" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Semester" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="User" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="Assignment" positionX="135" positionY="240" width="128" height="120"/>
+        <element name="Course" positionX="144" positionY="-63" width="128" height="180"/>
+        <element name="Lesson" positionX="394" positionY="144" width="128" height="135"/>
+        <element name="Semester" positionX="520" positionY="-72" width="128" height="90"/>
     </elements>
 </model>

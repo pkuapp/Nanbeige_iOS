@@ -22,6 +22,112 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 
 @implementation CPRequest
 
+
+/**
+ * Formulate the NSError
+ */
+- (id)formError:(NSInteger)code userInfo:(NSDictionary *) errorData {
+	return [NSError errorWithDomain:@"CoffeepotErrDomain" code:code userInfo:errorData];
+	
+}
+
+/**
+ * parse the response data
+ */
+- (id)parseJsonResponse:(NSData *)data error:(NSError **)error {
+	
+	NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+	
+	NSError *inplaceError = nil;
+	
+	id result = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding]
+												options:0
+												  error:&inplaceError];
+	
+	if( inplaceError ) {
+		NSLog(@"%s: %d: Unable to decode JSON: %@", __FILE__, __LINE__, responseString);
+		result = nil;
+	}
+	
+	if (result == nil) {
+		return responseString;
+	}
+	
+	if ([result isKindOfClass:[NSDictionary class]]) {
+		if ([result objectForKey:@"error"] != nil) {
+				}
+		
+		if ([result objectForKey:@"error_code"] != nil) {
+			if (error != nil) {
+				*error = [self formError:[[result objectForKey:@"error_code"] intValue] userInfo:result];
+			}
+			return nil;
+		}
+	}
+	
+	return result;
+	
+}
+
+- (void)_reportError:(NSError*)error {
+	[self enumerateEventHandlers:kCPErrorBlockHandlerKey block:^(id _handler) {
+		void (^handler)(CPRequest*,NSError *) = _handler;
+		handler(self, error);
+	}];
+}
+
+- (void)failWithError:(NSError *)error {
+//	if ([error code] == kRESTAPIAccessTokenErrorCode) {
+//		self.sessionDidExpire = YES;
+//	}
+	[self _reportError:error];
+}
+
+/*
+ * private helper function: handle the response data
+ */
+- (void)handleResponseData:(NSData *)data {
+	if( [self eventHandlerCount:kCPRawBlockHandlerKey] > 0 ) {
+		[self enumerateEventHandlers:kCPRawBlockHandlerKey block:^(id _handler) {
+			void (^handler)(CPRequest*,NSData *) = _handler;
+			handler(self, data);
+		}];
+	}
+	else {
+		NSError* error = nil;
+		id result = [self parseJsonResponse:data error:&error];
+		self.error = error;
+		
+		if( error ) {
+			[self _reportError:error];
+		}
+		else {
+			[self enumerateEventHandlers:kCPCompletionBlockHandlerKey block:^(id _handler) {
+				void (^handler)(CPRequest*,id) = _handler;
+				handler(self, result);
+			}];
+		}
+	}
+}
+
+// class public
+
++ (CPRequest *)getRequestWithParameters:(NSDictionary *) params
+						  requestMethod:(NSString *) httpMethod
+							 requestURL:(NSString *) url {
+	
+	CPRequest* request = [[CPRequest alloc] init];
+	request.url = url;
+	request.httpMethod = httpMethod;
+	request.params = params;
+	request.connection = nil;
+	request.responseText = nil;
+	
+	return request;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // private
 
@@ -158,25 +264,25 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 	return body;
 }
 
-/**
- * Formulate the NSError
- */
-- (id)formError:(NSInteger)code userInfo:(NSDictionary *) errorData {
-	return [NSError errorWithDomain:@"facebookErrDomain" code:code userInfo:errorData];
-	
-}
+
 
 - (void)connect {
-	if( [Coffeepot sharedCoffeepot].requestStarted ) {
-		[Coffeepot sharedCoffeepot].requestStarted(self);
+	if( [Coffeepot shared].requestStarted ) {
+		[Coffeepot shared].requestStarted(self);
 	}
 	
 	[self enumerateEventHandlers:kCPLoadBlockHandlerKey block:^(id _handler) {
 		void (^handler)(CPRequest*) = _handler;
 		handler(self);
 	}];
-	
-	NSString* url = [[self class] serializeURL:_url params:_params requestMethod:_httpMethod];
+    
+    NSString *url = self.url;
+    
+	if ([self.httpMethod isEqualToString:@"GET"]) {
+        url = [[self class] serializeURL:_url params:_params requestMethod:_httpMethod];
+
+    }
+    
 	NSMutableURLRequest* request =
 	[NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
 							cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
@@ -193,7 +299,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 		[request setHTTPBody:[self generatePostBody]];
 	}
 	
-//	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 	self.state = kCPRequestStateLoading;
 	self.isSessionExpired = NO;
 }
@@ -205,6 +311,55 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 		void (^handler)(CPRequest *, CPRequestState) = _handler;
 		handler(self, _);
 	}];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// NSURLConnectionDelegate
+
+#pragma mark - NSURLConnection Delegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	_responseText = [NSMutableData data];
+	
+	NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+	
+	[self enumerateEventHandlers:kCPResponseBlockHandlerKey block:^(id _handler) {
+		void (^handler)(CPRequest*,NSURLResponse*) = _handler;
+		handler(self, httpResponse);
+	}];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[_responseText appendData:data];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+				  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
+	return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	if( [Coffeepot shared].requestFinished ) {
+		[Coffeepot shared].requestFinished(self);
+	}
+    
+	[self handleResponseData:_responseText];
+	
+	self.responseText = nil;
+	self.connection = nil;
+	self.state = kCPRequestStateComplete;
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	if( [Coffeepot shared].requestFinished ) {
+		[Coffeepot shared].requestFinished(self);
+	}
+	[self handleResponseData:_responseText];
+	[self failWithError:error];
+	
+	self.responseText = nil;
+	self.connection = nil;
+	self.state = kCPRequestStateComplete;
 }
 
 @end

@@ -8,9 +8,12 @@
 
 #import "Coffeepot.h"
 #import <Objection-iOS/Objection.h>
-#import "ModelsAddon.h"
+#import "Models+addon.h"
+
 
 static NSString *pURLPrefix = @"http://api.pkuapp.com:433/";
+static NSString *kCPSession = @"com.pkuapp:session";
+static NSString *kCPSessionExpiredDate = @"com.pkuapp:session_expired_date";
 
 @interface Coffeepot ()
 
@@ -21,29 +24,32 @@ static Coffeepot *coffeepotSharedObject = nil;
 
 @implementation Coffeepot
 
+- (Coffeepot *)init {
+    self = [super init];
+    if (self) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        self.session = [defaults objectForKey:kCPSession];
+        self.expirationDate = [defaults objectForKey:kCPSessionExpiredDate];
+    }
+    return self;
+}
 
-+ (Coffeepot *)sharedCoffeepot {
++ (Coffeepot *)shared {
     if (!coffeepotSharedObject) {
-        return [self bind];
+        coffeepotSharedObject = [[Coffeepot alloc] init];
     }
     return coffeepotSharedObject;
 }
 
-+ (Coffeepot *)bind {
-    User *appUser = [User sharedUser];
-    if (appUser) {
-        Coffeepot *coffeepot = [[Coffeepot alloc] init];
-        coffeepot.appUser = appUser;
-        return coffeepot;
-    }
-    return nil;
-}
-+ (Coffeepot *)authorizeWithEmail:(NSString *)email Password:(NSString *)password{
-    return [self bind];
-}
-+ (Coffeepot *)authorizeWithSianWeiboToken:(NSString* )token {
-    return [self bind];
-}
+//+ (Coffeepot *)bind {
+//    User *appUser = [User sharedUser];
+//    if (appUser) {
+//        Coffeepot *coffeepot = [[Coffeepot alloc] init];
+//        coffeepot.appUser = appUser;
+//        return coffeepot;
+//    }
+//    return nil;
+//}
 
 - (void)extendSession {
     
@@ -54,9 +60,11 @@ static Coffeepot *coffeepotSharedObject = nil;
 - (void)logout {
 
 }
+
 - (BOOL)isSessionExpired {
-    
+    return !(self.session != nil && self.expirationDate != nil && NSOrderedDescending == [self.expirationDate compare:[NSDate date]]);
 }
+
 - (void)addLoginHandler:(void(^)(Coffeepot* coffeepot, CPLoginState state))handler {
     
 }
@@ -73,20 +81,54 @@ static Coffeepot *coffeepotSharedObject = nil;
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                               params:(NSDictionary *)params
-                        responseType:(Class)class_name
                              success:(void (^)(id collection))success_block
                                error:(void (^)(id collection, NSError *error))error_block {
-
+    return [self requestWithMethodPath:method_path params:params requestMethod:@"GET" success:success_block error:error_block];
 }
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                               params:(NSDictionary *)params
                        requestMethod:(NSString *)httpMethod
-                        responseType:(Class)class_name
-                             success:(void (^)(id))success_block
-                               error:(void (^)(id, NSError *))error_block {
+                             success:(void (^)(id collection))success_block
+                               error:(void (^)(id collection, NSError *error))error_block {
 
 }
 
+- (CPRequest*)openUrl:(NSString *)url
+               params:(NSDictionary *)params
+		requestMethod:(NSString *)httpMethod
+			 finalize:(void(^)(CPRequest*))finalize {
 
+    
+//    [self extendAccessTokenIfNeeded];
+    
+    CPRequest* _request = [CPRequest getRequestWithParameters:params
+												requestMethod:httpMethod
+												   requestURL:url];
+    [_requests addObject:_request];
+	
+	[_request registerEventHandler:kCPStateChangeBlockHandlerKey handler:^(CPRequest *request, CPRequestState state) {
+		if( state == kCPRequestStateComplete ) {
+			if( [request isSessionExpired] ) {
+//				[self invalidateSession];
+				[self _applyCoreHandlers:kCPSessionBlockHandlerKey];
+			}
+			[_requests removeObject:request];
+		}
+	}];
+	
+	if( finalize ) {
+		finalize(_request);
+	}
+	
+    [_request connect];
+    return _request;
+}
+
+- (void)_applyCoreHandlers:(NSString*)event {
+	[self enumerateEventHandlers:event block:^(id _handler) {
+		void (^handler)(Coffeepot*) = _handler;
+		handler(self);
+	}];
+}
 @end

@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol CPAccountManageDelegate <NSObject>
+//user profile keys are defined as adding a prefix 'com.pkuapp' to server-side key returned
+
+
+@protocol CPUserManageDelegate <NSObject>
+
+- (void)updateAppUserProfileWith:(NSDictionary *)dict;
 
 @end

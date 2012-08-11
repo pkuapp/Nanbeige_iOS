@@ -10,8 +10,11 @@
 #import "Environment.h"
 #import "CPAccountManager.h"
 #import "CPSigninEmailViewController.h"
+#import "Coffeepot.h"
 
-
+#import "Models+addon.h"
+#import "CPUserManageDelegate.h"
+#import <Objection-iOS/Objection.h>
 
 @interface CPSignViewController () <CPAccountManagerDelegate> {
 	CPAccountManager *accountManager;
@@ -31,8 +34,11 @@
 }
 
 - (WBEngine *)weibo {
-
-    return [WBEngine sharedWBEngine];
+    if (!_weibo) {
+        _weibo = [WBEngine sharedWBEngine];
+        _weibo.rootViewController = self;
+    }
+    return _weibo;
 }
 
 #pragma mark - View Lifecycle
@@ -54,8 +60,7 @@
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
-	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
+
 }
 
 - (void)viewDidUnload
@@ -113,11 +118,10 @@
 }
 - (void)onWeiboLogin:(id)sender
 {
-    WBEngine *weibo = [WBEngine sharedWBEngine];
-    weibo.delegate = self;
-    weibo.isUserExclusive = NO;
-    weibo.redirectURI = @"https://api.weibo.com/oauth2/default.html";
-    [weibo logIn];
+    self.weibo.delegate = self;
+    self.weibo.isUserExclusive = NO;
+    self.weibo.redirectURI = @"https://api.weibo.com/oauth2/default.html";
+    [self.weibo logIn];
 
 }
 - (void)engineDidLogIn:(WBEngine *)engine
@@ -128,23 +132,21 @@
 	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
     success:^(WBRequest *request, id result) {
         if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISCREEN_NAME]) {
-            //		[defaults setObject:[result objectForKey:kAPISCREEN_NAME] forKey:kWEIBONAMEKEY];
-            if ([self respondsToSelector:@selector(didWeiboLoginWithUserID:UserName:WeiboToken:)]) {
-
-                [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-                [self loading:YES];
-            }
-        }
-        if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISTATUSES]) {
-            if ([self respondsToSelector:@selector(didWeiboHomeTimelineReceived:)]) {
-                [self didWeiboHomeTimelineReceived:[result objectForKey:kAPISTATUSES]];
-            }
+            
+            [[Coffeepot shared] requestWithMethodPath:@"/user/login/weibo" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(NSDictionary *collection) {
+                
+                [[[JSObjection defaultInjector] getObject:@protocol(CPUserManageDelegate)] updateAppUserProfileWith:collection];
+                
+            } error:^(NSDictionary *collection, NSError *error) {
+                if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
+                    raise(-1);
+                }
+            }];
         }
     }
     fail:^(WBRequest *request, NSError *error) {
-        if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
-            [self didRequest:nil FailWithError:[error description]];
-        }
+        [self loading:NO];
+        [self showAlert:error.description];
     }];
 }
 
@@ -176,7 +178,7 @@
 
 - (void)onRenrenLogin:(id)sender
 {
-	[accountManager renrenLogin];
+    
 }
 
 
@@ -216,12 +218,6 @@
 }
 
 #pragma mark - AccountManagerDelegate Error
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self loading:NO];
-	[self showAlert:errorString];
-}
 
 - (void)didRequest:(ASIHTTPRequest *)request FailWithErrorCode:(NSString *)errorCode
 {

@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CPUserManageDelegate.h"
 
-@interface CPAppDelegate : UIResponder <UIApplicationDelegate>
+@interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPUserManageDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 - (NSURL *)applicationDocumentsDirectory;
+- (void)updateAppUserProfileWith:(NSDictionary *)dict;
 
 @end

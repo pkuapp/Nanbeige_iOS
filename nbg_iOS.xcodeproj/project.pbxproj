@@ -593,8 +593,8 @@
 		414AFC8315D39A0C00EFFB60 /* 180-stickynote.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC8015D39A0C00EFFB60 /* 180-stickynote.png */; };
 		414AFC8415D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */; };
 		414AFC8515D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */; };
-		414AFCAA15D3C6CC00EFFB60 /* ModelsAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* ModelsAddon.m */; };
-		414AFCAB15D3C6CC00EFFB60 /* ModelsAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* ModelsAddon.m */; };
+		414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
+		414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
 		414AFCAE15D422FE00EFFB60 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCAD15D422FC00EFFB60 /* User.m */; };
 		414AFCAF15D422FE00EFFB60 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCAD15D422FC00EFFB60 /* User.m */; };
 		414AFCB215D422FF00EFFB60 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB115D422FF00EFFB60 /* Assignment.m */; };
@@ -836,8 +836,9 @@
 		411DBC3915CBA59700EDB31D /* MagicalRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecord.m; sourceTree = "<group>"; };
 		411DBC3A15CBA59700EDB31D /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		411DBC3B15CBA59700EDB31D /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
-		4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "WBEngine+addon.h"; path = "nbg_iOS/WBEngine+addon.h"; sourceTree = "<group>"; };
-		4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "WBEngine+addon.m"; path = "nbg_iOS/WBEngine+addon.m"; sourceTree = "<group>"; };
+		4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "WBEngine+addon.h"; path = "../WBEngine+addon.h"; sourceTree = "<group>"; };
+		4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "WBEngine+addon.m"; path = "../WBEngine+addon.m"; sourceTree = "<group>"; };
+		4120F2B915D6B4F500D0AA97 /* CPUserManageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserManageDelegate.h; sourceTree = "<group>"; };
 		413B9E6E15D51D95000C9451 /* GCArraySectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCArraySectionController.h; path = Demo/Demo/GCArraySectionController.h; sourceTree = "<group>"; };
 		413B9E6F15D51D95000C9451 /* GCArraySectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCArraySectionController.m; path = Demo/Demo/GCArraySectionController.m; sourceTree = "<group>"; };
 		413B9E7015D51D95000C9451 /* GCRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCRetractableSectionController.h; path = GCRetractableSectionController/GCRetractableSectionController.h; sourceTree = "<group>"; };
@@ -1280,8 +1281,8 @@
 		414AFC7A15D399D800EFFB60 /* rooms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rooms@2x.png"; sourceTree = "<group>"; };
 		414AFC8015D39A0C00EFFB60 /* 180-stickynote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180-stickynote.png"; sourceTree = "<group>"; };
 		414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180-stickynote@2x.png"; sourceTree = "<group>"; };
-		414AFCA815D3C6CC00EFFB60 /* ModelsAddon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelsAddon.h; path = Models/ModelsAddon.h; sourceTree = "<group>"; };
-		414AFCA915D3C6CC00EFFB60 /* ModelsAddon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelsAddon.m; path = Models/ModelsAddon.m; sourceTree = "<group>"; };
+		414AFCA815D3C6CC00EFFB60 /* Models+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Models+addon.h"; path = "Models/Models+addon.h"; sourceTree = "<group>"; };
+		414AFCA915D3C6CC00EFFB60 /* Models+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Models+addon.m"; path = "Models/Models+addon.m"; sourceTree = "<group>"; };
 		414AFCAC15D422FC00EFFB60 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
 		414AFCAD15D422FC00EFFB60 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		414AFCB015D422FF00EFFB60 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
@@ -1470,8 +1471,6 @@
 		411DBBBC15CB9E3F00EDB31D = {
 			isa = PBXGroup;
 			children = (
-				4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */,
-				4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */,
 				41FD95E015D5603200477483 /* Objection-iOS.framework */,
 				413BA22315D52B18000C9451 /* HMGLTransitions */,
 				413BA20615D529E3000C9451 /* SYPaginator */,
@@ -1539,6 +1538,7 @@
 				4120F2B115D6419000D0AA97 /* CPSignFlow */,
 				411DBBDC15CB9E4000EDB31D /* CPAppDelegate.h */,
 				411DBBDD15CB9E4000EDB31D /* CPAppDelegate.m */,
+				4120F2B915D6B4F500D0AA97 /* CPUserManageDelegate.h */,
 				41D6FDD915D0BA4C0085DF89 /* CPAppModule.h */,
 				41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */,
 				41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */,
@@ -1709,6 +1709,10 @@
 				41FD95F415D6378B00477483 /* confirmLogin.json */,
 				41FD95F515D6378B00477483 /* emailLogin.json */,
 				41FD95F615D6378B00477483 /* emailSignup.json */,
+				414AFD7415D512A500EFFB60 /* CPAccountManager.h */,
+				414AFD7515D512A500EFFB60 /* CPAccountManager.m */,
+				4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */,
+				4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */,
 				414AFD8E15D512A500EFFB60 /* CPSigninComfirmViewController.h */,
 				414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */,
 				414AFD9A15D512A500EFFB60 /* CPSigninEmailViewController.h */,
@@ -2456,7 +2460,6 @@
 		414AFC8E15D3C59D00EFFB60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				414AFCAC15D422FC00EFFB60 /* User.h */,
 				414AFCBC15D4230100EFFB60 /* Course.h */,
 				414AFCBD15D4230100EFFB60 /* Course.m */,
 				414AFCB815D4230000EFFB60 /* Lesson.h */,
@@ -2465,10 +2468,11 @@
 				414AFCB515D422FF00EFFB60 /* Semester.m */,
 				414AFCB015D422FF00EFFB60 /* Assignment.h */,
 				414AFCB115D422FF00EFFB60 /* Assignment.m */,
+				414AFCAC15D422FC00EFFB60 /* User.h */,
 				414AFCAD15D422FC00EFFB60 /* User.m */,
 				411DBBDF15CB9E4000EDB31D /* nbg_iOS.xcdatamodeld */,
-				414AFCA815D3C6CC00EFFB60 /* ModelsAddon.h */,
-				414AFCA915D3C6CC00EFFB60 /* ModelsAddon.m */,
+				414AFCA815D3C6CC00EFFB60 /* Models+addon.h */,
+				414AFCA915D3C6CC00EFFB60 /* Models+addon.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2478,8 +2482,6 @@
 			children = (
 				414AFD6B15D512A500EFFB60 /* courseGrabber.json */,
 				414AFD6F15D512A500EFFB60 /* Environment.h */,
-				414AFD7415D512A500EFFB60 /* CPAccountManager.h */,
-				414AFD7515D512A500EFFB60 /* CPAccountManager.m */,
 				414AFD7615D512A500EFFB60 /* CPAccountManageViewController.h */,
 				414AFD7715D512A500EFFB60 /* CPAccountManageViewController.m */,
 				414AFD7A15D512A500EFFB60 /* CPAssignmentDeadlineViewController.h */,
@@ -2928,7 +2930,7 @@
 				41D6FDE615D0C4BA0085DF89 /* Coffeepot.m in Sources */,
 				41E7F96E15D2680C009B8703 /* CPRequest.m in Sources */,
 				41E7F97115D26F3A009B8703 /* CPBlockHandler.m in Sources */,
-				414AFCAA15D3C6CC00EFFB60 /* ModelsAddon.m in Sources */,
+				414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
 				414AFCAE15D422FE00EFFB60 /* User.m in Sources */,
 				414AFCB215D422FF00EFFB60 /* Assignment.m in Sources */,
 				414AFCB615D422FF00EFFB60 /* Semester.m in Sources */,
@@ -3176,7 +3178,7 @@
 				411DBC6D15CBA59700EDB31D /* MagicalRecord+ShorthandSupport.m in Sources */,
 				411DBC6F15CBA59700EDB31D /* MagicalRecord.m in Sources */,
 				41E7F97215D26F3A009B8703 /* CPBlockHandler.m in Sources */,
-				414AFCAB15D3C6CC00EFFB60 /* ModelsAddon.m in Sources */,
+				414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
 				414AFCAF15D422FE00EFFB60 /* User.m in Sources */,
 				414AFCB315D422FF00EFFB60 /* Assignment.m in Sources */,
 				414AFCB715D422FF00EFFB60 /* Semester.m in Sources */,

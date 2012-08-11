@@ -26,20 +26,23 @@ typedef enum {
 }CPLoginState;
 
 @interface Coffeepot : CPBlockHandler {
+    NSMutableSet* _requests;
     
 }
+@property (nonatomic, copy) NSString* session;
 @property (strong, nonatomic) NSDate* expirationDate;
 @property (copy) void (^requestStarted)(CPRequest*);
 @property (copy) void (^requestFinished)(CPRequest*);
 
-+ (Coffeepot *)sharedCoffeepot;
-+ (Coffeepot *)authorizeWithEmail:(NSString *)email Password:(NSString *)password;
-+ (Coffeepot *)authorizeWithSianWeiboToken:(NSString* )token;
++ (Coffeepot *)shared;
+//+ (Coffeepot *)authorizeWithEmail:(NSString *)email Password:(NSString *)password;
+//+ (Coffeepot *)authorizeWithSianWeiboToken:(NSString* )token;
 
 - (void)extendSession;
 - (void)extendSessionIfNeeded;
 - (void)logout;
 - (BOOL)isSessionExpired;
+
 - (void)addLoginHandler:(void(^)(Coffeepot* coffeepot, CPLoginState state))handler;
 - (void)addExtendTokenHandler:(void(^)(Coffeepot *coffeepot, NSString *token, NSDate *expiresAt))handler;
 - (void)addLogoutHandler:(void(^)(Coffeepot* coffeepot))handler;
@@ -48,14 +51,12 @@ typedef enum {
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                                params:(NSDictionary *)params
-                       responseType:(Class)class_name
                               success:(void (^)(id collection))success_block
                                 error:(void (^)(id collection, NSError *error))error_block;
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                               params:(NSDictionary *)params
                        requestMethod:(NSString *)httpMethod
-                        responseType:(Class)class_name
                              success:(void (^)(id))success_block
                                error:(void (^)(id, NSError *))error_block;
 

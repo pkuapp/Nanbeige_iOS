@@ -11,9 +11,9 @@
 #import "Semester.h"
 #import "Course.h"
 #import "Lesson.h"
-
-@interface User (ModelsAddon)
-
-+ (User *)sharedUser;
-
-@end
+//
+//@interface User (addon)
+//
+//+ (User *)sharedAppUser;
+//
+//@end

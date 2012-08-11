@@ -9,12 +9,13 @@
 #import "CPAppModule.h"
 #import <CoreData/CoreData.h>
 @protocol CoreDataContextProviderDelegete;
+@protocol CPUserManageDelegate;
 
 @implementation CPAppModule
 - (void)configure {
     [self bind:[UIApplication sharedApplication] toClass:[UIApplication class]];
-    [self bind:[UIApplication sharedApplication].delegate toProtocol:@protocol(UIApplicationDelegate) ];
-    
+    [self bind:[UIApplication sharedApplication].delegate toProtocol:@protocol(UIApplicationDelegate)];
+    [self bind:[UIApplication sharedApplication].delegate toProtocol:@protocol(CPUserManageDelegate)];
 
 //    [self bind:[NSManagedObjectContext defaultContext] toProtocol:@protocol(CoreDataContextProviderDelegete)];
 }
