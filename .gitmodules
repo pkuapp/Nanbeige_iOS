@@ -29,3 +29,6 @@
 [submodule "MagicalRecord"]
 	path = MagicalRecord
 	url = https://github.com/magicalpanda/MagicalRecord.git
+[submodule "GCRetractableSectionController"]
+	path = GCRetractableSectionController
+	url = https://github.com/gcamp/GCRetractableSectionController.git

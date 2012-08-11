@@ -607,10 +607,6 @@
 		414AFD0615D4D9A600EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD0415D4D9A600EFFB60 /* CPSigninFlow.storyboard */; };
 		414AFD0915D4DAAB00EFFB60 /* CPSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD0815D4DAAB00EFFB60 /* CPSigninViewController.m */; };
 		414AFD0A15D4DAAB00EFFB60 /* CPSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD0815D4DAAB00EFFB60 /* CPSigninViewController.m */; };
-		414AFD0D15D4EC8B00EFFB60 /* CPEmailSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD0C15D4EC8B00EFFB60 /* CPEmailSignupViewController.m */; };
-		414AFD0E15D4EC8B00EFFB60 /* CPEmailSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD0C15D4EC8B00EFFB60 /* CPEmailSignupViewController.m */; };
-		414AFD5715D4F4D000EFFB60 /* CPTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD5615D4F4D000EFFB60 /* CPTextFieldCell.m */; };
-		414AFD5815D4F4D000EFFB60 /* CPTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD5615D4F4D000EFFB60 /* CPTextFieldCell.m */; };
 		414AFDDA15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
 		414AFDDB15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
 		414AFDDC15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */; };
@@ -719,7 +715,7 @@
 		414AFE4B15D512A500EFFB60 /* NanbeigeWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD315D512A500EFFB60 /* NanbeigeWelcomeViewController.m */; };
 		414AFE4E15D512A500EFFB60 /* SystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD915D512A500EFFB60 /* SystemHelper.m */; };
 		414AFE4F15D512A500EFFB60 /* SystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD915D512A500EFFB60 /* SystemHelper.m */; };
-		41D6FDD715D0B9720085DF89 /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D6FDD615D0B9720085DF89 /* Objection-iOS.framework */; };
+		41D6FDD715D0B9720085DF89 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D6FDD615D0B9720085DF89 /* GHUnitIOS.framework */; };
 		41D6FDDB15D0BA4C0085DF89 /* CPAppModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */; };
 		41D6FDE615D0C4BA0085DF89 /* Coffeepot.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D6FDE515D0C4BA0085DF89 /* Coffeepot.m */; };
 		41E7F96E15D2680C009B8703 /* CPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E7F96D15D2680C009B8703 /* CPRequest.m */; };
@@ -727,6 +723,8 @@
 		41E7F97215D26F3A009B8703 /* CPBlockHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E7F97015D26F3A009B8703 /* CPBlockHandler.m */; };
 		41E7F98A15D2AF63009B8703 /* AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = 41E7F98915D2AF63009B8703 /* AFNetworking */; };
 		41E7F98B15D2AF63009B8703 /* AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = 41E7F98915D2AF63009B8703 /* AFNetworking */; };
+		41FD95E115D5603200477483 /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD95E015D5603200477483 /* Objection-iOS.framework */; };
+		41FD95E215D5603200477483 /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD95E015D5603200477483 /* Objection-iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -824,10 +822,10 @@
 		411DBC3915CBA59700EDB31D /* MagicalRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalRecord.m; sourceTree = "<group>"; };
 		411DBC3A15CBA59700EDB31D /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		411DBC3B15CBA59700EDB31D /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
-		413B9E6E15D51D95000C9451 /* GCArraySectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCArraySectionController.h; sourceTree = "<group>"; };
-		413B9E6F15D51D95000C9451 /* GCArraySectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCArraySectionController.m; sourceTree = "<group>"; };
-		413B9E7015D51D95000C9451 /* GCRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCRetractableSectionController.h; sourceTree = "<group>"; };
-		413B9E7115D51D95000C9451 /* GCRetractableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCRetractableSectionController.m; sourceTree = "<group>"; };
+		413B9E6E15D51D95000C9451 /* GCArraySectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCArraySectionController.h; path = Demo/Demo/GCArraySectionController.h; sourceTree = "<group>"; };
+		413B9E6F15D51D95000C9451 /* GCArraySectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCArraySectionController.m; path = Demo/Demo/GCArraySectionController.m; sourceTree = "<group>"; };
+		413B9E7015D51D95000C9451 /* GCRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCRetractableSectionController.h; path = GCRetractableSectionController/GCRetractableSectionController.h; sourceTree = "<group>"; };
+		413B9E7115D51D95000C9451 /* GCRetractableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCRetractableSectionController.m; path = GCRetractableSectionController/GCRetractableSectionController.m; sourceTree = "<group>"; };
 		413B9E7315D51D95000C9451 /* DownAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DownAccessory.png; sourceTree = "<group>"; };
 		413B9E7415D51D95000C9451 /* DownAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DownAccessory@2x.png"; sourceTree = "<group>"; };
 		413B9E7515D51D95000C9451 /* DownAccessoryWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DownAccessoryWhite.png; sourceTree = "<group>"; };
@@ -1281,10 +1279,6 @@
 		414AFD0415D4D9A600EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD0715D4DAAB00EFFB60 /* CPSigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSigninViewController.h; sourceTree = "<group>"; };
 		414AFD0815D4DAAB00EFFB60 /* CPSigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSigninViewController.m; sourceTree = "<group>"; };
-		414AFD0B15D4EC8B00EFFB60 /* CPEmailSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPEmailSignupViewController.h; sourceTree = "<group>"; };
-		414AFD0C15D4EC8B00EFFB60 /* CPEmailSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPEmailSignupViewController.m; sourceTree = "<group>"; };
-		414AFD5515D4F4D000EFFB60 /* CPTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextFieldCell.h; sourceTree = "<group>"; };
-		414AFD5615D4F4D000EFFB60 /* CPTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextFieldCell.m; sourceTree = "<group>"; };
 		414AFD6B15D512A500EFFB60 /* courseGrabber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseGrabber.json; sourceTree = "<group>"; };
 		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD6F15D512A500EFFB60 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
@@ -1383,7 +1377,7 @@
 		414AFDD315D512A500EFFB60 /* NanbeigeWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWelcomeViewController.m; sourceTree = "<group>"; };
 		414AFDD815D512A500EFFB60 /* SystemHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemHelper.h; sourceTree = "<group>"; };
 		414AFDD915D512A500EFFB60 /* SystemHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemHelper.m; sourceTree = "<group>"; };
-		41D6FDD615D0B9720085DF89 /* Objection-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "Objection-iOS.framework"; sourceTree = SOURCE_ROOT; };
+		41D6FDD615D0B9720085DF89 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = SOURCE_ROOT; };
 		41D6FDD915D0BA4C0085DF89 /* CPAppModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAppModule.h; sourceTree = "<group>"; };
 		41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppModule.m; sourceTree = "<group>"; };
 		41D6FDE415D0C4BA0085DF89 /* Coffeepot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Coffeepot.h; path = CPConnect/Coffeepot.h; sourceTree = "<group>"; };
@@ -1393,6 +1387,7 @@
 		41E7F96F15D26F3A009B8703 /* CPBlockHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPBlockHandler.h; path = CPConnect/Backend/CPBlockHandler.h; sourceTree = "<group>"; };
 		41E7F97015D26F3A009B8703 /* CPBlockHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPBlockHandler.m; path = CPConnect/Backend/CPBlockHandler.m; sourceTree = "<group>"; };
 		41E7F98915D2AF63009B8703 /* AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AFNetworking; path = AFNetworking/AFNetworking; sourceTree = "<group>"; };
+		41FD95E015D5603200477483 /* Objection-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "Objection-iOS.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1414,12 +1409,13 @@
 				413BA24E15D52DBF000C9451 /* CFNetwork.framework in Frameworks */,
 				413BA24D15D52DBB000C9451 /* Security.framework in Frameworks */,
 				413BA24515D52BCC000C9451 /* libxml2.2.7.3.dylib in Frameworks */,
-				41D6FDD715D0B9720085DF89 /* Objection-iOS.framework in Frameworks */,
+				41D6FDD715D0B9720085DF89 /* GHUnitIOS.framework in Frameworks */,
 				411DBBCC15CB9E4000EDB31D /* UIKit.framework in Frameworks */,
 				411DBBCE15CB9E4000EDB31D /* Foundation.framework in Frameworks */,
 				411DBBD015CB9E4000EDB31D /* CoreGraphics.framework in Frameworks */,
 				411DBBD215CB9E4000EDB31D /* CoreData.framework in Frameworks */,
 				413BA20415D5265C000C9451 /* GHUnitIOS.framework in Frameworks */,
+				41FD95E115D5603200477483 /* Objection-iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1444,6 +1440,7 @@
 				411DBBEB15CB9E4000EDB31D /* Foundation.framework in Frameworks */,
 				411DBBEC15CB9E4000EDB31D /* CoreData.framework in Frameworks */,
 				413BA20515D5265C000C9451 /* GHUnitIOS.framework in Frameworks */,
+				41FD95E215D5603200477483 /* Objection-iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1453,23 +1450,9 @@
 		411DBBBC15CB9E3F00EDB31D = {
 			isa = PBXGroup;
 			children = (
-				413BA26A15D52EC7000C9451 /* MobileCoreServices.framework */,
-				413BA26715D52EA2000C9451 /* CoreLocation.framework */,
-				413BA26515D52E96000C9451 /* CoreText.framework */,
-				413BA26115D52E82000C9451 /* EventKitUI.framework */,
-				413BA25F15D52E7E000C9451 /* EventKit.framework */,
-				413BA25C15D52E5D000C9451 /* MapKit.framework */,
-				413BA25915D52E4B000C9451 /* SystemConfiguration.framework */,
-				413BA25615D52E2E000C9451 /* libz.1.2.5.dylib */,
-				413BA25315D52E1A000C9451 /* libsqlite3.dylib */,
-				413BA25015D52DE4000C9451 /* QuartzCore.framework */,
-				413BA24B15D52DB1000C9451 /* Security.framework */,
-				413BA24915D52DA6000C9451 /* CFNetwork.framework */,
-				413BA24715D52D9E000C9451 /* OpenGLES.framework */,
-				413BA24415D52BCC000C9451 /* libxml2.2.7.3.dylib */,
+				41FD95E015D5603200477483 /* Objection-iOS.framework */,
 				413BA22315D52B18000C9451 /* HMGLTransitions */,
 				413BA20615D529E3000C9451 /* SYPaginator */,
-				413BA20315D5265C000C9451 /* GHUnitIOS.framework */,
 				413BA1E315D523CD000C9451 /* EGOTableViewPullRefresh */,
 				413BA1E215D52248000C9451 /* MBProgressHUD */,
 				413BA14115D52182000C9451 /* ASIHttpRequest */,
@@ -1479,9 +1462,7 @@
 				413B9E6D15D51D95000C9451 /* GCRetractableSectionController */,
 				413B9E7B15D51D95000C9451 /* Renren */,
 				413B9EF215D51D95000C9451 /* SinaWeiBoSDK */,
-				414AFD5415D4F4CF00EFFB60 /* CPTextFieldCell */,
 				41E7F98915D2AF63009B8703 /* AFNetworking */,
-				41D6FDD615D0B9720085DF89 /* Objection-iOS.framework */,
 				411DBC0015CBA59700EDB31D /* MagicalRecord */,
 				41D6FDE315D0C3CB0085DF89 /* CPConnect */,
 				411DBBD315CB9E4000EDB31D /* nbg_iOS */,
@@ -1503,6 +1484,21 @@
 		411DBBCA15CB9E3F00EDB31D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				41D6FDD615D0B9720085DF89 /* GHUnitIOS.framework */,
+				413BA26A15D52EC7000C9451 /* MobileCoreServices.framework */,
+				413BA26715D52EA2000C9451 /* CoreLocation.framework */,
+				413BA26515D52E96000C9451 /* CoreText.framework */,
+				413BA26115D52E82000C9451 /* EventKitUI.framework */,
+				413BA25F15D52E7E000C9451 /* EventKit.framework */,
+				413BA25C15D52E5D000C9451 /* MapKit.framework */,
+				413BA25915D52E4B000C9451 /* SystemConfiguration.framework */,
+				413BA25615D52E2E000C9451 /* libz.1.2.5.dylib */,
+				413BA25315D52E1A000C9451 /* libsqlite3.dylib */,
+				413BA25015D52DE4000C9451 /* QuartzCore.framework */,
+				413BA24B15D52DB1000C9451 /* Security.framework */,
+				413BA24915D52DA6000C9451 /* CFNetwork.framework */,
+				413BA24715D52D9E000C9451 /* OpenGLES.framework */,
+				413BA24415D52BCC000C9451 /* libxml2.2.7.3.dylib */,
 				411DBBCB15CB9E4000EDB31D /* UIKit.framework */,
 				411DBBCD15CB9E4000EDB31D /* Foundation.framework */,
 				411DBBCF15CB9E4000EDB31D /* CoreGraphics.framework */,
@@ -1522,8 +1518,6 @@
 				411DBBDD15CB9E4000EDB31D /* CPAppDelegate.m */,
 				41D6FDD915D0BA4C0085DF89 /* CPAppModule.h */,
 				41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */,
-				414AFD0B15D4EC8B00EFFB60 /* CPEmailSignupViewController.h */,
-				414AFD0C15D4EC8B00EFFB60 /* CPEmailSignupViewController.m */,
 				414AFD0415D4D9A600EFFB60 /* CPSigninFlow.storyboard */,
 				414AFD0715D4DAAB00EFFB60 /* CPSigninViewController.h */,
 				414AFD0815D4DAAB00EFFB60 /* CPSigninViewController.m */,
@@ -1688,7 +1682,8 @@
 				413B9E7915D51D95000C9451 /* UpAccessoryWhite.png */,
 				413B9E7A15D51D95000C9451 /* UpAccessoryWhite@2x.png */,
 			);
-			path = Images;
+			name = Images;
+			path = GCRetractableSectionController/Images;
 			sourceTree = "<group>";
 		};
 		413B9E7B15D51D95000C9451 /* Renren */ = {
@@ -2406,16 +2401,6 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		414AFD5415D4F4CF00EFFB60 /* CPTextFieldCell */ = {
-			isa = PBXGroup;
-			children = (
-				414AFD5515D4F4D000EFFB60 /* CPTextFieldCell.h */,
-				414AFD5615D4F4D000EFFB60 /* CPTextFieldCell.m */,
-			);
-			name = CPTextFieldCell;
-			path = ELCTextFieldCell;
-			sourceTree = "<group>";
-		};
 		414AFD6815D512A400EFFB60 /* Nanbeige */ = {
 			isa = PBXGroup;
 			children = (
@@ -2883,8 +2868,6 @@
 				414AFCBA15D4230000EFFB60 /* Lesson.m in Sources */,
 				414AFCBE15D4230100EFFB60 /* Course.m in Sources */,
 				414AFD0915D4DAAB00EFFB60 /* CPSigninViewController.m in Sources */,
-				414AFD0D15D4EC8B00EFFB60 /* CPEmailSignupViewController.m in Sources */,
-				414AFD5715D4F4D000EFFB60 /* CPTextFieldCell.m in Sources */,
 				414AFDE615D512A500EFFB60 /* CPAccountManager.m in Sources */,
 				414AFDE815D512A500EFFB60 /* CPAccountManageViewController.m in Sources */,
 				414AFDEC15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */,
@@ -3134,8 +3117,6 @@
 				414AFCBB15D4230000EFFB60 /* Lesson.m in Sources */,
 				414AFCBF15D4230100EFFB60 /* Course.m in Sources */,
 				414AFD0A15D4DAAB00EFFB60 /* CPSigninViewController.m in Sources */,
-				414AFD0E15D4EC8B00EFFB60 /* CPEmailSignupViewController.m in Sources */,
-				414AFD5815D4F4D000EFFB60 /* CPTextFieldCell.m in Sources */,
 				414AFDE715D512A500EFFB60 /* CPAccountManager.m in Sources */,
 				414AFDE915D512A500EFFB60 /* CPAccountManageViewController.m in Sources */,
 				414AFDED15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */,

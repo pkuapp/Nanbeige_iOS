@@ -13,7 +13,6 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import <Objection-iOS/Objection.h>
-    #import "CPTextFieldCell.h"
     #import "Quickdialog.h"
     #import "Environment.h"
 #define MR_SHORTHAND
