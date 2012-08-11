@@ -1,6 +1,6 @@
 //
-//  NanbeigeSelectedCoursesViewController.m
-//  Nanbeige
+//  CPSelectedCoursesViewController.m
+//  CP
 //
 //  Created by ZongZiWang on 12-8-8.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

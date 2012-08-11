@@ -1,6 +1,6 @@
 //
-//  NanbeigeAccountManager.m
-//  Nanbeige
+//  CPAccountManager.m
+//  CP
 //
 //  Created by ZongZiWang on 12-8-3.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -69,8 +69,8 @@
 - (void)emailLoginWithEmail:(NSString *)email
 			  Password:(NSString *)password
 {
-	[defaults setObject:email forKey:kNANBEIGEEMAILKEY];
-	[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
+	[defaults setObject:email forKey:kCPEMAILKEY];
+	[defaults setObject:password forKey:kCPPASSWORDKEY];
 	
 	emailLoginRequest = [ASIFormDataRequest requestWithURL:urlAPIUserLoginEmail];
 	[emailLoginRequest setDidFinishSelector:@selector(emailLoginRequestFinished:)];
@@ -110,7 +110,7 @@
 	id res = [self resultFromRequest:request];
 	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
 	
-	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
+	NSNumber *CPid = [res objectForKey:kAPIID];
 	NSString *nickname = nil;
 	NSNumber *university_id = nil;
 	NSString *university_name = nil;
@@ -129,10 +129,10 @@
 		campus_name = [[res objectForKey:kAPICAMPUS] objectForKey:kAPINAME];
 	}
 	
-	if (nickname && ![defaults objectForKey:kNANBEIGENICKNAMEKEY])
-		[defaults setValue:nickname forKey:kNANBEIGENICKNAMEKEY];
-	if (nanbeigeid && ![defaults objectForKey:kNANBEIGEIDKEY])
-		[defaults setValue:nanbeigeid forKey:kNANBEIGEIDKEY];
+	if (nickname && ![defaults objectForKey:kCPNICKNAMEKEY])
+		[defaults setValue:nickname forKey:kCPNICKNAMEKEY];
+	if (CPid && ![defaults objectForKey:kCPIDKEY])
+		[defaults setValue:CPid forKey:kCPIDKEY];
 	if (university_id && ![defaults objectForKey:kUNIVERSITYIDKEY])
 		[defaults setValue:university_id forKey:kUNIVERSITYIDKEY];
 	if (university_name && ![defaults objectForKey:kUNIVERSITYNAMEKEY])
@@ -143,7 +143,7 @@
 		[defaults setValue:campus_name forKey:kCAMPUSNAMEKEY];
 	
 	if ([self.delegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
-		[self.delegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
+		[self.delegate didEmailLoginWithID:CPid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
 	}
 }
 
@@ -163,10 +163,10 @@
 		weibo_token = [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY];
 	}
 	if (!nickname && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITNICKNAME] boolValue]) {
-		nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY];
+		nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY];
 	}
 	if (!password && [[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDITPASSWORD] boolValue]) {
-		password = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEPASSWORDKEY];
+		password = [[NSUserDefaults standardUserDefaults] objectForKey:kCPPASSWORDKEY];
 	}
 	
 	if (campus_id) {
@@ -182,12 +182,12 @@
 	if (nickname) {
 		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITNICKNAME];
 		[editRequest addPostValue:nickname forKey:kAPINICKNAME];
-		[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+		[defaults setObject:nickname forKey:kCPNICKNAMEKEY];
 	}
 	if (password) {
 		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:kACCOUNTEDITPASSWORD];
 		[editRequest addPostValue:password forKey:kAPIPASSWORD];
-		[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
+		[defaults setObject:password forKey:kCPPASSWORDKEY];
 	}
 	
 	[editRequest setDelegate:self];
@@ -206,10 +206,10 @@
 
 - (void)emailLogout
 {
-	[defaults removeObjectForKey:kNANBEIGEEMAILKEY];
-	[defaults removeObjectForKey:kNANBEIGEIDKEY];
-	[defaults removeObjectForKey:kNANBEIGENICKNAMEKEY];
-	[defaults removeObjectForKey:kNANBEIGEPASSWORDKEY];
+	[defaults removeObjectForKey:kCPEMAILKEY];
+	[defaults removeObjectForKey:kCPIDKEY];
+	[defaults removeObjectForKey:kCPNICKNAMEKEY];
+	[defaults removeObjectForKey:kCPPASSWORDKEY];
 	
 	logoutRequest = [[ASIFormDataRequest alloc] initWithURL:urlAPIUserLogout];
 	[logoutRequest setDidFinishSelector:@selector(logoutRequestFinished:)];
@@ -232,9 +232,9 @@
 					Password:(NSString *)password
 					Nickname:(NSString *)nickname
 {
-	[defaults setObject:email forKey:kNANBEIGEEMAILKEY];
-	[defaults setObject:password forKey:kNANBEIGEPASSWORDKEY];
-	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+	[defaults setObject:email forKey:kCPEMAILKEY];
+	[defaults setObject:password forKey:kCPPASSWORDKEY];
+	[defaults setObject:nickname forKey:kCPNICKNAMEKEY];
 
 	emailSignupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegEmail];
 	[emailSignupRequest setDidFinishSelector:@selector(signupRequestFinished:)];
@@ -251,10 +251,10 @@
 	id res = [self resultFromRequest:request];
 	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
 	
-	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
-	[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+	NSNumber *CPid = [res objectForKey:kAPIID];
+	[defaults setObject:CPid forKey:kCPIDKEY];
 	if ([self.delegate respondsToSelector:@selector(didEmailSignupWithID:)]) {
-		[self.delegate didEmailSignupWithID:nanbeigeid];
+		[self.delegate didEmailSignupWithID:CPid];
 	}
 }
 
@@ -284,7 +284,7 @@
 					Nickname:(NSString *)nickname
 {
 	[defaults setObject:token forKey:kRENRENTOKENKEY];
-	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+	[defaults setObject:nickname forKey:kCPNICKNAMEKEY];
 	
 	renrenSignupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegRenren];
 	[renrenSignupRequest setDidFinishSelector:@selector(renrenSignupRequestFinished:)];
@@ -300,10 +300,10 @@
 	id res = [self resultFromRequest:request];
 	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
 	
-	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
-	[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+	NSNumber *CPid = [res objectForKey:kAPIID];
+	[defaults setObject:CPid forKey:kCPIDKEY];
 	if ([self.delegate respondsToSelector:@selector(didRenrenSignupWithID:)]) {
-		[self.delegate didRenrenSignupWithID:nanbeigeid];
+		[self.delegate didRenrenSignupWithID:CPid];
 	}
 }
 
@@ -329,7 +329,7 @@
 					Nickname:(NSString *)nickname
 {
 	[defaults setObject:token forKey:kWEIBOTOKENKEY];
-	[defaults setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+	[defaults setObject:nickname forKey:kCPNICKNAMEKEY];
 	
 	weiboSingupRequest = [ASIFormDataRequest requestWithURL:urlAPIUserRegWeibo];
 	[weiboSingupRequest setDidFinishSelector:@selector(weiboSignupRequestFinished:)];
@@ -345,10 +345,10 @@
 	id res = [self resultFromRequest:request];
 	if ([res isKindOfClass:[NSDictionary class]] && ([res objectForKey:kAPIERROR] || [res objectForKey:kAPIERROR_CODE])) return ;
 	
-	NSNumber *nanbeigeid = [res objectForKey:kAPIID];
-	[defaults setObject:nanbeigeid forKey:kNANBEIGEIDKEY];
+	NSNumber *CPid = [res objectForKey:kAPIID];
+	[defaults setObject:CPid forKey:kCPIDKEY];
 	if ([self.delegate respondsToSelector:@selector(didWeiboSignupWithID:)]) {
-		[self.delegate didWeiboSignupWithID:nanbeigeid];
+		[self.delegate didWeiboSignupWithID:CPid];
 	}
 }
 

@@ -1,14 +1,14 @@
 {
 	"grouped": true,
 	"title": "账号管理",
-    "controllerName": "NanbeigeAccountManageViewController",
+    "controllerName": "CPAccountManageViewController",
 	"sections": [
 				 
 				 {
 				 "title":"你的身份",
 				 "bind":"iterate:identity",
 				 "elementTemplate": {
-				 "type":"NanbeigeLabelLeftDetailElement",
+				 "type":"CPLabelLeftDetailElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction",
 				 }
 				 },
@@ -16,21 +16,21 @@
 				 "title":"你的登录凭证",
 				 "bind":"iterate:loginaccount",
 				 "elementTemplate": {
-				 "type":"NanbeigeLabelLeftDetailElement",
+				 "type":"CPLabelLeftDetailElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction",
 				 }
 				 },
 				 {
 				 "bind":"iterate:connectaccount",
 				 "elementTemplate": {
-				 "type":"NanbeigeLabelButtonElement",
+				 "type":"CPLabelButtonElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction",
 				 }
 				 },
 				 {
 				 "elements": [
 							  {
-							  "type":"NanbeigeLabelButtonCenterElement",
+							  "type":"CPLabelButtonCenterElement",
 							  "title":"登出",
 							  "controllerAction":"onLaunchActionSheet:"
 							  }

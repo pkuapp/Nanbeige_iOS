@@ -146,7 +146,7 @@
     [self requestAccessTokenWithUserID:userID password:password];
 }
 
-#pragma mark - NanbeigeWeiboLoginDelegate Methods
+#pragma mark - CPWeiboLoginDelegate Methods
 
 - (void)authorizeViewController:(UIViewController *)viewController didReceiveAuthorizeCode:(NSString *)code
 {

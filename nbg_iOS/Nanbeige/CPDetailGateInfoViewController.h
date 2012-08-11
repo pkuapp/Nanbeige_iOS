@@ -1,6 +1,6 @@
 //
-//  NanbeigeDetailGateInfoViewController.h
-//  Nanbeige
+//  CPDetailGateInfoViewController.h
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-16.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

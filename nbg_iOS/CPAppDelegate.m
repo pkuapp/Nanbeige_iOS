@@ -11,7 +11,33 @@
 #import <Objection-iOS/Objection.h>
 #import "CPAppModule.h"
 
+@interface CPAppDelegate ()
+
+- (BOOL)needSignin;
+
+@end
+
 @implementation CPAppDelegate
+
+- (BOOL)needSignin {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:kWEIBOIDKEY] == nil &&
+		[defaults valueForKey:kRENRENIDKEY] == nil &&
+		[defaults valueForKey:kCPEMAILKEY] == nil) {
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kACCOUNTIDKEY];
+	}
+	
+	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
+        return NO;
+	} else {
+		id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
+		NSDictionary *emptySettings = (workaround51Crash != nil)
+		? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
+		: [NSDictionary dictionary];
+		[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
+        return YES;
+	}
+}
 
 - (void)configureGlobalAppearance {
 //    [[UITableView appearance] setBackgroundColor:[UIColor colorWithRed:214.0/255 green:214.0/255 blue:214.0/255 alpha:1.0]];
@@ -24,11 +50,17 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     JSObjectionInjector *injector = [JSObjection createInjector:[[CPAppModule alloc] init]];
     [JSObjection setDefaultInjector:injector];
+
+    if (self.needSignin) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPSigninFlow" bundle:[NSBundle mainBundle]];
+        UINavigationController *rvc = [sb instantiateInitialViewController];
+        self.window.rootViewController = rvc;
+    }
+    else {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
+        self.window.rootViewController = [sb instantiateInitialViewController];
+    }
     
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPSignInFlow" bundle:[NSBundle mainBundle]];
-    UINavigationController *rvc = [sb instantiateInitialViewController];
-    
-    self.window.rootViewController = rvc;
     [self.window makeKeyAndVisible];
     
     return YES;

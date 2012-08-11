@@ -1,14 +1,14 @@
 //
-//  NanbeigeLine3Button0Cell.m
-//  Nanbeige
+//  CPLine3Button0Cell.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-13.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeLine3Button0Cell.h"
+#import "CPLine3Button0Cell.h"
 
-@implementation NanbeigeLine3Button0Cell
+@implementation CPLine3Button0Cell
 @synthesize nameLabel;
 @synthesize imageView;
 @synthesize name;

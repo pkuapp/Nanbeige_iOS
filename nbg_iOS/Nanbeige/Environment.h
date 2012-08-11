@@ -176,10 +176,10 @@
 #define kCAMPUSNAMEKEY @"campusname"
 #define kCAMPUSIDKEY @"campusid"
 
-#define kNANBEIGEEMAILKEY @"nanbeigeemail"
-#define kNANBEIGEPASSWORDKEY @"nanbeigepassword"
-#define kNANBEIGEIDKEY @"nanbeigeid"
-#define kNANBEIGENICKNAMEKEY @"nickname"
+#define kCPEMAILKEY @"CPemail"
+#define kCPPASSWORDKEY @"CPpassword"
+#define kCPIDKEY @"CPid"
+#define kCPNICKNAMEKEY @"nickname"
 
 #define kASSIGNMENTS @"assignments"
 #define kCOMPLETEASSIGNMENTS @"complete_assignments"

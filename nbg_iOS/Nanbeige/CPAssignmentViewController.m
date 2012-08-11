@@ -1,6 +1,6 @@
 //
-//  NanbeigeAssignmentViewController.m
-//  Nanbeige
+//  CPAssignmentViewController.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-17.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -165,11 +165,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	NSUInteger row = [indexPath row];
-	NSString *nibName = @"NanbeigeAssignmentNoImageCell";
+	NSString *nibName = @"CPAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
 	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
-		nibName = @"NanbeigeAssignmentImageCell";
+		nibName = @"CPAssignmentImageCell";
 		identifier = @"ImageCellIdentifier";
 	}
 	
@@ -202,11 +202,11 @@
 {
 	
 	NSUInteger row = [indexPath row];
-	NSString *nibName = @"NanbeigeAssignmentNoImageCell";
+	NSString *nibName = @"CPAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
 	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
-		nibName = @"NanbeigeAssignmentImageCell";
+		nibName = @"CPAssignmentImageCell";
 		identifier = @"ImageCellIdentifier";
 	}
 	
@@ -220,8 +220,8 @@
 	[(id)cell courseName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTCOURSE];
 	[(id)cell assignmentName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTDESCRIPTION];
 	[(id)cell assignmentTime].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTDDLSTR];
-	if ([nibName isEqualToString:@"NanbeigeAssignmentImageCell"]) {
-		//[[(NanbeigeAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
+	if ([nibName isEqualToString:@"CPAssignmentImageCell"]) {
+		//[[(CPAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
 	}
 	
 	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTCOMPLETE] boolValue]) {

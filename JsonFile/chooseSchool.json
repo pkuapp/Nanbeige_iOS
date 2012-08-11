@@ -1,12 +1,12 @@
 {
 	"grouped": true,
 	"title": "选择你的学校",
-    "controllerName": "NanbeigeChooseSchoolViewController",
+    "controllerName": "CPChooseSchoolViewController",
 	"sections": [
 				 {
 				 "bind":"iterate:university",
 				 "elementTemplate": {
-					"type":"NanbeigeLabelButtonElement",
+					"type":"CPLabelButtonElement",
 					"bind":"title:name",
 					"controllerAction":"onChooseSchool:"
 					}

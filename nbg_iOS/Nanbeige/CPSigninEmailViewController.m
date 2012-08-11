@@ -1,6 +1,6 @@
 //
-//  NanbeigeEmailLoginViewController.m
-//  Nanbeige
+//  CPEmailLoginViewController.m
+//  CP
 //
 //  Created by ZongZiWang on 12-8-1.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -125,7 +125,7 @@
 	[self performSegueWithIdentifier:@"EmailSignupSegue" sender:self];
 }
 
-- (void)didEmailLoginWithID:(NSNumber *)nanbeigeid
+- (void)didEmailLoginWithID:(NSNumber *)CPid
 				   Nickname:(NSString *)nickname
 			   UniversityID:(NSNumber *)university_id
 			 UniversityName:(NSString *)university_name
@@ -134,11 +134,11 @@
 {
 	[self loading:NO];
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPIDKEY] forKey:kACCOUNTIDKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
 	}
 	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
-		[self.accountManagerDelegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
+		[self.accountManagerDelegate didEmailLoginWithID:CPid Nickname:nickname UniversityID:university_id UniversityName:university_name CampusID:campus_id CampusName:campus_name];
 	}
 	[self close];
 }

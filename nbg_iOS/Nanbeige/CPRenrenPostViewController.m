@@ -1,20 +1,20 @@
 //
-//  NanbeigeRenrenPostViewController.m
-//  Nanbeige
+//  CPRenrenPostViewController.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-10.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeRenrenPostViewController.h"
+#import "CPRenrenPostViewController.h"
 
-@interface NanbeigeRenrenPostViewController () {
+@interface CPRenrenPostViewController () {
 	CGRect originalTextViewFrame;
 }
 
 @end
 
-@implementation NanbeigeRenrenPostViewController
+@implementation CPRenrenPostViewController
 @synthesize textToPost;
 
 #pragma mark - View lifecycle

@@ -1,6 +1,6 @@
 //
-//  NanbeigeCreateAssignmentViewController.m
-//  Nanbeige
+//  CPCreateAssignmentViewController.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-21.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  NanbeigeRenrenPostViewController.h
-//  Nanbeige
+//  CPRenrenPostViewController.h
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-10.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Renren.h"
 
-@interface NanbeigeRenrenPostViewController : UIViewController <RenrenDelegate> {
+@interface CPRenrenPostViewController : UIViewController <RenrenDelegate> {
 	Renren * renren;
     BOOL _isKeyboardHidden;
 	UIActivityIndicatorView *indicatorView;

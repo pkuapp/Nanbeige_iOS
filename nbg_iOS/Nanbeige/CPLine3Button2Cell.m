@@ -1,14 +1,14 @@
 //
-//  NanbeigeLine3Button2Cell.m
-//  Nanbeige
+//  CPLine3Button2Cell.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-13.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeLine3Button2Cell.h"
+#import "CPLine3Button2Cell.h"
 
-@implementation NanbeigeLine3Button2Cell
+@implementation CPLine3Button2Cell
 @synthesize statusLabel;
 @synthesize detailStatusLabel;
 @synthesize statusBackground;

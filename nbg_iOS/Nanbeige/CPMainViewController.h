@@ -1,6 +1,6 @@
 //
-//  NanbeigeMainViewController.h
-//  Nanbeige
+//  CPMainViewController.h
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-9.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -16,21 +16,21 @@
 #import "CPIPGateHelper.h"
 #import "Environment.h"
 
-#import "NanbeigeItsViewController.h"
+#import "CPItsViewController.h"
 #import "CPAssignmentViewController.h"
 #import "CPRoomsViewController.h"
 #import "CPLine2Button2Cell.h"
-#import "NanbeigeLine3Button2Cell.h"
+#import "CPLine3Button2Cell.h"
 
-@interface CPMainViewController : UITableViewController <NanbeigeItsWidgetDelegateProtocol, CPLine2Button2DelegateProtocol, CPIPGateConnectDelegate, MBProgressHUDDelegate>
+@interface CPMainViewController : UITableViewController <CPItsWidgetDelegateProtocol, CPLine2Button2DelegateProtocol, CPIPGateConnectDelegate, MBProgressHUDDelegate>
 
 @property (retain, nonatomic) NSMutableArray * functionArray;
 @property (retain, nonatomic) NSArray * functionOrder;
 @property (retain, nonatomic) NSMutableDictionary *nibsRegistered;
 @property (retain, nonatomic) MBProgressHUD *progressHub;
 @property (assign, nonatomic) NSObject *delegate;
-@property (weak, nonatomic) NanbeigeLine3Button2Cell *itsCell;
-@property (retain, nonatomic) NanbeigeItsViewController *nivc;
+@property (weak, nonatomic) CPLine3Button2Cell *itsCell;
+@property (retain, nonatomic) CPItsViewController *nivc;
 //@property (strong, nonatomic) CPIPGateHelper *connector;
 @property (retain, nonatomic) NSMutableDictionary* gateStateDictionary;
 @property (retain, nonatomic) NSUserDefaults *defaults;

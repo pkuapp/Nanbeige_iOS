@@ -1,6 +1,6 @@
 //
-//  NanbeigeLine2Button0Cell.h
-//  Nanbeige
+//  CPLine2Button0Cell.h
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-13.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

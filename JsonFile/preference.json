@@ -1,12 +1,12 @@
 {
 	"grouped": true,
 	"title": "偏好设置",
-    "controllerName": "NanbeigePreferenceViewController",
+    "controllerName": "CPPreferenceViewController",
 	"sections": [
 				 {
 				 "elements": [
 							  {
-							  "type":"NanbeigeLabelButtonElement",
+							  "type":"CPLabelButtonElement",
 							  "title":"账号管理",
 							  "controllerAction":"onAccountManage:"
 							  }
@@ -15,12 +15,12 @@
 				 {
 				 "elements":[
 							 {
-							 "type":"NanbeigeLabelButtonElement",
+							 "type":"CPLabelButtonElement",
 							 "title":"更改仪表盘布局",
 							 "controllerAction":"onChangeMainOrder:"
 							 },
 							 {
-							 "type":"NanbeigeLabelButtonElement",
+							 "type":"CPLabelButtonElement",
 							 "title":"重置仪表盘布局",
 							 "controllerAction":"onResetMainOrder:"
 							 }
@@ -29,7 +29,7 @@
 				 {
 				 "elements":[
 							 {
-							 "type":"NanbeigeLabelButtonElement",
+							 "type":"CPLabelButtonElement",
 							 "key":"onAbout",
 							 "title":"关于南北阁",
 							 "controllerAction":"onAbout:"

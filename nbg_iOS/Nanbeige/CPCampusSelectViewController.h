@@ -1,6 +1,6 @@
 //
-//  NanbeigeChooseCampusViewController.h
-//  Nanbeige
+//  CPChooseCampusViewController.h
+//  CP
 //
 //  Created by ZongZiWang on 12-8-5.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

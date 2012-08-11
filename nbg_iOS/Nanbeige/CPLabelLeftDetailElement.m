@@ -1,15 +1,15 @@
 //
-//  NanbeigeLabelLeftDetailElement.m
-//  Nanbeige
+//  CPLabelLeftDetailElement.m
+//  CP
 //
 //  Created by ZongZiWang on 12-8-1.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeLabelLeftDetailElement.h"
+#import "CPLabelLeftDetailElement.h"
 #import "Environment.h"
 
-@implementation NanbeigeLabelLeftDetailElement
+@implementation CPLabelLeftDetailElement
 
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
     QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller withStyle:UITableViewCellStyleValue1];

@@ -1,18 +1,18 @@
 //
-//  NanbeigeLoginItsViewController.m
-//  Nanbeige
+//  CPLoginItsViewController.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-13.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeLoginItsViewController.h"
+#import "CPLoginItsViewController.h"
 
-@interface NanbeigeLoginItsViewController ()
+@interface CPLoginItsViewController ()
 
 @end
 
-@implementation NanbeigeLoginItsViewController
+@implementation CPLoginItsViewController
 @synthesize usernameTextField;
 @synthesize passwordTextField;
 @synthesize usernameCell;

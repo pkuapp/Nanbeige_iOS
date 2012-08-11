@@ -1,6 +1,6 @@
 //
-//  NanbeigeAssignmentDeadlineViewController.m
-//  Nanbeige
+//  CPAssignmentDeadlineViewController.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-22.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

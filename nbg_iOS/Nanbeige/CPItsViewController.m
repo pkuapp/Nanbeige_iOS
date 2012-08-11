@@ -1,20 +1,20 @@
 //
-//  NanbeigeItsViewController.m
-//  Nanbeige
+//  CPItsViewController.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-9.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "NanbeigeItsViewController.h"
+#import "CPItsViewController.h"
 
-@interface NanbeigeItsViewController () {
+@interface CPItsViewController () {
 	BOOL bViewDidLoad;
 }
 
 @end
 
-@implementation NanbeigeItsViewController
+@implementation CPItsViewController
 @synthesize detailGateInfo;
 @synthesize Username;
 @synthesize Password;
@@ -125,7 +125,7 @@
 	
 	self.defaults = [NSUserDefaults standardUserDefaults];
     
-	//self.connector = [[NanbeigeIPGateHelper alloc] init];
+	//self.connector = [[CPIPGateHelper alloc] init];
 	//self.connector.delegate = self;
 	
 	[connectFree setBackgroundColor:gateConnectCellColor];

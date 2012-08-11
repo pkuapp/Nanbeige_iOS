@@ -1,7 +1,7 @@
 {
 	"grouped": true,
 	"title": "导入课程",
-    "controllerName": "NanbeigeCourseGrabberViewController",
+    "controllerName": "CPCourseGrabberViewController",
 	"sections": [
 				 {
 				 "elements": [

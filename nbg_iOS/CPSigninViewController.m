@@ -1,6 +1,6 @@
 //
-//  NanbeigeConnectViewController.m
-//  Nanbeige
+//  CPConnectViewController.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-15.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -71,10 +71,10 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //	if ([defaults valueForKey:kWEIBOIDKEY] != nil || 
 //		[defaults valueForKey:kRENRENIDKEY] != nil ||
-//		[defaults valueForKey:kNANBEIGEIDKEY] != nil) {
-//		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kNANBEIGEIDKEY] != nil) {
-//			[defaults setValue:[defaults valueForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-//			[defaults setValue:[defaults valueForKey:kNANBEIGEPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
+//		[defaults valueForKey:kCPIDKEY] != nil) {
+//		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kCPIDKEY] != nil) {
+//			[defaults setValue:[defaults valueForKey:kCPIDKEY] forKey:kACCOUNTIDKEY];
+//			[defaults setValue:[defaults valueForKey:kCPPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
 //		}
 //		if ([defaults valueForKey:kACCOUNTIDKEY] == nil && [defaults valueForKey:kRENRENIDKEY] != nil) {
 //			[defaults setValue:[defaults valueForKey:kRENRENIDKEY] forKey:kACCOUNTIDKEY];
@@ -235,10 +235,10 @@
 		return ;
     }
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:usernameTextField.text forKey:kNANBEIGEIDKEY];
-	[defaults setValue:passwordTextField.text forKey:kNANBEIGEPASSWORDKEY];
-	[defaults setValue:[defaults valueForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-	[defaults setValue:[defaults valueForKey:kNANBEIGEPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
+	[defaults setValue:usernameTextField.text forKey:kCPIDKEY];
+	[defaults setValue:passwordTextField.text forKey:kCPPASSWORDKEY];
+	[defaults setValue:[defaults valueForKey:kCPIDKEY] forKey:kACCOUNTIDKEY];
+	[defaults setValue:[defaults valueForKey:kCPPASSWORDKEY] forKey:kACCOUNTPASSWORDKEY];
 	[self didLogin];
 }
 

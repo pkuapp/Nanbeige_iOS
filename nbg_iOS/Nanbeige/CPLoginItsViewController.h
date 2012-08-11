@@ -1,6 +1,6 @@
 //
-//  NanbeigeLoginItsViewController.h
-//  Nanbeige
+//  CPLoginItsViewController.h
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-13.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Environment.h"
-#import "NanbeigeItsViewController.h"
+#import "CPItsViewController.h"
 
-@interface NanbeigeLoginItsViewController : UITableViewController <UITextFieldDelegate>
+@interface CPLoginItsViewController : UITableViewController <UITextFieldDelegate>
 - (IBAction)onCancelButtonPressed:(id)sender;
 @property (retain, nonatomic) UITextField *usernameTextField;
 @property (retain, nonatomic) UITextField *passwordTextField;

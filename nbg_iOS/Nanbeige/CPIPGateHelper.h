@@ -1,6 +1,6 @@
 //
-//  NanbeigeIPGateHelper.h
-//  Nanbeige
+//  CPIPGateHelper.h
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-11.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

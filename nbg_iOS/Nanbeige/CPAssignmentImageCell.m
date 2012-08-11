@@ -1,6 +1,6 @@
 //
-//  NanbeigeAssignmentImageCell.m
-//  Nanbeige
+//  CPAssignmentImageCell.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-17.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

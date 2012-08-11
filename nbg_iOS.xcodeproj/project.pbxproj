@@ -603,8 +603,6 @@
 		414AFCBB15D4230000EFFB60 /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB915D4230000EFFB60 /* Lesson.m */; };
 		414AFCBE15D4230100EFFB60 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCBD15D4230100EFFB60 /* Course.m */; };
 		414AFCBF15D4230100EFFB60 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCBD15D4230100EFFB60 /* Course.m */; };
-		414AFD0515D4D9A600EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD0415D4D9A600EFFB60 /* CPSigninFlow.storyboard */; };
-		414AFD0615D4D9A600EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD0415D4D9A600EFFB60 /* CPSigninFlow.storyboard */; };
 		414AFD0915D4DAAB00EFFB60 /* CPSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD0815D4DAAB00EFFB60 /* CPSigninViewController.m */; };
 		414AFD0A15D4DAAB00EFFB60 /* CPSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD0815D4DAAB00EFFB60 /* CPSigninViewController.m */; };
 		414AFDDA15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
@@ -659,44 +657,44 @@
 		414AFE1315D512A500EFFB60 /* CPEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9F15D512A500EFFB60 /* CPEventManager.m */; };
 		414AFE1415D512A500EFFB60 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */; };
 		414AFE1515D512A500EFFB60 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */; };
-		414AFE1615D512A500EFFB60 /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA315D512A500EFFB60 /* NanbeigeItsViewController.m */; };
-		414AFE1715D512A500EFFB60 /* NanbeigeItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA315D512A500EFFB60 /* NanbeigeItsViewController.m */; };
+		414AFE1615D512A500EFFB60 /* CPItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA315D512A500EFFB60 /* CPItsViewController.m */; };
+		414AFE1715D512A500EFFB60 /* CPItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA315D512A500EFFB60 /* CPItsViewController.m */; };
 		414AFE1815D512A500EFFB60 /* CPLabelButtonCenterElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA515D512A500EFFB60 /* CPLabelButtonCenterElement.m */; };
 		414AFE1915D512A500EFFB60 /* CPLabelButtonCenterElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA515D512A500EFFB60 /* CPLabelButtonCenterElement.m */; };
 		414AFE1A15D512A500EFFB60 /* CPLabelButtonElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */; };
 		414AFE1B15D512A500EFFB60 /* CPLabelButtonElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */; };
-		414AFE1C15D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA915D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.m */; };
-		414AFE1D15D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA915D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.m */; };
+		414AFE1C15D512A500EFFB60 /* CPLabelLeftDetailElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */; };
+		414AFE1D15D512A500EFFB60 /* CPLabelLeftDetailElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */; };
 		414AFE1E15D512A500EFFB60 /* CPLine1Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDAB15D512A500EFFB60 /* CPLine1Button0Cell.m */; };
 		414AFE1F15D512A500EFFB60 /* CPLine1Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDAB15D512A500EFFB60 /* CPLine1Button0Cell.m */; };
-		414AFE2015D512A500EFFB60 /* NanbeigeLine1Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDAC15D512A500EFFB60 /* NanbeigeLine1Button0Cell.xib */; };
-		414AFE2115D512A500EFFB60 /* NanbeigeLine1Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDAC15D512A500EFFB60 /* NanbeigeLine1Button0Cell.xib */; };
+		414AFE2015D512A500EFFB60 /* CPLine1Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDAC15D512A500EFFB60 /* CPLine1Button0Cell.xib */; };
+		414AFE2115D512A500EFFB60 /* CPLine1Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDAC15D512A500EFFB60 /* CPLine1Button0Cell.xib */; };
 		414AFE2215D512A500EFFB60 /* CPLine2Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDAE15D512A500EFFB60 /* CPLine2Button0Cell.m */; };
 		414AFE2315D512A500EFFB60 /* CPLine2Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDAE15D512A500EFFB60 /* CPLine2Button0Cell.m */; };
-		414AFE2415D512A500EFFB60 /* NanbeigeLine2Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDAF15D512A500EFFB60 /* NanbeigeLine2Button0Cell.xib */; };
-		414AFE2515D512A500EFFB60 /* NanbeigeLine2Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDAF15D512A500EFFB60 /* NanbeigeLine2Button0Cell.xib */; };
+		414AFE2415D512A500EFFB60 /* CPLine2Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDAF15D512A500EFFB60 /* CPLine2Button0Cell.xib */; };
+		414AFE2515D512A500EFFB60 /* CPLine2Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDAF15D512A500EFFB60 /* CPLine2Button0Cell.xib */; };
 		414AFE2615D512A500EFFB60 /* CPLine2Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB115D512A500EFFB60 /* CPLine2Button2Cell.m */; };
 		414AFE2715D512A500EFFB60 /* CPLine2Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB115D512A500EFFB60 /* CPLine2Button2Cell.m */; };
-		414AFE2815D512A500EFFB60 /* NanbeigeLine2Button2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB215D512A500EFFB60 /* NanbeigeLine2Button2Cell.xib */; };
-		414AFE2915D512A500EFFB60 /* NanbeigeLine2Button2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB215D512A500EFFB60 /* NanbeigeLine2Button2Cell.xib */; };
-		414AFE2A15D512A500EFFB60 /* NanbeigeLine3Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB415D512A500EFFB60 /* NanbeigeLine3Button0Cell.m */; };
-		414AFE2B15D512A500EFFB60 /* NanbeigeLine3Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB415D512A500EFFB60 /* NanbeigeLine3Button0Cell.m */; };
-		414AFE2C15D512A500EFFB60 /* NanbeigeLine3Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB515D512A500EFFB60 /* NanbeigeLine3Button0Cell.xib */; };
-		414AFE2D15D512A500EFFB60 /* NanbeigeLine3Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB515D512A500EFFB60 /* NanbeigeLine3Button0Cell.xib */; };
-		414AFE2E15D512A500EFFB60 /* NanbeigeLine3Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB715D512A500EFFB60 /* NanbeigeLine3Button2Cell.m */; };
-		414AFE2F15D512A500EFFB60 /* NanbeigeLine3Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB715D512A500EFFB60 /* NanbeigeLine3Button2Cell.m */; };
-		414AFE3015D512A500EFFB60 /* NanbeigeLine3Button2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB815D512A500EFFB60 /* NanbeigeLine3Button2Cell.xib */; };
-		414AFE3115D512A500EFFB60 /* NanbeigeLine3Button2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB815D512A500EFFB60 /* NanbeigeLine3Button2Cell.xib */; };
-		414AFE3215D512A500EFFB60 /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBA15D512A500EFFB60 /* NanbeigeLoginItsViewController.m */; };
-		414AFE3315D512A500EFFB60 /* NanbeigeLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBA15D512A500EFFB60 /* NanbeigeLoginItsViewController.m */; };
+		414AFE2815D512A500EFFB60 /* CPLine2Button2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB215D512A500EFFB60 /* CPLine2Button2Cell.xib */; };
+		414AFE2915D512A500EFFB60 /* CPLine2Button2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB215D512A500EFFB60 /* CPLine2Button2Cell.xib */; };
+		414AFE2A15D512A500EFFB60 /* CPLine3Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB415D512A500EFFB60 /* CPLine3Button0Cell.m */; };
+		414AFE2B15D512A500EFFB60 /* CPLine3Button0Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB415D512A500EFFB60 /* CPLine3Button0Cell.m */; };
+		414AFE2C15D512A500EFFB60 /* CPLine3Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB515D512A500EFFB60 /* CPLine3Button0Cell.xib */; };
+		414AFE2D15D512A500EFFB60 /* CPLine3Button0Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB515D512A500EFFB60 /* CPLine3Button0Cell.xib */; };
+		414AFE2E15D512A500EFFB60 /* CPLine3Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB715D512A500EFFB60 /* CPLine3Button2Cell.m */; };
+		414AFE2F15D512A500EFFB60 /* CPLine3Button2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDB715D512A500EFFB60 /* CPLine3Button2Cell.m */; };
+		414AFE3015D512A500EFFB60 /* CPLine3Button2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB815D512A500EFFB60 /* CPLine3Button2Cell.xib */; };
+		414AFE3115D512A500EFFB60 /* CPLine3Button2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFDB815D512A500EFFB60 /* CPLine3Button2Cell.xib */; };
+		414AFE3215D512A500EFFB60 /* CPLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */; };
+		414AFE3315D512A500EFFB60 /* CPLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */; };
 		414AFE3415D512A500EFFB60 /* CPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBC15D512A500EFFB60 /* CPMainViewController.m */; };
 		414AFE3515D512A500EFFB60 /* CPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBC15D512A500EFFB60 /* CPMainViewController.m */; };
 		414AFE3615D512A500EFFB60 /* CPPickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */; };
 		414AFE3715D512A500EFFB60 /* CPPickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */; };
 		414AFE3815D512A500EFFB60 /* CPPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */; };
 		414AFE3915D512A500EFFB60 /* CPPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */; };
-		414AFE3A15D512A500EFFB60 /* NanbeigeRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC215D512A500EFFB60 /* NanbeigeRenrenPostViewController.m */; };
-		414AFE3B15D512A500EFFB60 /* NanbeigeRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC215D512A500EFFB60 /* NanbeigeRenrenPostViewController.m */; };
+		414AFE3A15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */; };
+		414AFE3B15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */; };
 		414AFE3C15D512A500EFFB60 /* CPRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */; };
 		414AFE3D15D512A500EFFB60 /* CPRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */; };
 		414AFE3E15D512A500EFFB60 /* CPUserCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC615D512A500EFFB60 /* CPUserCoursesViewController.m */; };
@@ -711,8 +709,6 @@
 		414AFE4715D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */; };
 		414AFE4815D512A500EFFB60 /* CPWelcomeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */; };
 		414AFE4915D512A500EFFB60 /* CPWelcomeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */; };
-		414AFE4A15D512A500EFFB60 /* NanbeigeWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD315D512A500EFFB60 /* NanbeigeWelcomeViewController.m */; };
-		414AFE4B15D512A500EFFB60 /* NanbeigeWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD315D512A500EFFB60 /* NanbeigeWelcomeViewController.m */; };
 		414AFE4E15D512A500EFFB60 /* SystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD915D512A500EFFB60 /* SystemHelper.m */; };
 		414AFE4F15D512A500EFFB60 /* SystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD915D512A500EFFB60 /* SystemHelper.m */; };
 		41D6FDD715D0B9720085DF89 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D6FDD615D0B9720085DF89 /* GHUnitIOS.framework */; };
@@ -725,6 +721,24 @@
 		41E7F98B15D2AF63009B8703 /* AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = 41E7F98915D2AF63009B8703 /* AFNetworking */; };
 		41FD95E115D5603200477483 /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD95E015D5603200477483 /* Objection-iOS.framework */; };
 		41FD95E215D5603200477483 /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD95E015D5603200477483 /* Objection-iOS.framework */; };
+		41FD95ED15D616C600477483 /* CPCoursesFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */; };
+		41FD95EE15D616C600477483 /* CPCoursesFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */; };
+		41FD95F815D6378B00477483 /* accountManage.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F015D6378B00477483 /* accountManage.json */; };
+		41FD95F915D6378B00477483 /* accountManage.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F015D6378B00477483 /* accountManage.json */; };
+		41FD95FA15D6378B00477483 /* chooseCampus.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F115D6378B00477483 /* chooseCampus.json */; };
+		41FD95FB15D6378B00477483 /* chooseCampus.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F115D6378B00477483 /* chooseCampus.json */; };
+		41FD95FC15D6378B00477483 /* chooseLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F215D6378B00477483 /* chooseLogin.json */; };
+		41FD95FD15D6378B00477483 /* chooseLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F215D6378B00477483 /* chooseLogin.json */; };
+		41FD95FE15D6378B00477483 /* chooseSchool.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F315D6378B00477483 /* chooseSchool.json */; };
+		41FD95FF15D6378B00477483 /* chooseSchool.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F315D6378B00477483 /* chooseSchool.json */; };
+		41FD960015D6378B00477483 /* confirmLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* confirmLogin.json */; };
+		41FD960115D6378B00477483 /* confirmLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* confirmLogin.json */; };
+		41FD960215D6378B00477483 /* emailLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F515D6378B00477483 /* emailLogin.json */; };
+		41FD960315D6378B00477483 /* emailLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F515D6378B00477483 /* emailLogin.json */; };
+		41FD960415D6378B00477483 /* emailSignup.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F615D6378B00477483 /* emailSignup.json */; };
+		41FD960515D6378B00477483 /* emailSignup.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F615D6378B00477483 /* emailSignup.json */; };
+		41FD960615D6378B00477483 /* preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F715D6378B00477483 /* preference.json */; };
+		41FD960715D6378B00477483 /* preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F715D6378B00477483 /* preference.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1276,13 +1290,12 @@
 		414AFCB915D4230000EFFB60 /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = Models/Lesson.m; sourceTree = "<group>"; };
 		414AFCBC15D4230100EFFB60 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
 		414AFCBD15D4230100EFFB60 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = Models/Course.m; sourceTree = "<group>"; };
-		414AFD0415D4D9A600EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD0715D4DAAB00EFFB60 /* CPSigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSigninViewController.h; sourceTree = "<group>"; };
 		414AFD0815D4DAAB00EFFB60 /* CPSigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSigninViewController.m; sourceTree = "<group>"; };
 		414AFD6B15D512A500EFFB60 /* courseGrabber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseGrabber.json; sourceTree = "<group>"; };
-		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPSigninFlow.storyboard; sourceTree = "<group>"; };
+		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CPSigninFlow.storyboard; path = Nanbeige/CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD6F15D512A500EFFB60 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
-		414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone.storyboard; path = Nanbeige/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		414AFD7415D512A500EFFB60 /* CPAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAccountManager.h; sourceTree = "<group>"; };
 		414AFD7515D512A500EFFB60 /* CPAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAccountManager.m; sourceTree = "<group>"; };
 		414AFD7615D512A500EFFB60 /* CPAccountManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAccountManageViewController.h; sourceTree = "<group>"; };
@@ -1303,8 +1316,8 @@
 		414AFD8715D512A500EFFB60 /* CPChangeMainOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPChangeMainOrderViewController.m; sourceTree = "<group>"; };
 		414AFD8815D512A500EFFB60 /* CPCampusSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCampusSelectViewController.h; sourceTree = "<group>"; };
 		414AFD8915D512A500EFFB60 /* CPCampusSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCampusSelectViewController.m; sourceTree = "<group>"; };
-		414AFD8A15D512A500EFFB60 /* CPSignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignViewController.h; sourceTree = "<group>"; };
-		414AFD8B15D512A500EFFB60 /* CPSignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignViewController.m; sourceTree = "<group>"; };
+		414AFD8A15D512A500EFFB60 /* CPSignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPSignViewController.h; path = Nanbeige/CPSignViewController.h; sourceTree = "<group>"; };
+		414AFD8B15D512A500EFFB60 /* CPSignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPSignViewController.m; path = Nanbeige/CPSignViewController.m; sourceTree = "<group>"; };
 		414AFD8C15D512A500EFFB60 /* CPUniversitySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUniversitySelectViewController.h; sourceTree = "<group>"; };
 		414AFD8D15D512A500EFFB60 /* CPUniversitySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUniversitySelectViewController.m; sourceTree = "<group>"; };
 		414AFD8E15D512A500EFFB60 /* CPSigninComfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSigninComfirmViewController.h; sourceTree = "<group>"; };
@@ -1326,39 +1339,39 @@
 		414AFD9E15D512A500EFFB60 /* CPEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPEventManager.h; sourceTree = "<group>"; };
 		414AFD9F15D512A500EFFB60 /* CPEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPEventManager.m; sourceTree = "<group>"; };
 		414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIPGateHelper.m; sourceTree = "<group>"; };
-		414AFDA215D512A500EFFB60 /* NanbeigeItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeItsViewController.h; sourceTree = "<group>"; };
-		414AFDA315D512A500EFFB60 /* NanbeigeItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeItsViewController.m; sourceTree = "<group>"; };
+		414AFDA215D512A500EFFB60 /* CPItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPItsViewController.h; sourceTree = "<group>"; };
+		414AFDA315D512A500EFFB60 /* CPItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPItsViewController.m; sourceTree = "<group>"; };
 		414AFDA415D512A500EFFB60 /* CPLabelButtonCenterElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLabelButtonCenterElement.h; sourceTree = "<group>"; };
 		414AFDA515D512A500EFFB60 /* CPLabelButtonCenterElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLabelButtonCenterElement.m; sourceTree = "<group>"; };
 		414AFDA615D512A500EFFB60 /* CPLabelButtonElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLabelButtonElement.h; sourceTree = "<group>"; };
 		414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLabelButtonElement.m; sourceTree = "<group>"; };
-		414AFDA815D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLabelLeftDetailElement.h; sourceTree = "<group>"; };
-		414AFDA915D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLabelLeftDetailElement.m; sourceTree = "<group>"; };
+		414AFDA815D512A500EFFB60 /* CPLabelLeftDetailElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLabelLeftDetailElement.h; sourceTree = "<group>"; };
+		414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLabelLeftDetailElement.m; sourceTree = "<group>"; };
 		414AFDAA15D512A500EFFB60 /* CPLine1Button0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLine1Button0Cell.h; sourceTree = "<group>"; };
 		414AFDAB15D512A500EFFB60 /* CPLine1Button0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLine1Button0Cell.m; sourceTree = "<group>"; };
-		414AFDAC15D512A500EFFB60 /* NanbeigeLine1Button0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeLine1Button0Cell.xib; sourceTree = "<group>"; };
+		414AFDAC15D512A500EFFB60 /* CPLine1Button0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPLine1Button0Cell.xib; sourceTree = "<group>"; };
 		414AFDAD15D512A500EFFB60 /* CPLine2Button0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLine2Button0Cell.h; sourceTree = "<group>"; };
 		414AFDAE15D512A500EFFB60 /* CPLine2Button0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLine2Button0Cell.m; sourceTree = "<group>"; };
-		414AFDAF15D512A500EFFB60 /* NanbeigeLine2Button0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeLine2Button0Cell.xib; sourceTree = "<group>"; };
+		414AFDAF15D512A500EFFB60 /* CPLine2Button0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPLine2Button0Cell.xib; sourceTree = "<group>"; };
 		414AFDB015D512A500EFFB60 /* CPLine2Button2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLine2Button2Cell.h; sourceTree = "<group>"; };
 		414AFDB115D512A500EFFB60 /* CPLine2Button2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLine2Button2Cell.m; sourceTree = "<group>"; };
-		414AFDB215D512A500EFFB60 /* NanbeigeLine2Button2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeLine2Button2Cell.xib; sourceTree = "<group>"; };
-		414AFDB315D512A500EFFB60 /* NanbeigeLine3Button0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLine3Button0Cell.h; sourceTree = "<group>"; };
-		414AFDB415D512A500EFFB60 /* NanbeigeLine3Button0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine3Button0Cell.m; sourceTree = "<group>"; };
-		414AFDB515D512A500EFFB60 /* NanbeigeLine3Button0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeLine3Button0Cell.xib; sourceTree = "<group>"; };
-		414AFDB615D512A500EFFB60 /* NanbeigeLine3Button2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLine3Button2Cell.h; sourceTree = "<group>"; };
-		414AFDB715D512A500EFFB60 /* NanbeigeLine3Button2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLine3Button2Cell.m; sourceTree = "<group>"; };
-		414AFDB815D512A500EFFB60 /* NanbeigeLine3Button2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NanbeigeLine3Button2Cell.xib; sourceTree = "<group>"; };
-		414AFDB915D512A500EFFB60 /* NanbeigeLoginItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeLoginItsViewController.h; sourceTree = "<group>"; };
-		414AFDBA15D512A500EFFB60 /* NanbeigeLoginItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeLoginItsViewController.m; sourceTree = "<group>"; };
+		414AFDB215D512A500EFFB60 /* CPLine2Button2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPLine2Button2Cell.xib; sourceTree = "<group>"; };
+		414AFDB315D512A500EFFB60 /* CPLine3Button0Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLine3Button0Cell.h; sourceTree = "<group>"; };
+		414AFDB415D512A500EFFB60 /* CPLine3Button0Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLine3Button0Cell.m; sourceTree = "<group>"; };
+		414AFDB515D512A500EFFB60 /* CPLine3Button0Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPLine3Button0Cell.xib; sourceTree = "<group>"; };
+		414AFDB615D512A500EFFB60 /* CPLine3Button2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLine3Button2Cell.h; sourceTree = "<group>"; };
+		414AFDB715D512A500EFFB60 /* CPLine3Button2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLine3Button2Cell.m; sourceTree = "<group>"; };
+		414AFDB815D512A500EFFB60 /* CPLine3Button2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPLine3Button2Cell.xib; sourceTree = "<group>"; };
+		414AFDB915D512A500EFFB60 /* CPLoginItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLoginItsViewController.h; sourceTree = "<group>"; };
+		414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLoginItsViewController.m; sourceTree = "<group>"; };
 		414AFDBB15D512A500EFFB60 /* CPMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainViewController.h; sourceTree = "<group>"; };
 		414AFDBC15D512A500EFFB60 /* CPMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainViewController.m; sourceTree = "<group>"; };
 		414AFDBD15D512A500EFFB60 /* CPPickerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPickerLabel.h; sourceTree = "<group>"; };
 		414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPickerLabel.m; sourceTree = "<group>"; };
 		414AFDBF15D512A500EFFB60 /* CPPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPreferenceViewController.h; sourceTree = "<group>"; };
 		414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPreferenceViewController.m; sourceTree = "<group>"; };
-		414AFDC115D512A500EFFB60 /* NanbeigeRenrenPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeRenrenPostViewController.h; sourceTree = "<group>"; };
-		414AFDC215D512A500EFFB60 /* NanbeigeRenrenPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeRenrenPostViewController.m; sourceTree = "<group>"; };
+		414AFDC115D512A500EFFB60 /* CPRenrenPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRenrenPostViewController.h; sourceTree = "<group>"; };
+		414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRenrenPostViewController.m; sourceTree = "<group>"; };
 		414AFDC315D512A500EFFB60 /* CPRoomsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRoomsViewController.h; sourceTree = "<group>"; };
 		414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRoomsViewController.m; sourceTree = "<group>"; };
 		414AFDC515D512A500EFFB60 /* CPUserCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserCoursesViewController.h; sourceTree = "<group>"; };
@@ -1373,8 +1386,6 @@
 		414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWeiboPostViewController.m; sourceTree = "<group>"; };
 		414AFDD015D512A500EFFB60 /* CPWelcomeSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWelcomeSegue.h; sourceTree = "<group>"; };
 		414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWelcomeSegue.m; sourceTree = "<group>"; };
-		414AFDD215D512A500EFFB60 /* NanbeigeWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanbeigeWelcomeViewController.h; sourceTree = "<group>"; };
-		414AFDD315D512A500EFFB60 /* NanbeigeWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanbeigeWelcomeViewController.m; sourceTree = "<group>"; };
 		414AFDD815D512A500EFFB60 /* SystemHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemHelper.h; sourceTree = "<group>"; };
 		414AFDD915D512A500EFFB60 /* SystemHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemHelper.m; sourceTree = "<group>"; };
 		41D6FDD615D0B9720085DF89 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = SOURCE_ROOT; };
@@ -1388,6 +1399,15 @@
 		41E7F97015D26F3A009B8703 /* CPBlockHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPBlockHandler.m; path = CPConnect/Backend/CPBlockHandler.m; sourceTree = "<group>"; };
 		41E7F98915D2AF63009B8703 /* AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AFNetworking; path = AFNetworking/AFNetworking; sourceTree = "<group>"; };
 		41FD95E015D5603200477483 /* Objection-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "Objection-iOS.framework"; sourceTree = "<group>"; };
+		41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CPCoursesFlow.storyboard; path = ../CPCoursesFlow.storyboard; sourceTree = "<group>"; };
+		41FD95F015D6378B00477483 /* accountManage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountManage.json; sourceTree = "<group>"; };
+		41FD95F115D6378B00477483 /* chooseCampus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chooseCampus.json; sourceTree = "<group>"; };
+		41FD95F215D6378B00477483 /* chooseLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chooseLogin.json; sourceTree = "<group>"; };
+		41FD95F315D6378B00477483 /* chooseSchool.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chooseSchool.json; sourceTree = "<group>"; };
+		41FD95F415D6378B00477483 /* confirmLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = confirmLogin.json; sourceTree = "<group>"; };
+		41FD95F515D6378B00477483 /* emailLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emailLogin.json; sourceTree = "<group>"; };
+		41FD95F615D6378B00477483 /* emailSignup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emailSignup.json; sourceTree = "<group>"; };
+		41FD95F715D6378B00477483 /* preference.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = preference.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1514,13 +1534,17 @@
 				414AFD6815D512A400EFFB60 /* Nanbeige */,
 				414AFC8E15D3C59D00EFFB60 /* Models */,
 				414AFC4715D3982800EFFB60 /* Resources */,
+				414AFD8A15D512A500EFFB60 /* CPSignViewController.h */,
+				414AFD8B15D512A500EFFB60 /* CPSignViewController.m */,
 				411DBBDC15CB9E4000EDB31D /* CPAppDelegate.h */,
 				411DBBDD15CB9E4000EDB31D /* CPAppDelegate.m */,
 				41D6FDD915D0BA4C0085DF89 /* CPAppModule.h */,
 				41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */,
-				414AFD0415D4D9A600EFFB60 /* CPSigninFlow.storyboard */,
 				414AFD0715D4DAAB00EFFB60 /* CPSigninViewController.h */,
 				414AFD0815D4DAAB00EFFB60 /* CPSigninViewController.m */,
+				41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */,
+				414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */,
+				414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */,
 				411DBBD415CB9E4000EDB31D /* Supporting Files */,
 			);
 			path = nbg_iOS;
@@ -2358,6 +2382,7 @@
 		414AFC4715D3982800EFFB60 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				41FD95EF15D6378B00477483 /* JsonFile */,
 				414AFC8015D39A0C00EFFB60 /* 180-stickynote.png */,
 				414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */,
 				414AFC7915D399D800EFFB60 /* rooms.png */,
@@ -2405,9 +2430,7 @@
 			isa = PBXGroup;
 			children = (
 				414AFD6B15D512A500EFFB60 /* courseGrabber.json */,
-				414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */,
 				414AFD6F15D512A500EFFB60 /* Environment.h */,
-				414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */,
 				414AFD7415D512A500EFFB60 /* CPAccountManager.h */,
 				414AFD7515D512A500EFFB60 /* CPAccountManager.m */,
 				414AFD7615D512A500EFFB60 /* CPAccountManageViewController.h */,
@@ -2428,8 +2451,6 @@
 				414AFD8715D512A500EFFB60 /* CPChangeMainOrderViewController.m */,
 				414AFD8815D512A500EFFB60 /* CPCampusSelectViewController.h */,
 				414AFD8915D512A500EFFB60 /* CPCampusSelectViewController.m */,
-				414AFD8A15D512A500EFFB60 /* CPSignViewController.h */,
-				414AFD8B15D512A500EFFB60 /* CPSignViewController.m */,
 				414AFD8C15D512A500EFFB60 /* CPUniversitySelectViewController.h */,
 				414AFD8D15D512A500EFFB60 /* CPUniversitySelectViewController.m */,
 				413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */,
@@ -2453,39 +2474,39 @@
 				414AFD9E15D512A500EFFB60 /* CPEventManager.h */,
 				414AFD9F15D512A500EFFB60 /* CPEventManager.m */,
 				414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */,
-				414AFDA215D512A500EFFB60 /* NanbeigeItsViewController.h */,
-				414AFDA315D512A500EFFB60 /* NanbeigeItsViewController.m */,
+				414AFDA215D512A500EFFB60 /* CPItsViewController.h */,
+				414AFDA315D512A500EFFB60 /* CPItsViewController.m */,
 				414AFDA415D512A500EFFB60 /* CPLabelButtonCenterElement.h */,
 				414AFDA515D512A500EFFB60 /* CPLabelButtonCenterElement.m */,
 				414AFDA615D512A500EFFB60 /* CPLabelButtonElement.h */,
 				414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */,
-				414AFDA815D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.h */,
-				414AFDA915D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.m */,
+				414AFDA815D512A500EFFB60 /* CPLabelLeftDetailElement.h */,
+				414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */,
 				414AFDAA15D512A500EFFB60 /* CPLine1Button0Cell.h */,
 				414AFDAB15D512A500EFFB60 /* CPLine1Button0Cell.m */,
-				414AFDAC15D512A500EFFB60 /* NanbeigeLine1Button0Cell.xib */,
+				414AFDAC15D512A500EFFB60 /* CPLine1Button0Cell.xib */,
 				414AFDAD15D512A500EFFB60 /* CPLine2Button0Cell.h */,
 				414AFDAE15D512A500EFFB60 /* CPLine2Button0Cell.m */,
-				414AFDAF15D512A500EFFB60 /* NanbeigeLine2Button0Cell.xib */,
+				414AFDAF15D512A500EFFB60 /* CPLine2Button0Cell.xib */,
 				414AFDB015D512A500EFFB60 /* CPLine2Button2Cell.h */,
 				414AFDB115D512A500EFFB60 /* CPLine2Button2Cell.m */,
-				414AFDB215D512A500EFFB60 /* NanbeigeLine2Button2Cell.xib */,
-				414AFDB315D512A500EFFB60 /* NanbeigeLine3Button0Cell.h */,
-				414AFDB415D512A500EFFB60 /* NanbeigeLine3Button0Cell.m */,
-				414AFDB515D512A500EFFB60 /* NanbeigeLine3Button0Cell.xib */,
-				414AFDB615D512A500EFFB60 /* NanbeigeLine3Button2Cell.h */,
-				414AFDB715D512A500EFFB60 /* NanbeigeLine3Button2Cell.m */,
-				414AFDB815D512A500EFFB60 /* NanbeigeLine3Button2Cell.xib */,
-				414AFDB915D512A500EFFB60 /* NanbeigeLoginItsViewController.h */,
-				414AFDBA15D512A500EFFB60 /* NanbeigeLoginItsViewController.m */,
+				414AFDB215D512A500EFFB60 /* CPLine2Button2Cell.xib */,
+				414AFDB315D512A500EFFB60 /* CPLine3Button0Cell.h */,
+				414AFDB415D512A500EFFB60 /* CPLine3Button0Cell.m */,
+				414AFDB515D512A500EFFB60 /* CPLine3Button0Cell.xib */,
+				414AFDB615D512A500EFFB60 /* CPLine3Button2Cell.h */,
+				414AFDB715D512A500EFFB60 /* CPLine3Button2Cell.m */,
+				414AFDB815D512A500EFFB60 /* CPLine3Button2Cell.xib */,
+				414AFDB915D512A500EFFB60 /* CPLoginItsViewController.h */,
+				414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */,
 				414AFDBB15D512A500EFFB60 /* CPMainViewController.h */,
 				414AFDBC15D512A500EFFB60 /* CPMainViewController.m */,
 				414AFDBD15D512A500EFFB60 /* CPPickerLabel.h */,
 				414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */,
 				414AFDBF15D512A500EFFB60 /* CPPreferenceViewController.h */,
 				414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */,
-				414AFDC115D512A500EFFB60 /* NanbeigeRenrenPostViewController.h */,
-				414AFDC215D512A500EFFB60 /* NanbeigeRenrenPostViewController.m */,
+				414AFDC115D512A500EFFB60 /* CPRenrenPostViewController.h */,
+				414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */,
 				414AFDC315D512A500EFFB60 /* CPRoomsViewController.h */,
 				414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */,
 				414AFDC515D512A500EFFB60 /* CPUserCoursesViewController.h */,
@@ -2500,8 +2521,6 @@
 				414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */,
 				414AFDD015D512A500EFFB60 /* CPWelcomeSegue.h */,
 				414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */,
-				414AFDD215D512A500EFFB60 /* NanbeigeWelcomeViewController.h */,
-				414AFDD315D512A500EFFB60 /* NanbeigeWelcomeViewController.m */,
 				414AFDD815D512A500EFFB60 /* SystemHelper.h */,
 				414AFDD915D512A500EFFB60 /* SystemHelper.m */,
 			);
@@ -2529,6 +2548,21 @@
 			);
 			name = Backend;
 			sourceTree = "<group>";
+		};
+		41FD95EF15D6378B00477483 /* JsonFile */ = {
+			isa = PBXGroup;
+			children = (
+				41FD95F015D6378B00477483 /* accountManage.json */,
+				41FD95F115D6378B00477483 /* chooseCampus.json */,
+				41FD95F215D6378B00477483 /* chooseLogin.json */,
+				41FD95F315D6378B00477483 /* chooseSchool.json */,
+				41FD95F415D6378B00477483 /* confirmLogin.json */,
+				41FD95F515D6378B00477483 /* emailLogin.json */,
+				41FD95F615D6378B00477483 /* emailSignup.json */,
+				41FD95F715D6378B00477483 /* preference.json */,
+			);
+			path = JsonFile;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -2626,17 +2660,16 @@
 				414AFC7D15D399D800EFFB60 /* rooms@2x.png in Resources */,
 				414AFC8215D39A0C00EFFB60 /* 180-stickynote.png in Resources */,
 				414AFC8415D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */,
-				414AFD0515D4D9A600EFFB60 /* CPSigninFlow.storyboard in Resources */,
 				414AFDDA15D512A500EFFB60 /* courseGrabber.json in Resources */,
 				414AFDDC15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */,
 				414AFDE215D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */,
 				414AFDF015D512A500EFFB60 /* CPAssignmentImageCell.xib in Resources */,
 				414AFDF615D512A500EFFB60 /* CPAssignmentNoImageCell.xib in Resources */,
-				414AFE2015D512A500EFFB60 /* NanbeigeLine1Button0Cell.xib in Resources */,
-				414AFE2415D512A500EFFB60 /* NanbeigeLine2Button0Cell.xib in Resources */,
-				414AFE2815D512A500EFFB60 /* NanbeigeLine2Button2Cell.xib in Resources */,
-				414AFE2C15D512A500EFFB60 /* NanbeigeLine3Button0Cell.xib in Resources */,
-				414AFE3015D512A500EFFB60 /* NanbeigeLine3Button2Cell.xib in Resources */,
+				414AFE2015D512A500EFFB60 /* CPLine1Button0Cell.xib in Resources */,
+				414AFE2415D512A500EFFB60 /* CPLine2Button0Cell.xib in Resources */,
+				414AFE2815D512A500EFFB60 /* CPLine2Button2Cell.xib in Resources */,
+				414AFE2C15D512A500EFFB60 /* CPLine3Button0Cell.xib in Resources */,
+				414AFE3015D512A500EFFB60 /* CPLine3Button2Cell.xib in Resources */,
 				413B9F3915D51D95000C9451 /* DownAccessory.png in Resources */,
 				413B9F3B15D51D95000C9451 /* DownAccessory@2x.png in Resources */,
 				413B9F3D15D51D95000C9451 /* DownAccessoryWhite.png in Resources */,
@@ -2700,6 +2733,15 @@
 				413BA1FF15D523CD000C9451 /* whiteArrow.png in Resources */,
 				413BA20115D523CD000C9451 /* whiteArrow@2x.png in Resources */,
 				413BA21B15D529E3000C9451 /* SYPaginatorResources-Info.plist in Resources */,
+				41FD95ED15D616C600477483 /* CPCoursesFlow.storyboard in Resources */,
+				41FD95F815D6378B00477483 /* accountManage.json in Resources */,
+				41FD95FA15D6378B00477483 /* chooseCampus.json in Resources */,
+				41FD95FC15D6378B00477483 /* chooseLogin.json in Resources */,
+				41FD95FE15D6378B00477483 /* chooseSchool.json in Resources */,
+				41FD960015D6378B00477483 /* confirmLogin.json in Resources */,
+				41FD960215D6378B00477483 /* emailLogin.json in Resources */,
+				41FD960415D6378B00477483 /* emailSignup.json in Resources */,
+				41FD960615D6378B00477483 /* preference.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2728,17 +2770,16 @@
 				414AFC7E15D399D800EFFB60 /* rooms@2x.png in Resources */,
 				414AFC8315D39A0C00EFFB60 /* 180-stickynote.png in Resources */,
 				414AFC8515D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */,
-				414AFD0615D4D9A600EFFB60 /* CPSigninFlow.storyboard in Resources */,
 				414AFDDB15D512A500EFFB60 /* courseGrabber.json in Resources */,
 				414AFDDD15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */,
 				414AFDE315D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */,
 				414AFDF115D512A500EFFB60 /* CPAssignmentImageCell.xib in Resources */,
 				414AFDF715D512A500EFFB60 /* CPAssignmentNoImageCell.xib in Resources */,
-				414AFE2115D512A500EFFB60 /* NanbeigeLine1Button0Cell.xib in Resources */,
-				414AFE2515D512A500EFFB60 /* NanbeigeLine2Button0Cell.xib in Resources */,
-				414AFE2915D512A500EFFB60 /* NanbeigeLine2Button2Cell.xib in Resources */,
-				414AFE2D15D512A500EFFB60 /* NanbeigeLine3Button0Cell.xib in Resources */,
-				414AFE3115D512A500EFFB60 /* NanbeigeLine3Button2Cell.xib in Resources */,
+				414AFE2115D512A500EFFB60 /* CPLine1Button0Cell.xib in Resources */,
+				414AFE2515D512A500EFFB60 /* CPLine2Button0Cell.xib in Resources */,
+				414AFE2915D512A500EFFB60 /* CPLine2Button2Cell.xib in Resources */,
+				414AFE2D15D512A500EFFB60 /* CPLine3Button0Cell.xib in Resources */,
+				414AFE3115D512A500EFFB60 /* CPLine3Button2Cell.xib in Resources */,
 				413B9F3A15D51D95000C9451 /* DownAccessory.png in Resources */,
 				413B9F3C15D51D95000C9451 /* DownAccessory@2x.png in Resources */,
 				413B9F3E15D51D95000C9451 /* DownAccessoryWhite.png in Resources */,
@@ -2802,6 +2843,15 @@
 				413BA20015D523CD000C9451 /* whiteArrow.png in Resources */,
 				413BA20215D523CD000C9451 /* whiteArrow@2x.png in Resources */,
 				413BA21C15D529E3000C9451 /* SYPaginatorResources-Info.plist in Resources */,
+				41FD95EE15D616C600477483 /* CPCoursesFlow.storyboard in Resources */,
+				41FD95F915D6378B00477483 /* accountManage.json in Resources */,
+				41FD95FB15D6378B00477483 /* chooseCampus.json in Resources */,
+				41FD95FD15D6378B00477483 /* chooseLogin.json in Resources */,
+				41FD95FF15D6378B00477483 /* chooseSchool.json in Resources */,
+				41FD960115D6378B00477483 /* confirmLogin.json in Resources */,
+				41FD960315D6378B00477483 /* emailLogin.json in Resources */,
+				41FD960515D6378B00477483 /* emailSignup.json in Resources */,
+				41FD960715D6378B00477483 /* preference.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2889,20 +2939,20 @@
 				414AFE1015D512A500EFFB60 /* CPSignupEmailViewController.m in Sources */,
 				414AFE1215D512A500EFFB60 /* CPEventManager.m in Sources */,
 				414AFE1415D512A500EFFB60 /* CPIPGateHelper.m in Sources */,
-				414AFE1615D512A500EFFB60 /* NanbeigeItsViewController.m in Sources */,
+				414AFE1615D512A500EFFB60 /* CPItsViewController.m in Sources */,
 				414AFE1815D512A500EFFB60 /* CPLabelButtonCenterElement.m in Sources */,
 				414AFE1A15D512A500EFFB60 /* CPLabelButtonElement.m in Sources */,
-				414AFE1C15D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.m in Sources */,
+				414AFE1C15D512A500EFFB60 /* CPLabelLeftDetailElement.m in Sources */,
 				414AFE1E15D512A500EFFB60 /* CPLine1Button0Cell.m in Sources */,
 				414AFE2215D512A500EFFB60 /* CPLine2Button0Cell.m in Sources */,
 				414AFE2615D512A500EFFB60 /* CPLine2Button2Cell.m in Sources */,
-				414AFE2A15D512A500EFFB60 /* NanbeigeLine3Button0Cell.m in Sources */,
-				414AFE2E15D512A500EFFB60 /* NanbeigeLine3Button2Cell.m in Sources */,
-				414AFE3215D512A500EFFB60 /* NanbeigeLoginItsViewController.m in Sources */,
+				414AFE2A15D512A500EFFB60 /* CPLine3Button0Cell.m in Sources */,
+				414AFE2E15D512A500EFFB60 /* CPLine3Button2Cell.m in Sources */,
+				414AFE3215D512A500EFFB60 /* CPLoginItsViewController.m in Sources */,
 				414AFE3415D512A500EFFB60 /* CPMainViewController.m in Sources */,
 				414AFE3615D512A500EFFB60 /* CPPickerLabel.m in Sources */,
 				414AFE3815D512A500EFFB60 /* CPPreferenceViewController.m in Sources */,
-				414AFE3A15D512A500EFFB60 /* NanbeigeRenrenPostViewController.m in Sources */,
+				414AFE3A15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */,
 				414AFE3C15D512A500EFFB60 /* CPRoomsViewController.m in Sources */,
 				414AFE3E15D512A500EFFB60 /* CPUserCoursesViewController.m in Sources */,
 				414AFE4015D512A500EFFB60 /* CPFeedViewController.m in Sources */,
@@ -2910,7 +2960,6 @@
 				414AFE4415D512A500EFFB60 /* CPWeiboLoginViewController.m in Sources */,
 				414AFE4615D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */,
 				414AFE4815D512A500EFFB60 /* CPWelcomeSegue.m in Sources */,
-				414AFE4A15D512A500EFFB60 /* NanbeigeWelcomeViewController.m in Sources */,
 				414AFE4E15D512A500EFFB60 /* SystemHelper.m in Sources */,
 				413B9F3515D51D95000C9451 /* GCArraySectionController.m in Sources */,
 				413B9F3715D51D95000C9451 /* GCRetractableSectionController.m in Sources */,
@@ -3138,20 +3187,20 @@
 				414AFE1115D512A500EFFB60 /* CPSignupEmailViewController.m in Sources */,
 				414AFE1315D512A500EFFB60 /* CPEventManager.m in Sources */,
 				414AFE1515D512A500EFFB60 /* CPIPGateHelper.m in Sources */,
-				414AFE1715D512A500EFFB60 /* NanbeigeItsViewController.m in Sources */,
+				414AFE1715D512A500EFFB60 /* CPItsViewController.m in Sources */,
 				414AFE1915D512A500EFFB60 /* CPLabelButtonCenterElement.m in Sources */,
 				414AFE1B15D512A500EFFB60 /* CPLabelButtonElement.m in Sources */,
-				414AFE1D15D512A500EFFB60 /* NanbeigeLabelLeftDetailElement.m in Sources */,
+				414AFE1D15D512A500EFFB60 /* CPLabelLeftDetailElement.m in Sources */,
 				414AFE1F15D512A500EFFB60 /* CPLine1Button0Cell.m in Sources */,
 				414AFE2315D512A500EFFB60 /* CPLine2Button0Cell.m in Sources */,
 				414AFE2715D512A500EFFB60 /* CPLine2Button2Cell.m in Sources */,
-				414AFE2B15D512A500EFFB60 /* NanbeigeLine3Button0Cell.m in Sources */,
-				414AFE2F15D512A500EFFB60 /* NanbeigeLine3Button2Cell.m in Sources */,
-				414AFE3315D512A500EFFB60 /* NanbeigeLoginItsViewController.m in Sources */,
+				414AFE2B15D512A500EFFB60 /* CPLine3Button0Cell.m in Sources */,
+				414AFE2F15D512A500EFFB60 /* CPLine3Button2Cell.m in Sources */,
+				414AFE3315D512A500EFFB60 /* CPLoginItsViewController.m in Sources */,
 				414AFE3515D512A500EFFB60 /* CPMainViewController.m in Sources */,
 				414AFE3715D512A500EFFB60 /* CPPickerLabel.m in Sources */,
 				414AFE3915D512A500EFFB60 /* CPPreferenceViewController.m in Sources */,
-				414AFE3B15D512A500EFFB60 /* NanbeigeRenrenPostViewController.m in Sources */,
+				414AFE3B15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */,
 				414AFE3D15D512A500EFFB60 /* CPRoomsViewController.m in Sources */,
 				414AFE3F15D512A500EFFB60 /* CPUserCoursesViewController.m in Sources */,
 				414AFE4115D512A500EFFB60 /* CPFeedViewController.m in Sources */,
@@ -3159,7 +3208,6 @@
 				414AFE4515D512A500EFFB60 /* CPWeiboLoginViewController.m in Sources */,
 				414AFE4715D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */,
 				414AFE4915D512A500EFFB60 /* CPWelcomeSegue.m in Sources */,
-				414AFE4B15D512A500EFFB60 /* NanbeigeWelcomeViewController.m in Sources */,
 				414AFE4F15D512A500EFFB60 /* SystemHelper.m in Sources */,
 				413B9F3615D51D95000C9451 /* GCArraySectionController.m in Sources */,
 				413B9F3815D51D95000C9451 /* GCRetractableSectionController.m in Sources */,

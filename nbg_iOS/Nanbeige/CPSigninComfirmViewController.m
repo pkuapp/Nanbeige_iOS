@@ -1,6 +1,6 @@
 //
-//  NanbeigeConfirmLoginViewController.m
-//  Nanbeige
+//  CPConfirmLoginViewController.m
+//  CP
 //
 //  Created by ZongZiWang on 12-8-1.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -82,7 +82,7 @@
 
 - (void)refreshDataSource
 {
-	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY];
+	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY];
 	if (!nickname) nickname = sDEFAULTNICKNAME;
 	NSString *university = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYNAMEKEY];
 	if (!university) university = sDEFAULTUNIVERSITY;
@@ -92,8 +92,8 @@
 	NSMutableArray *loginaccount = [[NSMutableArray alloc] init];
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
 	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY])
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY], @"value", nil]];
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kCPEMAILKEY])
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kCPEMAILKEY], @"value", nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onEmailLogin:", @"controllerAction", nil]];
 	
@@ -155,8 +155,8 @@
 		[accountManager emailEditWithPassword:nil Nickname:nil CampusID:nil WeiboToken:nil];
 		
 	} else {
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPIDKEY] forKey:kACCOUNTIDKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
 		[self dismissModalViewControllerAnimated:YES];
 	}
 }
@@ -181,8 +181,8 @@
 
 - (void)didEmailEdit {
 	[self loading:NO];
-	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEIDKEY] forKey:kACCOUNTIDKEY];
-	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGENICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
+	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPIDKEY] forKey:kACCOUNTIDKEY];
+	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
 	[self dismissModalViewControllerAnimated:YES];
 }
 

@@ -1,7 +1,7 @@
 {
 	"grouped": true,
 	"title": "用 Email 地址登录",
-    "controllerName": "NanbeigeEmailLoginViewController",
+    "controllerName": "CPEmailLoginViewController",
 	"sections": [
 				 {
 				 "elements": [
@@ -23,7 +23,7 @@
 				 "title":"还未注册？",
 				 "elements":[
 							 {
-							 "type":"NanbeigeLabelButtonElement",
+							 "type":"CPLabelButtonElement",
 							 "title":"用 Email 地址注册",
 							 "controllerAction":"onEmailSignup:"
 							 }

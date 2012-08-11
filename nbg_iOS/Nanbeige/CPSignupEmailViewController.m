@@ -1,6 +1,6 @@
 //
-//  NanbeigeEmailSignupViewController.m
-//  Nanbeige
+//  CPEmailSignupViewController.m
+//  CP
 //
 //  Created by ZongZiWang on 12-8-1.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -103,16 +103,16 @@
 
 #pragma mark - AccountManagerDelegate Email
 
-- (void)didEmailSignupWithID:(NSNumber *)nanbeigeid
+- (void)didEmailSignupWithID:(NSNumber *)CPid
 {
 	[self loading:NO];
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
-		[[NSUserDefaults standardUserDefaults] setObject:nanbeigeid forKey:kACCOUNTIDKEY];
+		[[NSUserDefaults standardUserDefaults] setObject:CPid forKey:kACCOUNTIDKEY];
 		[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
 	}
 	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
-		[self.accountManagerDelegate didEmailLoginWithID:nanbeigeid Nickname:nickname UniversityID:nil UniversityName:nil CampusID:nil CampusName:nil];
+		[self.accountManagerDelegate didEmailLoginWithID:CPid Nickname:nickname UniversityID:nil UniversityName:nil CampusID:nil CampusName:nil];
 	}
 	[self dismissModalViewControllerAnimated:YES];
 }

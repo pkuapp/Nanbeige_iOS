@@ -1,6 +1,6 @@
 //
-//  NanbeigeMainViewController.m
-//  Nanbeige
+//  CPMainViewController.m
+//  CP
 //
 //  Created by Wang Zhongyu on 12-7-9.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -11,8 +11,8 @@
 #import "CPLine1Button0Cell.h"
 #import "CPLine2Button0Cell.h"
 #import "CPLine2Button2Cell.h"
-#import "NanbeigeLine3Button0Cell.h"
-#import "NanbeigeLine3Button2Cell.h"
+#import "CPLine3Button0Cell.h"
+#import "CPLine3Button2Cell.h"
 #import "CPAssignmentCreateViewController.h"
 
 @interface CPMainViewController () {
@@ -100,14 +100,14 @@
 							 @"IP网关", @"name",
 							 @"its", @"image", 
 							 @"Line1Button0Identifier", @"identifier",
-							 @"NanbeigeLine1Button0Cell", @"nibname",
+							 @"CPLine1Button0Cell", @"nibname",
 							 nil];
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] != nil) {
 		itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								 @"IP网关", @"name",
 								 @"its", @"image",
 								 @"Line3Button2Identifier", @"identifier",
-								 @"NanbeigeLine3Button2Cell", @"nibname",
+								 @"CPLine3Button2Cell", @"nibname",
 								 nil];
 	}
 	
@@ -115,47 +115,47 @@
 								 @"课程", @"name", 
 								 @"courses", @"image", 
 								 @"Line3Button0Identifier", @"identifier", 
-								 @"NanbeigeLine3Button0Cell", @"nibname",
+								 @"CPLine3Button0Cell", @"nibname",
 								 nil];
 	NSDictionary *roomsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 							   @"自习室", @"name", 
 							   @"rooms", @"image", 
 							   @"Line1Button0Identifier", @"identifier", 
-							   @"NanbeigeLine1Button0Cell", @"nibname",
+							   @"CPLine1Button0Cell", @"nibname",
 							   nil];
 	NSDictionary *calendarDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"校园黄页", @"name", 
 								  @"calendar", @"image", 
 								  @"Line1Button0Identifier", @"identifier", 
-								  @"NanbeigeLine1Button0Cell", @"nibname",
+								  @"CPLine1Button0Cell", @"nibname",
 								  nil];
 	NSDictionary *feedbackDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"反馈", @"name", 
 								  @"feedback", @"image", 
 								  @"Line1Button0Identifier", @"identifier",
-								  @"NanbeigeLine1Button0Cell", @"nibname",
+								  @"CPLine1Button0Cell", @"nibname",
 								  nil];
 	NSDictionary *activityDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"活动", @"name", 
 								  @"Icon", @"image", 
 								  @"Line2Button0Identifier", @"identifier", 
-								  @"NanbeigeLine2Button0Cell", @"nibname",
+								  @"CPLine2Button0Cell", @"nibname",
 								  nil];
 	NSDictionary *homeworkDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"作业", @"name", 
 								  @"180-stickynote", @"image", 
 								  @"Line2Button2Identifier", @"identifier", 
-								  @"NanbeigeLine2Button2Cell", @"nibname",
+								  @"CPLine2Button2Cell", @"nibname",
 								  nil];
 	
 	functionArray =[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil];
 	
 	nibsRegistered = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-					  @"NO", @"NanbeigeLine1Button0Cell",
-					  @"NO", @"NanbeigeLine2Button0Cell",
-					  @"NO", @"NanbeigeLine2Button2Cell", 
-					  @"NO", @"NanbeigeLine3Button0Cell",
-					  @"NO", @"NanbeigeLine3Button2Cell", 
+					  @"NO", @"CPLine1Button0Cell",
+					  @"NO", @"CPLine2Button0Cell",
+					  @"NO", @"CPLine2Button2Cell", 
+					  @"NO", @"CPLine3Button0Cell",
+					  @"NO", @"CPLine3Button2Cell", 
 					  nil];
 //	self.connector = [[CPIPGateHelper alloc] init];
 	self.defaults = [NSUserDefaults standardUserDefaults];
@@ -182,7 +182,7 @@
 								 @"IP网关", @"name",
 								 @"its", @"image", 
 								 @"Line1Button0Identifier", @"identifier",
-								 @"NanbeigeLine1Button0Cell", @"nibname",
+								 @"CPLine1Button0Cell", @"nibname",
 								 nil];
 		[self.functionArray removeObjectAtIndex:0];
 		[self.functionArray insertObject:itsDict atIndex:0];
@@ -192,7 +192,7 @@
 								 @"IP网关", @"name",
 								 @"its", @"image", 
 								 @"Line3Button2Identifier", @"identifier",
-								 @"NanbeigeLine3Button2Cell", @"nibname",
+								 @"CPLine3Button2Cell", @"nibname",
 								 nil];
 		[self.functionArray removeObjectAtIndex:0];
 		[self.functionArray insertObject:itsDict atIndex:0];
@@ -208,7 +208,7 @@
 {
 	[super prepareForSegue:segue sender:sender];
 	if ([segue.identifier isEqualToString:@"ItsEnterSegue"]) {
-		NanbeigeItsViewController *destinationViewController = (NanbeigeItsViewController *)[segue destinationViewController];
+		CPItsViewController *destinationViewController = (CPItsViewController *)[segue destinationViewController];
 //		destinationViewController.connector = self.connector;
 		destinationViewController.mainViewController = self;
 //		self.connector.delegate = destinationViewController;
@@ -340,24 +340,24 @@
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 	}
 	
-	if ([nibName isEqualToString:@"NanbeigeLine1Button0Cell"]) {
+	if ([nibName isEqualToString:@"CPLine1Button0Cell"]) {
 		((CPLine1Button0Cell *) cell).name = name;
 		((CPLine1Button0Cell *) cell).image = image;
-	} else if ([nibName isEqualToString:@"NanbeigeLine2Button0Cell"]) {
+	} else if ([nibName isEqualToString:@"CPLine2Button0Cell"]) {
 		((CPLine2Button0Cell *) cell).name = name;
 		((CPLine2Button0Cell *) cell).image = image;
-	} else if ([nibName isEqualToString:@"NanbeigeLine2Button2Cell"]) {
+	} else if ([nibName isEqualToString:@"CPLine2Button2Cell"]) {
 		((CPLine2Button2Cell *) cell).name = name;
 		((CPLine2Button2Cell *) cell).image = image;
 		((CPLine2Button2Cell *) cell).delegate = self;
-	} else if ([nibName isEqualToString:@"NanbeigeLine3Button0Cell"]) {
-		((NanbeigeLine3Button0Cell*) cell).name = name;
-		((NanbeigeLine3Button0Cell*) cell).image = image;
-	} else if ([nibName isEqualToString:@"NanbeigeLine3Button2Cell"]) {
-		itsCell = (NanbeigeLine3Button2Cell*) cell;
-		((NanbeigeLine3Button2Cell*) cell).name = name;
-		((NanbeigeLine3Button2Cell*) cell).image = image;
-		((NanbeigeLine3Button2Cell*) cell).delegate = self;
+	} else if ([nibName isEqualToString:@"CPLine3Button0Cell"]) {
+		((CPLine3Button0Cell*) cell).name = name;
+		((CPLine3Button0Cell*) cell).image = image;
+	} else if ([nibName isEqualToString:@"CPLine3Button2Cell"]) {
+		itsCell = (CPLine3Button2Cell*) cell;
+		((CPLine3Button2Cell*) cell).name = name;
+		((CPLine3Button2Cell*) cell).image = image;
+		((CPLine3Button2Cell*) cell).delegate = self;
 		[self changeDetailGateInfo:nil isConnecting:NO];
 	}
 	
@@ -466,7 +466,7 @@
 	self.progressHub.taskInProgress = NO;
 }
 
-#pragma mark - NanbeigeLine2Button2DelegateProtocol
+#pragma mark - CPLine2Button2DelegateProtocol
 
 - (void)onButton1Pressed:(id)sender
 {
@@ -478,7 +478,7 @@
 	[self performSegueWithIdentifier:@"CreateAssignmentWithCameraSegue" sender:self];
 }
 
-#pragma mark - NanbeigeItsWidgetDelegateProtocol
+#pragma mark - CPItsWidgetDelegateProtocol
 
 - (void)connectFree:(id)sender
 {

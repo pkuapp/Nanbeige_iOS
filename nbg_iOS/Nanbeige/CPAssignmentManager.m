@@ -1,6 +1,6 @@
 //
-//  NanbeigeAssignmentManager.m
-//  Nanbeige
+//  CPAssignmentManager.m
+//  CP
 //
 //  Created by ZongZiWang on 12-8-9.
 //  Copyright (c) 2012年 Peking University. All rights reserved.

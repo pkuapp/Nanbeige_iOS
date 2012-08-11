@@ -1,6 +1,6 @@
 //
-//  NanbeigeAccountManageViewController.m
-//  Nanbeige
+//  CPAccountManageViewController.m
+//  CP
 //
 //  Created by ZongZiWang on 12-8-2.
 //  Copyright (c) 2012年 Peking University. All rights reserved.
@@ -90,7 +90,7 @@
 			NSString *nickname = [[alertView textFieldAtIndex:0] text];
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITNICKNAME];
-			[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kNANBEIGENICKNAMEKEY];
+			[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kCPNICKNAMEKEY];
 			[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
 			[self refreshDisplay];
 		}
@@ -100,7 +100,7 @@
 			NSString *password = [[alertView textFieldAtIndex:0] text];
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDIT];
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kACCOUNTEDITPASSWORD];
-			[[NSUserDefaults standardUserDefaults] setObject:password forKey:kNANBEIGEPASSWORDKEY];
+			[[NSUserDefaults standardUserDefaults] setObject:password forKey:kCPPASSWORDKEY];
 			[self refreshDisplay];
 		}
 	}
@@ -120,8 +120,8 @@
 	NSMutableArray *loginaccount = [[NSMutableArray alloc] init];
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
 	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY])
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kNANBEIGEEMAILKEY], @"value", @"onLaunchActionSheet:", @"controllerAction", nil]];
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kCPEMAILKEY])
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kCPEMAILKEY], @"value", @"onLaunchActionSheet:", @"controllerAction", nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onEmailLogin:", @"controllerAction", nil]];
 	
