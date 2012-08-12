@@ -32,7 +32,8 @@
 		[defaults valueForKey:kCPEMAILKEY] == nil) {
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kACCOUNTIDKEY];
 	}
-	
+#warning 无账号测试
+	return NO;
 	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
         return NO;
 	} else {
@@ -56,6 +57,54 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     JSObjectionInjector *injector = [JSObjection createInjector:[[CPAppModule alloc] init]];
     [JSObjection setDefaultInjector:injector];
+	
+#ifdef kDefaultSyncDbURL
+    // Register the default value of the pref for the remote database URL to sync with:
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *appdefaults = [NSDictionary dictionaryWithObject:kDefaultSyncDbURL
+                                                            forKey:@"syncpoint"];
+    [defaults registerDefaults:appdefaults];
+    [defaults synchronize];
+	
+	NSURLCredential* cred;
+	cred = [NSURLCredential credentialWithUser: kDefaultUsername
+									  password: kDefaultPassword
+								   persistence: NSURLCredentialPersistencePermanent];
+	NSURLProtectionSpace* space;
+	space = [[NSURLProtectionSpace alloc] initWithHost: kDefaultHostName
+												  port: 443
+											  protocol: @"https"
+												 realm: @"Cloudant Private Database"
+								  authenticationMethod: NSURLAuthenticationMethodDefault];
+	[[NSURLCredentialStorage sharedCredentialStorage] setDefaultCredential: cred forProtectionSpace: space];
+#endif
+	// Start the Couchbase Mobile server:
+    gCouchLogLevel = 1;
+    CouchTouchDBServer* server;
+#ifdef USE_REMOTE_SERVER
+    server = [[CouchTouchDBServer alloc] initWithURL: [NSURL URLWithString: USE_REMOTE_SERVER]];
+#else
+    server = [[CouchTouchDBServer alloc] init];
+#endif
+    
+    if (server.error) {
+        [self showAlert: @"Couldn't start Couchbase." error: server.error fatal: YES];
+        return YES;
+    }
+    
+    self.database = [server databaseNamed: kDatabaseName];
+    
+#if !INSTALL_CANNED_DATABASE && !defined(USE_REMOTE_SERVER)
+    // Create the database on the first run of the app.
+    NSError* error;
+    if (![self.database ensureCreated: &error]) {
+        [self showAlert: @"Couldn't create local database." error: error fatal: YES];
+        return YES;
+    }
+#endif
+    
+    self.database.tracksChanges = YES;
+
 
     if (self.needSignin) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPSigninFlow" bundle:[NSBundle mainBundle]];
@@ -72,6 +121,19 @@
     return YES;
 }
 
+// Display an error alert, without blocking.
+// If 'fatal' is true, the app will quit when it's pressed.
+- (void)showAlert: (NSString*)message error: (NSError*)error fatal: (BOOL)fatal {
+    if (error) {
+        message = [NSString stringWithFormat: @"%@\n\n%@", message, error.localizedDescription];
+    }
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle: (fatal ? @"Fatal Error" : @"Error")
+                                                    message: message
+                                                   delegate: (fatal ? self : nil)
+                                          cancelButtonTitle: (fatal ? @"Quit" : @"Sorry")
+                                          otherButtonTitles: nil];
+    [alert show];
+}
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

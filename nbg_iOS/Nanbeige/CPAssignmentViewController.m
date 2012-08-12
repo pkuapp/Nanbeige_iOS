@@ -11,8 +11,7 @@
 #import "CPAssignmentNoImageCell.h"
 #import "CPAssignmentImageCell.h"
 #import "Environment.h"
-
-
+#import <CouchCocoa/CouchDesignDocument_Embedded.h>
 
 @interface CPAssignmentViewController () 
 {
@@ -31,10 +30,7 @@
 @synthesize assignmentsTableView = _assignmentsTableView;
 @synthesize completeAssignmentsTableView = _completeAssignmentsTableView;
 @synthesize completeNibsRegistered = _completeNibsRegistered;
-@synthesize completeSegmentedControl;
-
-
-@synthesize grabbedObject;
+@synthesize completeSegmentedControl = _completeSegmentedControl;
 
 #pragma mark - Setter and Getter methods
 
@@ -69,28 +65,28 @@
 
 - (NSMutableArray *)nowAssignments
 {
-	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
+	if ([_completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE)
 		return self.assignments;
 	else 
 		return self.completeAssignments;
 }
 - (NSMutableArray *)otherAssignments
 {
-	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
+	if ([_completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
 		return self.completeAssignments;
 	else 
 		return self.assignments;
 }
 - (UITableView *)nowAssignmentsTableView
 {
-	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
+	if ([_completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
 		return self.assignmentsTableView;
 	else 
 		return self.completeAssignmentsTableView;
 }
 - (UITableView *)otherAssignmentsTableView
 {
-	if ([completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
+	if ([_completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
 		return self.completeAssignmentsTableView;
 	else 
 		return self.assignmentsTableView;
@@ -128,23 +124,119 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.title = TITLE_ASSIGNMENT;
+	self.completeSegmentedControl.tintColor = navBarBgColor1;
+	
+	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     
+	// Create a 'view' containing list items sorted by date:
+    CouchDesignDocument* design = [self.database designDocumentWithName: @"assignment"];
+    [design defineViewNamed: @"notcomplete" mapBlock: MAPBLOCK({
+		NSString *type = [doc objectForKey:@"doc_type"];
+        NSNumber *finished = [doc objectForKey: @"finished"];
+		NSString *due = [doc objectForKey: @"due"];
+        if ([type isEqualToString:@"assignment"] && ![finished boolValue]) emit(due, doc);
+    }) version: @"1.0"];
+    [design defineViewNamed: @"complete" mapBlock: MAPBLOCK({
+		NSString *type = [doc objectForKey:@"doc_type"];
+        NSNumber *finished = [doc objectForKey: @"finished"];
+		NSString *due = [doc objectForKey: @"due"];
+        if ([type isEqualToString:@"assignment"] && [finished boolValue]) emit(due, doc);
+    }) version: @"1.0"];
+    
+    // and a validation function requiring parseable dates:
+    design.validationBlock = VALIDATIONBLOCK({
+        if (newRevision.deleted)
+            return YES;
+        id date = [newRevision.properties objectForKey: @"last_modified"];
+        if (date && ! [RESTBody dateWithJSONObject: date]) {
+            context.errorMessage = [@"invalid date " stringByAppendingString: date];
+            return NO;
+        }
+        return YES;
+    });
+	
+	// Create a query sorted by descending date, i.e. newest items first:
+    NSAssert(self.database!=nil, @"Not hooked up to database yet");
+    _query = [[[self.database designDocumentWithName: @"assignment"] queryViewNamed: @"notcomplete"] asLiveQuery];
+    _query.descending = NO;
+    [_query addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
+	
+	_completeQuery = [[[self.database designDocumentWithName: @"assignment"] queryViewNamed: @"complete"] asLiveQuery];
+    _completeQuery.descending = NO;
+    [_completeQuery addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
+	
+    [self updateSyncURL];
+}
+
+- (void)updateSyncURL {
+    if (!self.database)
+        return;
+    NSURL* newRemoteURL = nil;
+    NSString *syncpoint = kDefaultSyncDbURL;
+    if (syncpoint.length > 0)
+        newRemoteURL = [NSURL URLWithString:syncpoint];
+    
+    [self forgetSync];
+	
+    NSArray* repls = [self.database replicateWithURL: newRemoteURL exclusively: YES];
+    _pull = [repls objectAtIndex: 0];
+    _push = [repls objectAtIndex: 1];
+    [_pull addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
+    [_push addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
+}
+
+- (void) forgetSync {
+    [_pull removeObserver: self forKeyPath: @"completed"];
+    _pull = nil;
+    [_push removeObserver: self forKeyPath: @"completed"];
+    _push = nil;
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                         change:(NSDictionary *)change context:(void *)context
+{
+    if (object == _pull || object == _push) {
+        unsigned completed = _pull.completed + _push.completed;
+        unsigned total = _pull.total + _push.total;
+        NSLog(@"SYNC progress: %u / %u", completed, total);
+        if (total > 0 && completed < total) {
+            //[self showSyncStatus];
+            //[progress setProgress:(completed / (float)total)];
+        } else {
+            //[self showSyncButton];
+        }
+		for (CouchQueryRow* row in [object rows]) {
+            // update the UI
+        }
+    }
+	if (object == _query) {
+		for (CouchQueryRow* row in [object rows]) {
+            // update the UI
+        }
+	}
+	if (object == _completeQuery) {
+		for (CouchQueryRow* row in [object rows]) {
+            // update the UI
+        }
+	}
 }
 
 - (void)viewDidUnload
 {
-	[self setAssignmentsTableView:nil];
 	[self setCompleteSegmentedControl:nil];
+	[self setAssignmentsTableView:nil];
 	[self setCompleteAssignmentsTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	self.assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
-	self.completeAssignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
+//	self.assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
+//	self.completeAssignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
 }
+
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
@@ -168,7 +260,7 @@
 	NSString *nibName = @"CPAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
-	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
+	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"has_image"] boolValue]) {
 		nibName = @"CPAssignmentImageCell";
 		identifier = @"ImageCellIdentifier";
 	}
@@ -205,7 +297,7 @@
 	NSString *nibName = @"CPAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
-	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
+	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"has_image"] boolValue]) {
 		nibName = @"CPAssignmentImageCell";
 		identifier = @"ImageCellIdentifier";
 	}
@@ -217,18 +309,18 @@
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
-	[(id)cell courseName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTCOURSE];
-	[(id)cell assignmentName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTDESCRIPTION];
-	[(id)cell assignmentTime].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTDDLSTR];
+	[(id)cell courseName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"course_id"];
+	[(id)cell assignmentName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"content"];
+	[(id)cell assignmentTime].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"due"];
 	if ([nibName isEqualToString:@"CPAssignmentImageCell"]) {
 		//[[(CPAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
 	}
 	
-	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:kASSIGNMENTCOMPLETE] boolValue]) {
+	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"finished"] boolValue]) {
 		[[(id)cell changeCompleteButton] setBackgroundColor:completeAssignmentCellColor];
 	} else {
 		[[(id)cell changeCompleteButton] setBackgroundColor:notCompleteAssignmentCellColor];
-	}	
+	}
 	[(id)cell setDelegate:self];
 	[(id)cell setAssignmentIndex:row];
 	
@@ -238,14 +330,16 @@
 - (void)changeComplete:(id)sender
 {
 	NSMutableDictionary *assignment = [[[self nowAssignments] objectAtIndex:[sender assignmentIndex]] mutableCopy];
-	[assignment setObject:[NSNumber numberWithBool:[completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE] forKey:kASSIGNMENTCOMPLETE];
-	[[self nowAssignments] removeObjectAtIndex:[sender assignmentIndex]];
-	[[self otherAssignments] addObject:assignment];
+	[assignment setObject:[NSNumber numberWithBool:[self.completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE] forKey:@"finished"];
 	
-	[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
-	[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
 	
-	[[self nowAssignmentsTableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sender assignmentIndex] inSection:0]] withRowAnimation:[completeSegmentedControl selectedSegmentIndex] == COMPLETE ? UITableViewRowAnimationLeft : UITableViewRowAnimationRight];
+//	[[self nowAssignments] removeObjectAtIndex:[sender assignmentIndex]];
+//	[[self otherAssignments] addObject:assignment];
+	
+//	[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
+//	[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
+	
+	[[self nowAssignmentsTableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sender assignmentIndex] inSection:0]] withRowAnimation:[self.completeSegmentedControl selectedSegmentIndex] == COMPLETE ? UITableViewRowAnimationLeft : UITableViewRowAnimationRight];
 	
 }
 
@@ -282,7 +376,7 @@
 	ncavc.initWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
 		ncavc.assignmentIndex = assignmentSelect;
-		ncavc.bComplete = ([completeSegmentedControl selectedSegmentIndex] == COMPLETE);
+		ncavc.bComplete = ([self.completeSegmentedControl selectedSegmentIndex] == COMPLETE);
 	} else {
 		ncavc.assignmentIndex = -1;
 	}
@@ -302,86 +396,6 @@
 	[[self nowAssignmentsTableView] reloadData];
 	[[self nowAssignmentsTableView] setHidden:NO];
 	[[self otherAssignmentsTableView] setHidden:YES];
-}
-//
-//#pragma mark JTTableViewGestureEditingRowDelegate
-//
-//- (void)gestureRecognizer:(JTTableViewGestureRecognizer *)gestureRecognizer didEnterEditingState:(JTTableViewCellEditingState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell;
-//	cell = [[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath];
-//	
-//    switch (state) {
-//        case JTTableViewCellEditingStateLeft:
-//            break;
-//        case JTTableViewCellEditingStateRight:
-//            break;
-//		case JTTableViewCellEditingStateMiddle:
-//			break;
-//        default:
-//            break;
-//    }
-//}
-//
-//// This is needed to be implemented to let our delegate choose whether the panning gesture should work
-//- (BOOL)gestureRecognizer:(JTTableViewGestureRecognizer *)gestureRecognizer canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
-//
-//- (void)gestureRecognizer:(JTTableViewGestureRecognizer *)gestureRecognizer commitEditingState:(JTTableViewCellEditingState)state forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableView *tableView = gestureRecognizer.tableView;
-//    [tableView beginUpdates];
-//    if (state == JTTableViewCellEditingStateLeft) {
-//        // An example to discard the cell at JTTableViewCellEditingStateLeft
-//		if ([[[[self nowAssignments] objectAtIndex:indexPath.row] objectForKey:kASSIGNMENTCOMPLETE] boolValue]) {
-//			NSMutableDictionary *assignment = [[[self nowAssignments] objectAtIndex:indexPath.row] mutableCopy];
-//			[assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTCOMPLETE];
-//			[[self nowAssignments] removeObjectAtIndex:indexPath.row];
-//			[[self otherAssignments] addObject:assignment];
-//			
-//			[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
-//			[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
-//			
-//			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-//		} else {
-//			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"确认删除作业: 「%@」", [(id)[[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath] assignmentName].text] message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
-//			[alert setTag:indexPath.row];
-//			[alert show];
-//		}
-//    } else if (state == JTTableViewCellEditingStateRight) {
-//        // An example to retain the cell at commiting at JTTableViewCellEditingStateRight
-//		if (![[[[self nowAssignments] objectAtIndex:indexPath.row] objectForKey:kASSIGNMENTCOMPLETE] boolValue]) {
-//			NSMutableDictionary *assignment = [[[self nowAssignments] objectAtIndex:indexPath.row] mutableCopy];
-//			[assignment setObject:[NSNumber numberWithBool:YES] forKey:kASSIGNMENTCOMPLETE];
-//			[[self nowAssignments] removeObjectAtIndex:indexPath.row];
-//			[[self otherAssignments] addObject:assignment];
-//			
-//			[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
-//			[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
-//			
-//			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
-//		} else {
-//			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"确认删除作业: 「%@」", [(id)[[self nowAssignmentsTableView] cellForRowAtIndexPath:indexPath] assignmentName].text] message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
-//			[alert setTag:indexPath.row];
-//			[alert show];
-//		}
-//    } else {
-//        // JTTableViewCellEditingStateMiddle shouldn't really happen in
-//        // - [JTTableViewGestureDelegate gestureRecognizer:commitEditingState:forRowAtIndexPath:]
-//    }
-//    [tableView endUpdates];
-//	
-//    // Row color needs update after datasource changes, reload it.
-//    [tableView performSelector:@selector(reloadVisibleRowsExceptIndexPath:) withObject:indexPath afterDelay:JTTableViewRowAnimationDuration];
-//}
-
-#pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if (buttonIndex == 1) {
-		[[self nowAssignments] removeObjectAtIndex:alertView.tag];
-		[[self nowAssignmentsTableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:alertView.tag inSection:0]] withRowAnimation:[completeSegmentedControl selectedSegmentIndex] == COMPLETE ? UITableViewRowAnimationRight : UITableViewRowAnimationLeft];
-		[[NSUserDefaults standardUserDefaults] setObject:[self nowAssignments] forKey:[completeSegmentedControl selectedSegmentIndex] == COMPLETE ? kCOMPLETEASSIGNMENTS : kASSIGNMENTS];
-	}	
 }
 		
 @end

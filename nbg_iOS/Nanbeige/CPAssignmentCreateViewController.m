@@ -61,19 +61,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	
+	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)]};
+	
 	nibNames = [[NSArray alloc] initWithObjects:@"AssignmentDescriptionIdentifier", @"AssignmentImageIdentifier", @"AssignmentTimeIdentifier", @"AssignmentCourseIdentifier", nil];
-	assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
+//	assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
 	if (assignments == nil) assignments = [[NSMutableArray alloc] init];
 	if (assignmentIndex != -1) {
 		self.title = @"修改作业计划";
 		if (bComplete) {
-			assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
+//			assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
 		}
 	}
 	weeksData = ASSIGNMENTDDLWEAKS;
 	
-	if ([[self.assignment objectForKey:kASSIGNMENTHASIMAGE] boolValue]) {
-		self.imageView.image = [NSKeyedUnarchiver unarchiveObjectWithData:[self.assignment objectForKey:kASSIGNMENTIMAGE]];
+	if ([[self.assignment objectForKey:@"has_image"] boolValue]) {
+		self.imageView.image = [NSKeyedUnarchiver unarchiveObjectWithData:[self.assignment objectForKey:@"image"]];
 	}
 	
 }
@@ -124,30 +128,30 @@
 
 - (IBAction)onConfirm:(id)sender {
 	
-	[self.assignment setObject:[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView.subviews objectAtIndex:0] text] forKey:kASSIGNMENTDESCRIPTION];
+	[self.assignment setObject:[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView.subviews objectAtIndex:0] text] forKey:@"content"];
 	NSString *deadlineString = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].contentView subviews] objectAtIndex:1] text];
 	[self.assignment setObject:deadlineString forKey:kASSIGNMENTDDLSTR];
 	NSString *course = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] text];
-	[self.assignment setObject:course forKey:kASSIGNMENTCOURSE];
+	[self.assignment setObject:course forKey:@"course_id"];
 	
 	if (imageView.image.size.width && imageView.image.size.height) {
-		[self.assignment setObject:[NSNumber numberWithBool:YES] forKey:kASSIGNMENTHASIMAGE];
+		[self.assignment setObject:[NSNumber numberWithBool:YES] forKey:@"has_image"];
 		NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:imageView.image];
-		[self.assignment setObject:imageData forKey:kASSIGNMENTIMAGE];
+		[self.assignment setObject:imageData forKey:@"image"];
 	} else {
-		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTHASIMAGE];
+		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:@"has_image"];
 	}
 	
 	if (assignmentIndex == -1) {
-		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:kASSIGNMENTCOMPLETE];
+		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:@"finished"];
 		[assignments addObject:self.assignment];
-		[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
+//		[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
 	} else {
 		[assignments replaceObjectAtIndex:assignmentIndex withObject:self.assignment];
 		if (bComplete) {
-			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kCOMPLETEASSIGNMENTS];
+//			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kCOMPLETEASSIGNMENTS];
 		} else {
-			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
+//			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
 		}
 	}
 	
@@ -220,7 +224,7 @@ numberOfRowsInComponent:(NSInteger)component
 	
 	if ([identifier isEqualToString:@"AssignmentDescriptionIdentifier"]) {
 		UITextView *tv = [cell.contentView.subviews objectAtIndex:0];
-		tv.text = [self.assignment valueForKey:kASSIGNMENTDESCRIPTION];
+		tv.text = [self.assignment valueForKey:@"content"];
 		if (tv.text == nil) tv.text = @"";
 	} else if ([identifier isEqualToString:@"AssignmentImageIdentifier"]) {
 		
@@ -238,8 +242,8 @@ numberOfRowsInComponent:(NSInteger)component
 			[[[cell.contentView subviews] objectAtIndex:1] setText:[[weeksData objectAtIndex:[[self.assignment objectForKey:kASSIGNMENTDDLWEEKS] intValue]] stringByAppendingString:@"课上"]];
 		}
 	} else if ([identifier isEqualToString:@"AssignmentCourseIdentifier"]) {
-		if ([self.assignment valueForKey:kASSIGNMENTCOURSE]) {
-			[[[cell.contentView subviews] objectAtIndex:1] setText:[self.assignment valueForKey:kASSIGNMENTCOURSE]];
+		if ([self.assignment valueForKey:@"course_id"]) {
+			[[[cell.contentView subviews] objectAtIndex:1] setText:[self.assignment valueForKey:@"course_id"]];
 		} else {
 #warning 选择课程列表中的课程
 			[[[cell.contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:0] objectForKey:kAPINAME]];

@@ -13,8 +13,11 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import <Objection-iOS/Objection.h>
+	#import <CouchCocoa/CouchCocoa.h>
+	#import <CouchCocoa/CouchDatabase.h>
     #import "Quickdialog.h"
     #import "Environment.h"
+	#import "CPAppDelegate.h"
 #define MR_SHORTHAND
     #import "CoreData+MagicalRecord.h"
 #endif

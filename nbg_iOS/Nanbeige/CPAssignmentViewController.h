@@ -7,15 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CouchCocoa/CouchUITableSource.h>
 #import "CPAssignmentNoImageCell.h"
 
-@interface CPAssignmentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CPAssignmentCellDelegate, UIAlertViewDelegate>
+@interface CPAssignmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CPAssignmentCellDelegate, UIAlertViewDelegate> {
+    CouchPersistentReplication* _pull;
+    CouchPersistentReplication* _push;
+	CouchLiveQuery* _query;
+	CouchLiveQuery* _completeQuery;
+}
 @property (strong, nonatomic) NSMutableArray *assignments;
 @property (strong, nonatomic) NSMutableArray *completeAssignments;
 @property (strong, nonatomic) NSMutableDictionary *nibsRegistered;
 @property (strong, nonatomic) NSMutableDictionary *completeNibsRegistered;
 @property (weak, nonatomic) IBOutlet UITableView *assignmentsTableView;
 @property (weak, nonatomic) IBOutlet UITableView *completeAssignmentsTableView;
+@property (strong, nonatomic) CouchDatabase *database;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *completeSegmentedControl;
 - (IBAction)onAssignmentCompleteChanged:(id)sender;
 
