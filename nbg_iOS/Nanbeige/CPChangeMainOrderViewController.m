@@ -188,9 +188,9 @@
 	[defaults setValue:neworderStr forKey:kMAINORDERKEY];
 	
 	if (![neworderStr isEqualToString:oldorderStr]) {
-		[self dismissModalViewControllerAnimated:YES];
+		[[[UIAlertView alloc] initWithTitle:nil message:@"已修改" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil] show];
 	} else {
-		[self.navigationController popViewControllerAnimated:YES];
+		[[[UIAlertView alloc] initWithTitle:nil message:@"未变化" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil] show];
 	}
 }
 

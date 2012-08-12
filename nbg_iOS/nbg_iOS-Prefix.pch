@@ -15,6 +15,7 @@
     #import <Objection-iOS/Objection.h>
 	#import <CouchCocoa/CouchCocoa.h>
 	#import <CouchCocoa/CouchDatabase.h>
+	#import <CouchCocoa/CouchDesignDocument_Embedded.h>
     #import "Quickdialog.h"
     #import "Environment.h"
 	#import "CPAppDelegate.h"

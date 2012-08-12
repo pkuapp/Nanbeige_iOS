@@ -96,6 +96,7 @@
     }
     
     self.database = [server databaseNamed: kDatabaseName];
+	self.localDatabase = [server databaseNamed:kLocalDatabaseName];
     
 #if !INSTALL_CANNED_DATABASE && !defined(USE_REMOTE_SERVER)
     // Create the database on the first run of the app.
@@ -104,10 +105,14 @@
         [self showAlert: @"Couldn't create local database." error: error fatal: YES];
         return YES;
     }
+	if (![self.localDatabase ensureCreated: &error]) {
+        [self showAlert: @"Couldn't create local database." error: error fatal: YES];
+        return YES;
+    }
 #endif
     
     self.database.tracksChanges = YES;
-
+	self.localDatabase.tracksChanges = YES;
 
     if (self.needSignin) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPSigninFlow" bundle:[NSBundle mainBundle]];

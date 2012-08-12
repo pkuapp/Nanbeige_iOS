@@ -22,6 +22,7 @@
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = NO;
+	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
 #pragma mark - View Lifecycle
@@ -73,7 +74,7 @@
 - (void)onResetMainOrder:(id)sender
 {
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kMAINORDERKEY];
-	[self dismissModalViewControllerAnimated:YES];
+	[[[UIAlertView alloc] initWithTitle:nil message:@"已重置" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil] show];
 }
 
 - (void)onAbout:(id)sender

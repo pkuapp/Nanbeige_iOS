@@ -11,7 +11,6 @@
 #import "CPAssignmentNoImageCell.h"
 #import "CPAssignmentImageCell.h"
 #import "Environment.h"
-#import <CouchCocoa/CouchDesignDocument_Embedded.h>
 
 @interface CPAssignmentViewController () 
 {
@@ -128,44 +127,35 @@
 	
 	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     
-	// Create a 'view' containing list items sorted by date:
-    CouchDesignDocument* design = [self.database designDocumentWithName: @"assignment"];
-    [design defineViewNamed: @"notcomplete" mapBlock: MAPBLOCK({
+	CouchDesignDocument *_design = [self.database designDocumentWithName: @"assignment"];
+    [_design defineViewNamed: @"notcomplete" mapBlock: MAPBLOCK({
 		NSString *type = [doc objectForKey:@"doc_type"];
         NSNumber *finished = [doc objectForKey: @"finished"];
 		NSString *due = [doc objectForKey: @"due"];
         if ([type isEqualToString:@"assignment"] && ![finished boolValue]) emit(due, doc);
     }) version: @"1.0"];
-    [design defineViewNamed: @"complete" mapBlock: MAPBLOCK({
+	
+    CouchDesignDocument *_completeDesign = [self.database designDocumentWithName: @"completeAssignment"];
+    [_completeDesign defineViewNamed: @"complete" mapBlock: MAPBLOCK({
 		NSString *type = [doc objectForKey:@"doc_type"];
         NSNumber *finished = [doc objectForKey: @"finished"];
 		NSString *due = [doc objectForKey: @"due"];
         if ([type isEqualToString:@"assignment"] && [finished boolValue]) emit(due, doc);
     }) version: @"1.0"];
-    
-    // and a validation function requiring parseable dates:
-    design.validationBlock = VALIDATIONBLOCK({
-        if (newRevision.deleted)
-            return YES;
-        id date = [newRevision.properties objectForKey: @"last_modified"];
-        if (date && ! [RESTBody dateWithJSONObject: date]) {
-            context.errorMessage = [@"invalid date " stringByAppendingString: date];
-            return NO;
-        }
-        return YES;
-    });
-	
+
 	// Create a query sorted by descending date, i.e. newest items first:
     NSAssert(self.database!=nil, @"Not hooked up to database yet");
-    _query = [[[self.database designDocumentWithName: @"assignment"] queryViewNamed: @"notcomplete"] asLiveQuery];
+    _query = [[_design queryViewNamed: @"notcomplete"] asLiveQuery];
     _query.descending = NO;
     [_query addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
+	[_query start];
 	
-	_completeQuery = [[[self.database designDocumentWithName: @"assignment"] queryViewNamed: @"complete"] asLiveQuery];
+	_completeQuery = [[_completeDesign queryViewNamed: @"complete"] asLiveQuery];
     _completeQuery.descending = NO;
     [_completeQuery addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
+	[_completeQuery start];
 	
-    [self updateSyncURL];
+	[self updateSyncURL];
 }
 
 - (void)updateSyncURL {
@@ -207,14 +197,18 @@
         }
     }
 	if (object == _query) {
+		self.assignments = nil;
 		for (CouchQueryRow* row in [object rows]) {
-            // update the UI
+            [self.assignments addObject:row.value];
         }
+		[[self assignmentsTableView] reloadData];
 	}
 	if (object == _completeQuery) {
+		self.completeAssignments = nil;
 		for (CouchQueryRow* row in [object rows]) {
-            // update the UI
+            [self.completeAssignments addObject:row.value];
         }
+		[[self completeAssignmentsTableView] reloadData];
 	}
 }
 
@@ -230,14 +224,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-//	self.assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
-//	self.completeAssignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[[self nowAssignmentsTableView] reloadData];
+//	[[self nowAssignmentsTableView] reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -306,7 +298,7 @@
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
-	[(id)cell courseName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"course_id"];
+	[(id)cell courseName].text = [NSString stringWithFormat:@"%@", [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"course_id"] ];
 	[(id)cell assignmentName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"content"];
 	[(id)cell assignmentTime].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"due"];
 	if ([nibName isEqualToString:@"CPAssignmentImageCell"]) {
@@ -326,17 +318,17 @@
 
 - (void)changeComplete:(id)sender
 {
+	
 	NSMutableDictionary *assignment = [[[self nowAssignments] objectAtIndex:[sender assignmentIndex]] mutableCopy];
 	[assignment setObject:[NSNumber numberWithBool:[self.completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE] forKey:@"finished"];
-	
-	
-//	[[self nowAssignments] removeObjectAtIndex:[sender assignmentIndex]];
-//	[[self otherAssignments] addObject:assignment];
-	
-//	[[NSUserDefaults standardUserDefaults] setObject:self.assignments forKey:kASSIGNMENTS];
-//	[[NSUserDefaults standardUserDefaults] setObject:self.completeAssignments forKey:kCOMPLETEASSIGNMENTS];
-	
-	[[self nowAssignmentsTableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[sender assignmentIndex] inSection:0]] withRowAnimation:[self.completeSegmentedControl selectedSegmentIndex] == COMPLETE ? UITableViewRowAnimationLeft : UITableViewRowAnimationRight];
+	RESTOperation *op = [[self.database documentWithID:[assignment objectForKey:@"_id"]] putProperties:assignment];
+	[op onCompletion:^{
+		if (op.error) {
+			NSLog(@"%@", op.error);
+		} else {
+			NSLog(@"%@", @"更新完毕");
+		}
+	}];
 	
 }
 

@@ -11,6 +11,7 @@
 
 // The name of the database the app will use.
 #define kDatabaseName @"assignments_3"
+#define kLocalDatabaseName @"nbg_db"
 
 // The default remote database URL to sync with, if the user hasn't set a different one as a pref.
 #define kDefaultSyncDbURL @"https://zongziwang.cloudant.com/assignments_3"
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic, retain) CouchDatabase *database;
+@property (nonatomic, retain) CouchDatabase *localDatabase;
 
 - (NSURL *)applicationDocumentsDirectory;
 - (void)updateAppUserProfileWith:(NSDictionary *)dict;

@@ -158,6 +158,34 @@
 {
 	[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+	
+	if (![User sharedAppUser].university_id) return ;
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, NSDictionary *result) {
+		[self loading:NO];
+		
+		NSMutableDictionary *mutableResult = [result mutableCopy];
+		[mutableResult setObject:[User sharedAppUser].university_id forKey:@"id"];
+		[mutableResult setObject:@"university" forKey:@"doc_type"];
+		
+		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university_%@", [[User sharedAppUser] university_id]]];
+		if ([doc propertyForKey:@"_rev"]) [mutableResult setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+		RESTOperation *op = [doc putProperties:mutableResult];
+		[op onCompletion:^{
+			if (op.error) NSLog(@"%@", op.error);
+			else NSLog(@"%@", mutableResult);
+		}];
+		
+	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		[self loading:NO];
+		if ([collection objectForKey:@"error"]) {
+			raise(-1);
+		}
+	}];
+	
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [self loading:YES];
+	
 }
 
 #pragma mark - WBEngineDelegate

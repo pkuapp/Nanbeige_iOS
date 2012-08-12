@@ -130,9 +130,9 @@
 	
 	[self.assignment setObject:[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView.subviews objectAtIndex:0] text] forKey:@"content"];
 	NSString *deadlineString = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].contentView subviews] objectAtIndex:1] text];
-	[self.assignment setObject:deadlineString forKey:kASSIGNMENTDDLSTR];
+	[self.assignment setObject:deadlineString forKey:@"due"];
 	NSString *course = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] text];
-	[self.assignment setObject:course forKey:@"course_id"];
+	[self.assignment setObject:@0 forKey:@"course_id"];
 	
 	if (imageView.image.size.width && imageView.image.size.height) {
 		[self.assignment setObject:[NSNumber numberWithBool:YES] forKey:@"has_image"];
@@ -153,6 +153,14 @@
 		} else {
 //			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
 		}
+	}
+	
+	[self.assignment setObject:@"assignment" forKey:@"doc_type"];
+	CouchDatabase *database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
+	CouchDocument *doc = [database untitledDocument];
+	RESTOperation *op = [doc putProperties:self.assignment];
+	if (![op wait]) {
+		NSLog(@"%@", op.error);
 	}
 	
 	[self dismissModalViewControllerAnimated:YES];

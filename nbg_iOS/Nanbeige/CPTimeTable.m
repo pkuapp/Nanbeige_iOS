@@ -8,6 +8,8 @@
 
 #import "CPTimeTable.h"
 #import "Environment.h"
+#import "Coffeepot.h"
+#import "Models+addon.h"
 
 @interface CPTimeTable () <UITableViewDataSource, UITableViewDelegate> {
 	int rowHeight;
@@ -97,8 +99,13 @@
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
 	if ((self = [super initWithReuseIdentifier:reuseIdentifier])) {
-		_university = [[NSUserDefaults standardUserDefaults] objectForKey:kTEMPUNIVERSITY];
-		_courses = [[NSUserDefaults standardUserDefaults] objectForKey:kTEMPCOURSES];
+		
+		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university_%@", [[User sharedAppUser] university_id]]];
+		_university = [doc properties];
+		
+		doc = [localDatabase documentWithID:@"courses"];
+		_courses = [[doc properties] objectForKey:@"value"];
 		
 		for (UIView *subview in [self subviews]) {
 			[subview removeFromSuperview];

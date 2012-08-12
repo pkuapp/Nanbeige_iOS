@@ -121,24 +121,50 @@
 	NSDictionary *campus = [campuses objectAtIndex:index];
 	[User updateSharedAppUserProfile:campus];
 	
-	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
-		[self loading:NO];
+//	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+//		[self loading:NO];
 		
 		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
-			[self dismissModalViewControllerAnimated:YES];
+			
+			[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, NSDictionary *result) {
+				[self loading:NO];
+				
+				NSMutableDictionary *mutableResult = [result mutableCopy];
+				[mutableResult setObject:[User sharedAppUser].university_id forKey:@"id"];
+				[mutableResult setObject:@"university" forKey:@"doc_type"];
+				
+				CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+				CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university_%@", [[User sharedAppUser] university_id]]];
+				if ([doc propertyForKey:@"_rev"]) [mutableResult setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+				RESTOperation *op = [doc putProperties:mutableResult];
+				[op onCompletion:^{
+					if (op.error) NSLog(@"%@", op.error);
+					else [self dismissModalViewControllerAnimated:YES];
+				}];
+				
+			} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+				[self loading:NO];
+				if ([collection objectForKey:@"error"]) {
+					raise(-1);
+				}
+			}];
+			
+			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+			[self loading:YES];
+			
 		} else {
 			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 		}
 		
-	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-		[self loading:NO];
-		if ([collection objectForKey:@"error"]) {
-			raise(-1);
-		}
-	}];
-	
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
+//	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+//		[self loading:NO];
+//		if ([collection objectForKey:@"error"]) {
+//			raise(-1);
+//		}
+//	}];
+//	
+//	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+//	[self loading:YES];
 }
 
 @end

@@ -377,7 +377,9 @@
 			[self.navigationController pushViewController:self.nivc animated:YES];
 		}
 	} else if (functionIndex == 1) {
-		[self performSegueWithIdentifier:@"CoursesEnterSegue" sender:self];
+		UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPCoursesFlow" bundle:[NSBundle mainBundle]];
+		[self.navigationController pushViewController:[sb instantiateInitialViewController] animated:YES];
+//		[self performSegueWithIdentifier:@"CoursesEnterSegue" sender:self];
 	} else if (functionIndex == 2) {
 		if (self.nrvc == nil) [self performSegueWithIdentifier:@"RoomsEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.nrvc animated:YES];

@@ -8,8 +8,9 @@
 
 #import "CPRoomsViewController.h"
 #import "Environment.h"
-#import "GCArraySectionController.h"
-#import "GCRetractableSectionController.h"
+#import "CPRoomRetractableSectionController.h"
+#import "Coffeepot.h"
+#import "Models+addon.h"
 
 @interface CPRoomsViewController () {
 	NSDate *date;
@@ -156,8 +157,27 @@
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 		return ;
 	}
-//	[accountManager requestRoomsWithBuildingID:[[self.buildings objectAtIndex:buildingIndex] objectForKey:kAPIID] Date:date];
-	buildingIndex ++;
+	
+	NSNumber *building_id;
+	NSDictionary *params;
+	if (date) {
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		dateFormatter.dateFormat = @"yyyy-MM-dd";
+		params = @{ @"date" : [dateFormatter stringFromDate:date] };
+	} else params = nil;
+	building_id = [[self.buildings objectAtIndex:buildingIndex] objectForKey:@"id"];
+	
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/%@/room/", building_id] params:params requestMethod:@"GET" success:^(CPRequest *_req, NSArray *collection) {
+		
+		buildingIndex ++;
+		[self.rooms addObject:collection];
+		[self syncNextRooms];
+		
+	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		if ([collection objectForKey:@"error"]) {
+			raise(-1);
+		}
+	}];
 }
 
 - (void)reloadRooms
@@ -174,12 +194,12 @@
 				roomString = @"";
 			}
 			if ([roomString length] > 0) roomString = [roomString stringByAppendingString:@"・"];
-			roomString = [roomString stringByAppendingString:[[[self.rooms objectAtIndex:index] objectAtIndex:i] objectForKey:kAPINAME]];
+			roomString = [roomString stringByAppendingString:[[[self.rooms objectAtIndex:index] objectAtIndex:i] objectForKey:@"name"]];
 		}
 		if ([roomString length] > 0) [roomNames addObject:roomString];
 		
-		GCArraySectionController* arrayController = [[GCArraySectionController alloc] initWithArray:roomNames viewController:self];
-		arrayController.title = [[self.buildings objectAtIndex:index] objectForKey:kAPINAME];
+		CPRoomRetractableSectionController* arrayController = [[CPRoomRetractableSectionController alloc] initWithArray:roomNames viewController:self];
+		arrayController.title = [[self.buildings objectAtIndex:index] objectForKey:@"name"];
 		arrayController.open = YES;
 		[retractableControllers addObject:arrayController];
 	}
@@ -194,12 +214,25 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-	NSNumber *campus_id = [[NSUserDefaults standardUserDefaults] objectForKey:kCAMPUSIDKEY];
-//	if (campus_id) {
-//		[accountManager requestBuildingsWithCampusID:campus_id];
-//	} else {
-//		[accountManager requestBuildingsWithCampusID:[NSNumber numberWithInt:8]];
-//	}
+	NSNumber *campus_id = nil;//[User sharedAppUser].campus_id;
+	if (!campus_id) campus_id = @8;
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/?campus_id=%@", campus_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id result) {
+		
+		if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"error"]) {
+			[self showAlert:[result objectForKey:@"error"]];
+		} else {
+			[[NSUserDefaults standardUserDefaults] setValue:result forKey:kTEMPBUILDINGS];
+			self.buildings = result;
+			self.rooms = nil;
+			buildingIndex = 0;
+			[self syncNextRooms];
+		}
+		
+	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		if ([collection objectForKey:@"error"]) {
+			raise(-1);
+		}
+	}];
 }
 
 - (void)doneLoadingTableViewData{
@@ -234,7 +267,6 @@
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
 	
 	[self reloadTableViewDataSource];
-	//[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
 	
 }
 
@@ -257,6 +289,7 @@
 	self.toolbar.hidden = NO;
 	self.datePicker.hidden = NO;
 }
+
 - (IBAction)onConfrimDatePick:(id)sender {
 	self.toolbar.hidden = YES;
 	self.datePicker.hidden = YES;
@@ -266,31 +299,5 @@
 	formatter.dateFormat = @"M月d日";
 	self.title = [NSString stringWithFormat:FORMAT_TITLE_ROOMS, [formatter stringFromDate:date]];
 }
-
-#pragma mark - AccountManagerDelegate Others
-
-- (void)didBuildingsReceived:(NSArray *)buildings
-				WithCampusID:(NSNumber *)campus_id
-{
-	self.buildings = buildings;
-	[[NSUserDefaults standardUserDefaults] setValue:buildings forKey:kTEMPBUILDINGS];
-	
-	self.rooms = nil;
-	buildingIndex = 0;
-	[self syncNextRooms];
-}
-
-- (void)didRoomsReceived:(NSArray *)rooms
-		  WithBuildingID:(NSNumber *)building_id
-{
-	[self.rooms addObject:rooms];
-	[self syncNextRooms];
-}
-
-//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-//{
-//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-//	[self showAlert:errorString];
-//}
 
 @end

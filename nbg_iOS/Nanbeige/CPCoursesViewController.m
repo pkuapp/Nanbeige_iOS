@@ -66,7 +66,7 @@
 	
 	_paginatorView.frame = self.view.bounds;
 	_paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
-	_paginatorView.numberOfPagesToPreload = 0;
+//	_paginatorView.numberOfPagesToPreload = 0;
 //	[_paginatorView removePageControlFromSuperview];
 	[self.view addSubview:_paginatorView];
 	

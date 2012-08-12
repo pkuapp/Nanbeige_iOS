@@ -8,7 +8,8 @@
 
 #import "CPUserCoursesViewController.h"
 #import "Environment.h"
-
+#import "Coffeepot.h"
+#import "Models+addon.h"
 
 @interface CPUserCoursesViewController ()  {
 //	CPCourseManager *courseManager;
@@ -57,9 +58,6 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
 	self.courses = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPCOURSES];
-
-//	courseManager = [[CPCourseManager alloc] init];
-//	courseManager.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -131,7 +129,43 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-//	[courseManager requestCourses];
+	[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id result) {
+		
+		if ([result isKindOfClass:[NSArray class]]) {
+			
+			for (NSDictionary *course in result) {
+				NSMutableDictionary *mutableCourse = [course mutableCopy];
+				[mutableCourse setObject:@"course" forKey:@"doc_type"];
+				
+				CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+				CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course_%@", [course objectForKey:@"id"]]];
+				if ([doc propertyForKey:@"_rev"]) [mutableCourse setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+				RESTOperation *op = [doc putProperties:mutableCourse];
+				[op onCompletion:^{
+					if (op.error) NSLog(@"%@", op.error);
+					else {
+						[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+					}
+				}];
+			}
+			
+			self.courses = result;
+			NSMutableDictionary *mutableCourses = [@{ @"value" : result } mutableCopy];
+			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+			CouchDocument *doc = [localDatabase documentWithID:@"courses"];
+			if ([doc propertyForKey:@"_rev"]) [mutableCourses setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+			RESTOperation *op = [doc putProperties:mutableCourses];
+			[op onCompletion:^{
+				if (op.error) NSLog(@"%@", op.error);
+			}];
+
+		}
+		
+	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		if ([collection objectForKey:@"error"]) {
+			raise(-1);
+		}
+	}];
 }
 
 - (void)doneLoadingTableViewData{
@@ -162,7 +196,6 @@
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
 	
 	[self reloadTableViewDataSource];
-	//[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
 	
 }
 
@@ -185,20 +218,5 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	[self showAlert:[[self.courses objectAtIndex:indexPath.row] description]];
 }
-
-#pragma mark - AccountManagerDelegate Others
-
-//- (void)didCoursesReceived:(NSArray *)courses
-//{
-//	self.courses = [courses mutableCopy];
-//	[[NSUserDefaults standardUserDefaults] setValue:courses forKey:kTEMPCOURSES];
-//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-//}
-//
-//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-//{
-//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-//	[self showAlert:errorString];
-//}
 
 @end
