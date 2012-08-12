@@ -26,7 +26,7 @@
 }
 
 - (BOOL)needSignin {
-<<<<<<< HEAD
+
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //	if ([defaults valueForKey:kWEIBOIDKEY] == nil &&
 //		[defaults valueForKey:kRENRENIDKEY] == nil &&
@@ -45,26 +45,7 @@
 //        return YES;
 //	}
     return ![[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue];
-=======
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if ([defaults valueForKey:kWEIBOIDKEY] == nil &&
-		[defaults valueForKey:kRENRENIDKEY] == nil &&
-		[defaults valueForKey:kCPEMAILKEY] == nil) {
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kACCOUNTIDKEY];
-	}
-#warning 无账号测试
-	return NO;
-	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
-        return NO;
-	} else {
-		id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
-		NSDictionary *emptySettings = (workaround51Crash != nil)
-		? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
-		: [NSDictionary dictionary];
-		[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
-        return YES;
-	}
->>>>>>> origin/nbg-TouchDB
+
 }
 
 - (void)configureGlobalAppearance {
