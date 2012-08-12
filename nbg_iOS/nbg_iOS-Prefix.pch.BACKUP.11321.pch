@@ -1,0 +1,29 @@
+//
+// Prefix header for all source files of the 'nbg_iOS' target in the 'nbg_iOS' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+
+
+    #import <Objection-iOS/Objection.h>
+	#import <CouchCocoa/CouchCocoa.h>
+	#import <CouchCocoa/CouchDatabase.h>
+    #import "Quickdialog.h"
+    #import "Environment.h"
+<<<<<<< HEAD
+#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+=======
+	#import "CPAppDelegate.h"
+>>>>>>> origin/nbg-TouchDB
+#define MR_SHORTHAND
+    #import "CoreData+MagicalRecord.h"
+#endif

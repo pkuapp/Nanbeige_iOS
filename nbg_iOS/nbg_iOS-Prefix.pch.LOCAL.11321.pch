@@ -1,0 +1,23 @@
+//
+// Prefix header for all source files of the 'nbg_iOS' target in the 'nbg_iOS' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+
+
+    #import <Objection-iOS/Objection.h>
+    #import "Quickdialog.h"
+    #import "Environment.h"
+#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+#define MR_SHORTHAND
+    #import "CoreData+MagicalRecord.h"
+#endif
