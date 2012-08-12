@@ -45,7 +45,7 @@ static User *sharedAppUserObject = nil;
         user.university_name = [[dict objectForKey:@"university"] objectForKey:@"name"];
         user.university_id = [[dict objectForKey:@"university"] objectForKey:@"id"];
     }
-    if ([dict objectForKey:@"university"] && ![[dict objectForKey:@"university"] isKindOfClass:[NSNull class]]) {
+    if ([dict objectForKey:@"campus"] && ![[dict objectForKey:@"campus"] isKindOfClass:[NSNull class]]) {
         user.campus_name = [[dict objectForKey:@"campus"] objectForKey:@"name"];
         user.campus_id = [[dict objectForKey:@"campus"] objectForKey:@"id"];
     }
