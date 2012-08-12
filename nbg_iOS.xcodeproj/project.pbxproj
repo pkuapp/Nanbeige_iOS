@@ -969,8 +969,8 @@
 		41FD95FD15D6378B00477483 /* sign.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F215D6378B00477483 /* sign.json */; };
 		41FD95FE15D6378B00477483 /* universitySelect.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F315D6378B00477483 /* universitySelect.json */; };
 		41FD95FF15D6378B00477483 /* universitySelect.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F315D6378B00477483 /* universitySelect.json */; };
-		41FD960015D6378B00477483 /* loginConfirm.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* loginConfirm.json */; };
-		41FD960115D6378B00477483 /* loginConfirm.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* loginConfirm.json */; };
+		41FD960015D6378B00477483 /* signinConfirm.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* signinConfirm.json */; };
+		41FD960115D6378B00477483 /* signinConfirm.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* signinConfirm.json */; };
 		41FD960215D6378B00477483 /* signinEmail.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F515D6378B00477483 /* signinEmail.json */; };
 		41FD960315D6378B00477483 /* signinEmail.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F515D6378B00477483 /* signinEmail.json */; };
 		41FD960415D6378B00477483 /* signupEmail.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F615D6378B00477483 /* signupEmail.json */; };
@@ -1732,7 +1732,7 @@
 		41FD95F115D6378B00477483 /* chooseCampus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = chooseCampus.json; path = ../../JsonFile/chooseCampus.json; sourceTree = "<group>"; };
 		41FD95F215D6378B00477483 /* sign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = sign.json; path = ../../JsonFile/sign.json; sourceTree = "<group>"; };
 		41FD95F315D6378B00477483 /* universitySelect.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = universitySelect.json; path = ../../JsonFile/universitySelect.json; sourceTree = "<group>"; };
-		41FD95F415D6378B00477483 /* loginConfirm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loginConfirm.json; path = ../../JsonFile/loginConfirm.json; sourceTree = "<group>"; };
+		41FD95F415D6378B00477483 /* signinConfirm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = signinConfirm.json; path = ../../JsonFile/signinConfirm.json; sourceTree = "<group>"; };
 		41FD95F515D6378B00477483 /* signinEmail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = signinEmail.json; path = ../../JsonFile/signinEmail.json; sourceTree = "<group>"; };
 		41FD95F615D6378B00477483 /* signupEmail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = signupEmail.json; path = ../../JsonFile/signupEmail.json; sourceTree = "<group>"; };
 		41FD95F715D6378B00477483 /* preference.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = preference.json; sourceTree = "<group>"; };
@@ -2215,7 +2215,7 @@
 				41FD95F115D6378B00477483 /* chooseCampus.json */,
 				41FD95F215D6378B00477483 /* sign.json */,
 				41FD95F315D6378B00477483 /* universitySelect.json */,
-				41FD95F415D6378B00477483 /* loginConfirm.json */,
+				41FD95F415D6378B00477483 /* signinConfirm.json */,
 				41FD95F515D6378B00477483 /* signinEmail.json */,
 				41FD95F615D6378B00477483 /* signupEmail.json */,
 				4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */,
@@ -3142,7 +3142,7 @@
 				41FD95FA15D6378B00477483 /* chooseCampus.json in Resources */,
 				41FD95FC15D6378B00477483 /* sign.json in Resources */,
 				41FD95FE15D6378B00477483 /* universitySelect.json in Resources */,
-				41FD960015D6378B00477483 /* loginConfirm.json in Resources */,
+				41FD960015D6378B00477483 /* signinConfirm.json in Resources */,
 				41FD960215D6378B00477483 /* signinEmail.json in Resources */,
 				41FD960415D6378B00477483 /* signupEmail.json in Resources */,
 				41FD960615D6378B00477483 /* preference.json in Resources */,
@@ -3399,7 +3399,7 @@
 				41FD95FB15D6378B00477483 /* chooseCampus.json in Resources */,
 				41FD95FD15D6378B00477483 /* sign.json in Resources */,
 				41FD95FF15D6378B00477483 /* universitySelect.json in Resources */,
-				41FD960115D6378B00477483 /* loginConfirm.json in Resources */,
+				41FD960115D6378B00477483 /* signinConfirm.json in Resources */,
 				41FD960315D6378B00477483 /* signinEmail.json in Resources */,
 				41FD960515D6378B00477483 /* signupEmail.json in Resources */,
 				41FD960715D6378B00477483 /* preference.json in Resources */,
