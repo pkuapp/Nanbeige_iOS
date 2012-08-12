@@ -2909,25 +2909,9 @@
 				414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */,
 				414AFDA815D512A500EFFB60 /* CPLabelLeftDetailElement.h */,
 				414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */,
-				414AFDAA15D512A500EFFB60 /* CPLine1Button0Cell.h */,
-				414AFDAB15D512A500EFFB60 /* CPLine1Button0Cell.m */,
-				414AFDAC15D512A500EFFB60 /* CPLine1Button0Cell.xib */,
-				414AFDAD15D512A500EFFB60 /* CPLine2Button0Cell.h */,
-				414AFDAE15D512A500EFFB60 /* CPLine2Button0Cell.m */,
-				414AFDAF15D512A500EFFB60 /* CPLine2Button0Cell.xib */,
-				414AFDB015D512A500EFFB60 /* CPLine2Button2Cell.h */,
-				414AFDB115D512A500EFFB60 /* CPLine2Button2Cell.m */,
-				414AFDB215D512A500EFFB60 /* CPLine2Button2Cell.xib */,
-				414AFDB315D512A500EFFB60 /* CPLine3Button0Cell.h */,
-				414AFDB415D512A500EFFB60 /* CPLine3Button0Cell.m */,
-				414AFDB515D512A500EFFB60 /* CPLine3Button0Cell.xib */,
-				414AFDB615D512A500EFFB60 /* CPLine3Button2Cell.h */,
-				414AFDB715D512A500EFFB60 /* CPLine3Button2Cell.m */,
-				414AFDB815D512A500EFFB60 /* CPLine3Button2Cell.xib */,
+				414E13E315D7A7E300000CA8 /* CPMainFlow */,
 				414AFDB915D512A500EFFB60 /* CPLoginItsViewController.h */,
 				414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */,
-				414AFDBB15D512A500EFFB60 /* CPMainViewController.h */,
-				414AFDBC15D512A500EFFB60 /* CPMainViewController.m */,
 				414AFDBD15D512A500EFFB60 /* CPPickerLabel.h */,
 				414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */,
 				414AFDBF15D512A500EFFB60 /* CPPreferenceViewController.h */,
@@ -2946,6 +2930,30 @@
 				414AFDD915D512A500EFFB60 /* SystemHelper.m */,
 			);
 			path = Nanbeige;
+			sourceTree = "<group>";
+		};
+		414E13E315D7A7E300000CA8 /* CPMainFlow */ = {
+			isa = PBXGroup;
+			children = (
+				414AFDAA15D512A500EFFB60 /* CPLine1Button0Cell.h */,
+				414AFDAB15D512A500EFFB60 /* CPLine1Button0Cell.m */,
+				414AFDAC15D512A500EFFB60 /* CPLine1Button0Cell.xib */,
+				414AFDAD15D512A500EFFB60 /* CPLine2Button0Cell.h */,
+				414AFDAE15D512A500EFFB60 /* CPLine2Button0Cell.m */,
+				414AFDAF15D512A500EFFB60 /* CPLine2Button0Cell.xib */,
+				414AFDB015D512A500EFFB60 /* CPLine2Button2Cell.h */,
+				414AFDB115D512A500EFFB60 /* CPLine2Button2Cell.m */,
+				414AFDB215D512A500EFFB60 /* CPLine2Button2Cell.xib */,
+				414AFDB315D512A500EFFB60 /* CPLine3Button0Cell.h */,
+				414AFDB415D512A500EFFB60 /* CPLine3Button0Cell.m */,
+				414AFDB515D512A500EFFB60 /* CPLine3Button0Cell.xib */,
+				414AFDB615D512A500EFFB60 /* CPLine3Button2Cell.h */,
+				414AFDB715D512A500EFFB60 /* CPLine3Button2Cell.m */,
+				414AFDB815D512A500EFFB60 /* CPLine3Button2Cell.xib */,
+				414AFDBB15D512A500EFFB60 /* CPMainViewController.h */,
+				414AFDBC15D512A500EFFB60 /* CPMainViewController.m */,
+			);
+			name = CPMainFlow;
 			sourceTree = "<group>";
 		};
 		41D6FDE315D0C3CB0085DF89 /* CPConnect */ = {
