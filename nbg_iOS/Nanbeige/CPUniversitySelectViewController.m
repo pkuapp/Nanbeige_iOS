@@ -44,6 +44,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
+	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
+		UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
+		self.navigationItem.leftBarButtonItem = closeButton;
+		self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	}
 	
 	[[Coffeepot shared] requestWithMethodPath:@"university/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, NSArray *collection) {
 		
@@ -65,6 +70,7 @@
 		NSDictionary *dict = @{@"campuses":campuses};
 		[self.root bindToObject:dict];
 		[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+		[self loading:NO];
 		
 	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
 		if ([collection objectForKey:@"error"]) {
@@ -72,6 +78,8 @@
 		}
 	}];
 	
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [self loading:YES];	
 }
 
 - (void)viewDidUnload
@@ -101,7 +109,12 @@
 
 #pragma mark - Button controllerAction
 
-- (void)onChooseSchool:(id)sender
+- (void)close
+{
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)onCampusSelect:(id)sender
 {
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
 	NSDictionary *campus = [campuses objectAtIndex:index];

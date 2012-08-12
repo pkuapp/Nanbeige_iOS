@@ -174,7 +174,7 @@
 - (void)onEditUniversity:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
+	[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 }
 
 - (void)onEmailLogin:(id)sender

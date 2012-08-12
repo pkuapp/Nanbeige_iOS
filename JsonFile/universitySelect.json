@@ -7,7 +7,7 @@
 				 "bind":"iterate:campuses",
 				 "elementTemplate": {
 					"type":"CPLabelButtonElement",
-					"bind":"title:name",
+					"bind":"title:display_name",
 					"controllerAction":"onCampusSelect:"
 					}
 				 }
