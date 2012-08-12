@@ -8,9 +8,11 @@
 
 #import "QuickDialogController.h"
 #import "WBEngine+addon.h"
+#import "Renren+addon.h"
 
-@protocol WBEngineDelegate;
+@interface CPSignViewController : QuickDialogController  <WBEngineDelegate, RenrenDelegate>
 
-@interface CPSignViewController : QuickDialogController  <WBEngineDelegate>
 @property (nonatomic, strong) WBEngine *weibo;
+@property (nonatomic, strong) Renren *renren;
+
 @end

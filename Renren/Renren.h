@@ -13,6 +13,8 @@
 #import "ROPublishPhotoRequestParam.h"
 #import "ROGetFriendsInfoRequestParam.h"
 
+@class CPBlockHandler;
+
 /**
  * For 3rd-party developers:
  * Please replace following strings with app id, api key and secret 
@@ -45,6 +47,13 @@
 	NSArray *_permissions;
 	id <RenrenDelegate> _renrenDelegate;
 }
+
+@property (atomic, strong) CPBlockHandler *handler;
+
+-(NSString *)getSessionKeyByToken:(NSString *)token;
+-(NSString *)getSecretKeyByToken:(NSString *)token;
+-(void)saveUserSessionInfo;
+- (void)requestWithParam:(RORequestParam *)param andDelegate:(id <RORequestDelegate>)delegate;
 
 @property(nonatomic, copy) NSString *accessToken;
 

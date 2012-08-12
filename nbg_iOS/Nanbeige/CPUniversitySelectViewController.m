@@ -51,6 +51,7 @@
 	}
 	
 	[[Coffeepot shared] requestWithMethodPath:@"university/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, NSArray *collection) {
+		[self loading:NO];
 		
 		campuses = [[NSMutableArray alloc] init];
 		for (NSDictionary *university in collection) {
@@ -70,9 +71,9 @@
 		NSDictionary *dict = @{@"campuses":campuses};
 		[self.root bindToObject:dict];
 		[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
-		[self loading:NO];
 		
 	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		[self loading:NO];
 		if ([collection objectForKey:@"error"]) {
 			raise(-1);
 		}
@@ -120,8 +121,24 @@
 	NSDictionary *campus = [campuses objectAtIndex:index];
 	[User updateSharedAppUserProfile:campus];
 	
-	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) [self dismissModalViewControllerAnimated:YES];
-	[self performSegueWithIdentifier:@"signinConfirmSegue" sender:self];
+	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+		[self loading:NO];
+		
+		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
+			[self dismissModalViewControllerAnimated:YES];
+		} else {
+			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+		}
+		
+	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		[self loading:NO];
+		if ([collection objectForKey:@"error"]) {
+			raise(-1);
+		}
+	}];
+	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
 }
 
 @end

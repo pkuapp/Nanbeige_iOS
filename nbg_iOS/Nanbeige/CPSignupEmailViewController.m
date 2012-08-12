@@ -96,11 +96,13 @@
     }
 	
 	[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:@{@"email":email, @"password":password ,@"nickname":nickname} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+		[self loading:NO];
 		
 		[User updateSharedAppUserProfile:collection];
 		[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 		
 	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		[self loading:NO];
 		if ([collection objectForKey:@"error"]) {
 			raise(-1);
 		}

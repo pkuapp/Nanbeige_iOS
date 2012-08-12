@@ -11,7 +11,7 @@
 
 static NSString *kWBSDKDemoAppKey = @"1362082242";
 static NSString *kWBSDKDemoAppSecret = @"26a3e4f3e784bd183aeac3d58440f19f";
-static NSString *kWBRequestSuccess = @"WBRequestStrat";
+static NSString *kWBRequestSuccess = @"WBRequestSuccess";
 static NSString *kWBRequestFail = @"WBRequestFail";
 static WBEngine *sharedWBEngineOject = nil;
 

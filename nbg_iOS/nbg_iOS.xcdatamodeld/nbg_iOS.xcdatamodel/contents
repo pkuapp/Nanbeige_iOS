@@ -39,9 +39,11 @@
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="realname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="renren_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="renren_token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="university_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="university_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weibo_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weibo_token" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="user" inverseEntity="Course" syncable="YES"/>
         <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lesson" inverseName="user" inverseEntity="Lesson" syncable="YES"/>
@@ -51,6 +53,6 @@
         <element name="Course" positionX="160" positionY="192" width="128" height="180"/>
         <element name="Lesson" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Semester" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="User" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="User" positionX="160" positionY="192" width="128" height="255"/>
     </elements>
 </model>

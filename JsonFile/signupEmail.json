@@ -8,6 +8,7 @@
 							  {
 							  "type":"QEntryElement",
 							  "placeholder":"Email",
+							  "keyboardType":"EmailAddress",
 							  "bind":"textValue:email",
 							  "autocorrectionType":"No"
 							  },

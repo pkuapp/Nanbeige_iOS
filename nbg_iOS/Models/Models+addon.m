@@ -29,26 +29,40 @@ static User *sharedAppUserObject = nil;
 
 + (void)updateSharedAppUserProfile:(NSDictionary *)dict {
     User *user = [self sharedAppUser];
-    if ([dict objectForKey:@"nickname"]) {
+    
+    if ([dict objectForKey:@"id"]) {
+        user.id = [dict objectForKey:@"id"];
+    }
+	if ([dict objectForKey:@"nickname"]) {
         user.nickname = [dict objectForKey:@"nickname"];
     }
+	
     if ([dict objectForKey:@"email"]) {
         user.email = [dict objectForKey:@"email"];
     }
     if ([dict objectForKey:@"weibo_token"]) {
         user.weibo_token = [dict objectForKey:@"weibo_token"];
     }
-    if ([dict objectForKey:@"id"]) {
-        user.id = [dict objectForKey:@"id"];
+    if ([dict objectForKey:@"renren_token"]) {
+        user.renren_token = [dict objectForKey:@"renren_token"];
     }
+	if ([dict objectForKey:@"weibo_name"]) {
+		user.weibo_name = [dict objectForKey:@"weibo_name"];
+	}
+	if ([dict objectForKey:@"renren_name"]) {
+		user.renren_name = [dict objectForKey:@"renren_name"];
+	}
+	
     if ([dict objectForKey:@"university"] && ![[dict objectForKey:@"university"] isKindOfClass:[NSNull class]]) {
         user.university_name = [[dict objectForKey:@"university"] objectForKey:@"name"];
         user.university_id = [[dict objectForKey:@"university"] objectForKey:@"id"];
     }
+	
     if ([dict objectForKey:@"campus"] && ![[dict objectForKey:@"campus"] isKindOfClass:[NSNull class]]) {
         user.campus_name = [[dict objectForKey:@"campus"] objectForKey:@"name"];
         user.campus_id = [[dict objectForKey:@"campus"] objectForKey:@"id"];
     }
+	
     [[NSManagedObjectContext defaultContext] save];
 }
 

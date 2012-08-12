@@ -2,7 +2,7 @@
 //  User.m
 //  nbg_iOS
 //
-//  Created by wuhaotian on 12-8-12.
+//  Created by ZongZiWang on 12-8-13.
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
@@ -13,16 +13,18 @@
 
 @implementation User
 
+@dynamic campus_id;
+@dynamic campus_name;
+@dynamic email;
+@dynamic id;
 @dynamic nickname;
 @dynamic realname;
-@dynamic university_name;
-@dynamic campus_name;
-@dynamic university_id;
-@dynamic campus_id;
-@dynamic weibo_token;
 @dynamic renren_token;
-@dynamic id;
-@dynamic email;
+@dynamic university_id;
+@dynamic university_name;
+@dynamic weibo_token;
+@dynamic renren_name;
+@dynamic weibo_name;
 @dynamic courses;
 @dynamic lessons;
 

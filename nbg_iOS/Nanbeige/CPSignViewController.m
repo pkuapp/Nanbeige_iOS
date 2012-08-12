@@ -42,6 +42,13 @@
     return _weibo;
 }
 
+- (Renren *)renren {
+	if (!_renren) {
+		_renren = [Renren sharedRenren];
+	}
+	return _renren;
+}
+
 #pragma mark - View Lifecycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -111,12 +118,14 @@
     self.weibo.isUserExclusive = NO;
     self.weibo.redirectURI = @"https://api.weibo.com/oauth2/default.html";
     [self.weibo logIn];
-
 }
 
 - (void)onRenrenLogin:(id)sender
 {
-    
+	[self.renren delUserSessionInfo];
+	NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
+	[self.renren authorizationInNavigationWithPermisson:permissions
+											andDelegate:self];
 }
 
 #pragma mark - WBEngineDelegate
@@ -128,32 +137,44 @@
     
 	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
     success:^(WBRequest *request, id result) {
-        if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISCREEN_NAME]) {
+        [self loading:NO];
+		if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
+			
+			[User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
             
 			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+				[self loading:NO];
                 
                 [User updateSharedAppUserProfile:collection];
                 [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
                 
             } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-                
+				[self loading:NO];
+				
 				if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
                     
-					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:kAPISCREEN_NAME]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+						[self loading:NO];
 						
 						[User updateSharedAppUserProfile:collection];
 						[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
-							
 						
 					} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+						[self loading:NO];
 						if ([collection objectForKey:@"error"]) {
 							raise(-1);
 						}
 					}];
+					
+					[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+					[self loading:YES];
                 } else if ([collection objectForKey:@"error"]) {
 					raise(-1);
 				}
             }];
+			
+			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+			[self loading:YES];
         }
     }
     fail:^(WBRequest *request, NSError *error) {
@@ -171,24 +192,101 @@
 // 2) Your app has not been authorized by Sina yet.
 - (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
 {
-	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
-//		[self didRequest:nil FailWithError:[error description]];
-	}
+	
 }
 
 // When you use the WBEngine's request methods,
 // you may receive the following four callbacks.
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
-	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
-//		[self didRequest:nil FailWithError:@"微博未授权"];
-	}
+	
 }
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
-	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
-//		[self didRequest:nil FailWithError:@"微博授权已过期"];
-	}
+	
+}
+
+#pragma mark - RenrenDelegate
+
+/**
+ * 授权登录成功时被调用，第三方开发者实现这个方法
+ * @param renren 传回代理授权登录接口请求的Renren类型对象。
+ */
+- (void)renrenDidLogin:(Renren *)renren
+{
+	ROUserInfoRequestParam *requestParam = [[ROUserInfoRequestParam alloc] init];
+	requestParam.fields = [NSString stringWithFormat:@"uid,name"];
+	
+	[self.renren requestWithParam:requestParam
+					  andDelegate:self
+						  success:^(RORequest *request, id result) {
+							  [self loading:NO];
+							  
+							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
+								  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
+//							  
+//								  [[Coffeepot shared] requestWithMethodPath:@"user/login/renren/" params:@{@"token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+//									  [self loading:NO];
+//									  
+//									  [User updateSharedAppUserProfile:collection];
+									  [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+//
+//								  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+//									  [self loading:NO];
+//									  
+//									  if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
+//										  
+//										  [[Coffeepot shared] requestWithMethodPath:@"user/reg/renren/" params:@{@"token":self.renren.accessToken, @"nickname":[[result objectAtIndex:0] objectForKey:@"name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+//											  [self loading:NO];
+//											  
+//											  [User updateSharedAppUserProfile:collection];
+//											  [self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
+//											  
+//											  
+//										  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+//											  [self loading:NO];
+//											  if ([collection objectForKey:@"error"]) {
+//												  raise(-1);
+//											  }
+//										  }];
+//								  
+//										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+//										  [self loading:YES];
+//									  } else if ([collection objectForKey:@"error"]) {
+//										  raise(-1);
+//									  }
+//								  }];
+//								  
+//								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+//								  [self loading:YES];
+							  }
+						  }
+							 fail:^(RORequest *request, ROError *error) {
+								 [self loading:NO];
+								 NSLog(@"%@", error);
+							 }
+	 ];
+	
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [self loading:YES];
+}
+
+/**
+ * 用户登出成功后被调用 第三方开发者实现这个方法
+ * @param renren 传回代理登出接口请求的Renren类型对象。
+ */
+- (void)renrenDidLogout:(Renren *)renren
+{
+	
+}
+
+/**
+ * 授权登录失败时被调用，第三方开发者实现这个方法
+ * @param renren 传回代理授权登录接口请求的Renren类型对象。
+ */
+- (void)renren:(Renren *)renren loginFailWithError:(ROError*)error
+{
+	
 }
 
 @end

@@ -54,6 +54,11 @@
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;	
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -97,11 +102,13 @@
     }
 	
 	[[Coffeepot shared] requestWithMethodPath:@"user/login/email/" params:@{@"email":email, @"password":password } requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+		[self loading:NO];
 		
 		[User updateSharedAppUserProfile:collection];
 		[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 		
 	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		[self loading:NO];
 		if ([collection objectForKey:@"error"]) {
 			raise(-1);
 		}

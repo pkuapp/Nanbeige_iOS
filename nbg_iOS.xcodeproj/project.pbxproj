@@ -345,6 +345,10 @@
 		26CD829415D789FD0070DF78 /* CouchCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829015D789FC0070DF78 /* CouchCocoa.framework */; };
 		26CD829715D789FD0070DF78 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829215D789FC0070DF78 /* TouchDB.framework */; };
 		26CD829815D789FD0070DF78 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829215D789FC0070DF78 /* TouchDB.framework */; };
+		26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
+		26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
+		26F3E2C215D818E100D69D0D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C115D818E100D69D0D /* User.m */; };
+		26F3E2C315D818E100D69D0D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C115D818E100D69D0D /* User.m */; };
 		411DBBCC15CB9E4000EDB31D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCB15CB9E4000EDB31D /* UIKit.framework */; };
 		411DBBCE15CB9E4000EDB31D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCD15CB9E4000EDB31D /* Foundation.framework */; };
 		411DBBD015CB9E4000EDB31D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCF15CB9E4000EDB31D /* CoreGraphics.framework */; };
@@ -413,8 +417,6 @@
 		411DBC6F15CBA59700EDB31D /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 411DBC3915CBA59700EDB31D /* MagicalRecord.m */; };
 		4120F2B415D645D000D0AA97 /* WBEngine+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */; };
 		4120F2B515D645D000D0AA97 /* WBEngine+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */; };
-		4120F2BC15D78AE800D0AA97 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2BB15D78AE800D0AA97 /* User.m */; };
-		4120F2BD15D78AE800D0AA97 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2BB15D78AE800D0AA97 /* User.m */; };
 		413B9F3515D51D95000C9451 /* GCArraySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E6F15D51D95000C9451 /* GCArraySectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		413B9F3615D51D95000C9451 /* GCArraySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E6F15D51D95000C9451 /* GCArraySectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		413B9F3715D51D95000C9451 /* GCRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7115D51D95000C9451 /* GCRetractableSectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1172,6 +1174,10 @@
 		26CD813A15D7811B0070DF78 /* widget_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_point.png; sourceTree = "<group>"; };
 		26CD829015D789FC0070DF78 /* CouchCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CouchCocoa.framework; path = Frameworks/CouchCocoa.framework; sourceTree = "<group>"; };
 		26CD829215D789FC0070DF78 /* TouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchDB.framework; path = Frameworks/TouchDB.framework; sourceTree = "<group>"; };
+		26F3E2BC15D7FE4000D69D0D /* Renren+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Renren+addon.h"; path = "nbg_iOS/Renren+addon.h"; sourceTree = SOURCE_ROOT; };
+		26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Renren+addon.m"; path = "nbg_iOS/Renren+addon.m"; sourceTree = SOURCE_ROOT; };
+		26F3E2C015D818E100D69D0D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		26F3E2C115D818E100D69D0D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		411DBBC715CB9E3F00EDB31D /* nbg_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nbg_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		411DBBCB15CB9E4000EDB31D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		411DBBCD15CB9E4000EDB31D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1247,8 +1253,6 @@
 		4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "WBEngine+addon.h"; path = "../WBEngine+addon.h"; sourceTree = "<group>"; };
 		4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "WBEngine+addon.m"; path = "../WBEngine+addon.m"; sourceTree = "<group>"; };
 		4120F2B915D6B4F500D0AA97 /* CPUserDefaultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserDefaultDelegate.h; sourceTree = "<group>"; };
-		4120F2BA15D78AE700D0AA97 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
-		4120F2BB15D78AE800D0AA97 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		413B9E6E15D51D95000C9451 /* GCArraySectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCArraySectionController.h; path = Demo/Demo/GCArraySectionController.h; sourceTree = "<group>"; };
 		413B9E6F15D51D95000C9451 /* GCArraySectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCArraySectionController.m; path = Demo/Demo/GCArraySectionController.m; sourceTree = "<group>"; };
 		413B9E7015D51D95000C9451 /* GCRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCRetractableSectionController.h; path = GCRetractableSectionController/GCRetractableSectionController.h; sourceTree = "<group>"; };
@@ -2220,6 +2224,8 @@
 				41FD95F615D6378B00477483 /* signupEmail.json */,
 				4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */,
 				4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */,
+				26F3E2BC15D7FE4000D69D0D /* Renren+addon.h */,
+				26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */,
 				414AFD8A15D512A500EFFB60 /* CPSignViewController.h */,
 				414AFD8B15D512A500EFFB60 /* CPSignViewController.m */,
 				414AFD9A15D512A500EFFB60 /* CPSigninEmailViewController.h */,
@@ -2868,9 +2874,9 @@
 				414AFCB515D422FF00EFFB60 /* Semester.m */,
 				414AFCB015D422FF00EFFB60 /* Assignment.h */,
 				414AFCB115D422FF00EFFB60 /* Assignment.m */,
+				26F3E2C015D818E100D69D0D /* User.h */,
+				26F3E2C115D818E100D69D0D /* User.m */,
 				411DBBDF15CB9E4000EDB31D /* nbg_iOS.xcdatamodeld */,
-				4120F2BA15D78AE700D0AA97 /* User.h */,
-				4120F2BB15D78AE800D0AA97 /* User.m */,
 				414AFCA815D3C6CC00EFFB60 /* Models+addon.h */,
 				414AFCA915D3C6CC00EFFB60 /* Models+addon.m */,
 			);
@@ -3811,7 +3817,8 @@
 				413BA24215D52B19000C9451 /* Switch3DTransition.m in Sources */,
 				413BA26E15D52FA6000C9451 /* CPIPGateHelper.m in Sources */,
 				4120F2B415D645D000D0AA97 /* WBEngine+addon.m in Sources */,
-				4120F2BC15D78AE800D0AA97 /* User.m in Sources */,
+				26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */,
+				26F3E2C215D818E100D69D0D /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4028,7 +4035,8 @@
 				413BA24315D52B19000C9451 /* Switch3DTransition.m in Sources */,
 				413BA26F15D52FA6000C9451 /* CPIPGateHelper.m in Sources */,
 				4120F2B515D645D000D0AA97 /* WBEngine+addon.m in Sources */,
-				4120F2BD15D78AE800D0AA97 /* User.m in Sources */,
+				26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */,
+				26F3E2C315D818E100D69D0D /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
