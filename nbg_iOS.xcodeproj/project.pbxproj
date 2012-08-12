@@ -151,9 +151,7 @@
 		26CD81C815D7811C0070DF78 /* datebar.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80D915D7811B0070DF78 /* datebar.png */; };
 		26CD81C915D7811C0070DF78 /* datebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80DA15D7811B0070DF78 /* datebar@2x.png */; };
 		26CD81CA15D7811C0070DF78 /* datebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80DA15D7811B0070DF78 /* datebar@2x.png */; };
-		26CD81CB15D7811C0070DF78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80DB15D7811B0070DF78 /* Default.png */; };
 		26CD81CC15D7811C0070DF78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80DB15D7811B0070DF78 /* Default.png */; };
-		26CD81CD15D7811C0070DF78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80DC15D7811B0070DF78 /* Default@2x.png */; };
 		26CD81CE15D7811C0070DF78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80DC15D7811B0070DF78 /* Default@2x.png */; };
 		26CD81CF15D7811C0070DF78 /* disclosure-indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80DD15D7811B0070DF78 /* disclosure-indicator.png */; };
 		26CD81D015D7811C0070DF78 /* disclosure-indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD80DD15D7811B0070DF78 /* disclosure-indicator.png */; };
@@ -2905,25 +2903,9 @@
 				414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */,
 				414AFDA815D512A500EFFB60 /* CPLabelLeftDetailElement.h */,
 				414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */,
-				414AFDAA15D512A500EFFB60 /* CPLine1Button0Cell.h */,
-				414AFDAB15D512A500EFFB60 /* CPLine1Button0Cell.m */,
-				414AFDAC15D512A500EFFB60 /* CPLine1Button0Cell.xib */,
-				414AFDAD15D512A500EFFB60 /* CPLine2Button0Cell.h */,
-				414AFDAE15D512A500EFFB60 /* CPLine2Button0Cell.m */,
-				414AFDAF15D512A500EFFB60 /* CPLine2Button0Cell.xib */,
-				414AFDB015D512A500EFFB60 /* CPLine2Button2Cell.h */,
-				414AFDB115D512A500EFFB60 /* CPLine2Button2Cell.m */,
-				414AFDB215D512A500EFFB60 /* CPLine2Button2Cell.xib */,
-				414AFDB315D512A500EFFB60 /* CPLine3Button0Cell.h */,
-				414AFDB415D512A500EFFB60 /* CPLine3Button0Cell.m */,
-				414AFDB515D512A500EFFB60 /* CPLine3Button0Cell.xib */,
-				414AFDB615D512A500EFFB60 /* CPLine3Button2Cell.h */,
-				414AFDB715D512A500EFFB60 /* CPLine3Button2Cell.m */,
-				414AFDB815D512A500EFFB60 /* CPLine3Button2Cell.xib */,
+				414E13E315D7A7E300000CA8 /* CPMainFlow */,
 				414AFDB915D512A500EFFB60 /* CPLoginItsViewController.h */,
 				414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */,
-				414AFDBB15D512A500EFFB60 /* CPMainViewController.h */,
-				414AFDBC15D512A500EFFB60 /* CPMainViewController.m */,
 				414AFDBD15D512A500EFFB60 /* CPPickerLabel.h */,
 				414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */,
 				414AFDBF15D512A500EFFB60 /* CPPreferenceViewController.h */,
@@ -2948,6 +2930,30 @@
 				414AFD8915D512A500EFFB60 /* CPCampusSelectViewController.m */,
 			);
 			path = Nanbeige;
+			sourceTree = "<group>";
+		};
+		414E13E315D7A7E300000CA8 /* CPMainFlow */ = {
+			isa = PBXGroup;
+			children = (
+				414AFDAA15D512A500EFFB60 /* CPLine1Button0Cell.h */,
+				414AFDAB15D512A500EFFB60 /* CPLine1Button0Cell.m */,
+				414AFDAC15D512A500EFFB60 /* CPLine1Button0Cell.xib */,
+				414AFDAD15D512A500EFFB60 /* CPLine2Button0Cell.h */,
+				414AFDAE15D512A500EFFB60 /* CPLine2Button0Cell.m */,
+				414AFDAF15D512A500EFFB60 /* CPLine2Button0Cell.xib */,
+				414AFDB015D512A500EFFB60 /* CPLine2Button2Cell.h */,
+				414AFDB115D512A500EFFB60 /* CPLine2Button2Cell.m */,
+				414AFDB215D512A500EFFB60 /* CPLine2Button2Cell.xib */,
+				414AFDB315D512A500EFFB60 /* CPLine3Button0Cell.h */,
+				414AFDB415D512A500EFFB60 /* CPLine3Button0Cell.m */,
+				414AFDB515D512A500EFFB60 /* CPLine3Button0Cell.xib */,
+				414AFDB615D512A500EFFB60 /* CPLine3Button2Cell.h */,
+				414AFDB715D512A500EFFB60 /* CPLine3Button2Cell.m */,
+				414AFDB815D512A500EFFB60 /* CPLine3Button2Cell.xib */,
+				414AFDBB15D512A500EFFB60 /* CPMainViewController.h */,
+				414AFDBC15D512A500EFFB60 /* CPMainViewController.m */,
+			);
+			name = CPMainFlow;
 			sourceTree = "<group>";
 		};
 		41D6FDE315D0C3CB0085DF89 /* CPConnect */ = {
@@ -3212,8 +3218,6 @@
 				26CD81C515D7811C0070DF78 /* datebar-arrow-right-pressed@2x.png in Resources */,
 				26CD81C715D7811C0070DF78 /* datebar.png in Resources */,
 				26CD81C915D7811C0070DF78 /* datebar@2x.png in Resources */,
-				26CD81CB15D7811C0070DF78 /* Default.png in Resources */,
-				26CD81CD15D7811C0070DF78 /* Default@2x.png in Resources */,
 				26CD81CF15D7811C0070DF78 /* disclosure-indicator.png in Resources */,
 				26CD81D115D7811C0070DF78 /* disclosure-indicator@2x.png in Resources */,
 				26CD81D315D7811C0070DF78 /* discuss.png in Resources */,
