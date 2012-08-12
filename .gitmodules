@@ -29,3 +29,9 @@
 [submodule "EGOTableViewPullRefresh"]
 	path = EGOTableViewPullRefresh
 	url = https://github.com/enormego/EGOTableViewPullRefresh.git
+[submodule "TouchDB-iOS"]
+	path = TouchDB-iOS
+	url = https://github.com/couchbaselabs/TouchDB-iOS.git
+[submodule "CouchCocoa"]
+	path = CouchCocoa
+	url = https://github.com/couchbaselabs/CouchCocoa.git
