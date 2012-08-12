@@ -9,8 +9,6 @@
 #import "CPWeiboLoginViewController.h"
 #import "Environment.h"
 
-#define kPadding 10
-
 @interface CPWeiboLoginViewController ()
 
 @end

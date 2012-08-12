@@ -7,14 +7,11 @@
 //
 
 #import "CPSigninComfirmViewController.h"
-
 #import "Environment.h"
+#import "Coffeepot.h"
 #import "Models+addon.h"
 
-@interface CPSigninComfirmViewController ()  {
-//	CPAccountManager *accountManager;
-	NSMutableDictionary *actionSheetDict;
-}
+@interface CPSigninComfirmViewController ()
 
 @end
 
@@ -27,6 +24,7 @@
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = YES;
+	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
 #pragma mark - View Lifecycle
@@ -35,7 +33,7 @@
 {
 	self = [super initWithCoder:aDecoder];
 	if (self) {
-		self.root = [[QRootElement alloc] initWithJSONFile:@"confirmLogin"];
+		self.root = [[QRootElement alloc] initWithJSONFile:@"signinConfirm"];
 	}
 	return self;
 }
@@ -44,9 +42,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	
-//	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-//	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -57,6 +52,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
 	[self refreshDisplay];
 }
 
@@ -88,27 +84,26 @@
 	if (!nickname) nickname = sDEFAULTNICKNAME;
 	NSString *university = appuser.university_name;
 	if (!university) university = sDEFAULTUNIVERSITY;
-    
-	NSString *campus = [[NSUserDefaults standardUserDefaults] objectForKey:kCAMPUSNAMEKEY];
+	NSString *campus = appuser.campus_name;
 	if (campus) university = [university stringByAppendingFormat:@" %@", campus];
 	
 	NSMutableArray *loginaccount = [[NSMutableArray alloc] init];
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
 	
 	if (appuser.email)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kCPEMAILKEY], @"value", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", appuser.email, @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onEmailLogin:", @"controllerAction", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onConnectEmail:", @"controllerAction", nil]];
 	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY])
+	if (appuser.renren_token)
 		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_token, @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTRENREN, @"title", @"onRenrenLogin:", @"controllerAction", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTRENREN, @"title", @"onConnectRenren:", @"controllerAction", nil]];
 	
 	if (appuser.weibo_token)
 		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", appuser.weibo_token, @"value", nil]];
 	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTWEIBO, @"title", @"onWeiboLogin:", @"controllerAction", nil]];
+		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTWEIBO, @"title", @"onConnectWeibo:", @"controllerAction", nil]];
 	
 	NSDictionary *dict = @{
 	@"identity": @[
@@ -117,8 +112,8 @@
 	@"loginaccount" : loginaccount,
 	@"connectaccount" : connectaccount};
 	[self.root bindToObject:dict];
-	
 }
+
 - (void)refreshDisplay
 {
 	[self refreshDataSource];
@@ -127,73 +122,23 @@
 
 #pragma mark - Button controllerAction
 
-- (void)onEmailLogin:(id)sender
+- (void)onConnectEmail:(id)sender
 {
-	[self performSegueWithIdentifier:@"EmailLoginSegue" sender:self];
+	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
 }
-- (void)onWeiboLogin:(id)sender
+- (void)onConnectWeibo:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-//	[accountManager weiboLogin];
+	
 }
-
-- (void)onRenrenLogin:(id)sender
+- (void)onConnectRenren:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-//	[accountManager renrenLogin];
+	
 }
 
 - (void)onConfirmLogin:(id)sender
 {
-//	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	
-#warning 获取该学校信息
-//	[accountManager requestUniversityWithID:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
-	
-//	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDIT] boolValue]) {
-//
-//		[self loading:YES];
-//		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-		
-//	} else {
-		[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
+	[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-//		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
-//		[self dismissModalViewControllerAnimated:YES];
-//	}
 }
-
-#pragma mark - AccountManagerDelegate Weibo
-
-- (void)didWeiboLoginWithUserID:(NSString *)user_id UserName:(NSString *)user_name WeiboToken:(NSString *)weibo_token
-{
-	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, weibo_token);
-	[self refreshDisplay];
-}
-
-#pragma mark - AccountManagerDelegate Renren
-
-- (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
-{
-	NSLog(@"id:%@, name:%@, token:%@", user_id, user_name, renren_token);
-	[self refreshDisplay];
-}
-
-#pragma mark - AccountManagerDelegate Email
-
-- (void)didEmailEdit {
-	[self loading:NO];
-	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPIDKEY] forKey:kACCOUNTIDKEY];
-	[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-//#pragma mark - AccountManagerDelegate Error
-//
-//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-//{
-//	[self loading:NO];
-//	[self showAlert:errorString];
-//}
 
 @end

@@ -1,7 +1,7 @@
 {
 	"grouped": true,
 	"title": "用 Email 地址注册",
-    "controllerName": "CPEmailSignupViewController",
+    "controllerName": "CPSignupEmailViewController",
 	"sections": [
 				 {
 				 "elements": [

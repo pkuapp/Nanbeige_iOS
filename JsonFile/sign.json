@@ -1,7 +1,7 @@
 {
 	"grouped": true,
 	"title": "欢迎使用南北阁",
-    "controllerName": "CPChooseLoginViewController",
+    "controllerName": "CPSignViewController",
 	"sections": [
 				 {
 				 "title":"登录南北阁",

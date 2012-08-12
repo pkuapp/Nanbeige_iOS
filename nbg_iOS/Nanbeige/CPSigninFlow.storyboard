@@ -17,12 +17,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="prn-3o-0WT"/>
                     <connections>
-                        <segue destination="n42-FH-vyM" kind="push" identifier="ConfirmLoginSegue" id="ooK-Bm-0Rf"/>
-                        <segue destination="Rga-bJ-rkM" kind="push" identifier="ChooseCampusSegue" id="ch1-tV-8wz"/>
+                        <segue destination="n42-FH-vyM" kind="push" identifier="SigninConfirmSegue" id="ooK-Bm-0Rf"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-830" y="-2454"/>
+            <point key="canvasLocation" x="390" y="-2304"/>
         </scene>
         <!--Signin Comfirm View Controller-->
         <scene sceneID="yVv-5F-5t8">
@@ -35,12 +34,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="d1v-Cb-4Fz"/>
-                    <connections>
-                        <segue destination="1Ye-tV-uVy" kind="modal" identifier="EmailLoginSegue" id="kav-4r-xjh"/>
-                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-104" y="-2454"/>
+            <point key="canvasLocation" x="1040" y="-3266"/>
         </scene>
         <!--Sign View Controller-->
         <scene sceneID="yJs-lO-HtS">
@@ -54,13 +50,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="iFi-yp-nTy"/>
                     <connections>
-                        <segue destination="vk4-mc-wZg" kind="push" identifier="ChooseSchoolSegue" id="Myr-Rl-IFE"/>
-                        <segue destination="n42-FH-vyM" kind="push" identifier="ConfirmLoginSegue" id="HeC-sN-6Fj"/>
-                        <segue destination="1Ye-tV-uVy" kind="modal" identifier="EmailLoginSegue" id="g9i-Ra-uvs"/>
+                        <segue destination="vk4-mc-wZg" kind="push" identifier="UniversitySelectSegue" id="Myr-Rl-IFE"/>
+                        <segue destination="n42-FH-vyM" kind="push" identifier="SigninConfirmSegue" id="HeC-sN-6Fj"/>
+                        <segue destination="xY4-YT-3wJ" kind="push" identifier="SigninEmailSegue" id="44A-U7-4x0"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-622" y="-3258"/>
+            <point key="canvasLocation" x="-258" y="-3266"/>
         </scene>
         <!--Signup Email View Controller-->
         <scene sceneID="n2u-84-V52">
@@ -73,43 +69,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="gOc-ou-CvE"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1164" y="-2454"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="QHY-zd-3YZ">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GjK-vp-buU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" id="1Ye-tV-uVy" sceneMemberID="viewController">
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Jd-WZ-qy7">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
                     <connections>
-                        <segue destination="xY4-YT-3wJ" kind="relationship" relationship="rootViewController" id="9U3-eO-yhk"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="439" y="-2454"/>
-        </scene>
-        <!--Campus Select View Controller-->
-        <scene sceneID="hUj-Af-0KT">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0BJ-Cb-Yjm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Rga-bJ-rkM" customClass="CPCampusSelectViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="A8D-gt-VVm">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="DBo-Q1-LzM"/>
-                    <connections>
-                        <segue destination="n42-FH-vyM" kind="push" identifier="ConfirmLoginSegue" id="f5B-cn-jfO"/>
+                        <segue destination="n42-FH-vyM" kind="push" identifier="SigninConfirmSegue" id="XfO-LC-cTL"/>
+                        <segue destination="vk4-mc-wZg" kind="push" identifier="UniversitySelectSegue" id="1w8-dm-wKH"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-466" y="-2454"/>
+            <point key="canvasLocation" x="390" y="-2900"/>
         </scene>
         <!--Signin Email View Controller-->
         <scene sceneID="XL0-Rw-tOd">
@@ -123,11 +89,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="GwZ-MG-sQC"/>
                     <connections>
-                        <segue destination="5gB-gP-MIo" kind="push" identifier="EmailSignupSegue" id="Hrz-A8-Aev"/>
+                        <segue destination="5gB-gP-MIo" kind="push" identifier="SignupEmailSegue" id="Hrz-A8-Aev"/>
+                        <segue destination="n42-FH-vyM" kind="push" identifier="SigninConfirmSegue" id="atX-En-Y7b"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="801" y="-2454"/>
+            <point key="canvasLocation" x="390" y="-3784"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ln2-vL-0si">
@@ -142,13 +109,10 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-990" y="-3258"/>
+            <point key="canvasLocation" x="-786" y="-3266"/>
         </scene>
     </scenes>
     <classes>
-        <class className="CPCampusSelectViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPCampusSelectViewController.h"/>
-        </class>
         <class className="CPSignViewController" superclassName="QuickDialogController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSignViewController.h"/>
         </class>
@@ -174,7 +138,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="g9i-Ra-uvs"/>
-        <segue reference="HeC-sN-6Fj"/>
+        <segue reference="XfO-LC-cTL"/>
+        <segue reference="1w8-dm-wKH"/>
     </inferredMetricsTieBreakers>
 </document>

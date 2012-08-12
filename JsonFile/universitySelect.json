@@ -1,14 +1,14 @@
 {
 	"grouped": true,
 	"title": "选择你的学校",
-    "controllerName": "CPChooseSchoolViewController",
+    "controllerName": "CPUniversitySelectViewController",
 	"sections": [
 				 {
-				 "bind":"iterate:university",
+				 "bind":"iterate:campuses",
 				 "elementTemplate": {
 					"type":"CPLabelButtonElement",
 					"bind":"title:name",
-					"controllerAction":"onChooseSchool:"
+					"controllerAction":"onCampusSelect:"
 					}
 				 }
 				 ]

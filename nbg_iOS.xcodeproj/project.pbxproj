@@ -843,44 +843,6 @@
 		413BA26B15D52EC7000C9451 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413BA26A15D52EC7000C9451 /* MobileCoreServices.framework */; };
 		413BA26E15D52FA6000C9451 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */; };
 		413BA26F15D52FA6000C9451 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */; };
-		414AFC5115D398CA00EFFB60 /* widget_1line_0btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC4C15D398CA00EFFB60 /* widget_1line_0btn.png */; };
-		414AFC5215D398CA00EFFB60 /* widget_1line_0btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC4C15D398CA00EFFB60 /* widget_1line_0btn.png */; };
-		414AFC5315D398CA00EFFB60 /* widget_2line_0btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC4D15D398CA00EFFB60 /* widget_2line_0btn.png */; };
-		414AFC5415D398CA00EFFB60 /* widget_2line_0btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC4D15D398CA00EFFB60 /* widget_2line_0btn.png */; };
-		414AFC5515D398CA00EFFB60 /* widget_2line_2btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC4E15D398CA00EFFB60 /* widget_2line_2btn.png */; };
-		414AFC5615D398CA00EFFB60 /* widget_2line_2btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC4E15D398CA00EFFB60 /* widget_2line_2btn.png */; };
-		414AFC5715D398CA00EFFB60 /* widget_3line_0btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC4F15D398CA00EFFB60 /* widget_3line_0btn.png */; };
-		414AFC5815D398CA00EFFB60 /* widget_3line_0btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC4F15D398CA00EFFB60 /* widget_3line_0btn.png */; };
-		414AFC5915D398CA00EFFB60 /* widget_3line_2btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5015D398CA00EFFB60 /* widget_3line_2btn.png */; };
-		414AFC5A15D398CA00EFFB60 /* widget_3line_2btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5015D398CA00EFFB60 /* widget_3line_2btn.png */; };
-		414AFC5F15D398EF00EFFB60 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5B15D398EF00EFFB60 /* calendar.png */; };
-		414AFC6015D398EF00EFFB60 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5B15D398EF00EFFB60 /* calendar.png */; };
-		414AFC6115D398EF00EFFB60 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5C15D398EF00EFFB60 /* calendar@2x.png */; };
-		414AFC6215D398EF00EFFB60 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5C15D398EF00EFFB60 /* calendar@2x.png */; };
-		414AFC6315D398EF00EFFB60 /* courses.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5D15D398EF00EFFB60 /* courses.png */; };
-		414AFC6415D398EF00EFFB60 /* courses.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5D15D398EF00EFFB60 /* courses.png */; };
-		414AFC6515D398EF00EFFB60 /* courses@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5E15D398EF00EFFB60 /* courses@2x.png */; };
-		414AFC6615D398EF00EFFB60 /* courses@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC5E15D398EF00EFFB60 /* courses@2x.png */; };
-		414AFC6815D3990400EFFB60 /* widget_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC6715D3990400EFFB60 /* widget_point.png */; };
-		414AFC6915D3990400EFFB60 /* widget_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC6715D3990400EFFB60 /* widget_point.png */; };
-		414AFC6C15D3991A00EFFB60 /* assignment.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC6A15D3991A00EFFB60 /* assignment.png */; };
-		414AFC6D15D3991A00EFFB60 /* assignment.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC6A15D3991A00EFFB60 /* assignment.png */; };
-		414AFC6E15D3991A00EFFB60 /* assignment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC6B15D3991A00EFFB60 /* assignment@2x.png */; };
-		414AFC6F15D3991A00EFFB60 /* assignment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC6B15D3991A00EFFB60 /* assignment@2x.png */; };
-		414AFC7115D399B000EFFB60 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7015D399B000EFFB60 /* Icon-Small@2x.png */; };
-		414AFC7215D399B000EFFB60 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7015D399B000EFFB60 /* Icon-Small@2x.png */; };
-		414AFC7515D399C400EFFB60 /* its.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7315D399C400EFFB60 /* its.png */; };
-		414AFC7615D399C400EFFB60 /* its.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7315D399C400EFFB60 /* its.png */; };
-		414AFC7715D399C400EFFB60 /* its@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7415D399C400EFFB60 /* its@2x.png */; };
-		414AFC7815D399C400EFFB60 /* its@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7415D399C400EFFB60 /* its@2x.png */; };
-		414AFC7B15D399D800EFFB60 /* rooms.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7915D399D800EFFB60 /* rooms.png */; };
-		414AFC7C15D399D800EFFB60 /* rooms.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7915D399D800EFFB60 /* rooms.png */; };
-		414AFC7D15D399D800EFFB60 /* rooms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7A15D399D800EFFB60 /* rooms@2x.png */; };
-		414AFC7E15D399D800EFFB60 /* rooms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC7A15D399D800EFFB60 /* rooms@2x.png */; };
-		414AFC8215D39A0C00EFFB60 /* 180-stickynote.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC8015D39A0C00EFFB60 /* 180-stickynote.png */; };
-		414AFC8315D39A0C00EFFB60 /* 180-stickynote.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC8015D39A0C00EFFB60 /* 180-stickynote.png */; };
-		414AFC8415D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */; };
-		414AFC8515D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */; };
 		414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
 		414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
 		414AFCB215D422FF00EFFB60 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB115D422FF00EFFB60 /* Assignment.m */; };
@@ -1005,16 +967,16 @@
 		41FD95F915D6378B00477483 /* accountManage.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F015D6378B00477483 /* accountManage.json */; };
 		41FD95FA15D6378B00477483 /* chooseCampus.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F115D6378B00477483 /* chooseCampus.json */; };
 		41FD95FB15D6378B00477483 /* chooseCampus.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F115D6378B00477483 /* chooseCampus.json */; };
-		41FD95FC15D6378B00477483 /* chooseLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F215D6378B00477483 /* chooseLogin.json */; };
-		41FD95FD15D6378B00477483 /* chooseLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F215D6378B00477483 /* chooseLogin.json */; };
-		41FD95FE15D6378B00477483 /* chooseSchool.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F315D6378B00477483 /* chooseSchool.json */; };
-		41FD95FF15D6378B00477483 /* chooseSchool.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F315D6378B00477483 /* chooseSchool.json */; };
-		41FD960015D6378B00477483 /* confirmLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* confirmLogin.json */; };
-		41FD960115D6378B00477483 /* confirmLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* confirmLogin.json */; };
-		41FD960215D6378B00477483 /* emailLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F515D6378B00477483 /* emailLogin.json */; };
-		41FD960315D6378B00477483 /* emailLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F515D6378B00477483 /* emailLogin.json */; };
-		41FD960415D6378B00477483 /* emailSignup.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F615D6378B00477483 /* emailSignup.json */; };
-		41FD960515D6378B00477483 /* emailSignup.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F615D6378B00477483 /* emailSignup.json */; };
+		41FD95FC15D6378B00477483 /* sign.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F215D6378B00477483 /* sign.json */; };
+		41FD95FD15D6378B00477483 /* sign.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F215D6378B00477483 /* sign.json */; };
+		41FD95FE15D6378B00477483 /* universitySelect.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F315D6378B00477483 /* universitySelect.json */; };
+		41FD95FF15D6378B00477483 /* universitySelect.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F315D6378B00477483 /* universitySelect.json */; };
+		41FD960015D6378B00477483 /* loginConfirm.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* loginConfirm.json */; };
+		41FD960115D6378B00477483 /* loginConfirm.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F415D6378B00477483 /* loginConfirm.json */; };
+		41FD960215D6378B00477483 /* signinEmail.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F515D6378B00477483 /* signinEmail.json */; };
+		41FD960315D6378B00477483 /* signinEmail.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F515D6378B00477483 /* signinEmail.json */; };
+		41FD960415D6378B00477483 /* signupEmail.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F615D6378B00477483 /* signupEmail.json */; };
+		41FD960515D6378B00477483 /* signupEmail.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F615D6378B00477483 /* signupEmail.json */; };
 		41FD960615D6378B00477483 /* preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F715D6378B00477483 /* preference.json */; };
 		41FD960715D6378B00477483 /* preference.json in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95F715D6378B00477483 /* preference.json */; };
 /* End PBXBuildFile section */
@@ -1658,25 +1620,6 @@
 		413BA26A15D52EC7000C9451 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIPGateHelper.m; sourceTree = "<group>"; };
 		413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIPGateHelper.h; sourceTree = "<group>"; };
-		414AFC4C15D398CA00EFFB60 /* widget_1line_0btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_1line_0btn.png; sourceTree = "<group>"; };
-		414AFC4D15D398CA00EFFB60 /* widget_2line_0btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_2line_0btn.png; sourceTree = "<group>"; };
-		414AFC4E15D398CA00EFFB60 /* widget_2line_2btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_2line_2btn.png; sourceTree = "<group>"; };
-		414AFC4F15D398CA00EFFB60 /* widget_3line_0btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_3line_0btn.png; sourceTree = "<group>"; };
-		414AFC5015D398CA00EFFB60 /* widget_3line_2btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_3line_2btn.png; sourceTree = "<group>"; };
-		414AFC5B15D398EF00EFFB60 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
-		414AFC5C15D398EF00EFFB60 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
-		414AFC5D15D398EF00EFFB60 /* courses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = courses.png; sourceTree = "<group>"; };
-		414AFC5E15D398EF00EFFB60 /* courses@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "courses@2x.png"; sourceTree = "<group>"; };
-		414AFC6715D3990400EFFB60 /* widget_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_point.png; sourceTree = "<group>"; };
-		414AFC6A15D3991A00EFFB60 /* assignment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = assignment.png; sourceTree = "<group>"; };
-		414AFC6B15D3991A00EFFB60 /* assignment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "assignment@2x.png"; sourceTree = "<group>"; };
-		414AFC7015D399B000EFFB60 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
-		414AFC7315D399C400EFFB60 /* its.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = its.png; sourceTree = "<group>"; };
-		414AFC7415D399C400EFFB60 /* its@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "its@2x.png"; sourceTree = "<group>"; };
-		414AFC7915D399D800EFFB60 /* rooms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rooms.png; sourceTree = "<group>"; };
-		414AFC7A15D399D800EFFB60 /* rooms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rooms@2x.png"; sourceTree = "<group>"; };
-		414AFC8015D39A0C00EFFB60 /* 180-stickynote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180-stickynote.png"; sourceTree = "<group>"; };
-		414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180-stickynote@2x.png"; sourceTree = "<group>"; };
 		414AFCA815D3C6CC00EFFB60 /* Models+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Models+addon.h"; path = "Models/Models+addon.h"; sourceTree = "<group>"; };
 		414AFCA915D3C6CC00EFFB60 /* Models+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Models+addon.m"; path = "Models/Models+addon.m"; sourceTree = "<group>"; };
 		414AFCB015D422FF00EFFB60 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
@@ -1789,11 +1732,11 @@
 		41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPCoursesFlow.storyboard; sourceTree = "<group>"; };
 		41FD95F015D6378B00477483 /* accountManage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = accountManage.json; sourceTree = "<group>"; };
 		41FD95F115D6378B00477483 /* chooseCampus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = chooseCampus.json; path = ../../JsonFile/chooseCampus.json; sourceTree = "<group>"; };
-		41FD95F215D6378B00477483 /* chooseLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = chooseLogin.json; path = ../../JsonFile/chooseLogin.json; sourceTree = "<group>"; };
-		41FD95F315D6378B00477483 /* chooseSchool.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = chooseSchool.json; path = ../../JsonFile/chooseSchool.json; sourceTree = "<group>"; };
-		41FD95F415D6378B00477483 /* confirmLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = confirmLogin.json; path = ../../JsonFile/confirmLogin.json; sourceTree = "<group>"; };
-		41FD95F515D6378B00477483 /* emailLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = emailLogin.json; path = ../../JsonFile/emailLogin.json; sourceTree = "<group>"; };
-		41FD95F615D6378B00477483 /* emailSignup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = emailSignup.json; path = ../../JsonFile/emailSignup.json; sourceTree = "<group>"; };
+		41FD95F215D6378B00477483 /* sign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = sign.json; path = ../../JsonFile/sign.json; sourceTree = "<group>"; };
+		41FD95F315D6378B00477483 /* universitySelect.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = universitySelect.json; path = ../../JsonFile/universitySelect.json; sourceTree = "<group>"; };
+		41FD95F415D6378B00477483 /* loginConfirm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loginConfirm.json; path = ../../JsonFile/loginConfirm.json; sourceTree = "<group>"; };
+		41FD95F515D6378B00477483 /* signinEmail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = signinEmail.json; path = ../../JsonFile/signinEmail.json; sourceTree = "<group>"; };
+		41FD95F615D6378B00477483 /* signupEmail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = signupEmail.json; path = ../../JsonFile/signupEmail.json; sourceTree = "<group>"; };
 		41FD95F715D6378B00477483 /* preference.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = preference.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2272,27 +2215,25 @@
 			isa = PBXGroup;
 			children = (
 				41FD95F115D6378B00477483 /* chooseCampus.json */,
-				41FD95F215D6378B00477483 /* chooseLogin.json */,
-				41FD95F315D6378B00477483 /* chooseSchool.json */,
-				41FD95F415D6378B00477483 /* confirmLogin.json */,
-				41FD95F515D6378B00477483 /* emailLogin.json */,
-				41FD95F615D6378B00477483 /* emailSignup.json */,
+				41FD95F215D6378B00477483 /* sign.json */,
+				41FD95F315D6378B00477483 /* universitySelect.json */,
+				41FD95F415D6378B00477483 /* loginConfirm.json */,
+				41FD95F515D6378B00477483 /* signinEmail.json */,
+				41FD95F615D6378B00477483 /* signupEmail.json */,
 				4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */,
 				4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */,
-				414AFD8E15D512A500EFFB60 /* CPSigninComfirmViewController.h */,
-				414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */,
+				414AFD8A15D512A500EFFB60 /* CPSignViewController.h */,
+				414AFD8B15D512A500EFFB60 /* CPSignViewController.m */,
 				414AFD9A15D512A500EFFB60 /* CPSigninEmailViewController.h */,
 				414AFD9B15D512A500EFFB60 /* CPSigninEmailViewController.m */,
 				414AFD9C15D512A500EFFB60 /* CPSignupEmailViewController.h */,
 				414AFD9D15D512A500EFFB60 /* CPSignupEmailViewController.m */,
-				414AFDC115D512A500EFFB60 /* CPRenrenPostViewController.h */,
-				414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */,
 				414AFDCC15D512A500EFFB60 /* CPWeiboLoginViewController.h */,
 				414AFDCD15D512A500EFFB60 /* CPWeiboLoginViewController.m */,
-				414AFDCE15D512A500EFFB60 /* CPWeiboPostViewController.h */,
-				414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */,
-				414AFD8A15D512A500EFFB60 /* CPSignViewController.h */,
-				414AFD8B15D512A500EFFB60 /* CPSignViewController.m */,
+				414AFD8C15D512A500EFFB60 /* CPUniversitySelectViewController.h */,
+				414AFD8D15D512A500EFFB60 /* CPUniversitySelectViewController.m */,
+				414AFD8E15D512A500EFFB60 /* CPSigninComfirmViewController.h */,
+				414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */,
 				414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */,
 			);
 			name = CPSignFlow;
@@ -2914,25 +2855,6 @@
 			isa = PBXGroup;
 			children = (
 				41FD95EF15D6378B00477483 /* JsonFile */,
-				414AFC8015D39A0C00EFFB60 /* 180-stickynote.png */,
-				414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */,
-				414AFC7915D399D800EFFB60 /* rooms.png */,
-				414AFC7A15D399D800EFFB60 /* rooms@2x.png */,
-				414AFC7315D399C400EFFB60 /* its.png */,
-				414AFC7415D399C400EFFB60 /* its@2x.png */,
-				414AFC7015D399B000EFFB60 /* Icon-Small@2x.png */,
-				414AFC6A15D3991A00EFFB60 /* assignment.png */,
-				414AFC6B15D3991A00EFFB60 /* assignment@2x.png */,
-				414AFC5B15D398EF00EFFB60 /* calendar.png */,
-				414AFC5C15D398EF00EFFB60 /* calendar@2x.png */,
-				414AFC5D15D398EF00EFFB60 /* courses.png */,
-				414AFC5E15D398EF00EFFB60 /* courses@2x.png */,
-				414AFC6715D3990400EFFB60 /* widget_point.png */,
-				414AFC4C15D398CA00EFFB60 /* widget_1line_0btn.png */,
-				414AFC4D15D398CA00EFFB60 /* widget_2line_0btn.png */,
-				414AFC4E15D398CA00EFFB60 /* widget_2line_2btn.png */,
-				414AFC4F15D398CA00EFFB60 /* widget_3line_0btn.png */,
-				414AFC5015D398CA00EFFB60 /* widget_3line_2btn.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2966,10 +2888,6 @@
 				414AFD7715D512A500EFFB60 /* CPAccountManageViewController.m */,
 				414AFD8615D512A500EFFB60 /* CPChangeMainOrderViewController.h */,
 				414AFD8715D512A500EFFB60 /* CPChangeMainOrderViewController.m */,
-				414AFD8815D512A500EFFB60 /* CPCampusSelectViewController.h */,
-				414AFD8915D512A500EFFB60 /* CPCampusSelectViewController.m */,
-				414AFD8C15D512A500EFFB60 /* CPUniversitySelectViewController.h */,
-				414AFD8D15D512A500EFFB60 /* CPUniversitySelectViewController.m */,
 				413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */,
 				413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */,
 				414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */,
@@ -3022,6 +2940,12 @@
 				414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */,
 				414AFDD815D512A500EFFB60 /* SystemHelper.h */,
 				414AFDD915D512A500EFFB60 /* SystemHelper.m */,
+				414AFDC115D512A500EFFB60 /* CPRenrenPostViewController.h */,
+				414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */,
+				414AFDCE15D512A500EFFB60 /* CPWeiboPostViewController.h */,
+				414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */,
+				414AFD8815D512A500EFFB60 /* CPCampusSelectViewController.h */,
+				414AFD8915D512A500EFFB60 /* CPCampusSelectViewController.m */,
 			);
 			path = Nanbeige;
 			sourceTree = "<group>";
@@ -3134,25 +3058,6 @@
 			files = (
 				411DBBD815CB9E4000EDB31D /* InfoPlist.strings in Resources */,
 				41E7F98A15D2AF63009B8703 /* AFNetworking in Resources */,
-				414AFC5115D398CA00EFFB60 /* widget_1line_0btn.png in Resources */,
-				414AFC5315D398CA00EFFB60 /* widget_2line_0btn.png in Resources */,
-				414AFC5515D398CA00EFFB60 /* widget_2line_2btn.png in Resources */,
-				414AFC5715D398CA00EFFB60 /* widget_3line_0btn.png in Resources */,
-				414AFC5915D398CA00EFFB60 /* widget_3line_2btn.png in Resources */,
-				414AFC5F15D398EF00EFFB60 /* calendar.png in Resources */,
-				414AFC6115D398EF00EFFB60 /* calendar@2x.png in Resources */,
-				414AFC6315D398EF00EFFB60 /* courses.png in Resources */,
-				414AFC6515D398EF00EFFB60 /* courses@2x.png in Resources */,
-				414AFC6815D3990400EFFB60 /* widget_point.png in Resources */,
-				414AFC6C15D3991A00EFFB60 /* assignment.png in Resources */,
-				414AFC6E15D3991A00EFFB60 /* assignment@2x.png in Resources */,
-				414AFC7115D399B000EFFB60 /* Icon-Small@2x.png in Resources */,
-				414AFC7515D399C400EFFB60 /* its.png in Resources */,
-				414AFC7715D399C400EFFB60 /* its@2x.png in Resources */,
-				414AFC7B15D399D800EFFB60 /* rooms.png in Resources */,
-				414AFC7D15D399D800EFFB60 /* rooms@2x.png in Resources */,
-				414AFC8215D39A0C00EFFB60 /* 180-stickynote.png in Resources */,
-				414AFC8415D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */,
 				414AFDDA15D512A500EFFB60 /* courseGrabber.json in Resources */,
 				414AFDDC15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */,
 				414AFDE215D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -3229,11 +3134,11 @@
 				41FD95ED15D616C600477483 /* CPCoursesFlow.storyboard in Resources */,
 				41FD95F815D6378B00477483 /* accountManage.json in Resources */,
 				41FD95FA15D6378B00477483 /* chooseCampus.json in Resources */,
-				41FD95FC15D6378B00477483 /* chooseLogin.json in Resources */,
-				41FD95FE15D6378B00477483 /* chooseSchool.json in Resources */,
-				41FD960015D6378B00477483 /* confirmLogin.json in Resources */,
-				41FD960215D6378B00477483 /* emailLogin.json in Resources */,
-				41FD960415D6378B00477483 /* emailSignup.json in Resources */,
+				41FD95FC15D6378B00477483 /* sign.json in Resources */,
+				41FD95FE15D6378B00477483 /* universitySelect.json in Resources */,
+				41FD960015D6378B00477483 /* loginConfirm.json in Resources */,
+				41FD960215D6378B00477483 /* signinEmail.json in Resources */,
+				41FD960415D6378B00477483 /* signupEmail.json in Resources */,
 				41FD960615D6378B00477483 /* preference.json in Resources */,
 				26CD813B15D7811C0070DF78 /* 179-notepad.png in Resources */,
 				26CD813D15D7811C0070DF78 /* 179-notepad@2x.png in Resources */,
@@ -3412,25 +3317,6 @@
 			files = (
 				411DBBF415CB9E4000EDB31D /* InfoPlist.strings in Resources */,
 				41E7F98B15D2AF63009B8703 /* AFNetworking in Resources */,
-				414AFC5215D398CA00EFFB60 /* widget_1line_0btn.png in Resources */,
-				414AFC5415D398CA00EFFB60 /* widget_2line_0btn.png in Resources */,
-				414AFC5615D398CA00EFFB60 /* widget_2line_2btn.png in Resources */,
-				414AFC5815D398CA00EFFB60 /* widget_3line_0btn.png in Resources */,
-				414AFC5A15D398CA00EFFB60 /* widget_3line_2btn.png in Resources */,
-				414AFC6015D398EF00EFFB60 /* calendar.png in Resources */,
-				414AFC6215D398EF00EFFB60 /* calendar@2x.png in Resources */,
-				414AFC6415D398EF00EFFB60 /* courses.png in Resources */,
-				414AFC6615D398EF00EFFB60 /* courses@2x.png in Resources */,
-				414AFC6915D3990400EFFB60 /* widget_point.png in Resources */,
-				414AFC6D15D3991A00EFFB60 /* assignment.png in Resources */,
-				414AFC6F15D3991A00EFFB60 /* assignment@2x.png in Resources */,
-				414AFC7215D399B000EFFB60 /* Icon-Small@2x.png in Resources */,
-				414AFC7615D399C400EFFB60 /* its.png in Resources */,
-				414AFC7815D399C400EFFB60 /* its@2x.png in Resources */,
-				414AFC7C15D399D800EFFB60 /* rooms.png in Resources */,
-				414AFC7E15D399D800EFFB60 /* rooms@2x.png in Resources */,
-				414AFC8315D39A0C00EFFB60 /* 180-stickynote.png in Resources */,
-				414AFC8515D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */,
 				414AFDDB15D512A500EFFB60 /* courseGrabber.json in Resources */,
 				414AFDDD15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */,
 				414AFDE315D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -3507,11 +3393,11 @@
 				41FD95EE15D616C600477483 /* CPCoursesFlow.storyboard in Resources */,
 				41FD95F915D6378B00477483 /* accountManage.json in Resources */,
 				41FD95FB15D6378B00477483 /* chooseCampus.json in Resources */,
-				41FD95FD15D6378B00477483 /* chooseLogin.json in Resources */,
-				41FD95FF15D6378B00477483 /* chooseSchool.json in Resources */,
-				41FD960115D6378B00477483 /* confirmLogin.json in Resources */,
-				41FD960315D6378B00477483 /* emailLogin.json in Resources */,
-				41FD960515D6378B00477483 /* emailSignup.json in Resources */,
+				41FD95FD15D6378B00477483 /* sign.json in Resources */,
+				41FD95FF15D6378B00477483 /* universitySelect.json in Resources */,
+				41FD960115D6378B00477483 /* loginConfirm.json in Resources */,
+				41FD960315D6378B00477483 /* signinEmail.json in Resources */,
+				41FD960515D6378B00477483 /* signupEmail.json in Resources */,
 				41FD960715D6378B00477483 /* preference.json in Resources */,
 				26CD813C15D7811C0070DF78 /* 179-notepad.png in Resources */,
 				26CD813E15D7811C0070DF78 /* 179-notepad@2x.png in Resources */,

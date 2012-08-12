@@ -419,7 +419,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <segment title="未完成"/>
                                 <segment title="已完成"/>
                             </segments>
-                            <color key="tintColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onAssignmentCompleteChanged:" destination="R9G-nc-9ot" eventType="valueChanged" id="n6X-a9-qqr"/>
                             </connections>
@@ -891,7 +890,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2689" y="-1224"/>
+            <point key="canvasLocation" x="2135" y="-948"/>
         </scene>
         <!--Weibo Post View Controller-->
         <scene sceneID="IcV-to-mG5">
@@ -937,7 +936,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2689" y="-673"/>
+            <point key="canvasLocation" x="2541" y="-948"/>
         </scene>
         <!--Navigation Controller - 信息流-->
         <scene sceneID="U6W-KN-1cs">
@@ -953,7 +952,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1082" y="-948"/>
+            <point key="canvasLocation" x="1038" y="-948"/>
         </scene>
         <!--Feed View Controller - 信息流-->
         <scene sceneID="qc2-n8-bCL">
@@ -995,7 +994,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1475" y="-948"/>
+            <point key="canvasLocation" x="1426" y="-948"/>
         </scene>
         <!--Navigation Controller - 仪表盘-->
         <scene sceneID="Q7Z-RS-Cjn">
@@ -1035,7 +1034,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1592" y="-328"/>
+            <point key="canvasLocation" x="1426" y="-328"/>
         </scene>
         <!--Account Manage View Controller-->
         <scene sceneID="wJr-wX-Vh1">
@@ -1049,9 +1048,42 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="062-ar-HqJ"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="Rwg-i3-Zyp" kind="modal" id="qHk-oG-Tsc"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1592" y="242"/>
+            <point key="canvasLocation" x="2135" y="-328"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="24G-RS-2Hp">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8T9-Lj-fJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Eoe-n4-jZJ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JZf-EP-QgV">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="f20-al-NzU"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2957" y="-328"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mwf-y5-DRY">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oDL-ly-5Rq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="Rwg-i3-Zyp" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2s6-Nb-egW">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Eoe-n4-jZJ" kind="relationship" relationship="rootViewController" id="C81-k4-Csb"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="2541" y="-328"/>
         </scene>
         <!--Change Main Order View Controller - 更改仪表盘布局-->
         <scene sceneID="KJ7-oZ-rj9">
@@ -1086,7 +1118,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2135" y="-328"/>
+            <point key="canvasLocation" x="1426" y="276"/>
         </scene>
         <!--View Controller - 关于南北阁-->
         <scene sceneID="tzG-CO-2lz">
@@ -1144,7 +1176,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2135" y="242"/>
+            <point key="canvasLocation" x="2135" y="276"/>
         </scene>
         <!--Navigation Controller - 设置-->
         <scene sceneID="ZKE-9y-wvS">
@@ -1184,7 +1216,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="ago-rE-zId"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2689" y="242"/>
+            <point key="canvasLocation" x="2541" y="276"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -1204,7 +1236,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tabBarController>
             </objects>
-            <point key="canvasLocation" x="502" y="-948"/>
+            <point key="canvasLocation" x="498" y="-948"/>
         </scene>
     </scenes>
     <resources>
@@ -1245,9 +1277,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="onAssignmentCompleteChanged:"/>
                 <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeDataSource" candidateClass="CouchUITableSource"/>
                 <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="notCompleteDataSource" candidateClass="CouchUITableSource"/>
             </relationships>
         </class>
         <class className="CPChangeMainOrderViewController" superclassName="UITableViewController">
@@ -1302,12 +1332,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="onCancelButtonPressed:"/>
                 <relationship kind="action" name="onPostButtonPressed:"/>
                 <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="CouchUITableSource" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CouchUITableSource.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="QuickDialogController" superclassName="UIViewController">

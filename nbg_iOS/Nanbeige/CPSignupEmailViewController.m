@@ -8,6 +8,8 @@
 
 #import "CPSignupEmailViewController.h"
 #import "Environment.h"
+#import "Coffeepot.h"
+#import "Models+addon.h"
 
 
 @interface CPSignupEmailViewController () {
@@ -27,6 +29,7 @@
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = NO;
+	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
 #pragma mark - View Lifecycle
@@ -35,7 +38,7 @@
 {
 	self = [super initWithCoder:aDecoder];
 	if (self) {
-		self.root = [[QRootElement alloc] initWithJSONFile:@"emailSignup"];
+		self.root = [[QRootElement alloc] initWithJSONFile:@"signupEmail"];
 	}
 	return self;
 }
@@ -92,26 +95,19 @@
 		return ;
     }
 	
-
+	[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:@{@"email":email, @"password":password ,@"nickname":nickname} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+		
+		[User updateSharedAppUserProfile:collection];
+		[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
+		
+	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		if ([collection objectForKey:@"error"]) {
+			raise(-1);
+		}
+	}];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
 }
 
-#pragma mark - AccountManagerDelegate Email
-
-- (void)didEmailSignupWithID:(NSNumber *)CPid
-{
-	[self loading:NO];
-	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTIDKEY]) {
-		[[NSUserDefaults standardUserDefaults] setObject:CPid forKey:kACCOUNTIDKEY];
-		[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
-	}
-//	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
-//		[self.accountManagerDelegate didEmailLoginWithID:CPid Nickname:nickname UniversityID:nil UniversityName:nil CampusID:nil CampusName:nil];
-//	}
-	[self dismissModalViewControllerAnimated:YES];
-//    }
-}
 @end

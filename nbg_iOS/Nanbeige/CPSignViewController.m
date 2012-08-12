@@ -31,6 +31,7 @@
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColor1;
     self.quickDialogTableView.bounces = NO;
+	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
 - (WBEngine *)weibo {
@@ -47,8 +48,7 @@
 {
 	self = [super initWithCoder:aDecoder];
 	if (self) {
-		self.root = [[QRootElement alloc] initWithJSONFile:@"chooseLogin"];
-        self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+		self.root = [[QRootElement alloc] initWithJSONFile:@"sign"];
 	}
 	return self;
 }
@@ -59,8 +59,6 @@
 	// Do any additional setup after loading the view.
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
-	
-
 }
 
 - (void)viewDidUnload
@@ -79,16 +77,6 @@
 	? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
 	: [NSDictionary dictionary];
 	[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	[super prepareForSegue:segue sender:sender];
-	if ([segue.identifier isEqualToString:@"EmailLoginSegue"]) {
-		UINavigationController *navVC = segue.destinationViewController;
-		CPSigninEmailViewController *destinationVC = (CPSigninEmailViewController *)navVC.topViewController;
-		destinationVC.accountManagerDelegate = self;
-	}
 }
 
 #pragma mark - Display
@@ -114,8 +102,9 @@
 
 - (void)onEmailLogin:(id)sender
 {
-	[self performSegueWithIdentifier:@"EmailLoginSegue" sender:self];
+	[self performSegueWithIdentifier:@"SigninEmailSegue" sender:self];
 }
+
 - (void)onWeiboLogin:(id)sender
 {
     self.weibo.delegate = self;
@@ -124,6 +113,14 @@
     [self.weibo logIn];
 
 }
+
+- (void)onRenrenLogin:(id)sender
+{
+    
+}
+
+#pragma mark - WBEngineDelegate
+
 - (void)engineDidLogIn:(WBEngine *)engine
 {
 	
@@ -133,16 +130,29 @@
     success:^(WBRequest *request, id result) {
         if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISCREEN_NAME]) {
             
-            [[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
                 
                 [User updateSharedAppUserProfile:collection];
-                
-                [self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
+                [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
                 
             } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-                if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
-                    raise(-1);
-                }
+                
+				if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
+                    
+					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:kAPISCREEN_NAME]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+						
+						[User updateSharedAppUserProfile:collection];
+						[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
+							
+						
+					} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+						if ([collection objectForKey:@"error"]) {
+							raise(-1);
+						}
+					}];
+                } else if ([collection objectForKey:@"error"]) {
+					raise(-1);
+				}
             }];
         }
     }
@@ -150,6 +160,9 @@
         [self loading:NO];
         [self showAlert:error.description];
     }];
+	
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [self loading:YES];
 }
 
 // Failed to log in.
@@ -177,48 +190,5 @@
 //		[self didRequest:nil FailWithError:@"微博授权已过期"];
 	}
 }
-
-- (void)onRenrenLogin:(id)sender
-{
-    
-}
-
-
-- (void)didWeiboSignupWithID:(NSNumber *)ID
-{
-}
-
-#pragma mark - AccountManagerDelegate Renren
-
-- (void)didRenrenLoginWithUserID:(NSNumber *)user_id UserName:(NSString *)user_name RenrenToken:(NSString *)renren_token
-{
-#warning 等待服务器完成人人网token使用流程
-	/*
-	[accountManager emailLoginWithRenrenToken:renren_token];
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
-	 */
-	[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
-}
-
-- (void)didRenrenSignupWithID:(NSNumber *)ID
-{
-//	[accountManager emailLoginWithRenrenToken:[[NSUserDefaults standardUserDefaults] objectForKey:kRENRENTOKENKEY]];
-}
-
-#pragma mark - AccountManagerDelegate Email
-
-- (void)didEmailLoginWithID:(NSNumber *)ID Nickname:(NSString *)nickname UniversityID:(NSNumber *)university_id UniversityName:(NSString *)university_name CampusID:(NSNumber *)campus_id CampusName:(NSString *)campus_name
-{
-	[self loading:NO];
-	if (university_id) {
-		[self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
-	} else {
-		[self performSegueWithIdentifier:@"ChooseSchoolSegue" sender:self];
-	}
-}
-
-#pragma mark - AccountManagerDelegate Error
-
 
 @end

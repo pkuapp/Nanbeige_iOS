@@ -205,9 +205,6 @@
         } else {
             //[self showSyncButton];
         }
-		for (CouchQueryRow* row in [object rows]) {
-            // update the UI
-        }
     }
 	if (object == _query) {
 		for (CouchQueryRow* row in [object rows]) {
