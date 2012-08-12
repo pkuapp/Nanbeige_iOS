@@ -8,23 +8,51 @@
 
 #import "Models+addon.h"
 #import <CoreData/CoreData.h>
+#import "MagicalRecord.h"
 
-//static User *sharedAppUserObject = nil;
-//
-//@implementation User (addon)
-//
-//+ (User *)sharedAppUser{
-//    if (!sharedAppUserObject) {
-//        sharedAppUserObject = [User findAll].count ? [[User findAll] objectAtIndex:1] : nil;
-//    }
-//    return sharedAppUserObject;
-//}
-//
-//+ (void)updateSharedAppUserProfile:(NSDictionary *)dict {
-//    
-//}
-//
-//- (void)updateUserProfile:(NSDictionary *)dict {
-//    
-//}
-//@end
+static User *sharedAppUserObject = nil;
+
+@implementation User (addon)
+
++ (User *)sharedAppUser{
+    @synchronized(sharedAppUserObject){
+        if (!sharedAppUserObject) {
+            sharedAppUserObject = [User findAll].count ? [[User findAll] objectAtIndex:0] : nil;
+            if (!sharedAppUserObject) {
+                sharedAppUserObject = [User createEntity];
+                [[NSManagedObjectContext defaultContext] save];
+            }
+        }
+    }
+    return sharedAppUserObject;
+}
+
++ (void)updateSharedAppUserProfile:(NSDictionary *)dict {
+    User *user = [self sharedAppUser];
+    if ([dict objectForKey:@"nickname"]) {
+        user.nickname = [dict objectForKey:@"nickname"];
+    }
+    if ([dict objectForKey:@"email"]) {
+        user.email = [dict objectForKey:@"email"];
+    }
+    if ([dict objectForKey:@"weibo_token"]) {
+        user.weibo_token = [dict objectForKey:@"weibo_token"];
+    }
+    if ([dict objectForKey:@"id"]) {
+        user.id = [dict objectForKey:@"id"];
+    }
+    if ([dict objectForKey:@"university"] && ![[dict objectForKey:@"university"] isKindOfClass:[NSNull class]]) {
+        user.university_name = [[dict objectForKey:@"university"] objectForKey:@"name"];
+        user.university_id = [[dict objectForKey:@"university"] objectForKey:@"id"];
+    }
+    if ([dict objectForKey:@"university"] && ![[dict objectForKey:@"university"] isKindOfClass:[NSNull class]]) {
+        user.campus_name = [[dict objectForKey:@"campus"] objectForKey:@"name"];
+        user.campus_id = [[dict objectForKey:@"campus"] objectForKey:@"id"];
+    }
+    [[NSManagedObjectContext defaultContext] save];
+}
+
+- (void)updateUserProfile:(NSDictionary *)dict {
+    
+}
+@end

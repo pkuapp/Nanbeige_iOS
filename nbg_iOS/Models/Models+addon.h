@@ -11,9 +11,9 @@
 #import "Semester.h"
 #import "Course.h"
 #import "Lesson.h"
-//
-//@interface User (addon)
-//
-//+ (User *)sharedAppUser;
-//
-//@end
+
+@interface User (addon)
+
++ (User *)sharedAppUser;
++ (void)updateSharedAppUserProfile:(NSDictionary *)dict;
+@end

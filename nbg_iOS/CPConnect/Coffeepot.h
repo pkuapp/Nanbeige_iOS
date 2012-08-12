@@ -51,14 +51,14 @@ typedef enum {
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                                params:(NSDictionary *)params
-                              success:(void (^)(id collection))success_block
-                                error:(void (^)(id collection, NSError *error))error_block;
+                              success:(void (^)(CPRequest*request,id collection))success_block
+                                error:(void (^)(CPRequest*request,id collection, NSError *error))error_block;
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                               params:(NSDictionary *)params
                        requestMethod:(NSString *)httpMethod
-                             success:(void (^)(id))success_block
-                               error:(void (^)(id, NSError *))error_block;
+                             success:(void (^)(CPRequest*request,id collection))success_block
+                               error:(void (^)(CPRequest*request,id collection, NSError *error))error_block;
 
 
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CPUserManageDelegate.h"
+#import "CPUserDefaultDelegate.h"
 
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPUserManageDelegate>
 

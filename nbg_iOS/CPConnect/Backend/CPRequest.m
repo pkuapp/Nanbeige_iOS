@@ -13,6 +13,8 @@ static NSString* kUserAgent = @"CoffepotOniOS";
 static NSString* kAPIVersion = @"2.0";
 static const NSTimeInterval kTimeoutInterval = 180.0;
 static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
+static NSString* pAPIDomain = @"api.pkuapp.com";
+static NSString* pAPIPort = @"333";
 
 @interface CPRequest () {
 }
@@ -22,6 +24,9 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 
 @implementation CPRequest
 
+- (BOOL)loading {
+	return !!_connection;
+}
 
 /**
  * Formulate the NSError
@@ -71,9 +76,11 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 }
 
 - (void)_reportError:(NSError*)error {
+    id result = [self parseJsonResponse:_responseText error:&error];
+
 	[self enumerateEventHandlers:kCPErrorBlockHandlerKey block:^(id _handler) {
-		void (^handler)(CPRequest*,NSError *) = _handler;
-		handler(self, error);
+		void (^handler)(CPRequest*,id collection, NSError *) = _handler;
+		handler(self,result, error);
 	}];
 }
 
@@ -118,7 +125,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 							 requestURL:(NSString *) url {
 	
 	CPRequest* request = [[CPRequest alloc] init];
-	request.url = url;
+	request.url = [NSString stringWithFormat:@"http://%@:%@/%@",pAPIDomain,pAPIPort,url];
 	request.httpMethod = httpMethod;
 	request.params = [NSMutableDictionary dictionaryWithDictionary: params];
 	request.connection = nil;
@@ -171,10 +178,10 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 }
 
 
-- (void)addCompletionHandler:(void(^)(CPRequest*,id))completionHandler {
+- (void)addCompletionHandler:(void(^)(CPRequest* req, id collection))completionHandler {
 	[self registerEventHandler:kCPCompletionBlockHandlerKey handler:completionHandler];
 }
-- (void)addErrorHandler:(void(^)(CPRequest*,NSError *))errorHandler {
+- (void)addErrorHandler:(void(^)(CPRequest*,id collection, NSError *))errorHandler {
 	[self registerEventHandler:kCPErrorBlockHandlerKey handler:errorHandler];
 }
 - (void)addLoadHandler:(void(^)(CPRequest*))loadHandler {
@@ -194,7 +201,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 	[self addCompletionHandler:^(CPRequest *request, id result) {
 		NSLog(@"CPRequest: Success: %@: %@", request.url, result);
 	}];
-	[self addErrorHandler:^(CPRequest *request, NSError *error) {
+	[self addErrorHandler:^(CPRequest *request,id collection, NSError *error) {
 		NSLog(@"CPRequest: Error: %@: %@", request.url, error);
 	}];
 }
@@ -354,7 +361,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 	if( [Coffeepot shared].requestFinished ) {
 		[Coffeepot shared].requestFinished(self);
 	}
-	[self handleResponseData:_responseText];
+//	[self handleResponseData:_responseText];
 	[self failWithError:error];
 	
 	self.responseText = nil;

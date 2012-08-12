@@ -75,6 +75,8 @@
 		411DBC6F15CBA59700EDB31D /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 411DBC3915CBA59700EDB31D /* MagicalRecord.m */; };
 		4120F2B415D645D000D0AA97 /* WBEngine+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */; };
 		4120F2B515D645D000D0AA97 /* WBEngine+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */; };
+		4120F2BC15D78AE800D0AA97 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2BB15D78AE800D0AA97 /* User.m */; };
+		4120F2BD15D78AE800D0AA97 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2BB15D78AE800D0AA97 /* User.m */; };
 		413B9F3515D51D95000C9451 /* GCArraySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E6F15D51D95000C9451 /* GCArraySectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		413B9F3615D51D95000C9451 /* GCArraySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E6F15D51D95000C9451 /* GCArraySectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		413B9F3715D51D95000C9451 /* GCRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7115D51D95000C9451 /* GCRetractableSectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -551,8 +553,6 @@
 		414AFC8515D39A0C00EFFB60 /* 180-stickynote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */; };
 		414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
 		414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
-		414AFCAE15D422FE00EFFB60 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCAD15D422FC00EFFB60 /* User.m */; };
-		414AFCAF15D422FE00EFFB60 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCAD15D422FC00EFFB60 /* User.m */; };
 		414AFCB215D422FF00EFFB60 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB115D422FF00EFFB60 /* Assignment.m */; };
 		414AFCB315D422FF00EFFB60 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB115D422FF00EFFB60 /* Assignment.m */; };
 		414AFCB615D422FF00EFFB60 /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB515D422FF00EFFB60 /* Semester.m */; };
@@ -786,7 +786,9 @@
 		411DBC3B15CBA59700EDB31D /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "WBEngine+addon.h"; path = "../WBEngine+addon.h"; sourceTree = "<group>"; };
 		4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "WBEngine+addon.m"; path = "../WBEngine+addon.m"; sourceTree = "<group>"; };
-		4120F2B915D6B4F500D0AA97 /* CPUserManageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserManageDelegate.h; sourceTree = "<group>"; };
+		4120F2B915D6B4F500D0AA97 /* CPUserDefaultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserDefaultDelegate.h; sourceTree = "<group>"; };
+		4120F2BA15D78AE700D0AA97 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		4120F2BB15D78AE800D0AA97 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		413B9E6E15D51D95000C9451 /* GCArraySectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCArraySectionController.h; path = Demo/Demo/GCArraySectionController.h; sourceTree = "<group>"; };
 		413B9E6F15D51D95000C9451 /* GCArraySectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCArraySectionController.m; path = Demo/Demo/GCArraySectionController.m; sourceTree = "<group>"; };
 		413B9E7015D51D95000C9451 /* GCRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCRetractableSectionController.h; path = GCRetractableSectionController/GCRetractableSectionController.h; sourceTree = "<group>"; };
@@ -1182,8 +1184,6 @@
 		414AFC8115D39A0C00EFFB60 /* 180-stickynote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180-stickynote@2x.png"; sourceTree = "<group>"; };
 		414AFCA815D3C6CC00EFFB60 /* Models+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Models+addon.h"; path = "Models/Models+addon.h"; sourceTree = "<group>"; };
 		414AFCA915D3C6CC00EFFB60 /* Models+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Models+addon.m"; path = "Models/Models+addon.m"; sourceTree = "<group>"; };
-		414AFCAC15D422FC00EFFB60 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
-		414AFCAD15D422FC00EFFB60 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		414AFCB015D422FF00EFFB60 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		414AFCB115D422FF00EFFB60 /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		414AFCB415D422FF00EFFB60 /* Semester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semester.h; path = Models/Semester.h; sourceTree = "<group>"; };
@@ -1428,7 +1428,7 @@
 				4120F2B115D6419000D0AA97 /* CPSignFlow */,
 				411DBBDC15CB9E4000EDB31D /* CPAppDelegate.h */,
 				411DBBDD15CB9E4000EDB31D /* CPAppDelegate.m */,
-				4120F2B915D6B4F500D0AA97 /* CPUserManageDelegate.h */,
+				4120F2B915D6B4F500D0AA97 /* CPUserDefaultDelegate.h */,
 				41D6FDD915D0BA4C0085DF89 /* CPAppModule.h */,
 				41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */,
 				41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */,
@@ -2273,9 +2273,9 @@
 				414AFCB515D422FF00EFFB60 /* Semester.m */,
 				414AFCB015D422FF00EFFB60 /* Assignment.h */,
 				414AFCB115D422FF00EFFB60 /* Assignment.m */,
-				414AFCAC15D422FC00EFFB60 /* User.h */,
-				414AFCAD15D422FC00EFFB60 /* User.m */,
 				411DBBDF15CB9E4000EDB31D /* nbg_iOS.xcdatamodeld */,
+				4120F2BA15D78AE700D0AA97 /* User.h */,
+				4120F2BB15D78AE800D0AA97 /* User.m */,
 				414AFCA815D3C6CC00EFFB60 /* Models+addon.h */,
 				414AFCA915D3C6CC00EFFB60 /* Models+addon.m */,
 			);
@@ -2732,7 +2732,6 @@
 				41E7F96E15D2680C009B8703 /* CPRequest.m in Sources */,
 				41E7F97115D26F3A009B8703 /* CPBlockHandler.m in Sources */,
 				414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
-				414AFCAE15D422FE00EFFB60 /* User.m in Sources */,
 				414AFCB215D422FF00EFFB60 /* Assignment.m in Sources */,
 				414AFCB615D422FF00EFFB60 /* Semester.m in Sources */,
 				414AFCBA15D4230000EFFB60 /* Lesson.m in Sources */,
@@ -2918,6 +2917,7 @@
 				413BA24215D52B19000C9451 /* Switch3DTransition.m in Sources */,
 				413BA26E15D52FA6000C9451 /* CPIPGateHelper.m in Sources */,
 				4120F2B415D645D000D0AA97 /* WBEngine+addon.m in Sources */,
+				4120F2BC15D78AE800D0AA97 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2954,7 +2954,6 @@
 				411DBC6F15CBA59700EDB31D /* MagicalRecord.m in Sources */,
 				41E7F97215D26F3A009B8703 /* CPBlockHandler.m in Sources */,
 				414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
-				414AFCAF15D422FE00EFFB60 /* User.m in Sources */,
 				414AFCB315D422FF00EFFB60 /* Assignment.m in Sources */,
 				414AFCB715D422FF00EFFB60 /* Semester.m in Sources */,
 				414AFCBB15D4230000EFFB60 /* Lesson.m in Sources */,
@@ -3140,6 +3139,7 @@
 				413BA24315D52B19000C9451 /* Switch3DTransition.m in Sources */,
 				413BA26F15D52FA6000C9451 /* CPIPGateHelper.m in Sources */,
 				4120F2B515D645D000D0AA97 /* WBEngine+addon.m in Sources */,
+				4120F2BD15D78AE800D0AA97 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

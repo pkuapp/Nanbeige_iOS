@@ -9,6 +9,7 @@
 #import "CPSigninComfirmViewController.h"
 
 #import "Environment.h"
+#import "Models+addon.h"
 
 @interface CPSigninComfirmViewController ()  {
 //	CPAccountManager *accountManager;
@@ -82,28 +83,30 @@
 
 - (void)refreshDataSource
 {
-	NSString *nickname = [[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY];
+    User *appuser = [User sharedAppUser];
+	NSString *nickname = appuser.nickname;
 	if (!nickname) nickname = sDEFAULTNICKNAME;
-	NSString *university = [[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYNAMEKEY];
+	NSString *university = appuser.university_name;
 	if (!university) university = sDEFAULTUNIVERSITY;
+    
 	NSString *campus = [[NSUserDefaults standardUserDefaults] objectForKey:kCAMPUSNAMEKEY];
 	if (campus) university = [university stringByAppendingFormat:@" %@", campus];
 	
 	NSMutableArray *loginaccount = [[NSMutableArray alloc] init];
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
 	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kCPEMAILKEY])
+	if (appuser.email)
 		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kCPEMAILKEY], @"value", nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onEmailLogin:", @"controllerAction", nil]];
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY])
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY], @"value", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_token, @"value", nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTRENREN, @"title", @"onRenrenLogin:", @"controllerAction", nil]];
 	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY])
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", [[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY], @"value", nil]];
+	if (appuser.weibo_token)
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", appuser.weibo_token, @"value", nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTWEIBO, @"title", @"onWeiboLogin:", @"controllerAction", nil]];
 	
@@ -142,23 +145,22 @@
 
 - (void)onConfirmLogin:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
+//	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	
 #warning 获取该学校信息
 //	[accountManager requestUniversityWithID:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
 	
-	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDIT] boolValue]) {
+//	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDIT] boolValue]) {
+//
+//		[self loading:YES];
+//		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 		
-		[self loading:YES];
-		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-		
-//		[accountManager emailEditWithPassword:nil Nickname:nil CampusID:nil WeiboToken:nil];
-		
-	} else {
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPIDKEY] forKey:kACCOUNTIDKEY];
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
-		[self dismissModalViewControllerAnimated:YES];
-	}
+//	} else {
+		[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+//		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPNICKNAMEKEY] forKey:kACCOUNTNICKNAMEKEY];
+//		[self dismissModalViewControllerAnimated:YES];
+//	}
 }
 
 #pragma mark - AccountManagerDelegate Weibo

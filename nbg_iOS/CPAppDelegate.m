@@ -10,7 +10,7 @@
 #import "MagicalRecord.h"
 #import <Objection-iOS/Objection.h>
 #import "CPAppModule.h"
-
+#import "Models/Models+addon.h"
 @interface CPAppDelegate ()
 
 - (BOOL)needSignin;
@@ -26,23 +26,24 @@
 }
 
 - (BOOL)needSignin {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if ([defaults valueForKey:kWEIBOIDKEY] == nil &&
-		[defaults valueForKey:kRENRENIDKEY] == nil &&
-		[defaults valueForKey:kCPEMAILKEY] == nil) {
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kACCOUNTIDKEY];
-	}
-	
-	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
-        return NO;
-	} else {
-		id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
-		NSDictionary *emptySettings = (workaround51Crash != nil)
-		? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
-		: [NSDictionary dictionary];
-		[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
-        return YES;
-	}
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//	if ([defaults valueForKey:kWEIBOIDKEY] == nil &&
+//		[defaults valueForKey:kRENRENIDKEY] == nil &&
+//		[defaults valueForKey:kCPEMAILKEY] == nil) {
+//		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kACCOUNTIDKEY];
+//	}
+//	
+//	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
+//        return NO;
+//	} else {
+//		id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
+//		NSDictionary *emptySettings = (workaround51Crash != nil)
+//		? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
+//		: [NSDictionary dictionary];
+//		[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
+//        return YES;
+//	}
+    return ![[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue];
 }
 
 - (void)configureGlobalAppearance {
@@ -52,7 +53,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-//    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"nbg_iOS"];
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"nbg_iOS"];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     JSObjectionInjector *injector = [JSObjection createInjector:[[CPAppModule alloc] init]];
     [JSObjection setDefaultInjector:injector];

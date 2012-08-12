@@ -81,17 +81,24 @@ static Coffeepot *coffeepotSharedObject = nil;
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                               params:(NSDictionary *)params
-                             success:(void (^)(id collection))success_block
-                               error:(void (^)(id collection, NSError *error))error_block {
+                             success:(void (^)(CPRequest* _req,id collection))success_block
+                               error:(void (^)(CPRequest* _req,id collection, NSError *error))error_block {
     return [self requestWithMethodPath:method_path params:params requestMethod:@"GET" success:success_block error:error_block];
 }
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                               params:(NSDictionary *)params
                        requestMethod:(NSString *)httpMethod
-                             success:(void (^)(id collection))success_block
-                               error:(void (^)(id collection, NSError *error))error_block {
-
+                             success:(void (^)(CPRequest* _req,id collection))success_block
+                               error:(void (^)(CPRequest* _req,id collection, NSError *error))error_block {
+	return [self openUrl:method_path params:params requestMethod:httpMethod finalize: ^(CPRequest *request) {
+								  if( success_block ) {
+									  [request addCompletionHandler:success_block];
+								  }
+								  if( error_block ) {
+									  [request addErrorHandler:error_block];
+								  }
+							  }];
 }
 
 - (CPRequest*)openUrl:(NSString *)url
@@ -105,6 +112,7 @@ static Coffeepot *coffeepotSharedObject = nil;
     CPRequest* _request = [CPRequest getRequestWithParameters:params
 												requestMethod:httpMethod
 												   requestURL:url];
+    [_request addDebugOutputHandlers];
     [_requests addObject:_request];
 	
 	[_request registerEventHandler:kCPStateChangeBlockHandlerKey handler:^(CPRequest *request, CPRequestState state) {

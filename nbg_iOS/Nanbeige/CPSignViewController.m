@@ -13,7 +13,7 @@
 #import "Coffeepot.h"
 
 #import "Models+addon.h"
-#import "CPUserManageDelegate.h"
+
 #import <Objection-iOS/Objection.h>
 
 @interface CPSignViewController () {
@@ -133,11 +133,13 @@
     success:^(WBRequest *request, id result) {
         if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:kAPISCREEN_NAME]) {
             
-            [[Coffeepot shared] requestWithMethodPath:@"/user/login/weibo" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(NSDictionary *collection) {
+            [[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
                 
-                [[[JSObjection defaultInjector] getObject:@protocol(CPUserManageDelegate)] updateAppUserProfileWith:collection];
+                [User updateSharedAppUserProfile:collection];
                 
-            } error:^(NSDictionary *collection, NSError *error) {
+                [self performSegueWithIdentifier:@"ConfirmLoginSegue" sender:self];
+                
+            } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
                 if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
                     raise(-1);
                 }
