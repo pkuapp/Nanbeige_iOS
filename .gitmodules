@@ -26,3 +26,6 @@
 [submodule "GCRetractableSectionController"]
 	path = GCRetractableSectionController
 	url = https://github.com/gcamp/GCRetractableSectionController.git
+[submodule "EGOTableViewPullRefresh"]
+	path = EGOTableViewPullRefresh
+	url = https://github.com/enormego/EGOTableViewPullRefresh.git
