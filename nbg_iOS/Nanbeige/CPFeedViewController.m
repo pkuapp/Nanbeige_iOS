@@ -8,10 +8,10 @@
 
 #import "CPFeedViewController.h"
 #import "Environment.h"
-#import "CPAccountManager.h"
 
-@interface CPFeedViewController () <CPAccountManagerDelegate> {
-	CPAccountManager *accountManager;
+
+@interface CPFeedViewController ()  {
+//	CPAccountManager *accountManager;
 }
 
 
@@ -60,8 +60,8 @@
 	self.title = TITLE_STREAM;
 	self.streams = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPSTREAMS];
 	
-	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
+//	accountManager = [[CPAccountManager alloc] initWithViewController:self];
+//	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -165,7 +165,7 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-	[accountManager weiboRequestHomeTimeline];
+//	[accountManager weiboRequestHomeTimeline];
 }
 
 - (void)doneLoadingTableViewData{
@@ -248,17 +248,17 @@
 
 #pragma mark - AccountManagerDelegate Others
 
-- (void)didWeiboHomeTimelineReceived:(NSArray *)home_timeline
-{
-	self.streams = [home_timeline mutableCopy];
-	[[NSUserDefaults standardUserDefaults] setObject:home_timeline forKey:kTEMPSTREAMS];
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-}
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-	[self showAlert:errorString];
-}
+//- (void)didWeiboHomeTimelineReceived:(NSArray *)home_timeline
+//{
+//	self.streams = [home_timeline mutableCopy];
+//	[[NSUserDefaults standardUserDefaults] setObject:home_timeline forKey:kTEMPSTREAMS];
+//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+//}
+//
+//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
+//{
+//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+//	[self showAlert:errorString];
+//}
 
 @end

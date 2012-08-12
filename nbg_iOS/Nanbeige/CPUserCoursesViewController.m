@@ -8,10 +8,10 @@
 
 #import "CPUserCoursesViewController.h"
 #import "Environment.h"
-#import "CPCourseManager.h"
 
-@interface CPUserCoursesViewController () <CPCourseManagerDelegate> {
-	CPCourseManager *courseManager;
+
+@interface CPUserCoursesViewController ()  {
+//	CPCourseManager *courseManager;
 }
 
 @end
@@ -58,8 +58,8 @@
 	
 	self.courses = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPCOURSES];
 
-	courseManager = [[CPCourseManager alloc] init];
-	courseManager.delegate = self;
+//	courseManager = [[CPCourseManager alloc] init];
+//	courseManager.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -131,7 +131,7 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-	[courseManager requestCourses];
+//	[courseManager requestCourses];
 }
 
 - (void)doneLoadingTableViewData{
@@ -188,17 +188,17 @@
 
 #pragma mark - AccountManagerDelegate Others
 
-- (void)didCoursesReceived:(NSArray *)courses
-{
-	self.courses = [courses mutableCopy];
-	[[NSUserDefaults standardUserDefaults] setValue:courses forKey:kTEMPCOURSES];
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-}
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-	[self showAlert:errorString];
-}
+//- (void)didCoursesReceived:(NSArray *)courses
+//{
+//	self.courses = [courses mutableCopy];
+//	[[NSUserDefaults standardUserDefaults] setValue:courses forKey:kTEMPCOURSES];
+//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+//}
+//
+//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
+//{
+//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+//	[self showAlert:errorString];
+//}
 
 @end

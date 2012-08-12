@@ -10,10 +10,10 @@
 #import "CPSignupEmailViewController.h"
 #import "Environment.h"
 
-@interface CPSigninEmailViewController () <CPAccountManagerDelegate> {
+@interface CPSigninEmailViewController () {
 	NSString *email;
 	NSString *password;
-	CPAccountManager *accountManager;
+
 }
 
 @end
@@ -51,8 +51,8 @@
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	
-	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
+//	accountManager = [[CPAccountManager alloc] initWithViewController:self];
+//	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -66,7 +66,7 @@
 	[super prepareForSegue:segue sender:sender];
 	if ([segue.identifier isEqualToString:@"EmailSignupSegue"]) {
 		CPSignupEmailViewController *destinationVC = segue.destinationViewController;
-		destinationVC.accountManagerDelegate = self.accountManagerDelegate;
+//		destinationVC.accountManagerDelegate = self.accountManagerDelegate;
 	}
 }
 
@@ -106,7 +106,7 @@
 		return ;
     }
 	
-	[accountManager emailLoginWithEmail:email Password:password];
+//	[accountManager emailLoginWithEmail:email Password:password];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
@@ -143,13 +143,13 @@
 	[self close];
 }
 
-#pragma mark - AccountManagerDelegate Error
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self loading:NO];
-	[self showAlert:errorString];
-}
+//#pragma mark - AccountManagerDelegate Error
+//
+//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
+//{
+//	[self loading:NO];
+//	[self showAlert:errorString];
+//}
 
 
 @end

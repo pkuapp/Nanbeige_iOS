@@ -7,11 +7,11 @@
 //
 
 #import "CPAccountManageViewController.h"
-#import "CPAccountManager.h"
+
 #import "Environment.h"
 
-@interface CPAccountManageViewController () <UIAlertViewDelegate, CPAccountManagerDelegate> {
-	CPAccountManager *accountManager;
+@interface CPAccountManageViewController () <UIAlertViewDelegate> {
+
 	
 	UIAlertView *nicknameEditAlert;
 	UIAlertView *passwordEditAlert;
@@ -45,9 +45,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	
-	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -153,7 +150,6 @@
 		[self loading:YES];
 		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 
-		[accountManager emailEditWithPassword:nil Nickname:nil CampusID:nil WeiboToken:nil];
 	}
 }
 
@@ -189,13 +185,13 @@
 - (void)onWeiboLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	[accountManager weiboLogin];
+
 }
 
 - (void)onRenrenLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	[accountManager renrenLogin];
+
 }
 
 - (void)onLaunchActionSheet:(id)sender
@@ -263,7 +259,7 @@
 
 - (void)onRenrenLogout:(id)sender
 {
-	[accountManager renrenLogout];
+
 	[self refreshDisplay];
 }
 - (void)onRenrenDisconnect:(id)sender
@@ -272,7 +268,7 @@
 }
 - (void)onWeiboLogout:(id)sender
 {
-	[accountManager weiboLogout];
+
 	[self refreshDisplay];
 }
 - (void)onWeiboDisconnect:(id)sender
@@ -281,7 +277,7 @@
 }
 - (void)onEmailLogout:(id)sender
 {
-	[accountManager emailLogout];
+
 	[self refreshDisplay];
 }
 - (void)onEmailDisconnect:(id)sender
@@ -310,16 +306,8 @@
 - (void)didEmailEdit
 {
 	[self loading:NO];
-#warning 获取该学校信息
-	[accountManager requestUniversityWithID:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
-}
 
-#pragma mark - AccountManagerDelegate Error
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self loading:NO];
-	[self showAlert:errorString];
+//	[accountManager requestUniversityWithID:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
 }
 
 @end

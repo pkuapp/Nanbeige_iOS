@@ -8,13 +8,12 @@
 
 #import "CPSignupEmailViewController.h"
 #import "Environment.h"
-#import "CPAccountManager.h"
 
-@interface CPSignupEmailViewController () <CPAccountManagerDelegate> {
+
+@interface CPSignupEmailViewController () {
 	NSString *email;
 	NSString *nickname;
 	NSString *password;
-	CPAccountManager *accountManager;
 }
 
 @end
@@ -47,9 +46,7 @@
 	// Do any additional setup after loading the view.
 	UIBarButtonItem *signupButton = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleBordered target:self action:@selector(onSignup:)];
 	self.navigationItem.rightBarButtonItem = signupButton;
-	
-	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
+
 }
 
 - (void)viewDidUnload
@@ -95,7 +92,7 @@
 		return ;
     }
 	
-	[accountManager emailSignupWithEmail:email Password:password Nickname:nickname];
+
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
@@ -111,18 +108,10 @@
 		[[NSUserDefaults standardUserDefaults] setObject:CPid forKey:kACCOUNTIDKEY];
 		[[NSUserDefaults standardUserDefaults] setObject:nickname forKey:kACCOUNTNICKNAMEKEY];
 	}
-	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
-		[self.accountManagerDelegate didEmailLoginWithID:CPid Nickname:nickname UniversityID:nil UniversityName:nil CampusID:nil CampusName:nil];
-	}
+//	if ([self.accountManagerDelegate respondsToSelector:@selector(didEmailLoginWithID:Nickname:UniversityID:UniversityName:CampusID:CampusName:)]) {
+//		[self.accountManagerDelegate didEmailLoginWithID:CPid Nickname:nickname UniversityID:nil UniversityName:nil CampusID:nil CampusName:nil];
+//	}
 	[self dismissModalViewControllerAnimated:YES];
+//    }
 }
-
-#pragma mark - AccountManagerDelegate Error
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self loading:NO];
-	[self showAlert:errorString];
-}
-
 @end

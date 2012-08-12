@@ -567,8 +567,6 @@
 		414AFDDD15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */; };
 		414AFDE215D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */; };
 		414AFDE315D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */; };
-		414AFDE615D512A500EFFB60 /* CPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD7515D512A500EFFB60 /* CPAccountManager.m */; };
-		414AFDE715D512A500EFFB60 /* CPAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD7515D512A500EFFB60 /* CPAccountManager.m */; };
 		414AFDE815D512A500EFFB60 /* CPAccountManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD7715D512A500EFFB60 /* CPAccountManageViewController.m */; };
 		414AFDE915D512A500EFFB60 /* CPAccountManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD7715D512A500EFFB60 /* CPAccountManageViewController.m */; };
 		414AFDEC15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD7B15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m */; };
@@ -577,8 +575,6 @@
 		414AFDEF15D512A500EFFB60 /* CPAssignmentImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD7D15D512A500EFFB60 /* CPAssignmentImageCell.m */; };
 		414AFDF015D512A500EFFB60 /* CPAssignmentImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD7E15D512A500EFFB60 /* CPAssignmentImageCell.xib */; };
 		414AFDF115D512A500EFFB60 /* CPAssignmentImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD7E15D512A500EFFB60 /* CPAssignmentImageCell.xib */; };
-		414AFDF215D512A500EFFB60 /* CPAssignmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8015D512A500EFFB60 /* CPAssignmentManager.m */; };
-		414AFDF315D512A500EFFB60 /* CPAssignmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8015D512A500EFFB60 /* CPAssignmentManager.m */; };
 		414AFDF415D512A500EFFB60 /* CPAssignmentNoImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8215D512A500EFFB60 /* CPAssignmentNoImageCell.m */; };
 		414AFDF515D512A500EFFB60 /* CPAssignmentNoImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8215D512A500EFFB60 /* CPAssignmentNoImageCell.m */; };
 		414AFDF615D512A500EFFB60 /* CPAssignmentNoImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD8315D512A500EFFB60 /* CPAssignmentNoImageCell.xib */; };
@@ -597,8 +593,6 @@
 		414AFE0315D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */; };
 		414AFE0415D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */; };
 		414AFE0515D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */; };
-		414AFE0615D512A500EFFB60 /* CPCourseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9315D512A500EFFB60 /* CPCourseManager.m */; };
-		414AFE0715D512A500EFFB60 /* CPCourseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9315D512A500EFFB60 /* CPCourseManager.m */; };
 		414AFE0815D512A500EFFB60 /* CPCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */; };
 		414AFE0915D512A500EFFB60 /* CPCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */; };
 		414AFE0A15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9715D512A500EFFB60 /* CPAssignmentCreateViewController.m */; };
@@ -609,8 +603,6 @@
 		414AFE0F15D512A500EFFB60 /* CPSigninEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9B15D512A500EFFB60 /* CPSigninEmailViewController.m */; };
 		414AFE1015D512A500EFFB60 /* CPSignupEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9D15D512A500EFFB60 /* CPSignupEmailViewController.m */; };
 		414AFE1115D512A500EFFB60 /* CPSignupEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9D15D512A500EFFB60 /* CPSignupEmailViewController.m */; };
-		414AFE1215D512A500EFFB60 /* CPEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9F15D512A500EFFB60 /* CPEventManager.m */; };
-		414AFE1315D512A500EFFB60 /* CPEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9F15D512A500EFFB60 /* CPEventManager.m */; };
 		414AFE1415D512A500EFFB60 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */; };
 		414AFE1515D512A500EFFB60 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */; };
 		414AFE1615D512A500EFFB60 /* CPItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDA315D512A500EFFB60 /* CPItsViewController.m */; };
@@ -1204,8 +1196,6 @@
 		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD6F15D512A500EFFB60 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone.storyboard; path = Nanbeige/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		414AFD7415D512A500EFFB60 /* CPAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAccountManager.h; sourceTree = "<group>"; };
-		414AFD7515D512A500EFFB60 /* CPAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAccountManager.m; sourceTree = "<group>"; };
 		414AFD7615D512A500EFFB60 /* CPAccountManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAccountManageViewController.h; sourceTree = "<group>"; };
 		414AFD7715D512A500EFFB60 /* CPAccountManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAccountManageViewController.m; sourceTree = "<group>"; };
 		414AFD7A15D512A500EFFB60 /* CPAssignmentDeadlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentDeadlineViewController.h; sourceTree = "<group>"; };
@@ -1213,8 +1203,6 @@
 		414AFD7C15D512A500EFFB60 /* CPAssignmentImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentImageCell.h; sourceTree = "<group>"; };
 		414AFD7D15D512A500EFFB60 /* CPAssignmentImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentImageCell.m; sourceTree = "<group>"; };
 		414AFD7E15D512A500EFFB60 /* CPAssignmentImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPAssignmentImageCell.xib; sourceTree = "<group>"; };
-		414AFD7F15D512A500EFFB60 /* CPAssignmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentManager.h; sourceTree = "<group>"; };
-		414AFD8015D512A500EFFB60 /* CPAssignmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentManager.m; sourceTree = "<group>"; };
 		414AFD8115D512A500EFFB60 /* CPAssignmentNoImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentNoImageCell.h; sourceTree = "<group>"; };
 		414AFD8215D512A500EFFB60 /* CPAssignmentNoImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentNoImageCell.m; sourceTree = "<group>"; };
 		414AFD8315D512A500EFFB60 /* CPAssignmentNoImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPAssignmentNoImageCell.xib; sourceTree = "<group>"; };
@@ -1232,8 +1220,6 @@
 		414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSigninComfirmViewController.m; sourceTree = "<group>"; };
 		414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseGrabberViewController.h; sourceTree = "<group>"; };
 		414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseGrabberViewController.m; sourceTree = "<group>"; };
-		414AFD9215D512A500EFFB60 /* CPCourseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseManager.h; sourceTree = "<group>"; };
-		414AFD9315D512A500EFFB60 /* CPCourseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseManager.m; sourceTree = "<group>"; };
 		414AFD9415D512A500EFFB60 /* CPCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoursesViewController.h; sourceTree = "<group>"; };
 		414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoursesViewController.m; sourceTree = "<group>"; };
 		414AFD9615D512A500EFFB60 /* CPAssignmentCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCreateViewController.h; sourceTree = "<group>"; };
@@ -1244,8 +1230,6 @@
 		414AFD9B15D512A500EFFB60 /* CPSigninEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSigninEmailViewController.m; sourceTree = "<group>"; };
 		414AFD9C15D512A500EFFB60 /* CPSignupEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignupEmailViewController.h; sourceTree = "<group>"; };
 		414AFD9D15D512A500EFFB60 /* CPSignupEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignupEmailViewController.m; sourceTree = "<group>"; };
-		414AFD9E15D512A500EFFB60 /* CPEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPEventManager.h; sourceTree = "<group>"; };
-		414AFD9F15D512A500EFFB60 /* CPEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPEventManager.m; sourceTree = "<group>"; };
 		414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIPGateHelper.m; sourceTree = "<group>"; };
 		414AFDA215D512A500EFFB60 /* CPItsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPItsViewController.h; sourceTree = "<group>"; };
 		414AFDA315D512A500EFFB60 /* CPItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPItsViewController.m; sourceTree = "<group>"; };
@@ -1600,8 +1584,6 @@
 				414AFD7C15D512A500EFFB60 /* CPAssignmentImageCell.h */,
 				414AFD7D15D512A500EFFB60 /* CPAssignmentImageCell.m */,
 				414AFD7E15D512A500EFFB60 /* CPAssignmentImageCell.xib */,
-				414AFD7F15D512A500EFFB60 /* CPAssignmentManager.h */,
-				414AFD8015D512A500EFFB60 /* CPAssignmentManager.m */,
 			);
 			name = CPAssignment;
 			sourceTree = "<group>";
@@ -1615,8 +1597,6 @@
 				41FD95F415D6378B00477483 /* confirmLogin.json */,
 				41FD95F515D6378B00477483 /* emailLogin.json */,
 				41FD95F615D6378B00477483 /* emailSignup.json */,
-				414AFD7415D512A500EFFB60 /* CPAccountManager.h */,
-				414AFD7515D512A500EFFB60 /* CPAccountManager.m */,
 				4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */,
 				4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */,
 				414AFD8E15D512A500EFFB60 /* CPSigninComfirmViewController.h */,
@@ -2321,14 +2301,10 @@
 				413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */,
 				414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */,
 				414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */,
-				414AFD9215D512A500EFFB60 /* CPCourseManager.h */,
-				414AFD9315D512A500EFFB60 /* CPCourseManager.m */,
 				414AFD9415D512A500EFFB60 /* CPCoursesViewController.h */,
 				414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */,
 				414AFD9815D512A500EFFB60 /* CPDetailGateInfoViewController.h */,
 				414AFD9915D512A500EFFB60 /* CPDetailGateInfoViewController.m */,
-				414AFD9E15D512A500EFFB60 /* CPEventManager.h */,
-				414AFD9F15D512A500EFFB60 /* CPEventManager.m */,
 				414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */,
 				414AFDA215D512A500EFFB60 /* CPItsViewController.h */,
 				414AFDA315D512A500EFFB60 /* CPItsViewController.m */,
@@ -2761,11 +2737,9 @@
 				414AFCB615D422FF00EFFB60 /* Semester.m in Sources */,
 				414AFCBA15D4230000EFFB60 /* Lesson.m in Sources */,
 				414AFCBE15D4230100EFFB60 /* Course.m in Sources */,
-				414AFDE615D512A500EFFB60 /* CPAccountManager.m in Sources */,
 				414AFDE815D512A500EFFB60 /* CPAccountManageViewController.m in Sources */,
 				414AFDEC15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */,
 				414AFDEE15D512A500EFFB60 /* CPAssignmentImageCell.m in Sources */,
-				414AFDF215D512A500EFFB60 /* CPAssignmentManager.m in Sources */,
 				414AFDF415D512A500EFFB60 /* CPAssignmentNoImageCell.m in Sources */,
 				414AFDF815D512A500EFFB60 /* CPAssignmentViewController.m in Sources */,
 				414AFDFA15D512A500EFFB60 /* CPChangeMainOrderViewController.m in Sources */,
@@ -2774,13 +2748,11 @@
 				414AFE0015D512A500EFFB60 /* CPUniversitySelectViewController.m in Sources */,
 				414AFE0215D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */,
 				414AFE0415D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */,
-				414AFE0615D512A500EFFB60 /* CPCourseManager.m in Sources */,
 				414AFE0815D512A500EFFB60 /* CPCoursesViewController.m in Sources */,
 				414AFE0A15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */,
 				414AFE0C15D512A500EFFB60 /* CPDetailGateInfoViewController.m in Sources */,
 				414AFE0E15D512A500EFFB60 /* CPSigninEmailViewController.m in Sources */,
 				414AFE1015D512A500EFFB60 /* CPSignupEmailViewController.m in Sources */,
-				414AFE1215D512A500EFFB60 /* CPEventManager.m in Sources */,
 				414AFE1415D512A500EFFB60 /* CPIPGateHelper.m in Sources */,
 				414AFE1615D512A500EFFB60 /* CPItsViewController.m in Sources */,
 				414AFE1815D512A500EFFB60 /* CPLabelButtonCenterElement.m in Sources */,
@@ -2987,11 +2959,9 @@
 				414AFCB715D422FF00EFFB60 /* Semester.m in Sources */,
 				414AFCBB15D4230000EFFB60 /* Lesson.m in Sources */,
 				414AFCBF15D4230100EFFB60 /* Course.m in Sources */,
-				414AFDE715D512A500EFFB60 /* CPAccountManager.m in Sources */,
 				414AFDE915D512A500EFFB60 /* CPAccountManageViewController.m in Sources */,
 				414AFDED15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */,
 				414AFDEF15D512A500EFFB60 /* CPAssignmentImageCell.m in Sources */,
-				414AFDF315D512A500EFFB60 /* CPAssignmentManager.m in Sources */,
 				414AFDF515D512A500EFFB60 /* CPAssignmentNoImageCell.m in Sources */,
 				414AFDF915D512A500EFFB60 /* CPAssignmentViewController.m in Sources */,
 				414AFDFB15D512A500EFFB60 /* CPChangeMainOrderViewController.m in Sources */,
@@ -3000,13 +2970,11 @@
 				414AFE0115D512A500EFFB60 /* CPUniversitySelectViewController.m in Sources */,
 				414AFE0315D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */,
 				414AFE0515D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */,
-				414AFE0715D512A500EFFB60 /* CPCourseManager.m in Sources */,
 				414AFE0915D512A500EFFB60 /* CPCoursesViewController.m in Sources */,
 				414AFE0B15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */,
 				414AFE0D15D512A500EFFB60 /* CPDetailGateInfoViewController.m in Sources */,
 				414AFE0F15D512A500EFFB60 /* CPSigninEmailViewController.m in Sources */,
 				414AFE1115D512A500EFFB60 /* CPSignupEmailViewController.m in Sources */,
-				414AFE1315D512A500EFFB60 /* CPEventManager.m in Sources */,
 				414AFE1515D512A500EFFB60 /* CPIPGateHelper.m in Sources */,
 				414AFE1715D512A500EFFB60 /* CPItsViewController.m in Sources */,
 				414AFE1915D512A500EFFB60 /* CPLabelButtonCenterElement.m in Sources */,

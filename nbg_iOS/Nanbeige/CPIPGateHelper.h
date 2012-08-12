@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
+
 
 #define Max_Listen_Rounds 4
 #define PORT @"5428"
@@ -71,7 +71,7 @@ typedef enum IPGateResult{
 
 @end
 
-@interface CPIPGateHelper : NSObject<ASIHTTPRequestDelegate> {
+@interface CPIPGateHelper : NSObject {
 @private
     NSObject <CPIPGateConnectDelegate> *delegate;
     NSString *stirngRange;
@@ -80,7 +80,7 @@ typedef enum IPGateResult{
 }
 @property (strong) NSString *stringRange;
 @property (strong) id<CPIPGateConnectDelegate> delegate;
-@property (strong, nonatomic)ASIHTTPRequest* request;
+
 @property BOOL isConnected;
 @property NSInteger numberListenRetry;
 @property (assign, atomic) IPGateConnectError error;

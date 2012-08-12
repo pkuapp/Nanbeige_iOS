@@ -7,11 +7,11 @@
 //
 
 #import "CPSigninComfirmViewController.h"
-#import "CPAccountManager.h"
+
 #import "Environment.h"
 
-@interface CPSigninComfirmViewController () <CPAccountManagerDelegate> {
-	CPAccountManager *accountManager;
+@interface CPSigninComfirmViewController ()  {
+//	CPAccountManager *accountManager;
 	NSMutableDictionary *actionSheetDict;
 }
 
@@ -44,8 +44,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
+//	accountManager = [[CPAccountManager alloc] initWithViewController:self];
+//	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -131,13 +131,13 @@
 - (void)onWeiboLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	[accountManager weiboLogin];
+//	[accountManager weiboLogin];
 }
 
 - (void)onRenrenLogin:(id)sender
 {
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	[accountManager renrenLogin];
+//	[accountManager renrenLogin];
 }
 
 - (void)onConfirmLogin:(id)sender
@@ -145,14 +145,14 @@
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	
 #warning 获取该学校信息
-	[accountManager requestUniversityWithID:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
+//	[accountManager requestUniversityWithID:[[NSUserDefaults standardUserDefaults] objectForKey:kUNIVERSITYIDKEY]];
 	
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kACCOUNTEDIT] boolValue]) {
 		
 		[self loading:YES];
 		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 		
-		[accountManager emailEditWithPassword:nil Nickname:nil CampusID:nil WeiboToken:nil];
+//		[accountManager emailEditWithPassword:nil Nickname:nil CampusID:nil WeiboToken:nil];
 		
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:kCPIDKEY] forKey:kACCOUNTIDKEY];
@@ -186,12 +186,12 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark - AccountManagerDelegate Error
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self loading:NO];
-	[self showAlert:errorString];
-}
+//#pragma mark - AccountManagerDelegate Error
+//
+//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
+//{
+//	[self loading:NO];
+//	[self showAlert:errorString];
+//}
 
 @end

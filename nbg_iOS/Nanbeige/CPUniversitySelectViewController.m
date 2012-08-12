@@ -8,12 +8,12 @@
 
 #import "CPUniversitySelectViewController.h"
 #import "Environment.h"
-#import "CPAccountManager.h"
+
 #import "CPCampusSelectViewController.h"
 
-@interface CPUniversitySelectViewController () <CPAccountManagerDelegate> {
+@interface CPUniversitySelectViewController () {
 	NSDictionary *dict;
-	CPAccountManager *accountManager;
+//	CPAccountManager *accountManager;
 	NSDictionary *university;
 }
 
@@ -46,9 +46,9 @@
 	// Do any additional setup after loading the view.
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
-	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
-	[accountManager requestUniversities];
+//	accountManager = [[CPAccountManager alloc] initWithViewController:self];
+//	accountManager.delegate = self;
+//	[accountManager requestUniversities];
 	
 	university = nil;
 	
@@ -137,12 +137,12 @@
     [self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
 }
 
-#pragma mark - AccountManagerDelegate Error
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self loading:NO];
-	[self showAlert:errorString];
-}
+//#pragma mark - AccountManagerDelegate Error
+//
+//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
+//{
+//	[self loading:NO];
+//	[self showAlert:errorString];
+//}
 
 @end

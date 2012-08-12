@@ -16,7 +16,7 @@
 #import "Environment.h"
 
 
-#import "ASIHTTPRequest.h"
+
 #import "SystemHelper.h"
 
 #import "CPDetailGateInfoViewController.h"

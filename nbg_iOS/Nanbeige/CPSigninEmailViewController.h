@@ -7,10 +7,9 @@
 //
 
 #import "QuickDialogController.h"
-#import "CPAccountManager.h"
 
 @interface CPSigninEmailViewController : QuickDialogController
 
-@property (strong, nonatomic) id<CPAccountManagerDelegate> accountManagerDelegate;
+@property (strong, nonatomic) id accountManagerDelegate;
 
 @end

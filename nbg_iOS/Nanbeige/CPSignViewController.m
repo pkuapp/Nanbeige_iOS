@@ -8,7 +8,7 @@
 
 #import "CPSignViewController.h"
 #import "Environment.h"
-#import "CPAccountManager.h"
+
 #import "CPSigninEmailViewController.h"
 #import "Coffeepot.h"
 
@@ -16,8 +16,8 @@
 #import "CPUserManageDelegate.h"
 #import <Objection-iOS/Objection.h>
 
-@interface CPSignViewController () <CPAccountManagerDelegate> {
-	CPAccountManager *accountManager;
+@interface CPSignViewController () {
+
 }
 
 @end
@@ -157,7 +157,7 @@
 - (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
 {
 	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
-		[self didRequest:nil FailWithError:[error description]];
+//		[self didRequest:nil FailWithError:[error description]];
 	}
 }
 
@@ -166,13 +166,13 @@
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
 	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
-		[self didRequest:nil FailWithError:@"微博未授权"];
+//		[self didRequest:nil FailWithError:@"微博未授权"];
 	}
 }
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
 	if ([self respondsToSelector:@selector(didRequest:FailWithError:)]) {
-		[self didRequest:nil FailWithError:@"微博授权已过期"];
+//		[self didRequest:nil FailWithError:@"微博授权已过期"];
 	}
 }
 
@@ -184,7 +184,6 @@
 
 - (void)didWeiboSignupWithID:(NSNumber *)ID
 {
-	[accountManager emailLoginWithWeiboToken:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY]];
 }
 
 #pragma mark - AccountManagerDelegate Renren
@@ -202,7 +201,7 @@
 
 - (void)didRenrenSignupWithID:(NSNumber *)ID
 {
-	[accountManager emailLoginWithRenrenToken:[[NSUserDefaults standardUserDefaults] objectForKey:kRENRENTOKENKEY]];
+//	[accountManager emailLoginWithRenrenToken:[[NSUserDefaults standardUserDefaults] objectForKey:kRENRENTOKENKEY]];
 }
 
 #pragma mark - AccountManagerDelegate Email
@@ -219,25 +218,5 @@
 
 #pragma mark - AccountManagerDelegate Error
 
-- (void)didRequest:(ASIHTTPRequest *)request FailWithErrorCode:(NSString *)errorCode
-{
-	if ([[request url] isEqual:urlAPIUserLoginWeibo]) {
-		if ([errorCode isEqualToString:sERRORUSERNOTFOUND]) {
-			[accountManager weiboSignupWithToken:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBOTOKENKEY] Nickname:[[NSUserDefaults standardUserDefaults] objectForKey:kWEIBONAMEKEY]];
-			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-			[self loading:YES];
-			return ;
-		}
-	} else if ([[request url] isEqual:urlAPIUserLoginRenren]) {
-		if ([errorCode isEqualToString:sERRORUSERNOTFOUND]) {
-			[accountManager renrenSignupWithToken:[[NSUserDefaults standardUserDefaults] objectForKey:kRENRENTOKENKEY] Nickname:[[NSUserDefaults standardUserDefaults] objectForKey:kRENRENNAMEKEY]];
-			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-			[self loading:YES];
-			return ;
-		}
-	}
-	[self loading:NO];
-	[self showAlert:errorCode];
-}
 
 @end

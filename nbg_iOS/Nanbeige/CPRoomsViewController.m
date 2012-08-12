@@ -8,12 +8,10 @@
 
 #import "CPRoomsViewController.h"
 #import "Environment.h"
-#import "CPAccountManager.h"
 #import "GCArraySectionController.h"
 #import "GCRetractableSectionController.h"
 
-@interface CPRoomsViewController () <CPAccountManagerDelegate> {
-	CPAccountManager *accountManager;
+@interface CPRoomsViewController () {
 	NSDate *date;
 	NSInteger buildingIndex;
 	NSMutableArray *retractableControllers;
@@ -78,9 +76,6 @@
 	self.buildings = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPBUILDINGS];
 	self.rooms = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPROOMS];
 	[self reloadRooms];
-	
-	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-	accountManager.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -161,7 +156,7 @@
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 		return ;
 	}
-	[accountManager requestRoomsWithBuildingID:[[self.buildings objectAtIndex:buildingIndex] objectForKey:kAPIID] Date:date];
+//	[accountManager requestRoomsWithBuildingID:[[self.buildings objectAtIndex:buildingIndex] objectForKey:kAPIID] Date:date];
 	buildingIndex ++;
 }
 
@@ -200,11 +195,11 @@
 	_reloading = YES;
 	
 	NSNumber *campus_id = [[NSUserDefaults standardUserDefaults] objectForKey:kCAMPUSIDKEY];
-	if (campus_id) {
-		[accountManager requestBuildingsWithCampusID:campus_id];
-	} else {
-		[accountManager requestBuildingsWithCampusID:[NSNumber numberWithInt:8]];
-	}
+//	if (campus_id) {
+//		[accountManager requestBuildingsWithCampusID:campus_id];
+//	} else {
+//		[accountManager requestBuildingsWithCampusID:[NSNumber numberWithInt:8]];
+//	}
 }
 
 - (void)doneLoadingTableViewData{
@@ -292,10 +287,10 @@
 	[self syncNextRooms];
 }
 
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-	[self showAlert:errorString];
-}
+//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
+//{
+//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+//	[self showAlert:errorString];
+//}
 
 @end

@@ -8,10 +8,10 @@
 
 #import "CPCourseGrabberViewController.h"
 #import "Environment.h"
-#import "CPCourseManager.h"
 
-@interface CPCourseGrabberViewController () <CPCourseManagerDelegate> {
-	CPCourseManager *courseManager;
+
+@interface CPCourseGrabberViewController () {
+
 }
 
 @end
@@ -48,11 +48,9 @@
 	self.navigationItem.leftBarButtonItem = closeButton;
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+
 	
-	courseManager = [[CPCourseManager alloc] init];
-	courseManager.delegate = self;
-	
-	[courseManager requestCourseGrabber];
+
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
 }
@@ -100,7 +98,7 @@
 		return ;
     }
 	
-	[courseManager startCourseGrabberWithUsername:username Password:password Captcha:captcha];
+
 	 
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
@@ -122,7 +120,7 @@
 		return ;
 	}
 	if ([[grabber objectForKey:kAPIREQUIRE_CAPTCHA] boolValue]) {
-		[courseManager requestCourseGrabberCaptcha];
+
 		return ;
 	}
 	[self loading:NO];
@@ -148,24 +146,5 @@
 	[self close];
 }
 
-- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-{
-	[self loading:NO];
-	[self showAlert:errorString];
-}
-
-- (void)didRequest:(ASIHTTPRequest *)request FailWithErrorCode:(NSString *)errorCode
-{
-	[self loading:NO];
-	if ([errorCode isEqualToString:sERRORAUTHERROR]) {
-		[self showAlert:@"用户名密码输入错误"];
-	}
-	if ([errorCode isEqualToString:sERRORCAPTCHAERROR]) {
-		[self showAlert:@"验证码输入错误"];
-	}
-	if ([errorCode isEqualToString:sERRORUNKNOWNERROR]) {
-		[self showAlert:@"未知错误"];
-	}
-}
 
 @end
