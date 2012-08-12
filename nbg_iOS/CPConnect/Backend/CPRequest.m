@@ -120,7 +120,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 	CPRequest* request = [[CPRequest alloc] init];
 	request.url = url;
 	request.httpMethod = httpMethod;
-	request.params = params;
+	request.params = [NSMutableDictionary dictionaryWithDictionary: params];
 	request.connection = nil;
 	request.responseText = nil;
 	
