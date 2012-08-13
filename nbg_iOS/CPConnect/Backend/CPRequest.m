@@ -237,7 +237,10 @@ static NSString* pAPIPort = @"333";
 					   data:[NSString
 							 stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",
 							 key]];
-		[self utfAppendBody:body data:[_params objectForKey:key]];
+        if (![[_params objectForKey:key] isKindOfClass:[NSString class]])
+            [self utfAppendBody:body data:[[_params objectForKey:key] description] ];
+		else
+            [self utfAppendBody:body data:[_params objectForKey:key]];
 		
 		[self utfAppendBody:body data:endLine];
 	}

@@ -121,8 +121,8 @@
 	NSDictionary *campus = [campuses objectAtIndex:index];
 	[User updateSharedAppUserProfile:campus];
 	
-//	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
-//		[self loading:NO];
+	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+		[self loading:NO];
 		
 		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
 			
@@ -156,15 +156,15 @@
 			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 		}
 		
-//	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-//		[self loading:NO];
-//		if ([collection objectForKey:@"error"]) {
-//			raise(-1);
-//		}
-//	}];
-//	
-//	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-//	[self loading:YES];
+	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+		[self loading:NO];
+		if ([collection objectForKey:@"error"]) {
+			raise(-1);
+		}
+	}];
+	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
 }
 
 @end
