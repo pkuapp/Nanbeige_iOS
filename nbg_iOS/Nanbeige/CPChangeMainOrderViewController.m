@@ -192,6 +192,7 @@
 	} else {
 		[[[UIAlertView alloc] initWithTitle:nil message:@"未变化" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil] show];
 	}
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onCancelButtonPressed:(id)sender {

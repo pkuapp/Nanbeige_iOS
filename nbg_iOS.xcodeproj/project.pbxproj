@@ -2021,6 +2021,7 @@
 				414AFDC615D512A500EFFB60 /* CPUserCoursesViewController.m */,
 			);
 			name = CPCourse;
+			path = Nanbeige;
 			sourceTree = "<group>";
 		};
 		411DBBBC15CB9E3F00EDB31D = {
@@ -2089,6 +2090,7 @@
 		411DBBD315CB9E4000EDB31D /* nbg_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				26F3E2D215D8BC1600D69D0D /* CPCourse */,
 				4120F2B115D6419000D0AA97 /* CPSignFlow */,
 				26F3E2C915D8332300D69D0D /* CPRoom */,
 				26F3E2C415D82AE500D69D0D /* CPPreference */,
@@ -2933,7 +2935,6 @@
 			isa = PBXGroup;
 			children = (
 				414E13E315D7A7E300000CA8 /* CPMainFlow */,
-				26F3E2D215D8BC1600D69D0D /* CPCourse */,
 				414AFD6F15D512A500EFFB60 /* Environment.h */,
 				413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */,
 				413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */,

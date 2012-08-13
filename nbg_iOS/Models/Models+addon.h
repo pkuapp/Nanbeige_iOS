@@ -16,4 +16,6 @@
 
 + (User *)sharedAppUser;
 + (void)updateSharedAppUserProfile:(NSDictionary *)dict;
++ (void)deactiveSharedAppUser;
+
 @end

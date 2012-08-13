@@ -66,7 +66,15 @@ static User *sharedAppUserObject = nil;
     [[NSManagedObjectContext defaultContext] save];
 }
 
-- (void)updateUserProfile:(NSDictionary *)dict {
-    
++ (void)deactiveSharedAppUser
+{
+	@synchronized(sharedAppUserObject){
+        if (sharedAppUserObject) {
+            [sharedAppUserObject deleteEntity];
+			sharedAppUserObject = nil;
+			[[NSManagedObjectContext defaultContext] save];
+        }
+    }
 }
+
 @end

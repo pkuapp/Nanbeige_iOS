@@ -10,6 +10,7 @@
 #import "Coffeepot.h"
 #import "Models+addon.h"
 #import "Environment.h"
+#import "MagicalRecord.h"
 
 @interface CPAccountManageViewController () <UIAlertViewDelegate> {
 	UIAlertView *nicknameEditAlert;
@@ -142,6 +143,7 @@
 
 - (void)refreshDataSource
 {
+	[[NSManagedObjectContext defaultContext] save];
     User *appuser = [User sharedAppUser];
 	NSString *nickname = appuser.nickname;
 	if (!nickname) nickname = sDEFAULTNICKNAME;
@@ -154,17 +156,17 @@
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
 	
 	if (appuser.email)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", appuser.email, @"value", @"onDisconnectEmail:", @"controllerAction", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", appuser.email, @"value", @"onLaunchActionSheet:", @"controllerAction", nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onConnectEmail:", @"controllerAction", nil]];
 	
 	if (appuser.renren_name)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_name, @"value", @"onDisconnectRenren:", @"controllerAction",nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_name, @"value", @"onLaunchActionSheet:", @"controllerAction",nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTRENREN, @"title", @"onConnectRenren:", @"controllerAction", nil]];
 	
 	if (appuser.weibo_name)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", appuser.weibo_name, @"value", @"onDisconnectWeibo:", @"controllerAction",nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", appuser.weibo_name, @"value", @"onLaunchActionSheet:", @"controllerAction",nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTWEIBO, @"title", @"onConnectWeibo:", @"controllerAction", nil]];
 	
@@ -186,14 +188,6 @@
 	nicknameEditAlert = [[UIAlertView alloc] initWithTitle:sEDITNICKNAME message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
 	nicknameEditAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
 	[nicknameEditAlert show];
-}
-
-- (void)onEditPassword:(id)sender
-{
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
-	passwordEditAlert = [[UIAlertView alloc] initWithTitle:sEDITPASSWORD message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
-	passwordEditAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
-	[passwordEditAlert show];
 }
 
 - (void)onEditUniversity:(id)sender
@@ -239,21 +233,6 @@
 	[menu showInView:self.view];
 }
 
-- (void)onLogout:(id)sender
-{
-	[self onRenrenLogout:sender];
-	[self onWeiboLogout:sender];
-	[self onEmailLogout:sender];
-	
-	id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
-	NSDictionary *emptySettings = (workaround51Crash != nil)
-	? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
-	: [NSDictionary dictionary];
-	[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
-	
-//	[self dismissModalViewControllerAnimated:YES];
-}
-
 #pragma mark - ActionSheetDelegate Setup
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -275,34 +254,91 @@
 
 #pragma mark - ActionSheet Button controllerAction
 
-- (void)onRenrenLogout:(id)sender
+- (void)onEditPassword:(id)sender
 {
-	[User sharedAppUser].renren_name = nil;
-	[User sharedAppUser].renren_token = nil;
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
+	passwordEditAlert = [[UIAlertView alloc] initWithTitle:sEDITPASSWORD message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
+	passwordEditAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
+	[passwordEditAlert show];
+}
+
+- (void)onLocalRenrenLogout:(id)sender
+{
+	[self.renren logout:self];
 }
 - (void)onDisconnectRenren:(id)sender
 {
-	[self onRenrenLogout:sender];
+	[User sharedAppUser].renren_name = nil;
+	[User sharedAppUser].renren_token = nil;
+	[self onLocalRenrenLogout:sender];
+	// TODO disconnect Renren on Server
 	[self refreshDataSource];
 }
-- (void)onWeiboLogout:(id)sender
+
+- (void)onLocalWeiboLogout:(id)sender
 {
-	[User sharedAppUser].weibo_name = nil;
-	[User sharedAppUser].weibo_token = nil;
+	[self.weibo logOut];
 }
 - (void)onDisconnectWeibo:(id)sender
 {
-	[self onWeiboLogout:sender];
+	[User sharedAppUser].weibo_name = nil;
+	[User sharedAppUser].weibo_token = nil;
+	[self onLocalWeiboLogout:sender];
+	// TODO disconnect Weibo on Server
 	[self refreshDataSource];
 }
-- (void)onEmailLogout:(id)sender
+
+- (void)onLocalEmailLogout:(id)sender
 {
-	[User sharedAppUser].email = nil;
+	[[Coffeepot shared] requestWithMethodPath:@"user/logout/" params:nil requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		[self loading:NO];
+		
+	} error:^(CPRequest *_req, id collection, NSError *error) {
+		[self loading:NO];
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+	}];
+	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
 }
 - (void)onDisconnectEmail:(id)sender
 {
-	[self onEmailLogout:sender];
+	[User sharedAppUser].email = nil;
+	[self onLocalEmailLogout:sender];
+	// TODO disconnect Email on Server
 	[self refreshDataSource];
+}
+
+- (void)onLogout:(id)sender
+{
+	[self onLocalRenrenLogout:sender];
+	[self onLocalWeiboLogout:sender];
+	[self onLocalEmailLogout:sender];
+	
+	[User deactiveSharedAppUser];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([UIApplication sharedApplication].delegate) localDatabase];
+	CouchQuery *query = [localDatabase getAllDocuments];
+	RESTOperation *op = [query start];
+	if ([op wait]) {
+		NSMutableArray *docs = [@[] mutableCopy];
+		for (CouchQueryRow *row in query.rows) {
+			[docs addObject:row.document];
+		}
+		[localDatabase deleteDocuments:docs];
+	}
+	[self refreshDataSource];
+	
+	id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
+	NSDictionary *emptySettings = (workaround51Crash != nil)
+	? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
+	: [NSDictionary dictionary];
+	[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
+	
+	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPSigninFlow" bundle:[NSBundle mainBundle]];
+	[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
 }
 
 #pragma mark - WBEngineDelegate

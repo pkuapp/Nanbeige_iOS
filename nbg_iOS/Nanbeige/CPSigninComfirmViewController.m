@@ -94,6 +94,7 @@
 
 - (void)refreshDataSource
 {
+	[[NSManagedObjectContext defaultContext] save];
     User *appuser = [User sharedAppUser];
 	NSString *nickname = appuser.nickname;
 	if (!nickname) nickname = sDEFAULTNICKNAME;
@@ -106,24 +107,24 @@
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
 	
 	if (appuser.email)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", appuser.email, @"value", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", appuser.email, @"value", @"onLaunchActionSheet:", @"controllerAction", nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onConnectEmail:", @"controllerAction", nil]];
 	
 	if (appuser.renren_name)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_name, @"value", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_name, @"value", @"onLaunchActionSheet:", @"controllerAction",nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTRENREN, @"title", @"onConnectRenren:", @"controllerAction", nil]];
 	
 	if (appuser.weibo_name)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", appuser.weibo_name, @"value", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", appuser.weibo_name, @"value", @"onLaunchActionSheet:", @"controllerAction",nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTWEIBO, @"title", @"onConnectWeibo:", @"controllerAction", nil]];
 	
 	NSDictionary *dict = @{
 	@"identity": @[
-	@{ @"title" : sNICKNAME, @"value" : nickname } ,
-	@{ @"title" : sUNIVERSITY, @"value" : university } ] ,
+	@{ @"title" : sNICKNAME, @"value" : nickname, @"controllerAction" : @"onEditNickname:" } ,
+	@{ @"title" : sUNIVERSITY, @"value" : university , @"controllerAction" :  @"onEditUniversity:" } ] ,
 	@"loginaccount" : loginaccount,
 	@"connectaccount" : connectaccount};
 	[self.root bindToObject:dict];
@@ -186,6 +187,9 @@
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
+	
+	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
+	[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
 	
 }
 
