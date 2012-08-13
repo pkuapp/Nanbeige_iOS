@@ -101,6 +101,19 @@ static Coffeepot *coffeepotSharedObject = nil;
 							  }];
 }
 
+
+- (CPRequest *)requestWithMethodPath:(NSString *)method_path
+                              params:(NSDictionary *)params
+                       requestMethod:(NSString *)httpMethod
+                                 raw:(void (^)(CPRequest *_req, NSData *data))raw_block {
+    return [self openUrl:method_path params:params requestMethod:httpMethod finalize:^(CPRequest *_req){
+        if (raw_block) {
+            [_req addRawHandler:raw_block];
+        }
+    }];
+
+}
+
 - (CPRequest*)openUrl:(NSString *)url
                params:(NSDictionary *)params
 		requestMethod:(NSString *)httpMethod
