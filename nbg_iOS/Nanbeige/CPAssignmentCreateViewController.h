@@ -13,13 +13,12 @@
 @property (strong, nonatomic) NSMutableDictionary *assignment;
 @property (strong, nonatomic) NSDictionary *course;
 @property (strong, nonatomic) NSArray *weeksData;
-
 @property (strong, nonatomic) NSArray *coursesData;
 
 @property (nonatomic) BOOL bCreate;
 @property (nonatomic) BOOL bInitWithCamera;
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIImage *image;
 @property (assign, nonatomic) CGRect imageFrame;
 @property (assign, nonatomic) BOOL imagePickerUsed;

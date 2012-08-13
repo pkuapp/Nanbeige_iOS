@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */; };
+		262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 262A4A1615D94F1D001BAC03 /* assignmentCourse.json */; };
 		26CD813B15D7811C0070DF78 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD809315D7811B0070DF78 /* 179-notepad.png */; };
 		26CD813C15D7811C0070DF78 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD809315D7811B0070DF78 /* 179-notepad.png */; };
 		26CD813D15D7811C0070DF78 /* 179-notepad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD809415D7811B0070DF78 /* 179-notepad@2x.png */; };
@@ -1005,6 +1007,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCourseViewController.h; sourceTree = "<group>"; };
+		262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCourseViewController.m; sourceTree = "<group>"; };
+		262A4A1615D94F1D001BAC03 /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCourse.json; sourceTree = "<group>"; };
 		26CD809315D7811B0070DF78 /* 179-notepad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad.png"; sourceTree = "<group>"; };
 		26CD809415D7811B0070DF78 /* 179-notepad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad@2x.png"; sourceTree = "<group>"; };
 		26CD809515D7811B0070DF78 /* 180-stickynote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180-stickynote.png"; sourceTree = "<group>"; };
@@ -2246,12 +2251,15 @@
 			isa = PBXGroup;
 			children = (
 				26F3E2D815D92EED00D69D0D /* assignmentCreate.json */,
+				262A4A1615D94F1D001BAC03 /* assignmentCourse.json */,
 				414AFD8415D512A500EFFB60 /* CPAssignmentViewController.h */,
 				414AFD8515D512A500EFFB60 /* CPAssignmentViewController.m */,
 				414AFD9615D512A500EFFB60 /* CPAssignmentCreateViewController.h */,
 				414AFD9715D512A500EFFB60 /* CPAssignmentCreateViewController.m */,
 				414AFD7A15D512A500EFFB60 /* CPAssignmentDeadlineViewController.h */,
 				414AFD7B15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m */,
+				262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */,
+				262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */,
 				414AFD8115D512A500EFFB60 /* CPAssignmentNoImageCell.h */,
 				414AFD8215D512A500EFFB60 /* CPAssignmentNoImageCell.m */,
 				414AFD8315D512A500EFFB60 /* CPAssignmentNoImageCell.xib */,
@@ -3348,6 +3356,7 @@
 				26CD828715D7811C0070DF78 /* widget_3line_2btn.png in Resources */,
 				26CD828915D7811C0070DF78 /* widget_point.png in Resources */,
 				26F3E2D915D92EEE00D69D0D /* assignmentCreate.json in Resources */,
+				262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3849,6 +3858,7 @@
 				26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */,
 				26F3E2C215D818E100D69D0D /* User.m in Sources */,
 				26F3E2C715D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
+				262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,15 @@
+{
+	"grouped": true,
+	"title": "选择所属课程",
+    "controllerName": "CPAssignmentCourseViewController",
+	"sections": [
+				 {
+				 "bind":"iterate:courses",
+				 "elementTemplate": {
+				 "type":"CPLabelButtonElement",
+				 "bind":"title:name",
+				 "controllerAction":"onCourseSelect:"
+				 }
+				 }
+				 ]
+}

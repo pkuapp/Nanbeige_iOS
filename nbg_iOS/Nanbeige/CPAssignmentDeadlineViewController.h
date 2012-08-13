@@ -17,7 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *deadlinePicker;
 
 @property (weak, nonatomic) NSMutableDictionary *assignment;
-@property (strong, nonatomic) NSArray *pickerData;
+@property (weak, nonatomic) NSArray *coursesData;
+@property (weak, nonatomic) NSArray *weeksData;
 
 - (IBAction)onModeChange:(UISegmentedControl *)sender;
 - (IBAction)onConfirm:(id)sender;

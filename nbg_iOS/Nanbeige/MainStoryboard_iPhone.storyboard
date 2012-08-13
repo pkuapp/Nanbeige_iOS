@@ -547,11 +547,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3714" y="-3151"/>
         </scene>
-        <!--View Controller-->
+        <!--Assignment Course View Controller-->
         <scene sceneID="cR3-4j-h3P">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Bd-cy-sDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="zre-PQ-iW9" sceneMemberID="viewController">
+                <viewController id="zre-PQ-iW9" customClass="CPAssignmentCourseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="80L-b4-Scy">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

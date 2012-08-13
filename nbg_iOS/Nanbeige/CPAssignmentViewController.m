@@ -381,7 +381,7 @@
 	ncavc.bInitWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
 		ncavc.bCreate = NO;
-		[ncavc.assignment setValuesForKeysWithDictionary:[[self nowAssignments] objectAtIndex:assignmentSelect]];
+		ncavc.assignment = [[[self nowAssignments] objectAtIndex:assignmentSelect] mutableCopy];
 	} else {
 		ncavc.bCreate = YES;
 	}

@@ -14,12 +14,6 @@
 @end
 
 @implementation CPAssignmentDeadlineViewController
-@synthesize deadlinePicker;
-@synthesize modeSegmentedControl;
-@synthesize datePicker;
-@synthesize modeLabel;
-@synthesize assignment;
-@synthesize pickerData;
 
 #pragma mark - View Lifecycle
 
@@ -36,16 +30,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	if ([[assignment objectForKey:@"due_type"] isEqualToString:TYPE_ON_LESSON]) {
-		[modeSegmentedControl setSelectedSegmentIndex:0];
-//		[deadlinePicker selectRow:[[assignment objectForKey:kASSIGNMENTDDLWEEKS] intValue] inComponent:0 animated:YES];
+	
+	if ([[self.assignment objectForKey:@"due_type"] isEqualToString:TYPE_ON_LESSON]) {
+		[self.modeSegmentedControl setSelectedSegmentIndex:0];
+		[self.deadlinePicker selectRow:[self.weeksData indexOfObject:[self.assignment objectForKey:@"due_lesson"]] inComponent:0 animated:YES];
 	} else {
-		[modeSegmentedControl setSelectedSegmentIndex:1];
-		if ([assignment objectForKey:@"due_date"]) {
-			[datePicker setDate:[assignment objectForKey:@"due_date"]];
-		}
+		[self.modeSegmentedControl setSelectedSegmentIndex:1];
+		NSDate *date = dateFromString([self.assignment objectForKey:@"due_date"], @"yyyy-MM-dd HH:mm:ss");
+		if (!date) date = [NSDate date];
+		[self.datePicker setDate:date];
 	}
-	[self onModeChange:modeSegmentedControl];
+	if (!self.coursesData.count) {
+		[self.modeSegmentedControl setSelectedSegmentIndex:1];
+		self.modeSegmentedControl.hidden = YES;
+		self.title = @"选择截止时间";
+	}
+	
+	[self onModeChange:self.modeSegmentedControl];
 }
 
 - (void)viewDidUnload
@@ -73,25 +74,30 @@
 
 - (IBAction)onConfirm:(id)sender {
 	
-	if ([modeSegmentedControl selectedSegmentIndex] == ON_LESSON) {
-		[assignment setObject:TYPE_ON_LESSON forKey:@"due_type"];
-		[assignment setObject:[self.pickerData objectAtIndex:[deadlinePicker selectedRowInComponent:0]] forKey:@"due_lesson"];
-	} else if ([modeSegmentedControl selectedSegmentIndex] == ON_DATE) {
-		[assignment setObject:TYPE_ON_DATE forKey:@"due_type"];
-		[assignment setObject:datePicker.date forKey:@"due_date"];
+	if ([self.modeSegmentedControl selectedSegmentIndex] == ON_LESSON) {
+		NSDictionary *due_lesson = [self.weeksData objectAtIndex:[self.deadlinePicker selectedRowInComponent:0]];
+		[self.assignment setObject:TYPE_ON_LESSON forKey:@"due_type"];
+		[self.assignment setObject:due_lesson forKey:@"due_lesson"];
+		[self.assignment removeObjectForKey:@"due_date"];
+	} else if ([self.modeSegmentedControl selectedSegmentIndex] == ON_DATE) {
+		[self.assignment setObject:TYPE_ON_DATE forKey:@"due_type"];
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+		[self.assignment setObject:[dateFormatter stringFromDate:self.datePicker.date] forKey:@"due_date"];
+		[self.assignment removeObjectForKey:@"due_lesson"];
 	}
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onModeChange:(UISegmentedControl *)sender {
 	if (sender.selectedSegmentIndex == 0) {
-		modeLabel.text = @"截止于所选这周的课堂上";
-		datePicker.hidden = YES;
-		deadlinePicker.hidden = NO;
+		self.modeLabel.text = @"截止于所选这周的课堂上";
+		self.datePicker.hidden = YES;
+		self.deadlinePicker.hidden = NO;
 	} else if (sender.selectedSegmentIndex == 1) {
-		modeLabel.text = @"截止于所选时刻";
-		datePicker.hidden = NO;
-		deadlinePicker.hidden = YES;
+		self.modeLabel.text = @"截止于所选时刻";
+		self.datePicker.hidden = NO;
+		self.deadlinePicker.hidden = YES;
 	}
 }
 
@@ -104,7 +110,7 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component
 {
-	return [pickerData count];
+	return [self.weeksData count];
 }
 
 #pragma mark Picker Delegate Methods
@@ -113,7 +119,7 @@ numberOfRowsInComponent:(NSInteger)component
 			 titleForRow:(NSInteger)row
 			forComponent:(NSInteger)component
 {
-	NSString *due_display = [NSString stringWithFormat:@"第%@周 周%@ 课上", [[pickerData objectAtIndex:row] objectForKey:@"week"], [[pickerData objectAtIndex:row] objectForKey:@"day"]];
+	NSString *due_display = [NSString stringWithFormat:@"第%@周 周%@ 课上", [[self.weeksData objectAtIndex:row] objectForKey:@"week"], [[self.weeksData objectAtIndex:row] objectForKey:@"day"]];
 	return due_display;
 }
 
