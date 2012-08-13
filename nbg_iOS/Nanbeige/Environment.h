@@ -189,12 +189,14 @@
 //#define kASSIGNMENTDESCRIPTION @"assignment_description"
 //#define kASSIGNMENTCOMPLETE @"assignment_complete"
 
-#define kASSIGNMENTDDLSTR @"assignment_ddl_str"
-#define kASSIGNMENTDDLMODE @"assignment_ddl_mode"
-#define kASSIGNMENTDDLDATE @"assignment_ddl_date"
-#define kASSIGNMENTDDLWEEKS @"assignment_ddl_weeks"
-#define ONCLASS 0
-#define ONDATE 1
+//#define kASSIGNMENTDDLSTR @"assignment_ddl_str"
+//#define kASSIGNMENTDDLMODE @"assignment_ddl_mode"
+//#define kASSIGNMENTDDLDATE @"assignment_ddl_date"
+//#define kASSIGNMENTDDLWEEKS @"assignment_ddl_weeks"
+#define ON_LESSON 0
+#define ON_DATE 1
+#define TYPE_ON_LESSON @"on_lesson"
+#define TYPE_ON_DATE @"on_date"
 #define NOTCOMPLETE 0
 #define COMPLETE 1
 
@@ -207,7 +209,7 @@
 #define TIMETABLESEPARATORHEIGHT 1
 #define kSHOWTIME @"showtime"
 
-#define ASSIGNMENTDDLWEAKS [[NSArray alloc] initWithObjects:@"本周", @"下周", @"2周后", @"3周后", @"4周后", @"5周后", @"6周后", @"7周后", @"8周后", @"9周后", @"10周后", @"11周后", @"12周后", @"13周后", @"14周后", @"15周后", @"16周后", @"17周后", @"18周后", @"19周后", @"20周后", @"26周后", @"52周后", @"猴年马月", nil];
+//#define ASSIGNMENTDDLWEAKS [[NSArray alloc] initWithObjects:@"本周", @"下周", @"2周后", @"3周后", @"4周后", @"5周后", @"6周后", @"7周后", @"8周后", @"9周后", @"10周后", @"11周后", @"12周后", @"13周后", @"14周后", @"15周后", @"16周后", @"17周后", @"18周后", @"19周后", @"20周后", @"26周后", @"52周后", @"猴年马月", nil];
 //#define kTEMPCOURSES @"tempcourses"
 //#define kTEMPUNIVERSITIES @"tempuniversities"
 //#define kTEMPUNIVERSITY @"tempuniversity"

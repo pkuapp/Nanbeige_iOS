@@ -119,7 +119,9 @@
 		_timeTable.dataSource = self;
 		[self addSubview:_timeTable];
 		
-		rowHeight = TIMETABLEHEIGHT / [[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] count];
+		NSInteger rowNumber = [[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] count];
+		if (rowNumber) rowHeight = TIMETABLEHEIGHT / rowNumber;
+		else rowHeight = TIMETABLEHEIGHT / 12;
 	}
 	return self;
 }

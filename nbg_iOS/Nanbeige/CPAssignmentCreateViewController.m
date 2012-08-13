@@ -9,52 +9,84 @@
 #import "CPAssignmentCreateViewController.h"
 #import "CPAssignmentDeadlineViewController.h"
 #import "Environment.h"
-#import "CPPickerLabel.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 
 @interface CPAssignmentCreateViewController () {
-	NSArray *nibNames;
+	BOOL bCourseChanged;
+	BOOL bCourseUpdated;
 }
 
 @end
 
 @implementation CPAssignmentCreateViewController
-@synthesize imageView;
-@synthesize assignmentTableView;
-@synthesize coursesPicker;
-@synthesize assignmentIndex;
-@synthesize initWithCamera;
-@synthesize bComplete;
-@synthesize assignments;
-@synthesize assignment = _assignment;
-@synthesize weeksData;
-@synthesize coursesData;
-@synthesize coursesToolbar;
-@synthesize lastChosenMediaType, image, imageFrame, imagePickerUsed;
 
 #pragma mark - Setter and Getter Methods
+
+- (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
+    [super setQuickDialogTableView:aQuickDialogTableView];
+    self.quickDialogTableView.backgroundView = nil;
+    self.quickDialogTableView.backgroundColor = tableBgColor1;
+    self.quickDialogTableView.bounces = NO;
+	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+}
 
 -(NSMutableDictionary *)assignment
 {
 	if (_assignment == nil) {
-		if (assignmentIndex == -1)
-			_assignment = [[NSMutableDictionary alloc] init];
-		else {
-			_assignment = [[assignments objectAtIndex:assignmentIndex] mutableCopy];
-		}
+		_assignment = [[NSMutableDictionary alloc] init];
 	}
 	return _assignment;
 }
 
+-(NSDictionary *)course
+{
+	if (_course == nil || bCourseChanged) {
+		NSNumber *course_id = [self.assignment valueForKey:@"course_id"];
+		if (course_id == nil) course_id = [[self.coursesData objectAtIndex:0] objectForKey:@"id"];
+		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course_%@", course_id]];
+		_course = doc.properties;
+		bCourseChanged = NO;
+		bCourseUpdated = YES;
+	}
+	return _course;
+}
+
+- (NSArray *)weeksData
+{
+	if (_weeksData == nil || bCourseUpdated) {
+		NSMutableArray *tempArray = [@[] mutableCopy];
+		for (NSDictionary *lesson in [self.course objectForKey:@"lessons"]) {
+			NSNumber *day = [lesson objectForKey:@"day"];
+			for (NSNumber *week in [lesson objectForKey:@"week"]) {
+				[tempArray addObject:@{ @"day" : day, @"week" : week }];
+			}
+		}
+		_weeksData = [tempArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+			int week1 = [[obj1 objectForKey:@"week"] intValue];
+			int day1 = [[obj1 objectForKey:@"day"] intValue];
+			int week2 = [[obj2 objectForKey:@"week"] intValue];
+			int day2 = [[obj2 objectForKey:@"day"] intValue];
+			if (week1 < week2) return NSOrderedAscending;
+			if (week1 > week2) return NSOrderedDescending;
+			if (day1 < day2) return NSOrderedAscending;
+			if (day1 > day2) return NSOrderedDescending;
+			return NSOrderedSame;
+		}];
+		bCourseUpdated = NO;
+	}
+	return _weeksData;
+}
+
 #pragma mark - View Lifecycle
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		self.root = [[QRootElement alloc] initWithJSONFile:@"assignmentCreate"];
+	}
+	return self;
 }
 
 - (void)viewDidLoad
@@ -63,39 +95,45 @@
 	// Do any additional setup after loading the view.
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
-	self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)]};
+	self.imageView.superview.backgroundColor = tableBgColor1;
 	
-	nibNames = [[NSArray alloc] initWithObjects:@"AssignmentDescriptionIdentifier", @"AssignmentImageIdentifier", @"AssignmentTimeIdentifier", @"AssignmentCourseIdentifier", nil];
-//	assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kASSIGNMENTS] mutableCopy];
-	if (assignments == nil) assignments = [[NSMutableArray alloc] init];
-	if (assignmentIndex != -1) {
-		self.title = @"修改作业计划";
-		if (bComplete) {
-//			assignments = [[[NSUserDefaults standardUserDefaults] objectForKey:kCOMPLETEASSIGNMENTS] mutableCopy];
-		}
-	}
-	weeksData = ASSIGNMENTDDLWEAKS;
+	if (!_bCreate) self.title = @"修改作业计划";
+	
+	UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc] initWithTitle:@"确认" style:UIBarButtonItemStyleBordered target:self action:@selector(onConfirm:)];
+	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(onCancel:)];
+	self.navigationItem.rightBarButtonItem = confirmButton;
+	self.navigationItem.leftBarButtonItem = cancelButton;
+	
+	bCourseChanged = NO;
+	bCourseUpdated = NO;
 	
 	if ([[self.assignment objectForKey:@"has_image"] boolValue]) {
-		self.imageView.image = [NSKeyedUnarchiver unarchiveObjectWithData:[self.assignment objectForKey:@"image"]];
+		self.imageView.image = [NSKeyedUnarchiver unarchiveObjectWithData:[self.assignment objectForKey:@"image_data"]];
 	}
-	
+	if (![self.assignment objectForKey:@"due_type"]) {
+		[self.assignment setObject:TYPE_ON_LESSON forKey:@"due_type"];
+		[self.assignment setObject:[self.weeksData objectAtIndex:0] forKey:@"due_lesson"];
+	}
 }
 
 - (void)viewDidUnload
 {
-	[self setAssignmentTableView:nil];
-	[self setImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self refreshDataSource];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[self.assignmentTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
-	if (initWithCamera) {
-		initWithCamera = NO;
+//	[self.assignmentTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+	if (_bInitWithCamera) {
+		_bInitWithCamera = NO;
 		[self getMediaFromSource:UIImagePickerControllerSourceTypeCamera];
 	}
 }
@@ -103,10 +141,33 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 	[super prepareForSegue:segue sender:sender];
-	if ([segue.identifier isEqualToString:@"DeadlineSegue"]) {
+	if ([segue.identifier isEqualToString:@"AssignmentDeadlineSegue"]) {
 		CPAssignmentDeadlineViewController *nadvc = segue.destinationViewController;
 		nadvc.assignment = self.assignment;
+		nadvc.pickerData = self.weeksData;
 	}
+}
+
+- (void)refreshDataSource
+{
+	
+	NSString *content = [self.assignment valueForKey:@"content"];
+	NSString *course_name = [self.course objectForKey:@"name"];
+	NSString *due_display;
+	if ([[self.assignment objectForKey:@"due_type"] isEqualToString:TYPE_ON_DATE]) {
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		formatter.dateFormat = @"M月d日 E hh:mm";
+		due_display = [formatter stringFromDate:[self.assignment objectForKey:@"due_date"]];
+	} else {
+		due_display = [NSString stringWithFormat:@"第%@周 周%@ 课上", [[self.assignment objectForKey:@"due_lesson"] objectForKey:@"week"], [[self.assignment objectForKey:@"due_lesson"] objectForKey:@"day"]];
+	}
+	
+	NSMutableDictionary *dict = [@{ @"course_name" : course_name, @"due_display" : due_display } mutableCopy];
+	if (content) [dict setObject:content forKey:@"content"];
+	
+    [self.root bindToObject:dict];
+	[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)] withRowAnimation:UITableViewRowAnimationFade];
+	
 }
 
 #pragma mark - Display
@@ -122,148 +183,156 @@
 
 #pragma mark - Button controllerAction
 
-- (IBAction)onCancel:(id)sender {
+- (void)onCancel:(id)sender {
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)onConfirm:(id)sender {
+- (void)onConfirm:(id)sender {
+	NSMutableDictionary *assignmentInfo = [[NSMutableDictionary alloc] init];
+    [self.root fetchValueUsingBindingsIntoObject:assignmentInfo];
+	NSString *content = [assignmentInfo objectForKey:@"content"];
+	NSString *course_name = [assignmentInfo objectForKey:@"course_name"];
+	NSString *due_display = [assignmentInfo objectForKey:@"due_display"];
 	
-	[self.assignment setObject:[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView.subviews objectAtIndex:0] text] forKey:@"content"];
-	NSString *deadlineString = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].contentView subviews] objectAtIndex:1] text];
-	[self.assignment setObject:deadlineString forKey:@"due"];
-	NSString *course = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] text];
-#warning 进行id和课程名的数据库转换
-	[self.assignment setObject:@0 forKey:@"course_id"];
+	if (!content) content = @"";
+//	NSString *content = [[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView.subviews objectAtIndex:0] text];
+//	NSString *due_display = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].contentView subviews] objectAtIndex:1] text];
 	
-	if (imageView.image.size.width && imageView.image.size.height) {
+	[self.assignment setObject:content forKey:@"content"];
+	//[self.assignment setObject:course_id forKey:@"course_id"];
+	[self.assignment setObject:due_display forKey:@"due_display"];
+	if (_bCreate) [self.assignment setObject:[NSNumber numberWithBool:NO] forKey:@"finished"];
+	
+	if (self.imageView.image.size.width && self.imageView.image.size.height) {
 		[self.assignment setObject:[NSNumber numberWithBool:YES] forKey:@"has_image"];
-		NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:imageView.image];
-		[self.assignment setObject:imageData forKey:@"image"];
-	} else {
+		NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:self.imageView.image];
+		[self.assignment setObject:imageData forKey:@"image_data"];
+	} else
 		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:@"has_image"];
-	}
-	
-	if (assignmentIndex == -1) {
-		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:@"finished"];
-		[assignments addObject:self.assignment];
-//		[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
-	} else {
-		[assignments replaceObjectAtIndex:assignmentIndex withObject:self.assignment];
-		if (bComplete) {
-//			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kCOMPLETEASSIGNMENTS];
-		} else {
-//			[[NSUserDefaults standardUserDefaults] setObject:assignments forKey:kASSIGNMENTS];
-		}
-	}
 	
 	[self.assignment setObject:@"assignment" forKey:@"doc_type"];
+	
 	CouchDatabase *database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
-	CouchDocument *doc = [database untitledDocument];
+	CouchDocument *doc;
+	if ([self.assignment objectForKey:@"_id"]) doc = [database documentWithID:[self.assignment objectForKey:@"_id"]];
+	else doc = [database untitledDocument];
 	RESTOperation *op = [doc putProperties:self.assignment];
 	if (![op wait]) {
 		NSLog(@"%@", op.error);
+	} else {
+		[self dismissModalViewControllerAnimated:YES];
 	}
-	
-	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)onConfirmCoursesBeforeResignFirstResponder:(id)sender {
-	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] objectForKey:kAPINAME]];
-	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] resignFirstResponder];
-}
-- (void)onConfirmCoursesAfterResignFirstResponder:(id)sender {
-	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:[coursesPicker selectedRowInComponent:0]] objectForKey:kAPINAME]];
-}
-
-#pragma mark - Picker Data Source Methods
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (void)onEditDue:(id)sender
 {
-	return 1;
+	[self performSegueWithIdentifier:@"AssignmentDeadlineSegue" sender:self];
 }
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
+
+- (void)onEditCourse:(id)sender
 {
-	return [coursesData count];
+	[self performSegueWithIdentifier:@"AssignmentCourseSegue" sender:self];
+	bCourseChanged = YES;
 }
 
-#pragma mark Picker Delegate Methods
-
-- (NSString *)pickerView:(UIPickerView *)pickerView
-			 titleForRow:(NSInteger)row
-			forComponent:(NSInteger)component
+- (void)onImageSelect:(id)sender
 {
-	return [[coursesData objectAtIndex:row] objectForKey:kAPINAME];
+	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"添加照片"
+													  delegate:self
+											 cancelButtonTitle:sCANCEL
+										destructiveButtonTitle:nil
+											 otherButtonTitles:@"拍照", @"选取照片", @"选取最近一张照片", nil];
+	[menu showInView:self.view];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-	return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	switch (section) {
-		case 0:
-			return  2;
-			break;
-		case 1:
-			return 2;
-			break;
-			
-		default:
-			break;
-	}
-	return 2;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	
-	NSUInteger row = [indexPath row];
-	NSUInteger section = [indexPath section];
-	NSString *identifier = [nibNames objectAtIndex:section * 2 + row];
-	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-	if (nil == cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-	}
-	
-	if ([identifier isEqualToString:@"AssignmentDescriptionIdentifier"]) {
-		UITextView *tv = [cell.contentView.subviews objectAtIndex:0];
-		tv.text = [self.assignment valueForKey:@"content"];
-		if (tv.text == nil) tv.text = @"";
-	} else if ([identifier isEqualToString:@"AssignmentImageIdentifier"]) {
-		
-	} else if ([identifier isEqualToString:@"AssignmentTimeIdentifier"]) {
-		if ([[self.assignment objectForKey:kASSIGNMENTDDLMODE] isEqualToNumber:[NSNumber numberWithInt:ONDATE]]) {
-			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-			formatter.dateFormat = @"M月d日 E hh:mm";
-			[[[cell.contentView subviews] objectAtIndex:1] setText:[formatter stringFromDate:[self.assignment objectForKey:kASSIGNMENTDDLDATE]]];
-		} else {
-			[self.assignment setObject:[NSNumber numberWithInt:ONCLASS] forKey:kASSIGNMENTDDLMODE];
-			if ([self.assignment objectForKey:kASSIGNMENTDDLWEEKS] == nil) {
-#warning 根据课程属性及最近一次选择偏好，决定默认本周、下周、2周后
-				[self.assignment setObject:[NSNumber numberWithInt:2] forKey:kASSIGNMENTDDLWEEKS];
-			}
-			[[[cell.contentView subviews] objectAtIndex:1] setText:[[weeksData objectAtIndex:[[self.assignment objectForKey:kASSIGNMENTDDLWEEKS] intValue]] stringByAppendingString:@"课上"]];
-		}
-	} else if ([identifier isEqualToString:@"AssignmentCourseIdentifier"]) {
-		if ([self.assignment valueForKey:@"course_id"]) {
-			[[[cell.contentView subviews] objectAtIndex:1] setText:[self.assignment valueForKey:@"course_id"]];
-		} else {
-#warning 选择课程列表中的课程
-			[[[cell.contentView subviews] objectAtIndex:1] setText:[[coursesData objectAtIndex:0] objectForKey:kAPINAME]];
-		}
-		[[[cell.contentView subviews] objectAtIndex:1] setInputView:self.coursesPicker];
-		[[[cell.contentView subviews] objectAtIndex:1] setInputAccessoryView:self.coursesToolbar];
-		[[[cell.contentView subviews] objectAtIndex:1] setDelegate:self];
-	}
-	
-    return cell;
-}
+//- (IBAction)onConfirmCoursesBeforeResignFirstResponder:(id)sender {
+//	bCourseChanged = YES;
+////	[self.assignment setObject:[[_coursesData objectAtIndex:[_coursesPicker selectedRowInComponent:0]] objectForKey:@"id"] forKey:@"course_id"];
+//	//[self.assignmentTableView reloadData];
+//	[[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] resignFirstResponder];
+//}
+//
+//#pragma mark - Picker Data Source Methods
+//
+//- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//{
+//	return 1;
+//}
+//- (NSInteger)pickerView:(UIPickerView *)pickerView
+//numberOfRowsInComponent:(NSInteger)component
+//{
+//	return [_coursesData count];
+//}
+//
+//#pragma mark Picker Delegate Methods
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView
+//			 titleForRow:(NSInteger)row
+//			forComponent:(NSInteger)component
+//{
+//	return [[_coursesData objectAtIndex:row] objectForKey:@"name"];
+//}
+//
+//#pragma mark - Table view data source
+//
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//	return 2;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//	switch (section) {
+//		case 0:
+//			return  2;
+//			break;
+//		case 1:
+//			return 2;
+//			break;
+//			
+//		default:
+//			break;
+//	}
+//	return 2;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//	
+//	NSUInteger row = [indexPath row];
+//	NSUInteger section = [indexPath section];
+//	NSString *identifier = [nibNames objectAtIndex:section * 2 + row];
+//	
+//	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//	if (nil == cell) {
+//		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//	}
+//	
+//	if ([identifier isEqualToString:@"AssignmentDescriptionIdentifier"]) {
+//		UITextView *tv = [cell.contentView.subviews objectAtIndex:0];
+//		tv.text = [self.assignment valueForKey:@"content"];
+//		if (tv.text == nil) tv.text = @"";
+//	} else if ([identifier isEqualToString:@"AssignmentImageIdentifier"]) {
+//		
+//	} else if ([identifier isEqualToString:@"AssignmentTimeIdentifier"]) {
+//		if ([[self.assignment objectForKey:@"due_type"] isEqualToNumber:TYPE_ON_DATE]) {
+//			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//			formatter.dateFormat = @"M月d日 E hh:mm";
+//			[[[cell.contentView subviews] objectAtIndex:1] setText:[formatter stringFromDate:[self.assignment objectForKey:@"due_date"]]];
+//		} else {
+//			[[[cell.contentView subviews] objectAtIndex:1] setText:[NSString stringWithFormat:@"第%@周 周%@ 课上", [[self.assignment objectForKey:@"due_lesson"] objectForKey:@"week"], [[self.assignment objectForKey:@"due_lesson"] objectForKey:@"day"]]];
+//		}
+//	} else if ([identifier isEqualToString:@"AssignmentCourseIdentifier"]) {
+//		
+//		[[[cell.contentView subviews] objectAtIndex:1] setText:[self.course objectForKey:@"name"]];
+//		
+//		[[[cell.contentView subviews] objectAtIndex:1] setInputView:self.coursesPicker];
+//		[[[cell.contentView subviews] objectAtIndex:1] setInputAccessoryView:self.coursesToolbar];
+//		[[[cell.contentView subviews] objectAtIndex:1] setDelegate:self];
+//	}
+//	
+//    return cell;
+//}
 
 /*
  // Override to support conditional editing of the table view.
@@ -311,67 +380,55 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	}
 }
 
-- (void) performActionSheet
-{
-	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"添加照片" 
-													  delegate:self 
-											 cancelButtonTitle:sCANCEL 
-										destructiveButtonTitle:nil 
-											 otherButtonTitles:@"拍照", @"选取照片", @"选取最近一张照片", nil];
-	[menu showInView:self.view];
-}
-
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-	NSUInteger row = [indexPath row];
-	NSUInteger section = [indexPath section];
-	switch (section) {
-		case 0:
-			switch (row) {
-				case 0:
-					[[[[self.assignmentTableView cellForRowAtIndexPath:indexPath].contentView subviews] objectAtIndex:0] becomeFirstResponder];
-					break;
-				case 1:
-					[self performActionSheet];
-					break;
-				default:
-					break;
-			}
-			break;
-		case 1:
-			switch (row) {
-				case 0:
-					[self performSegueWithIdentifier:@"DeadlineSegue" sender:self];
-					break;
-				case 1:
-					[[[[self.assignmentTableView cellForRowAtIndexPath:indexPath].contentView subviews] objectAtIndex:1] becomeFirstResponder];
-					break;
-				default:
-					break;
-			}
-			break;
-		default:
-			break;
-	}
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Navigation logic may go here. Create and push another view controller.
+//	NSUInteger row = [indexPath row];
+//	NSUInteger section = [indexPath section];
+//	switch (section) {
+//		case 0:
+//			switch (row) {
+//				case 0:
+//					[[[[self.assignmentTableView cellForRowAtIndexPath:indexPath].contentView subviews] objectAtIndex:0] becomeFirstResponder];
+//					break;
+//				case 1:
+//					[self performActionSheet];
+//					break;
+//				default:
+//					break;
+//			}
+//			break;
+//		case 1:
+//			switch (row) {
+//				case 0:
+//					break;
+//				case 1:
+//					break;
+//				default:
+//					break;
+//			}
+//			break;
+//		default:
+//			break;
+//	}
+//	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+//}
 
 #pragma mark - UIImagePickerController delegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker 
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	// get last chosen photo or video
     self.lastChosenMediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([lastChosenMediaType isEqual:(NSString *)kUTTypeImage]) {
+    if ([self.lastChosenMediaType isEqual:(NSString *)kUTTypeImage]) {
 	    self.image = [info objectForKey:UIImagePickerControllerEditedImage];
     }
 	// end picker
     [picker dismissModalViewControllerAnimated:YES];   
-	if ([lastChosenMediaType isEqual:(NSString *)kUTTypeImage]) {
-		imageView.image = image;
-        imageView.hidden = NO;
+	if ([self.lastChosenMediaType isEqual:(NSString *)kUTTypeImage]) {
+		self.imageView.image = self.image;
+        self.imageView.hidden = NO;
     }
 }
 

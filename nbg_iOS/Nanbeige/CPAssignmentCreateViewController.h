@@ -8,27 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPAssignmentCreateViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-- (IBAction)onCancel:(id)sender;
-- (IBAction)onConfirm:(id)sender;
-@property (weak, nonatomic) IBOutlet UITableView *assignmentTableView;
-@property (strong, nonatomic) NSMutableArray *assignments;
+@interface CPAssignmentCreateViewController : QuickDialogController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
 @property (strong, nonatomic) NSMutableDictionary *assignment;
+@property (strong, nonatomic) NSDictionary *course;
 @property (strong, nonatomic) NSArray *weeksData;
+
 @property (strong, nonatomic) NSArray *coursesData;
-@property (nonatomic) BOOL bComplete;
-@property (nonatomic) int assignmentIndex;
-@property (nonatomic) BOOL initWithCamera;
 
-@property (weak, nonatomic) IBOutlet UIPickerView *coursesPicker;
-@property (weak, nonatomic) IBOutlet UIToolbar *coursesToolbar;
+@property (nonatomic) BOOL bCreate;
+@property (nonatomic) BOOL bInitWithCamera;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIImage *image;
-@property (copy, nonatomic) NSString *lastChosenMediaType;
 @property (assign, nonatomic) CGRect imageFrame;
 @property (assign, nonatomic) BOOL imagePickerUsed;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-
-- (void)onConfirmCoursesAfterResignFirstResponder:(id)sender;
+@property (copy, nonatomic) NSString *lastChosenMediaType;
 
 @end

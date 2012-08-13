@@ -39,6 +39,15 @@
 	return self;
 }
 
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		self.root = [[QRootElement alloc] initWithJSONFile:@"courseGrabber"];
+	}
+	return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

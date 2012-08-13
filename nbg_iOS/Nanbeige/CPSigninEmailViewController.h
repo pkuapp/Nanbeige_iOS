@@ -10,6 +10,4 @@
 
 @interface CPSigninEmailViewController : QuickDialogController
 
-@property (strong, nonatomic) id accountManagerDelegate;
-
 @end

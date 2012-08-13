@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface CPAssignmentDeadlineViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (weak, nonatomic) IBOutlet UILabel *modeLabel;
-@property (weak, nonatomic) IBOutlet UIPickerView *deadlinePicker;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeSegmentedControl;
+@property (weak, nonatomic) IBOutlet UILabel *modeLabel;
+
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *deadlinePicker;
+
 @property (weak, nonatomic) NSMutableDictionary *assignment;
 @property (strong, nonatomic) NSArray *pickerData;
+
 - (IBAction)onModeChange:(UISegmentedControl *)sender;
 - (IBAction)onConfirm:(id)sender;
 

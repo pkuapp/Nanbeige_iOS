@@ -49,7 +49,7 @@
         <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lesson" inverseName="user" inverseEntity="Lesson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Assignment" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Course" positionX="160" positionY="192" width="128" height="180"/>
         <element name="Lesson" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Semester" positionX="160" positionY="192" width="128" height="90"/>

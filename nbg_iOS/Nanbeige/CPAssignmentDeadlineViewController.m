@@ -36,17 +36,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	if ([[assignment objectForKey:kASSIGNMENTDDLMODE] isEqualToNumber:[NSNumber numberWithInt:ONCLASS]]) {
+	if ([[assignment objectForKey:@"due_type"] isEqualToString:TYPE_ON_LESSON]) {
 		[modeSegmentedControl setSelectedSegmentIndex:0];
-		//[deadlinePicker selectRow:[[assignment objectForKey:kASSIGNMENTDDLWEEKS] intValue] inComponent:0 animated:YES];
+//		[deadlinePicker selectRow:[[assignment objectForKey:kASSIGNMENTDDLWEEKS] intValue] inComponent:0 animated:YES];
 	} else {
 		[modeSegmentedControl setSelectedSegmentIndex:1];
-		if ([assignment objectForKey:kASSIGNMENTDDLDATE]) {
-			[datePicker setDate:[assignment objectForKey:kASSIGNMENTDDLDATE]];
+		if ([assignment objectForKey:@"due_date"]) {
+			[datePicker setDate:[assignment objectForKey:@"due_date"]];
 		}
 	}
 	[self onModeChange:modeSegmentedControl];
-	self.pickerData = ASSIGNMENTDDLWEAKS;
 }
 
 - (void)viewDidUnload
@@ -74,13 +73,12 @@
 
 - (IBAction)onConfirm:(id)sender {
 	
-	if ([modeSegmentedControl selectedSegmentIndex] == 0) {
-		[assignment setObject:[NSNumber numberWithInt:ONCLASS] forKey:kASSIGNMENTDDLMODE];
-		NSInteger row = [deadlinePicker selectedRowInComponent:0];
-		[assignment setObject:[NSNumber numberWithInt:row] forKey:kASSIGNMENTDDLWEEKS];
-	} else if ([modeSegmentedControl selectedSegmentIndex] == 1) {
-		[assignment setObject:[NSNumber numberWithInt:ONDATE] forKey:kASSIGNMENTDDLMODE];
-		[assignment setObject:datePicker.date forKey:kASSIGNMENTDDLDATE];
+	if ([modeSegmentedControl selectedSegmentIndex] == ON_LESSON) {
+		[assignment setObject:TYPE_ON_LESSON forKey:@"due_type"];
+		[assignment setObject:[self.pickerData objectAtIndex:[deadlinePicker selectedRowInComponent:0]] forKey:@"due_lesson"];
+	} else if ([modeSegmentedControl selectedSegmentIndex] == ON_DATE) {
+		[assignment setObject:TYPE_ON_DATE forKey:@"due_type"];
+		[assignment setObject:datePicker.date forKey:@"due_date"];
 	}
 	[self.navigationController popViewControllerAnimated:YES];
 }
@@ -115,7 +113,8 @@ numberOfRowsInComponent:(NSInteger)component
 			 titleForRow:(NSInteger)row
 			forComponent:(NSInteger)component
 {
-	return [pickerData objectAtIndex:row];
+	NSString *due_display = [NSString stringWithFormat:@"第%@周 周%@ 课上", [[pickerData objectAtIndex:row] objectForKey:@"week"], [[pickerData objectAtIndex:row] objectForKey:@"day"]];
+	return due_display;
 }
 
 @end

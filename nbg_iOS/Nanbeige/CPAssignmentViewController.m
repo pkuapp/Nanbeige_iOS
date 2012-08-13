@@ -10,11 +10,13 @@
 #import "CPAssignmentCreateViewController.h"
 #import "CPAssignmentNoImageCell.h"
 #import "CPAssignmentImageCell.h"
+#import "CPCourseGrabberViewController.h"
 #import "Environment.h"
 
 @interface CPAssignmentViewController () 
 {
 	int assignmentSelect;
+	bool bViewDidLoad;
 }
 
 
@@ -125,6 +127,8 @@
 	self.title = TITLE_ASSIGNMENT;
 	self.completeSegmentedControl.tintColor = navBarBgColor1;
 	
+	bViewDidLoad = YES;
+	
 	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     
 	CouchDesignDocument *_design = [self.database designDocumentWithName: @"assignment"];
@@ -229,7 +233,12 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-//	[[self nowAssignmentsTableView] reloadData];
+	if (bViewDidLoad && ![[[NSUserDefaults standardUserDefaults] objectForKey:kCOURSE_IMPORTED] boolValue]) {
+		CPCourseGrabberViewController *cgvc = [[CPCourseGrabberViewController alloc] init];
+		UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:cgvc];
+		[self presentModalViewController:nc animated:YES];
+		bViewDidLoad = NO;
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -298,9 +307,13 @@
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
-	[(id)cell courseName].text = [NSString stringWithFormat:@"%@", [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"course_id"] ];
+	NSNumber *course_id = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"course_id"];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course_%@", course_id]];
+	[(id)cell courseName].text = [doc propertyForKey:@"name"];
+	
 	[(id)cell assignmentName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"content"];
-	[(id)cell assignmentTime].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"due"];
+	[(id)cell assignmentTime].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"due_display"];
 	if ([nibName isEqualToString:@"CPAssignmentImageCell"]) {
 		//[[(CPAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
 	}
@@ -365,12 +378,12 @@
 	CouchDocument *doc = [localDatabase documentWithID:@"courses"];
 	ncavc.coursesData = [[doc properties] objectForKey:@"value"];
 	
-	ncavc.initWithCamera = NO;
+	ncavc.bInitWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
-		ncavc.assignmentIndex = assignmentSelect;
-		ncavc.bComplete = ([self.completeSegmentedControl selectedSegmentIndex] == COMPLETE);
+		ncavc.bCreate = NO;
+		[ncavc.assignment setValuesForKeysWithDictionary:[[self nowAssignments] objectAtIndex:assignmentSelect]];
 	} else {
-		ncavc.assignmentIndex = -1;
+		ncavc.bCreate = YES;
 	}
 }
 

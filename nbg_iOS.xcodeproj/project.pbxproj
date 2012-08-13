@@ -351,6 +351,7 @@
 		26F3E2C315D818E100D69D0D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C115D818E100D69D0D /* User.m */; };
 		26F3E2C715D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */; };
 		26F3E2C815D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */; };
+		26F3E2D915D92EEE00D69D0D /* assignmentCreate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26F3E2D815D92EED00D69D0D /* assignmentCreate.json */; };
 		411DBBCC15CB9E4000EDB31D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCB15CB9E4000EDB31D /* UIKit.framework */; };
 		411DBBCE15CB9E4000EDB31D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCD15CB9E4000EDB31D /* Foundation.framework */; };
 		411DBBD015CB9E4000EDB31D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCF15CB9E4000EDB31D /* CoreGraphics.framework */; };
@@ -931,8 +932,6 @@
 		414AFE3315D512A500EFFB60 /* CPLoginItsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */; };
 		414AFE3415D512A500EFFB60 /* CPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBC15D512A500EFFB60 /* CPMainViewController.m */; };
 		414AFE3515D512A500EFFB60 /* CPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBC15D512A500EFFB60 /* CPMainViewController.m */; };
-		414AFE3615D512A500EFFB60 /* CPPickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */; };
-		414AFE3715D512A500EFFB60 /* CPPickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */; };
 		414AFE3815D512A500EFFB60 /* CPPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */; };
 		414AFE3915D512A500EFFB60 /* CPPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */; };
 		414AFE3A15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */; };
@@ -1182,6 +1181,7 @@
 		26F3E2C115D818E100D69D0D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		26F3E2C515D8325300D69D0D /* CPRoomRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRoomRetractableSectionController.h; sourceTree = "<group>"; };
 		26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRoomRetractableSectionController.m; sourceTree = "<group>"; };
+		26F3E2D815D92EED00D69D0D /* assignmentCreate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCreate.json; sourceTree = "<group>"; };
 		411DBBC715CB9E3F00EDB31D /* nbg_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nbg_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		411DBBCB15CB9E4000EDB31D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		411DBBCD15CB9E4000EDB31D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1702,8 +1702,6 @@
 		414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLoginItsViewController.m; sourceTree = "<group>"; };
 		414AFDBB15D512A500EFFB60 /* CPMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainViewController.h; sourceTree = "<group>"; };
 		414AFDBC15D512A500EFFB60 /* CPMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainViewController.m; sourceTree = "<group>"; };
-		414AFDBD15D512A500EFFB60 /* CPPickerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPickerLabel.h; sourceTree = "<group>"; };
-		414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPickerLabel.m; sourceTree = "<group>"; };
 		414AFDBF15D512A500EFFB60 /* CPPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPPreferenceViewController.h; path = Nanbeige/CPPreferenceViewController.h; sourceTree = "<group>"; };
 		414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPPreferenceViewController.m; path = Nanbeige/CPPreferenceViewController.m; sourceTree = "<group>"; };
 		414AFDC115D512A500EFFB60 /* CPRenrenPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRenrenPostViewController.h; sourceTree = "<group>"; };
@@ -2019,6 +2017,8 @@
 				414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */,
 				414AFDC515D512A500EFFB60 /* CPUserCoursesViewController.h */,
 				414AFDC615D512A500EFFB60 /* CPUserCoursesViewController.m */,
+				414AFDCA15D512A500EFFB60 /* CPTimeTable.h */,
+				414AFDCB15D512A500EFFB60 /* CPTimeTable.m */,
 			);
 			name = CPCourse;
 			path = Nanbeige;
@@ -2245,6 +2245,7 @@
 		4120F2B015D6413100D0AA97 /* CPAssignment */ = {
 			isa = PBXGroup;
 			children = (
+				26F3E2D815D92EED00D69D0D /* assignmentCreate.json */,
 				414AFD8415D512A500EFFB60 /* CPAssignmentViewController.h */,
 				414AFD8515D512A500EFFB60 /* CPAssignmentViewController.m */,
 				414AFD9615D512A500EFFB60 /* CPAssignmentCreateViewController.h */,
@@ -2951,12 +2952,8 @@
 				414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */,
 				414AFDB915D512A500EFFB60 /* CPLoginItsViewController.h */,
 				414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */,
-				414AFDBD15D512A500EFFB60 /* CPPickerLabel.h */,
-				414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */,
 				414AFDC815D512A500EFFB60 /* CPFeedViewController.h */,
 				414AFDC915D512A500EFFB60 /* CPFeedViewController.m */,
-				414AFDCA15D512A500EFFB60 /* CPTimeTable.h */,
-				414AFDCB15D512A500EFFB60 /* CPTimeTable.m */,
 				414AFDD015D512A500EFFB60 /* CPWelcomeSegue.h */,
 				414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */,
 				414AFDD815D512A500EFFB60 /* SystemHelper.h */,
@@ -3350,6 +3347,7 @@
 				26CD828515D7811C0070DF78 /* widget_3line_0btn.png in Resources */,
 				26CD828715D7811C0070DF78 /* widget_3line_2btn.png in Resources */,
 				26CD828915D7811C0070DF78 /* widget_point.png in Resources */,
+				26F3E2D915D92EEE00D69D0D /* assignmentCreate.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3701,7 +3699,6 @@
 				414AFE2E15D512A500EFFB60 /* CPLine3Button2Cell.m in Sources */,
 				414AFE3215D512A500EFFB60 /* CPLoginItsViewController.m in Sources */,
 				414AFE3415D512A500EFFB60 /* CPMainViewController.m in Sources */,
-				414AFE3615D512A500EFFB60 /* CPPickerLabel.m in Sources */,
 				414AFE3815D512A500EFFB60 /* CPPreferenceViewController.m in Sources */,
 				414AFE3A15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */,
 				414AFE3C15D512A500EFFB60 /* CPRoomsViewController.m in Sources */,
@@ -3920,7 +3917,6 @@
 				414AFE2F15D512A500EFFB60 /* CPLine3Button2Cell.m in Sources */,
 				414AFE3315D512A500EFFB60 /* CPLoginItsViewController.m in Sources */,
 				414AFE3515D512A500EFFB60 /* CPMainViewController.m in Sources */,
-				414AFE3715D512A500EFFB60 /* CPPickerLabel.m in Sources */,
 				414AFE3915D512A500EFFB60 /* CPPreferenceViewController.m in Sources */,
 				414AFE3B15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */,
 				414AFE3D15D512A500EFFB60 /* CPRoomsViewController.m in Sources */,

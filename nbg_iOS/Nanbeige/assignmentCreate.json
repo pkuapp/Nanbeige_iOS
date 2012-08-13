@@ -1,0 +1,37 @@
+{
+	"grouped": true,
+	"title": "添加作业计划",
+    "controllerName": "CPAssignmentCreateViewController",
+	"sections": [
+				 {
+				 "elements": [
+							  {
+							  "type":"QEntryElement",
+							  "placeholder":"作业要求",
+							  "bind":"textValue:content"
+							  },
+							  {
+							  "type":"CPLabelButtonCenterElement",
+							  "title":"添加照片 beta ( 只支持一张 )",
+							  "controllerAction":"onImageSelect:"
+							  }
+							  ]
+				 },
+				 {
+				 "elements": [
+							  {
+							  "type":"CPLabelLeftDetailElement",
+							  "title":"截止日期",
+							  "bind":"value:due_display",
+							  "controllerAction":"onEditDue:"
+							  },
+							  {
+							  "type":"CPLabelLeftDetailElement",
+							  "title":"所属课程",
+							  "bind":"value:course_name",
+							  "controllerAction":"onEditCourse:"
+							  }
+							  ]
+				 }
+				 ]
+}

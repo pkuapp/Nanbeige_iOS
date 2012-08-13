@@ -94,7 +94,6 @@
 	self.tableView.backgroundColor = tableBgColor1;
 	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
-	self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor blackColor], UITextAttributeTextShadowColor: [UIColor whiteColor] , UITextAttributeFont : [UIFont boldSystemFontOfSize:20], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0.5)]};
 	
 	NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 							 @"IP网关", @"name",
@@ -220,13 +219,14 @@
 	} else if ([segue.identifier isEqualToString:@"CreateAssignmentSegue"] || [segue.identifier isEqualToString:@"CreateAssignmentWithCameraSegue"]) {
 		UINavigationController *nc = segue.destinationViewController;
 		CPAssignmentCreateViewController *ncavc = (CPAssignmentCreateViewController *)(nc.topViewController);
-#warning 传递课表
+
 		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
 		CouchDocument *doc = [localDatabase documentWithID:@"courses"];
 		ncavc.coursesData = [[doc properties] objectForKey:@"value"];
+
+		ncavc.bInitWithCamera = [segue.identifier isEqualToString:@"CreateAssignmentWithCameraSegue"];
+		ncavc.bCreate = YES;
 		
-		ncavc.initWithCamera = [segue.identifier isEqualToString:@"CreateAssignmentWithCameraSegue"];
-		ncavc.assignmentIndex = -1;
 	} else if ([segue.identifier isEqualToString:@"DetailGateInfoSegue"]) {
 		CPDetailGateInfoViewController *dvc = segue.destinationViewController;
 		
