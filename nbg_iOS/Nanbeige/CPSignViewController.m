@@ -142,13 +142,13 @@
 			
 			[User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
             
-			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 				[self loading:NO];
                 
                 [User updateSharedAppUserProfile:collection];
                 [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
                 
-            } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+            } error:^(CPRequest *_req, id collection, NSError *error) {
 				[self loading:NO];
 				
 				if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
@@ -159,17 +159,18 @@
 						[User updateSharedAppUserProfile:collection];
 						[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 						
-					} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+					} error:^(CPRequest *_req, id collection, NSError *error) {
 						[self loading:NO];
-						if ([collection objectForKey:@"error"]) {
-							raise(-1);
-						}
+						if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+							[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+						if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+							[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 					}];
 					
 					[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 					[self loading:YES];
                 } else if ([collection objectForKey:@"error"]) {
-					raise(-1);
+					[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
 				}
             }];
 			
@@ -224,8 +225,8 @@
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
-//							  
-//								  [[Coffeepot shared] requestWithMethodPath:@"user/login/renren/" params:@{@"token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+							  
+//								  [[Coffeepot shared] requestWithMethodPath:@"user/login/renren/" params:@{@"token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 //									  [self loading:NO];
 //									  
 //									  [User updateSharedAppUserProfile:collection];
@@ -253,7 +254,7 @@
 //										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 //										  [self loading:YES];
 //									  } else if ([collection objectForKey:@"error"]) {
-//										  raise(-1);
+//										  [self showAlert:[collection objectForKey:@"error"]];
 //									  }
 //								  }];
 //								  

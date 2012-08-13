@@ -95,17 +95,18 @@
 		return ;
     }
 	
-	[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:@{@"email":email, @"password":password ,@"nickname":nickname} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+	[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:@{@"email":email, @"password":password ,@"nickname":nickname} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		[self loading:NO];
 		
 		[User updateSharedAppUserProfile:collection];
 		[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 		
-	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+	} error:^(CPRequest *_req, id collection, NSError *error) {
 		[self loading:NO];
-		if ([collection objectForKey:@"error"]) {
-			raise(-1);
-		}
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 	}];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];

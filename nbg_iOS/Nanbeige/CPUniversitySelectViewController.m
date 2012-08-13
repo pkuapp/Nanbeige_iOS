@@ -50,7 +50,7 @@
 		self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	}
 	
-	[[Coffeepot shared] requestWithMethodPath:@"university/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, NSArray *collection) {
+	[[Coffeepot shared] requestWithMethodPath:@"university/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		[self loading:NO];
 		
 		campuses = [[NSMutableArray alloc] init];
@@ -72,11 +72,12 @@
 		[self.root bindToObject:dict];
 		[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
 		
-	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+	} error:^(CPRequest *_req, id collection, NSError *error) {
 		[self loading:NO];
-		if ([collection objectForKey:@"error"]) {
-			raise(-1);
-		}
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 	}];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -121,15 +122,15 @@
 	NSDictionary *campus = [campuses objectAtIndex:index];
 	[User updateSharedAppUserProfile:campus];
 	
-	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		[self loading:NO];
 		
 		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
 			
-			[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, NSDictionary *result) {
+			[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 				[self loading:NO];
 				
-				NSMutableDictionary *mutableResult = [result mutableCopy];
+				NSMutableDictionary *mutableResult = [collection mutableCopy];
 				[mutableResult setObject:[User sharedAppUser].university_id forKey:@"id"];
 				[mutableResult setObject:@"university" forKey:@"doc_type"];
 				
@@ -142,11 +143,12 @@
 					else [self dismissModalViewControllerAnimated:YES];
 				}];
 				
-			} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+			} error:^(CPRequest *_req, id collection, NSError *error) {
 				[self loading:NO];
-				if ([collection objectForKey:@"error"]) {
-					raise(-1);
-				}
+				if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+					[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+				if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+					[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 			}];
 			
 			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -156,11 +158,12 @@
 			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 		}
 		
-	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+	} error:^(CPRequest *_req, id collection, NSError *error) {
 		[self loading:NO];
-		if ([collection objectForKey:@"error"]) {
-			raise(-1);
-		}
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];

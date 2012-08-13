@@ -132,6 +132,7 @@
 	NSString *deadlineString = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].contentView subviews] objectAtIndex:1] text];
 	[self.assignment setObject:deadlineString forKey:@"due"];
 	NSString *course = [[[[self.assignmentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]].contentView subviews] objectAtIndex:1] text];
+#warning 进行id和课程名的数据库转换
 	[self.assignment setObject:@0 forKey:@"course_id"];
 	
 	if (imageView.image.size.width && imageView.image.size.height) {

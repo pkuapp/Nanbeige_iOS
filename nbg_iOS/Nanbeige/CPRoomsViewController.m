@@ -74,8 +74,13 @@
 	UIBarButtonItem *datePickButton = [[UIBarButtonItem alloc] initWithTitle:@"日期" style:UIBarButtonItemStyleBordered target:self action:@selector(onDatePick:)];
 	self.navigationItem.rightBarButtonItem = datePickButton;
 	
-	self.buildings = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPBUILDINGS];
-	self.rooms = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPROOMS];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"buildings_%@", [User sharedAppUser].campus_id]];
+	self.buildings = [[doc properties] objectForKey:@"value"];
+	
+	doc = [localDatabase documentWithID:@"rooms"];
+	self.rooms = [[doc properties] objectForKey:@"value"];
+	
 	[self reloadRooms];
 }
 
@@ -152,7 +157,17 @@
 - (void)syncNextRooms
 {
 	if (buildingIndex == _buildings.count) {
-		[[NSUserDefaults standardUserDefaults] setValue:self.rooms forKey:kTEMPROOMS];
+		
+		NSMutableDictionary *mutableRooms = [@{ @"value" : self.rooms } mutableCopy];
+		[mutableRooms setObject:@"rooms" forKey:@"doc_type"];
+		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+		CouchDocument *doc = [localDatabase documentWithID:@"rooms"];
+		if ([doc propertyForKey:@"_rev"]) [mutableRooms setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+		RESTOperation *op = [doc putProperties:mutableRooms];
+		[op onCompletion:^{
+			if (op.error) NSLog(@"%@", op.error);
+		}];
+		
 		[self reloadRooms];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 		return ;
@@ -167,16 +182,17 @@
 	} else params = nil;
 	building_id = [[self.buildings objectAtIndex:buildingIndex] objectForKey:@"id"];
 	
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/%@/room/", building_id] params:params requestMethod:@"GET" success:^(CPRequest *_req, NSArray *collection) {
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/%@/room/", building_id] params:params requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
 		buildingIndex ++;
 		[self.rooms addObject:collection];
 		[self syncNextRooms];
 		
-	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-		if ([collection objectForKey:@"error"]) {
-			raise(-1);
-		}
+	} error:^(CPRequest *_req, id collection, NSError *error) {
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 	}];
 }
 
@@ -214,24 +230,30 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-	NSNumber *campus_id = nil;//[User sharedAppUser].campus_id;
-	if (!campus_id) campus_id = @8;
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/?campus_id=%@", campus_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id result) {
+	NSNumber *campus_id = [User sharedAppUser].campus_id;
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/?campus_id=%@", campus_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
-		if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"error"]) {
-			[self showAlert:[result objectForKey:@"error"]];
-		} else {
-			[[NSUserDefaults standardUserDefaults] setValue:result forKey:kTEMPBUILDINGS];
-			self.buildings = result;
-			self.rooms = nil;
-			buildingIndex = 0;
-			[self syncNextRooms];
-		}
+		NSMutableDictionary *mutableBuildings = [@{ @"value" : collection } mutableCopy];
+		[mutableBuildings setObject:campus_id forKey:@"campus_id"];
+		[mutableBuildings setObject:@"buildings" forKey:@"doc_type"];
+		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"buildings_%@", campus_id]];
+		if ([doc propertyForKey:@"_rev"]) [mutableBuildings setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+		RESTOperation *op = [doc putProperties:mutableBuildings];
+		[op onCompletion:^{
+			if (op.error) NSLog(@"%@", op.error);
+		}];
 		
-	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-		if ([collection objectForKey:@"error"]) {
-			raise(-1);
-		}
+		self.buildings = collection;
+		self.rooms = nil;
+		buildingIndex = 0;
+		[self syncNextRooms];
+		
+	} error:^(CPRequest *_req, id collection, NSError *error) {
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 	}];
 }
 

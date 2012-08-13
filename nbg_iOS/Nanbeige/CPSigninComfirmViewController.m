@@ -160,10 +160,10 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	if (![User sharedAppUser].university_id) return ;
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, NSDictionary *result) {
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		[self loading:NO];
 		
-		NSMutableDictionary *mutableResult = [result mutableCopy];
+		NSMutableDictionary *mutableResult = [collection mutableCopy];
 		[mutableResult setObject:[User sharedAppUser].university_id forKey:@"id"];
 		[mutableResult setObject:@"university" forKey:@"doc_type"];
 		
@@ -176,11 +176,12 @@
 			else NSLog(@"%@", mutableResult);
 		}];
 		
-	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+	} error:^(CPRequest *_req, id collection, NSError *error) {
 		[self loading:NO];
-		if ([collection objectForKey:@"error"]) {
-			raise(-1);
-		}
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 	}];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -203,17 +204,17 @@
 										  
 										  [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
 										  
-										  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id result) {
+										  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 											  [self loading:NO];
 											  
 											  [self refreshDataSource];
 											  
-										  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+										  } error:^(CPRequest *_req, id collection, NSError *error) {
 											  [self loading:NO];
-											  
-											  if ([collection objectForKey:@"error"]) {
-												  raise(-1);
-											  }
+											  if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+												  [self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+											  if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+												  [self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 										  }];
 										  
 										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -248,21 +249,21 @@
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
 								  
-//								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+//								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 //									  [self loading:NO];
 //									  
 									  [self refreshDataSource];
-//									  
-//								  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+//
+//								  } error:^(CPRequest *_req, id collection, NSError *error) {
 //									  [self loading:NO];
-//
-//									  if ([collection objectForKey:@"error"]) {
-//										  raise(-1);
-//									  }
+//									  if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+//										  [self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+//									  if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+//										  [self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 //								  }];
-//
-//								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-//								  [self loading:YES];
+
+								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+								  [self loading:YES];
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {

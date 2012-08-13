@@ -57,7 +57,9 @@
 	//  update the last update date
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
-	self.courses = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPCOURSES];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDocument *doc = [localDatabase documentWithID:@"courses"];
+	self.courses = [[doc properties] objectForKey:@"value"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -129,11 +131,11 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-	[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id result) {
+	[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
-		if ([result isKindOfClass:[NSArray class]]) {
+		if ([collection isKindOfClass:[NSArray class]]) {
 			
-			for (NSDictionary *course in result) {
+			for (NSDictionary *course in collection) {
 				NSMutableDictionary *mutableCourse = [course mutableCopy];
 				[mutableCourse setObject:@"course" forKey:@"doc_type"];
 				
@@ -149,8 +151,10 @@
 				}];
 			}
 			
-			self.courses = result;
-			NSMutableDictionary *mutableCourses = [@{ @"value" : result } mutableCopy];
+			self.courses = collection;
+			NSMutableDictionary *mutableCourses = [@{ @"value" : collection } mutableCopy];
+			[mutableCourses setObject:@"courses" forKey:@"doc_type"];
+			
 			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
 			CouchDocument *doc = [localDatabase documentWithID:@"courses"];
 			if ([doc propertyForKey:@"_rev"]) [mutableCourses setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
@@ -161,10 +165,11 @@
 
 		}
 		
-	} error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-		if ([collection objectForKey:@"error"]) {
-			raise(-1);
-		}
+	} error:^(CPRequest *_req, id collection, NSError *error) {
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 	}];
 }
 

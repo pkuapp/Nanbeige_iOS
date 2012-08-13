@@ -8,7 +8,8 @@
 
 #import "CPCourseGrabberViewController.h"
 #import "Environment.h"
-
+#import "Coffeepot.h"
+#import "Models+addon.h"
 
 @interface CPCourseGrabberViewController () {
 
@@ -49,7 +50,42 @@
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 
-	
+	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/" params:nil requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		[self loading:NO];
+
+		if (![collection isKindOfClass:[NSDictionary class]] || ![[collection objectForKey:@"available"] boolValue]) {
+			[self performSelector:@selector(close) withObject:nil afterDelay:1.0];
+			[self showAlert:@"抓课器暂不可用"];
+		} else if ([[collection objectForKey:@"require_captcha"] boolValue]) {
+			
+			[[Coffeepot shared] requestWithMethodPath:@"course/grabber/captcha/" params:nil requestMethod:@"GET" raw:^(CPRequest *_req, NSData *data) {
+			
+				[self loading:NO];
+				
+				if ([data isKindOfClass:[NSData class]]) {
+					NSDictionary *dict = @{@"captcha":@[@{ @"placeholder" : @"验证码" }]};
+					[self.root bindToObject:dict];
+					[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];
+					UIImage *image = [UIImage imageWithData:data];
+					CGFloat width = image.size.width * 31.0 / image.size.height;
+					UIImageView *captchaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(290 - width, 6, width, 31)];
+					captchaImageView.image = image;
+					[[[self.quickDialogTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] contentView] addSubview:captchaImageView];
+				}
+				
+			}];
+			
+			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+			[self loading:YES];
+		}
+		
+	} error:^(CPRequest *_req, id collection, NSError *error) {
+		[self loading:NO];
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+	}];
 
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
@@ -98,53 +134,31 @@
 		return ;
     }
 	
-
-	 
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-    [self loading:YES];
+	NSMutableDictionary *params = [@{ @"username":username, @"password":password } mutableCopy];
+	if (captcha) [params setObject:captcha forKey:@"captcha"];
+	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/start/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		[self loading:NO];
+		
+		// TODO collection as NSArray of courses' id
+		
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kCOURSE_IMPORTED];
+		[self close];
+		
+	} error:^(CPRequest *_req, id collection, NSError *error) {
+		[self loading:NO];
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+	}];
+	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
 }
 
 - (void)close
 {
 	[self dismissModalViewControllerAnimated:YES];
 }
-
-#pragma mark - CourseManagerDelegate Email
-
-- (void)didCourseGrabberReceived:(NSDictionary *)grabber
-{
-	if (![[grabber objectForKey:kAPIAVAILABLE] boolValue]) {
-		[self loading:NO];
-		[self performSelector:@selector(close) withObject:nil afterDelay:1.0];
-		[self showAlert:@"抓课器暂不可用"];
-		return ;
-	}
-	if ([[grabber objectForKey:kAPIREQUIRE_CAPTCHA] boolValue]) {
-
-		return ;
-	}
-	[self loading:NO];
-}
-
-- (void)didCourseGrabberCaptchaReceived:(NSData *)captchaImage
-{
-	NSDictionary *dict = @{@"captcha":@[@{ @"placeholder" : @"验证码" }]};
-	[self.root bindToObject:dict];
-	[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];
-	UIImage *image = [UIImage imageWithData:captchaImage];
-	CGFloat width = image.size.width * 31.0 / image.size.height;
-	UIImageView *captchaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(280 - width, 6, width, 31)];
-	captchaImageView.image = image;
-	[[[self.quickDialogTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] contentView] addSubview:captchaImageView];
-	[self loading:NO];
-}
-
-- (void)didCourseGrabberStarted
-{
-	[self loading:NO];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kCOURSE_IMPORTED];
-	[self close];
-}
-
 
 @end

@@ -2009,6 +2009,20 @@
 			path = Nanbeige;
 			sourceTree = "<group>";
 		};
+		26F3E2D215D8BC1600D69D0D /* CPCourse */ = {
+			isa = PBXGroup;
+			children = (
+				414AFD6B15D512A500EFFB60 /* courseGrabber.json */,
+				414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */,
+				414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */,
+				414AFD9415D512A500EFFB60 /* CPCoursesViewController.h */,
+				414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */,
+				414AFDC515D512A500EFFB60 /* CPUserCoursesViewController.h */,
+				414AFDC615D512A500EFFB60 /* CPUserCoursesViewController.m */,
+			);
+			name = CPCourse;
+			sourceTree = "<group>";
+		};
 		411DBBBC15CB9E3F00EDB31D = {
 			isa = PBXGroup;
 			children = (
@@ -2918,14 +2932,11 @@
 		414AFD6815D512A400EFFB60 /* Nanbeige */ = {
 			isa = PBXGroup;
 			children = (
-				414AFD6B15D512A500EFFB60 /* courseGrabber.json */,
+				414E13E315D7A7E300000CA8 /* CPMainFlow */,
+				26F3E2D215D8BC1600D69D0D /* CPCourse */,
 				414AFD6F15D512A500EFFB60 /* Environment.h */,
 				413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */,
 				413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */,
-				414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */,
-				414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */,
-				414AFD9415D512A500EFFB60 /* CPCoursesViewController.h */,
-				414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */,
 				414AFD9815D512A500EFFB60 /* CPDetailGateInfoViewController.h */,
 				414AFD9915D512A500EFFB60 /* CPDetailGateInfoViewController.m */,
 				414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */,
@@ -2937,13 +2948,10 @@
 				414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */,
 				414AFDA815D512A500EFFB60 /* CPLabelLeftDetailElement.h */,
 				414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */,
-				414E13E315D7A7E300000CA8 /* CPMainFlow */,
 				414AFDB915D512A500EFFB60 /* CPLoginItsViewController.h */,
 				414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */,
 				414AFDBD15D512A500EFFB60 /* CPPickerLabel.h */,
 				414AFDBE15D512A500EFFB60 /* CPPickerLabel.m */,
-				414AFDC515D512A500EFFB60 /* CPUserCoursesViewController.h */,
-				414AFDC615D512A500EFFB60 /* CPUserCoursesViewController.m */,
 				414AFDC815D512A500EFFB60 /* CPFeedViewController.h */,
 				414AFDC915D512A500EFFB60 /* CPFeedViewController.m */,
 				414AFDCA15D512A500EFFB60 /* CPTimeTable.h */,

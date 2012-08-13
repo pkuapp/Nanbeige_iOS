@@ -361,7 +361,10 @@
 	UINavigationController *nc = segue.destinationViewController;
 	CPAssignmentCreateViewController *ncavc = (CPAssignmentCreateViewController *)(nc.topViewController);
 #warning 传递课表
-	ncavc.coursesData = [[NSUserDefaults standardUserDefaults] objectForKey:kTEMPCOURSES];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDocument *doc = [localDatabase documentWithID:@"courses"];
+	ncavc.coursesData = [[doc properties] objectForKey:@"value"];
+	
 	ncavc.initWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
 		ncavc.assignmentIndex = assignmentSelect;
