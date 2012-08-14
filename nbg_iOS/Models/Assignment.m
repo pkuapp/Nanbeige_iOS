@@ -2,7 +2,7 @@
 //  Assignment.m
 //  nbg_iOS
 //
-//  Created by wuhaotian on 12-8-10.
+//  Created by ZongZiWang on 12-8-14.
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
@@ -11,10 +11,17 @@
 
 @implementation Assignment
 
-@dynamic absolute_modified;
+@dynamic finished;
 @dynamic content;
 @dynamic course_id;
-@dynamic due;
+@dynamic due_date;
 @dynamic id;
+@dynamic due_type;
+@dynamic due_display;
+@dynamic due_lesson;
+@dynamic has_image;
+@dynamic image_data;
+@dynamic course_name;
+@dynamic doc_type;
 
 @end

@@ -8,9 +8,11 @@
 
 #import "QuickDialogController.h"
 
+@class Assignment;
+
 @interface CPAssignmentCourseViewController : QuickDialogController
 
-@property (weak, nonatomic) NSMutableDictionary *assignment;
+@property (weak, nonatomic) Assignment *assignment;
 @property (weak, nonatomic) NSArray *courseData;
 
 @end

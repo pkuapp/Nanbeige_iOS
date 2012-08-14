@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class Assignment;
+
 @interface CPAssignmentDeadlineViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *modeSegmentedControl;
@@ -16,11 +18,14 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *deadlinePicker;
 
-@property (weak, nonatomic) NSMutableDictionary *assignment;
+@property (weak, nonatomic) Assignment *assignment;
 @property (weak, nonatomic) NSArray *coursesData;
 @property (weak, nonatomic) NSArray *weeksData;
 
 - (IBAction)onModeChange:(UISegmentedControl *)sender;
 - (IBAction)onConfirm:(id)sender;
+
++ (NSString *)displayFromWeekDay:(NSDictionary *)weekDay;
++ (NSString *)displayFromDate:(NSDate *)date;
 
 @end

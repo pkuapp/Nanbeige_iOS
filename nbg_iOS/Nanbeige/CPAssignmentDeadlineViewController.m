@@ -8,6 +8,7 @@
 
 #import "CPAssignmentDeadlineViewController.h"
 #import "Environment.h"
+#import "Assignment.h"
 
 @interface CPAssignmentDeadlineViewController ()
 
@@ -31,14 +32,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	if ([[self.assignment objectForKey:@"due_type"] isEqualToString:TYPE_ON_LESSON]) {
+	if ([self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
 		[self.modeSegmentedControl setSelectedSegmentIndex:0];
-		[self.deadlinePicker selectRow:[self.weeksData indexOfObject:[self.assignment objectForKey:@"due_lesson"]] inComponent:0 animated:YES];
+		[self.deadlinePicker selectRow:[self.weeksData indexOfObject:self.assignment.due_lesson] inComponent:0 animated:YES];
 	} else {
 		[self.modeSegmentedControl setSelectedSegmentIndex:1];
-		NSDate *date = dateFromString([self.assignment objectForKey:@"due_date"], @"yyyy-MM-dd HH:mm:ss");
-		if (!date) date = [NSDate date];
-		[self.datePicker setDate:date];
+		[self.datePicker setDate:self.assignment.due_date];
 	}
 	if (!self.coursesData.count) {
 		[self.modeSegmentedControl setSelectedSegmentIndex:1];
@@ -73,18 +72,17 @@
 #pragma mark - Button controllerAction
 
 - (IBAction)onConfirm:(id)sender {
-	
 	if ([self.modeSegmentedControl selectedSegmentIndex] == ON_LESSON) {
 		NSDictionary *due_lesson = [self.weeksData objectAtIndex:[self.deadlinePicker selectedRowInComponent:0]];
-		[self.assignment setObject:TYPE_ON_LESSON forKey:@"due_type"];
-		[self.assignment setObject:due_lesson forKey:@"due_lesson"];
-		[self.assignment removeObjectForKey:@"due_date"];
+		self.assignment.due_type = TYPE_ON_LESSON;
+		self.assignment.due_lesson = due_lesson;
+		self.assignment.due_date = nil;
+		self.assignment.due_display = [[self class] displayFromWeekDay:self.assignment.due_lesson];
 	} else if ([self.modeSegmentedControl selectedSegmentIndex] == ON_DATE) {
-		[self.assignment setObject:TYPE_ON_DATE forKey:@"due_type"];
-		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-		dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-		[self.assignment setObject:[dateFormatter stringFromDate:self.datePicker.date] forKey:@"due_date"];
-		[self.assignment removeObjectForKey:@"due_lesson"];
+		self.assignment.due_type = TYPE_ON_DATE;
+		self.assignment.due_date = self.datePicker.date;
+		self.assignment.due_lesson = nil;
+		self.assignment.due_display = [[self class] displayFromDate:self.assignment.due_date];
 	}
 	[self.navigationController popViewControllerAnimated:YES];
 }
@@ -119,8 +117,20 @@ numberOfRowsInComponent:(NSInteger)component
 			 titleForRow:(NSInteger)row
 			forComponent:(NSInteger)component
 {
-	NSString *due_display = [NSString stringWithFormat:@"第%@周 周%@ 课上", [[self.weeksData objectAtIndex:row] objectForKey:@"week"], [[self.weeksData objectAtIndex:row] objectForKey:@"day"]];
+	NSString *due_display = [[self class] displayFromWeekDay:[self.weeksData objectAtIndex:row]];
 	return due_display;
+}
+
++ (NSString *)displayFromWeekDay:(NSDictionary *)weekDay
+{
+	return [NSString stringWithFormat:@"第%@周 周%@ 课上", [weekDay objectForKey:@"week"], [weekDay objectForKey:@"day"]];
+}
+
++ (NSString *)displayFromDate:(NSDate *)date
+{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"M月d日 E HH:mm";
+	return [formatter stringFromDate:date];
 }
 
 @end

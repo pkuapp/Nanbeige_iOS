@@ -6,11 +6,12 @@
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
+#import <MobileCoreServices/UTCoreTypes.h>
 #import "CPAssignmentCreateViewController.h"
 #import "CPAssignmentDeadlineViewController.h"
 #import "CPAssignmentCourseViewController.h"
 #import "Environment.h"
-#import <MobileCoreServices/UTCoreTypes.h>
+#import "Assignment.h"
 
 #define DISPLAY_COURSE
 
@@ -33,31 +34,32 @@
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
--(NSMutableDictionary *)assignment
+- (void)setAssignment:(Assignment *)assignment
 {
-	if (_assignment == nil) {
-		_assignment = [[NSMutableDictionary alloc] init];
-		
-		if (self.coursesData.count) [_assignment setObject:[[self.coursesData objectAtIndex:0] objectForKey:@"id"] forKey:@"course_id"];
-		
-		if (self.coursesData.count && self.weeksData.count) {
-			[_assignment setObject:TYPE_ON_LESSON forKey:@"due_type"];
-			[_assignment setObject:[self.weeksData objectAtIndex:0] forKey:@"due_lesson"];
-		} else {
-			[_assignment setObject:TYPE_ON_DATE forKey:@"due_type"];
-			NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-			dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-			[_assignment setObject:[dateFormatter stringFromDate:[NSDate date]] forKey:@"due_date"];
+	_assignment = assignment;
+	if (self.bCreate) {
+		_assignment.finished = NO;
+		if (self.coursesData.count) {
+			_assignment.course_id = [[self.coursesData objectAtIndex:0] objectForKey:@"id"];
+			_assignment.course_name = [[self.coursesData objectAtIndex:0] objectForKey:@"name"];
 		}
-		
+
+		if (self.coursesData.count && self.weeksData.count) {
+			_assignment.due_type = TYPE_ON_LESSON;
+			_assignment.due_lesson = [self.weeksData objectAtIndex:0];
+			_assignment.due_display = [CPAssignmentDeadlineViewController displayFromWeekDay:_assignment.due_lesson];
+		} else {
+			_assignment.due_type = TYPE_ON_DATE;
+			_assignment.due_date = [NSDate date];
+			_assignment.due_display = [CPAssignmentDeadlineViewController displayFromDate:_assignment.due_date];
+		}
 	}
-	return _assignment;
 }
 
 -(NSDictionary *)course
 {
 	if (_coursesData.count && (_course == nil || bCourseChanged)) {
-		NSNumber *course_id = [self.assignment valueForKey:@"course_id"];
+		NSNumber *course_id = self.assignment.course_id;
 		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
 		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course_%@", course_id]];
 		_course = doc.properties;
@@ -131,9 +133,11 @@
 	}
 #endif
 	
-	if ([[self.assignment objectForKey:@"has_image"] boolValue]) {
-		self.imageView.image = [NSKeyedUnarchiver unarchiveObjectWithData:[self.assignment objectForKey:@"image_data"]];
+	if ([self.assignment.has_image boolValue]) {
+		self.imageView.image = [NSKeyedUnarchiver unarchiveObjectWithData:self.assignment.image_data];
 	}
+	QEntryElement *contentElement = [[[self.root.sections objectAtIndex:0] elements] objectAtIndex:0];
+	contentElement.textValue = self.assignment.content;
 }
 
 - (void)viewDidUnload
@@ -145,7 +149,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[self refreshDataSource];
+	[self refreshDisplay];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -173,29 +177,22 @@
 	}
 }
 
-- (void)refreshDataSource
+- (void)refreshDisplay
 {
 	// Once Course Changed
-	if (bCourseChanged && self.coursesData.count && self.weeksData.count && [[self.assignment objectForKey:@"due_type"] isEqualToString:TYPE_ON_LESSON])
-		[self.assignment setObject:[_weeksData objectAtIndex:0] forKey:@"due_lesson"];
+	if (bCourseChanged && self.coursesData.count && self.weeksData.count && [self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
+		self.assignment.due_lesson = [self.weeksData objectAtIndex:0];
+		self.assignment.due_display = [CPAssignmentDeadlineViewController displayFromWeekDay:_assignment.due_lesson];
+	}
 	
-	NSString *due_display;
-	NSString *content = [self.assignment valueForKey:@"content"];
-	NSString *course_name = [self.course objectForKey:@"name"];
+	QEntryElement *contentElement = [[[self.root.sections objectAtIndex:0] elements] objectAtIndex:0];
+	NSString *content = contentElement.textValue;
+	NSString *due_display = self.assignment.due_display;
+	NSString *course_name = self.assignment.course_name;
 	
 #ifdef DISPLAY_COURSE
 	if (!course_name) course_name = @">_<还木有课程";
 #endif
-	
-	if ([[self.assignment objectForKey:@"due_type"] isEqualToString:TYPE_ON_DATE]) {
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-		formatter.dateFormat = @"M月d日 E HH:mm";
-		NSDate *date = dateFromString([self.assignment objectForKey:@"due_date"], @"yyyy-MM-dd HH:mm:ss");
-		if (!date) date = [NSDate date];
-		due_display = [formatter stringFromDate:date];
-	} else {
-		due_display = [NSString stringWithFormat:@"第%@周 周%@ 课上", [[self.assignment objectForKey:@"due_lesson"] objectForKey:@"week"], [[self.assignment objectForKey:@"due_lesson"] objectForKey:@"day"]];
-	}
 	
 	NSMutableDictionary *dict = [@{ @"due_display" : due_display } mutableCopy];
 	if (content) [dict setObject:content forKey:@"content"];
@@ -227,29 +224,21 @@
 	NSMutableDictionary *assignmentInfo = [[NSMutableDictionary alloc] init];
     [self.root fetchValueUsingBindingsIntoObject:assignmentInfo];
 
-	NSString *due_display = [assignmentInfo objectForKey:@"due_display"];
 	NSString *content = [assignmentInfo objectForKey:@"content"];
 	if (!content.length) content = @"施主有点懒，什么都没留下";
+	self.assignment.content = content;
 	
-	[self.assignment setObject:content forKey:@"content"];
-	[self.assignment setObject:due_display forKey:@"due_display"];
+	if (self.imageView.image) {
+		self.assignment.has_image = [NSNumber numberWithBool:YES];
+		self.assignment.image_data = [NSKeyedArchiver archivedDataWithRootObject:self.imageView.image];
+	} else {
+		self.assignment.has_image = [NSNumber numberWithBool:NO];
+		self.assignment.image_data = nil;
+	}
 	
-	if (_bCreate) [self.assignment setObject:[NSNumber numberWithBool:NO] forKey:@"finished"];
+	self.assignment.doc_type = @"assignment";
 	
-	if (self.imageView.image.size.width && self.imageView.image.size.height) {
-		[self.assignment setObject:[NSNumber numberWithBool:YES] forKey:@"has_image"];
-		NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:self.imageView.image];
-		[self.assignment setObject:imageData forKey:@"image_data"];
-	} else
-		[self.assignment setObject:[NSNumber numberWithBool:NO] forKey:@"has_image"];
-	
-	[self.assignment setObject:@"assignment" forKey:@"doc_type"];
-	
-	CouchDatabase *database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
-	CouchDocument *doc;
-	if ([self.assignment objectForKey:@"_id"]) doc = [database documentWithID:[self.assignment objectForKey:@"_id"]];
-	else doc = [database untitledDocument];
-	RESTOperation *op = [doc putProperties:self.assignment];
+	RESTOperation *op = [self.assignment save];
 	if (![op wait]) {
 		NSLog(@"%@", op.error);
 	} else {

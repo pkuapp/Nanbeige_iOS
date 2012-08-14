@@ -347,6 +347,8 @@
 		26CD829415D789FD0070DF78 /* CouchCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829015D789FC0070DF78 /* CouchCocoa.framework */; };
 		26CD829715D789FD0070DF78 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829215D789FC0070DF78 /* TouchDB.framework */; };
 		26CD829815D789FD0070DF78 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829215D789FC0070DF78 /* TouchDB.framework */; };
+		26F14ED315DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
+		26F14ED415DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
 		26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
 		26F3E2C215D818E100D69D0D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C115D818E100D69D0D /* User.m */; };
@@ -850,8 +852,6 @@
 		413BA26F15D52FA6000C9451 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */; };
 		414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
 		414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
-		414AFCB215D422FF00EFFB60 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB115D422FF00EFFB60 /* Assignment.m */; };
-		414AFCB315D422FF00EFFB60 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB115D422FF00EFFB60 /* Assignment.m */; };
 		414AFCB615D422FF00EFFB60 /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB515D422FF00EFFB60 /* Semester.m */; };
 		414AFCB715D422FF00EFFB60 /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB515D422FF00EFFB60 /* Semester.m */; };
 		414AFCBA15D4230000EFFB60 /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB915D4230000EFFB60 /* Lesson.m */; };
@@ -1180,6 +1180,8 @@
 		26CD813A15D7811B0070DF78 /* widget_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = widget_point.png; sourceTree = "<group>"; };
 		26CD829015D789FC0070DF78 /* CouchCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CouchCocoa.framework; path = Frameworks/CouchCocoa.framework; sourceTree = "<group>"; };
 		26CD829215D789FC0070DF78 /* TouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchDB.framework; path = Frameworks/TouchDB.framework; sourceTree = "<group>"; };
+		26F14ED115DA253F00C8E74E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
+		26F14ED215DA253F00C8E74E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		26F3E2BC15D7FE4000D69D0D /* Renren+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Renren+addon.h"; path = "nbg_iOS/Renren+addon.h"; sourceTree = SOURCE_ROOT; };
 		26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Renren+addon.m"; path = "nbg_iOS/Renren+addon.m"; sourceTree = SOURCE_ROOT; };
 		26F3E2C015D818E100D69D0D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
@@ -1633,8 +1635,6 @@
 		413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIPGateHelper.h; sourceTree = "<group>"; };
 		414AFCA815D3C6CC00EFFB60 /* Models+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Models+addon.h"; path = "Models/Models+addon.h"; sourceTree = "<group>"; };
 		414AFCA915D3C6CC00EFFB60 /* Models+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Models+addon.m"; path = "Models/Models+addon.m"; sourceTree = "<group>"; };
-		414AFCB015D422FF00EFFB60 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
-		414AFCB115D422FF00EFFB60 /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		414AFCB415D422FF00EFFB60 /* Semester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semester.h; path = Models/Semester.h; sourceTree = "<group>"; };
 		414AFCB515D422FF00EFFB60 /* Semester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Semester.m; path = Models/Semester.m; sourceTree = "<group>"; };
 		414AFCB815D4230000EFFB60 /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lesson.h; path = Models/Lesson.h; sourceTree = "<group>"; };
@@ -2929,11 +2929,11 @@
 				414AFCB915D4230000EFFB60 /* Lesson.m */,
 				414AFCB415D422FF00EFFB60 /* Semester.h */,
 				414AFCB515D422FF00EFFB60 /* Semester.m */,
-				414AFCB015D422FF00EFFB60 /* Assignment.h */,
-				414AFCB115D422FF00EFFB60 /* Assignment.m */,
 				26F3E2C015D818E100D69D0D /* User.h */,
 				26F3E2C115D818E100D69D0D /* User.m */,
 				411DBBDF15CB9E4000EDB31D /* nbg_iOS.xcdatamodeld */,
+				26F14ED115DA253F00C8E74E /* Assignment.h */,
+				26F14ED215DA253F00C8E74E /* Assignment.m */,
 				414AFCA815D3C6CC00EFFB60 /* Models+addon.h */,
 				414AFCA915D3C6CC00EFFB60 /* Models+addon.m */,
 			);
@@ -3676,7 +3676,6 @@
 				41E7F96E15D2680C009B8703 /* CPRequest.m in Sources */,
 				41E7F97115D26F3A009B8703 /* CPBlockHandler.m in Sources */,
 				414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
-				414AFCB215D422FF00EFFB60 /* Assignment.m in Sources */,
 				414AFCB615D422FF00EFFB60 /* Semester.m in Sources */,
 				414AFCBA15D4230000EFFB60 /* Lesson.m in Sources */,
 				414AFCBE15D4230100EFFB60 /* Course.m in Sources */,
@@ -3859,6 +3858,7 @@
 				26F3E2C215D818E100D69D0D /* User.m in Sources */,
 				26F3E2C715D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
 				262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */,
+				26F14ED315DA253F00C8E74E /* Assignment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3895,7 +3895,6 @@
 				411DBC6F15CBA59700EDB31D /* MagicalRecord.m in Sources */,
 				41E7F97215D26F3A009B8703 /* CPBlockHandler.m in Sources */,
 				414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
-				414AFCB315D422FF00EFFB60 /* Assignment.m in Sources */,
 				414AFCB715D422FF00EFFB60 /* Semester.m in Sources */,
 				414AFCBB15D4230000EFFB60 /* Lesson.m in Sources */,
 				414AFCBF15D4230100EFFB60 /* Course.m in Sources */,
@@ -4077,6 +4076,7 @@
 				26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */,
 				26F3E2C315D818E100D69D0D /* User.m in Sources */,
 				26F3E2C815D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
+				26F14ED415DA253F00C8E74E /* Assignment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

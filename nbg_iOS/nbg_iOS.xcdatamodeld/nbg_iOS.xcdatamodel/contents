@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12A269" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Assignment" representedClassName="Assignment" syncable="YES">
-        <attribute name="absolute_modified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="course_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="due" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="course_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="doc_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="due_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="due_display" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="due_lesson" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="due_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="finished" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="has_image" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="image_data" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
     <entity name="Course" representedClassName="Course" syncable="YES">
         <attribute name="credit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -49,10 +56,10 @@
         <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lesson" inverseName="user" inverseEntity="Lesson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Course" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="Lesson" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Semester" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="User" positionX="160" positionY="192" width="128" height="255"/>
+        <element name="Assignment" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Course" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Lesson" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Semester" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

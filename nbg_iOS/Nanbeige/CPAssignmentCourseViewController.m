@@ -7,6 +7,7 @@
 //
 
 #import "CPAssignmentCourseViewController.h"
+#import "Assignment.h"
 
 @interface CPAssignmentCourseViewController ()
 
@@ -57,7 +58,8 @@
 {
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
 	NSDictionary *course = [self.courseData objectAtIndex:index];
-	[self.assignment setObject:[course objectForKey:@"id"] forKey:@"course_id"];
+	self.assignment.course_id = [course objectForKey:@"id"];
+	self.assignment.course_name = [course objectForKey:@"name"];
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

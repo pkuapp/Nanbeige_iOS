@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class Assignment;
+
 @interface CPAssignmentCreateViewController : QuickDialogController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (strong, nonatomic) NSMutableDictionary *assignment;
+@property (strong, nonatomic) Assignment *assignment;
 @property (strong, nonatomic) NSDictionary *course;
 @property (strong, nonatomic) NSArray *weeksData;
 @property (strong, nonatomic) NSArray *coursesData;

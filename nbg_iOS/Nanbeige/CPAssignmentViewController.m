@@ -12,6 +12,7 @@
 #import "CPAssignmentImageCell.h"
 #import "CPCourseGrabberViewController.h"
 #import "Environment.h"
+#import "Assignment.h"
 
 @interface CPAssignmentViewController () 
 {
@@ -203,14 +204,14 @@
 	if (object == _query) {
 		self.assignments = nil;
 		for (CouchQueryRow* row in [object rows]) {
-            [self.assignments addObject:row.value];
+            [self.assignments addObject:[Assignment modelForDocument:row.document]];
         }
 		[[self assignmentsTableView] reloadData];
 	}
 	if (object == _completeQuery) {
 		self.completeAssignments = nil;
 		for (CouchQueryRow* row in [object rows]) {
-            [self.completeAssignments addObject:row.value];
+            [self.completeAssignments addObject:[Assignment modelForDocument:row.document]];
         }
 		[[self completeAssignmentsTableView] reloadData];
 	}
@@ -258,7 +259,9 @@
 	NSString *nibName = @"CPAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
-	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"has_image"] boolValue]) {
+	Assignment *assignment = [[self assignmentsOfTableView:tableView] objectAtIndex:row];
+	
+	if ([assignment.has_image boolValue]) {
 		nibName = @"CPAssignmentImageCell";
 		identifier = @"ImageCellIdentifier";
 	}
@@ -295,7 +298,9 @@
 	NSString *nibName = @"CPAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
-	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"has_image"] boolValue]) {
+	Assignment *assignment = [[self assignmentsOfTableView:tableView] objectAtIndex:row];
+	
+	if ([assignment.has_image boolValue]) {
 		nibName = @"CPAssignmentImageCell";
 		identifier = @"ImageCellIdentifier";
 	}
@@ -307,18 +312,14 @@
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
-	NSNumber *course_id = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"course_id"];
-	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-	CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course_%@", course_id]];
-	[(id)cell courseName].text = [doc propertyForKey:@"name"];
-	
-	[(id)cell assignmentName].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"content"];
-	[(id)cell assignmentTime].text = [[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"due_display"];
-	if ([nibName isEqualToString:@"CPAssignmentImageCell"]) {
-		//[[(CPAssignmentImageCell *)cell assignmentImage] setBackgroundImage:[UIImage imageNamed:@"assignment_image"] forState:UIControlStateNormal];
+	[(id)cell courseName].text = assignment.course_name;
+	[(id)cell assignmentName].text = assignment.content;
+	[(id)cell assignmentTime].text = assignment.due_display;
+	if ([assignment.has_image boolValue]) {
+		[[(id)cell assignmentImage] setBackgroundImage:[UIImage imageWithData:assignment.image_data] forState:UIControlStateNormal];
 	}
 	
-	if ([[[[self assignmentsOfTableView:tableView] objectAtIndex:row] objectForKey:@"finished"] boolValue]) {
+	if ([assignment.finished boolValue]) {
 		[[(id)cell changeCompleteButton] setBackgroundColor:completeAssignmentCellColor];
 	} else {
 		[[(id)cell changeCompleteButton] setBackgroundColor:notCompleteAssignmentCellColor];
@@ -331,10 +332,9 @@
 
 - (void)changeComplete:(id)sender
 {
-	
-	NSMutableDictionary *assignment = [[[self nowAssignments] objectAtIndex:[sender assignmentIndex]] mutableCopy];
-	[assignment setObject:[NSNumber numberWithBool:[self.completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE] forKey:@"finished"];
-	RESTOperation *op = [[self.database documentWithID:[assignment objectForKey:@"_id"]] putProperties:assignment];
+	Assignment *assignment = [[self nowAssignments] objectAtIndex:[sender assignmentIndex]];
+	assignment.finished = [NSNumber numberWithBool:![assignment.finished boolValue]];
+	RESTOperation *op = [assignment save];
 	[op onCompletion:^{
 		if (op.error) {
 			NSLog(@"%@", op.error);
@@ -381,9 +381,10 @@
 	ncavc.bInitWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
 		ncavc.bCreate = NO;
-		ncavc.assignment = [[[self nowAssignments] objectAtIndex:assignmentSelect] mutableCopy];
+		ncavc.assignment = [[self nowAssignments] objectAtIndex:assignmentSelect];
 	} else {
 		ncavc.bCreate = YES;
+		ncavc.assignment = [[Assignment alloc] initWithNewDocumentInDatabase:[(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database]];
 	}
 }
 
