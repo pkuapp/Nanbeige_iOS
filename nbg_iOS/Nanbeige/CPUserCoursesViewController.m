@@ -10,6 +10,8 @@
 #import "Environment.h"
 #import "Coffeepot.h"
 #import "Models+addon.h"
+#import "Course.h"
+#import "Lesson.h"
 
 @interface CPUserCoursesViewController ()  {
 //	CPCourseManager *courseManager;
@@ -56,9 +58,7 @@
 	//  update the last update date
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
-	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-	CouchDocument *doc = [localDatabase documentWithID:@"courses"];
-	self.courses = [[doc properties] objectForKey:@"value"];
+	self.courses = [[Course userCourseListDocument] propertyForKey:@"value"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -116,8 +116,11 @@
 	if (nil == cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 	}
-	cell.textLabel.text = [[self.courses objectAtIndex:indexPath.row] objectForKey:kAPINAME];
-    cell.detailTextLabel.text = [[[self.courses objectAtIndex:indexPath.row] objectForKey:kAPICREDIT] stringValue];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDocument *courseDocument = [localDatabase documentWithID:[self.courses objectAtIndex:indexPath.row]];
+	Course *course = [Course modelForDocument:courseDocument];
+	cell.textLabel.text = course.name;
+    cell.detailTextLabel.text = course.orig_id;
 	
     return cell;
 }
@@ -132,35 +135,110 @@
 	
 	[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
+		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+		
+		CouchQuery *tempQuery = [localDatabase getAllDocuments];
+		NSLog(@"%d", [localDatabase getDocumentCount]);
+		if ([[tempQuery start] wait]) {
+			for (CouchQueryRow *row in tempQuery.rows) {
+				NSLog(@"%@", row.document.properties);
+			}
+		}
+		
 		if ([collection isKindOfClass:[NSArray class]]) {
 			
-			for (NSDictionary *course in collection) {
-				NSMutableDictionary *mutableCourse = [course mutableCopy];
-				[mutableCourse setObject:@"course" forKey:@"doc_type"];
+			NSMutableArray *courses = [[NSMutableArray alloc] init];
+			for (NSDictionary *courseDict in collection) {
 				
-				CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-				CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course_%@", [course objectForKey:@"id"]]];
-				if ([doc propertyForKey:@"_rev"]) [mutableCourse setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
-				RESTOperation *op = [doc putProperties:mutableCourse];
-				[op onCompletion:^{
-					if (op.error) NSLog(@"%@", op.error);
-					else {
-						[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+				Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
+					
+				NSLog(@"%@", course.document.documentID);
+				
+				course.doc_type = @"course";
+				course.id = [courseDict objectForKey:@"id"];
+				course.name = [courseDict objectForKey:@"name"];
+				course.credit = [courseDict objectForKey:@"credit"];
+				course.orig_id = [courseDict objectForKey:@"orig_id"];
+				course.semester_id = [courseDict objectForKey:@"semester_id"];
+				course.ta = [courseDict objectForKey:@"ta"];
+				course.teacher = [courseDict objectForKey:@"teacher"];
+				
+				if (course.lessons) {
+					for (NSString *lessonDocumentID in course.lessons) {
+						CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
+						RESTOperation *deleteOp = [lessonDocument DELETE];
+						if (![deleteOp wait]) NSLog(@"%@", deleteOp.error);
 					}
-				}];
+				}
+				
+				NSMutableArray *lessons = [[NSMutableArray alloc] init];
+				for (NSDictionary *lessonDict in [courseDict objectForKey:@"lessons"]) {
+					
+					Lesson *lesson = [[Lesson alloc] initWithNewDocumentInDatabase:localDatabase];
+					
+					lesson.doc_type = @"lesson";
+					lesson.course = course;
+					lesson.start = [lessonDict objectForKey:@"start"];
+					lesson.end = [lessonDict objectForKey:@"end"];
+					lesson.day = [lessonDict objectForKey:@"day"];
+					lesson.location = [lessonDict objectForKey:@"location"];
+					lesson.week = [lessonDict objectForKey:@"week"];
+					
+					RESTOperation *saveOp = [lesson save];
+					if ([saveOp wait])
+						[lessons addObject:lesson.document.documentID];
+					else NSLog(@"%@", saveOp.error);
+					
+				}
+				course.lessons = lessons;
+				
+				RESTOperation *saveOp = [course save];
+				if ([saveOp wait])
+					[courses addObject:course.document.documentID];
+				else NSLog(@"%@", saveOp.error);
+					
+				
+				// BEFORE COUCHDB COMPLETE
+//				{
+//					NSMutableDictionary *mutableCourse = [courseDict mutableCopy];
+//					[mutableCourse setObject:@"coursetemp" forKey:@"doc_type"];
+//					
+//					CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+//					CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course%@", [courseDict objectForKey:@"id"]]];
+//					if ([doc propertyForKey:@"_rev"]) [mutableCourse setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+//					RESTOperation *op = [doc putProperties:mutableCourse];
+//					[op onCompletion:^{
+//						if (op.error) NSLog(@"%@", op.error);
+//						else {
+//							[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+//						}
+//					}];
+//				}
 			}
 			
-			self.courses = collection;
-			NSMutableDictionary *mutableCourses = [@{ @"value" : collection } mutableCopy];
-			[mutableCourses setObject:@"courses" forKey:@"doc_type"];
-			
-			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-			CouchDocument *doc = [localDatabase documentWithID:@"courses"];
-			if ([doc propertyForKey:@"_rev"]) [mutableCourses setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
-			RESTOperation *op = [doc putProperties:mutableCourses];
-			[op onCompletion:^{
-				if (op.error) NSLog(@"%@", op.error);
+			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];
+			CouchDocument *courseListDocument = [Course userCourseListDocument];
+			if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
+			RESTOperation *putOp = [courseListDocument putProperties:courseListDict];
+			[putOp onCompletion:^{
+				if (putOp.error) NSLog(@"%@", putOp.error);
+				else [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			}];
+			
+			// BEFORE COUCHDB COMPLETE
+//			{
+//				self.courses = collection;
+//				NSMutableDictionary *mutableCourses = [@{ @"value" : collection } mutableCopy];
+//				[mutableCourses setObject:@"courses" forKey:@"doc_type"];
+//				
+//				CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+//				CouchDocument *doc = [localDatabase documentWithID:@"courses"];
+//				if ([doc propertyForKey:@"_rev"]) [mutableCourses setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+//				RESTOperation *op = [doc putProperties:mutableCourses];
+//				[op onCompletion:^{
+//					if (op.error) NSLog(@"%@", op.error);
+//				}];
+//			}
 
 		}
 		

@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class Assignment;
+#import "Models+addon.h"
 
 @interface CPAssignmentCreateViewController : QuickDialogController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
+@property (weak, nonatomic) CouchDatabase *localDatabase;
 @property (strong, nonatomic) Assignment *assignment;
-@property (strong, nonatomic) NSDictionary *course;
+@property (strong, nonatomic) Course *course;
 @property (strong, nonatomic) NSArray *weeksData;
 @property (strong, nonatomic) NSArray *coursesData;
 

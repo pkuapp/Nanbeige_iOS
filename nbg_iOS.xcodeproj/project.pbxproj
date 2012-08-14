@@ -349,6 +349,10 @@
 		26CD829815D789FD0070DF78 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829215D789FC0070DF78 /* TouchDB.framework */; };
 		26F14ED315DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED415DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
+		26F14ED815DA3F3000C8E74E /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED715DA3F2F00C8E74E /* Course.m */; };
+		26F14ED915DA3F3000C8E74E /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED715DA3F2F00C8E74E /* Course.m */; };
+		26F14EDC15DA3F3000C8E74E /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14EDB15DA3F3000C8E74E /* Lesson.m */; };
+		26F14EDD15DA3F3000C8E74E /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14EDB15DA3F3000C8E74E /* Lesson.m */; };
 		26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
 		26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
 		26F3E2C215D818E100D69D0D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C115D818E100D69D0D /* User.m */; };
@@ -854,10 +858,6 @@
 		414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
 		414AFCB615D422FF00EFFB60 /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB515D422FF00EFFB60 /* Semester.m */; };
 		414AFCB715D422FF00EFFB60 /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB515D422FF00EFFB60 /* Semester.m */; };
-		414AFCBA15D4230000EFFB60 /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB915D4230000EFFB60 /* Lesson.m */; };
-		414AFCBB15D4230000EFFB60 /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB915D4230000EFFB60 /* Lesson.m */; };
-		414AFCBE15D4230100EFFB60 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCBD15D4230100EFFB60 /* Course.m */; };
-		414AFCBF15D4230100EFFB60 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCBD15D4230100EFFB60 /* Course.m */; };
 		414AFDDA15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
 		414AFDDB15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
 		414AFDDC15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */; };
@@ -1182,6 +1182,10 @@
 		26CD829215D789FC0070DF78 /* TouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchDB.framework; path = Frameworks/TouchDB.framework; sourceTree = "<group>"; };
 		26F14ED115DA253F00C8E74E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		26F14ED215DA253F00C8E74E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
+		26F14ED615DA3F2F00C8E74E /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
+		26F14ED715DA3F2F00C8E74E /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = Models/Course.m; sourceTree = "<group>"; };
+		26F14EDA15DA3F3000C8E74E /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lesson.h; path = Models/Lesson.h; sourceTree = "<group>"; };
+		26F14EDB15DA3F3000C8E74E /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = Models/Lesson.m; sourceTree = "<group>"; };
 		26F3E2BC15D7FE4000D69D0D /* Renren+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Renren+addon.h"; path = "nbg_iOS/Renren+addon.h"; sourceTree = SOURCE_ROOT; };
 		26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Renren+addon.m"; path = "nbg_iOS/Renren+addon.m"; sourceTree = SOURCE_ROOT; };
 		26F3E2C015D818E100D69D0D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
@@ -1637,10 +1641,6 @@
 		414AFCA915D3C6CC00EFFB60 /* Models+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Models+addon.m"; path = "Models/Models+addon.m"; sourceTree = "<group>"; };
 		414AFCB415D422FF00EFFB60 /* Semester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semester.h; path = Models/Semester.h; sourceTree = "<group>"; };
 		414AFCB515D422FF00EFFB60 /* Semester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Semester.m; path = Models/Semester.m; sourceTree = "<group>"; };
-		414AFCB815D4230000EFFB60 /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lesson.h; path = Models/Lesson.h; sourceTree = "<group>"; };
-		414AFCB915D4230000EFFB60 /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = Models/Lesson.m; sourceTree = "<group>"; };
-		414AFCBC15D4230100EFFB60 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
-		414AFCBD15D4230100EFFB60 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = Models/Course.m; sourceTree = "<group>"; };
 		414AFD6B15D512A500EFFB60 /* courseGrabber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseGrabber.json; sourceTree = "<group>"; };
 		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD6F15D512A500EFFB60 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
@@ -2923,15 +2923,15 @@
 		414AFC8E15D3C59D00EFFB60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				414AFCBC15D4230100EFFB60 /* Course.h */,
-				414AFCBD15D4230100EFFB60 /* Course.m */,
-				414AFCB815D4230000EFFB60 /* Lesson.h */,
-				414AFCB915D4230000EFFB60 /* Lesson.m */,
 				414AFCB415D422FF00EFFB60 /* Semester.h */,
 				414AFCB515D422FF00EFFB60 /* Semester.m */,
 				26F3E2C015D818E100D69D0D /* User.h */,
 				26F3E2C115D818E100D69D0D /* User.m */,
 				411DBBDF15CB9E4000EDB31D /* nbg_iOS.xcdatamodeld */,
+				26F14ED615DA3F2F00C8E74E /* Course.h */,
+				26F14ED715DA3F2F00C8E74E /* Course.m */,
+				26F14EDA15DA3F3000C8E74E /* Lesson.h */,
+				26F14EDB15DA3F3000C8E74E /* Lesson.m */,
 				26F14ED115DA253F00C8E74E /* Assignment.h */,
 				26F14ED215DA253F00C8E74E /* Assignment.m */,
 				414AFCA815D3C6CC00EFFB60 /* Models+addon.h */,
@@ -3677,8 +3677,6 @@
 				41E7F97115D26F3A009B8703 /* CPBlockHandler.m in Sources */,
 				414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
 				414AFCB615D422FF00EFFB60 /* Semester.m in Sources */,
-				414AFCBA15D4230000EFFB60 /* Lesson.m in Sources */,
-				414AFCBE15D4230100EFFB60 /* Course.m in Sources */,
 				414AFDE815D512A500EFFB60 /* CPAccountManageViewController.m in Sources */,
 				414AFDEC15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */,
 				414AFDEE15D512A500EFFB60 /* CPAssignmentImageCell.m in Sources */,
@@ -3859,6 +3857,8 @@
 				26F3E2C715D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
 				262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */,
 				26F14ED315DA253F00C8E74E /* Assignment.m in Sources */,
+				26F14ED815DA3F3000C8E74E /* Course.m in Sources */,
+				26F14EDC15DA3F3000C8E74E /* Lesson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3896,8 +3896,6 @@
 				41E7F97215D26F3A009B8703 /* CPBlockHandler.m in Sources */,
 				414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
 				414AFCB715D422FF00EFFB60 /* Semester.m in Sources */,
-				414AFCBB15D4230000EFFB60 /* Lesson.m in Sources */,
-				414AFCBF15D4230100EFFB60 /* Course.m in Sources */,
 				414AFDE915D512A500EFFB60 /* CPAccountManageViewController.m in Sources */,
 				414AFDED15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */,
 				414AFDEF15D512A500EFFB60 /* CPAssignmentImageCell.m in Sources */,
@@ -4077,6 +4075,8 @@
 				26F3E2C315D818E100D69D0D /* User.m in Sources */,
 				26F3E2C815D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
 				26F14ED415DA253F00C8E74E /* Assignment.m in Sources */,
+				26F14ED915DA3F3000C8E74E /* Course.m in Sources */,
+				26F14EDD15DA3F3000C8E74E /* Lesson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -78,3 +78,72 @@ static User *sharedAppUserObject = nil;
 }
 
 @end
+
+
+@implementation Course (addon)
+
++ (CouchDocument *)userCourseListDocument
+{
+	CouchDocument *courseListDocument = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"courselist"];
+	[design defineViewNamed:@"byID" mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSString *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"courselist"]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	CouchQuery *query = [design queryViewNamed:@"byID"];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (courseListDocument) {
+				NSLog(@"重复课程列表:%@", row.document.properties);
+				[row.document DELETE];
+			}
+			courseListDocument = row.document;
+		}
+	} else NSLog(@"%@", queryOp.error);
+	
+	if (!courseListDocument) courseListDocument = [localDatabase untitledDocument];
+	return courseListDocument;
+}
+
++ (Course *)userCourseAtIndex:(NSInteger)index
+				   courseList:(NSArray *)courseList
+{
+	if (index >= courseList.count) courseList = [[Course userCourseListDocument] propertyForKey:@"value"];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	NSString *courseDocumentID = [courseList objectAtIndex:index];
+	return [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
+}
+
++ (Course *)courseWithID:(NSNumber *)course_id
+{
+	Course *course = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"course"];
+	NSString *viewName = [NSString stringWithFormat:@"id=%@", course_id];
+	[design defineViewNamed:viewName mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSNumber *course_id = [doc objectForKey: @"id"];
+		NSNumber *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"course"] && [course_id isEqualToNumber:course_id]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	
+	CouchQuery *query = [design queryViewNamed:viewName];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (course && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"course"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:course_id]) {
+				NSLog(@"%@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				[row.document DELETE];
+			}
+			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:course_id])
+				course = [Course modelForDocument:row.document];
+		}
+	} else NSLog(@"%@", queryOp.error);
+	if (!course) course = [[Course alloc] initWithNewDocumentInDatabase:localDatabase];
+	return course;
+}
+
+@end

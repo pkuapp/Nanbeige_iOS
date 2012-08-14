@@ -7,7 +7,7 @@
         <attribute name="doc_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="due_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="due_display" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="due_lesson" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="due_lesson" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="due_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="finished" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="has_image" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -15,7 +15,8 @@
         <attribute name="image_data" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
     <entity name="Course" representedClassName="Course" syncable="YES">
-        <attribute name="credit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="credit" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="doc_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orig_id" optional="YES" attributeType="String" syncable="YES"/>
@@ -26,11 +27,12 @@
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="courses" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Lesson" representedClassName="Lesson" syncable="YES">
-        <attribute name="day" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="end" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="day" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="doc_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="start" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="weeks" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="week" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="course" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="lessons" inverseEntity="Course" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="lessons" inverseEntity="User" syncable="YES"/>
     </entity>
@@ -56,10 +58,10 @@
         <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lesson" inverseName="user" inverseEntity="Lesson" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Course" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Lesson" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Semester" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Assignment" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Course" positionX="160" positionY="192" width="128" height="195"/>
+        <element name="Lesson" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="Semester" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="User" positionX="160" positionY="192" width="128" height="255"/>
     </elements>
 </model>

@@ -14,6 +14,7 @@
 #import "CPLine3Button0Cell.h"
 #import "CPLine3Button2Cell.h"
 #import "CPAssignmentCreateViewController.h"
+#import "Models+addon.h"
 
 @interface CPMainViewController () {
     BOOL _autoDisconnect;
@@ -220,12 +221,11 @@
 		UINavigationController *nc = segue.destinationViewController;
 		CPAssignmentCreateViewController *ncavc = (CPAssignmentCreateViewController *)(nc.topViewController);
 
-		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		CouchDocument *doc = [localDatabase documentWithID:@"courses"];
-		ncavc.coursesData = [[doc properties] objectForKey:@"value"];
-
+		ncavc.coursesData = [[Course userCourseListDocument] propertyForKey:@"value"];;
+		
 		ncavc.bInitWithCamera = [segue.identifier isEqualToString:@"CreateAssignmentWithCameraSegue"];
 		ncavc.bCreate = YES;
+		ncavc.assignment = [[Assignment alloc] initWithNewDocumentInDatabase:[(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database]];
 		
 	} else if ([segue.identifier isEqualToString:@"DetailGateInfoSegue"]) {
 		CPDetailGateInfoViewController *dvc = segue.destinationViewController;

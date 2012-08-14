@@ -12,6 +12,8 @@
 #import "CPAssignmentCourseViewController.h"
 #import "Environment.h"
 #import "Assignment.h"
+#import "Course.h"
+#import "Lesson.h"
 
 #define DISPLAY_COURSE
 
@@ -38,10 +40,11 @@
 {
 	_assignment = assignment;
 	if (self.bCreate) {
-		_assignment.finished = NO;
+		_assignment.finished = [NSNumber numberWithBool:NO];
 		if (self.coursesData.count) {
-			_assignment.course_id = [[self.coursesData objectAtIndex:0] objectForKey:@"id"];
-			_assignment.course_name = [[self.coursesData objectAtIndex:0] objectForKey:@"name"];
+			Course *course = [Course userCourseAtIndex:0 courseList:self.coursesData];
+			_assignment.course_id = course.id;
+			_assignment.course_name = course.name;
 		}
 
 		if (self.coursesData.count && self.weeksData.count) {
@@ -56,13 +59,19 @@
 	}
 }
 
--(NSDictionary *)course
+- (CouchDatabase *)localDatabase
+{
+	if (_localDatabase == nil) {
+		_localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	}
+	return _localDatabase;
+}
+
+- (Course *)course
 {
 	if (_coursesData.count && (_course == nil || bCourseChanged)) {
 		NSNumber *course_id = self.assignment.course_id;
-		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course_%@", course_id]];
-		_course = doc.properties;
+		_course = [Course courseWithID:course_id];
 		bCourseChanged = NO;
 		bCourseUpdated = YES;
 	}
@@ -73,9 +82,10 @@
 {
 	if (_coursesData.count && (_weeksData == nil || bCourseUpdated || bCourseChanged)) {
 		NSMutableArray *tempArray = [@[] mutableCopy];
-		for (NSDictionary *lesson in [self.course objectForKey:@"lessons"]) {
-			NSNumber *day = [lesson objectForKey:@"day"];
-			for (NSNumber *week in [lesson objectForKey:@"week"]) {
+		for (NSString *lessonDocumentID in self.course.lessons) {
+			Lesson *lesson = [Lesson modelForDocument:[self.localDatabase documentWithID:lessonDocumentID]];
+			NSNumber *day = lesson.day;
+			for (NSNumber *week in lesson.week) {
 				[tempArray addObject:@{ @"day" : day, @"week" : week }];
 			}
 		}
@@ -173,7 +183,7 @@
 	} else if ([segue.identifier isEqualToString:@"AssignmentCourseSegue"]) {
 		CPAssignmentCourseViewController *acvc = segue.destinationViewController;
 		acvc.assignment = self.assignment;
-		acvc.courseData = self.coursesData;
+		acvc.coursesData = self.coursesData;
 	}
 }
 

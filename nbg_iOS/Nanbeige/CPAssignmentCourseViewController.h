@@ -13,6 +13,6 @@
 @interface CPAssignmentCourseViewController : QuickDialogController
 
 @property (weak, nonatomic) Assignment *assignment;
-@property (weak, nonatomic) NSArray *courseData;
+@property (weak, nonatomic) NSArray *coursesData;
 
 @end

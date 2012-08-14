@@ -7,7 +7,7 @@
 //
 
 #import "CPAssignmentCourseViewController.h"
-#import "Assignment.h"
+#import "Models+addon.h"
 
 @interface CPAssignmentCourseViewController ()
 
@@ -40,7 +40,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	[self.root bindToObject:@{ @"courses" : self.courseData }];
+	NSMutableArray *courses = [@[] mutableCopy];
+	for (int i = 0; i < self.coursesData.count; i++) {
+		Course *course = [Course userCourseAtIndex:i courseList:self.coursesData];
+		[courses addObject:@{ @"name" : course.name }];
+	}
+	[self.root bindToObject:@{ @"courses" :  courses}];
 }
 
 - (void)viewDidUnload
@@ -57,9 +62,9 @@
 - (void)onCourseSelect:(id)sender
 {
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
-	NSDictionary *course = [self.courseData objectAtIndex:index];
-	self.assignment.course_id = [course objectForKey:@"id"];
-	self.assignment.course_name = [course objectForKey:@"name"];
+	Course *course = [Course userCourseAtIndex:index courseList:self.coursesData];
+	self.assignment.course_id = course.id;
+	self.assignment.course_name = course.name;
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

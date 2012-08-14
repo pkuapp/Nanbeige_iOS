@@ -169,7 +169,7 @@
 		[mutableResult setObject:@"university" forKey:@"doc_type"];
 		
 		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university_%@", [[User sharedAppUser] university_id]]];
+		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university%@", [[User sharedAppUser] university_id]]];
 		if ([doc propertyForKey:@"_rev"]) [mutableResult setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
 		RESTOperation *op = [doc putProperties:mutableResult];
 		[op onCompletion:^{

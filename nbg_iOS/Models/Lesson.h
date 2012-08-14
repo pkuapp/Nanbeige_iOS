@@ -2,22 +2,23 @@
 //  Lesson.h
 //  nbg_iOS
 //
-//  Created by wuhaotian on 12-8-10.
+//  Created by ZongZiWang on 12-8-14.
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Course;
+@class Course, User;
 
-@interface Lesson : NSManagedObject
+@interface Lesson : CouchModel
 
+@property (nonatomic, retain) NSString * doc_type;
 @property (nonatomic, retain) NSNumber * day;
 @property (nonatomic, retain) NSNumber * end;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSNumber * start;
-@property (nonatomic, retain) id weeks;
-@property (nonatomic, retain) Course *course;
+@property (nonatomic, retain) NSArray * week;
+@property (nonatomic, assign) Course * course;
 
 @end

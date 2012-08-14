@@ -19,3 +19,12 @@
 + (void)deactiveSharedAppUser;
 
 @end
+
+@interface Course (addon)
+
++ (CouchDocument *)userCourseListDocument;
++ (Course *)userCourseAtIndex:(NSInteger)index
+				   courseList:(NSArray *)courseList;
++ (Course *)courseWithID:(NSNumber *)course_id;
+
+@end

@@ -12,7 +12,7 @@
 #import "CPAssignmentImageCell.h"
 #import "CPCourseGrabberViewController.h"
 #import "Environment.h"
-#import "Assignment.h"
+#import "Models+addon.h"
 
 @interface CPAssignmentViewController () 
 {
@@ -373,10 +373,8 @@
 	[super prepareForSegue:segue sender:sender];
 	UINavigationController *nc = segue.destinationViewController;
 	CPAssignmentCreateViewController *ncavc = (CPAssignmentCreateViewController *)(nc.topViewController);
-#warning 传递课表
-	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-	CouchDocument *doc = [localDatabase documentWithID:@"courses"];
-	ncavc.coursesData = [[doc properties] objectForKey:@"value"];
+
+	ncavc.coursesData = [[Course userCourseListDocument] propertyForKey:@"value"];
 	
 	ncavc.bInitWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {

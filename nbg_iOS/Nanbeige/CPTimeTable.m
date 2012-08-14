@@ -101,7 +101,7 @@
 	if ((self = [super initWithReuseIdentifier:reuseIdentifier])) {
 		
 		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university_%@", [[User sharedAppUser] university_id]]];
+		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university%@", [[User sharedAppUser] university_id]]];
 		_university = [doc properties];
 		
 		doc = [localDatabase documentWithID:@"courses"];
