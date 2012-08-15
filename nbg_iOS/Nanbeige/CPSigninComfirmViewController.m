@@ -160,8 +160,44 @@
 	[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 	
-	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
-	[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+		[self loading:NO];
+		
+		if (![collection isKindOfClass:[NSDictionary class]]) return ;
+		NSDictionary *universityDict = collection;
+		
+		University *university = [University universityWithID:[User sharedAppUser].university_id];
+		university.doc_type = @"university";
+		university.id = [User sharedAppUser].university_id;
+		university.name = [universityDict objectForKey:@"name"];
+		university.support_import_course = [[universityDict objectForKey:@"support"] objectForKey:@"import_course"];
+		university.support_list_course = [[universityDict objectForKey:@"support"] objectForKey:@"list_course"];
+		university.lessons_count_afternoon = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"afternoon"];
+		university.lessons_count_evening = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"evening"];
+		university.lessons_count_morning = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"morning"];
+		university.lessons_count_total = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"total"];
+		university.lessons_detail = [[universityDict objectForKey:@"lessons"] objectForKey:@"detail"];
+		university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
+		
+		RESTOperation *op = [university save];
+		[op onCompletion:^{
+			if (op.error) NSLog(@"%@", op.error);
+			else {
+				UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
+				[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
+			}
+		}];
+		
+	} error:^(CPRequest *_req, id collection, NSError *error) {
+		[self loading:NO];
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+	}];
+	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
 	
 }
 

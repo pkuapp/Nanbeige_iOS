@@ -18,7 +18,7 @@
 //#define kDefaultSyncDbURL @"https://zongziwang.cloudant.com/assignments_3"
 #define kSyncDbURLWithID(id) [NSString stringWithFormat:@"http://api.pkuapp.com:5984/user_sync_db_%@", (id)]
 //#define kDefaultHostName @"zongziwang.cloudant.com"
-#define kSyncDbHostNameWithID(id) @"api.pkuapp.com:5984"
+#define kSyncDbHostNameWithID(id) @"api.pkuapp.com"
 //#define kDefaultUsername @"lsonedivelesedsireveredi"
 #define kSyncDbUsername [[NSUserDefaults standardUserDefaults] objectForKey:@"sync_db_username"]
 //#define kDefaultPassword @"DpjcGHR6yDsYhk0r5q5IuK0H"

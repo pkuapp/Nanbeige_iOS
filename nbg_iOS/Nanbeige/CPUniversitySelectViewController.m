@@ -54,16 +54,28 @@
 		[self loading:NO];
 		
 		campuses = [[NSMutableArray alloc] init];
-		for (NSDictionary *university in collection) {
-			for (NSDictionary *campus in [university objectForKey:@"campuses"]) {
+		for (NSDictionary *universityDict in collection) {
+			
+			NSNumber *university_id = [universityDict objectForKey:@"id"];
+			NSString *university_name = [universityDict objectForKey:@"name"];
+			
+			University *university = [University universityWithID:university_id];
+			university.doc_type = @"university";
+			university.id = university_id;
+			university.name = university_name;
+			university.campuses = [universityDict objectForKey:@"campuses"];
+			RESTOperation *op = [university save];
+			if (![op wait]) NSLog(@"%@", op.error);
+			
+			for (NSDictionary *campusDict in [universityDict objectForKey:@"campuses"]) {
 				NSDictionary *displayCampus = @{
 				@"campus" : @{
-					@"id" : [campus objectForKey:@"id"],
-					@"name" : [campus objectForKey:@"name"]},
+					@"id" : [campusDict objectForKey:@"id"],
+					@"name" : [campusDict objectForKey:@"name"]},
 				@"university" : @{
-					@"id" : [university objectForKey:@"id"],
-					@"name" : [university objectForKey:@"name"]},
-				@"display_name" : [[university objectForKey:@"name"] stringByAppendingFormat:@" %@", [campus objectForKey:@"name"]]};
+					@"id" : university_id,
+					@"name" : university_name},
+				@"display_name" : [[universityDict objectForKey:@"name"] stringByAppendingFormat:@" %@", [campusDict objectForKey:@"name"]]};
 				[campuses addObject:displayCampus];
 			}
 		}
@@ -125,54 +137,47 @@
 	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		[self loading:NO];
 		
-		[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-			[self loading:NO];
+		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
 			
-//			NSMutableDictionary *mutableResult = [collection mutableCopy];
-//			[mutableResult setObject:[User sharedAppUser].university_id forKey:@"id"];
-//			[mutableResult setObject:@"university" forKey:@"doc_type"];
-//			
-//			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-//			CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university%@", [[User sharedAppUser] university_id]]];
-//			if ([doc propertyForKey:@"_rev"]) [mutableResult setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
-//			RESTOperation *op = [doc putProperties:mutableResult];
+			[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+				[self loading:NO];
 
-			if (![collection isKindOfClass:[NSDictionary class]]) return ;
-			NSDictionary *universityDict = collection;
-			
-			University *university = [University universityWithID:[User sharedAppUser].university_id];
-			university.doc_type = @"university";
-			university.id = [User sharedAppUser].university_id;
-			university.name = [universityDict objectForKey:@"name"];
-			university.support_import_course = [[universityDict objectForKey:@"support"] objectForKey:@"import_course"];
-			university.support_list_course = [[universityDict objectForKey:@"support"] objectForKey:@"list_course"];
-			university.lessons_count_afternoon = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"afternoon"];
-			university.lessons_count_evening = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"evening"];
-			university.lessons_count_morning = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"morning"];
-			university.lessons_count_total = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"total"];
-			university.lessons_detail = [[universityDict objectForKey:@"lessons"] objectForKey:@"detail"];
-			university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
-			
-			RESTOperation *op = [university save];
-			[op onCompletion:^{
-				if (op.error) NSLog(@"%@", op.error);
-				else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
-					[self dismissModalViewControllerAnimated:YES];
-				} else {
-					[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
-				}
+				if (![collection isKindOfClass:[NSDictionary class]]) return ;
+				NSDictionary *universityDict = collection;
+				
+				University *university = [University universityWithID:[User sharedAppUser].university_id];
+				university.doc_type = @"university";
+				university.id = [User sharedAppUser].university_id;
+				university.name = [universityDict objectForKey:@"name"];
+				university.support_import_course = [[universityDict objectForKey:@"support"] objectForKey:@"import_course"];
+				university.support_list_course = [[universityDict objectForKey:@"support"] objectForKey:@"list_course"];
+				university.lessons_count_afternoon = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"afternoon"];
+				university.lessons_count_evening = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"evening"];
+				university.lessons_count_morning = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"morning"];
+				university.lessons_count_total = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"total"];
+				university.lessons_detail = [[universityDict objectForKey:@"lessons"] objectForKey:@"detail"];
+				university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
+				
+				RESTOperation *op = [university save];
+				[op onCompletion:^{
+					if (op.error) NSLog(@"%@", op.error);
+					else [self dismissModalViewControllerAnimated:YES];
+				}];
+				
+			} error:^(CPRequest *_req, id collection, NSError *error) {
+				[self loading:NO];
+				if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+					[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+				if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+					[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 			}];
 			
-		} error:^(CPRequest *_req, id collection, NSError *error) {
-			[self loading:NO];
-			if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-				[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-			if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-				[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
-		}];
-		
-		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-		[self loading:YES];
+			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+			[self loading:YES];
+			
+		} else {
+			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+		}
 		
 	} error:^(CPRequest *_req, id collection, NSError *error) {
 		[self loading:NO];

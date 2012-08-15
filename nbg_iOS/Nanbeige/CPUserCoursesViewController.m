@@ -197,25 +197,9 @@
 					[courses addObject:course.document.documentID];
 				else NSLog(@"%@", saveOp.error);
 					
-				
-				// BEFORE COUCHDB COMPLETE
-//				{
-//					NSMutableDictionary *mutableCourse = [courseDict mutableCopy];
-//					[mutableCourse setObject:@"coursetemp" forKey:@"doc_type"];
-//					
-//					CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-//					CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"course%@", [courseDict objectForKey:@"id"]]];
-//					if ([doc propertyForKey:@"_rev"]) [mutableCourse setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
-//					RESTOperation *op = [doc putProperties:mutableCourse];
-//					[op onCompletion:^{
-//						if (op.error) NSLog(@"%@", op.error);
-//						else {
-//							[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-//						}
-//					}];
-//				}
 			}
 			
+			self.courses = courses;
 			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];
 			CouchDocument *courseListDocument = [Course userCourseListDocument];
 			if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
@@ -224,21 +208,6 @@
 				if (putOp.error) NSLog(@"%@", putOp.error);
 				else [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			}];
-			
-			// BEFORE COUCHDB COMPLETE
-//			{
-//				self.courses = collection;
-//				NSMutableDictionary *mutableCourses = [@{ @"value" : collection } mutableCopy];
-//				[mutableCourses setObject:@"courses" forKey:@"doc_type"];
-//				
-//				CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-//				CouchDocument *doc = [localDatabase documentWithID:@"courses"];
-//				if ([doc propertyForKey:@"_rev"]) [mutableCourses setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
-//				RESTOperation *op = [doc putProperties:mutableCourses];
-//				[op onCompletion:^{
-//					if (op.error) NSLog(@"%@", op.error);
-//				}];
-//			}
 
 		}
 		

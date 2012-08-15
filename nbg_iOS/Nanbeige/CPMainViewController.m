@@ -621,12 +621,12 @@
 	NSURLCredential* cred;
 	cred = [NSURLCredential credentialWithUser: kSyncDbUsername
 									  password: kSyncDbPassword
-								   persistence: NSURLCredentialPersistencePermanent];
+								   persistence: NSURLCredentialPersistenceForSession];
 	NSURLProtectionSpace* space;
 	space = [[NSURLProtectionSpace alloc] initWithHost: kSyncDbHostNameWithID(appUser.id)
-												  port: 443
-											  protocol: @"https"
-												 realm: @"Cloudant Private Database"
+												  port: 5984
+											  protocol: @"http"
+												 realm: @"server"
 								  authenticationMethod: NSURLAuthenticationMethodDefault];
 	[[NSURLCredentialStorage sharedCredentialStorage] setDefaultCredential: cred forProtectionSpace: space];
 	
