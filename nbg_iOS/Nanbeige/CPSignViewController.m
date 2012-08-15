@@ -144,6 +144,9 @@
             
 			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 				[self loading:NO];
+				
+				[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"weibo:%@", self.weibo.userID] forKey:@"sync_db_username"];
+				[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
                 
                 [User updateSharedAppUserProfile:collection];
                 [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
@@ -155,6 +158,9 @@
                     
 					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
 						[self loading:NO];
+					
+						[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"weibo:%@", self.weibo.userID] forKey:@"sync_db_username"];
+						[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
 						
 						[User updateSharedAppUserProfile:collection];
 						[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];

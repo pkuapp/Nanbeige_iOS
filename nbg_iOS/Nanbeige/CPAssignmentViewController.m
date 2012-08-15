@@ -167,7 +167,7 @@
     if (!self.database)
         return;
     NSURL* newRemoteURL = nil;
-    NSString *syncpoint = kDefaultSyncDbURL;
+    NSString *syncpoint = [[NSUserDefaults standardUserDefaults] objectForKey:@"syncpoint"];
     if (syncpoint.length > 0)
         newRemoteURL = [NSURL URLWithString:syncpoint];
     

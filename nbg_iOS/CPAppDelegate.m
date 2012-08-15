@@ -61,6 +61,19 @@
     JSObjectionInjector *injector = [JSObjection createInjector:[[CPAppModule alloc] init]];
     [JSObjection setDefaultInjector:injector];
 	
+	// Start the Couchbase Mobile server:
+    gCouchLogLevel = 1;
+#ifdef USE_REMOTE_SERVER
+    self.server = [[CouchTouchDBServer alloc] initWithURL: [NSURL URLWithString: USE_REMOTE_SERVER]];
+#else
+    self.server = [[CouchTouchDBServer alloc] init];
+#endif
+    
+    if (self.server.error) {
+        [self showAlert: @"Couldn't start Couchbase." error: self.server.error fatal: YES];
+        return YES;
+    }
+    
 #ifdef kDefaultSyncDbURL
     // Register the default value of the pref for the remote database URL to sync with:
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -81,23 +94,9 @@
 								  authenticationMethod: NSURLAuthenticationMethodDefault];
 	[[NSURLCredentialStorage sharedCredentialStorage] setDefaultCredential: cred forProtectionSpace: space];
 #endif
-	// Start the Couchbase Mobile server:
-    gCouchLogLevel = 1;
-    CouchTouchDBServer* server;
-#ifdef USE_REMOTE_SERVER
-    server = [[CouchTouchDBServer alloc] initWithURL: [NSURL URLWithString: USE_REMOTE_SERVER]];
-#else
-    server = [[CouchTouchDBServer alloc] init];
-#endif
-    
-    if (server.error) {
-        [self showAlert: @"Couldn't start Couchbase." error: server.error fatal: YES];
-        return YES;
-    }
-    
-    self.database = [server databaseNamed: kDatabaseName];
-	self.localDatabase = [server databaseNamed:kLocalDatabaseName];
-    
+#ifdef kDatabaseName
+    self.database = [self.server databaseNamed: kDatabaseName];
+    self.database.tracksChanges = YES;
 #if !INSTALL_CANNED_DATABASE && !defined(USE_REMOTE_SERVER)
     // Create the database on the first run of the app.
     NSError* error;
@@ -105,14 +104,20 @@
         [self showAlert: @"Couldn't create local database." error: error fatal: YES];
         return YES;
     }
-	if (![self.localDatabase ensureCreated: &error]) {
-        [self showAlert: @"Couldn't create local database." error: error fatal: YES];
+#endif
+#endif
+	
+	self.localDatabase = [self.server databaseNamed:kLocalDatabaseName];
+	self.localDatabase.tracksChanges = YES;
+    
+#if !INSTALL_CANNED_DATABASE && !defined(USE_REMOTE_SERVER)
+    // Create the database on the first run of the app.
+    NSError* localError;
+	if (![self.localDatabase ensureCreated: &localError]) {
+        [self showAlert: @"Couldn't create local database." error: localError fatal: YES];
         return YES;
     }
 #endif
-    
-    self.database.tracksChanges = YES;
-	self.localDatabase.tracksChanges = YES;
 
     if (self.needSignin) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPSigninFlow" bundle:[NSBundle mainBundle]];

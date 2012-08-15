@@ -2,18 +2,26 @@
 //  Semester.h
 //  nbg_iOS
 //
-//  Created by wuhaotian on 12-8-10.
+//  Created by ZongZiWang on 12-8-15.
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class University, Course;
 
-@interface Semester : NSManagedObject
+@interface Semester : CouchModel
 
-@property (nonatomic, retain) NSNumber * university_id;
+@property (nonatomic, retain) NSString * doc_type;
+@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * year;
 @property (nonatomic, retain) NSDate * week_end;
 @property (nonatomic, retain) NSDate * week_start;
+@property (nonatomic, retain) NSArray * week_excluded;
+
+@property (nonatomic, assign) University * university;
+@property (nonatomic, retain) NSArray * courses;
 
 @end

@@ -11,6 +11,7 @@
 #import "Semester.h"
 #import "Course.h"
 #import "Lesson.h"
+#import "University.h"
 
 @interface User (addon)
 
@@ -26,5 +27,11 @@
 + (Course *)userCourseAtIndex:(NSInteger)index
 				   courseList:(NSArray *)courseList;
 + (Course *)courseWithID:(NSNumber *)course_id;
+
+@end
+
+@interface University (addon)
+
++ (University *)universityWithID:(NSNumber *)university_id;
 
 @end

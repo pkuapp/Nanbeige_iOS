@@ -160,6 +160,8 @@
 //	self.connector = [[CPIPGateHelper alloc] init];
 	self.defaults = [NSUserDefaults standardUserDefaults];
 	self.title = TITLE_MAIN;
+	
+	[self setupDatabaseForSync];
 }
 
 - (void)viewDidUnload
@@ -606,6 +608,38 @@
 //	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictResult];
 //	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictDetail];
     [self.defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
+}
+
+- (void)setupDatabaseForSync
+{
+	User *appUser = [User sharedAppUser];
+    // Register the default value of the pref for the remote database URL to sync with:
+    NSDictionary *appdefaults = [NSDictionary dictionaryWithObject:kSyncDbURLWithID(appUser.id)
+                                                            forKey:@"syncpoint"];
+    [defaults registerDefaults:appdefaults];
+    [defaults synchronize];
+	NSURLCredential* cred;
+	cred = [NSURLCredential credentialWithUser: kSyncDbUsername
+									  password: kSyncDbPassword
+								   persistence: NSURLCredentialPersistencePermanent];
+	NSURLProtectionSpace* space;
+	space = [[NSURLProtectionSpace alloc] initWithHost: kSyncDbHostNameWithID(appUser.id)
+												  port: 443
+											  protocol: @"https"
+												 realm: @"Cloudant Private Database"
+								  authenticationMethod: NSURLAuthenticationMethodDefault];
+	[[NSURLCredentialStorage sharedCredentialStorage] setDefaultCredential: cred forProtectionSpace: space];
+	
+	CPAppDelegate *appDelegate = (CPAppDelegate *)([[UIApplication sharedApplication] delegate]);
+    appDelegate.database = [appDelegate.server databaseNamed: kDatabaseNameWithID(appUser.id)];
+    appDelegate.database.tracksChanges = YES;
+#if !INSTALL_CANNED_DATABASE && !defined(USE_REMOTE_SERVER)
+    // Create the database on the first run of the app.
+    NSError* error;
+    if (![appDelegate.database ensureCreated: &error]) {
+        [self showAlert:[error localizedFailureReason]];
+    }
+#endif
 }
 
 @end

@@ -19,6 +19,7 @@
 @dynamic location;
 @dynamic start;
 @dynamic week;
+
 @dynamic course;
 
 @end

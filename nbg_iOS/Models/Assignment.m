@@ -24,4 +24,6 @@
 @dynamic course_name;
 @dynamic doc_type;
 
+@dynamic course;
+
 @end

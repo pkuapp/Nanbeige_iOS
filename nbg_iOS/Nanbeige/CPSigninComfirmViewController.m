@@ -160,34 +160,6 @@
 	[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 	
-	if (![User sharedAppUser].university_id) return ;
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-		[self loading:NO];
-		
-		NSMutableDictionary *mutableResult = [collection mutableCopy];
-		[mutableResult setObject:[User sharedAppUser].university_id forKey:@"id"];
-		[mutableResult setObject:@"university" forKey:@"doc_type"];
-		
-		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university%@", [[User sharedAppUser] university_id]]];
-		if ([doc propertyForKey:@"_rev"]) [mutableResult setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
-		RESTOperation *op = [doc putProperties:mutableResult];
-		[op onCompletion:^{
-			if (op.error) NSLog(@"%@", op.error);
-			else NSLog(@"%@", mutableResult);
-		}];
-		
-	} error:^(CPRequest *_req, id collection, NSError *error) {
-		[self loading:NO];
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
-	}];
-	
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-    [self loading:YES];
-	
 	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
 	[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
 	

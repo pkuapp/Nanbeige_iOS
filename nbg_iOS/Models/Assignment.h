@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import <CouchCocoa/CouchCocoa.h>
 
+@class Course, User;
 
 @interface Assignment : CouchModel
 
@@ -25,5 +25,7 @@
 @property (nonatomic, retain) NSDictionary *due_lesson;
 @property (nonatomic, retain) NSNumber * has_image;
 @property (nonatomic, retain) NSData * image_data;
+
+@property (nonatomic, assign) Course *course;
 
 @end

@@ -10,14 +10,19 @@
 #import "CPUserDefaultDelegate.h"
 
 // The name of the database the app will use.
-#define kDatabaseName @"assignments_3"
+//#define kDatabaseName @"assignments_3"
+#define kDatabaseNameWithID(id) [NSString stringWithFormat:@"user_sync_db_%@", (id)]
 #define kLocalDatabaseName @"nbg_db"
 
 // The default remote database URL to sync with, if the user hasn't set a different one as a pref.
-#define kDefaultSyncDbURL @"https://zongziwang.cloudant.com/assignments_3"
-#define kDefaultHostName @"zongziwang.cloudant.com"
-#define kDefaultUsername @"lsonedivelesedsireveredi"
-#define kDefaultPassword @"DpjcGHR6yDsYhk0r5q5IuK0H"
+//#define kDefaultSyncDbURL @"https://zongziwang.cloudant.com/assignments_3"
+#define kSyncDbURLWithID(id) [NSString stringWithFormat:@"http://api.pkuapp.com:5984/user_sync_db_%@", (id)]
+//#define kDefaultHostName @"zongziwang.cloudant.com"
+#define kSyncDbHostNameWithID(id) @"api.pkuapp.com:5984"
+//#define kDefaultUsername @"lsonedivelesedsireveredi"
+#define kSyncDbUsername [[NSUserDefaults standardUserDefaults] objectForKey:@"sync_db_username"]
+//#define kDefaultPassword @"DpjcGHR6yDsYhk0r5q5IuK0H"
+#define kSyncDbPassword [[NSUserDefaults standardUserDefaults] objectForKey:@"sync_db_password"]
 
 // Define this to use a server at a specific URL, instead of the embedded Couchbase Mobile.
 // This can be useful for debugging, since you can use the admin console (futon) to inspect
@@ -28,6 +33,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, retain) CouchTouchDBServer *server;
 @property (nonatomic, retain) CouchDatabase *database;
 @property (nonatomic, retain) CouchDatabase *localDatabase;
 

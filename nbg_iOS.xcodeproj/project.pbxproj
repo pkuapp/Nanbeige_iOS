@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		261D308E15DAB34200E6BDBD /* University.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D308D15DAB34200E6BDBD /* University.m */; };
+		261D308F15DAB34200E6BDBD /* University.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D308D15DAB34200E6BDBD /* University.m */; };
+		261D309215DAB38600E6BDBD /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309115DAB38600E6BDBD /* Semester.m */; };
+		261D309315DAB38600E6BDBD /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309115DAB38600E6BDBD /* Semester.m */; };
+		261D309615DAB7E200E6BDBD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309515DAB7E200E6BDBD /* User.m */; };
+		261D309715DAB7E200E6BDBD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309515DAB7E200E6BDBD /* User.m */; };
 		262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */; };
 		262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 262A4A1615D94F1D001BAC03 /* assignmentCourse.json */; };
 		26CD813B15D7811C0070DF78 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD809315D7811B0070DF78 /* 179-notepad.png */; };
@@ -355,8 +361,6 @@
 		26F14EDD15DA3F3000C8E74E /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14EDB15DA3F3000C8E74E /* Lesson.m */; };
 		26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
 		26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
-		26F3E2C215D818E100D69D0D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C115D818E100D69D0D /* User.m */; };
-		26F3E2C315D818E100D69D0D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C115D818E100D69D0D /* User.m */; };
 		26F3E2C715D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */; };
 		26F3E2C815D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */; };
 		26F3E2D915D92EEE00D69D0D /* assignmentCreate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26F3E2D815D92EED00D69D0D /* assignmentCreate.json */; };
@@ -856,8 +860,6 @@
 		413BA26F15D52FA6000C9451 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */; };
 		414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
 		414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
-		414AFCB615D422FF00EFFB60 /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB515D422FF00EFFB60 /* Semester.m */; };
-		414AFCB715D422FF00EFFB60 /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCB515D422FF00EFFB60 /* Semester.m */; };
 		414AFDDA15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
 		414AFDDB15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
 		414AFDDC15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */; };
@@ -1007,6 +1009,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		261D308C15DAB34200E6BDBD /* University.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = University.h; path = Models/University.h; sourceTree = "<group>"; };
+		261D308D15DAB34200E6BDBD /* University.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = University.m; path = Models/University.m; sourceTree = "<group>"; };
+		261D309015DAB38600E6BDBD /* Semester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semester.h; path = Models/Semester.h; sourceTree = "<group>"; };
+		261D309115DAB38600E6BDBD /* Semester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Semester.m; path = Models/Semester.m; sourceTree = "<group>"; };
+		261D309415DAB7E100E6BDBD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		261D309515DAB7E200E6BDBD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCourseViewController.h; sourceTree = "<group>"; };
 		262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCourseViewController.m; sourceTree = "<group>"; };
 		262A4A1615D94F1D001BAC03 /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCourse.json; sourceTree = "<group>"; };
@@ -1188,8 +1196,6 @@
 		26F14EDB15DA3F3000C8E74E /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = Models/Lesson.m; sourceTree = "<group>"; };
 		26F3E2BC15D7FE4000D69D0D /* Renren+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Renren+addon.h"; path = "nbg_iOS/Renren+addon.h"; sourceTree = SOURCE_ROOT; };
 		26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Renren+addon.m"; path = "nbg_iOS/Renren+addon.m"; sourceTree = SOURCE_ROOT; };
-		26F3E2C015D818E100D69D0D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
-		26F3E2C115D818E100D69D0D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		26F3E2C515D8325300D69D0D /* CPRoomRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRoomRetractableSectionController.h; sourceTree = "<group>"; };
 		26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRoomRetractableSectionController.m; sourceTree = "<group>"; };
 		26F3E2D815D92EED00D69D0D /* assignmentCreate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCreate.json; sourceTree = "<group>"; };
@@ -1639,8 +1645,6 @@
 		413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIPGateHelper.h; sourceTree = "<group>"; };
 		414AFCA815D3C6CC00EFFB60 /* Models+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Models+addon.h"; path = "Models/Models+addon.h"; sourceTree = "<group>"; };
 		414AFCA915D3C6CC00EFFB60 /* Models+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Models+addon.m"; path = "Models/Models+addon.m"; sourceTree = "<group>"; };
-		414AFCB415D422FF00EFFB60 /* Semester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semester.h; path = Models/Semester.h; sourceTree = "<group>"; };
-		414AFCB515D422FF00EFFB60 /* Semester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Semester.m; path = Models/Semester.m; sourceTree = "<group>"; };
 		414AFD6B15D512A500EFFB60 /* courseGrabber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseGrabber.json; sourceTree = "<group>"; };
 		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD6F15D512A500EFFB60 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
@@ -2923,11 +2927,13 @@
 		414AFC8E15D3C59D00EFFB60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				414AFCB415D422FF00EFFB60 /* Semester.h */,
-				414AFCB515D422FF00EFFB60 /* Semester.m */,
-				26F3E2C015D818E100D69D0D /* User.h */,
-				26F3E2C115D818E100D69D0D /* User.m */,
+				261D308C15DAB34200E6BDBD /* University.h */,
+				261D308D15DAB34200E6BDBD /* University.m */,
+				261D309015DAB38600E6BDBD /* Semester.h */,
+				261D309115DAB38600E6BDBD /* Semester.m */,
 				411DBBDF15CB9E4000EDB31D /* nbg_iOS.xcdatamodeld */,
+				261D309415DAB7E100E6BDBD /* User.h */,
+				261D309515DAB7E200E6BDBD /* User.m */,
 				26F14ED615DA3F2F00C8E74E /* Course.h */,
 				26F14ED715DA3F2F00C8E74E /* Course.m */,
 				26F14EDA15DA3F3000C8E74E /* Lesson.h */,
@@ -3676,7 +3682,6 @@
 				41E7F96E15D2680C009B8703 /* CPRequest.m in Sources */,
 				41E7F97115D26F3A009B8703 /* CPBlockHandler.m in Sources */,
 				414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
-				414AFCB615D422FF00EFFB60 /* Semester.m in Sources */,
 				414AFDE815D512A500EFFB60 /* CPAccountManageViewController.m in Sources */,
 				414AFDEC15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */,
 				414AFDEE15D512A500EFFB60 /* CPAssignmentImageCell.m in Sources */,
@@ -3853,12 +3858,14 @@
 				413BA26E15D52FA6000C9451 /* CPIPGateHelper.m in Sources */,
 				4120F2B415D645D000D0AA97 /* WBEngine+addon.m in Sources */,
 				26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */,
-				26F3E2C215D818E100D69D0D /* User.m in Sources */,
 				26F3E2C715D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
 				262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */,
 				26F14ED315DA253F00C8E74E /* Assignment.m in Sources */,
 				26F14ED815DA3F3000C8E74E /* Course.m in Sources */,
 				26F14EDC15DA3F3000C8E74E /* Lesson.m in Sources */,
+				261D308E15DAB34200E6BDBD /* University.m in Sources */,
+				261D309215DAB38600E6BDBD /* Semester.m in Sources */,
+				261D309615DAB7E200E6BDBD /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3895,7 +3902,6 @@
 				411DBC6F15CBA59700EDB31D /* MagicalRecord.m in Sources */,
 				41E7F97215D26F3A009B8703 /* CPBlockHandler.m in Sources */,
 				414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */,
-				414AFCB715D422FF00EFFB60 /* Semester.m in Sources */,
 				414AFDE915D512A500EFFB60 /* CPAccountManageViewController.m in Sources */,
 				414AFDED15D512A500EFFB60 /* CPAssignmentDeadlineViewController.m in Sources */,
 				414AFDEF15D512A500EFFB60 /* CPAssignmentImageCell.m in Sources */,
@@ -4072,11 +4078,13 @@
 				413BA26F15D52FA6000C9451 /* CPIPGateHelper.m in Sources */,
 				4120F2B515D645D000D0AA97 /* WBEngine+addon.m in Sources */,
 				26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */,
-				26F3E2C315D818E100D69D0D /* User.m in Sources */,
 				26F3E2C815D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
 				26F14ED415DA253F00C8E74E /* Assignment.m in Sources */,
 				26F14ED915DA3F3000C8E74E /* Course.m in Sources */,
 				26F14EDD15DA3F3000C8E74E /* Lesson.m in Sources */,
+				261D308F15DAB34200E6BDBD /* University.m in Sources */,
+				261D309315DAB38600E6BDBD /* Semester.m in Sources */,
+				261D309715DAB7E200E6BDBD /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

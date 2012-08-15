@@ -21,6 +21,9 @@
 @dynamic semester_id;
 @dynamic ta;
 @dynamic teacher;
+
 @dynamic lessons;
+@dynamic assignments;
+@dynamic semester;
 
 @end

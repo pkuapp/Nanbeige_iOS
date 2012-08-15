@@ -100,12 +100,9 @@
 {
 	if ((self = [super initWithReuseIdentifier:reuseIdentifier])) {
 		
-		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"university%@", [[User sharedAppUser] university_id]]];
-		_university = [doc properties];
+		_university = [University universityWithID:[User sharedAppUser].university_id];
 		
-		doc = [localDatabase documentWithID:@"courses"];
-		_courses = [[doc properties] objectForKey:@"value"];
+		_courses = [[Course userCourseListDocument] propertyForKey:@"value"];
 		
 		for (UIView *subview in [self subviews]) {
 			[subview removeFromSuperview];
@@ -119,7 +116,7 @@
 		_timeTable.dataSource = self;
 		[self addSubview:_timeTable];
 		
-		NSInteger rowNumber = [[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] count];
+		NSInteger rowNumber = [_university.lessons_detail count];
 		if (rowNumber) rowHeight = TIMETABLEHEIGHT / rowNumber;
 		else rowHeight = TIMETABLEHEIGHT / 12;
 	}
@@ -130,28 +127,31 @@
 
 - (NSInteger)lessonsCount
 {
-	return [[[_university objectForKey:kAPILESSONS] objectForKey:kAPISEPARATORS] count];
+	return [_university.lessons_separators count];
 }
 
 - (NSInteger)separatorAtIndex:(NSInteger)index
 {
-	return [[[[_university objectForKey:kAPILESSONS] objectForKey:kAPISEPARATORS] objectAtIndex:index] integerValue];
+	return [[_university.lessons_separators objectAtIndex:index] integerValue];
 }
 
 - (NSArray *)coursesAtWeekday:(NSInteger)weekday
 						 Week:(NSInteger)week
 {
 	NSMutableArray *result = [[NSMutableArray alloc] init];
-	for (NSDictionary *course in _courses) {
-		for (NSDictionary *lesson in [course objectForKey:kAPILESSONS]) {
-			NSInteger lessonDay = [[lesson objectForKey:kAPIDAY] integerValue];
-			NSArray *weeks = [lesson objectForKey:kAPIWEEK];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	for (int i = 0; i < _courses.count; i++) {
+		Course *course = [Course userCourseAtIndex:i courseList:_courses];
+		for (NSString *lessonDocumentID in course.lessons) {
+			Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
+			NSInteger lessonDay = [lesson.day integerValue];
+			NSArray *weeks = lesson.week;
 			if (lessonDay == weekday && [weeks containsObject:[NSNumber numberWithInteger:week]]) {
 				[result addObject:
-				     @{kAPISTART : [lesson objectForKey:kAPISTART],
-						 kAPIEND : [lesson objectForKey:kAPIEND],
-						kAPINAME : [course objectForKey:kAPINAME],
-					kAPILOCATION : [lesson objectForKey:kAPILOCATION]}];
+				     @{@"start" : lesson.start,
+						 @"end" : lesson.end,
+						@"name" : course.name,
+					@"location" : lesson.location}];
 			}
 		}
 	}
@@ -162,7 +162,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] count];
+	return [_university.lessons_detail count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -191,9 +191,9 @@
 	}
 	
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	cell.textLabel.text = [NSString stringWithFormat:@"%@", [[[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] objectAtIndex:indexPath.row] objectForKey:kAPINUMBER]];
+	cell.textLabel.text = [NSString stringWithFormat:@"%@", [[_university.lessons_detail objectAtIndex:indexPath.row] objectForKey:@"number"]];
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:kSHOWTIME] boolValue]) {
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"%@-%@", [[[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] objectAtIndex:indexPath.row] objectForKey:kAPISTART], [[[[_university objectForKey:kAPILESSONS] objectForKey:kAPIDETAIL] objectAtIndex:indexPath.row] objectForKey:kAPIEND]];
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"%@-%@", [[_university.lessons_detail objectAtIndex:indexPath.row] objectForKey:@"start"], [[_university.lessons_detail objectAtIndex:indexPath.row] objectForKey:@"end"]];
 		cell.detailTextLabel.textColor = timeColor1;
 	} else {
 		cell.detailTextLabel.text = nil;

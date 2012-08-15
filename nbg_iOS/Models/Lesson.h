@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSNumber * start;
 @property (nonatomic, retain) NSArray * week;
+
 @property (nonatomic, assign) Course * course;
 
 @end

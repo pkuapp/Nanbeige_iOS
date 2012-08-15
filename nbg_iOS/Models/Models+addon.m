@@ -28,6 +28,7 @@ static User *sharedAppUserObject = nil;
 }
 
 + (void)updateSharedAppUserProfile:(NSDictionary *)dict {
+	if (![dict isKindOfClass:[NSDictionary class]]) raise(-1);
     User *user = [self sharedAppUser];
     
     if ([dict objectForKey:@"id"]) {
@@ -125,9 +126,9 @@ static User *sharedAppUserObject = nil;
 	NSString *viewName = [NSString stringWithFormat:@"id=%@", course_id];
 	[design defineViewNamed:viewName mapBlock: MAPBLOCK({
 		NSString *doc_type = [doc objectForKey:@"doc_type"];
-		NSNumber *course_id = [doc objectForKey: @"id"];
+		NSNumber *id = [doc objectForKey: @"id"];
 		NSNumber *doc_id = [doc objectForKey:@"_id"];
-		if ([doc_type isEqualToString:@"course"] && [course_id isEqualToNumber:course_id]) emit(doc_id, doc);
+		if ([doc_type isEqualToString:@"course"] && [id isEqualToNumber:course_id]) emit(doc_id, doc);
 	}) version: @"1.0"];
 	
 	CouchQuery *query = [design queryViewNamed:viewName];
@@ -144,6 +145,39 @@ static User *sharedAppUserObject = nil;
 	} else NSLog(@"%@", queryOp.error);
 	if (!course) course = [[Course alloc] initWithNewDocumentInDatabase:localDatabase];
 	return course;
+}
+
+@end
+
+@implementation University (addon)
+
++ (University *)universityWithID:(NSNumber *)university_id
+{
+	University *university = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"university"];
+	NSString *viewName = [NSString stringWithFormat:@"id=%@", university_id];
+	[design defineViewNamed:viewName mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSNumber *id = [doc objectForKey: @"id"];
+		NSNumber *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"university"] && [id isEqualToNumber:university_id]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	
+	CouchQuery *query = [design queryViewNamed:viewName];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (university && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"university"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:university_id]) {
+				NSLog(@"%@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				[row.document DELETE];
+			}
+			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:university_id])
+				university = [University modelForDocument:row.document];
+		}
+	} else NSLog(@"%@", queryOp.error);
+	if (!university) university = [[University alloc] initWithNewDocumentInDatabase:localDatabase];
+	return university;
 }
 
 @end

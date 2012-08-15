@@ -7,12 +7,13 @@
 //
 
 #import "SYPageView.h"
+#import "Models+addon.h"
 
 @interface CPTimeTable : SYPageView
 
 @property (strong, nonatomic) UITableView *timeTable;
 @property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) NSDictionary *university;
+@property (strong, nonatomic) University *university;
 @property (strong, nonatomic) NSArray *courses;
 
 - (id)initWithDate:(NSDate *)date;
