@@ -15,6 +15,11 @@
 		261D309715DAB7E200E6BDBD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309515DAB7E200E6BDBD /* User.m */; };
 		262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */; };
 		262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 262A4A1615D94F1D001BAC03 /* assignmentCourse.json */; };
+		269CBB0115DC108900B5CF2C /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0015DC108900B5CF2C /* course.json */; };
+		269CBB0415DC10A100B5CF2C /* CPCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */; };
+		269CBB0715DC1E5C00B5CF2C /* CPCourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */; };
+		269CBB0915DC1F1000B5CF2C /* courseDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0815DC1F1000B5CF2C /* courseDetail.json */; };
+		269CBB0A15DC1F1000B5CF2C /* courseDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0815DC1F1000B5CF2C /* courseDetail.json */; };
 		26CD813B15D7811C0070DF78 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD809315D7811B0070DF78 /* 179-notepad.png */; };
 		26CD813C15D7811C0070DF78 /* 179-notepad.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD809315D7811B0070DF78 /* 179-notepad.png */; };
 		26CD813D15D7811C0070DF78 /* 179-notepad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CD809415D7811B0070DF78 /* 179-notepad@2x.png */; };
@@ -892,8 +897,8 @@
 		414AFE0315D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */; };
 		414AFE0415D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */; };
 		414AFE0515D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */; };
-		414AFE0815D512A500EFFB60 /* CPCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */; };
-		414AFE0915D512A500EFFB60 /* CPCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */; };
+		414AFE0815D512A500EFFB60 /* CPCoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9515D512A500EFFB60 /* CPCoursesTableViewController.m */; };
+		414AFE0915D512A500EFFB60 /* CPCoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9515D512A500EFFB60 /* CPCoursesTableViewController.m */; };
 		414AFE0A15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9715D512A500EFFB60 /* CPAssignmentCreateViewController.m */; };
 		414AFE0B15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9715D512A500EFFB60 /* CPAssignmentCreateViewController.m */; };
 		414AFE0C15D512A500EFFB60 /* CPDetailGateInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9915D512A500EFFB60 /* CPDetailGateInfoViewController.m */; };
@@ -1018,6 +1023,12 @@
 		262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCourseViewController.h; sourceTree = "<group>"; };
 		262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCourseViewController.m; sourceTree = "<group>"; };
 		262A4A1615D94F1D001BAC03 /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCourse.json; sourceTree = "<group>"; };
+		269CBB0015DC108900B5CF2C /* course.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
+		269CBB0215DC10A000B5CF2C /* CPCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseViewController.h; sourceTree = "<group>"; };
+		269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseViewController.m; sourceTree = "<group>"; };
+		269CBB0515DC1E5B00B5CF2C /* CPCourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseDetailViewController.h; sourceTree = "<group>"; };
+		269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseDetailViewController.m; sourceTree = "<group>"; };
+		269CBB0815DC1F1000B5CF2C /* courseDetail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseDetail.json; sourceTree = "<group>"; };
 		26CD809315D7811B0070DF78 /* 179-notepad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad.png"; sourceTree = "<group>"; };
 		26CD809415D7811B0070DF78 /* 179-notepad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "179-notepad@2x.png"; sourceTree = "<group>"; };
 		26CD809515D7811B0070DF78 /* 180-stickynote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180-stickynote.png"; sourceTree = "<group>"; };
@@ -1673,8 +1684,8 @@
 		414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSigninComfirmViewController.m; sourceTree = "<group>"; };
 		414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseGrabberViewController.h; sourceTree = "<group>"; };
 		414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseGrabberViewController.m; sourceTree = "<group>"; };
-		414AFD9415D512A500EFFB60 /* CPCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoursesViewController.h; sourceTree = "<group>"; };
-		414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoursesViewController.m; sourceTree = "<group>"; };
+		414AFD9415D512A500EFFB60 /* CPCoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoursesTableViewController.h; sourceTree = "<group>"; };
+		414AFD9515D512A500EFFB60 /* CPCoursesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoursesTableViewController.m; sourceTree = "<group>"; };
 		414AFD9615D512A500EFFB60 /* CPAssignmentCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCreateViewController.h; sourceTree = "<group>"; };
 		414AFD9715D512A500EFFB60 /* CPAssignmentCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCreateViewController.m; sourceTree = "<group>"; };
 		414AFD9815D512A500EFFB60 /* CPDetailGateInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDetailGateInfoViewController.h; sourceTree = "<group>"; };
@@ -2020,12 +2031,18 @@
 			isa = PBXGroup;
 			children = (
 				414AFD6B15D512A500EFFB60 /* courseGrabber.json */,
+				269CBB0015DC108900B5CF2C /* course.json */,
+				269CBB0815DC1F1000B5CF2C /* courseDetail.json */,
 				414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */,
 				414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */,
-				414AFD9415D512A500EFFB60 /* CPCoursesViewController.h */,
-				414AFD9515D512A500EFFB60 /* CPCoursesViewController.m */,
+				414AFD9415D512A500EFFB60 /* CPCoursesTableViewController.h */,
+				414AFD9515D512A500EFFB60 /* CPCoursesTableViewController.m */,
 				414AFDC515D512A500EFFB60 /* CPUserCoursesViewController.h */,
 				414AFDC615D512A500EFFB60 /* CPUserCoursesViewController.m */,
+				269CBB0215DC10A000B5CF2C /* CPCourseViewController.h */,
+				269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */,
+				269CBB0515DC1E5B00B5CF2C /* CPCourseDetailViewController.h */,
+				269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */,
 				414AFDCA15D512A500EFFB60 /* CPTimeTable.h */,
 				414AFDCB15D512A500EFFB60 /* CPTimeTable.m */,
 			);
@@ -3363,6 +3380,8 @@
 				26CD828915D7811C0070DF78 /* widget_point.png in Resources */,
 				26F3E2D915D92EEE00D69D0D /* assignmentCreate.json in Resources */,
 				262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */,
+				269CBB0115DC108900B5CF2C /* course.json in Resources */,
+				269CBB0915DC1F1000B5CF2C /* courseDetail.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3622,6 +3641,7 @@
 				26CD828615D7811C0070DF78 /* widget_3line_0btn.png in Resources */,
 				26CD828815D7811C0070DF78 /* widget_3line_2btn.png in Resources */,
 				26CD828A15D7811C0070DF78 /* widget_point.png in Resources */,
+				269CBB0A15DC1F1000B5CF2C /* courseDetail.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3693,7 +3713,7 @@
 				414AFE0015D512A500EFFB60 /* CPUniversitySelectViewController.m in Sources */,
 				414AFE0215D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */,
 				414AFE0415D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */,
-				414AFE0815D512A500EFFB60 /* CPCoursesViewController.m in Sources */,
+				414AFE0815D512A500EFFB60 /* CPCoursesTableViewController.m in Sources */,
 				414AFE0A15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */,
 				414AFE0C15D512A500EFFB60 /* CPDetailGateInfoViewController.m in Sources */,
 				414AFE0E15D512A500EFFB60 /* CPSigninEmailViewController.m in Sources */,
@@ -3866,6 +3886,8 @@
 				261D308E15DAB34200E6BDBD /* University.m in Sources */,
 				261D309215DAB38600E6BDBD /* Semester.m in Sources */,
 				261D309615DAB7E200E6BDBD /* User.m in Sources */,
+				269CBB0415DC10A100B5CF2C /* CPCourseViewController.m in Sources */,
+				269CBB0715DC1E5C00B5CF2C /* CPCourseDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3913,7 +3935,7 @@
 				414AFE0115D512A500EFFB60 /* CPUniversitySelectViewController.m in Sources */,
 				414AFE0315D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */,
 				414AFE0515D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */,
-				414AFE0915D512A500EFFB60 /* CPCoursesViewController.m in Sources */,
+				414AFE0915D512A500EFFB60 /* CPCoursesTableViewController.m in Sources */,
 				414AFE0B15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */,
 				414AFE0D15D512A500EFFB60 /* CPDetailGateInfoViewController.m in Sources */,
 				414AFE0F15D512A500EFFB60 /* CPSigninEmailViewController.m in Sources */,

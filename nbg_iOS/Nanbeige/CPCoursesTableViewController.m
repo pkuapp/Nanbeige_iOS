@@ -6,18 +6,18 @@
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "CPCoursesViewController.h"
+#import "CPCoursesTableViewController.h"
 #import "CPTimeTable.h"
 #import "Environment.h"
 
-@interface CPCoursesViewController () {
+@interface CPCoursesTableViewController () {
 	BOOL bViewDidLoad;
 	NSDate *today;
 }
 
 @end
 
-@implementation CPCoursesViewController
+@implementation CPCoursesTableViewController
 @synthesize paginatorView = _paginatorView;
 
 #pragma mark - NSObject

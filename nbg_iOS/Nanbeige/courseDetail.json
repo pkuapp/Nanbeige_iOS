@@ -1,23 +1,37 @@
 {
 	"grouped": true,
-	"title": "课程信息",
-    "controllerName": "CPCourseViewController",
+	"title": "详情",
+    "controllerName": "CPCourseDetailViewController",
 	"sections": [
 				 {
-				 "title":"作业",
-				 "bind":"iterate:assignments",
+				 "bind":"iterate:basic",
 				 "elementTemplate": {
-				 "type":"CPLabelButtonElement",
+				 "type":"CPLabelLeftDetailElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction"
 				 }
 				 },
 				 {
-				 "title":"七嘴八舌",
-				 "bind":"iterate:comments",
+				 "bind":"iterate:extension",
 				 "elementTemplate": {
-				 "type":"CPLabelButtonElement",
+				 "type":"CPLabelLeftDetailElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction"
 				 }
+				 },
+				 {
+				 "bind":"iterate:exam",
+				 "elementTemplate": {
+				 "type":"CPLabelLeftDetailElement",
+				 "bind":"title:title, value:value, controllerAction:controllerAction"
+				 }
+				 },
+				 {
+				 "elements": [
+							  {
+							  "type":"CPLabelButtonCenterElement",
+							  "title":"自定义",
+							  "controllerAction":"onEdit:"
+							  },
+							  ]
 				 }
 				 ]
 }

@@ -1,0 +1,23 @@
+{
+	"grouped": true,
+	"title": "课程信息",
+    "controllerName": "CPCourseViewController",
+	"sections": [
+				 {
+				 "title":"作业",
+				 "bind":"iterate:assignments",
+				 "elementTemplate": {
+				 "type":"CPLabelButtonElement",
+				 "bind":"title:title, value:value, controllerAction:controllerAction"
+				 }
+				 },
+				 {
+				 "title":"七嘴八舌",
+				 "bind":"iterate:comments",
+				 "elementTemplate": {
+				 "type":"CPLabelButtonElement",
+				 "bind":"title:title, value:value, controllerAction:controllerAction"
+				 }
+				 }
+				 ]
+}

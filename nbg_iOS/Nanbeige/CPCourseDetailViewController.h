@@ -7,7 +7,10 @@
 //
 
 #import "QuickDialogController.h"
+#import "Models+addon.h"
 
 @interface CPCourseDetailViewController : QuickDialogController
+
+@property (nonatomic, strong) Course *course;
 
 @end

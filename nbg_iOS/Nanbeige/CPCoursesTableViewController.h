@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SYPaginatorView.h"
 
-@interface CPCoursesViewController : UIViewController <SYPaginatorViewDataSource, SYPaginatorViewDelegate>
+@interface CPCoursesTableViewController : UIViewController <SYPaginatorViewDataSource, SYPaginatorViewDelegate>
 
 @property (nonatomic, strong) SYPaginatorView *paginatorView;
 

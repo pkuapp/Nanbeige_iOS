@@ -217,9 +217,9 @@
 //#define kTEMPROOMS @"temprooms"
 
 #define kTEMPSTREAMS @"tempstreams"
-#define kSTREAMTITLE @"text"
-#define kSTREAMDETAIL @"user"
-#define kSTREAMDETAILMORE @"screen_name"
+#define kSTREAMTITLE @"content"
+#define kSTREAMDETAIL @"writer"
+#define kSTREAMDETAILMORE @"nickname"
 
 ///////////////////////////////
 #define test_username @"pkttus#42$"

@@ -8,12 +8,10 @@
 
 #import "CPFeedViewController.h"
 #import "Environment.h"
+#import "Models+addon.h"
+#import "Coffeepot.h"
 
-
-@interface CPFeedViewController ()  {
-//	CPAccountManager *accountManager;
-}
-
+@interface CPFeedViewController ()
 
 @end
 
@@ -57,10 +55,11 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
 	self.title = TITLE_STREAM;
-	self.streams = [[NSUserDefaults standardUserDefaults] valueForKey:kTEMPSTREAMS];
 	
-//	accountManager = [[CPAccountManager alloc] initWithViewController:self];
-//	accountManager.delegate = self;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDocument *doc = [localDatabase documentWithID:@"feeds"];
+	self.streams = [doc propertyForKey:@"value"];
+
 }
 
 - (void)viewDidUnload
@@ -164,7 +163,28 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-//	[accountManager weiboRequestHomeTimeline];
+	[[Coffeepot shared] requestWithMethodPath:@"comment/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+		
+		self.streams = collection;
+		NSMutableDictionary *mutableComments = [@{ @"value" : collection } mutableCopy];
+		[mutableComments setObject:@"feeds" forKey:@"doc_type"];
+		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+		CouchDocument *doc = [localDatabase documentWithID:@"feeds"];
+		if ([doc propertyForKey:@"_rev"]) [mutableComments setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+		RESTOperation *op = [doc putProperties:mutableComments];
+		[op onCompletion:^{
+			if (op.error) NSLog(@"%@", op.error);
+		}];
+		
+		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
+		
+	} error:^(CPRequest *_req, id collection, NSError *error) {
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
+			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
+			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+	}];
+	
 }
 
 - (void)doneLoadingTableViewData{
@@ -244,20 +264,5 @@
 		[self performSegueWithIdentifier:@"WeiboPostSegue" sender:self];
 	}
 }
-
-#pragma mark - AccountManagerDelegate Others
-
-//- (void)didWeiboHomeTimelineReceived:(NSArray *)home_timeline
-//{
-//	self.streams = [home_timeline mutableCopy];
-//	[[NSUserDefaults standardUserDefaults] setObject:home_timeline forKey:kTEMPSTREAMS];
-//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-//}
-//
-//- (void)didRequest:(ASIHTTPRequest *)request FailWithError:(NSString *)errorString
-//{
-//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-//	[self showAlert:errorString];
-//}
 
 @end

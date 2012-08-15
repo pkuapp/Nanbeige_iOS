@@ -13,6 +13,7 @@
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
     QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller];
     
+	cell.textLabel.numberOfLines = 0;
 	for (UIView *subView in cell.contentView.subviews) {
 		if (![subView isEqual:cell.textLabel]) [subView removeFromSuperview];
 	}

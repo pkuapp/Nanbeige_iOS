@@ -7,6 +7,7 @@
 //
 
 #import "CPUserCoursesViewController.h"
+#import "CPCourseViewController.h"
 #import "Environment.h"
 #import "Coffeepot.h"
 #import "Models+addon.h"
@@ -14,7 +15,7 @@
 #import "Lesson.h"
 
 @interface CPUserCoursesViewController ()  {
-//	CPCourseManager *courseManager;
+	Course *courseSelected;
 }
 
 @end
@@ -267,7 +268,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	[self showAlert:[[self.courses objectAtIndex:indexPath.row] description]];
+	courseSelected = [Course userCourseAtIndex:indexPath.row courseList:self.courses];
+	[self performSegueWithIdentifier:@"CourseSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:@"CourseSegue"]) {
+		[segue.destinationViewController setCourse:courseSelected];
+	}
 }
 
 @end
