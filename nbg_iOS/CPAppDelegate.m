@@ -11,6 +11,8 @@
 #import <Objection-iOS/Objection.h>
 #import "CPAppModule.h"
 #import "Models/Models+addon.h"
+#import "Coffeepot.h"
+
 @interface CPAppDelegate ()
 
 - (BOOL)needSignin;
@@ -54,6 +56,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [[Coffeepot shared] requestWithMethodPath:@"" params:nil requestMethod:@"GET" success:^(CPRequest *request, id collection) {
+            
+    } error:^(CPRequest *request,id collection, NSError *error) {
+        NSLog(@"%@", error.userInfo);
+    }];
+    
     
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"nbg_iOS"];
 

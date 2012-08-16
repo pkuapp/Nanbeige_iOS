@@ -55,20 +55,20 @@ static NSString* pAPIPort = @"333";
 		result = nil;
 	}
 	
+    *error = inplaceError;
+    
 	if (result == nil) {
 		return responseString;
 	}
 	
 	if ([result isKindOfClass:[NSDictionary class]]) {
-		if ([result objectForKey:@"error"] != nil) {
-				}
-		
-		if ([result objectForKey:@"error_code"] != nil) {
-			if (error != nil) {
-				*error = [self formError:[[result objectForKey:@"error_code"] intValue] userInfo:result];
+
+//		if ([result objectForKey:@"error_code"] != nil) {
+			if (error != nil && self.status_code >= 400) {
+				*error = [self formError:self.status_code userInfo:result];
 			}
 			return nil;
-		}
+//		}
 	}
 	
 	return result;
@@ -76,18 +76,15 @@ static NSString* pAPIPort = @"333";
 }
 
 - (void)_reportError:(NSError*)error {
-    id result = [self parseJsonResponse:_responseText error:&error];
 
 	[self enumerateEventHandlers:kCPErrorBlockHandlerKey block:^(id _handler) {
 		void (^handler)(CPRequest*,id collection, NSError *) = _handler;
-		handler(self,result, error);
+		handler(self,nil, error);
 	}];
 }
 
 - (void)failWithError:(NSError *)error {
-//	if ([error code] == kRESTAPIAccessTokenErrorCode) {
-//		self.sessionDidExpire = YES;
-//	}
+	
 	[self _reportError:error];
 }
 
@@ -96,6 +93,9 @@ static NSString* pAPIPort = @"333";
  */
 - (void)handleResponseData:(NSData *)data {
 	if( [self eventHandlerCount:kCPRawBlockHandlerKey] > 0 ) {
+        if( self.error ) {
+			[self _reportError:self.error];
+		}
 		[self enumerateEventHandlers:kCPRawBlockHandlerKey block:^(id _handler) {
 			void (^handler)(CPRequest*,NSData *) = _handler;
 			handler(self, data);
@@ -104,10 +104,13 @@ static NSString* pAPIPort = @"333";
 	else {
 		NSError* error = nil;
 		id result = [self parseJsonResponse:data error:&error];
-		self.error = error;
+        
+        if (error) {
+            self.error = error;
+        }
 		
-		if( error ) {
-			[self _reportError:error];
+		if( self.error ) {
+			[self _reportError:self.error];
 		}
 		else {
 			[self enumerateEventHandlers:kCPCompletionBlockHandlerKey block:^(id _handler) {
@@ -337,6 +340,24 @@ static NSString* pAPIPort = @"333";
 		void (^handler)(CPRequest*,NSURLResponse*) = _handler;
 		handler(self, httpResponse);
 	}];
+    if ([response respondsToSelector:@selector(statusCode)])
+    {
+        int statusCode = [((NSHTTPURLResponse *)response) statusCode];
+        if (statusCode >= 400)
+        {
+            NSDictionary *errorInfo
+            = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:
+                                                  NSLocalizedString(@"Server returned status code %d",@""),
+                                                  statusCode]
+                                          forKey:NSLocalizedDescriptionKey];
+            NSError *statusError = [NSError errorWithDomain:[NSString stringWithFormat:@"%@",httpResponse.URL]
+                                  code:statusCode
+                              userInfo:errorInfo];
+            self.error = statusError;
+            self.status_code = statusCode;
+        }
+    }
+
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -364,7 +385,7 @@ static NSString* pAPIPort = @"333";
 	if( [Coffeepot shared].requestFinished ) {
 		[Coffeepot shared].requestFinished(self);
 	}
-//	[self handleResponseData:_responseText];
+
 	[self failWithError:error];
 	
 	self.responseText = nil;

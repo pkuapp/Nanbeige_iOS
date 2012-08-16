@@ -81,6 +81,8 @@
 	doc = [localDatabase documentWithID:@"rooms"];
 	self.rooms = [[doc properties] objectForKey:@"value"];
 	
+    
+    
 	[self reloadRooms];
 }
 
@@ -131,7 +133,7 @@
 {
     GCRetractableSectionController* sectionController = [retractableControllers objectAtIndex:indexPath.section];
     return [sectionController cellForRow:indexPath.row];
-	/*
+	
     static NSString *identifier = @"Cell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if (nil == cell) {
@@ -141,7 +143,7 @@
     cell.detailTextLabel.text = [[[self.buildings objectAtIndex:indexPath.row] objectForKey:kAPIID] stringValue];
 	
     return cell;
-	 */
+	 
 }
 
 #pragma mark - Table view delegate
@@ -183,10 +185,10 @@
 	building_id = [[self.buildings objectAtIndex:buildingIndex] objectForKey:@"id"];
 	
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/%@/room/", building_id] params:params requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-		
+		NSLog(@"%@", collection);
 		buildingIndex ++;
 		[self.rooms addObject:collection];
-		[self syncNextRooms];
+//		[self syncNextRooms];
 		
 	} error:^(CPRequest *_req, id collection, NSError *error) {
 		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])

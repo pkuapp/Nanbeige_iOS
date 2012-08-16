@@ -30,8 +30,9 @@ typedef enum
 @property (weak, nonatomic) NSMutableDictionary* params;
 @property (nonatomic, readonly) CPRequestState state;
 @property (nonatomic, readonly) BOOL isSessionExpired;
-@property (nonatomic, weak) NSError* error;
-@property(nonatomic) NSURLConnection*  connection;
+@property (nonatomic, strong) NSError* error;
+@property (nonatomic) NSInteger status_code;
+@property(nonatomic) NSURLConnection* connection;
 @property(nonatomic) NSMutableData* responseText;
 
 + (CPRequest *)getRequestWithParameters:(NSDictionary *) params
@@ -39,7 +40,7 @@ typedef enum
 							 requestURL:(NSString *) url;
 
 - (void)addCompletionHandler:(void(^)(CPRequest*request,id collection))completionHandler;
-- (void)addErrorHandler:(void(^)(CPRequest*request,id collection, NSError *error))errorHandler;
+- (void)addErrorHandler:(void(^)(CPRequest*request, NSError *error))errorHandler;
 - (void)addLoadHandler:(void(^)(CPRequest*request))loadHandler;
 - (void)addRawHandler:(void(^)(CPRequest*request,NSData*raw))rawHandler;
 - (void)addResponseHandler:(void(^)(CPRequest*request,NSURLResponse*response))responseHandler;

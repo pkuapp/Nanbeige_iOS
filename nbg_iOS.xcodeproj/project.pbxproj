@@ -966,6 +966,20 @@
 		414AFE4915D512A500EFFB60 /* CPWelcomeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */; };
 		414AFE4E15D512A500EFFB60 /* SystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD915D512A500EFFB60 /* SystemHelper.m */; };
 		414AFE4F15D512A500EFFB60 /* SystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD915D512A500EFFB60 /* SystemHelper.m */; };
+		4163D83A15DD3B4000BFE89E /* ClassroomQueryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D82F15DD3B4000BFE89E /* ClassroomQueryController.m */; };
+		4163D83B15DD3B4000BFE89E /* ClassroomQueryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D82F15DD3B4000BFE89E /* ClassroomQueryController.m */; };
+		4163D83C15DD3B4000BFE89E /* PKUBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D83115DD3B4000BFE89E /* PKUBarView.m */; };
+		4163D83D15DD3B4000BFE89E /* PKUBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D83115DD3B4000BFE89E /* PKUBarView.m */; };
+		4163D83E15DD3B4000BFE89E /* PKURoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D83315DD3B4000BFE89E /* PKURoomCell.m */; };
+		4163D83F15DD3B4000BFE89E /* PKURoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D83315DD3B4000BFE89E /* PKURoomCell.m */; };
+		4163D84015DD3B4000BFE89E /* PKURoomCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4163D83415DD3B4000BFE89E /* PKURoomCellXIB.xib */; };
+		4163D84115DD3B4000BFE89E /* PKURoomCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4163D83415DD3B4000BFE89E /* PKURoomCellXIB.xib */; };
+		4163D84215DD3B4000BFE89E /* QueryResults.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4163D83515DD3B4000BFE89E /* QueryResults.xib */; };
+		4163D84315DD3B4000BFE89E /* QueryResults.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4163D83515DD3B4000BFE89E /* QueryResults.xib */; };
+		4163D84415DD3B4000BFE89E /* QueryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D83715DD3B4000BFE89E /* QueryResultsController.m */; };
+		4163D84515DD3B4000BFE89E /* QueryResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D83715DD3B4000BFE89E /* QueryResultsController.m */; };
+		4163D84615DD3B4000BFE89E /* RoomControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D83915DD3B4000BFE89E /* RoomControlButton.m */; };
+		4163D84715DD3B4000BFE89E /* RoomControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163D83915DD3B4000BFE89E /* RoomControlButton.m */; };
 		41D6FDD715D0B9720085DF89 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D6FDD615D0B9720085DF89 /* GHUnitIOS.framework */; };
 		41D6FDDB15D0BA4C0085DF89 /* CPAppModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */; };
 		41D6FDE615D0C4BA0085DF89 /* Coffeepot.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D6FDE515D0C4BA0085DF89 /* Coffeepot.m */; };
@@ -1754,6 +1768,18 @@
 		414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWelcomeSegue.m; sourceTree = "<group>"; };
 		414AFDD815D512A500EFFB60 /* SystemHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemHelper.h; sourceTree = "<group>"; };
 		414AFDD915D512A500EFFB60 /* SystemHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemHelper.m; sourceTree = "<group>"; };
+		4163D82E15DD3B4000BFE89E /* ClassroomQueryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassroomQueryController.h; sourceTree = "<group>"; };
+		4163D82F15DD3B4000BFE89E /* ClassroomQueryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassroomQueryController.m; sourceTree = "<group>"; };
+		4163D83015DD3B4000BFE89E /* PKUBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKUBarView.h; sourceTree = "<group>"; };
+		4163D83115DD3B4000BFE89E /* PKUBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKUBarView.m; sourceTree = "<group>"; };
+		4163D83215DD3B4000BFE89E /* PKURoomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKURoomCell.h; sourceTree = "<group>"; };
+		4163D83315DD3B4000BFE89E /* PKURoomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKURoomCell.m; sourceTree = "<group>"; };
+		4163D83415DD3B4000BFE89E /* PKURoomCellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PKURoomCellXIB.xib; sourceTree = "<group>"; };
+		4163D83515DD3B4000BFE89E /* QueryResults.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QueryResults.xib; sourceTree = "<group>"; };
+		4163D83615DD3B4000BFE89E /* QueryResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryResultsController.h; sourceTree = "<group>"; };
+		4163D83715DD3B4000BFE89E /* QueryResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryResultsController.m; sourceTree = "<group>"; };
+		4163D83815DD3B4000BFE89E /* RoomControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomControlButton.h; sourceTree = "<group>"; };
+		4163D83915DD3B4000BFE89E /* RoomControlButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomControlButton.m; sourceTree = "<group>"; };
 		41D6FDD615D0B9720085DF89 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = SOURCE_ROOT; };
 		41D6FDD915D0BA4C0085DF89 /* CPAppModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAppModule.h; sourceTree = "<group>"; };
 		41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppModule.m; sourceTree = "<group>"; };
@@ -2046,6 +2072,7 @@
 		26F3E2C915D8332300D69D0D /* CPRoom */ = {
 			isa = PBXGroup;
 			children = (
+				4163D84915DD3B4800BFE89E /* PKURoom */,
 				414AFDC315D512A500EFFB60 /* CPRoomsViewController.h */,
 				414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */,
 				26F3E2C515D8325300D69D0D /* CPRoomRetractableSectionController.h */,
@@ -3051,6 +3078,25 @@
 			name = CPMainFlow;
 			sourceTree = "<group>";
 		};
+		4163D84915DD3B4800BFE89E /* PKURoom */ = {
+			isa = PBXGroup;
+			children = (
+				4163D83515DD3B4000BFE89E /* QueryResults.xib */,
+				4163D83615DD3B4000BFE89E /* QueryResultsController.h */,
+				4163D83715DD3B4000BFE89E /* QueryResultsController.m */,
+				4163D83815DD3B4000BFE89E /* RoomControlButton.h */,
+				4163D83915DD3B4000BFE89E /* RoomControlButton.m */,
+				4163D82E15DD3B4000BFE89E /* ClassroomQueryController.h */,
+				4163D82F15DD3B4000BFE89E /* ClassroomQueryController.m */,
+				4163D83015DD3B4000BFE89E /* PKUBarView.h */,
+				4163D83115DD3B4000BFE89E /* PKUBarView.m */,
+				4163D83215DD3B4000BFE89E /* PKURoomCell.h */,
+				4163D83315DD3B4000BFE89E /* PKURoomCell.m */,
+				4163D83415DD3B4000BFE89E /* PKURoomCellXIB.xib */,
+			);
+			name = PKURoom;
+			sourceTree = "<group>";
+		};
 		41D6FDE315D0C3CB0085DF89 /* CPConnect */ = {
 			isa = PBXGroup;
 			children = (
@@ -3408,6 +3454,8 @@
 				262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */,
 				269CBB0115DC108900B5CF2C /* course.json in Resources */,
 				269CBB0915DC1F1000B5CF2C /* courseDetail.json in Resources */,
+				4163D84015DD3B4000BFE89E /* PKURoomCellXIB.xib in Resources */,
+				4163D84215DD3B4000BFE89E /* QueryResults.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3667,6 +3715,8 @@
 				26CD828615D7811C0070DF78 /* widget_3line_0btn.png in Resources */,
 				26CD828815D7811C0070DF78 /* widget_3line_2btn.png in Resources */,
 				269CBB0A15DC1F1000B5CF2C /* courseDetail.json in Resources */,
+				4163D84115DD3B4000BFE89E /* PKURoomCellXIB.xib in Resources */,
+				4163D84315DD3B4000BFE89E /* QueryResults.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3917,6 +3967,11 @@
 				26D6209115DD221F000AB849 /* CPLabelMutipleLinesElement.m in Sources */,
 				26D6209515DD2519000AB849 /* CPPostEntryElement.m in Sources */,
 				26D6209915DD26AE000AB849 /* CPDashboardViewController.m in Sources */,
+				4163D83A15DD3B4000BFE89E /* ClassroomQueryController.m in Sources */,
+				4163D83C15DD3B4000BFE89E /* PKUBarView.m in Sources */,
+				4163D83E15DD3B4000BFE89E /* PKURoomCell.m in Sources */,
+				4163D84415DD3B4000BFE89E /* QueryResultsController.m in Sources */,
+				4163D84615DD3B4000BFE89E /* RoomControlButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4139,6 +4194,11 @@
 				26D6209215DD221F000AB849 /* CPLabelMutipleLinesElement.m in Sources */,
 				26D6209615DD2519000AB849 /* CPPostEntryElement.m in Sources */,
 				26D6209A15DD26AE000AB849 /* CPDashboardViewController.m in Sources */,
+				4163D83B15DD3B4000BFE89E /* ClassroomQueryController.m in Sources */,
+				4163D83D15DD3B4000BFE89E /* PKUBarView.m in Sources */,
+				4163D83F15DD3B4000BFE89E /* PKURoomCell.m in Sources */,
+				4163D84515DD3B4000BFE89E /* QueryResultsController.m in Sources */,
+				4163D84715DD3B4000BFE89E /* RoomControlButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
