@@ -78,8 +78,8 @@ static NSString* pAPIPort = @"333";
 - (void)_reportError:(NSError*)error {
 
 	[self enumerateEventHandlers:kCPErrorBlockHandlerKey block:^(id _handler) {
-		void (^handler)(CPRequest*,id collection, NSError *) = _handler;
-		handler(self,nil, error);
+		void (^handler)(CPRequest*, NSError *) = _handler;
+		handler(self, error);
 	}];
 }
 
@@ -184,7 +184,7 @@ static NSString* pAPIPort = @"333";
 - (void)addCompletionHandler:(void(^)(CPRequest* req, id collection))completionHandler {
 	[self registerEventHandler:kCPCompletionBlockHandlerKey handler:completionHandler];
 }
-- (void)addErrorHandler:(void(^)(CPRequest*,id collection, NSError *))errorHandler {
+- (void)addErrorHandler:(void(^)(CPRequest*, NSError *))errorHandler {
 	[self registerEventHandler:kCPErrorBlockHandlerKey handler:errorHandler];
 }
 - (void)addLoadHandler:(void(^)(CPRequest*))loadHandler {
@@ -204,7 +204,7 @@ static NSString* pAPIPort = @"333";
 	[self addCompletionHandler:^(CPRequest *request, id result) {
 		NSLog(@"CPRequest: Success: %@: %@", request.url, result);
 	}];
-	[self addErrorHandler:^(CPRequest *request,id collection, NSError *error) {
+	[self addErrorHandler:^(CPRequest *request, NSError *error) {
 		NSLog(@"CPRequest: Error: %@: %@", request.url, error);
 	}];
 }
