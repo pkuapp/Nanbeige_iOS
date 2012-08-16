@@ -8,14 +8,13 @@
 
 #import "CPRoomsViewController.h"
 #import "Environment.h"
-#import "CPRoomRetractableSectionController.h"
 #import "Coffeepot.h"
 #import "Models+addon.h"
 
 @interface CPRoomsViewController () {
 	NSDate *date;
 	NSInteger buildingIndex;
-	NSMutableArray *retractableControllers;
+	NSMutableArray *roomsOfBuilding;
 }
 
 @end
@@ -81,8 +80,6 @@
 	doc = [localDatabase documentWithID:@"rooms"];
 	self.rooms = [[doc properties] objectForKey:@"value"];
 	
-    
-    
 	[self reloadRooms];
 }
 
@@ -120,38 +117,85 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return retractableControllers.count;
+	return roomsOfBuilding.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    GCRetractableSectionController* sectionController = [retractableControllers objectAtIndex:section];
-    return sectionController.numberOfRow;
+    NSArray* rooms = [roomsOfBuilding objectAtIndex:section];
+    return rooms.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GCRetractableSectionController* sectionController = [retractableControllers objectAtIndex:indexPath.section];
-    return [sectionController cellForRow:indexPath.row];
-	
     static NSString *identifier = @"Cell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if (nil == cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
 	}
-	cell.textLabel.text = [[self.buildings objectAtIndex:indexPath.row] objectForKey:kAPINAME];
-    cell.detailTextLabel.text = [[[self.buildings objectAtIndex:indexPath.row] objectForKey:kAPIID] stringValue];
+	
+	if (indexPath.row == 0) {
+		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+		
+		cell.textLabel.text = [[self.buildings objectAtIndex:indexPath.row] objectForKey:@"name"];
+		cell.detailTextLabel.text = nil;
+		
+		[self addSeparatorAtView:cell.contentView OffsetY:0 WithColor:separatorColorTitleNoContentHeader1];
+		[self addSeparatorAtView:cell.contentView OffsetY:TIMETABLESEPARATORHEIGHT WithColor:separatorColorTitleNoContentHeader2];
+		if ([[roomsOfBuilding objectAtIndex:indexPath.section] count] == 0)
+			[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - TIMETABLESEPARATORHEIGHT WithColor:separatorColorTitleNoContentFooter];
+		else [self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - TIMETABLESEPARATORHEIGHT WithColor:separatorColorTitleHasContentFooter];
+		
+	} else {
+		
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		cell.textLabel.shadowColor = [UIColor whiteColor];
+		cell.textLabel.shadowOffset = CGSizeMake(0, 1);
+		cell.textLabel.textColor = [UIColor colorWithRed:120/255.0 green:116/255.0 blue:100/255.0 alpha:1.0];
+		cell.textLabel.backgroundColor = [UIColor clearColor];
+		cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+		cell.contentView.backgroundColor = tableBgColorGrouped;
+		
+		cell.textLabel.text = [[roomsOfBuilding objectAtIndex:indexPath.section] objectAtIndex:indexPath.row-1];
+		cell.detailTextLabel.text = nil;
+		
+		if (indexPath.row == 1) {
+			[self addSeparatorAtView:cell.contentView OffsetY:0 WithColor:separatorColorContentHeader1];
+			[self addSeparatorAtView:cell.contentView OffsetY:TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentHeader2];
+			[self addSeparatorAtView:cell.contentView OffsetY:2*TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentHeader3];
+		} else {
+			[self addSeparatorAtView:cell.contentView OffsetY:0 WithColor:separatorColorContentMiddleHeader];
+		}
+		
+		if (indexPath.row == [[roomsOfBuilding objectAtIndex:indexPath.section] count]) {
+			[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - 2 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentFooter1];
+			[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentFooter2];
+		} else {
+			[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentMiddleFooter];
+		}
+	}
 	
     return cell;
-	 
+}
+
+- (UIView *)addSeparatorAtView:(UIView *)view
+					   OffsetY:(CGFloat)y
+					 WithColor:(UIColor *)color
+{
+	UIView *separator = [[UIView alloc] init];
+	separator.backgroundColor = color;
+	separator.frame = CGRectMake(0, y, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
+	[view addSubview:separator];
+	return separator;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GCRetractableSectionController* sectionController = [retractableControllers objectAtIndex:indexPath.section];
-    return [sectionController didSelectCellAtRow:indexPath.row];
+	[self showAlert:[tableView cellForRowAtIndexPath:indexPath].textLabel.text];
+	// TODO
 }
 
 #pragma mark - Data Process
@@ -185,10 +229,10 @@
 	building_id = [[self.buildings objectAtIndex:buildingIndex] objectForKey:@"id"];
 	
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/%@/room/", building_id] params:params requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-		NSLog(@"%@", collection);
+		
 		buildingIndex ++;
 		[self.rooms addObject:collection];
-//		[self syncNextRooms];
+		[self syncNextRooms];
 		
 	} error:^(CPRequest *_req, id collection, NSError *error) {
 		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
@@ -200,7 +244,7 @@
 
 - (void)reloadRooms
 {
-	retractableControllers = [[NSMutableArray alloc] init];
+	roomsOfBuilding = [[NSMutableArray alloc] init];
 	if (self.buildings.count != self.rooms.count) return ;
 	for (int index = 0; index < self.buildings.count; index++) {
 		
@@ -216,10 +260,7 @@
 		}
 		if ([roomString length] > 0) [roomNames addObject:roomString];
 		
-		CPRoomRetractableSectionController* arrayController = [[CPRoomRetractableSectionController alloc] initWithArray:roomNames viewController:self];
-		arrayController.title = [[self.buildings objectAtIndex:index] objectForKey:@"name"];
-		arrayController.open = YES;
-		[retractableControllers addObject:arrayController];
+		[roomsOfBuilding addObject:roomNames];
 	}
 }
 

@@ -371,8 +371,6 @@
 		26F14EDD15DA3F3000C8E74E /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14EDB15DA3F3000C8E74E /* Lesson.m */; };
 		26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
 		26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
-		26F3E2C715D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */; };
-		26F3E2C815D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */; };
 		26F3E2D915D92EEE00D69D0D /* assignmentCreate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26F3E2D815D92EED00D69D0D /* assignmentCreate.json */; };
 		411DBBCC15CB9E4000EDB31D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCB15CB9E4000EDB31D /* UIKit.framework */; };
 		411DBBCE15CB9E4000EDB31D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCD15CB9E4000EDB31D /* Foundation.framework */; };
@@ -442,26 +440,6 @@
 		411DBC6F15CBA59700EDB31D /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 411DBC3915CBA59700EDB31D /* MagicalRecord.m */; };
 		4120F2B415D645D000D0AA97 /* WBEngine+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */; };
 		4120F2B515D645D000D0AA97 /* WBEngine+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */; };
-		413B9F3515D51D95000C9451 /* GCArraySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E6F15D51D95000C9451 /* GCArraySectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		413B9F3615D51D95000C9451 /* GCArraySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E6F15D51D95000C9451 /* GCArraySectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		413B9F3715D51D95000C9451 /* GCRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7115D51D95000C9451 /* GCRetractableSectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		413B9F3815D51D95000C9451 /* GCRetractableSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7115D51D95000C9451 /* GCRetractableSectionController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		413B9F3915D51D95000C9451 /* DownAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7315D51D95000C9451 /* DownAccessory.png */; };
-		413B9F3A15D51D95000C9451 /* DownAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7315D51D95000C9451 /* DownAccessory.png */; };
-		413B9F3B15D51D95000C9451 /* DownAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7415D51D95000C9451 /* DownAccessory@2x.png */; };
-		413B9F3C15D51D95000C9451 /* DownAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7415D51D95000C9451 /* DownAccessory@2x.png */; };
-		413B9F3D15D51D95000C9451 /* DownAccessoryWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7515D51D95000C9451 /* DownAccessoryWhite.png */; };
-		413B9F3E15D51D95000C9451 /* DownAccessoryWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7515D51D95000C9451 /* DownAccessoryWhite.png */; };
-		413B9F3F15D51D95000C9451 /* DownAccessoryWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7615D51D95000C9451 /* DownAccessoryWhite@2x.png */; };
-		413B9F4015D51D95000C9451 /* DownAccessoryWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7615D51D95000C9451 /* DownAccessoryWhite@2x.png */; };
-		413B9F4115D51D95000C9451 /* UpAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7715D51D95000C9451 /* UpAccessory.png */; };
-		413B9F4215D51D95000C9451 /* UpAccessory.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7715D51D95000C9451 /* UpAccessory.png */; };
-		413B9F4315D51D95000C9451 /* UpAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7815D51D95000C9451 /* UpAccessory@2x.png */; };
-		413B9F4415D51D95000C9451 /* UpAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7815D51D95000C9451 /* UpAccessory@2x.png */; };
-		413B9F4515D51D96000C9451 /* UpAccessoryWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7915D51D95000C9451 /* UpAccessoryWhite.png */; };
-		413B9F4615D51D96000C9451 /* UpAccessoryWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7915D51D95000C9451 /* UpAccessoryWhite.png */; };
-		413B9F4715D51D96000C9451 /* UpAccessoryWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7A15D51D95000C9451 /* UpAccessoryWhite@2x.png */; };
-		413B9F4815D51D96000C9451 /* UpAccessoryWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 413B9E7A15D51D95000C9451 /* UpAccessoryWhite@2x.png */; };
 		413B9F4915D51D96000C9451 /* Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7D15D51D95000C9451 /* Renren.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		413B9F4A15D51D96000C9451 /* Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7D15D51D95000C9451 /* Renren.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		413B9F4B15D51D96000C9451 /* RenrenPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7F15D51D95000C9451 /* RenrenPay.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1233,8 +1211,6 @@
 		26F14EDB15DA3F3000C8E74E /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = Models/Lesson.m; sourceTree = "<group>"; };
 		26F3E2BC15D7FE4000D69D0D /* Renren+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Renren+addon.h"; path = "nbg_iOS/Renren+addon.h"; sourceTree = SOURCE_ROOT; };
 		26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Renren+addon.m"; path = "nbg_iOS/Renren+addon.m"; sourceTree = SOURCE_ROOT; };
-		26F3E2C515D8325300D69D0D /* CPRoomRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRoomRetractableSectionController.h; sourceTree = "<group>"; };
-		26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRoomRetractableSectionController.m; sourceTree = "<group>"; };
 		26F3E2D815D92EED00D69D0D /* assignmentCreate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCreate.json; sourceTree = "<group>"; };
 		411DBBC715CB9E3F00EDB31D /* nbg_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nbg_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		411DBBCB15CB9E4000EDB31D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1311,18 +1287,6 @@
 		4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "WBEngine+addon.h"; path = "../WBEngine+addon.h"; sourceTree = "<group>"; };
 		4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "WBEngine+addon.m"; path = "../WBEngine+addon.m"; sourceTree = "<group>"; };
 		4120F2B915D6B4F500D0AA97 /* CPUserDefaultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserDefaultDelegate.h; sourceTree = "<group>"; };
-		413B9E6E15D51D95000C9451 /* GCArraySectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCArraySectionController.h; path = Demo/Demo/GCArraySectionController.h; sourceTree = "<group>"; };
-		413B9E6F15D51D95000C9451 /* GCArraySectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCArraySectionController.m; path = Demo/Demo/GCArraySectionController.m; sourceTree = "<group>"; };
-		413B9E7015D51D95000C9451 /* GCRetractableSectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCRetractableSectionController.h; path = GCRetractableSectionController/GCRetractableSectionController.h; sourceTree = "<group>"; };
-		413B9E7115D51D95000C9451 /* GCRetractableSectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCRetractableSectionController.m; path = GCRetractableSectionController/GCRetractableSectionController.m; sourceTree = "<group>"; };
-		413B9E7315D51D95000C9451 /* DownAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DownAccessory.png; sourceTree = "<group>"; };
-		413B9E7415D51D95000C9451 /* DownAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DownAccessory@2x.png"; sourceTree = "<group>"; };
-		413B9E7515D51D95000C9451 /* DownAccessoryWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DownAccessoryWhite.png; sourceTree = "<group>"; };
-		413B9E7615D51D95000C9451 /* DownAccessoryWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DownAccessoryWhite@2x.png"; sourceTree = "<group>"; };
-		413B9E7715D51D95000C9451 /* UpAccessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpAccessory.png; sourceTree = "<group>"; };
-		413B9E7815D51D95000C9451 /* UpAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UpAccessory@2x.png"; sourceTree = "<group>"; };
-		413B9E7915D51D95000C9451 /* UpAccessoryWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpAccessoryWhite.png; sourceTree = "<group>"; };
-		413B9E7A15D51D95000C9451 /* UpAccessoryWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UpAccessoryWhite@2x.png"; sourceTree = "<group>"; };
 		413B9E7C15D51D95000C9451 /* Renren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renren.h; sourceTree = "<group>"; };
 		413B9E7D15D51D95000C9451 /* Renren.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Renren.m; sourceTree = "<group>"; };
 		413B9E7E15D51D95000C9451 /* RenrenPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenrenPay.h; sourceTree = "<group>"; };
@@ -2075,8 +2039,6 @@
 				4163D84915DD3B4800BFE89E /* PKURoom */,
 				414AFDC315D512A500EFFB60 /* CPRoomsViewController.h */,
 				414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */,
-				26F3E2C515D8325300D69D0D /* CPRoomRetractableSectionController.h */,
-				26F3E2C615D8325500D69D0D /* CPRoomRetractableSectionController.m */,
 			);
 			name = CPRoom;
 			path = Nanbeige;
@@ -2117,7 +2079,6 @@
 				413BA12915D520EE000C9451 /* FMDB */,
 				413BA04715D52052000C9451 /* quickdialog */,
 				413BA01415D51EAE000C9451 /* SBJSON */,
-				413B9E6D15D51D95000C9451 /* GCRetractableSectionController */,
 				413B9E7B15D51D95000C9451 /* Renren */,
 				413B9EF215D51D95000C9451 /* SinaWeiBoSDK */,
 				41E7F98915D2AF63009B8703 /* AFNetworking */,
@@ -2375,34 +2336,6 @@
 			);
 			name = CPSignFlow;
 			path = Nanbeige;
-			sourceTree = "<group>";
-		};
-		413B9E6D15D51D95000C9451 /* GCRetractableSectionController */ = {
-			isa = PBXGroup;
-			children = (
-				413B9E6E15D51D95000C9451 /* GCArraySectionController.h */,
-				413B9E6F15D51D95000C9451 /* GCArraySectionController.m */,
-				413B9E7015D51D95000C9451 /* GCRetractableSectionController.h */,
-				413B9E7115D51D95000C9451 /* GCRetractableSectionController.m */,
-				413B9E7215D51D95000C9451 /* Images */,
-			);
-			path = GCRetractableSectionController;
-			sourceTree = "<group>";
-		};
-		413B9E7215D51D95000C9451 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				413B9E7315D51D95000C9451 /* DownAccessory.png */,
-				413B9E7415D51D95000C9451 /* DownAccessory@2x.png */,
-				413B9E7515D51D95000C9451 /* DownAccessoryWhite.png */,
-				413B9E7615D51D95000C9451 /* DownAccessoryWhite@2x.png */,
-				413B9E7715D51D95000C9451 /* UpAccessory.png */,
-				413B9E7815D51D95000C9451 /* UpAccessory@2x.png */,
-				413B9E7915D51D95000C9451 /* UpAccessoryWhite.png */,
-				413B9E7A15D51D95000C9451 /* UpAccessoryWhite@2x.png */,
-			);
-			name = Images;
-			path = GCRetractableSectionController/Images;
 			sourceTree = "<group>";
 		};
 		413B9E7B15D51D95000C9451 /* Renren */ = {
@@ -3213,14 +3146,6 @@
 				414AFE2815D512A500EFFB60 /* CPLine2Button2Cell.xib in Resources */,
 				414AFE2C15D512A500EFFB60 /* CPLine3Button0Cell.xib in Resources */,
 				414AFE3015D512A500EFFB60 /* CPLine3Button2Cell.xib in Resources */,
-				413B9F3915D51D95000C9451 /* DownAccessory.png in Resources */,
-				413B9F3B15D51D95000C9451 /* DownAccessory@2x.png in Resources */,
-				413B9F3D15D51D95000C9451 /* DownAccessoryWhite.png in Resources */,
-				413B9F3F15D51D95000C9451 /* DownAccessoryWhite@2x.png in Resources */,
-				413B9F4115D51D95000C9451 /* UpAccessory.png in Resources */,
-				413B9F4315D51D95000C9451 /* UpAccessory@2x.png in Resources */,
-				413B9F4515D51D96000C9451 /* UpAccessoryWhite.png in Resources */,
-				413B9F4715D51D96000C9451 /* UpAccessoryWhite@2x.png in Resources */,
 				413B9F5915D51D96000C9451 /* bottom-bar.png in Resources */,
 				413B9F5B15D51D96000C9451 /* bottom-bar@2x.png in Resources */,
 				413B9F5D15D51D96000C9451 /* close.png in Resources */,
@@ -3475,14 +3400,6 @@
 				414AFE2915D512A500EFFB60 /* CPLine2Button2Cell.xib in Resources */,
 				414AFE2D15D512A500EFFB60 /* CPLine3Button0Cell.xib in Resources */,
 				414AFE3115D512A500EFFB60 /* CPLine3Button2Cell.xib in Resources */,
-				413B9F3A15D51D95000C9451 /* DownAccessory.png in Resources */,
-				413B9F3C15D51D95000C9451 /* DownAccessory@2x.png in Resources */,
-				413B9F3E15D51D95000C9451 /* DownAccessoryWhite.png in Resources */,
-				413B9F4015D51D95000C9451 /* DownAccessoryWhite@2x.png in Resources */,
-				413B9F4215D51D95000C9451 /* UpAccessory.png in Resources */,
-				413B9F4415D51D95000C9451 /* UpAccessory@2x.png in Resources */,
-				413B9F4615D51D96000C9451 /* UpAccessoryWhite.png in Resources */,
-				413B9F4815D51D96000C9451 /* UpAccessoryWhite@2x.png in Resources */,
 				413B9F5A15D51D96000C9451 /* bottom-bar.png in Resources */,
 				413B9F5C15D51D96000C9451 /* bottom-bar@2x.png in Resources */,
 				413B9F5E15D51D96000C9451 /* close.png in Resources */,
@@ -3815,8 +3732,6 @@
 				414AFE4615D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */,
 				414AFE4815D512A500EFFB60 /* CPWelcomeSegue.m in Sources */,
 				414AFE4E15D512A500EFFB60 /* SystemHelper.m in Sources */,
-				413B9F3515D51D95000C9451 /* GCArraySectionController.m in Sources */,
-				413B9F3715D51D95000C9451 /* GCRetractableSectionController.m in Sources */,
 				413B9F4915D51D96000C9451 /* Renren.m in Sources */,
 				413B9F4B15D51D96000C9451 /* RenrenPay.m in Sources */,
 				413B9F4D15D51D96000C9451 /* ROBaseDialogViewController.m in Sources */,
@@ -3953,7 +3868,6 @@
 				413BA26E15D52FA6000C9451 /* CPIPGateHelper.m in Sources */,
 				4120F2B415D645D000D0AA97 /* WBEngine+addon.m in Sources */,
 				26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */,
-				26F3E2C715D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
 				262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */,
 				26F14ED315DA253F00C8E74E /* Assignment.m in Sources */,
 				26F14ED815DA3F3000C8E74E /* Course.m in Sources */,
@@ -4046,8 +3960,6 @@
 				414AFE4715D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */,
 				414AFE4915D512A500EFFB60 /* CPWelcomeSegue.m in Sources */,
 				414AFE4F15D512A500EFFB60 /* SystemHelper.m in Sources */,
-				413B9F3615D51D95000C9451 /* GCArraySectionController.m in Sources */,
-				413B9F3815D51D95000C9451 /* GCRetractableSectionController.m in Sources */,
 				413B9F4C15D51D96000C9451 /* RenrenPay.m in Sources */,
 				413B9F4A15D51D96000C9451 /* Renren.m in Sources */,
 				413B9F4E15D51D96000C9451 /* ROBaseDialogViewController.m in Sources */,
@@ -4184,7 +4096,6 @@
 				413BA26F15D52FA6000C9451 /* CPIPGateHelper.m in Sources */,
 				4120F2B515D645D000D0AA97 /* WBEngine+addon.m in Sources */,
 				26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */,
-				26F3E2C815D8325700D69D0D /* CPRoomRetractableSectionController.m in Sources */,
 				26F14ED415DA253F00C8E74E /* Assignment.m in Sources */,
 				26F14ED915DA3F3000C8E74E /* Course.m in Sources */,
 				26F14EDD15DA3F3000C8E74E /* Lesson.m in Sources */,
