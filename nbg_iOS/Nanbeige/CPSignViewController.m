@@ -158,7 +158,6 @@
                 [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
                 
             } error:^(CPRequest *request, NSError *error) {
-				[self loading:NO];
 				
 				if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
                     
@@ -176,15 +175,11 @@
 						[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 					}];
 					
-					[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-					[self loading:YES];
                 } else {
+					[self loading:NO];
 					[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 				}
             }];
-			
-			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-			[self loading:YES];
         }
     }
     fail:^(WBRequest *request, NSError *error) {
@@ -230,7 +225,6 @@
 	[self.renren requestWithParam:requestParam
 					  andDelegate:self
 						  success:^(RORequest *request, id result) {
-							  [self loading:NO];
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
@@ -245,8 +239,7 @@
 									  [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 
 								  } error:^(CPRequest *request, NSError *error) {
-									  [self loading:NO];
-									  
+	
 									  if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
 										  
 										  [[Coffeepot shared] requestWithMethodPath:@"user/reg/renren/" params:@{@"token":self.renren.accessToken, @"nickname":[[result objectAtIndex:0] objectForKey:@"name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
@@ -258,21 +251,18 @@
 											  [User updateSharedAppUserProfile:collection];
 											  [self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 											  
-											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
 											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 										  }];
-								  
-										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-										  [self loading:YES];
+										  
 									  } else {
+										  [self loading:NO];
 										  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 									  }
+									  
 								  }];
 								  
-								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-								  [self loading:YES];
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {

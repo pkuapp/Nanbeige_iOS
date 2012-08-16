@@ -341,7 +341,6 @@
     
 	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
 								  success:^(WBRequest *request, id result) {
-									  [self loading:NO];
 									  
 									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
 										  
@@ -356,9 +355,6 @@
 											  [self loading:NO];
 											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 										  }];
-										  
-										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-										  [self loading:YES];
 									  }
 								  }
 									 fail:^(WBRequest *request, NSError *error) {

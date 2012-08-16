@@ -138,7 +138,6 @@
 	[User updateSharedAppUserProfile:campus];
 	
 	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-		[self loading:NO];
 		
 		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
 			
@@ -171,9 +170,6 @@
 				[self loading:NO];
 				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 			}];
-			
-			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-			[self loading:YES];
 			
 		} else {
 			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];

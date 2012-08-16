@@ -65,8 +65,7 @@
 	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 
 	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/" params:nil requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-		[self loading:NO];
-
+		
 		if (![collection isKindOfClass:[NSDictionary class]] || ![[collection objectForKey:@"available"] boolValue]) {
 			[self performSelector:@selector(close) withObject:nil afterDelay:1.0];
 			[self showAlert:@"抓课器暂不可用"];
@@ -91,9 +90,6 @@
 				[self loading:NO];
 				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 			}];
-			
-			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-			[self loading:YES];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
