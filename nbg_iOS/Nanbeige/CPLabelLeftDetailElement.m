@@ -12,32 +12,17 @@
 @implementation CPLabelLeftDetailElement
 
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
-    QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller withStyle:UITableViewCellStyleValue1];
 	
-	for (UIView *subView in cell.contentView.subviews) {
-		[subView removeFromSuperview];
-	}
+	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"reuseIdentifier"];
 	
-	self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 11, 68, 21)];
-	self.titleLabel.textAlignment = UITextAlignmentRight;
-	self.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-	self.titleLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-	self.titleLabel.adjustsFontSizeToFitWidth = YES;
-	self.titleLabel.text = cell.textLabel.text;
-	self.titleLabel.textColor = labelLeftColor;
-	cell.textLabel.text = nil;
-	[cell.contentView addSubview:self.titleLabel];
+    cell.imageView.image = self.image;
+	cell.textLabel.text = self.title;
+	cell.detailTextLabel.text = [self.value description];
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
-	self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(96, 10, 200, 21)];
-	self.valueLabel.textAlignment = UITextAlignmentLeft;
-	self.valueLabel.font = [UIFont boldSystemFontOfSize:17];
-	self.valueLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-	self.titleLabel.adjustsFontSizeToFitWidth = YES;
-	self.valueLabel.text = cell.detailTextLabel.text;
-	cell.detailTextLabel.text = nil;
-	[cell.contentView addSubview:self.valueLabel];
-    
-	cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.selectionStyle = self.sections!= nil || self.controllerAction!=nil ? UITableViewCellSelectionStyleBlue: UITableViewCellSelectionStyleNone;
+//	cell.accessoryType = self.sections!= nil || self.controllerAction!=nil ? (self.accessoryType != (int) nil ? self.accessoryType : UITableViewCellAccessoryDisclosureIndicator) : UITableViewCellAccessoryNone;
+	
     return cell;
 }
 

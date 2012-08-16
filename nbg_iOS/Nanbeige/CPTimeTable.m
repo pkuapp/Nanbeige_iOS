@@ -245,6 +245,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	BOOL prevIsShowTime = [[[NSUserDefaults standardUserDefaults] objectForKey:kSHOWTIME] boolValue];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:!prevIsShowTime] forKey:kSHOWTIME];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 	if ([self.delegate respondsToSelector:@selector(didChangeIfShowTime:)]) {
 		[self.delegate didChangeIfShowTime:!prevIsShowTime];
 	}

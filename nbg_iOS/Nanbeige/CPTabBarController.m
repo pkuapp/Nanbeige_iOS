@@ -27,9 +27,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	UITabBarItem *feedTabBarButton = [[self.tabBar items] objectAtIndex:0];
-	UITabBarItem *mainTabBarButton = [[self.tabBar items] objectAtIndex:1];
-	UITabBarItem *preferenceTabBarButton = [[self.tabBar items] objectAtIndex:2];
+//	UITabBarItem *feedTabBarButton = [[self.tabBar items] objectAtIndex:0];
+//	UITabBarItem *mainTabBarButton = [[self.tabBar items] objectAtIndex:1];
+//	UITabBarItem *preferenceTabBarButton = [[self.tabBar items] objectAtIndex:2];
 	[self setSelectedIndex:1];
 }
 

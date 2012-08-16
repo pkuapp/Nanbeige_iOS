@@ -357,6 +357,12 @@
 		26CD829715D789FD0070DF78 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829215D789FC0070DF78 /* TouchDB.framework */; };
 		26CD829815D789FD0070DF78 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829215D789FC0070DF78 /* TouchDB.framework */; };
 		26D6208D15DCED5F000AB849 /* CPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6208C15DCED5F000AB849 /* CPTabBarController.m */; };
+		26D6209115DD221F000AB849 /* CPLabelMutipleLinesElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209015DD221F000AB849 /* CPLabelMutipleLinesElement.m */; };
+		26D6209215DD221F000AB849 /* CPLabelMutipleLinesElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209015DD221F000AB849 /* CPLabelMutipleLinesElement.m */; };
+		26D6209515DD2519000AB849 /* CPPostEntryElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209415DD2518000AB849 /* CPPostEntryElement.m */; };
+		26D6209615DD2519000AB849 /* CPPostEntryElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209415DD2518000AB849 /* CPPostEntryElement.m */; };
+		26D6209915DD26AE000AB849 /* CPDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209815DD26AC000AB849 /* CPDashboardViewController.m */; };
+		26D6209A15DD26AE000AB849 /* CPDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209815DD26AC000AB849 /* CPDashboardViewController.m */; };
 		26F14ED315DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED415DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED815DA3F3000C8E74E /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED715DA3F2F00C8E74E /* Course.m */; };
@@ -1199,6 +1205,12 @@
 		26CD829215D789FC0070DF78 /* TouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchDB.framework; path = Frameworks/TouchDB.framework; sourceTree = "<group>"; };
 		26D6208B15DCED5F000AB849 /* CPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTabBarController.h; sourceTree = "<group>"; };
 		26D6208C15DCED5F000AB849 /* CPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTabBarController.m; sourceTree = "<group>"; };
+		26D6208F15DD221F000AB849 /* CPLabelMutipleLinesElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLabelMutipleLinesElement.h; sourceTree = "<group>"; };
+		26D6209015DD221F000AB849 /* CPLabelMutipleLinesElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLabelMutipleLinesElement.m; sourceTree = "<group>"; };
+		26D6209315DD2518000AB849 /* CPPostEntryElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPostEntryElement.h; sourceTree = "<group>"; };
+		26D6209415DD2518000AB849 /* CPPostEntryElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPostEntryElement.m; sourceTree = "<group>"; };
+		26D6209715DD26AB000AB849 /* CPDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDashboardViewController.h; sourceTree = "<group>"; };
+		26D6209815DD26AC000AB849 /* CPDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDashboardViewController.m; sourceTree = "<group>"; };
 		26F14ED115DA253F00C8E74E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		26F14ED215DA253F00C8E74E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		26F14ED615DA3F2F00C8E74E /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
@@ -1997,6 +2009,23 @@
 				26CD813915D7811B0070DF78 /* widget_3line_2btn.png */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		26D6208E15DD21E3000AB849 /* CPQElement */ = {
+			isa = PBXGroup;
+			children = (
+				414AFDA415D512A500EFFB60 /* CPLabelButtonCenterElement.h */,
+				414AFDA515D512A500EFFB60 /* CPLabelButtonCenterElement.m */,
+				414AFDA615D512A500EFFB60 /* CPLabelButtonElement.h */,
+				414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */,
+				414AFDA815D512A500EFFB60 /* CPLabelLeftDetailElement.h */,
+				414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */,
+				26D6208F15DD221F000AB849 /* CPLabelMutipleLinesElement.h */,
+				26D6209015DD221F000AB849 /* CPLabelMutipleLinesElement.m */,
+				26D6209315DD2518000AB849 /* CPPostEntryElement.h */,
+				26D6209415DD2518000AB849 /* CPPostEntryElement.m */,
+			);
+			name = CPQElement;
 			sourceTree = "<group>";
 		};
 		26F3E2C415D82AE500D69D0D /* CPPreference */ = {
@@ -2966,6 +2995,8 @@
 			isa = PBXGroup;
 			children = (
 				414E13E315D7A7E300000CA8 /* CPMainFlow */,
+				26D6209715DD26AB000AB849 /* CPDashboardViewController.h */,
+				26D6209815DD26AC000AB849 /* CPDashboardViewController.m */,
 				414AFD6F15D512A500EFFB60 /* Environment.h */,
 				413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */,
 				413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */,
@@ -2974,12 +3005,7 @@
 				414AFDA115D512A500EFFB60 /* CPIPGateHelper.m */,
 				414AFDA215D512A500EFFB60 /* CPItsViewController.h */,
 				414AFDA315D512A500EFFB60 /* CPItsViewController.m */,
-				414AFDA415D512A500EFFB60 /* CPLabelButtonCenterElement.h */,
-				414AFDA515D512A500EFFB60 /* CPLabelButtonCenterElement.m */,
-				414AFDA615D512A500EFFB60 /* CPLabelButtonElement.h */,
-				414AFDA715D512A500EFFB60 /* CPLabelButtonElement.m */,
-				414AFDA815D512A500EFFB60 /* CPLabelLeftDetailElement.h */,
-				414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */,
+				26D6208E15DD21E3000AB849 /* CPQElement */,
 				414AFDB915D512A500EFFB60 /* CPLoginItsViewController.h */,
 				414AFDBA15D512A500EFFB60 /* CPLoginItsViewController.m */,
 				414AFDC815D512A500EFFB60 /* CPFeedViewController.h */,
@@ -3888,6 +3914,9 @@
 				269CBB0415DC10A100B5CF2C /* CPCourseViewController.m in Sources */,
 				269CBB0715DC1E5C00B5CF2C /* CPCourseDetailViewController.m in Sources */,
 				26D6208D15DCED5F000AB849 /* CPTabBarController.m in Sources */,
+				26D6209115DD221F000AB849 /* CPLabelMutipleLinesElement.m in Sources */,
+				26D6209515DD2519000AB849 /* CPPostEntryElement.m in Sources */,
+				26D6209915DD26AE000AB849 /* CPDashboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4107,6 +4136,9 @@
 				261D308F15DAB34200E6BDBD /* University.m in Sources */,
 				261D309315DAB38600E6BDBD /* Semester.m in Sources */,
 				261D309715DAB7E200E6BDBD /* User.m in Sources */,
+				26D6209215DD221F000AB849 /* CPLabelMutipleLinesElement.m in Sources */,
+				26D6209615DD2519000AB849 /* CPPostEntryElement.m in Sources */,
+				26D6209A15DD26AE000AB849 /* CPDashboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

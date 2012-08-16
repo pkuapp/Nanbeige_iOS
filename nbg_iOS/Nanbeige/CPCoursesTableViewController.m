@@ -129,6 +129,8 @@
 - (void)onTodayButtonPressed:(id)sender
 {
 	[self.paginatorView setCurrentPageIndex:TIMETABLEPAGEINDEX animated:YES];
+	CPTimeTable *currentPage = (CPTimeTable *)[self.paginatorView currentPage];
+	[currentPage refreshDisplay];
 }
 
 #pragma mark - Private

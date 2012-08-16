@@ -1,20 +1,19 @@
 //
-//  CPLabelButtonCenterElement.m
-//  CP
+//  CPLabelMutipleLinesElement.m
+//  nbg_iOS
 //
-//  Created by ZongZiWang on 12-8-1.
-//  Copyright (c) 2012年 Peking University. All rights reserved.
+//  Created by ZongZiWang on 12-8-16.
+//  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
-#import "CPLabelButtonCenterElement.h"
+#import "CPLabelMutipleLinesElement.h"
 
-@implementation CPLabelButtonCenterElement
+@implementation CPLabelMutipleLinesElement
 
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
     QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller];
     
 	cell.accessoryType = UITableViewCellAccessoryNone;
-	cell.textLabel.textAlignment = UITextAlignmentCenter;
 	
 	return cell;
 }

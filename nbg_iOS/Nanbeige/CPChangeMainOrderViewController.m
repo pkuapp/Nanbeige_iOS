@@ -97,7 +97,7 @@
 	}
 	
 	cell.textLabel.text = [[functionArray objectAtIndex:functionIndex] valueForKey:@"name"];
-    cell.imageView.image = [UIImage imageNamed:[[functionArray objectAtIndex:functionIndex] valueForKey:@"image"]];
+//	cell.imageView.image = [UIImage imageNamed:[[functionArray objectAtIndex:functionIndex] valueForKey:@"image"]];
 	
     return cell;
 }
@@ -186,6 +186,7 @@
 	NSString * neworderStr = [functionOrder componentsJoinedByString:@","];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setValue:neworderStr forKey:kMAINORDERKEY];
+	[defaults synchronize];
 	
 	if (![neworderStr isEqualToString:oldorderStr]) {
 		[[[UIAlertView alloc] initWithTitle:nil message:@"已修改" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil] show];

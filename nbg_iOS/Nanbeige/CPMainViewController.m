@@ -26,44 +26,53 @@
 @end
 
 @implementation CPMainViewController
-@synthesize delegate;
-@synthesize functionOrder = _functionOrder;
-@synthesize functionArray;
-@synthesize nibsRegistered;
-@synthesize nivc;
-//@synthesize connector;
-@synthesize navc;
-@synthesize nrvc;
-@synthesize progressHub;
-@synthesize gateStateDictionary;
-@synthesize defaults;
-@synthesize numStatus;
-@synthesize itsCell;
-@synthesize Username;
-@synthesize Password;
 
 
 #pragma mark - getter and setter Override
 
 - (NSObject *)delegate {
-    if (delegate == nil) {
+    if (_delegate == nil) {
 //        delegate = (NSObject<AppCoreDataProtocol,AppUserDelegateProtocol,ReachabilityProtocol,PABezelHUDDelegate> *)[UIApplication sharedApplication].delegate;
     }
-    return delegate;
+    return _delegate;
 }
 - (MBProgressHUD *)progressHub{
-    if (progressHub == nil) {
+    if (_progressHub == nil) {
 //        progressHub = self.delegate.progressHub;
     }
-    return progressHub;
+    return _progressHub;
+}
+- (NSUserDefaults *)defaults
+{
+	if (_defaults == nil) {
+		_defaults = [NSUserDefaults standardUserDefaults];
+	}
+	return _defaults;
+}
+- (NSMutableArray *)functionArray
+{
+	if (_functionArray == nil) {
+		NSMutableDictionary *itsDict = [@{ @"name" : @"IP网关", @"identifier" : @"Line1Button0Identifier", @"nibname" : @"CPLine1Button0Cell" } mutableCopy];
+		NSMutableDictionary *coursesDict = [@{ @"name" : @"课程", @"identifier" : @"Line3Button0Identifier", @"nibname" : @"CPLine3Button0Cell" } mutableCopy];
+		NSMutableDictionary *roomsDict = [@{ @"name" : @"自习室", @"identifier" : @"Line1Button0Identifier", @"nibname" : @"CPLine1Button0Cell" } mutableCopy];
+		NSDictionary *homeworkDict = [@{ @"name" : @"作业", @"identifier" : @"Line2Button2Identifier", @"nibname" : @"CPLine2Button2Cell" } mutableCopy];
+		
+		if ([[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] != nil) {
+			[itsDict setObject:@"Line3Button2Identifier" forKey:@"identifier"];
+			[itsDict setObject:@"CPLine3Button2Cell" forKey:@"nibname"];
+		}
+		
+		_functionArray = [@[ itsDict, coursesDict, roomsDict, homeworkDict ] mutableCopy];
+	}
+	return _functionArray;
 }
 - (NSArray *)functionOrder
 {
 	if (_functionOrder == nil) {
-		NSMutableArray *newOrder = [[[defaults valueForKey:kMAINORDERKEY] componentsSeparatedByString:@","] mutableCopy];
-		if (newOrder == nil || newOrder.count < 7) {
+		NSMutableArray *newOrder = [[[self.defaults valueForKey:kMAINORDERKEY] componentsSeparatedByString:@","] mutableCopy];
+		if (newOrder == nil || newOrder.count < self.functionArray.count) {
 			newOrder = [[NSMutableArray alloc] init];
-			int cnt = functionArray.count;
+			int cnt = self.functionArray.count;
 			for (int i = 0; i < cnt; i++) {
 				[newOrder addObject:[NSString stringWithFormat:@"%d", i]];
 			}
@@ -71,6 +80,14 @@
 		_functionOrder = [[NSArray alloc] initWithArray:newOrder];
 	}
 	return _functionOrder;
+}
+
+- (NSMutableDictionary *)nibsRegistered
+{
+	if (_nibsRegistered == nil) {
+		_nibsRegistered = [@{ @"CPLine1Button0Cell" : [NSNumber numberWithBool:NO], @"CPLine2Button0Cell" : [NSNumber numberWithBool:NO], @"CPLine2Button2Cell" : [NSNumber numberWithBool:NO], @"CPLine3Button0Cell" : [NSNumber numberWithBool:NO], @"CPLine3Button2Cell" : [NSNumber numberWithBool:NO] } mutableCopy];
+	}
+	return  _nibsRegistered;
 }
 
 #pragma mark - View Lifecycle
@@ -97,108 +114,22 @@
 	self.tableView.backgroundColor = tableBgColorGrouped;
 	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	self.title = TITLE_MAIN;
 	
 	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
 	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
 	[titleTextAttributes setObject:[UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0] forKey:UITextAttributeTextColor];
 	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
 	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
-	
-	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-	view.backgroundColor = [UIColor colorWithRed:227/255.0 green:225/255.0 blue:218/255.0 alpha:1.0];
-	
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"第w周 E M月d日";
-	self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, view.frame.size.height - 30, 280, 20)];
-	self.timeLabel.text = [formatter stringFromDate:[NSDate date]];
-	self.timeLabel.backgroundColor = [UIColor clearColor];
-	self.timeLabel.textColor = [UIColor whiteColor];
-	self.timeLabel.font = [UIFont boldSystemFontOfSize:14];
-	self.timeLabel.shadowColor = [UIColor blackColor];
-	self.timeLabel.shadowOffset = CGSizeMake(0, 0.5);
-	self.timeLabel.textAlignment = UITextAlignmentCenter;
-	
-	formatter.dateFormat = @"w";
-	UIView *timeFlies = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width * [[formatter stringFromDate:[NSDate date]] integerValue] / 52, view.frame.size.height)];
-	timeFlies.backgroundColor = [UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0];
-	
-	[self.tableView addSubview:view];
-	[view addSubview:timeFlies];
-	[view addSubview:self.timeLabel];
-	
-	NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-							 @"IP网关", @"name",
-							 @"its", @"image", 
-							 @"Line1Button0Identifier", @"identifier",
-							 @"CPLine1Button0Cell", @"nibname",
-							 nil];
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] != nil) {
-		itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								 @"IP网关", @"name",
-								 @"its", @"image",
-								 @"Line3Button2Identifier", @"identifier",
-								 @"CPLine3Button2Cell", @"nibname",
-								 nil];
-	}
-	
-	NSDictionary *coursesDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								 @"课程", @"name", 
-								 @"courses", @"image", 
-								 @"Line3Button0Identifier", @"identifier", 
-								 @"CPLine3Button0Cell", @"nibname",
-								 nil];
-	NSDictionary *roomsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-							   @"自习室", @"name", 
-							   @"rooms", @"image", 
-							   @"Line1Button0Identifier", @"identifier", 
-							   @"CPLine1Button0Cell", @"nibname",
-							   nil];
-//	NSDictionary *calendarDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-//								  @"校园黄页", @"name", 
-//								  @"calendar", @"image", 
-//								  @"Line1Button0Identifier", @"identifier", 
-//								  @"CPLine1Button0Cell", @"nibname",
-//								  nil];
-//	NSDictionary *feedbackDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-//								  @"反馈", @"name", 
-//								  @"feedback", @"image", 
-//								  @"Line1Button0Identifier", @"identifier",
-//								  @"CPLine1Button0Cell", @"nibname",
-//								  nil];
-//	NSDictionary *activityDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-//								  @"活动", @"name", 
-//								  @"Icon", @"image", 
-//								  @"Line2Button0Identifier", @"identifier", 
-//								  @"CPLine2Button0Cell", @"nibname",
-//								  nil];
-	NSDictionary *homeworkDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								  @"作业", @"name", 
-								  @"180-stickynote", @"image", 
-								  @"Line2Button2Identifier", @"identifier", 
-								  @"CPLine2Button2Cell", @"nibname",
-								  nil];
-	
-	functionArray =[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, /*calendarDict, feedbackDict, activityDict, */homeworkDict, nil];
-	
-	nibsRegistered = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-					  @"NO", @"CPLine1Button0Cell",
-					  @"NO", @"CPLine2Button0Cell",
-					  @"NO", @"CPLine2Button2Cell", 
-					  @"NO", @"CPLine3Button0Cell",
-					  @"NO", @"CPLine3Button2Cell", 
-					  nil];
+		
 //	self.connector = [[CPIPGateHelper alloc] init];
-	self.defaults = [NSUserDefaults standardUserDefaults];
-	self.title = TITLE_MAIN;
 	
+	[self setupTimeIndicator];
 	[self setupDatabaseForSync];
 }
 
 - (void)viewDidUnload
 {
-	[self setFunctionOrder:nil];
-	[self setFunctionArray:nil];
-	[self setNibsRegistered:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -209,28 +140,15 @@
 	[super viewWillAppear:animated];
 
 	if ([[[self.functionArray objectAtIndex:0] objectForKey:@"identifier"] isEqualToString:@"Line3Button2Identifier"] && [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] == nil) {
-		NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								 @"IP网关", @"name",
-								 @"its", @"image", 
-								 @"Line1Button0Identifier", @"identifier",
-								 @"CPLine1Button0Cell", @"nibname",
-								 nil];
-		[self.functionArray removeObjectAtIndex:0];
-		[self.functionArray insertObject:itsDict atIndex:0];
-		[self.tableView reloadData];
+		[[self.functionArray objectAtIndex:0] setObject:@"Line1Button0Identifier" forKey:@"identifier"];
+		[[self.functionArray objectAtIndex:0] setObject:@"CPLine1Button0Cell" forKey:@"nibname"];
 	} else if ([[[self.functionArray objectAtIndex:0] objectForKey:@"identifier"] isEqualToString:@"Line1Button0Identifier"] && [[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] != nil) {
-		NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								 @"IP网关", @"name",
-								 @"its", @"image", 
-								 @"Line3Button2Identifier", @"identifier",
-								 @"CPLine3Button2Cell", @"nibname",
-								 nil];
-		[self.functionArray removeObjectAtIndex:0];
-		[self.functionArray insertObject:itsDict atIndex:0];
-		[self.tableView reloadData];
+		[[self.functionArray objectAtIndex:0] setObject:@"Line3Button2Identifier" forKey:@"identifier"];
+		[[self.functionArray objectAtIndex:0] setObject:@"CPLine3Button2Cell" forKey:@"nibname"];
 	}
+	[self.tableView reloadData];
 //	self.connector.delegate = self;
-	if (itsCell) {
+	if (self.itsCell) {
 		[self changeDetailGateInfo:nil isConnecting:NO];
 	}
 }
@@ -262,7 +180,7 @@
 	} else if ([segue.identifier isEqualToString:@"DetailGateInfoSegue"]) {
 		CPDetailGateInfoViewController *dvc = segue.destinationViewController;
 		
-		self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+		self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[self.defaults objectForKey:_keyAccountState]];
 		
 		if ([[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
 			dvc.accountPackage = @"10元国内地址任意游";
@@ -323,13 +241,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUInteger row = [indexPath row];
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
-	NSString *identifier = [[functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
-	NSString *nibName = [[functionArray objectAtIndex:functionIndex] objectForKey:@"nibname"];
+	NSString *identifier = [[self.functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
+	NSString *nibName = [[self.functionArray objectAtIndex:functionIndex] objectForKey:@"nibname"];
 	
-	if ([[nibsRegistered objectForKey:nibName] isEqualToString:@"NO"]) {
+	if (![[self.nibsRegistered objectForKey:nibName] boolValue]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
 		[tableView registerNib:nib forCellReuseIdentifier:identifier];
-		[nibsRegistered setValue:@"YES" forKey:nibName];
+		[self.nibsRegistered setValue:[NSNumber numberWithBool:YES] forKey:nibName];
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
@@ -345,7 +263,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [functionArray count];
+	return [self.functionArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -353,15 +271,15 @@
 	
 	NSUInteger row = [indexPath row];
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
-	NSString *identifier = [[functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
-	NSString *nibName = [[functionArray objectAtIndex:functionIndex] objectForKey:@"nibname"];
-	NSString *name = [[functionArray objectAtIndex:functionIndex] objectForKey:@"name"];
+	NSString *identifier = [[self.functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
+	NSString *nibName = [[self.functionArray objectAtIndex:functionIndex] objectForKey:@"nibname"];
+	NSString *name = [[self.functionArray objectAtIndex:functionIndex] objectForKey:@"name"];
 //	NSString *image = [[functionArray objectAtIndex:functionIndex] objectForKey:@"image"];
 	
-	if ([[nibsRegistered objectForKey:nibName] isEqualToString:@"NO"]) {
+	if (![[self.nibsRegistered objectForKey:nibName] boolValue]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
 		[tableView registerNib:nib forCellReuseIdentifier:identifier];
-		[nibsRegistered setValue:@"YES" forKey:nibName];
+		[self.nibsRegistered setValue:[NSNumber numberWithBool:YES] forKey:nibName];
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if (nil == cell) {
@@ -382,7 +300,7 @@
 		((CPLine3Button0Cell*) cell).name = name;
 //		((CPLine3Button0Cell*) cell).image = image;
 	} else if ([nibName isEqualToString:@"CPLine3Button2Cell"]) {
-		itsCell = (CPLine3Button2Cell*) cell;
+		self.itsCell = (CPLine3Button2Cell*) cell;
 		((CPLine3Button2Cell*) cell).name = name;
 //		((CPLine3Button2Cell*) cell).image = image;
 		((CPLine3Button2Cell*) cell).delegate = self;
@@ -399,7 +317,7 @@
     // Navigation logic may go here. Create and push another view controller.
 	NSUInteger row = [indexPath row];
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
-	NSString *name = [[functionArray objectAtIndex:functionIndex] objectForKey:@"name"];
+	NSString *name = [[self.functionArray objectAtIndex:functionIndex] objectForKey:@"name"];
 	
 	if ([name isEqualToString:@"IP网关"]) {
 		if (self.nivc == nil) [self performSegueWithIdentifier:@"ItsEnterSegue" sender:self];
@@ -410,7 +328,6 @@
 	} else if ([name isEqualToString:@"课程"]) {
 		UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPCoursesFlow" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:[sb instantiateInitialViewController] animated:YES];
-//		[self performSegueWithIdentifier:@"CoursesEnterSegue" sender:self];
 	} else if ([name isEqualToString:@"自习室"]) {
 		if (self.nrvc == nil) [self performSegueWithIdentifier:@"RoomsEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.nrvc animated:YES];
@@ -431,17 +348,17 @@
     NSDate *dateUpdate = [NSDate date];
     NSString *stringUpdateStatus = [NSString stringWithFormat:@"更新于：%@",[formatter stringFromDate:dateUpdate]];
     
-	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[self.defaults objectForKey:_keyAccountState]];
     [self.gateStateDictionary setObject:stringUpdateStatus forKey:_keyIPGateUpdatedTime];
-	[defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
+	[self.defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
 	
-    numStatus = anumStatus;
+    self.numStatus = anumStatus;
 }
 
 - (void)changeProgressHub:(NSString *)title
 				isSuccess:(BOOL)bSuccess
 {
-	progressHub.animationType = MBProgressHUDAnimationZoom;
+	self.progressHub.animationType = MBProgressHUDAnimationZoom;
     self.progressHub.labelText = title;
     if (bSuccess) {
 		self.progressHub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alert-yes"]];
@@ -464,30 +381,30 @@
 - (void)changeDetailGateInfo:(NSString *)title 
 				isConnecting:(BOOL)bConnecting
 {
-	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[self.defaults objectForKey:_keyAccountState]];
 	
 	NSString *timeLeftString = [NSString stringWithFormat:@"（包月剩余：%@）",[self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] ? [self.gateStateDictionary objectForKey:_keyIPGateTimeLeft] : @"未知"];
 	NSString *balanceString = [self.gateStateDictionary objectForKey:_keyIPGateBalance] ? [NSString stringWithFormat:@"（账户余额：%@元）", [self.gateStateDictionary objectForKey:_keyIPGateBalance]] : @"（账户余额：未知）";
 	
 	if (![[self.gateStateDictionary objectForKey:_keyIPGateType] isEqualToString:@"NO"]) {
-		itsCell.detailStatusLabel.text = timeLeftString;
+		self.itsCell.detailStatusLabel.text = timeLeftString;
 	} else {
-		itsCell.detailStatusLabel.text = balanceString;
+		self.itsCell.detailStatusLabel.text = balanceString;
 	}
 	if (bConnecting) {
-		itsCell.statusLabel.text = @"已连接";
-		[itsCell.statusBackground setBackgroundColor:gateConnectingBtnColor]; 
+		self.itsCell.statusLabel.text = @"已连接";
+		[self.itsCell.statusBackground setBackgroundColor:gateConnectingBtnColor]; 
 	} else {
-		[itsCell.statusBackground setBackgroundColor:gateConnectedBtnColor];
+		[self.itsCell.statusBackground setBackgroundColor:gateConnectedBtnColor];
 	}
 	
 	if (self.numStatus == 0) {
-		itsCell.statusLabel.text = @"状态未知";
-		itsCell.detailStatusLabel.text = [NSString stringWithFormat:@"    %@", itsCell.detailStatusLabel.text];
+		self.itsCell.statusLabel.text = @"状态未知";
+		self.itsCell.detailStatusLabel.text = [NSString stringWithFormat:@"    %@", self.itsCell.detailStatusLabel.text];
 	} else if (self.numStatus == 1) {
-		itsCell.statusLabel.text = @"未连接";
+		self.itsCell.statusLabel.text = @"未连接";
 	} else if (self.numStatus >= 2) {
-		itsCell.statusLabel.text = @"已连接";
+		self.itsCell.statusLabel.text = @"已连接";
 	}
 }
 
@@ -521,7 +438,7 @@
 		[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
 		return ;
 	}
-	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[self.defaults objectForKey:_keyAccountState]];
 	if ([[self.gateStateDictionary objectForKey:_keyAutoDisconnect] boolValue]) {
 //		[self.connector disConnect];
 		_hasSilentCallback = YES;
@@ -539,7 +456,7 @@
 		[self performSegueWithIdentifier:@"ItsLoginSegue" sender:self];
 		return ;
 	}
-	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[self.defaults objectForKey:_keyAccountState]];
 	if ([[self.gateStateDictionary objectForKey:_keyAutoDisconnect] boolValue]) {
 //		[self.connector disConnect];
 		_hasSilentCallback = YES;
@@ -630,7 +547,7 @@
 }
 
 - (void)saveAccountState {
-	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:_keyAccountState]];
+	self.gateStateDictionary = [NSMutableDictionary dictionaryWithDictionary:[self.defaults objectForKey:_keyAccountState]];
 //	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictResult];
 //	[self.gateStateDictionary setValuesForKeysWithDictionary:self.connector.dictDetail];
     [self.defaults setObject:self.gateStateDictionary forKey:_keyAccountState];
@@ -642,8 +559,8 @@
     // Register the default value of the pref for the remote database URL to sync with:
     NSDictionary *appdefaults = [NSDictionary dictionaryWithObject:kSyncDbURLWithID(appUser.id)
                                                             forKey:@"syncpoint"];
-    [defaults registerDefaults:appdefaults];
-    [defaults synchronize];
+    [self.defaults registerDefaults:appdefaults];
+    [self.defaults synchronize];
 	NSURLCredential* cred;
 	cred = [NSURLCredential credentialWithUser: kSyncDbUsername
 									  password: kSyncDbPassword
@@ -668,13 +585,45 @@
 #endif
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)setupTimeIndicator
+{
+	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+	view.backgroundColor = [UIColor colorWithRed:227/255.0 green:225/255.0 blue:218/255.0 alpha:1.0];
+	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"第w周 E M月d日";
+	self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, view.frame.size.height - 30, 280, 20)];
+	self.timeLabel.text = [formatter stringFromDate:[NSDate date]];
+	self.timeLabel.backgroundColor = [UIColor clearColor];
+	self.timeLabel.textColor = [UIColor whiteColor];
+	self.timeLabel.font = [UIFont boldSystemFontOfSize:14];
+	self.timeLabel.shadowColor = [UIColor blackColor];
+	self.timeLabel.shadowOffset = CGSizeMake(0, 0.5);
+	self.timeLabel.textAlignment = UITextAlignmentCenter;
+	
+	formatter.dateFormat = @"w";
+	UIView *timeIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width * [[formatter stringFromDate:[NSDate date]] integerValue] / 52, view.frame.size.height)];
+	timeIndicator.backgroundColor = [UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0];
+	
+	[self.tableView addSubview:view];
+	[view addSubview:timeIndicator];
+	[view addSubview:self.timeLabel];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 	CGFloat scrollViewHeight = -scrollView.contentOffset.y;
 	CGFloat timeLabelY = [self.timeLabel superview].frame.size.height - 30;
 	if (scrollViewHeight > 40) {
 		self.timeLabel.frame = CGRectMake(20, timeLabelY - (scrollViewHeight - 40) / 2, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
 	}
+}
+
+- (IBAction)testDashboard:(id)sender
+{
+	[self performSegueWithIdentifier:@"DashboardSegue" sender:self];
 }
 
 @end

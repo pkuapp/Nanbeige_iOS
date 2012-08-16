@@ -10,7 +10,4 @@
 
 @interface CPLabelLeftDetailElement : QLabelElement
 
-@property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *valueLabel;
-
 @end

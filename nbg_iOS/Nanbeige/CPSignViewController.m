@@ -145,7 +145,7 @@
 			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 				[self loading:NO];
 				
-				[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"weibo:%@", self.weibo.userID] forKey:@"sync_db_username"];
+				[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
 				[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
                 
                 [User updateSharedAppUserProfile:collection];
@@ -159,7 +159,7 @@
 					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
 						[self loading:NO];
 					
-						[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"weibo:%@", self.weibo.userID] forKey:@"sync_db_username"];
+						[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
 						[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
 						
 						[User updateSharedAppUserProfile:collection];
@@ -232,40 +232,46 @@
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
 							  
-//								  [[Coffeepot shared] requestWithMethodPath:@"user/login/renren/" params:@{@"token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-//									  [self loading:NO];
-//									  
-//									  [User updateSharedAppUserProfile:collection];
+								  [[Coffeepot shared] requestWithMethodPath:@"user/login/renren/" params:@{@"token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+									  [self loading:NO];
+									  
+									  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
+									  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
+									  
+									  [User updateSharedAppUserProfile:collection];
 									  [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
-//
-//								  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-//									  [self loading:NO];
-//									  
-//									  if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
-//										  
-//										  [[Coffeepot shared] requestWithMethodPath:@"user/reg/renren/" params:@{@"token":self.renren.accessToken, @"nickname":[[result objectAtIndex:0] objectForKey:@"name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
-//											  [self loading:NO];
-//											  
-//											  [User updateSharedAppUserProfile:collection];
-//											  [self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
-//											  
-//											  
-//										  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
-//											  [self loading:NO];
-//											  if ([collection objectForKey:@"error"]) {
-//												  raise(-1);
-//											  }
-//										  }];
-//								  
-//										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-//										  [self loading:YES];
-//									  } else if ([collection objectForKey:@"error"]) {
-//										  [self showAlert:[collection objectForKey:@"error"]];
-//									  }
-//								  }];
-//								  
-//								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-//								  [self loading:YES];
+
+								  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+									  [self loading:NO];
+									  
+									  if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
+										  
+										  [[Coffeepot shared] requestWithMethodPath:@"user/reg/renren/" params:@{@"token":self.renren.accessToken, @"nickname":[[result objectAtIndex:0] objectForKey:@"name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+											  [self loading:NO];
+											  
+											  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
+											  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
+											  
+											  [User updateSharedAppUserProfile:collection];
+											  [self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
+											  
+											  
+										  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+											  [self loading:NO];
+											  if ([collection objectForKey:@"error"]) {
+												  raise(-1);
+											  }
+										  }];
+								  
+										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+										  [self loading:YES];
+									  } else if ([collection objectForKey:@"error"]) {
+										  [self showAlert:[collection objectForKey:@"error"]];
+									  }
+								  }];
+								  
+								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+								  [self loading:YES];
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {

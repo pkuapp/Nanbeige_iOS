@@ -19,7 +19,13 @@
                             <outlet property="delegate" destination="T7Q-qL-CHf" id="nx4-QA-wqJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="仪表盘" id="Ghq-hk-poq"/>
+                    <navigationItem key="navigationItem" title="仪表盘" id="Ghq-hk-poq">
+                        <barButtonItem key="rightBarButtonItem" title="测试" id="QMD-rF-C0e">
+                            <connections>
+                                <action selector="testDashboard:" destination="T7Q-qL-CHf" id="fmH-Fm-6PT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="Y3a-g9-RLQ" kind="push" identifier="ItsEnterSegue" id="bRx-DI-TvE"/>
                         <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentSegue" id="R2x-pA-P8y"/>
@@ -27,10 +33,31 @@
                         <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentWithCameraSegue" id="Yqn-fv-amI"/>
                         <segue destination="yil-Q7-q5m" kind="push" identifier="DetailGateInfoSegue" id="iBD-dN-4lH"/>
                         <segue destination="PRZ-eR-Bt6" kind="push" identifier="RoomsEnterSegue" id="nfF-gJ-ICc"/>
+                        <segue destination="bM9-CV-lnz" kind="push" identifier="DashboardSegue" id="oEV-y0-AS3"/>
                     </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1426" y="-1650"/>
+        </scene>
+        <!--Dashboard View Controller-->
+        <scene sceneID="WKp-at-k3T">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JGw-ae-2qi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="bM9-CV-lnz" customClass="CPDashboardViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kcI-Uw-Npr">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UFU-yj-Kou"/>
+                    <connections>
+                        <segue destination="R9G-nc-9ot" kind="push" identifier="AssignmentEnterSegue" id="M2A-jv-NdW"/>
+                        <segue destination="PRZ-eR-Bt6" kind="push" identifier="RoomsEnterSegue" id="G9S-eJ-tg0"/>
+                        <segue destination="ehN-NR-OG8" kind="push" identifier="CreateAssignmentSegue" id="i3w-8o-pRl"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1426" y="-2229"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KGt-Uk-zxi">
@@ -439,6 +466,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6c-91-qGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="ehN-NR-OG8" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="qmn-xf-ImM"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="e9Q-bc-bhf">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -455,7 +483,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ce-HP-s3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="lcF-gu-4RP" customClass="CPAssignmentDeadlineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAi-C7-ki4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="截止于所选这周的课堂上" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="VSB-aF-kCM">
@@ -547,7 +575,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Bd-cy-sDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zre-PQ-iW9" customClass="CPAssignmentCourseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="80L-b4-Scy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -562,7 +590,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4l-81-fss" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="XnQ-bK-izJ" customClass="CPAssignmentCreateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HSE-Dd-qJJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1034,7 +1062,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.90145985401459849" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="关于南北阁" id="Z6w-nu-iWN"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -1075,7 +1103,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.90145985401459849" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ago-rE-zId"/>
                 </viewController>
@@ -1109,101 +1137,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="38-house.png" width="18" height="17"/>
         <image name="Icon@2x.png" width="114" height="114"/>
     </resources>
-    <classes>
-        <class className="CPAccountManageViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAccountManageViewController.h"/>
-        </class>
-        <class className="CPAssignmentCourseViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentCourseViewController.h"/>
-        </class>
-        <class className="CPAssignmentCreateViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentCreateViewController.h"/>
-        </class>
-        <class className="CPAssignmentDeadlineViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentDeadlineViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onConfirm:"/>
-                <relationship kind="action" name="onModeChange:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="deadlinePicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="modeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="CPAssignmentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onAssignmentCompleteChanged:"/>
-                <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="CPChangeMainOrderViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPChangeMainOrderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onChangeButtonPressed:"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="CPDetailGateInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPDetailGateInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="CPFeedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPFeedViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="renrenPost:"/>
-                <relationship kind="action" name="weiboPost:"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CPMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPMainViewController.h"/>
-        </class>
-        <class className="CPPreferenceViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPPreferenceViewController.h"/>
-        </class>
-        <class className="CPRoomsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPRoomsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="CPTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTabBarController.h"/>
-        </class>
-        <class className="CPUniversitySelectViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPUniversitySelectViewController.h"/>
-        </class>
-        <class className="CPWeiboPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPWeiboPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="QuickDialogController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuickDialogController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Yqn-fv-amI"/>
         <segue reference="iBD-dN-4lH"/>
+        <segue reference="i3w-8o-pRl"/>
+        <segue reference="M2A-jv-NdW"/>
+        <segue reference="G9S-eJ-tg0"/>
     </inferredMetricsTieBreakers>
 </document>
