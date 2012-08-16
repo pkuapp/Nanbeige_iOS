@@ -7,7 +7,7 @@
 				 "title":"作业",
 				 "bind":"iterate:assignments",
 				 "elementTemplate": {
-				 "type":"CPLabelButtonElement",
+				 "type":"CPLabelMutipleLinesElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction"
 				 }
 				 },
@@ -15,7 +15,7 @@
 				 "title":"七嘴八舌",
 				 "bind":"iterate:comments",
 				 "elementTemplate": {
-				 "type":"CPLabelButtonElement",
+				 "type":"CPLabelMutipleLinesElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction"
 				 }
 				 }

@@ -46,7 +46,7 @@
 	
 	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
 	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:[UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0] forKey:UITextAttributeTextColor];
+	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
 	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
 	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 

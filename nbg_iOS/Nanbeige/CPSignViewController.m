@@ -66,6 +66,12 @@
 	// Do any additional setup after loading the view.
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
+	
+	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
+	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
+	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
+	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
+	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 }
 
 - (void)viewDidUnload

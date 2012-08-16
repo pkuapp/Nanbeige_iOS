@@ -58,6 +58,11 @@
 	self.navigationItem.leftBarButtonItem = closeButton;
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
+	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
+	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
+	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
+	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 
 	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/" params:nil requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		[self loading:NO];

@@ -118,7 +118,7 @@
 	
 	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
 	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:[UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0] forKey:UITextAttributeTextColor];
+	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
 	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
 	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 		
@@ -603,7 +603,7 @@
 	
 	formatter.dateFormat = @"w";
 	UIView *timeIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width * [[formatter stringFromDate:[NSDate date]] integerValue] / 52, view.frame.size.height)];
-	timeIndicator.backgroundColor = [UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0];
+	timeIndicator.backgroundColor = navBarTextColor1;
 	
 	[self.tableView addSubview:view];
 	[view addSubview:timeIndicator];

@@ -116,7 +116,7 @@
 	
 	formatter.dateFormat = @"w";
 	UIView *timeIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width * [[formatter stringFromDate:[NSDate date]] integerValue] / 52, view.frame.size.height)];
-	timeIndicator.backgroundColor = [UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0];
+	timeIndicator.backgroundColor = navBarTextColor1;
 	
 	[self.quickDialogTableView addSubview:view];
 	[view addSubview:timeIndicator];

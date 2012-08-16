@@ -14,6 +14,7 @@
 @optional
 
 - (void)didChangeIfShowTime:(BOOL)isShowTime;
+- (void)didDisplayCourse:(id)sender;
 
 @end
 

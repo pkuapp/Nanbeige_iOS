@@ -9,6 +9,7 @@
 #import "CPCourseViewController.h"
 #import "Coffeepot.h"
 #import "CPAssignmentViewController.h"
+#import "CPPostEntryElement.h"
 
 @interface CPCourseViewController () <QuickDialogEntryElementDelegate, UIAlertViewDelegate>
 
@@ -143,7 +144,7 @@
 	[self.root bindToObject:dict];
 
 	QSection *commentsSection = [[self.root sections] objectAtIndex:1];
-	QEntryElement *addCommentEntry = [[QEntryElement alloc] initWithTitle:nil Value:nil Placeholder:@"我说..."];
+	CPPostEntryElement *addCommentEntry = [[CPPostEntryElement alloc] initWithTitle:nil Value:nil Placeholder:@"我说..."];
 	[addCommentEntry setDelegate:self];
 	if ([commentsSection elements]) [[commentsSection elements] insertObject:addCommentEntry atIndex:0];
 	else [commentsSection addElement:addCommentEntry];

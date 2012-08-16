@@ -133,6 +133,7 @@
 #define tableBgColorGrouped [[UIColor alloc] initWithRed:240/255.0 green:239/255.0 blue:235/255.0 alpha:1.0]
 #define tableBgColorPlain [[UIColor alloc] initWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 #define navBarBgColor1 [[UIColor alloc] initWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0]
+#define navBarTextColor1 [UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0]
 #define tabBarBgColor1 [[UIColor alloc] initWithRed:40/255.0 green:60/255.0 blue:68/255.0 alpha:1.0]
 
 #define separatorColorNoCourseFooter [[UIColor alloc] initWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0]
@@ -226,6 +227,7 @@
 #define TIMETABLEHEIGHT 367
 #define TIMETABLEWIDTH 320
 #define TIMETABLELEFTPADDING 30
+#define TIMETABLERIGHTPADDING 100
 #define TIMETABLESEPARATORHEIGHT 1
 #define kSHOWTIME @"showtime"
 

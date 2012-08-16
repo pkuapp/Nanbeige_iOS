@@ -120,16 +120,22 @@
 			[self addSeparatorAtOffsetY:end * self.rowHeight + 3 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseShadow4];
 		}
 		
+		UIButton *courseButton = [[UIButton alloc] init];
+		courseButton.frame = CGRectMake(TIMETABLELEFTPADDING, (start - 1) * self.rowHeight, TIMETABLEWIDTH - TIMETABLELEFTPADDING - TIMETABLERIGHTPADDING, self.rowHeight * (end - start + 1));
+		[courseButton setTitle:[course objectForKey:@"courseDocumentID"] forState:UIControlStateHighlighted];
+		[courseButton setTitleColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+		[courseButton addTarget:self.delegate action:@selector(didDisplayCourse:) forControlEvents:UIControlStateHighlighted];
+		[self.timeTable addSubview:courseButton];
 		
 		UILabel *nameLabel = [[UILabel alloc] init];
-		nameLabel.frame = CGRectMake(TIMETABLELEFTPADDING, (start - 1) * self.rowHeight, TIMETABLEWIDTH - TIMETABLELEFTPADDING * 2, self.rowHeight);
+		nameLabel.frame = CGRectMake(TIMETABLELEFTPADDING, (start - 1) * self.rowHeight, TIMETABLEWIDTH - TIMETABLELEFTPADDING - TIMETABLERIGHTPADDING, self.rowHeight);
 		nameLabel.text = name;
 		nameLabel.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.0];
 		nameLabel.font = [UIFont boldSystemFontOfSize:17];
 		[self.timeTable addSubview:nameLabel];
 		
 		UILabel *locationLabel = [[UILabel alloc] init];
-		locationLabel.frame = CGRectMake(TIMETABLELEFTPADDING, start * self.rowHeight, TIMETABLEWIDTH - TIMETABLELEFTPADDING * 2, self.rowHeight);
+		locationLabel.frame = CGRectMake(TIMETABLELEFTPADDING, start * self.rowHeight, TIMETABLEWIDTH - TIMETABLELEFTPADDING - TIMETABLERIGHTPADDING, self.rowHeight);
 		locationLabel.text = location;
 		locationLabel.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.0];
 		locationLabel.font = [UIFont systemFontOfSize:13];
@@ -184,12 +190,13 @@
 				     @{@"start" : lesson.start,
 						 @"end" : lesson.end,
 						@"name" : course.name,
-					@"location" : lesson.location}];
+					@"location" : lesson.location,
+			@"courseDocumentID" : course.document.documentID}];
 			}
 		}
 	}
 	return [result sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-		if ([obj1 objectForKey:@"start"] < [obj2 objectForKey:@"start"]) return NSOrderedAscending;
+		if ([[obj1 objectForKey:@"start"] integerValue] < [[obj2 objectForKey:@"start"] integerValue]) return NSOrderedAscending;
 		return NSOrderedDescending;
 	}];
 }

@@ -9,10 +9,12 @@
 #import "CPCoursesTableViewController.h"
 #import "CPTimeTable.h"
 #import "Environment.h"
+#import "Models+addon.h"
 
 @interface CPCoursesTableViewController () <CPTimeTableDelegate> {
 	BOOL bViewDidLoad;
 	NSDate *today;
+	Course *courseSelected;
 }
 
 @end
@@ -194,6 +196,20 @@
 	if (pageIndex + 1 < self.paginatorView.numberOfPages) {
 		CPTimeTable *view = (CPTimeTable *)[self.paginatorView pageForIndex:pageIndex + 1];
 		[view.timeTable reloadData];
+	}
+}
+
+- (void)didDisplayCourse:(id)sender
+{
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([UIApplication sharedApplication].delegate) localDatabase];
+	courseSelected = [Course modelForDocument:[localDatabase documentWithID:[sender currentTitle]]];
+	[self performSegueWithIdentifier:@"CourseSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if ([segue.identifier isEqualToString:@"CourseSegue"]) {
+		[segue.destinationViewController setCourse:courseSelected];
 	}
 }
 

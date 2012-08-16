@@ -24,6 +24,12 @@
         self.navigationBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.navigationBar.tintColor = navBarBgColor1;
+		
+		NSMutableDictionary *titleTextAttributes = [self.navigationBar.titleTextAttributes mutableCopy];
+		if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
+		[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
+		[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
+		self.navigationBar.titleTextAttributes = titleTextAttributes;
         
         [self.view addSubview:self.navigationBar];
         
