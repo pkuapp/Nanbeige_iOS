@@ -10,7 +10,7 @@
 #import "CPTimeTable.h"
 #import "Environment.h"
 
-@interface CPCoursesTableViewController () {
+@interface CPCoursesTableViewController () <CPTimeTableDelegate> {
 	BOOL bViewDidLoad;
 	NSDate *today;
 }
@@ -19,6 +19,12 @@
 
 @implementation CPCoursesTableViewController
 @synthesize paginatorView = _paginatorView;
+
+- (SYPaginatorView *)paginatorView
+{
+	if (_paginatorView == nil) [self _initialize];
+	return _paginatorView;
+}
 
 #pragma mark - NSObject
 
@@ -39,8 +45,8 @@
 
 
 - (void)dealloc {
-	_paginatorView.dataSource = nil;
-	_paginatorView.delegate = nil;
+	self.paginatorView.dataSource = nil;
+	self.paginatorView.delegate = nil;
 }
 
 
@@ -63,11 +69,9 @@
 	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	self.view.BackgroundColor = tableBgColorGrouped;
 	
-	_paginatorView.frame = self.view.bounds;
-	_paginatorView.pageGapWidth = 0;
-//	_paginatorView.numberOfPagesToPreload = 0;
-//	[_paginatorView removePageControlFromSuperview];
-	[self.view addSubview:_paginatorView];
+	self.paginatorView.frame = self.view.bounds;
+	self.paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
+	[self.view addSubview:self.paginatorView];
 	
 	today = [NSDate date];
 	[self onTodayButtonPressed:nil];
@@ -83,11 +87,14 @@
 	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
 	
-	NSDate *day = [today dateByAddingTimeInterval:60*60*24*([_paginatorView currentPageIndex] - TIMETABLEPAGEINDEX)];
+	NSDate *day = [today dateByAddingTimeInterval:60*60*24*([self.paginatorView currentPageIndex] - TIMETABLEPAGEINDEX)];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"第w周 E M月d日";
 	NSString *dayDate = [formatter stringFromDate:day];
 	self.tabBarController.title = dayDate;
+	
+	CPTimeTable *currentPage = (CPTimeTable *)[self.paginatorView currentPage];
+	[currentPage refreshDisplay];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -121,7 +128,7 @@
 
 - (void)onTodayButtonPressed:(id)sender
 {
-	[_paginatorView setCurrentPageIndex:TIMETABLEPAGEINDEX animated:YES];
+	[self.paginatorView setCurrentPageIndex:TIMETABLEPAGEINDEX animated:YES];
 }
 
 #pragma mark - Private
@@ -148,6 +155,7 @@
 	if (!view) {
 		view = [[CPTimeTable alloc] initWithDate:[today dateByAddingTimeInterval:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)]];
 	}
+	view.delegate = self;
 	
 	return view;
 }
@@ -162,8 +170,29 @@
 	NSString *dayDate = [formatter stringFromDate:day];
 	self.tabBarController.title = dayDate;
 	
-	CPTimeTable *view = (CPTimeTable *)[paginatorView pageForIndex:pageIndex];
-	[view.timeTable reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+	if (pageIndex > 0) {
+		CPTimeTable *view = (CPTimeTable *)[paginatorView pageForIndex:pageIndex - 1];
+		[view refreshDisplay];
+	}
+	if (pageIndex + 1 < paginatorView.numberOfPages) {
+		CPTimeTable *view = (CPTimeTable *)[paginatorView pageForIndex:pageIndex + 1];
+		[view refreshDisplay];
+	}
+}
+
+#pragma mark - CPTimeTableDelegate
+
+- (void)didChangeIfShowTime:(BOOL)isShowTime
+{
+	NSInteger pageIndex = [self.paginatorView currentPageIndex];
+	if (pageIndex > 0) {
+		CPTimeTable *view = (CPTimeTable *)[self.paginatorView pageForIndex:pageIndex - 1];
+		[view.timeTable reloadData];
+	}
+	if (pageIndex + 1 < self.paginatorView.numberOfPages) {
+		CPTimeTable *view = (CPTimeTable *)[self.paginatorView pageForIndex:pageIndex + 1];
+		[view.timeTable reloadData];
+	}
 }
 
 @end
