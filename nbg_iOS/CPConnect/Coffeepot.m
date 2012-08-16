@@ -11,7 +11,7 @@
 #import "Models+addon.h"
 
 
-static NSString *pURLPrefix = @"http://127.0.0.1:8000/";
+static NSString *pURLPrefix = @"http://api.pkuapp.com:333/";
 static NSString *kCPSession = @"com.pkuapp:session";
 static NSString *kCPSessionExpiredDate = @"com.pkuapp:session_expired_date";
 

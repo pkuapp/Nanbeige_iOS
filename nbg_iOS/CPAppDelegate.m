@@ -57,13 +57,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    [[Coffeepot shared] requestWithMethodPath:@"" params:nil requestMethod:@"GET" success:^(CPRequest *request, id collection) {
-            
-    } error:^(CPRequest *request,id collection, NSError *error) {
-        NSLog(@"%@", error.userInfo);
-    }];
-    
-    
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"nbg_iOS"];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
