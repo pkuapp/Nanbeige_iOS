@@ -157,10 +157,10 @@
                 [User updateSharedAppUserProfile:collection];
                 [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
                 
-            } error:^(CPRequest *_req, id collection, NSError *error) {
+            } error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
 				
-				if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
+				if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
                     
 					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
 						[self loading:NO];
@@ -171,18 +171,15 @@
 						[User updateSharedAppUserProfile:collection];
 						[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 						
-					} error:^(CPRequest *_req, id collection, NSError *error) {
+					} error:^(CPRequest *request, NSError *error) {
 						[self loading:NO];
-						if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-							[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-						if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-							[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+						[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 					}];
 					
 					[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 					[self loading:YES];
-                } else if ([collection objectForKey:@"error"]) {
-					[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
+                } else {
+					[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 				}
             }];
 			
@@ -247,10 +244,10 @@
 									  [User updateSharedAppUserProfile:collection];
 									  [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 
-								  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+								  } error:^(CPRequest *request, NSError *error) {
 									  [self loading:NO];
 									  
-									  if ([[collection objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
+									  if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
 										  
 										  [[Coffeepot shared] requestWithMethodPath:@"user/reg/renren/" params:@{@"token":self.renren.accessToken, @"nickname":[[result objectAtIndex:0] objectForKey:@"name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
 											  [self loading:NO];
@@ -262,17 +259,15 @@
 											  [self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 											  
 											  
-										  } error:^(CPRequest *_req,NSDictionary *collection, NSError *error) {
+										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
-											  if ([collection objectForKey:@"error"]) {
-												  raise(-1);
-											  }
+											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 										  }];
 								  
 										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 										  [self loading:YES];
-									  } else if ([collection objectForKey:@"error"]) {
-										  [self showAlert:[collection objectForKey:@"error"]];
+									  } else {
+										  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 									  }
 								  }];
 								  

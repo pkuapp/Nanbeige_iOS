@@ -234,11 +234,8 @@
 		[self.rooms addObject:collection];
 		[self syncNextRooms];
 		
-	} error:^(CPRequest *_req, id collection, NSError *error) {
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+	} error:^(CPRequest *request, NSError *error) {
+		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 	}];
 }
 
@@ -292,11 +289,8 @@
 		buildingIndex = 0;
 		[self syncNextRooms];
 		
-	} error:^(CPRequest *_req, id collection, NSError *error) {
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+	} error:^(CPRequest *request, NSError *error) {
+		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 	}];
 }
 

@@ -90,12 +90,9 @@
 		[self.root bindToObject:dict];
 		[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
 		
-	} error:^(CPRequest *_req, id collection, NSError *error) {
+	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 	}];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -170,12 +167,9 @@
 					else [self dismissModalViewControllerAnimated:YES];
 				}];
 				
-			} error:^(CPRequest *_req, id collection, NSError *error) {
+			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
-				if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-					[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-				if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-					[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 			}];
 			
 			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -185,12 +179,9 @@
 			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 		}
 		
-	} error:^(CPRequest *_req, id collection, NSError *error) {
+	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];

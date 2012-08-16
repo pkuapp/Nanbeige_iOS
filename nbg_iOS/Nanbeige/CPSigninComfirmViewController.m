@@ -188,12 +188,9 @@
 			}
 		}];
 		
-	} error:^(CPRequest *_req, id collection, NSError *error) {
+	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-			[self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-		if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-			[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -221,12 +218,9 @@
 											  
 											  [self refreshDataSource];
 											  
-										  } error:^(CPRequest *_req, id collection, NSError *error) {
+										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
-											  if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-												  [self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-											  if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-												  [self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 										  }];
 										  
 										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -266,12 +260,9 @@
 									  
 									  [self refreshDataSource];
 
-								  } error:^(CPRequest *_req, id collection, NSError *error) {
+								  } error:^(CPRequest *request, NSError *error) {
 									  [self loading:NO];
-									  if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error"])
-										  [self showAlert:[collection objectForKey:@"error"]];//raise(-1);
-									  if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
-										  [self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
+									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 								  }];
 
 								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
