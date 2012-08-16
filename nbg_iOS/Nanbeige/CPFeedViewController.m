@@ -41,13 +41,19 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.tableView.backgroundColor = tableBgColor3;
+	self.tableView.backgroundColor = tableBgColorPlain;
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	
+	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
+	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
+	[titleTextAttributes setObject:[UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0] forKey:UITextAttributeTextColor];
+	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
+	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
 		view.delegate = self;
-		[view setBackgroundColor:tableBgColor1];
+		[view setBackgroundColor:tableBgColorPlain];
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
 	}

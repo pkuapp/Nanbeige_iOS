@@ -61,10 +61,10 @@
 	// Do any additional setup after loading the view.
 	
 	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
-	self.view.BackgroundColor = tableBgColor2;
+	self.view.BackgroundColor = tableBgColorGrouped;
 	
 	_paginatorView.frame = self.view.bounds;
-	_paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
+	_paginatorView.pageGapWidth = 0;
 //	_paginatorView.numberOfPagesToPreload = 0;
 //	[_paginatorView removePageControlFromSuperview];
 	[self.view addSubview:_paginatorView];

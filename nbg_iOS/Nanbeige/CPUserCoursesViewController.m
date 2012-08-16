@@ -48,11 +48,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	self.tableView.backgroundColor = tableBgColorPlain;
 	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
 		view.delegate = self;
-		[view setBackgroundColor:tableBgColor1];
+		[view setBackgroundColor:tableBgColorPlain];
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
 	}
@@ -68,7 +69,6 @@
 	
 	self.tabBarController.navigationItem.rightBarButtonItem = nil;
 	self.tabBarController.title = TITLE_SELECTED_COURSE;
-	self.tableView.backgroundColor = tableBgColor3;
 }
 
 - (void)viewDidUnload

@@ -48,14 +48,11 @@
 	cell.detailTextLabel.text = nil;
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
-	UIView *separator = [[UIView alloc] init];
-	separator.backgroundColor = separatorColor3;
-	separator.frame = CGRectMake(0, cell.contentView.frame.size.height-TIMETABLESEPARATORHEIGHT, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-	[cell.contentView addSubview:separator];
-	separator = [[UIView alloc] init];
-	separator.backgroundColor = separatorColor4;
-	separator.frame = CGRectMake(0, 0, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-	[cell.contentView addSubview:separator];
+	[self addSeparatorAtView:cell.contentView OffsetY:0 WithColor:separatorColorTitleNoContentHeader1];
+	[self addSeparatorAtView:cell.contentView OffsetY:TIMETABLESEPARATORHEIGHT WithColor:separatorColorTitleNoContentHeader2];
+	if ([self numberOfRow] == 1)
+	[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - TIMETABLESEPARATORHEIGHT WithColor:separatorColorTitleNoContentFooter];
+	else [self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - TIMETABLESEPARATORHEIGHT WithColor:separatorColorTitleHasContentFooter];
 	
 	return cell;
 }
@@ -65,44 +62,41 @@
 	UITableViewCell *cell = [super contentCellForRow:row];
 	cell.accessoryType = UITableViewCellAccessoryNone;
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	cell.textLabel.shadowColor = separatorColor5;
+	cell.textLabel.shadowColor = [UIColor whiteColor];
 	cell.textLabel.shadowOffset = CGSizeMake(0, 1);
-	cell.textLabel.textColor = [UIColor whiteColor];
+	cell.textLabel.textColor = [UIColor colorWithRed:120/255.0 green:116/255.0 blue:100/255.0 alpha:1.0];
 	cell.textLabel.backgroundColor = [UIColor clearColor];
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-	cell.contentView.backgroundColor = tableBgColor4;
+	cell.contentView.backgroundColor = tableBgColorGrouped;
 	
-	UIView *separator = [[UIView alloc] init];
-	separator.backgroundColor = separatorColor5;
-	separator.frame = CGRectMake(0, cell.contentView.frame.size.height-TIMETABLESEPARATORHEIGHT, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-	[cell.contentView addSubview:separator];
-	
-	if (row > 0) {
-		separator = [[UIView alloc] init];
-		separator.backgroundColor = separatorColor6;
-		separator.frame = CGRectMake(0, 0, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-		[cell.contentView addSubview:separator];
+	if (row == 0) {
+		[self addSeparatorAtView:cell.contentView OffsetY:0 WithColor:separatorColorContentHeader1];
+		[self addSeparatorAtView:cell.contentView OffsetY:TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentHeader2];
+		[self addSeparatorAtView:cell.contentView OffsetY:2*TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentHeader3];
 	} else {
-		separator = [[UIView alloc] init];
-		separator.backgroundColor = [UIColor colorWithRed:145/255.0 green:145/255.0 blue:145/255.0 alpha:1.0];
-		separator.frame = CGRectMake(0, 0, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-		[cell.contentView addSubview:separator];
-		separator = [[UIView alloc] init];
-		separator.backgroundColor = [UIColor colorWithRed:133/255.0 green:133/255.0 blue:133/255.0 alpha:1.0];
-		separator.frame = CGRectMake(0, TIMETABLESEPARATORHEIGHT, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-		[cell.contentView addSubview:separator];
-		separator = [[UIView alloc] init];
-		separator.backgroundColor = [UIColor colorWithRed:143/255.0 green:143/255.0 blue:143/255.0 alpha:1.0];
-		separator.frame = CGRectMake(0, TIMETABLESEPARATORHEIGHT * 2, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-		[cell.contentView addSubview:separator];
-		separator = [[UIView alloc] init];
-		separator.backgroundColor = [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1.0];
-		separator.frame = CGRectMake(0, TIMETABLESEPARATORHEIGHT * 3, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-		[cell.contentView addSubview:separator];
-		
+		[self addSeparatorAtView:cell.contentView OffsetY:0 WithColor:separatorColorContentMiddleHeader];
+	}
+	
+	if (row == [self contentNumberOfRow] - 1) {
+		[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - 2 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentFooter1];
+		[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentFooter2];
+//		[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height WithColor:separatorColorTitleHasContentHeader];
+	} else {
+		[self addSeparatorAtView:cell.contentView OffsetY:cell.contentView.frame.size.height - TIMETABLESEPARATORHEIGHT WithColor:separatorColorContentMiddleFooter];
 	}
 	
 	return cell;
+}
+
+- (UIView *)addSeparatorAtView:(UIView *)view
+					   OffsetY:(CGFloat)y
+						WithColor:(UIColor *)color
+{
+	UIView *separator = [[UIView alloc] init];
+	separator.backgroundColor = color;
+	separator.frame = CGRectMake(0, y, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
+	[view addSubview:separator];
+	return separator;
 }
 
 - (void)dealloc {

@@ -133,20 +133,37 @@
 	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     
 	CouchDesignDocument *_design = [self.database designDocumentWithName: @"assignment"];
-    [_design defineViewNamed: @"notcomplete" mapBlock: MAPBLOCK({
-		NSString *type = [doc objectForKey:@"doc_type"];
-        NSNumber *finished = [doc objectForKey: @"finished"];
-		NSString *due = [doc objectForKey: @"due"];
-        if ([type isEqualToString:@"assignment"] && ![finished boolValue]) emit(due, doc);
-    }) version: @"1.0"];
-	
     CouchDesignDocument *_completeDesign = [self.database designDocumentWithName: @"completeAssignment"];
-    [_completeDesign defineViewNamed: @"complete" mapBlock: MAPBLOCK({
-		NSString *type = [doc objectForKey:@"doc_type"];
-        NSNumber *finished = [doc objectForKey: @"finished"];
-		NSString *due = [doc objectForKey: @"due"];
-        if ([type isEqualToString:@"assignment"] && [finished boolValue]) emit(due, doc);
-    }) version: @"1.0"];
+    if (self.courseIdFilter) {
+		[_design defineViewNamed: @"notcomplete" mapBlock: MAPBLOCK({
+			NSString *type = [doc objectForKey:@"doc_type"];
+			NSNumber *finished = [doc objectForKey: @"finished"];
+			NSString *due = [doc objectForKey: @"due"];
+			NSNumber *course_id = [doc objectForKey:@"course_id"];
+			if ([type isEqualToString:@"assignment"] && [course_id isEqualToNumber:self.courseIdFilter] && ![finished boolValue]) emit(due, doc);
+		}) version: @"1.0"];
+		[_completeDesign defineViewNamed: @"complete" mapBlock: MAPBLOCK({
+			NSString *type = [doc objectForKey:@"doc_type"];
+			NSNumber *finished = [doc objectForKey: @"finished"];
+			NSString *due = [doc objectForKey: @"due"];
+			NSNumber *course_id = [doc objectForKey:@"course_id"];
+			if ([type isEqualToString:@"assignment"] && [course_id isEqualToNumber:self.courseIdFilter] && [finished boolValue]) emit(due, doc);
+		}) version: @"1.0"];
+	} else {
+		[_design defineViewNamed: @"notcomplete" mapBlock: MAPBLOCK({
+			NSString *type = [doc objectForKey:@"doc_type"];
+			NSNumber *finished = [doc objectForKey: @"finished"];
+			NSString *due = [doc objectForKey: @"due"];
+			if ([type isEqualToString:@"assignment"] && ![finished boolValue]) emit(due, doc);
+		}) version: @"1.0"];
+		[_completeDesign defineViewNamed: @"complete" mapBlock: MAPBLOCK({
+			NSString *type = [doc objectForKey:@"doc_type"];
+			NSNumber *finished = [doc objectForKey: @"finished"];
+			NSString *due = [doc objectForKey: @"due"];
+			if ([type isEqualToString:@"assignment"] && [finished boolValue]) emit(due, doc);
+		}) version: @"1.0"];
+	}
+	
 
 	// Create a query sorted by descending date, i.e. newest items first:
     NSAssert(self.database!=nil, @"Not hooked up to database yet");
@@ -161,6 +178,10 @@
 	[_completeQuery start];
 	
 	[self updateSyncURL];
+	if (self.bInitShowComplete) {
+		self.completeSegmentedControl.selectedSegmentIndex = COMPLETE;
+		[self onAssignmentCompleteChanged:self.completeSegmentedControl];
+	}
 }
 
 - (void)updateSyncURL {

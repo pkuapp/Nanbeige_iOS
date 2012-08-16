@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *completeAssignmentsTableView;
 @property (strong, nonatomic) CouchDatabase *database;
 
+@property (strong, nonatomic) NSNumber *courseIdFilter;
+@property (assign, nonatomic) BOOL bInitShowComplete;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *completeSegmentedControl;
 - (IBAction)onAssignmentCompleteChanged:(id)sender;
 

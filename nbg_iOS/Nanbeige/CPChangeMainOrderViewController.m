@@ -42,13 +42,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-	UINavigationController *nc = [self.tabBarController.childViewControllers objectAtIndex:0];
+	UINavigationController *nc = [self.tabBarController.childViewControllers objectAtIndex:1];
 	CPMainViewController *nmvc = (CPMainViewController *)(nc.topViewController);
 	[nmvc.functionArray indexOfObject:0];
 	functionArray = [[NSArray alloc] initWithArray:nmvc.functionArray];
 	functionOrder = [[NSArray alloc] initWithArray:nmvc.functionOrder];
 	
-	self.tableView.backgroundColor = tableBgColor2;
+	self.tableView.backgroundColor = tableBgColorPlain;
 	[self.tableView setEditing:!self.tableView.editing animated:YES];
 	
 	oldorderStr = [[NSUserDefaults standardUserDefaults] valueForKey:kMAINORDERKEY];

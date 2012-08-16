@@ -41,5 +41,4 @@
 @property (strong, nonatomic) CPAssignmentViewController *navc;
 @property (strong, nonatomic) CPRoomsViewController *nrvc;
 
-- (IBAction)calendarButtonPressed:(id)sender;
 @end

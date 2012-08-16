@@ -8,6 +8,7 @@
 
 #import "CPCourseViewController.h"
 #import "Coffeepot.h"
+#import "CPAssignmentViewController.h"
 
 @interface CPCourseViewController () <QuickDialogEntryElementDelegate, UIAlertViewDelegate>
 
@@ -21,7 +22,7 @@
     [super setQuickDialogTableView:aQuickDialogTableView];
 	self.quickDialogTableView.bounces = YES;
     self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColor1;
+    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 	self.quickDialogTableView.delegate = self;
 }
@@ -45,7 +46,7 @@
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.quickDialogTableView.bounds.size.height, self.view.frame.size.width, self.quickDialogTableView.bounds.size.height)];
 		view.delegate = self;
-		[view setBackgroundColor:tableBgColor1];
+		[view setBackgroundColor:tableBgColorGrouped];
 		[self.quickDialogTableView addSubview:view];
 		_refreshHeaderView = view;
 	}
@@ -58,8 +59,6 @@
 	for (NSDictionary *commentDict in [[doc properties] objectForKey:@"value"]) {
 		[self.comments addObject:@{ @"title" : [NSString stringWithFormat:@"%@：%@", [commentDict objectForKey:@"writer"], [commentDict objectForKey:@"content"]] } ];
 	}
-	
-	self.assignments = [@[ @{ @"title" : @"已完成的作业...", @"controllerAction" : @"onDisplayCompleteAssignments:"} ] mutableCopy];
 	
 	[self setupCourseDetail];
 }
@@ -100,7 +99,7 @@
 {
 	UIButton *courseDetailView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 105)];
 	[courseDetailView addTarget:self action:@selector(onDisplayCourseDetail:) forControlEvents:UIControlStateHighlighted];
-	courseDetailView.backgroundColor = tableBgColor3;
+	courseDetailView.backgroundColor = tableBgColorPlain;
 	
 	UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 65, 65)];
 	imageView.image = [UIImage imageNamed:@"Icon"];
@@ -142,8 +141,6 @@
 	
 	NSDictionary *dict = @{ @"assignments" : self.assignments, @"comments" : self.comments };
 	[self.root bindToObject:dict];
-	
-	//[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)] withRowAnimation:UITableViewRowAnimationFade];
 
 	QSection *commentsSection = [[self.root sections] objectAtIndex:1];
 	QEntryElement *addCommentEntry = [[QEntryElement alloc] initWithTitle:nil Value:nil Placeholder:@"我说..."];
@@ -178,20 +175,25 @@
 			if ([collection isKindOfClass:[NSDictionary class]] && [collection objectForKey:@"error_code"])
 				[self showAlert:[collection objectForKey:@"error_code"]];//raise(-1);
 		}];
+		
+		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+		[self loading:YES];
 	}
-	
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
 }
 
 - (void)onDisplayCompleteAssignments:(id)sender
 {
-	
+	NSLog(@"%@", sender);
+	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+	CPAssignmentViewController *avc = [sb instantiateViewControllerWithIdentifier:@"AssignmentListIdentifier"];
+	avc.courseIdFilter = self.course.id;
+	avc.bInitShowComplete = YES;
+	[self.navigationController pushViewController:avc animated:YES];
 }
 
 - (void)QEntryDidEndEditingElement:(QEntryElement *)element andCell:(QEntryTableViewCell *)cell
 {
-	NSLog(@"%@", element.textValue);
+	if (!element.textValue.length) return ;
 	UIAlertView *postAlert = [[UIAlertView alloc] initWithTitle:@"确认发送" message:element.textValue delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
 	[postAlert show];
 }

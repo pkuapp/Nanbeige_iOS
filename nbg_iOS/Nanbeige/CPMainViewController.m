@@ -16,10 +16,12 @@
 #import "CPAssignmentCreateViewController.h"
 #import "Models+addon.h"
 
-@interface CPMainViewController () {
+@interface CPMainViewController () <UIScrollViewDelegate> {
     BOOL _autoDisconnect;
     BOOL _hasSilentCallback;
 }
+
+@property (strong, nonatomic) UILabel *timeLabel;
 
 @end
 
@@ -92,9 +94,37 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.tableView.backgroundColor = tableBgColor1;
+	self.tableView.backgroundColor = tableBgColorGrouped;
 	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	
+	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
+	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
+	[titleTextAttributes setObject:[UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0] forKey:UITextAttributeTextColor];
+	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
+	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
+	
+	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+	view.backgroundColor = [UIColor colorWithRed:227/255.0 green:225/255.0 blue:218/255.0 alpha:1.0];
+	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"第w周 E M月d日";
+	self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, view.frame.size.height - 30, 280, 20)];
+	self.timeLabel.text = [formatter stringFromDate:[NSDate date]];
+	self.timeLabel.backgroundColor = [UIColor clearColor];
+	self.timeLabel.textColor = [UIColor whiteColor];
+	self.timeLabel.font = [UIFont boldSystemFontOfSize:14];
+	self.timeLabel.shadowColor = [UIColor blackColor];
+	self.timeLabel.shadowOffset = CGSizeMake(0, 0.5);
+	self.timeLabel.textAlignment = UITextAlignmentCenter;
+	
+	formatter.dateFormat = @"w";
+	UIView *timeFlies = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width * [[formatter stringFromDate:[NSDate date]] integerValue] / 52, view.frame.size.height)];
+	timeFlies.backgroundColor = [UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0];
+	
+	[self.tableView addSubview:view];
+	[view addSubview:timeFlies];
+	[view addSubview:self.timeLabel];
 	
 	NSDictionary *itsDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 							 @"IP网关", @"name",
@@ -123,24 +153,24 @@
 							   @"Line1Button0Identifier", @"identifier", 
 							   @"CPLine1Button0Cell", @"nibname",
 							   nil];
-	NSDictionary *calendarDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								  @"校园黄页", @"name", 
-								  @"calendar", @"image", 
-								  @"Line1Button0Identifier", @"identifier", 
-								  @"CPLine1Button0Cell", @"nibname",
-								  nil];
-	NSDictionary *feedbackDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								  @"反馈", @"name", 
-								  @"feedback", @"image", 
-								  @"Line1Button0Identifier", @"identifier",
-								  @"CPLine1Button0Cell", @"nibname",
-								  nil];
-	NSDictionary *activityDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								  @"活动", @"name", 
-								  @"Icon", @"image", 
-								  @"Line2Button0Identifier", @"identifier", 
-								  @"CPLine2Button0Cell", @"nibname",
-								  nil];
+//	NSDictionary *calendarDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+//								  @"校园黄页", @"name", 
+//								  @"calendar", @"image", 
+//								  @"Line1Button0Identifier", @"identifier", 
+//								  @"CPLine1Button0Cell", @"nibname",
+//								  nil];
+//	NSDictionary *feedbackDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+//								  @"反馈", @"name", 
+//								  @"feedback", @"image", 
+//								  @"Line1Button0Identifier", @"identifier",
+//								  @"CPLine1Button0Cell", @"nibname",
+//								  nil];
+//	NSDictionary *activityDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+//								  @"活动", @"name", 
+//								  @"Icon", @"image", 
+//								  @"Line2Button0Identifier", @"identifier", 
+//								  @"CPLine2Button0Cell", @"nibname",
+//								  nil];
 	NSDictionary *homeworkDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								  @"作业", @"name", 
 								  @"180-stickynote", @"image", 
@@ -148,7 +178,7 @@
 								  @"CPLine2Button2Cell", @"nibname",
 								  nil];
 	
-	functionArray =[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, calendarDict, feedbackDict, activityDict, homeworkDict, nil];
+	functionArray =[[NSMutableArray alloc] initWithObjects:itsDict, coursesDict, roomsDict, /*calendarDict, feedbackDict, activityDict, */homeworkDict, nil];
 	
 	nibsRegistered = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 					  @"NO", @"CPLine1Button0Cell",
@@ -288,12 +318,6 @@
 	[alertView show];
 }
 
-#pragma mark - Button controllerAction
-
-- (IBAction)calendarButtonPressed:(id)sender {
-	[self showAlert:@"日历功能正在制作中，敬请期待！"];
-}
-
 #pragma mark - Table View Attributes Methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -332,7 +356,7 @@
 	NSString *identifier = [[functionArray objectAtIndex:functionIndex] objectForKey:@"identifier"];
 	NSString *nibName = [[functionArray objectAtIndex:functionIndex] objectForKey:@"nibname"];
 	NSString *name = [[functionArray objectAtIndex:functionIndex] objectForKey:@"name"];
-	NSString *image = [[functionArray objectAtIndex:functionIndex] objectForKey:@"image"];
+//	NSString *image = [[functionArray objectAtIndex:functionIndex] objectForKey:@"image"];
 	
 	if ([[nibsRegistered objectForKey:nibName] isEqualToString:@"NO"]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
@@ -346,21 +370,21 @@
 	
 	if ([nibName isEqualToString:@"CPLine1Button0Cell"]) {
 		((CPLine1Button0Cell *) cell).name = name;
-		((CPLine1Button0Cell *) cell).image = image;
+//		((CPLine1Button0Cell *) cell).image = image;
 	} else if ([nibName isEqualToString:@"CPLine2Button0Cell"]) {
 		((CPLine2Button0Cell *) cell).name = name;
-		((CPLine2Button0Cell *) cell).image = image;
+//		((CPLine2Button0Cell *) cell).image = image;
 	} else if ([nibName isEqualToString:@"CPLine2Button2Cell"]) {
 		((CPLine2Button2Cell *) cell).name = name;
-		((CPLine2Button2Cell *) cell).image = image;
+//		((CPLine2Button2Cell *) cell).image = image;
 		((CPLine2Button2Cell *) cell).delegate = self;
 	} else if ([nibName isEqualToString:@"CPLine3Button0Cell"]) {
 		((CPLine3Button0Cell*) cell).name = name;
-		((CPLine3Button0Cell*) cell).image = image;
+//		((CPLine3Button0Cell*) cell).image = image;
 	} else if ([nibName isEqualToString:@"CPLine3Button2Cell"]) {
 		itsCell = (CPLine3Button2Cell*) cell;
 		((CPLine3Button2Cell*) cell).name = name;
-		((CPLine3Button2Cell*) cell).image = image;
+//		((CPLine3Button2Cell*) cell).image = image;
 		((CPLine3Button2Cell*) cell).delegate = self;
 		[self changeDetailGateInfo:nil isConnecting:NO];
 	}
@@ -375,20 +399,22 @@
     // Navigation logic may go here. Create and push another view controller.
 	NSUInteger row = [indexPath row];
 	NSUInteger functionIndex = [(NSString *)([self.functionOrder objectAtIndex:row]) integerValue];
-	if (functionIndex == 0) {
+	NSString *name = [[functionArray objectAtIndex:functionIndex] objectForKey:@"name"];
+	
+	if ([name isEqualToString:@"IP网关"]) {
 		if (self.nivc == nil) [self performSegueWithIdentifier:@"ItsEnterSegue" sender:self];
 		else {
 //			self.connector.delegate = self.nivc;
 			[self.navigationController pushViewController:self.nivc animated:YES];
 		}
-	} else if (functionIndex == 1) {
+	} else if ([name isEqualToString:@"课程"]) {
 		UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPCoursesFlow" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:[sb instantiateInitialViewController] animated:YES];
 //		[self performSegueWithIdentifier:@"CoursesEnterSegue" sender:self];
-	} else if (functionIndex == 2) {
+	} else if ([name isEqualToString:@"自习室"]) {
 		if (self.nrvc == nil) [self performSegueWithIdentifier:@"RoomsEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.nrvc animated:YES];
-	} else if (functionIndex == 6) {
+	} else if ([name isEqualToString:@"作业"]) {
 		if (self.navc == nil) [self performSegueWithIdentifier:@"AssignmentEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.navc animated:YES];
 	} else {
@@ -640,6 +666,15 @@
         [self showAlert:[error localizedFailureReason]];
     }
 #endif
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	CGFloat scrollViewHeight = -scrollView.contentOffset.y;
+	CGFloat timeLabelY = [self.timeLabel superview].frame.size.height - 30;
+	if (scrollViewHeight > 40) {
+		self.timeLabel.frame = CGRectMake(20, timeLabelY - (scrollViewHeight - 40) / 2, self.timeLabel.frame.size.width, self.timeLabel.frame.size.height);
+	}
 }
 
 @end

@@ -20,7 +20,7 @@
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColor1;
+    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
     self.quickDialogTableView.bounces = NO;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
@@ -50,6 +50,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	
+	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
+	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
+	[titleTextAttributes setObject:[UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0] forKey:UITextAttributeTextColor];
+	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
+	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 }
 
 - (void)viewDidUnload

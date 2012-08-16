@@ -24,7 +24,7 @@
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColor1;
+    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 

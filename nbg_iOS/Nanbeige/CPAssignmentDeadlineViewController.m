@@ -32,6 +32,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
+	self.view.backgroundColor = tableBgColorGrouped;
+	
 	if ([self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
 		[self.modeSegmentedControl setSelectedSegmentIndex:0];
 		[self.deadlinePicker selectRow:[self.weeksData indexOfObject:self.assignment.due_lesson] inComponent:0 animated:YES];

@@ -31,7 +31,7 @@
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColor1;
+    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
     self.quickDialogTableView.bounces = YES;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
@@ -122,7 +122,7 @@
 	// Do any additional setup after loading the view.
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
-	self.imageView.superview.backgroundColor = tableBgColor1;
+	self.imageView.superview.backgroundColor = tableBgColorGrouped;
 	
 	if (!_bCreate) self.title = @"修改作业计划";
 	
@@ -323,7 +323,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 		if (!self.imageView) {
 			self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 280, 280)];
 			UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.quickDialogTableView.frame.size.height, 320, 320)];
-			footerView.backgroundColor = tableBgColor1;
+			footerView.backgroundColor = tableBgColorGrouped;
 			[footerView addSubview:self.imageView];
 			self.quickDialogTableView.tableFooterView = footerView;
 		}

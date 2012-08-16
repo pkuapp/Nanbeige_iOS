@@ -36,12 +36,9 @@
 		int separatorNumber = [self lessonsCount];
 		separators = [[NSMutableArray alloc] initWithCapacity:separatorNumber];
 		for (int i = 0; i < separatorNumber; i++) {
-			UIView *separator = [[UIView alloc] init];
-			separator.backgroundColor = separatorColor1;
-			separator.frame = CGRectMake(0, [self separatorAtIndex:i] * rowHeight - TIMETABLESEPARATORHEIGHT, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
+			UIView *separator = [self addSeparatorAtOffsetY:[self separatorAtIndex:i] * rowHeight - TIMETABLESEPARATORHEIGHT WithColor:separatorColorNoCourseFooter];
 			separator.tag = [self separatorAtIndex:i];
 			[separators addObject:separator];
-			[_timeTable addSubview:separator];
 		}
 		
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -60,23 +57,23 @@
 			NSString *location = [course objectForKey:kAPILOCATION];
 			for (UIView *separator in separators) {
 				if (separator.superview && separator.tag >= start && separator.tag < end) {
-					[separator removeFromSuperview];
+					separator.backgroundColor = separatorColorCourseMiddle;
 				}
 			}
 			
-			UIView *courseStartSeparator = [[UIView alloc] init];
-			courseStartSeparator.backgroundColor = separatorColor1;
-			courseStartSeparator.frame = CGRectMake(0, (start - 1) * rowHeight - TIMETABLESEPARATORHEIGHT, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-			[_timeTable addSubview:courseStartSeparator];
-			courseStartSeparator = [[UIView alloc] init];
-			courseStartSeparator.backgroundColor = separatorColor2;
-			courseStartSeparator.frame = CGRectMake(0, (start - 1) * rowHeight, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-			[_timeTable addSubview:courseStartSeparator];
+			[self addSeparatorAtOffsetY:(start - 1) * rowHeight WithColor:separatorColorCourseHeader1];
+			[self addSeparatorAtOffsetY:(start - 1) * rowHeight + TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseHeader2];
+			[self addSeparatorAtOffsetY:end * rowHeight - 3 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseFooter1];
+			[self addSeparatorAtOffsetY:end * rowHeight - 2 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseFooter2];
+			[self addSeparatorAtOffsetY:end * rowHeight - TIMETABLESEPARATORHEIGHT WithColor:separatorColorNoCourseFooter];
 			
-			UIView *courseEndSeparator = [[UIView alloc] init];
-			courseEndSeparator.backgroundColor = separatorColor1;
-			courseEndSeparator.frame = CGRectMake(0, end * rowHeight - TIMETABLESEPARATORHEIGHT, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
-			[_timeTable addSubview:courseEndSeparator];
+			if (index >= todayCourses.count - 1 || [[[todayCourses objectAtIndex:index + 1] objectForKey:@"start"] integerValue] > end + 1) {
+				[self addSeparatorAtOffsetY:end * rowHeight WithColor:separatorColorCourseShadow1];
+				[self addSeparatorAtOffsetY:end * rowHeight + TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseShadow2];
+				[self addSeparatorAtOffsetY:end * rowHeight + 2 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseShadow3];
+				[self addSeparatorAtOffsetY:end * rowHeight + 3 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseShadow4];
+			}
+				
 			
 			UILabel *nameLabel = [[UILabel alloc] init];
 			nameLabel.frame = CGRectMake(TIMETABLELEFTPADDING, (start - 1) * rowHeight, TIMETABLEWIDTH - TIMETABLELEFTPADDING * 2, rowHeight);
@@ -96,6 +93,16 @@
 	return self;
 }
 
+- (UIView *)addSeparatorAtOffsetY:(CGFloat)y
+					WithColor:(UIColor *)color
+{
+	UIView *separator = [[UIView alloc] init];
+	separator.backgroundColor = color;
+	separator.frame = CGRectMake(0, y, TIMETABLEWIDTH, TIMETABLESEPARATORHEIGHT);
+	[_timeTable addSubview:separator];
+	return separator;
+}
+
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
 	if ((self = [super initWithReuseIdentifier:reuseIdentifier])) {
@@ -109,7 +116,7 @@
 		}
 		_timeTable = [[UITableView alloc] initWithFrame:self.bounds];
 		_timeTable.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		_timeTable.backgroundColor = tableBgColor2;
+		_timeTable.backgroundColor = tableBgColorGrouped;
 		_timeTable.bounces = FALSE;
 		_timeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 		_timeTable.delegate = self;
@@ -155,7 +162,10 @@
 			}
 		}
 	}
-	return result;
+	return [result sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+		if ([obj1 objectForKey:@"start"] < [obj2 objectForKey:@"start"]) return NSOrderedAscending;
+		return NSOrderedDescending;
+	}];
 }
 
 #pragma mark - Table view data source
@@ -171,12 +181,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = tableBgColor2;
+    cell.backgroundColor = tableBgColorGrouped;
 	for (NSDictionary *course in todayCourses) {
 		NSInteger start = [[course objectForKey:kAPISTART] integerValue];
 		NSInteger end = [[course objectForKey:kAPIEND] integerValue];
 		if (start - 1 <= indexPath.row && indexPath.row < end) {
-			cell.backgroundColor = tableBgColor3;
+			cell.backgroundColor = tableBgColorPlain;
 			break ;
 		}
 	}
