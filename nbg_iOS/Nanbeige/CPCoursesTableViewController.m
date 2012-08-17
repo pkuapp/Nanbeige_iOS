@@ -88,6 +88,7 @@
 	
 	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
+	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"时间表" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
 	NSDate *day = [today dateByAddingTimeInterval:60*60*24*([self.paginatorView currentPageIndex] - TIMETABLEPAGEINDEX)];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

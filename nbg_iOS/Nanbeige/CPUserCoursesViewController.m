@@ -68,6 +68,7 @@
 	[super viewWillAppear:animated];
 	
 	self.tabBarController.navigationItem.rightBarButtonItem = nil;
+	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:TITLE_SELECTED_COURSE style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.tabBarController.title = TITLE_SELECTED_COURSE;
 }
 
