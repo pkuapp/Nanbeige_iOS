@@ -214,20 +214,20 @@
 			for (NSDictionary *commentDict in collection) {
 				[self.comments addObject:@{ @"title" : [NSString stringWithFormat:@"%@：%@", [commentDict objectForKey:@"writer"], [commentDict objectForKey:@"content"]] } ];
 			}
+			
+			NSMutableDictionary *mutableComments = [@{ @"value" : collection } mutableCopy];
+			[mutableComments setObject:self.course.id forKey:@"course_id"];
+			[mutableComments setObject:@"comments" forKey:@"doc_type"];
+			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+			CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"comments%@", self.course.id]];
+			if ([doc propertyForKey:@"_rev"]) [mutableComments setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
+			RESTOperation *op = [doc putProperties:mutableComments];
+			[op onCompletion:^{
+				if (op.error) NSLog(@"%@", op.error);
+			}];
+			
+			[self refreshDisplay];
 		}
-		
-		NSMutableDictionary *mutableComments = [@{ @"value" : collection } mutableCopy];
-		[mutableComments setObject:self.course.id forKey:@"course_id"];
-		[mutableComments setObject:@"comments" forKey:@"doc_type"];
-		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"comments%@", self.course.id]];
-		if ([doc propertyForKey:@"_rev"]) [mutableComments setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
-		RESTOperation *op = [doc putProperties:mutableComments];
-		[op onCompletion:^{
-			if (op.error) NSLog(@"%@", op.error);
-		}];
-		
-		[self refreshDisplay];
 		
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
 		

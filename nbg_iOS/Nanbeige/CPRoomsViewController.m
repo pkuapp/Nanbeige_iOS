@@ -137,7 +137,7 @@
 	if (indexPath.row == 0) {
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 		
-		cell.textLabel.text = [[self.buildings objectAtIndex:indexPath.row] objectForKey:@"name"];
+		cell.textLabel.text = [[self.buildings objectAtIndex:indexPath.section] objectForKey:@"name"];
 		cell.detailTextLabel.text = nil;
 		
 		[self addSeparatorAtView:cell.contentView OffsetY:0 WithColor:separatorColorTitleNoContentHeader1];

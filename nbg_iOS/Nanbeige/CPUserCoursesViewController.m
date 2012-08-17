@@ -211,6 +211,9 @@
 				else [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			}];
 
+		} else {
+			[self showAlert:@"返回结果不是NSArray"];
+			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
