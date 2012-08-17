@@ -49,7 +49,7 @@ static NSString* pAPIPort = @"333";
 	id result = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding]
 												options:NSJSONReadingAllowFragments
 												  error:&inplaceError];
-	
+
 	if( inplaceError ) {
 		NSLog(@"%s: %d: Unable to decode JSON: %@", __FILE__, __LINE__, responseString);
 		result = nil;
@@ -66,8 +66,8 @@ static NSString* pAPIPort = @"333";
 //		if ([result objectForKey:@"error_code"] != nil) {
 			if (error != nil && self.status_code >= 400) {
 				*error = [self formError:self.status_code userInfo:result];
+                return nil;
 			}
-			return nil;
 //		}
 	}
 	
