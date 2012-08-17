@@ -58,6 +58,7 @@
 	
 	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.tableView.backgroundColor = tableBgColorPlain;
+	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"教学楼" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
@@ -137,6 +138,7 @@
 	
 	if (indexPath.row == 0) {
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		
 		cell.textLabel.text = [[self.buildings objectAtIndex:indexPath.section] objectForKey:@"name"];
 		cell.detailTextLabel.text = nil;
@@ -195,8 +197,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//	[self showAlert:[tableView cellForRowAtIndexPath:indexPath].textLabel.text];
-	// TODO
+	if (indexPath.row) return ;
     QueryResultsController *qrc = [[QueryResultsController alloc] initWithNibName:@"QueryResults" bundle:nil];
     qrc.nameLocation = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
     [self.navigationController pushViewController:qrc animated:YES];
