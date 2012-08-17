@@ -223,16 +223,23 @@
 			if ([doc propertyForKey:@"_rev"]) [mutableComments setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
 			RESTOperation *op = [doc putProperties:mutableComments];
 			[op onCompletion:^{
-				if (op.error) NSLog(@"%@", op.error);
+				if (op.error) [self showAlert:[op.error description]];
 			}];
 			
 			[self refreshDisplay];
+			
+			[self loading:NO];
+			[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
+			
+		} else {
+			[self loading:NO];
+			[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
+			[self showAlert:@"评论返回非NSArray"];
 		}
-		
-		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
+		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
 		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 	}];
 }

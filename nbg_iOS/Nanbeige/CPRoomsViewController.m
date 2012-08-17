@@ -215,11 +215,13 @@
 		if ([doc propertyForKey:@"_rev"]) [mutableRooms setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
 		RESTOperation *op = [doc putProperties:mutableRooms];
 		[op onCompletion:^{
-			if (op.error) NSLog(@"%@", op.error);
+			if (op.error) [self showAlert:[op.error description]];
 		}];
 		
 		[self reloadRooms];
+		
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+		
 		return ;
 	}
 	
@@ -286,7 +288,7 @@
 		if ([doc propertyForKey:@"_rev"]) [mutableBuildings setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
 		RESTOperation *op = [doc putProperties:mutableBuildings];
 		[op onCompletion:^{
-			if (op.error) NSLog(@"%@", op.error);
+			if (op.error) [self showAlert:[op.error description]];
 		}];
 		
 		self.buildings = collection;

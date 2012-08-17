@@ -57,7 +57,6 @@
 	}
 	
 	[[Coffeepot shared] requestWithMethodPath:@"university/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-		[self loading:NO];
 		
 		campuses = [[NSMutableArray alloc] init];
 		for (NSDictionary *universityDict in collection) {
@@ -85,10 +84,12 @@
 				[campuses addObject:displayCampus];
 			}
 		}
-		
 		NSDictionary *dict = @{@"campuses":campuses};
 		[self.root bindToObject:dict];
+		
 		[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+		
+		[self loading:NO];
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
@@ -135,15 +136,13 @@
 {
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
 	NSDictionary *campus = [campuses objectAtIndex:index];
-	[User updateSharedAppUserProfile:campus];
 	
 	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
 		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
 			
-			[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-				[self loading:NO];
-
+			[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [[campus objectForKey:@"university"] objectForKey:@"id"]] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+				
 				if ([collection isKindOfClass:[NSDictionary class]]) {
 					NSDictionary *universityDict = collection;
 					
@@ -161,11 +160,17 @@
 					university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
 					
 					RESTOperation *op = [university save];
-					[op onCompletion:^{
-						if (op.error) NSLog(@"%@", op.error);
-						else [self dismissModalViewControllerAnimated:YES];
-					}];
+					
+					if (![op wait]) [self showAlert:[op.error description]];
+					else {
+						[User updateSharedAppUserProfile:campus];
+						[self dismissModalViewControllerAnimated:YES];
+					}
+					
+					[self loading:NO];
+					
 				} else {
+					[self loading:NO];
 					[self showAlert:@"返回结果不是NSDictionary"];
 				}
 				
@@ -175,6 +180,7 @@
 			}];
 			
 		} else {
+			[self loading:NO];
 			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 		}
 		

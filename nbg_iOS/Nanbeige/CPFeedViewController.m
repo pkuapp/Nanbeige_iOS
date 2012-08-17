@@ -179,7 +179,7 @@
 		if ([doc propertyForKey:@"_rev"]) [mutableComments setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
 		RESTOperation *op = [doc putProperties:mutableComments];
 		[op onCompletion:^{
-			if (op.error) NSLog(@"%@", op.error);
+			if (op.error) [self showAlert:[op.error description]];
 		}];
 		
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];

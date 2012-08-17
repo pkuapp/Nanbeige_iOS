@@ -67,23 +67,33 @@
 	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/" params:nil requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
 		if (![collection isKindOfClass:[NSDictionary class]] || ![[collection objectForKey:@"available"] boolValue]) {
-			[self performSelector:@selector(close) withObject:nil afterDelay:1.0];
+			
+			[self loading:NO];
+			
 			[self showAlert:@"抓课器暂不可用"];
+			[self performSelector:@selector(close) withObject:nil afterDelay:1.0];
+			
 		} else if ([[collection objectForKey:@"require_captcha"] boolValue]) {
 			
 			[[Coffeepot shared] requestWithMethodPath:@"course/grabber/captcha/" params:nil requestMethod:@"GET" raw:^(CPRequest *_req, NSData *data) {
-			
-				[self loading:NO];
 				
 				if ([data isKindOfClass:[NSData class]]) {
+					
 					NSDictionary *dict = @{@"captcha":@[@{ @"placeholder" : @"验证码" }]};
 					[self.root bindToObject:dict];
-					[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];
 					UIImage *image = [UIImage imageWithData:data];
 					CGFloat width = image.size.width * 31.0 / image.size.height;
 					UIImageView *captchaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(290 - width, 6, width, 31)];
 					captchaImageView.image = image;
+					
+					[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];
 					[[[self.quickDialogTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]] contentView] addSubview:captchaImageView];
+					
+					[self loading:NO];
+					
+				} else {
+					[self loading:NO];
+					[self showAlert:@"验证码返回非NSData"];
 				}
 				
 			} error:^(CPRequest *request, NSError *error) {
@@ -147,12 +157,85 @@
 	NSMutableDictionary *params = [@{ @"username":username, @"password":password } mutableCopy];
 	if (captcha) [params setObject:captcha forKey:@"captcha"];
 	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/start/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-		[self loading:NO];
-		
-		// TODO collection as NSArray of courses' id
 		
 		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kCOURSE_IMPORTED];
-		[self close];
+		
+		[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+			
+			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+			
+			if ([collection isKindOfClass:[NSArray class]]) {
+				
+				NSMutableArray *courses = [[NSMutableArray alloc] init];
+				for (NSDictionary *courseDict in collection) {
+					
+					Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
+					
+					NSLog(@"%@", course.document.documentID);
+					
+					course.doc_type = @"course";
+					course.id = [courseDict objectForKey:@"id"];
+					course.name = [courseDict objectForKey:@"name"];
+					course.credit = [courseDict objectForKey:@"credit"];
+					course.orig_id = [courseDict objectForKey:@"orig_id"];
+					course.semester_id = [courseDict objectForKey:@"semester_id"];
+					course.ta = [courseDict objectForKey:@"ta"];
+					course.teacher = [courseDict objectForKey:@"teacher"];
+					
+					if (course.lessons) {
+						for (NSString *lessonDocumentID in course.lessons) {
+							CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
+							RESTOperation *deleteOp = [lessonDocument DELETE];
+							if (![deleteOp wait]) NSLog(@"%@", deleteOp.error);
+						}
+					}
+					
+					NSMutableArray *lessons = [[NSMutableArray alloc] init];
+					for (NSDictionary *lessonDict in [courseDict objectForKey:@"lessons"]) {
+						
+						Lesson *lesson = [[Lesson alloc] initWithNewDocumentInDatabase:localDatabase];
+						
+						lesson.doc_type = @"lesson";
+						lesson.course = course;
+						lesson.start = [lessonDict objectForKey:@"start"];
+						lesson.end = [lessonDict objectForKey:@"end"];
+						lesson.day = [lessonDict objectForKey:@"day"];
+						lesson.location = [lessonDict objectForKey:@"location"];
+						lesson.week = [lessonDict objectForKey:@"week"];
+						
+						RESTOperation *saveOp = [lesson save];
+						if ([saveOp wait])
+							[lessons addObject:lesson.document.documentID];
+						else NSLog(@"%@", saveOp.error);
+						
+					}
+					course.lessons = lessons;
+					
+					RESTOperation *saveOp = [course save];
+					if ([saveOp wait]) [courses addObject:course.document.documentID];
+					else [self showAlert:[saveOp.error description]];
+					
+				}
+				
+				NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];
+				CouchDocument *courseListDocument = [Course userCourseListDocument];
+				if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
+				RESTOperation *putOp = [courseListDocument putProperties:courseListDict];
+				
+				if (![putOp wait]) [self showAlert:[putOp.error description]];
+				else [self close];
+				
+				[self loading:NO];
+				
+			} else {
+				[self loading:NO];
+				[self showAlert:@"返回结果不是NSArray"];
+			}
+			
+		} error:^(CPRequest *request, NSError *error) {
+			[self loading:NO];
+			[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		}];
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];

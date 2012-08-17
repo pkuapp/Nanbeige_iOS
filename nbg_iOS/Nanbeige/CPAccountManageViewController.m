@@ -102,10 +102,12 @@
 		if (buttonIndex == 1) {
 			NSString *nickname = [[alertView textFieldAtIndex:0] text];
 			[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"nickname" : nickname } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-				[self loading:NO];
 				
 				[User updateSharedAppUserProfile:@{ @"nickname" : nickname }];
+				
 				[self refreshDataSource];
+				
+				[self loading:NO];
 				
 			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
@@ -120,6 +122,7 @@
 		if (buttonIndex == 1) {
 			NSString *password = [[alertView textFieldAtIndex:0] text];
 			[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"password" : password } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+				
 				[self loading:NO];
 				
 			} error:^(CPRequest *request, NSError *error) {
@@ -285,6 +288,7 @@
 - (void)onLocalEmailLogout:(id)sender
 {
 	[[Coffeepot shared] requestWithMethodPath:@"user/logout/" params:nil requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		
 		[self loading:NO];
 		
 	} error:^(CPRequest *request, NSError *error) {
@@ -309,7 +313,6 @@
 	[self onLocalWeiboLogout:sender];
 	[self onLocalEmailLogout:sender];
 	
-	[User deactiveSharedAppUser];
 	CouchDatabase *localDatabase = [(CPAppDelegate *)([UIApplication sharedApplication].delegate) localDatabase];
 	CouchQuery *query = [localDatabase getAllDocuments];
 	RESTOperation *op = [query start];
@@ -320,7 +323,8 @@
 		}
 		[localDatabase deleteDocuments:docs];
 	}
-	[self refreshDataSource];
+	
+	[User deactiveSharedAppUser];
 	
 	id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
 	NSDictionary *emptySettings = (workaround51Crash != nil)
@@ -344,12 +348,13 @@
 									  
 									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
 										  
-										  [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
-										  
 										  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-											  [self loading:NO];
+											  
+											  [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
 											  
 											  [self refreshDataSource];
+											  
+											  [self loading:NO];
 											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
@@ -359,7 +364,7 @@
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
 										 [self loading:NO];
-										 [self showAlert:error.description];
+										 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 									 }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -383,25 +388,24 @@
 							  [self loading:NO];
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
-								  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
-									  
+								    
 								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
-									  [self loading:NO];
-
+									  
+									  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
+									  
 									  [self refreshDataSource];
+									  
+									  [self loading:NO];
 
 								  } error:^(CPRequest *request, NSError *error) {
 									  [self loading:NO];
 									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 								  }];
-
-								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-								  [self loading:YES];
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 NSLog(@"%@", error);
+								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 							 }
 	 ];
 	

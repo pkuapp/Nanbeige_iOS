@@ -159,7 +159,7 @@
 	if ([segue.identifier isEqualToString:@"ItsEnterSegue"]) {
 		CPItsViewController *destinationViewController = (CPItsViewController *)[segue destinationViewController];
 //		destinationViewController.connector = self.connector;
-		destinationViewController.mainViewController = self;
+//		destinationViewController.mainViewController = self;
 //		self.connector.delegate = destinationViewController;
 		self.nivc = destinationViewController;
 	} else if ([segue.identifier isEqualToString:@"RoomsEnterSegue"]) {

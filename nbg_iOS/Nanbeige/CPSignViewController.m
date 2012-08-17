@@ -85,6 +85,9 @@
 	[super viewWillAppear:animated];
 
 	//Only clean defaults when Login Methods show to choose
+	
+	[User deactiveSharedAppUser];
+	
 	id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
 	NSDictionary *emptySettings = (workaround51Crash != nil)
 	? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
@@ -146,28 +149,29 @@
         [self loading:NO];
 		if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
 			
-			[User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
-            
 			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-				[self loading:NO];
 				
 				[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
 				[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
-                
-                [User updateSharedAppUserProfile:collection];
+                [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
+				[User updateSharedAppUserProfile:collection];
+				
+				[self loading:NO];
+				
                 [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
                 
             } error:^(CPRequest *request, NSError *error) {
 				
 				if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
                     
-					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
-						[self loading:NO];
-					
+					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {					
 						[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
 						[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
-						
+						[User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
 						[User updateSharedAppUserProfile:collection];
+						
+						[self loading:NO];
+						
 						[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 						
 					} error:^(CPRequest *request, NSError *error) {
@@ -184,7 +188,7 @@
     }
     fail:^(WBRequest *request, NSError *error) {
         [self loading:NO];
-        [self showAlert:error.description];
+		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
     }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -227,15 +231,16 @@
 						  success:^(RORequest *request, id result) {
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
-								  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
-							  
+								  
 								  [[Coffeepot shared] requestWithMethodPath:@"user/login/renren/" params:@{@"token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-									  [self loading:NO];
 									  
 									  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
 									  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
-									  
+									  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
 									  [User updateSharedAppUserProfile:collection];
+									  
+									  [self loading:NO];
+
 									  [self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 
 								  } error:^(CPRequest *request, NSError *error) {
@@ -243,12 +248,14 @@
 									  if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
 										  
 										  [[Coffeepot shared] requestWithMethodPath:@"user/reg/renren/" params:@{@"token":self.renren.accessToken, @"nickname":[[result objectAtIndex:0] objectForKey:@"name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
-											  [self loading:NO];
 											  
 											  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
 											  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
-											  
+											  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
 											  [User updateSharedAppUserProfile:collection];
+											  
+											  [self loading:NO];
+
 											  [self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 											  
 										  } error:^(CPRequest *request, NSError *error) {
@@ -267,7 +274,7 @@
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 NSLog(@"%@", error);
+								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 							 }
 	 ];
 	

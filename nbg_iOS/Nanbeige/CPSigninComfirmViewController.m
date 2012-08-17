@@ -161,7 +161,6 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-		[self loading:NO];
 		
 		if ([collection isKindOfClass:[NSDictionary class]]) {
 			NSDictionary *universityDict = collection;
@@ -180,14 +179,16 @@
 			university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
 			
 			RESTOperation *op = [university save];
-			[op onCompletion:^{
-				if (op.error) NSLog(@"%@", op.error);
-				else {
-					UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
-					[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
-				}
-			}];
+			if (![op wait]) [self showAlert:[op.error description]];
+			else {
+				UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
+				[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
+			}
+			
+			[self loading:NO];
+			
 		} else {
+			[self loading:NO];
 			[self showAlert:@"返回结果不是NSDictionary"];
 		}
 		
@@ -214,12 +215,14 @@
 									  
 									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
 										  
-										  [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
 										  
 										  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-											  [self loading:NO];
+											  
+											  [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
 											  
 											  [self refreshDataSource];
+											  
+											  [self loading:NO];
 											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
@@ -232,7 +235,7 @@
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
 										 [self loading:NO];
-										 [self showAlert:error.description];
+										 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 									 }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -256,12 +259,14 @@
 							  [self loading:NO];
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
-								  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
 								  
 								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-									  [self loading:NO];
+									  
+									  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
 									  
 									  [self refreshDataSource];
+									  
+									  [self loading:NO];
 
 								  } error:^(CPRequest *request, NSError *error) {
 									  [self loading:NO];
@@ -274,7 +279,7 @@
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 NSLog(@"%@", error);
+								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 							 }
 	 ];
 	

@@ -96,12 +96,13 @@
     }
 	
 	[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:@{@"email":email, @"password":password ,@"nickname":nickname} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-		[self loading:NO];
 		
 		[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
 		[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
-		
 		[User updateSharedAppUserProfile:collection];
+		
+		[self loading:NO];
+		
 		[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 		
 	} error:^(CPRequest *request, NSError *error) {

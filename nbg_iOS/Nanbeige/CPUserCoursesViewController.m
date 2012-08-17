@@ -139,21 +139,13 @@
 		
 		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
 		
-		CouchQuery *tempQuery = [localDatabase getAllDocuments];
-		NSLog(@"%d", [localDatabase getDocumentCount]);
-		if ([[tempQuery start] wait]) {
-			for (CouchQueryRow *row in tempQuery.rows) {
-				NSLog(@"%@", row.document.properties);
-			}
-		}
-		
 		if ([collection isKindOfClass:[NSArray class]]) {
 			
 			NSMutableArray *courses = [[NSMutableArray alloc] init];
 			for (NSDictionary *courseDict in collection) {
 				
 				Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
-					
+				
 				NSLog(@"%@", course.document.documentID);
 				
 				course.doc_type = @"course";
@@ -195,25 +187,22 @@
 				course.lessons = lessons;
 				
 				RESTOperation *saveOp = [course save];
-				if ([saveOp wait])
-					[courses addObject:course.document.documentID];
-				else NSLog(@"%@", saveOp.error);
-					
+				if ([saveOp wait]) [courses addObject:course.document.documentID];
+				else [self showAlert:[saveOp.error description]];
+				
 			}
 			
-			self.courses = courses;
 			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];
 			CouchDocument *courseListDocument = [Course userCourseListDocument];
 			if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
 			RESTOperation *putOp = [courseListDocument putProperties:courseListDict];
-			[putOp onCompletion:^{
-				if (putOp.error) NSLog(@"%@", putOp.error);
-				else [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-			}];
-
-		} else {
-			[self showAlert:@"返回结果不是NSArray"];
+			if (![putOp wait]) [self showAlert:[putOp.error description]];
+			
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+			
+		} else {
+			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+			[self showAlert:@"返回结果不是NSArray"];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
