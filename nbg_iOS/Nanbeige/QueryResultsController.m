@@ -158,6 +158,10 @@
 }
 
 - (void)prepareData {
+    
+#warning fake data
+//    self.nameLocation = @"二教";
+
     [self taskQuery];
 //    iOSOneAppDelegate* delegate = (iOSOneAppDelegate *)[UIApplication sharedApplication].delegate;
 //

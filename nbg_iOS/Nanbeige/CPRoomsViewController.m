@@ -10,6 +10,7 @@
 #import "Environment.h"
 #import "Coffeepot.h"
 #import "Models+addon.h"
+#import "QueryResultsController.h"
 
 @interface CPRoomsViewController () {
 	NSDate *date;
@@ -194,8 +195,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self showAlert:[tableView cellForRowAtIndexPath:indexPath].textLabel.text];
+//	[self showAlert:[tableView cellForRowAtIndexPath:indexPath].textLabel.text];
 	// TODO
+    QueryResultsController *qrc = [[QueryResultsController alloc] initWithNibName:@"QueryResults" bundle:nil];
+    qrc.nameLocation = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+    [self.navigationController pushViewController:qrc animated:YES];
 }
 
 #pragma mark - Data Process
