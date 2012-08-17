@@ -440,6 +440,8 @@
 		411DBC6F15CBA59700EDB31D /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 411DBC3915CBA59700EDB31D /* MagicalRecord.m */; };
 		4120F2B415D645D000D0AA97 /* WBEngine+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */; };
 		4120F2B515D645D000D0AA97 /* WBEngine+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */; };
+		4133AFAE15DE0A5300BEE9A3 /* test_data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4133AFAD15DE0A5300BEE9A3 /* test_data.plist */; };
+		4133AFAF15DE0A5300BEE9A3 /* test_data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4133AFAD15DE0A5300BEE9A3 /* test_data.plist */; };
 		413B9F4915D51D96000C9451 /* Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7D15D51D95000C9451 /* Renren.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		413B9F4A15D51D96000C9451 /* Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7D15D51D95000C9451 /* Renren.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		413B9F4B15D51D96000C9451 /* RenrenPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 413B9E7F15D51D95000C9451 /* RenrenPay.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1287,6 +1289,7 @@
 		4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "WBEngine+addon.h"; path = "../WBEngine+addon.h"; sourceTree = "<group>"; };
 		4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "WBEngine+addon.m"; path = "../WBEngine+addon.m"; sourceTree = "<group>"; };
 		4120F2B915D6B4F500D0AA97 /* CPUserDefaultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserDefaultDelegate.h; sourceTree = "<group>"; };
+		4133AFAD15DE0A5300BEE9A3 /* test_data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test_data.plist; sourceTree = "<group>"; };
 		413B9E7C15D51D95000C9451 /* Renren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renren.h; sourceTree = "<group>"; };
 		413B9E7D15D51D95000C9451 /* Renren.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Renren.m; sourceTree = "<group>"; };
 		413B9E7E15D51D95000C9451 /* RenrenPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenrenPay.h; sourceTree = "<group>"; };
@@ -3014,6 +3017,7 @@
 		4163D84915DD3B4800BFE89E /* PKURoom */ = {
 			isa = PBXGroup;
 			children = (
+				4133AFAD15DE0A5300BEE9A3 /* test_data.plist */,
 				4163D83515DD3B4000BFE89E /* QueryResults.xib */,
 				4163D83615DD3B4000BFE89E /* QueryResultsController.h */,
 				4163D83715DD3B4000BFE89E /* QueryResultsController.m */,
@@ -3381,6 +3385,7 @@
 				269CBB0915DC1F1000B5CF2C /* courseDetail.json in Resources */,
 				4163D84015DD3B4000BFE89E /* PKURoomCellXIB.xib in Resources */,
 				4163D84215DD3B4000BFE89E /* QueryResults.xib in Resources */,
+				4133AFAE15DE0A5300BEE9A3 /* test_data.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3634,6 +3639,7 @@
 				269CBB0A15DC1F1000B5CF2C /* courseDetail.json in Resources */,
 				4163D84115DD3B4000BFE89E /* PKURoomCellXIB.xib in Resources */,
 				4163D84315DD3B4000BFE89E /* QueryResults.xib in Resources */,
+				4133AFAF15DE0A5300BEE9A3 /* test_data.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

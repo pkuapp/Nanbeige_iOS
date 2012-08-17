@@ -47,7 +47,7 @@ static NSString* pAPIPort = @"333";
 	NSError *inplaceError = nil;
 	
 	id result = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding]
-												options:0
+												options:NSJSONReadingAllowFragments
 												  error:&inplaceError];
 	
 	if( inplaceError ) {

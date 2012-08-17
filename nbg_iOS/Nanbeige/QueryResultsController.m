@@ -158,6 +158,7 @@
 }
 
 - (void)prepareData {
+    [self taskQuery];
 //    iOSOneAppDelegate* delegate = (iOSOneAppDelegate *)[UIApplication sharedApplication].delegate;
 //
 //    delegate.progressHub.mode = MBProgressHUDModeIndeterminate;
@@ -233,6 +234,8 @@
 //    }
 //    
 //    NSLog(@"%@",stringQuery);
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test_data" ofType:@"plist"]];
+    stringQuery = [dict valueForKeyPath:@"classroom.json"];
 	NSArray *result = [stringQuery JSONValue];
     self.arrayResult = result;
     [self _prepareCells];
