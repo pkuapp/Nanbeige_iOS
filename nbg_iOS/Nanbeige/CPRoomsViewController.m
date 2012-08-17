@@ -269,9 +269,10 @@
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
 	_reloading = YES;
-	
+    
+#warning always use 8 as campus_id in test
 	NSNumber *campus_id = [User sharedAppUser].campus_id;
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/?campus_id=%@", campus_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"study/building/?campus_id=%@", @8] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
 		NSMutableDictionary *mutableBuildings = [@{ @"value" : collection } mutableCopy];
 		[mutableBuildings setObject:campus_id forKey:@"campus_id"];
