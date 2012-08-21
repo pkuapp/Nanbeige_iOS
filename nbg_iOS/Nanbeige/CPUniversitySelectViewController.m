@@ -146,9 +146,9 @@
 				if ([collection isKindOfClass:[NSDictionary class]]) {
 					NSDictionary *universityDict = collection;
 					
-					University *university = [University universityWithID:[User sharedAppUser].university_id];
+					University *university = [University universityWithID:[[campus objectForKey:@"university"] objectForKey:@"id"]];
 					university.doc_type = @"university";
-					university.id = [User sharedAppUser].university_id;
+					university.id = [[campus objectForKey:@"university"] objectForKey:@"id"];
 					university.name = [universityDict objectForKey:@"name"];
 					university.support_import_course = [[universityDict objectForKey:@"support"] objectForKey:@"import_course"];
 					university.support_list_course = [[universityDict objectForKey:@"support"] objectForKey:@"list_course"];
@@ -164,6 +164,7 @@
 					if (![op wait]) [self showAlert:[op.error description]];
 					else {
 						[User updateSharedAppUserProfile:campus];
+						[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCOURSE_IMPORTED];
 						[self dismissModalViewControllerAnimated:YES];
 					}
 					

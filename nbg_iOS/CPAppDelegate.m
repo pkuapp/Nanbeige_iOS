@@ -127,7 +127,7 @@
         self.window.rootViewController = rvc;
     }
     else {
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
         self.window.rootViewController = [sb instantiateInitialViewController];
     }
     

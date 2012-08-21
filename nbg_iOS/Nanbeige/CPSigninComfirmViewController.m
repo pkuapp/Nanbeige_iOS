@@ -181,7 +181,7 @@
 			RESTOperation *op = [university save];
 			if (![op wait]) [self showAlert:[op.error description]];
 			else {
-				UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
+				UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
 				[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
 			}
 			
@@ -211,11 +211,8 @@
     
 	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
 								  success:^(WBRequest *request, id result) {
-									  [self loading:NO];
 									  
-									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
-										  
-										  
+									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {										  
 										  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 											  
 											  [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
@@ -228,9 +225,9 @@
 											  [self loading:NO];
 											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 										  }];
-										  
-										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-										  [self loading:YES];
+									  } else {
+										  [self loading:NO];
+										  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
 									  }
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
@@ -256,7 +253,6 @@
 	[self.renren requestWithParam:requestParam
 					  andDelegate:self
 						  success:^(RORequest *request, id result) {
-							  [self loading:NO];
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								  
@@ -272,9 +268,9 @@
 									  [self loading:NO];
 									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 								  }];
-
-								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-								  [self loading:YES];
+							  } else {
+								  [self loading:NO];
+								  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {

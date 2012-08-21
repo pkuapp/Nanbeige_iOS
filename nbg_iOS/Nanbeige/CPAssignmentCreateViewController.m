@@ -165,6 +165,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	if (!self.coursesData.count) self.coursesData = [[Course userCourseListDocument] propertyForKey:@"value"];
 	[self refreshDisplay];
 }
 

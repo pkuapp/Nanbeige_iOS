@@ -103,13 +103,22 @@
 	
 	[[Coffeepot shared] requestWithMethodPath:@"user/login/email/" params:@{@"email":email, @"password":password } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
-		[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
-		[User updateSharedAppUserProfile:collection];
-		
-		[self loading:NO];
-		
-		[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+		if ([collection isKindOfClass:[NSDictionary class]]) {
+			
+			NSArray *semesters = [collection objectForKey:@"course_imported"];
+			if (semesters.count) [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCOURSE_IMPORTED];
+			else [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCOURSE_IMPORTED];
+			
+			[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
+			[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
+			[User updateSharedAppUserProfile:collection];
+			
+			[self loading:NO];
+			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+		} else {
+			[self loading:NO];
+			[self showAlert:[collection description]];//NSLog(%"%@", [error description]);
+		}
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];

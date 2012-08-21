@@ -17,7 +17,6 @@
 @interface CPAssignmentViewController () 
 {
 	int assignmentSelect;
-	bool bViewDidLoad;
 }
 
 
@@ -127,8 +126,6 @@
 	// Do any additional setup after loading the view.
 	self.title = TITLE_ASSIGNMENT;
 	self.completeSegmentedControl.tintColor = navBarBgColor1;
-	
-	bViewDidLoad = YES;
 	
 	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     
@@ -250,17 +247,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-	[super viewDidAppear:animated];
-	if (bViewDidLoad && ![[[NSUserDefaults standardUserDefaults] objectForKey:kCOURSE_IMPORTED] boolValue]) {
-		CPCourseGrabberViewController *cgvc = [[CPCourseGrabberViewController alloc] init];
-		UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:cgvc];
-		[self presentModalViewController:nc animated:YES];
-		bViewDidLoad = NO;
-	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

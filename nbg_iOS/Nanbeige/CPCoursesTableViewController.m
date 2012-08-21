@@ -106,6 +106,13 @@
 	if (bViewDidLoad && ![[[NSUserDefaults standardUserDefaults] objectForKey:kCOURSE_IMPORTED] boolValue]) {
 		[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
 		bViewDidLoad = NO;
+	} else if (![[[NSUserDefaults standardUserDefaults] objectForKey:kCOURSE_IMPORTED] boolValue]) {
+		[self.tabBarController.navigationController popViewControllerAnimated:YES];
+	} else {
+		CouchDocument *courseListDocument = [Course userCourseListDocument];
+		if (![courseListDocument propertyForKey:@"value"]) {
+			[self.tabBarController setSelectedIndex:1];
+		}
 	}
 }
 

@@ -13,9 +13,11 @@
 #import "Models+addon.h"
 #import "Course.h"
 #import "Lesson.h"
+#import "MBProgressHUD.h"
 
 @interface CPUserCoursesViewController ()  {
 	Course *courseSelected;
+	MBProgressHUD *progressHud;
 }
 
 @end
@@ -70,6 +72,11 @@
 	self.tabBarController.navigationItem.rightBarButtonItem = nil;
 	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:TITLE_SELECTED_COURSE style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.tabBarController.title = TITLE_SELECTED_COURSE;
+	
+	CouchDocument *courseListDocument = [Course userCourseListDocument];
+	if (![courseListDocument propertyForKey:@"value"]) {
+		[self reloadTableViewDataSource];
+	}
 }
 
 - (void)viewDidUnload
@@ -146,8 +153,6 @@
 				
 				Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
 				
-				NSLog(@"%@", course.document.documentID);
-				
 				course.doc_type = @"course";
 				course.id = [courseDict objectForKey:@"id"];
 				course.name = [courseDict objectForKey:@"name"];
@@ -161,7 +166,8 @@
 					for (NSString *lessonDocumentID in course.lessons) {
 						CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
 						RESTOperation *deleteOp = [lessonDocument DELETE];
-						if (![deleteOp wait]) NSLog(@"%@", deleteOp.error);
+						if (![deleteOp wait])
+							[self showAlert:[deleteOp.error description]];
 					}
 				}
 				
@@ -178,37 +184,57 @@
 					lesson.location = [lessonDict objectForKey:@"location"];
 					lesson.week = [lessonDict objectForKey:@"week"];
 					
-					RESTOperation *saveOp = [lesson save];
-					if ([saveOp wait])
+					RESTOperation *lessonSaveOp = [lesson save];
+					if ([lessonSaveOp wait])
 						[lessons addObject:lesson.document.documentID];
-					else NSLog(@"%@", saveOp.error);
+					else
+						[self showAlert:[lessonSaveOp.error description]];
 					
 				}
 				course.lessons = lessons;
 				
-				RESTOperation *saveOp = [course save];
-				if ([saveOp wait]) [courses addObject:course.document.documentID];
-				else [self showAlert:[saveOp.error description]];
+				RESTOperation *courseSaveOp = [course save];
+				if ([courseSaveOp wait])
+					[courses addObject:course.document.documentID];
+				else
+					[self showAlert:[courseSaveOp.error description]];
 				
 			}
 			
+			self.courses = courses;
 			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];
 			CouchDocument *courseListDocument = [Course userCourseListDocument];
 			if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
 			RESTOperation *putOp = [courseListDocument putProperties:courseListDict];
-			if (![putOp wait]) [self showAlert:[putOp.error description]];
+			if (![putOp wait])
+				[self showAlert:[putOp.error description]];
 			
+			[progressHud hide:YES afterDelay:0.5];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			
 		} else {
+			[progressHud hide:YES afterDelay:0.5];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			[self showAlert:@"返回结果不是NSArray"];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
+		[progressHud hide:YES afterDelay:0.5];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 	}];
+	
+	progressHud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].delegate.window];
+	[[UIApplication sharedApplication].delegate.window addSubview:progressHud];
+	progressHud.userInteractionEnabled = NO;
+	progressHud.opacity = 0.618;
+	progressHud.animationType = MBProgressHUDAnimationZoom;
+	progressHud.mode = MBProgressHUDModeIndeterminate;
+	progressHud.transform = CGAffineTransformIdentity;
+	progressHud.labelText = @"获取课程列表中...";
+	progressHud.taskInProgress = YES;
+	[progressHud show:YES];
+	
 }
 
 - (void)doneLoadingTableViewData{

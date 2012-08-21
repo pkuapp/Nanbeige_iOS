@@ -146,7 +146,7 @@
     
 	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
     success:^(WBRequest *request, id result) {
-        [self loading:NO];
+		
 		if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
 			
 			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
@@ -184,7 +184,10 @@
 					[self showAlert:[error description]];//NSLog(%"%@", [error description]);
 				}
             }];
-        }
+        } else {
+			[self loading:NO];
+			[self showAlert:[result description]];//NSLog(%"%@", [error description]);
+		}
     }
     fail:^(WBRequest *request, NSError *error) {
         [self loading:NO];
@@ -270,6 +273,11 @@
 									  
 								  }];
 								  
+							  } else if ([result isKindOfClass:[NSDictionary class]]) {
+								  NSLog(@"%@", result);
+							  } else {
+								  [self loading:NO];
+								  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
@@ -296,6 +304,35 @@
  * @param renren 传回代理授权登录接口请求的Renren类型对象。
  */
 - (void)renren:(Renren *)renren loginFailWithError:(ROError*)error
+{
+	
+}
+
+/**
+ * 接口请求成功，第三方开发者实现这个方法
+ * @param renren 传回代理服务器接口请求的Renren类型对象。
+ * @param response 传回接口请求的响应。
+ */
+- (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response
+{
+	
+}
+
+/**
+ * 接口请求失败，第三方开发者实现这个方法
+ * @param renren 传回代理服务器接口请求的Renren类型对象。
+ * @param response 传回接口请求的错误对象。
+ */
+- (void)renren:(Renren *)renren requestFailWithError:(ROError*)error
+{
+	
+}
+
+/**
+ * renren取消Dialog时调用，第三方开发者实现这个方法
+ * @param renren 传回代理授权登录接口请求的Renren类型对象。
+ */
+- (void)renrenDialogDidCancel:(Renren *)renren
 {
 	
 }

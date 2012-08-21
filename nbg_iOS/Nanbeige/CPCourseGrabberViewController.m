@@ -171,8 +171,6 @@
 					
 					Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
 					
-					NSLog(@"%@", course.document.documentID);
-					
 					course.doc_type = @"course";
 					course.id = [courseDict objectForKey:@"id"];
 					course.name = [courseDict objectForKey:@"name"];
@@ -186,7 +184,8 @@
 						for (NSString *lessonDocumentID in course.lessons) {
 							CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
 							RESTOperation *deleteOp = [lessonDocument DELETE];
-							if (![deleteOp wait]) NSLog(@"%@", deleteOp.error);
+							if (![deleteOp wait])
+								[self showAlert:[deleteOp.error description]];
 						}
 					}
 					
@@ -203,17 +202,20 @@
 						lesson.location = [lessonDict objectForKey:@"location"];
 						lesson.week = [lessonDict objectForKey:@"week"];
 						
-						RESTOperation *saveOp = [lesson save];
-						if ([saveOp wait])
+						RESTOperation *lessonSaveOp = [lesson save];
+						if ([lessonSaveOp wait])
 							[lessons addObject:lesson.document.documentID];
-						else NSLog(@"%@", saveOp.error);
+						else
+							[self showAlert:[lessonSaveOp.error description]];
 						
 					}
 					course.lessons = lessons;
 					
-					RESTOperation *saveOp = [course save];
-					if ([saveOp wait]) [courses addObject:course.document.documentID];
-					else [self showAlert:[saveOp.error description]];
+					RESTOperation *courseSaveOp = [course save];
+					if ([courseSaveOp wait])
+						[courses addObject:course.document.documentID];
+					else
+						[self showAlert:[courseSaveOp.error description]];
 					
 				}
 				
@@ -221,9 +223,10 @@
 				CouchDocument *courseListDocument = [Course userCourseListDocument];
 				if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
 				RESTOperation *putOp = [courseListDocument putProperties:courseListDict];
-				
-				if (![putOp wait]) [self showAlert:[putOp.error description]];
-				else [self close];
+				if (![putOp wait])
+					[self showAlert:[putOp.error description]];
+				else
+					[self close];
 				
 				[self loading:NO];
 				

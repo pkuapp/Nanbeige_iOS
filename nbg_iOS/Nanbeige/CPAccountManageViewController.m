@@ -360,6 +360,9 @@
 											  [self loading:NO];
 											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 										  }];
+									  } else {
+										  [self loading:NO];
+										  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
 									  }
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
@@ -385,11 +388,10 @@
 	[self.renren requestWithParam:requestParam
 					  andDelegate:self
 						  success:^(RORequest *request, id result) {
-							  [self loading:NO];
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								    
-								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 									  
 									  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
 									  
@@ -401,6 +403,9 @@
 									  [self loading:NO];
 									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 								  }];
+							  } else {
+								  [self loading:NO];
+								  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
