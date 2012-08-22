@@ -268,6 +268,8 @@
 									  [self loading:NO];
 									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 								  }];
+							  } else if ([result isKindOfClass:[NSDictionary class]]) {
+								  NSLog(@"%@", result);
 							  } else {
 								  [self loading:NO];
 								  [self showAlert:[result description]];//NSLog(%"%@", [error description]);

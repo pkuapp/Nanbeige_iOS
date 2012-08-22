@@ -41,7 +41,7 @@
 		[self.modeSegmentedControl setSelectedSegmentIndex:1];
 		[self.datePicker setDate:self.assignment.due_date];
 	}
-	if (!self.coursesData.count) {
+	if (!self.weeksData.count) {
 		[self.modeSegmentedControl setSelectedSegmentIndex:1];
 		self.modeSegmentedControl.hidden = YES;
 		self.title = @"选择截止时间";
@@ -125,7 +125,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 + (NSString *)displayFromWeekDay:(NSDictionary *)weekDay
 {
-	return [NSString stringWithFormat:@"第%@周 周%@ 课上", [weekDay objectForKey:@"week"], [weekDay objectForKey:@"day"]];
+	return [NSString stringWithFormat:@"第%@周 %@ 第%@-%@节课上", [weekDay objectForKey:@"week"], [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([[weekDay objectForKey:@"day"] integerValue] % 7)], [weekDay objectForKey:@"start"], [weekDay objectForKey:@"end"]];
 }
 
 + (NSString *)displayFromDate:(NSDate *)date

@@ -69,10 +69,17 @@
 		tas = [tas stringByAppendingFormat:@"%@ ", ta];
 	}
 	
+	University *university = [University universityWithID:[[User sharedAppUser] university_id]];
+	
 	NSDictionary *dict = @{
-	@"basic" : @[ @{ @"title" : @"全称", @"value" : self.course.name }, @{ @"title" : @"编号", @"value" : self.course.orig_id }, @{ @"title" : @"学分", @"value" : self.course.credit }, @{ @"title" : @"教师", @"value" : teachers }, @{ @"title" : @"助教", @"value" : tas },  ],
+	@"basic" : [@[ @{ @"title" : @"全称", @"value" : self.course.name }, @{ @"title" : @"编号", @"value" : self.course.orig_id }, @{ @"title" : @"学分", @"value" : self.course.credit }, @{ @"title" : @"教师", @"value" : teachers }, ] mutableCopy],
 	@"extension" : @[ @{ @"title" : @"时间", @"value" :  time}, @{ @"title" : @"地点", @"value" : place } ],
 	@"exam" : @[ @{ @"title" : @"考试", @"value" : @"API未提供" } ]};
+	
+	if ([university.support_ta boolValue]) {
+		[[dict objectForKey:@"basic"] addObject:@{ @"title" : @"助教", @"value" : tas }];
+	}
+		
 	[self.root bindToObject:dict];
 }
 

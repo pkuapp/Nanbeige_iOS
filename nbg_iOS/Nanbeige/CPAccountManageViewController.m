@@ -218,9 +218,11 @@
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	NSString *disconnectOrLogout = [dictLABEL2ACTIONSHEET objectForKey:[sender title]];
 	NSString *otherButtonTitle = nil;
-	if ([disconnectOrLogout isEqualToString:sDISCONNECTEMAIL]) {
+	if ([[sender title] isEqualToString:sEMAIL]) {
 		otherButtonTitle = sEDITPASSWORD;
 	}
+	if ([disconnectOrLogout isEqualToString:sDISCONNECTEMAIL] || [disconnectOrLogout isEqualToString:sDISCONNECTRENREN] || [disconnectOrLogout isEqualToString:sDISCONNECTWEIBO]) disconnectOrLogout = nil;
+	if (!disconnectOrLogout && !otherButtonTitle) return ;
 	
 	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:nil
 													  delegate:self
@@ -403,6 +405,8 @@
 									  [self loading:NO];
 									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
 								  }];
+							  } else if ([result isKindOfClass:[NSDictionary class]]) {
+								  NSLog(@"%@", result);
 							  } else {
 								  [self loading:NO];
 								  [self showAlert:[result description]];//NSLog(%"%@", [error description]);

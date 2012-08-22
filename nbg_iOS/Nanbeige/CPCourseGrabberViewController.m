@@ -83,7 +83,7 @@
 					[self.root bindToObject:dict];
 					UIImage *image = [UIImage imageWithData:data];
 					CGFloat width = image.size.width * 31.0 / image.size.height;
-					UIImageView *captchaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(290 - width, 6, width, 31)];
+					UIImageView *captchaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(252 - width, 6, width, 31)];
 					captchaImageView.image = image;
 					
 					[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];

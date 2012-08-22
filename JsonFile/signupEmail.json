@@ -10,7 +10,8 @@
 							  "placeholder":"Email",
 							  "keyboardType":"EmailAddress",
 							  "bind":"textValue:email",
-							  "autocorrectionType":"No"
+							  "autocorrectionType":"No",
+							  "autocapitalizationType":"None"
 							  },
 							  {
 							  "type":"QEntryElement",

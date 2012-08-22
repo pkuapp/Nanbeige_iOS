@@ -85,8 +85,10 @@
 		for (NSString *lessonDocumentID in self.course.lessons) {
 			Lesson *lesson = [Lesson modelForDocument:[self.localDatabase documentWithID:lessonDocumentID]];
 			NSNumber *day = lesson.day;
+			NSNumber *start = lesson.start;
+			NSNumber *end = lesson.end;
 			for (NSNumber *week in lesson.week) {
-				[tempArray addObject:@{ @"day" : day, @"week" : week }];
+				[tempArray addObject:@{ @"day" : day, @"week" : week , @"start" : start, @"end" : end }];
 			}
 		}
 		_weeksData = [tempArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -94,10 +96,18 @@
 			int day1 = [[obj1 objectForKey:@"day"] intValue];
 			int week2 = [[obj2 objectForKey:@"week"] intValue];
 			int day2 = [[obj2 objectForKey:@"day"] intValue];
+			int start1 = [[obj1 objectForKey:@"start"] intValue];
+			int start2 = [[obj2 objectForKey:@"start"] intValue];
+			int end1 = [[obj1 objectForKey:@"end"] intValue];
+			int end2 = [[obj2 objectForKey:@"end"] intValue];
 			if (week1 < week2) return NSOrderedAscending;
 			if (week1 > week2) return NSOrderedDescending;
 			if (day1 < day2) return NSOrderedAscending;
 			if (day1 > day2) return NSOrderedDescending;
+			if (start1 < start2) return NSOrderedAscending;
+			if (start1 > start2) return NSOrderedDescending;
+			if (end1 < end2) return NSOrderedAscending;
+			if (end1 > end2) return NSOrderedDescending;
 			return NSOrderedSame;
 		}];
 		bCourseUpdated = NO;
@@ -197,9 +207,15 @@
 - (void)refreshDisplay
 {
 	// Once Course Changed
-	if (bCourseChanged && self.coursesData.count && self.weeksData.count && [self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
-		self.assignment.due_lesson = [self.weeksData objectAtIndex:0];
-		self.assignment.due_display = [CPAssignmentDeadlineViewController displayFromWeekDay:_assignment.due_lesson];
+	if (bCourseChanged && self.coursesData.count && [self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
+		if (self.weeksData.count) {
+			self.assignment.due_lesson = [self.weeksData objectAtIndex:0];
+			self.assignment.due_display = [CPAssignmentDeadlineViewController displayFromWeekDay:self.assignment.due_lesson];
+		} else {
+			self.assignment.due_type = TYPE_ON_DATE;
+			self.assignment.due_date = [NSDate date];
+			self.assignment.due_display = [CPAssignmentDeadlineViewController displayFromDate:self.assignment.due_date];
+		}
 	}
 	
 	QEntryElement *contentElement = [[[self.root.sections objectAtIndex:0] elements] objectAtIndex:0];

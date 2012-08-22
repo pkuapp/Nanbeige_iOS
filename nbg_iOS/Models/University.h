@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * support_import_course;
 @property (nonatomic, retain) NSNumber * support_list_course;
+@property (nonatomic, retain) NSNumber * support_ta;
 @property (nonatomic, retain) NSNumber * lessons_count_evening;
 @property (nonatomic, retain) NSNumber * lessons_count_total;
 @property (nonatomic, retain) NSNumber * lessons_count_morning;

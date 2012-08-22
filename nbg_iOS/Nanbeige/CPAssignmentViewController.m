@@ -320,6 +320,8 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
 	[(id)cell courseName].text = assignment.course_name;
+	if ([assignment.due_type isEqualToString:TYPE_ON_LESSON] && [[(id)cell courseName].text length] > 5) [(id)cell courseName].text = [NSString stringWithFormat:@"%@...", [[(id)cell courseName].text substringToIndex:5]];
+	if ([assignment.due_type isEqualToString:TYPE_ON_DATE] && [[(id)cell courseName].text length] > 7) [(id)cell courseName].text =  [NSString stringWithFormat:@"%@...", [[(id)cell courseName].text substringToIndex:7]];
 	[(id)cell assignmentName].text = assignment.content;
 	[(id)cell assignmentTime].text = assignment.due_display;
 	if ([assignment.has_image boolValue]) {

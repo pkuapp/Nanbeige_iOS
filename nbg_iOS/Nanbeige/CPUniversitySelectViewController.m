@@ -152,6 +152,7 @@
 					university.name = [universityDict objectForKey:@"name"];
 					university.support_import_course = [[universityDict objectForKey:@"support"] objectForKey:@"import_course"];
 					university.support_list_course = [[universityDict objectForKey:@"support"] objectForKey:@"list_course"];
+					university.support_ta = [[universityDict objectForKey:@"support"] objectForKey:@"ta"];
 					university.lessons_count_afternoon = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"afternoon"];
 					university.lessons_count_evening = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"evening"];
 					university.lessons_count_morning = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"morning"];

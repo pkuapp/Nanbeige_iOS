@@ -19,6 +19,7 @@
 @dynamic campuses;
 @dynamic support_import_course;
 @dynamic support_list_course;
+@dynamic support_ta;
 @dynamic lessons_count_evening;
 @dynamic lessons_count_total;
 @dynamic lessons_count_morning;
