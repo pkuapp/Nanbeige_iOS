@@ -111,7 +111,7 @@
 				
 			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
-				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 			}];
 			
 			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -127,7 +127,7 @@
 				
 			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
-				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 			}];
 			
 			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -194,7 +194,8 @@
 
 - (void)onConnectEmail:(id)sender
 {
-	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
+	[self showAlert:@"绑定Email功能暂未实现"];
+//	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
 }
 
 - (void)onConnectWeibo:(id)sender
@@ -211,11 +212,11 @@
 	NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
 	[self.renren authorizationInNavigationWithPermisson:permissions
 											andDelegate:self];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 - (void)onLaunchActionSheet:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	NSString *disconnectOrLogout = [dictLABEL2ACTIONSHEET objectForKey:[sender title]];
 	NSString *otherButtonTitle = nil;
 	if ([[sender title] isEqualToString:sEMAIL]) {
@@ -230,6 +231,7 @@
 										destructiveButtonTitle:disconnectOrLogout
 											 otherButtonTitles:otherButtonTitle, nil];
 	[menu showInView:self.view];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 #pragma mark - ActionSheetDelegate Setup
@@ -255,10 +257,10 @@
 
 - (void)onEditPassword:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	passwordEditAlert = [[UIAlertView alloc] initWithTitle:sEDITPASSWORD message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
 	passwordEditAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
 	[passwordEditAlert show];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 - (void)onLocalRenrenLogout:(id)sender
@@ -295,7 +297,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		NSLog(@"AccountManage:onLocalEmailLogout %@", [error description]);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -360,16 +362,16 @@
 											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
-											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+											  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 										  }];
 									  } else {
 										  [self loading:NO];
-										  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
+										  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 									  }
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
 										 [self loading:NO];
-										 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+										 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 									 }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -403,18 +405,18 @@
 
 								  } error:^(CPRequest *request, NSError *error) {
 									  [self loading:NO];
-									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+									  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 								  }];
 							  } else if ([result isKindOfClass:[NSDictionary class]]) {
-								  NSLog(@"%@", result);
+								  NSLog(@"AccountManage:renrenDidLogin %@", result);
 							  } else {
 								  [self loading:NO];
-								  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
+								  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+								 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 							 }
 	 ];
 	

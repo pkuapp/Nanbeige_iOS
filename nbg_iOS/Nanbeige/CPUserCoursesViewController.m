@@ -81,9 +81,16 @@
 
 - (void)viewDidUnload
 {
+	progressHud = nil;
 	[self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	[progressHud hide:YES];
 }
 
 #pragma mark - Display
@@ -146,6 +153,8 @@
 		
 		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
 		
+		if (!self) return ;
+		
 		if ([collection isKindOfClass:[NSArray class]]) {
 			
 			NSMutableArray *courses = [[NSMutableArray alloc] init];
@@ -185,19 +194,19 @@
 					lesson.week = [lessonDict objectForKey:@"week"];
 					
 					RESTOperation *lessonSaveOp = [lesson save];
-					if ([lessonSaveOp wait])
-						[lessons addObject:lesson.document.documentID];
-					else
+					if (lessonSaveOp && ![lessonSaveOp wait])
 						[self showAlert:[lessonSaveOp.error description]];
+					else
+						[lessons addObject:lesson.document.documentID];
 					
 				}
 				course.lessons = lessons;
 				
 				RESTOperation *courseSaveOp = [course save];
-				if ([courseSaveOp wait])
-					[courses addObject:course.document.documentID];
-				else
+				if (courseSaveOp && ![courseSaveOp wait])
 					[self showAlert:[courseSaveOp.error description]];
+				else
+					[courses addObject:course.document.documentID];
 				
 			}
 			
@@ -221,7 +230,7 @@
 	} error:^(CPRequest *request, NSError *error) {
 		[progressHud hide:YES afterDelay:0.5];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	progressHud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].delegate.window];

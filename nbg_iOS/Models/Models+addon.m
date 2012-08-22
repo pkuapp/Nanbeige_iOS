@@ -37,6 +37,16 @@ static User *sharedAppUserObject = nil;
 	if ([dict objectForKey:@"nickname"]) {
         user.nickname = [dict objectForKey:@"nickname"];
     }
+	if ([dict objectForKey:@"password"]) {
+		user.password = [dict objectForKey:@"password"];
+	}
+	
+	if ([dict objectForKey:@"gate_id"]) {
+		user.gate_id = [dict objectForKey:@"gate_id"];
+	}
+	if ([dict objectForKey:@"gate_password"]) {
+		user.gate_password = [dict objectForKey:@"gate_password"];
+	}
 	
     if ([dict objectForKey:@"email"]) {
         user.email = [dict objectForKey:@"email"];
@@ -103,7 +113,7 @@ static User *sharedAppUserObject = nil;
 			}
 			courseListDocument = row.document;
 		}
-	} else NSLog(@"%@", queryOp.error);
+	} else NSLog(@"Models+addon:userCourseListDocument %@", queryOp.error);
 	
 	if (!courseListDocument) courseListDocument = [localDatabase untitledDocument];
 	return courseListDocument;
@@ -136,13 +146,13 @@ static User *sharedAppUserObject = nil;
 	if ([queryOp wait]) {
 		for (CouchQueryRow *row in query.rows) {
 			if (course && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"course"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:course_id]) {
-				NSLog(@"%@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				NSLog(@"Models+addon:courseWithID %@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
 				[row.document DELETE];
 			}
 			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:course_id])
 				course = [Course modelForDocument:row.document];
 		}
-	} else NSLog(@"%@", queryOp.error);
+	} else NSLog(@"Models+addon:courseWithID %@", queryOp.error);
 	if (!course) course = [[Course alloc] initWithNewDocumentInDatabase:localDatabase];
 	return course;
 }
@@ -169,13 +179,13 @@ static User *sharedAppUserObject = nil;
 	if ([queryOp wait]) {
 		for (CouchQueryRow *row in query.rows) {
 			if (university && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"university"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:university_id]) {
-				NSLog(@"%@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				NSLog(@"Models+addon:universityWithID %@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
 				[row.document DELETE];
 			}
 			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:university_id])
 				university = [University modelForDocument:row.document];
 		}
-	} else NSLog(@"%@", queryOp.error);
+	} else NSLog(@"Models+addon:universityWithID %@", queryOp.error);
 	if (!university) university = [[University alloc] initWithNewDocumentInDatabase:localDatabase];
 	return university;
 }

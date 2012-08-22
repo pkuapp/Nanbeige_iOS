@@ -27,7 +27,7 @@
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = NO;
+    self.quickDialogTableView.bounces = YES;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
@@ -117,12 +117,12 @@
 			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 		} else {
 			[self loading:NO];
-			[self showAlert:[collection description]];//NSLog(%"%@", [error description]);
+			[self showAlert:[collection description]];//NSLog(@"%@", [error description]);
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -133,6 +133,7 @@
 {
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	[self performSegueWithIdentifier:@"SignupEmailSegue" sender:self];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 @end

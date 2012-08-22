@@ -30,7 +30,7 @@
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = NO;
+    self.quickDialogTableView.bounces = YES;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
@@ -135,6 +135,7 @@
 	NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
 	[self.renren authorizationInNavigationWithPermisson:permissions
 											andDelegate:self];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 #pragma mark - WBEngineDelegate
@@ -176,22 +177,22 @@
 						
 					} error:^(CPRequest *request, NSError *error) {
 						[self loading:NO];
-						[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+						[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 					}];
 					
                 } else {
 					[self loading:NO];
-					[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+					[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 				}
             }];
         } else {
 			[self loading:NO];
-			[self showAlert:[result description]];//NSLog(%"%@", [error description]);
+			[self showAlert:[result description]];//NSLog(@"%@", [error description]);
 		}
     }
     fail:^(WBRequest *request, NSError *error) {
         [self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
     }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -263,26 +264,26 @@
 											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
-											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+											  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 										  }];
 										  
 									  } else {
 										  [self loading:NO];
-										  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+										  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 									  }
 									  
 								  }];
 								  
 							  } else if ([result isKindOfClass:[NSDictionary class]]) {
-								  NSLog(@"%@", result);
+								  NSLog(@"Sign:renrenDidLogin %@", result);
 							  } else {
 								  [self loading:NO];
-								  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
+								  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+								 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 							 }
 	 ];
 	

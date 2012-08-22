@@ -64,6 +64,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="support_import_course" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="support_list_course" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="support_ta" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="semesters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Semester" inverseName="university" inverseEntity="Semester" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="university" inverseEntity="User" syncable="YES"/>
     </entity>
@@ -71,8 +72,11 @@
         <attribute name="campus_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="campus_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gate_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gate_password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="realname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="renren_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="renren_token" optional="YES" attributeType="String" syncable="YES"/>
@@ -90,7 +94,7 @@
         <element name="Course" positionX="160" positionY="192" width="128" height="195"/>
         <element name="Lesson" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Semester" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="User" positionX="160" positionY="192" width="128" height="255"/>
         <element name="University" positionX="160" positionY="192" width="128" height="255"/>
+        <element name="User" positionX="160" positionY="192" width="128" height="330"/>
     </elements>
 </model>

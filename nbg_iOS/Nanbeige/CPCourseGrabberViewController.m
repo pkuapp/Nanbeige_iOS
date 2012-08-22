@@ -98,13 +98,13 @@
 				
 			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
-				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 			}];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -203,19 +203,19 @@
 						lesson.week = [lessonDict objectForKey:@"week"];
 						
 						RESTOperation *lessonSaveOp = [lesson save];
-						if ([lessonSaveOp wait])
-							[lessons addObject:lesson.document.documentID];
-						else
+						if (lessonSaveOp && ![lessonSaveOp wait])
 							[self showAlert:[lessonSaveOp.error description]];
+						else
+							[lessons addObject:lesson.document.documentID];
 						
 					}
 					course.lessons = lessons;
 					
 					RESTOperation *courseSaveOp = [course save];
-					if ([courseSaveOp wait])
-						[courses addObject:course.document.documentID];
-					else
+					if (courseSaveOp && ![courseSaveOp wait])
 						[self showAlert:[courseSaveOp.error description]];
+					else
+						[courses addObject:course.document.documentID];
 					
 				}
 				
@@ -237,12 +237,12 @@
 			
 		} error:^(CPRequest *request, NSError *error) {
 			[self loading:NO];
-			[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+			[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 		}];
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];

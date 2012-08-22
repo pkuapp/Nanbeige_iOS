@@ -186,7 +186,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 }

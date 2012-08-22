@@ -172,7 +172,7 @@
 			
 		} error:^(CPRequest *request, NSError *error) {
 			[self loading:NO];
-			[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+			[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 		}];
 		
 		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -182,7 +182,6 @@
 
 - (void)onDisplayCompleteAssignments:(id)sender
 {
-	NSLog(@"%@", sender);
 	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
 	CPAssignmentViewController *avc = [sb instantiateViewControllerWithIdentifier:@"AssignmentListIdentifier"];
 	avc.courseIdFilter = self.course.id;
@@ -240,7 +239,7 @@
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
 

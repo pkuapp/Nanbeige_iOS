@@ -21,7 +21,7 @@
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = NO;
+    self.quickDialogTableView.bounces = YES;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
@@ -80,6 +80,7 @@
 {
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kMAINORDERKEY];
 	[[[UIAlertView alloc] initWithTitle:nil message:@"已重置" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil] show];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 - (void)onAbout:(id)sender

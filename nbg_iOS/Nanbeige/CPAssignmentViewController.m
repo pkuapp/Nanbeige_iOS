@@ -346,9 +346,9 @@
 	RESTOperation *op = [assignment save];
 	[op onCompletion:^{
 		if (op.error) {
-			NSLog(@"%@", op.error);
+			NSLog(@"Assignment:changeComplete %@", op.error);
 		} else {
-			NSLog(@"%@", @"更新完毕");
+			NSLog(@"Assignment:changeComplete %@", @"更新完毕");
 		}
 	}];
 	

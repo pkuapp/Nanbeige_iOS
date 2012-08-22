@@ -76,6 +76,10 @@
 			for (int i = 0; i < cnt; i++) {
 				[newOrder addObject:[NSString stringWithFormat:@"%d", i]];
 			}
+			NSString * neworderStr = [newOrder componentsJoinedByString:@","];
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			[defaults setValue:neworderStr forKey:kMAINORDERKEY];
+			[defaults synchronize];
 		};
 		_functionOrder = [[NSArray alloc] initWithArray:newOrder];
 	}
@@ -146,10 +150,19 @@
 		[[self.functionArray objectAtIndex:0] setObject:@"Line3Button2Identifier" forKey:@"identifier"];
 		[[self.functionArray objectAtIndex:0] setObject:@"CPLine3Button2Cell" forKey:@"nibname"];
 	}
-	[self.tableView reloadData];
+
 //	self.connector.delegate = self;
 	if (self.itsCell) {
 		[self changeDetailGateInfo:nil isConnecting:NO];
+	}
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	if (![self.functionOrder isEqualToArray:[[self.defaults valueForKey:kMAINORDERKEY] componentsSeparatedByString:@","]]) {
+		self.functionOrder = nil;
+		[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 }
 

@@ -272,8 +272,8 @@
 	self.assignment.doc_type = @"assignment";
 	
 	RESTOperation *op = [self.assignment save];
-	if (![op wait]) {
-		NSLog(@"%@", op.error);
+	if (op && ![op wait]) {
+		NSLog(@"AssignmentCreate:onConfirm %@", op.error);
 	} else {
 		[self dismissModalViewControllerAnimated:YES];
 	}

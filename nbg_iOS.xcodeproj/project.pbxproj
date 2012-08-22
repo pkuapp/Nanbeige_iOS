@@ -11,10 +11,9 @@
 		261D308F15DAB34200E6BDBD /* University.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D308D15DAB34200E6BDBD /* University.m */; };
 		261D309215DAB38600E6BDBD /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309115DAB38600E6BDBD /* Semester.m */; };
 		261D309315DAB38600E6BDBD /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309115DAB38600E6BDBD /* Semester.m */; };
-		261D309615DAB7E200E6BDBD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309515DAB7E200E6BDBD /* User.m */; };
-		261D309715DAB7E200E6BDBD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309515DAB7E200E6BDBD /* User.m */; };
 		262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */; };
 		262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 262A4A1615D94F1D001BAC03 /* assignmentCourse.json */; };
+		26820FC215E518E60058DB6B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26820FC115E518E60058DB6B /* User.m */; };
 		269CBB0115DC108900B5CF2C /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0015DC108900B5CF2C /* course.json */; };
 		269CBB0415DC10A100B5CF2C /* CPCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */; };
 		269CBB0715DC1E5C00B5CF2C /* CPCourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */; };
@@ -878,8 +877,8 @@
 		414AFDFF15D512A500EFFB60 /* CPSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8B15D512A500EFFB60 /* CPSignViewController.m */; };
 		414AFE0015D512A500EFFB60 /* CPUniversitySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8D15D512A500EFFB60 /* CPUniversitySelectViewController.m */; };
 		414AFE0115D512A500EFFB60 /* CPUniversitySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8D15D512A500EFFB60 /* CPUniversitySelectViewController.m */; };
-		414AFE0215D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */; };
-		414AFE0315D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */; };
+		414AFE0215D512A500EFFB60 /* CPSigninConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8F15D512A500EFFB60 /* CPSigninConfirmViewController.m */; };
+		414AFE0315D512A500EFFB60 /* CPSigninConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD8F15D512A500EFFB60 /* CPSigninConfirmViewController.m */; };
 		414AFE0415D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */; };
 		414AFE0515D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */; };
 		414AFE0815D512A500EFFB60 /* CPCoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFD9515D512A500EFFB60 /* CPCoursesTableViewController.m */; };
@@ -1017,11 +1016,11 @@
 		261D308D15DAB34200E6BDBD /* University.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = University.m; path = Models/University.m; sourceTree = "<group>"; };
 		261D309015DAB38600E6BDBD /* Semester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semester.h; path = Models/Semester.h; sourceTree = "<group>"; };
 		261D309115DAB38600E6BDBD /* Semester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Semester.m; path = Models/Semester.m; sourceTree = "<group>"; };
-		261D309415DAB7E100E6BDBD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
-		261D309515DAB7E200E6BDBD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCourseViewController.h; sourceTree = "<group>"; };
 		262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCourseViewController.m; sourceTree = "<group>"; };
 		262A4A1615D94F1D001BAC03 /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCourse.json; sourceTree = "<group>"; };
+		26820FC015E518E60058DB6B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		26820FC115E518E60058DB6B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		269CBB0015DC108900B5CF2C /* course.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
 		269CBB0215DC10A000B5CF2C /* CPCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseViewController.h; sourceTree = "<group>"; };
 		269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseViewController.m; sourceTree = "<group>"; };
@@ -1673,8 +1672,8 @@
 		414AFD8B15D512A500EFFB60 /* CPSignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignViewController.m; sourceTree = "<group>"; };
 		414AFD8C15D512A500EFFB60 /* CPUniversitySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUniversitySelectViewController.h; sourceTree = "<group>"; };
 		414AFD8D15D512A500EFFB60 /* CPUniversitySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUniversitySelectViewController.m; sourceTree = "<group>"; };
-		414AFD8E15D512A500EFFB60 /* CPSigninComfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSigninComfirmViewController.h; sourceTree = "<group>"; };
-		414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSigninComfirmViewController.m; sourceTree = "<group>"; };
+		414AFD8E15D512A500EFFB60 /* CPSigninConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSigninConfirmViewController.h; sourceTree = "<group>"; };
+		414AFD8F15D512A500EFFB60 /* CPSigninConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSigninConfirmViewController.m; sourceTree = "<group>"; };
 		414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseGrabberViewController.h; sourceTree = "<group>"; };
 		414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseGrabberViewController.m; sourceTree = "<group>"; };
 		414AFD9415D512A500EFFB60 /* CPCoursesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoursesTableViewController.h; sourceTree = "<group>"; };
@@ -2328,8 +2327,8 @@
 				414AFD9D15D512A500EFFB60 /* CPSignupEmailViewController.m */,
 				414AFD8C15D512A500EFFB60 /* CPUniversitySelectViewController.h */,
 				414AFD8D15D512A500EFFB60 /* CPUniversitySelectViewController.m */,
-				414AFD8E15D512A500EFFB60 /* CPSigninComfirmViewController.h */,
-				414AFD8F15D512A500EFFB60 /* CPSigninComfirmViewController.m */,
+				414AFD8E15D512A500EFFB60 /* CPSigninConfirmViewController.h */,
+				414AFD8F15D512A500EFFB60 /* CPSigninConfirmViewController.m */,
 				4120F2B215D645CF00D0AA97 /* WBEngine+addon.h */,
 				4120F2B315D645CF00D0AA97 /* WBEngine+addon.m */,
 				414AFDCC15D512A500EFFB60 /* CPWeiboLoginViewController.h */,
@@ -2940,8 +2939,8 @@
 				261D309015DAB38600E6BDBD /* Semester.h */,
 				261D309115DAB38600E6BDBD /* Semester.m */,
 				411DBBDF15CB9E4000EDB31D /* nbg_iOS.xcdatamodeld */,
-				261D309415DAB7E100E6BDBD /* User.h */,
-				261D309515DAB7E200E6BDBD /* User.m */,
+				26820FC015E518E60058DB6B /* User.h */,
+				26820FC115E518E60058DB6B /* User.m */,
 				26F14ED615DA3F2F00C8E74E /* Course.h */,
 				26F14ED715DA3F2F00C8E74E /* Course.m */,
 				26F14EDA15DA3F3000C8E74E /* Lesson.h */,
@@ -3709,7 +3708,7 @@
 				414AFDFC15D512A500EFFB60 /* CPCampusSelectViewController.m in Sources */,
 				414AFDFE15D512A500EFFB60 /* CPSignViewController.m in Sources */,
 				414AFE0015D512A500EFFB60 /* CPUniversitySelectViewController.m in Sources */,
-				414AFE0215D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */,
+				414AFE0215D512A500EFFB60 /* CPSigninConfirmViewController.m in Sources */,
 				414AFE0415D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */,
 				414AFE0815D512A500EFFB60 /* CPCoursesTableViewController.m in Sources */,
 				414AFE0A15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */,
@@ -3880,7 +3879,6 @@
 				26F14EDC15DA3F3000C8E74E /* Lesson.m in Sources */,
 				261D308E15DAB34200E6BDBD /* University.m in Sources */,
 				261D309215DAB38600E6BDBD /* Semester.m in Sources */,
-				261D309615DAB7E200E6BDBD /* User.m in Sources */,
 				269CBB0415DC10A100B5CF2C /* CPCourseViewController.m in Sources */,
 				269CBB0715DC1E5C00B5CF2C /* CPCourseDetailViewController.m in Sources */,
 				26D6208D15DCED5F000AB849 /* CPTabBarController.m in Sources */,
@@ -3892,6 +3890,7 @@
 				4163D83E15DD3B4000BFE89E /* PKURoomCell.m in Sources */,
 				4163D84415DD3B4000BFE89E /* QueryResultsController.m in Sources */,
 				4163D84615DD3B4000BFE89E /* RoomControlButton.m in Sources */,
+				26820FC215E518E60058DB6B /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3937,7 +3936,7 @@
 				414AFDFD15D512A500EFFB60 /* CPCampusSelectViewController.m in Sources */,
 				414AFDFF15D512A500EFFB60 /* CPSignViewController.m in Sources */,
 				414AFE0115D512A500EFFB60 /* CPUniversitySelectViewController.m in Sources */,
-				414AFE0315D512A500EFFB60 /* CPSigninComfirmViewController.m in Sources */,
+				414AFE0315D512A500EFFB60 /* CPSigninConfirmViewController.m in Sources */,
 				414AFE0515D512A500EFFB60 /* CPCourseGrabberViewController.m in Sources */,
 				414AFE0915D512A500EFFB60 /* CPCoursesTableViewController.m in Sources */,
 				414AFE0B15D512A500EFFB60 /* CPAssignmentCreateViewController.m in Sources */,
@@ -4107,7 +4106,6 @@
 				26F14EDD15DA3F3000C8E74E /* Lesson.m in Sources */,
 				261D308F15DAB34200E6BDBD /* University.m in Sources */,
 				261D309315DAB38600E6BDBD /* Semester.m in Sources */,
-				261D309715DAB7E200E6BDBD /* User.m in Sources */,
 				26D6209215DD221F000AB849 /* CPLabelMutipleLinesElement.m in Sources */,
 				26D6209615DD2519000AB849 /* CPPostEntryElement.m in Sources */,
 				26D6209A15DD26AE000AB849 /* CPDashboardViewController.m in Sources */,

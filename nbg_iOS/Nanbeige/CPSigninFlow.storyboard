@@ -23,11 +23,11 @@
             </objects>
             <point key="canvasLocation" x="390" y="-2304"/>
         </scene>
-        <!--Signin Comfirm View Controller-->
+        <!--Signin Confirm View Controller-->
         <scene sceneID="yVv-5F-5t8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLb-ys-YWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="n42-FH-vyM" customClass="CPSigninComfirmViewController" sceneMemberID="viewController">
+                <viewController id="n42-FH-vyM" customClass="CPSigninConfirmViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fni-C2-b5y">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -115,9 +115,6 @@
     <classes>
         <class className="CPSignViewController" superclassName="QuickDialogController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSignViewController.h"/>
-        </class>
-        <class className="CPSigninComfirmViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSigninComfirmViewController.h"/>
         </class>
         <class className="CPSigninEmailViewController" superclassName="QuickDialogController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSigninEmailViewController.h"/>

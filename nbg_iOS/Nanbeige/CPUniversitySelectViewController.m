@@ -70,7 +70,7 @@
 			university.name = university_name;
 			university.campuses = [universityDict objectForKey:@"campuses"];
 			RESTOperation *op = [university save];
-			if (![op wait]) NSLog(@"%@", op.error);
+			if (op && ![op wait]) [self showAlert:[op.error description]];
 			
 			for (NSDictionary *campusDict in [universityDict objectForKey:@"campuses"]) {
 				NSDictionary *displayCampus = @{
@@ -93,7 +93,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -137,12 +137,12 @@
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
 	NSDictionary *campus = [campuses objectAtIndex:index];
 	
-	[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
 		
-		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
+		[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 			
 			[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [[campus objectForKey:@"university"] objectForKey:@"id"]] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-				
+			
 				if ([collection isKindOfClass:[NSDictionary class]]) {
 					NSDictionary *universityDict = collection;
 					
@@ -162,7 +162,7 @@
 					
 					RESTOperation *op = [university save];
 					
-					if (![op wait]) [self showAlert:[op.error description]];
+					if (op && ![op wait]) [self showAlert:[op.error description]];
 					else {
 						[User updateSharedAppUserProfile:campus];
 						[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCOURSE_IMPORTED];
@@ -178,18 +178,20 @@
 				
 			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
-				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 			}];
 			
-		} else {
+		} error:^(CPRequest *request, NSError *error) {
 			[self loading:NO];
-			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
-		}
+			[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		}];
 		
-	} error:^(CPRequest *request, NSError *error) {
+	} else {
+		[User updateSharedAppUserProfile:campus];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCOURSE_IMPORTED];
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
-	}];
+		[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+	}
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 	[self loading:YES];

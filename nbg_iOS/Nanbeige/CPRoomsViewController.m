@@ -242,7 +242,7 @@
 		[self syncNextRooms];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
 
@@ -298,7 +298,7 @@
 		[self syncNextRooms];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
 

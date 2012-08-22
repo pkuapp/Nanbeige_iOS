@@ -25,7 +25,8 @@
 				 "elementTemplate": {
 				 "type":"QEntryElement",
 				 "bind":"textValue:captcha, placeholder:placeholder",
-				 "autocorrectionType":"No"
+				 "autocorrectionType":"No",
+				 "autocapitalizationType":"None"
 				 }
 				 }
 				 ]

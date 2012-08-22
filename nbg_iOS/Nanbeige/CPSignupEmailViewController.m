@@ -28,7 +28,7 @@
     [super setQuickDialogTableView:aQuickDialogTableView];
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = NO;
+    self.quickDialogTableView.bounces = YES;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
 }
 
@@ -49,7 +49,7 @@
 	// Do any additional setup after loading the view.
 	UIBarButtonItem *signupButton = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleBordered target:self action:@selector(onSignup:)];
 	self.navigationItem.rightBarButtonItem = signupButton;
-
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleBordered target:nil action:nil];
 }
 
 - (void)viewDidUnload
@@ -94,24 +94,32 @@
         [self showAlert:@"密码不能为空！"];
 		return ;
     }
+	if ([nickname length] <= 0) {
+        [self showAlert:@"昵称不能为空！"];
+		return ;
+    }
 	
-	[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:@{@"email":email, @"password":password ,@"nickname":nickname} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-		
-		[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
-		[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
-		[User updateSharedAppUserProfile:collection];
-		
-		[self loading:NO];
-		
-		[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
-		
-	} error:^(CPRequest *request, NSError *error) {
-		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
-	}];
+	[User updateSharedAppUserProfile:@{ @"email" : email, @"nickname" : nickname, @"password" : password }];
 	
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-    [self loading:YES];
+	[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
+	
+//	[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:@{@"email":email, @"password":password ,@"nickname":nickname} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+//		
+//		[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
+//		[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
+//		[User updateSharedAppUserProfile:collection];
+//		
+//		[self loading:NO];
+//		
+//		[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
+//		
+//	} error:^(CPRequest *request, NSError *error) {
+//		[self loading:NO];
+//		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+//	}];
+//	
+//    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+//    [self loading:YES];
 }
 
 @end

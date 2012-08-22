@@ -6,16 +6,16 @@
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "CPSigninComfirmViewController.h"
+#import "CPSigninConfirmViewController.h"
 #import "Environment.h"
 #import "Coffeepot.h"
 #import "Models+addon.h"
 
-@interface CPSigninComfirmViewController ()
+@interface CPSigninConfirmViewController ()
 
 @end
 
-@implementation CPSigninComfirmViewController
+@implementation CPSigninConfirmViewController
 
 #pragma mark - Setter and Getter Methods
 
@@ -136,7 +136,8 @@
 
 - (void)onConnectEmail:(id)sender
 {
-	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
+	[self showAlert:@"绑定Email功能暂未实现"];
+//	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
 }
 
 - (void)onConnectWeibo:(id)sender
@@ -156,10 +157,38 @@
 }
 
 - (void)onConfirmLogin:(id)sender
-{
-	[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+{	
+	if (![[User sharedAppUser].id integerValue]) {
+		NSMutableDictionary *params = [@{@"email":[User sharedAppUser].email, @"password":[User sharedAppUser].password, @"nickname":[User sharedAppUser].nickname} mutableCopy];
+		if ([User sharedAppUser].campus_id) [params setObject:[User sharedAppUser].campus_id forKey:@"campus_id"];
+		[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+
+			[[NSUserDefaults standardUserDefaults] setObject:[User sharedAppUser].email forKey:@"sync_db_username"];
+			[[NSUserDefaults standardUserDefaults] setObject:[User sharedAppUser].password forKey:@"sync_db_password"];
+			[User updateSharedAppUserProfile:collection];
+			
+			[self onFetchUniversityInformation];
+
+		} error:^(CPRequest *request, NSError *error) {
+			[self loading:NO];
+			if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"Email 已被使用。"]) {
+				[self showAlert:[error.userInfo objectForKey:@"error"]];
+			} else {
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+			}
+		}];
+		
+	} else {
+		[self onFetchUniversityInformation];
+	}
 	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
+	
+}
+
+- (void)onFetchUniversityInformation
+{
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
 		if ([collection isKindOfClass:[NSDictionary class]]) {
@@ -179,8 +208,10 @@
 			university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
 			
 			RESTOperation *op = [university save];
-			if (![op wait]) [self showAlert:[op.error description]];
+			if (op && ![op wait]) [self showAlert:[op.error description]];
 			else {
+				[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
+				[[NSUserDefaults standardUserDefaults] synchronize];
 				UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
 				[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
 			}
@@ -194,12 +225,8 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
-	
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
-	
 }
 
 #pragma mark - WBEngineDelegate
@@ -223,16 +250,16 @@
 											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
-											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+											  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 										  }];
 									  } else {
 										  [self loading:NO];
-										  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
+										  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 									  }
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
 										 [self loading:NO];
-										 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+										 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 									 }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -266,18 +293,18 @@
 
 								  } error:^(CPRequest *request, NSError *error) {
 									  [self loading:NO];
-									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+									  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 								  }];
 							  } else if ([result isKindOfClass:[NSDictionary class]]) {
-								  NSLog(@"%@", result);
+								  NSLog(@"SigninConfirm:renrenDidLogin %@", result);
 							  } else {
 								  [self loading:NO];
-								  [self showAlert:[result description]];//NSLog(%"%@", [error description]);
+								  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+								 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 							 }
 	 ];
 	
