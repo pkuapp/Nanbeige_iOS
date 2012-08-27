@@ -68,7 +68,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	self.view.BackgroundColor = tableBgColorGrouped;
 	
 	self.paginatorView.frame = self.view.bounds;
@@ -84,7 +83,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	
 	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;

@@ -125,7 +125,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.title = TITLE_ASSIGNMENT;
-	self.completeSegmentedControl.tintColor = navBarBgColor1;
 	
 	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     

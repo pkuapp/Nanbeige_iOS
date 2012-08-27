@@ -50,8 +50,6 @@
 //	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
 	self.navigationItem.rightBarButtonItem = loginButton;
 //	self.navigationItem.leftBarButtonItem = closeButton;
-	
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;	
 }
 
 - (void)viewWillAppear:(BOOL)animated

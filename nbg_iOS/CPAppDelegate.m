@@ -12,6 +12,7 @@
 #import "CPAppModule.h"
 #import "Models/Models+addon.h"
 #import "Coffeepot.h"
+#import <QuartzCore/CALayer.h>
 
 @interface CPAppDelegate ()
 
@@ -56,10 +57,44 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	[[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-pressed-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 19, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlEventTouchUpInside barMetrics:UIBarMetricsDefault];
+	
+	[[UINavigationBar appearance] setFrame:CGRectMake(0, 20, 320, 50)];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavigationBar"] forBarMetrics:UIBarMetricsDefault];
+	
+	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] };
+	[[UINavigationBar appearance] setTitleTextAttributes:titleTextAttributes];
+	
+	[[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"TabBar"]];
+//	[[UITabBarItem appearance] setFinishedSelectedImage:[UIImage imageNamed:@"TabBar-selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"TabBar-selected"]];
+	
+	
+//    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)]  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    
+//    [[UISegmentedControl appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+//    
+//    [[UISegmentedControl appearance] setDividerImage:[UIImage imageNamed:@"btn-segmented-divider.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"nbg_iOS"];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+
+	UIImage *overlayImg = [UIImage imageNamed:@"corners"];
+	CALayer *overlay = [CALayer layer];
+	overlay.frame = CGRectMake(0, 20, overlayImg.size.width, overlayImg.size.height);
+	overlay.contents = (id)overlayImg.CGImage;
+	overlay.zPosition = 1;
+	[self.window.layer addSublayer:overlay];
+	
     JSObjectionInjector *injector = [JSObjection createInjector:[[CPAppModule alloc] init]];
     [JSObjection setDefaultInjector:injector];
 	

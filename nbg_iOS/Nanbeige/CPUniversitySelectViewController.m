@@ -47,13 +47,6 @@
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
 		UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
 		self.navigationItem.leftBarButtonItem = closeButton;
-		self.navigationController.navigationBar.tintColor = navBarBgColor1;
-		
-		NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-		if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-		[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-		[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-		self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 	}
 	
 	[[Coffeepot shared] requestWithMethodPath:@"university/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {

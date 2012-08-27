@@ -131,14 +131,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.imageView.superview.backgroundColor = tableBgColorGrouped;
-	
-	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 	
 	if (!_bCreate) self.title = @"修改作业计划";
 	

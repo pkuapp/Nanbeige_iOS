@@ -116,15 +116,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
 	self.tableView.backgroundColor = tableBgColorGrouped;
-	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.title = TITLE_MAIN;
-	
-	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 		
 //	self.connector = [[CPIPGateHelper alloc] init];
 	

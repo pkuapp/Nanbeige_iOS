@@ -189,6 +189,13 @@
 
 - (void)onFetchUniversityInformation
 {
+	if (![[User sharedAppUser].university_id integerValue]) {
+		[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+		[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
+	}
+	
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
 		if ([collection isKindOfClass:[NSDictionary class]]) {
