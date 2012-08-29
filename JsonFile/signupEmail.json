@@ -15,8 +15,9 @@
 							  },
 							  {
 							  "type":"QEntryElement",
-							  "placeholder":"昵称",
-							  "bind":"textValue:nickname"
+							  "placeholder":"密码",
+							  "secureTextEntry":true,
+							  "bind":"textValue:password"
 							  }
 							  ]
 				 },
@@ -24,9 +25,8 @@
 				 "elements":[
 							 {
 							 "type":"QEntryElement",
-							 "placeholder":"密码",
-							 "secureTextEntry":true,
-							 "bind":"textValue:password"
+							 "placeholder":"昵称",
+							 "bind":"textValue:nickname"
 							 }
 							 ]
 				 }

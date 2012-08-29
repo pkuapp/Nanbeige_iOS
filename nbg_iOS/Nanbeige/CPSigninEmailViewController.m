@@ -84,7 +84,7 @@
 
 #pragma mark - Button controllerAction
 
-- (void)onLogin:(UIBarButtonItem *)sender {
+- (void)onLogin:(id)sender {
 	NSMutableDictionary *loginInfo = [[NSMutableDictionary alloc] init];
     [self.root fetchValueUsingBindingsIntoObject:loginInfo];
 	email = [loginInfo objectForKey:kAPIEMAIL];
