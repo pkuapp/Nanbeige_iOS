@@ -12,6 +12,7 @@
 #import "Course.h"
 #import "Lesson.h"
 #import "University.h"
+#import "Weekset.h"
 
 @interface User (addon)
 
@@ -23,6 +24,9 @@
 
 @interface Course (addon)
 
++ (CouchDocument *)courseListDocument;
++ (Course *)courseAtIndex:(NSInteger)index
+				   courseList:(NSArray *)courseList;
 + (CouchDocument *)userCourseListDocument;
 + (Course *)userCourseAtIndex:(NSInteger)index
 				   courseList:(NSArray *)courseList;
@@ -33,5 +37,17 @@
 @interface University (addon)
 
 + (University *)universityWithID:(NSNumber *)university_id;
+
+@end
+
+@interface Semester (addon)
+
++ (Semester *)semesterWithID:(NSNumber *)semester_id;
+
+@end
+
+@interface Weekset (addon)
+
++ (Weekset *)weeksetWithID:(NSNumber *)weekset_id;
 
 @end

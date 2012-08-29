@@ -2,7 +2,7 @@
 //  User.h
 //  nbg_iOS
 //
-//  Created by ZongZiWang on 12-8-22.
+//  Created by ZongZiWang on 12-8-30.
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
@@ -16,18 +16,21 @@
 @property (nonatomic, retain) NSNumber * campus_id;
 @property (nonatomic, retain) NSString * campus_name;
 @property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSString * gate_id;
+@property (nonatomic, retain) NSString * gate_password;
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * nickname;
-@property (nonatomic, retain) NSString * realname;
+@property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSString * renren_name;
 @property (nonatomic, retain) NSString * renren_token;
 @property (nonatomic, retain) NSNumber * university_id;
 @property (nonatomic, retain) NSString * university_name;
 @property (nonatomic, retain) NSString * weibo_name;
 @property (nonatomic, retain) NSString * weibo_token;
-@property (nonatomic, retain) NSString * password;
-@property (nonatomic, retain) NSString * gate_id;
-@property (nonatomic, retain) NSString * gate_password;
+@property (nonatomic, retain) NSNumber * weibo_id;
+@property (nonatomic, retain) NSNumber * renren_id;
+@property (nonatomic, retain) NSArray * course_imported;
+
 @property (nonatomic, retain) NSSet *assignments;
 @property (nonatomic, retain) NSSet *courses;
 @property (nonatomic, retain) NSSet *lessons;

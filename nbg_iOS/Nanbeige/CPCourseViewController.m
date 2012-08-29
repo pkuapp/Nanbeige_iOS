@@ -68,6 +68,7 @@
 {
 	[super viewWillAppear:animated];
 	[self refreshDisplay];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)viewDidUnload
@@ -96,8 +97,61 @@
 	[alertView show];
 }
 
+- (void)onDeselectCourse:(id)sender
+{
+	[self showAlert:@"暂不开放退选功能"];
+}
+
+- (void)onDeauditCourse:(id)sender
+{
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/edit/", self.course.id] params:@{ @"status" : @"none" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		
+		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
+		self.navigationItem.rightBarButtonItem = auditButton;
+		
+		[self loading:NO];
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[self loading:NO];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
+}
+
+- (void)onAuditCourse:(id)sender
+{
+	
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/edit/", self.course.id] params:@{ @"status" : @"audit" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		
+		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
+		self.navigationItem.rightBarButtonItem = auditButton;
+		
+		[self loading:NO];
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[self loading:NO];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
+}
+
 - (void)setupCourseDetail
 {
+	if ([self.course.status isEqualToString:@"select"]) {
+		UIBarButtonItem *selectButton = [[UIBarButtonItem alloc] initWithTitle:@"已选" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeselectCourse:)];
+		self.navigationItem.rightBarButtonItem = selectButton;
+	} else if ([self.course.status isEqualToString:@"audit"]) {
+		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
+		self.navigationItem.rightBarButtonItem = auditButton;
+	} else {
+		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
+		self.navigationItem.rightBarButtonItem = auditButton;
+	}
+	
 	UIButton *courseDetailView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 105)];
 	[courseDetailView addTarget:self action:@selector(onDisplayCourseDetail:) forControlEvents:UIControlStateHighlighted];
 	courseDetailView.backgroundColor = tableBgColorPlain;
@@ -117,7 +171,7 @@
 	NSString *time = @"", *place = @"";
 	for (NSString *lessonDocumentID in self.course.lessons) {
 		Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
-		time = [time stringByAppendingFormat:@"%@%@-%@节 ", [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+		time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", [Weekset weeksetWithID:lesson.weekset_id].name, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
 		place = [place stringByAppendingFormat:@"%@ ", lesson.location];
 	}
 	
@@ -140,14 +194,10 @@
 {
 	self.assignments = [@[ @{ @"title" : @"已完成的作业...", @"controllerAction" : @"onDisplayCompleteAssignments:"} ] mutableCopy];
 	
-	NSDictionary *dict = @{ @"assignments" : self.assignments, @"comments" : self.comments };
+	NSArray *commentWithPost = [self.comments arrayByAddingObject:@{ @"title" : @"我说" , @"controllerAction" : @"onPost:" }];
+	
+	NSDictionary *dict = @{ @"assignments" : self.assignments, @"comments" : commentWithPost };
 	[self.root bindToObject:dict];
-
-	QSection *commentsSection = [[self.root sections] objectAtIndex:1];
-	CPPostEntryElement *addCommentEntry = [[CPPostEntryElement alloc] initWithTitle:nil Value:nil Placeholder:@"我说..."];
-	[addCommentEntry setDelegate:self];
-	if ([commentsSection elements]) [[commentsSection elements] insertObject:addCommentEntry atIndex:0];
-	else [commentsSection addElement:addCommentEntry];
 	
 }
 
@@ -161,6 +211,11 @@
 - (void)onDisplayCourseDetail:(id)sender
 {
 	[self performSegueWithIdentifier:@"CourseDetailSegue" sender:self];
+}
+
+- (void)onPost:(id)sender
+{
+	[self performSegueWithIdentifier:@"PostSegue" sender:self];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -188,15 +243,6 @@
 	avc.bInitShowComplete = YES;
 	[self.navigationController pushViewController:avc animated:YES];
 }
-
-- (void)QEntryDidEndEditingElement:(QEntryElement *)element andCell:(QEntryTableViewCell *)cell
-{
-	if (!element.textValue.length) return ;
-	UIAlertView *postAlert = [[UIAlertView alloc] initWithTitle:@"确认发送" message:element.textValue delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-	[postAlert show];
-}
-
-
 
 #pragma mark - Data Source Loading / Reloading Methods
 

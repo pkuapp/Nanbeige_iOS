@@ -13,7 +13,6 @@
 		261D309315DAB38600E6BDBD /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309115DAB38600E6BDBD /* Semester.m */; };
 		262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */; };
 		262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 262A4A1615D94F1D001BAC03 /* assignmentCourse.json */; };
-		26820FC215E518E60058DB6B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26820FC115E518E60058DB6B /* User.m */; };
 		269CBB0115DC108900B5CF2C /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0015DC108900B5CF2C /* course.json */; };
 		269CBB0415DC10A100B5CF2C /* CPCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */; };
 		269CBB0715DC1E5C00B5CF2C /* CPCourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */; };
@@ -482,6 +481,14 @@
 		26D6209615DD2519000AB849 /* CPPostEntryElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209415DD2518000AB849 /* CPPostEntryElement.m */; };
 		26D6209915DD26AE000AB849 /* CPDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209815DD26AC000AB849 /* CPDashboardViewController.m */; };
 		26D6209A15DD26AE000AB849 /* CPDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209815DD26AC000AB849 /* CPDashboardViewController.m */; };
+		26DE6FA115EE7E74009BE27A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FA015EE7E74009BE27A /* User.m */; };
+		26DE6FA215EE7E74009BE27A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FA015EE7E74009BE27A /* User.m */; };
+		26DE6FA615EE8875009BE27A /* Weekset.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FA515EE8875009BE27A /* Weekset.m */; };
+		26DE6FA715EE8875009BE27A /* Weekset.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FA515EE8875009BE27A /* Weekset.m */; };
+		26DE6FAA15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FA915EE8F2E009BE27A /* CPCoursesAllViewController.m */; };
+		26DE6FAB15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FA915EE8F2E009BE27A /* CPCoursesAllViewController.m */; };
+		26DE6FAE15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */; };
+		26DE6FAF15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */; };
 		26F14ED315DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED415DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED815DA3F3000C8E74E /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED715DA3F2F00C8E74E /* Course.m */; };
@@ -1139,8 +1146,6 @@
 		262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCourseViewController.h; sourceTree = "<group>"; };
 		262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCourseViewController.m; sourceTree = "<group>"; };
 		262A4A1615D94F1D001BAC03 /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCourse.json; sourceTree = "<group>"; };
-		26820FC015E518E60058DB6B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
-		26820FC115E518E60058DB6B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		269CBB0015DC108900B5CF2C /* course.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
 		269CBB0215DC10A000B5CF2C /* CPCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseViewController.h; sourceTree = "<group>"; };
 		269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseViewController.m; sourceTree = "<group>"; };
@@ -1384,6 +1389,14 @@
 		26D6209415DD2518000AB849 /* CPPostEntryElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPostEntryElement.m; sourceTree = "<group>"; };
 		26D6209715DD26AB000AB849 /* CPDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDashboardViewController.h; sourceTree = "<group>"; };
 		26D6209815DD26AC000AB849 /* CPDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDashboardViewController.m; sourceTree = "<group>"; };
+		26DE6F9F15EE7E74009BE27A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		26DE6FA015EE7E74009BE27A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
+		26DE6FA415EE8875009BE27A /* Weekset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Weekset.h; path = Models/Weekset.h; sourceTree = "<group>"; };
+		26DE6FA515EE8875009BE27A /* Weekset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Weekset.m; path = Models/Weekset.m; sourceTree = "<group>"; };
+		26DE6FA815EE8F2D009BE27A /* CPCoursesAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoursesAllViewController.h; sourceTree = "<group>"; };
+		26DE6FA915EE8F2E009BE27A /* CPCoursesAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoursesAllViewController.m; sourceTree = "<group>"; };
+		26DE6FAC15EEA84E009BE27A /* CPCoursePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoursePostViewController.h; sourceTree = "<group>"; };
+		26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoursePostViewController.m; sourceTree = "<group>"; };
 		26F14ED115DA253F00C8E74E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		26F14ED215DA253F00C8E74E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		26F14ED615DA3F2F00C8E74E /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
@@ -2314,8 +2327,12 @@
 				414AFD9515D512A500EFFB60 /* CPCoursesTableViewController.m */,
 				414AFDC515D512A500EFFB60 /* CPUserCoursesViewController.h */,
 				414AFDC615D512A500EFFB60 /* CPUserCoursesViewController.m */,
+				26DE6FA815EE8F2D009BE27A /* CPCoursesAllViewController.h */,
+				26DE6FA915EE8F2E009BE27A /* CPCoursesAllViewController.m */,
 				269CBB0215DC10A000B5CF2C /* CPCourseViewController.h */,
 				269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */,
+				26DE6FAC15EEA84E009BE27A /* CPCoursePostViewController.h */,
+				26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */,
 				269CBB0515DC1E5B00B5CF2C /* CPCourseDetailViewController.h */,
 				269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */,
 				414AFDCA15D512A500EFFB60 /* CPTimeTable.h */,
@@ -3195,9 +3212,11 @@
 				261D308D15DAB34200E6BDBD /* University.m */,
 				261D309015DAB38600E6BDBD /* Semester.h */,
 				261D309115DAB38600E6BDBD /* Semester.m */,
+				26DE6F9F15EE7E74009BE27A /* User.h */,
+				26DE6FA015EE7E74009BE27A /* User.m */,
 				411DBBDF15CB9E4000EDB31D /* nbg_iOS.xcdatamodeld */,
-				26820FC015E518E60058DB6B /* User.h */,
-				26820FC115E518E60058DB6B /* User.m */,
+				26DE6FA415EE8875009BE27A /* Weekset.h */,
+				26DE6FA515EE8875009BE27A /* Weekset.m */,
 				26F14ED615DA3F2F00C8E74E /* Course.h */,
 				26F14ED715DA3F2F00C8E74E /* Course.m */,
 				26F14EDA15DA3F3000C8E74E /* Lesson.h */,
@@ -4267,7 +4286,10 @@
 				4163D83E15DD3B4000BFE89E /* PKURoomCell.m in Sources */,
 				4163D84415DD3B4000BFE89E /* QueryResultsController.m in Sources */,
 				4163D84615DD3B4000BFE89E /* RoomControlButton.m in Sources */,
-				26820FC215E518E60058DB6B /* User.m in Sources */,
+				26DE6FA115EE7E74009BE27A /* User.m in Sources */,
+				26DE6FA615EE8875009BE27A /* Weekset.m in Sources */,
+				26DE6FAA15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */,
+				26DE6FAE15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4491,6 +4513,10 @@
 				4163D83F15DD3B4000BFE89E /* PKURoomCell.m in Sources */,
 				4163D84515DD3B4000BFE89E /* QueryResultsController.m in Sources */,
 				4163D84715DD3B4000BFE89E /* RoomControlButton.m in Sources */,
+				26DE6FA215EE7E74009BE27A /* User.m in Sources */,
+				26DE6FA715EE8875009BE27A /* Weekset.m in Sources */,
+				26DE6FAB15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */,
+				26DE6FAF15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

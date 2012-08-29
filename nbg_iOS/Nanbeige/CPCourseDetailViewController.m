@@ -59,7 +59,7 @@
 	NSString *time = @"", *place = @"", *teachers = @"", *tas = @"";
 	for (NSString *lessonDocumentID in self.course.lessons) {
 		Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
-		time = [time stringByAppendingFormat:@"%@%@-%@节 ", [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+		time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", [Weekset weeksetWithID:lesson.weekset_id].name, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
 		place = [place stringByAppendingFormat:@"%@ ", lesson.location];
 	}
 	for (NSString *teacher in self.course.teacher) {

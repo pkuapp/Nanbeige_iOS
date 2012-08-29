@@ -13,6 +13,7 @@
 
 @interface CPUniversitySelectViewController () {
 	NSMutableArray *campuses;
+	NSDictionary *campus_selected;
 }
 
 @end
@@ -128,51 +129,13 @@
 - (void)onCampusSelect:(id)sender
 {
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
-	NSDictionary *campus = [campuses objectAtIndex:index];
+	campus_selected = [campuses objectAtIndex:index];
 	
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
 		
-		[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus_selected objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 			
-			[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [[campus objectForKey:@"university"] objectForKey:@"id"]] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-			
-				if ([collection isKindOfClass:[NSDictionary class]]) {
-					NSDictionary *universityDict = collection;
-					
-					University *university = [University universityWithID:[[campus objectForKey:@"university"] objectForKey:@"id"]];
-					university.doc_type = @"university";
-					university.id = [[campus objectForKey:@"university"] objectForKey:@"id"];
-					university.name = [universityDict objectForKey:@"name"];
-					university.support_import_course = [[universityDict objectForKey:@"support"] objectForKey:@"import_course"];
-					university.support_list_course = [[universityDict objectForKey:@"support"] objectForKey:@"list_course"];
-					university.support_ta = [[universityDict objectForKey:@"support"] objectForKey:@"ta"];
-					university.lessons_count_afternoon = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"afternoon"];
-					university.lessons_count_evening = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"evening"];
-					university.lessons_count_morning = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"morning"];
-					university.lessons_count_total = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"total"];
-					university.lessons_detail = [[universityDict objectForKey:@"lessons"] objectForKey:@"detail"];
-					university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
-					
-					RESTOperation *op = [university save];
-					
-					if (op && ![op wait]) [self showAlert:[op.error description]];
-					else {
-						[User updateSharedAppUserProfile:campus];
-						[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCOURSE_IMPORTED];
-						[self dismissModalViewControllerAnimated:YES];
-					}
-					
-					[self loading:NO];
-					
-				} else {
-					[self loading:NO];
-					[self showAlert:@"返回结果不是NSDictionary"];
-				}
-				
-			} error:^(CPRequest *request, NSError *error) {
-				[self loading:NO];
-				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
-			}];
+			[self onFetchUniversity:[[campus_selected objectForKey:@"university"] objectForKey:@"id"]];
 			
 		} error:^(CPRequest *request, NSError *error) {
 			[self loading:NO];
@@ -180,14 +143,135 @@
 		}];
 		
 	} else {
-		[User updateSharedAppUserProfile:campus];
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCOURSE_IMPORTED];
 		[self loading:NO];
-		[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+		[self onComplete];
 	}
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 	[self loading:YES];
+}
+
+- (void)onFetchUniversity:(NSNumber *)university_id
+{
+	
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+		
+		if ([collection isKindOfClass:[NSDictionary class]]) {
+			NSDictionary *universityDict = collection;
+			
+			University *university = [University universityWithID:university_id];
+			university.doc_type = @"university";
+			university.id = university_id;
+			university.name = [universityDict objectForKey:@"name"];
+			university.support_import_course = [[universityDict objectForKey:@"support"] objectForKey:@"import_course"];
+			university.support_list_course = [[universityDict objectForKey:@"support"] objectForKey:@"list_course"];
+			university.lessons_count_afternoon = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"afternoon"];
+			university.lessons_count_evening = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"evening"];
+			university.lessons_count_morning = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"morning"];
+			university.lessons_count_total = [[[universityDict objectForKey:@"lessons"] objectForKey:@"count"] objectForKey:@"total"];
+			university.lessons_detail = [[universityDict objectForKey:@"lessons"] objectForKey:@"detail"];
+			university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
+			
+			RESTOperation *op = [university save];
+			if (op && ![op wait]) [self showAlert:[op.error description]];
+			else {
+				[self onFetchSemester:university_id];
+			}
+			
+		} else {
+			[self loading:NO];
+			[self showAlert:@"University返回结果不是NSDictionary"];
+		}
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[self loading:NO];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+}
+
+- (void)onFetchSemester:(NSNumber *)university_id
+{
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/semester/", university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+		
+		if ([collection isKindOfClass:[NSArray class]]) {
+			
+			for (NSDictionary *semesterDict in collection) {
+				
+				Semester *semester = [Semester semesterWithID:[semesterDict objectForKey:@"id"]];
+				
+				semester.doc_type = @"semester";
+				semester.id = [semesterDict objectForKey:@"id"];
+				semester.name = [semesterDict objectForKey:@"name"];
+				semester.year = [semesterDict objectForKey:@"year"];
+				semester.week_start = [[semesterDict objectForKey:@"week"] objectForKey:@"start"];
+				semester.week_end = [[semesterDict objectForKey:@"week"] objectForKey:@"end"];
+				
+				RESTOperation *op = [semester save];
+				if (op && ![op wait])
+					[self showAlert:[op.error description]];
+				else {
+					[self onFetchWeekset:[semesterDict objectForKey:@"id"]];
+				}
+			}
+			
+			[self loading:NO];
+			
+			[self onComplete];
+			
+		} else {
+			[self loading:NO];
+			[self showAlert:@"Semester返回结果不是NSArray"];
+		}
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[self loading:NO];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+}
+
+- (void)onFetchWeekset:(NSNumber *)semester_id
+{
+	
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/semester/%@/weekset/", semester_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+		
+		if ([collection isKindOfClass:[NSArray class]]) {
+			
+			for (NSDictionary *weeksetDict in collection) {
+				
+				Weekset *weekset = [Weekset weeksetWithID:[weeksetDict objectForKey:@"id"]];
+				
+				weekset.doc_type = @"weekset";
+				weekset.id = [weeksetDict objectForKey:@"id"];
+				weekset.name = [weeksetDict objectForKey:@"name"];
+				weekset.weeks = [weeksetDict objectForKey:@"weeks"];
+				
+				RESTOperation *op = [weekset save];
+				if (op && ![op wait])
+					[self showAlert:[op.error description]];
+				else {
+					return ;
+				}
+			}
+			
+		} else {
+			[self loading:NO];
+			[self showAlert:@"Weekset返回结果不是NSArray"];
+		}
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[self loading:NO];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+}
+
+- (void)onComplete
+{
+	[User updateSharedAppUserProfile:campus_selected];
+	[User updateSharedAppUserProfile:@{ @"course_imported" : @[] }];
+	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue])
+		[self dismissModalViewControllerAnimated:YES];
+	else
+		[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
 }
 
 @end

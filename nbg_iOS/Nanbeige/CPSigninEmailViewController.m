@@ -103,10 +103,6 @@
 		
 		if ([collection isKindOfClass:[NSDictionary class]]) {
 			
-			NSArray *semesters = [collection objectForKey:@"course_imported"];
-			if (semesters.count) [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCOURSE_IMPORTED];
-			else [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCOURSE_IMPORTED];
-			
 			[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
 			[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
 			[User updateSharedAppUserProfile:collection];

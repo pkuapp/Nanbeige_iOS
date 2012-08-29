@@ -11,9 +11,7 @@
 #import "CPAssignmentDeadlineViewController.h"
 #import "CPAssignmentCourseViewController.h"
 #import "Environment.h"
-#import "Assignment.h"
-#import "Course.h"
-#import "Lesson.h"
+#import "Models+addon.h"
 
 #define DISPLAY_COURSE
 
@@ -87,7 +85,7 @@
 			NSNumber *day = lesson.day;
 			NSNumber *start = lesson.start;
 			NSNumber *end = lesson.end;
-			for (NSNumber *week in lesson.week) {
+			for (NSNumber *week in [Weekset weeksetWithID:lesson.weekset_id].weeks) {
 				[tempArray addObject:@{ @"day" : day, @"week" : week , @"start" : start, @"end" : end }];
 			}
 		}

@@ -13,7 +13,6 @@
 
 @interface CPTimeTable () <UITableViewDataSource, UITableViewDelegate> {
 	NSMutableArray *separators;
-	NSArray *todayCourses;
 }
 
 @property (nonatomic) int rowHeight;
@@ -28,14 +27,6 @@
 		_university = [University universityWithID:[User sharedAppUser].university_id];
 	}
 	return _university;
-}
-
-- (NSArray *)courses
-{
-	if (_courses == nil) {
-		_courses = [[Course userCourseListDocument] propertyForKey:@"value"];
-	}
-	return _courses;
 }
 
 - (UITableView *)timeTable
@@ -87,16 +78,8 @@
 		[separators addObject:separator];
 	}
 	
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"w";
-	NSInteger week = [[formatter stringFromDate:_date] integerValue] - [[formatter stringFromDate:[NSDate date]] integerValue] + 1;
-	formatter.dateFormat = @"e";
-	NSInteger weekday = ([[formatter stringFromDate:_date] integerValue] + 5) % 7 + 1;
-	
-	todayCourses = [self coursesAtWeekday:weekday Week:week];
-	
-	for (int index = 0; index < todayCourses.count; index++) {
-		NSDictionary *course = [todayCourses objectAtIndex:index];
+	for (int index = 0; index < self.todayCourses.count; index++) {
+		NSDictionary *course = [self.todayCourses objectAtIndex:index];
 		NSInteger start = [[course objectForKey:kAPISTART] integerValue];
 		NSInteger end = [[course objectForKey:kAPIEND] integerValue];
 		NSString *name = [course objectForKey:kAPINAME];
@@ -113,7 +96,7 @@
 		[self addSeparatorAtOffsetY:end * self.rowHeight - 2 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseFooter2];
 		[self addSeparatorAtOffsetY:end * self.rowHeight - TIMETABLESEPARATORHEIGHT WithColor:separatorColorNoCourseFooter];
 		
-		if (index >= todayCourses.count - 1 || [[[todayCourses objectAtIndex:index + 1] objectForKey:@"start"] integerValue] > end + 1) {
+		if (index >= self.todayCourses.count - 1 || [[[self.todayCourses objectAtIndex:index + 1] objectForKey:@"start"] integerValue] > end + 1) {
 			[self addSeparatorAtOffsetY:end * self.rowHeight WithColor:separatorColorCourseShadow1];
 			[self addSeparatorAtOffsetY:end * self.rowHeight + TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseShadow2];
 			[self addSeparatorAtOffsetY:end * self.rowHeight + 2 * TIMETABLESEPARATORHEIGHT WithColor:separatorColorCourseShadow3];
@@ -174,33 +157,6 @@
 	return [[self.university.lessons_separators objectAtIndex:index] integerValue];
 }
 
-- (NSArray *)coursesAtWeekday:(NSInteger)weekday
-						 Week:(NSInteger)week
-{
-	NSMutableArray *result = [[NSMutableArray alloc] init];
-	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-	for (int i = 0; i < self.courses.count; i++) {
-		Course *course = [Course userCourseAtIndex:i courseList:self.courses];
-		for (NSString *lessonDocumentID in course.lessons) {
-			Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
-			NSInteger lessonDay = [lesson.day integerValue];
-			NSArray *weeks = lesson.week;
-			if (lessonDay == weekday && [weeks containsObject:[NSNumber numberWithInteger:week]]) {
-				[result addObject:
-				     @{@"start" : lesson.start,
-						 @"end" : lesson.end,
-						@"name" : course.name,
-					@"location" : lesson.location,
-			@"courseDocumentID" : course.document.documentID}];
-			}
-		}
-	}
-	return [result sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-		if ([[obj1 objectForKey:@"start"] integerValue] < [[obj2 objectForKey:@"start"] integerValue]) return NSOrderedAscending;
-		return NSOrderedDescending;
-	}];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -215,7 +171,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.backgroundColor = tableBgColorGrouped;
-	for (NSDictionary *course in todayCourses) {
+	for (NSDictionary *course in self.todayCourses) {
 		NSInteger start = [[course objectForKey:kAPISTART] integerValue];
 		NSInteger end = [[course objectForKey:kAPIEND] integerValue];
 		if (start - 1 <= indexPath.row && indexPath.row < end) {

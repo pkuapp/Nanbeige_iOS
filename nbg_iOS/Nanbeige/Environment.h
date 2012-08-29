@@ -123,6 +123,7 @@
 #define TITLE_ITS @"IP网关"
 #define TITLE_ASSIGNMENT @"作业"
 #define TITLE_SELECTED_COURSE @"我的课程"
+#define TITLE_ALL_COURSE @"课程目录"
 #define FORMAT_TITLE_ROOMS @"教学楼・%@"
 #define LIMIT_ROOM_STRING_LENGTH 20
 
@@ -173,7 +174,7 @@
 #define completeAssignmentCellColor [UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1.0]
 
 #define kMAINORDERKEY @"mainorder"
-#define kCOURSE_IMPORTED @"course_imported"
+//#define kCOURSE_IMPORTED @"course_imported"
 
 #define kWEIBOIDKEY @"weiboid"
 #define kWEIBONAMEKEY @"weiboname"

@@ -151,7 +151,7 @@
 	if (captcha) [params setObject:captcha forKey:@"captcha"];
 	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/start/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kCOURSE_IMPORTED];
+		[User updateSharedAppUserProfile:@{ @"course_imported" : collection }];
 		
 		[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 			
@@ -193,7 +193,7 @@
 						lesson.end = [lessonDict objectForKey:@"end"];
 						lesson.day = [lessonDict objectForKey:@"day"];
 						lesson.location = [lessonDict objectForKey:@"location"];
-						lesson.week = [lessonDict objectForKey:@"week"];
+						lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
 						
 						RESTOperation *lessonSaveOp = [lesson save];
 						if (lessonSaveOp && ![lessonSaveOp wait])
@@ -212,7 +212,7 @@
 					
 				}
 				
-				NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];
+				NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"usercourselist", @"value" : courses } mutableCopy];
 				CouchDocument *courseListDocument = [Course userCourseListDocument];
 				if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
 				RESTOperation *putOp = [courseListDocument putProperties:courseListDict];

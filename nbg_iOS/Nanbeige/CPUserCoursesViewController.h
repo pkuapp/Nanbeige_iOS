@@ -17,6 +17,8 @@
 }
 
 @property (strong, nonatomic) NSMutableArray *courses;
+@property (strong, nonatomic) NSMutableArray *coursesSelect;
+@property (strong, nonatomic) NSMutableArray *coursesAudit;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

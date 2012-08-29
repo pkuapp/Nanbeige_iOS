@@ -65,7 +65,7 @@
     
     [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlEventTouchUpInside barMetrics:UIBarMetricsDefault];
 	
-	[[UINavigationBar appearance] setFrame:CGRectMake(0, 20, 320, 50)];
+//	[[UINavigationBar appearance] setFrame:CGRectMake(0, 20, 320, 50)];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavigationBar"] forBarMetrics:UIBarMetricsDefault];
 	
 	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] };

@@ -147,7 +147,7 @@
 				
 				[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
 				[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
-                [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
+                [User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
 				[User updateSharedAppUserProfile:collection];
 				
 				[self loading:NO];
@@ -161,7 +161,7 @@
 					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {					
 						[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
 						[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
-						[User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
+						[User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
 						[User updateSharedAppUserProfile:collection];
 						
 						[self loading:NO];
@@ -233,7 +233,7 @@
 									  
 									  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
 									  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
-									  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
+									  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
 									  [User updateSharedAppUserProfile:collection];
 									  
 									  [self loading:NO];
@@ -248,7 +248,7 @@
 											  
 											  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
 											  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
-											  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
+											  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
 											  [User updateSharedAppUserProfile:collection];
 											  
 											  [self loading:NO];

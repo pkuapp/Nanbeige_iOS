@@ -14,6 +14,7 @@
 @interface Course : CouchModel
 
 @property (nonatomic, retain) NSString * doc_type;
+@property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSNumber * semester_id;
 @property (nonatomic, retain) NSNumber * credit;
