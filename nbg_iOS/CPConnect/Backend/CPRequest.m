@@ -62,13 +62,10 @@ static NSString* pAPIPort = @"333";
 	}
 	
 	if ([result isKindOfClass:[NSDictionary class]]) {
-
-//		if ([result objectForKey:@"error_code"] != nil) {
-			if (error != nil && self.status_code >= 400) {
-				*error = [self formError:self.status_code userInfo:result];
-                return nil;
-			}
-//		}
+		if ([result objectForKey:@"error_code"] || (error != nil && self.status_code >= 400)) {
+			*error = [self formError:self.status_code userInfo:result];
+			return nil;
+		}
 	}
 	
 	return result;

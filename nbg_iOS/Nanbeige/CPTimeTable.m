@@ -35,7 +35,7 @@
 		for (UIView *subview in [self subviews]) [subview removeFromSuperview];
 		_timeTable = [[UITableView alloc] initWithFrame:self.bounds];
 		_timeTable.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		_timeTable.backgroundColor = tableBgColorGrouped;
+		_timeTable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 		_timeTable.bounces = FALSE;
 		_timeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 		_timeTable.delegate = self;
@@ -170,7 +170,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = tableBgColorGrouped;
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	for (NSDictionary *course in self.todayCourses) {
 		NSInteger start = [[course objectForKey:kAPISTART] integerValue];
 		NSInteger end = [[course objectForKey:kAPIEND] integerValue];

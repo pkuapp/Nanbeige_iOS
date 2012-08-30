@@ -23,9 +23,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = YES;
+	[self.quickDialogTableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 #pragma mark - View Lifecycle
@@ -235,7 +233,13 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo isKindOfClass:[NSDictionary class]] && [error.userInfo objectForKey:@"error_code"]) {
+			NSString *errorCode = [error.userInfo objectForKey:@"error_code"];
+			if ([errorCode isEqualToString:@"AuthError"]) [self showAlert:@"用户名或密码错误"];
+			if ([errorCode isEqualToString:@"CaptchaError"]) [self showAlert:@"验证码错误"];
+			if ([errorCode isEqualToString:@"UnknownLoginError"]) [self showAlert:@"未知登录错误"];
+			if ([errorCode isEqualToString:@"GrabError"]) [self showAlert: [error.userInfo objectForKey:@"error"]];
+		} else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];

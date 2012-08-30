@@ -13,6 +13,10 @@
 		261D309315DAB38600E6BDBD /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 261D309115DAB38600E6BDBD /* Semester.m */; };
 		262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */; };
 		262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 262A4A1615D94F1D001BAC03 /* assignmentCourse.json */; };
+		267657E515EF26D900373E2A /* CPCommentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657E415EF26D800373E2A /* CPCommentElement.m */; };
+		267657E615EF26D900373E2A /* CPCommentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657E415EF26D800373E2A /* CPCommentElement.m */; };
+		267657ED15EFB93200373E2A /* CPEntryElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657EC15EFB93100373E2A /* CPEntryElement.m */; };
+		267657EE15EFB93200373E2A /* CPEntryElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657EC15EFB93100373E2A /* CPEntryElement.m */; };
 		269CBB0115DC108900B5CF2C /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0015DC108900B5CF2C /* course.json */; };
 		269CBB0415DC10A100B5CF2C /* CPCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */; };
 		269CBB0715DC1E5C00B5CF2C /* CPCourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */; };
@@ -491,6 +495,12 @@
 		26DE6FAF15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */; };
 		26DE6FB215EEF7E5009BE27A /* CPQTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FB115EEF7E5009BE27A /* CPQTableDelegate.m */; };
 		26DE6FB315EEF7E5009BE27A /* CPQTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FB115EEF7E5009BE27A /* CPQTableDelegate.m */; };
+		26DE6FF415EF180A009BE27A /* NavigationBar-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE6FF215EF1807009BE27A /* NavigationBar-shadow.png */; };
+		26DE6FF515EF180A009BE27A /* NavigationBar-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE6FF215EF1807009BE27A /* NavigationBar-shadow.png */; };
+		26DE6FF615EF180A009BE27A /* NavigationBar-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE6FF315EF1808009BE27A /* NavigationBar-shadow@2x.png */; };
+		26DE6FF715EF180A009BE27A /* NavigationBar-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE6FF315EF1808009BE27A /* NavigationBar-shadow@2x.png */; };
+		26DE6FFA15EF1D38009BE27A /* CPNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FF915EF1D37009BE27A /* CPNavViewController.m */; };
+		26DE6FFB15EF1D38009BE27A /* CPNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FF915EF1D37009BE27A /* CPNavViewController.m */; };
 		26F14ED315DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED415DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED815DA3F3000C8E74E /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED715DA3F2F00C8E74E /* Course.m */; };
@@ -1148,6 +1158,10 @@
 		262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCourseViewController.h; sourceTree = "<group>"; };
 		262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCourseViewController.m; sourceTree = "<group>"; };
 		262A4A1615D94F1D001BAC03 /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCourse.json; sourceTree = "<group>"; };
+		267657E315EF26D800373E2A /* CPCommentElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCommentElement.h; sourceTree = "<group>"; };
+		267657E415EF26D800373E2A /* CPCommentElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCommentElement.m; sourceTree = "<group>"; };
+		267657EB15EFB93000373E2A /* CPEntryElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPEntryElement.h; sourceTree = "<group>"; };
+		267657EC15EFB93100373E2A /* CPEntryElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPEntryElement.m; sourceTree = "<group>"; };
 		269CBB0015DC108900B5CF2C /* course.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
 		269CBB0215DC10A000B5CF2C /* CPCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseViewController.h; sourceTree = "<group>"; };
 		269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseViewController.m; sourceTree = "<group>"; };
@@ -1401,6 +1415,10 @@
 		26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoursePostViewController.m; sourceTree = "<group>"; };
 		26DE6FB015EEF7E5009BE27A /* CPQTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPQTableDelegate.h; sourceTree = "<group>"; };
 		26DE6FB115EEF7E5009BE27A /* CPQTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPQTableDelegate.m; sourceTree = "<group>"; };
+		26DE6FF215EF1807009BE27A /* NavigationBar-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBar-shadow.png"; sourceTree = "<group>"; };
+		26DE6FF315EF1808009BE27A /* NavigationBar-shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBar-shadow@2x.png"; sourceTree = "<group>"; };
+		26DE6FF815EF1D35009BE27A /* CPNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNavViewController.h; sourceTree = "<group>"; };
+		26DE6FF915EF1D37009BE27A /* CPNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNavViewController.m; sourceTree = "<group>"; };
 		26F14ED115DA253F00C8E74E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		26F14ED215DA253F00C8E74E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		26F14ED615DA3F2F00C8E74E /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
@@ -2251,6 +2269,8 @@
 				26CF8DBA15EB13C50011BEBB /* cell-top@2x.png */,
 				26CF8DBD15EB13C50011BEBB /* NavigationBar.png */,
 				26CF8DBE15EB13C50011BEBB /* NavigationBar@2x.png */,
+				26DE6FF215EF1807009BE27A /* NavigationBar-shadow.png */,
+				26DE6FF315EF1808009BE27A /* NavigationBar-shadow@2x.png */,
 				26CF8DBF15EB13C50011BEBB /* TabBar-selected.png */,
 				26CF8DC015EB13C50011BEBB /* TabBar-selected@2x.png */,
 				26CF8DC315EB13C50011BEBB /* TabBar.png */,
@@ -2291,6 +2311,10 @@
 				26D6209415DD2518000AB849 /* CPPostEntryElement.m */,
 				26DE6FB015EEF7E5009BE27A /* CPQTableDelegate.h */,
 				26DE6FB115EEF7E5009BE27A /* CPQTableDelegate.m */,
+				267657E315EF26D800373E2A /* CPCommentElement.h */,
+				267657E415EF26D800373E2A /* CPCommentElement.m */,
+				267657EB15EFB93000373E2A /* CPEntryElement.h */,
+				267657EC15EFB93100373E2A /* CPEntryElement.m */,
 			);
 			name = CPQElement;
 			sourceTree = "<group>";
@@ -3241,6 +3265,10 @@
 				414E13E315D7A7E300000CA8 /* CPMainFlow */,
 				26D6209715DD26AB000AB849 /* CPDashboardViewController.h */,
 				26D6209815DD26AC000AB849 /* CPDashboardViewController.m */,
+				26DE6FF815EF1D35009BE27A /* CPNavViewController.h */,
+				26DE6FF915EF1D37009BE27A /* CPNavViewController.m */,
+				26D6208B15DCED5F000AB849 /* CPTabBarController.h */,
+				26D6208C15DCED5F000AB849 /* CPTabBarController.m */,
 				26D6208E15DD21E3000AB849 /* CPQElement */,
 				414AFD6F15D512A500EFFB60 /* Environment.h */,
 				413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */,
@@ -3265,8 +3293,6 @@
 				414AFD8815D512A500EFFB60 /* CPCampusSelectViewController.h */,
 				414AFD8915D512A500EFFB60 /* CPCampusSelectViewController.m */,
 				41FD95F115D6378B00477483 /* chooseCampus.json */,
-				26D6208B15DCED5F000AB849 /* CPTabBarController.h */,
-				26D6208C15DCED5F000AB849 /* CPTabBarController.m */,
 			);
 			path = Nanbeige;
 			sourceTree = "<group>";
@@ -3727,6 +3753,8 @@
 				26CF8E4615EB13C50011BEBB /* news@2x.png in Resources */,
 				26CF8ECF15EB2BF70011BEBB /* corners.png in Resources */,
 				26CF8ED115EB2BF70011BEBB /* corners@2x.png in Resources */,
+				26DE6FF415EF180A009BE27A /* NavigationBar-shadow.png in Resources */,
+				26DE6FF615EF180A009BE27A /* NavigationBar-shadow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4041,6 +4069,8 @@
 				26CF8E4715EB13C50011BEBB /* news@2x.png in Resources */,
 				26CF8ED015EB2BF70011BEBB /* corners.png in Resources */,
 				26CF8ED215EB2BF70011BEBB /* corners@2x.png in Resources */,
+				26DE6FF515EF180A009BE27A /* NavigationBar-shadow.png in Resources */,
+				26DE6FF715EF180A009BE27A /* NavigationBar-shadow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4297,6 +4327,9 @@
 				26DE6FAA15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */,
 				26DE6FAE15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */,
 				26DE6FB215EEF7E5009BE27A /* CPQTableDelegate.m in Sources */,
+				26DE6FFA15EF1D38009BE27A /* CPNavViewController.m in Sources */,
+				267657E515EF26D900373E2A /* CPCommentElement.m in Sources */,
+				267657ED15EFB93200373E2A /* CPEntryElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4525,6 +4558,9 @@
 				26DE6FAB15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */,
 				26DE6FAF15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */,
 				26DE6FB315EEF7E5009BE27A /* CPQTableDelegate.m in Sources */,
+				26DE6FFB15EF1D38009BE27A /* CPNavViewController.m in Sources */,
+				267657E615EF26D900373E2A /* CPCommentElement.m in Sources */,
+				267657EE15EFB93200373E2A /* CPEntryElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,19 +1,19 @@
 //
-//  CPTabBarController.m
+//  CPNavViewController.m
 //  nbg_iOS
 //
-//  Created by ZongZiWang on 12-8-16.
+//  Created by ZongZiWang on 12-8-30.
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
-#import "CPTabBarController.h"
+#import "CPNavViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface CPTabBarController ()
+@interface CPNavViewController ()
 
 @end
 
-@implementation CPTabBarController
+@implementation CPNavViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,15 +29,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-//	UIImage *shadowImg = [UIImage imageNamed:@"TabBar-shadow"];
-//	CGFloat tabBarTop = self.tabBar.frame.origin.y - shadowImg.size.height;
-//	CALayer *shadowLayer = [CALayer layer];
-//	shadowLayer.frame = CGRectMake(0, tabBarTop, self.view.frame.size.width, shadowImg.size.height);
-//	shadowLayer.contents = (id)shadowImg.CGImage;
-//	shadowLayer.zPosition = 1;
-//	[self.view.layer addSublayer:shadowLayer];
-	
-	[self setSelectedIndex:1];
+	CGFloat navigationBarBottom = self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height;
+	UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
+	CALayer *shadowLayer = [CALayer layer];
+	shadowLayer.frame = CGRectMake(0, navigationBarBottom, self.view.frame.size.width, shadowImg.size.height);
+	shadowLayer.contents = (id)shadowImg.CGImage;
+	shadowLayer.zPosition = 1;
+	[self.view.layer addSublayer:shadowLayer];
 }
 
 - (void)viewDidUnload

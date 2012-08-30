@@ -91,7 +91,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.view.BackgroundColor = tableBgColorGrouped;
+	self.view.BackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
 	self.paginatorView.frame = self.view.bounds;
 	self.paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;

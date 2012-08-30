@@ -17,7 +17,7 @@
 				 "title":"注册用户",
 				 "elements": [
 							  {
-							  "type":"QEntryElement",
+							  "type":"CPEntryElement",
 							  "placeholder":"Email",
 							  "keyboardType":"EmailAddress",
 							  "bind":"textValue:email",
@@ -25,7 +25,7 @@
 							  "autocapitalizationType":"None"
 							  },
 							  {
-							  "type":"QEntryElement",
+							  "type":"CPEntryElement",
 							  "placeholder":"密码",
 							  "secureTextEntry":true,
 							  "bind":"textValue:password"

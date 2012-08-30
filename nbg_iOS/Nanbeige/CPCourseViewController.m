@@ -21,10 +21,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-	self.quickDialogTableView.bounces = YES;
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+	[self.quickDialogTableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-TableView"]]];
 	self.qTableDelegate = [[CPQTableDelegate alloc] initForTableView:self.quickDialogTableView scrollViewDelegate:self];
 	self.quickDialogTableView.delegate = self.qTableDelegate;
 }
@@ -48,7 +45,7 @@
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.quickDialogTableView.bounds.size.height, self.view.frame.size.width, self.quickDialogTableView.bounds.size.height)];
 		view.delegate = self;
-		[view setBackgroundColor:tableBgColorGrouped];
+		[view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 		[self.quickDialogTableView addSubview:view];
 		_refreshHeaderView = view;
 	}
@@ -126,6 +123,8 @@
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/edit/", self.course.id] params:@{ @"status" : @"audit" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
 		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
+		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
 		self.navigationItem.rightBarButtonItem = auditButton;
 		
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
@@ -142,9 +141,13 @@
 {
 	if ([self.course.status isEqualToString:@"select"]) {
 		UIBarButtonItem *selectButton = [[UIBarButtonItem alloc] initWithTitle:@"已选" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeselectCourse:)];
+		[selectButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+		[selectButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
 		self.navigationItem.rightBarButtonItem = selectButton;
 	} else if ([self.course.status isEqualToString:@"audit"]) {
 		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
+		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
 		self.navigationItem.rightBarButtonItem = auditButton;
 	} else {
 		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
@@ -193,11 +196,13 @@
 {
 	self.assignments = [@[ @{ @"title" : @"已完成的作业...", @"controllerAction" : @"onDisplayCompleteAssignments:"} ] mutableCopy];
 	
-	NSArray *commentWithPost = [self.comments arrayByAddingObject:@{ @"title" : @"我说" , @"controllerAction" : @"onPost:" }];
-	
-	NSDictionary *dict = @{ @"assignments" : self.assignments, @"comments" : commentWithPost };
+	NSDictionary *dict = @{ @"assignments" : self.assignments, @"comments" : self.comments };
 	[self.root bindToObject:dict];
 	
+	QSection *commentSection = [[self.root sections] objectAtIndex:1];
+	CPPostEntryElement *commentPostElement = [[CPPostEntryElement alloc] initWithTitle:@"我说" Value:nil];
+	commentPostElement.controllerAction = @"onPost:";
+	[commentSection insertElement:commentPostElement atIndex:0];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -205,7 +210,7 @@
 	if ([segue.identifier isEqualToString:@"CourseDetailSegue"]) {
 		[segue.destinationViewController setCourse:self.course];
 	} else if ([segue.identifier isEqualToString:@"CoursePostSegue"]) {
-		[segue.destinationViewController setCourse_id:self.course.id];
+		[(id)[(UINavigationController *)(segue.destinationViewController) topViewController] setCourse_id:self.course.id];
 	}
 }
 

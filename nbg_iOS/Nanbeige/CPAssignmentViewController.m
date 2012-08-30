@@ -126,6 +126,9 @@
 	// Do any additional setup after loading the view.
 	self.title = TITLE_ASSIGNMENT;
 	
+	self.assignmentsTableView.backgroundColor = tableBgColorPlain;
+	self.completeAssignmentsTableView.backgroundColor = tableBgColorPlain;
+	
 	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     
 	CouchDesignDocument *_design = [self.database designDocumentWithName: @"assignment"];

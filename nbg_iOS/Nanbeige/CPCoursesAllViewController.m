@@ -159,57 +159,57 @@
 		if ([collection isKindOfClass:[NSArray class]]) {
 			
 			NSMutableArray *courses = [[NSMutableArray alloc] init];
-			for (NSDictionary *courseDict in collection) {
-				
-				Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
-				
-				course.doc_type = @"course";
-				course.id = [courseDict objectForKey:@"id"];
-				course.name = [courseDict objectForKey:@"name"];
-				course.credit = [courseDict objectForKey:@"credit"];
-				course.orig_id = [courseDict objectForKey:@"orig_id"];
-				course.semester_id = [courseDict objectForKey:@"semester_id"];
-				course.ta = [courseDict objectForKey:@"ta"];
-				course.teacher = [courseDict objectForKey:@"teacher"];
-				
-				if (course.lessons) {
-					for (NSString *lessonDocumentID in course.lessons) {
-						CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
-						RESTOperation *deleteOp = [lessonDocument DELETE];
-						if (![deleteOp wait])
-							[self showAlert:[deleteOp.error description]];
-					}
-				}
-				
-				NSMutableArray *lessons = [[NSMutableArray alloc] init];
-				for (NSDictionary *lessonDict in [courseDict objectForKey:@"lessons"]) {
-					
-					Lesson *lesson = [[Lesson alloc] initWithNewDocumentInDatabase:localDatabase];
-					
-					lesson.doc_type = @"lesson";
-					lesson.course = course;
-					lesson.start = [lessonDict objectForKey:@"start"];
-					lesson.end = [lessonDict objectForKey:@"end"];
-					lesson.day = [lessonDict objectForKey:@"day"];
-					lesson.location = [lessonDict objectForKey:@"location"];
-					lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
-					
-					RESTOperation *lessonSaveOp = [lesson save];
-					if (lessonSaveOp && ![lessonSaveOp wait])
-						[self showAlert:[lessonSaveOp.error description]];
-					else
-						[lessons addObject:lesson.document.documentID];
-					
-				}
-				course.lessons = lessons;
-				
-				RESTOperation *courseSaveOp = [course save];
-				if (courseSaveOp && ![courseSaveOp wait])
-					[self showAlert:[courseSaveOp.error description]];
-				else
-					[courses addObject:course.document.documentID];
-				
-			}
+//			for (NSDictionary *courseDict in collection) {
+//				
+//				Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
+//				
+//				course.doc_type = @"course";
+//				course.id = [courseDict objectForKey:@"id"];
+//				course.name = [courseDict objectForKey:@"name"];
+//				course.credit = [courseDict objectForKey:@"credit"];
+//				course.orig_id = [courseDict objectForKey:@"orig_id"];
+//				course.semester_id = [courseDict objectForKey:@"semester_id"];
+//				course.ta = [courseDict objectForKey:@"ta"];
+//				course.teacher = [courseDict objectForKey:@"teacher"];
+//				
+//				if (course.lessons) {
+//					for (NSString *lessonDocumentID in course.lessons) {
+//						CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
+//						RESTOperation *deleteOp = [lessonDocument DELETE];
+//						if (![deleteOp wait])
+//							[self showAlert:[deleteOp.error description]];
+//					}
+//				}
+//				
+//				NSMutableArray *lessons = [[NSMutableArray alloc] init];
+//				for (NSDictionary *lessonDict in [courseDict objectForKey:@"lessons"]) {
+//					
+//					Lesson *lesson = [[Lesson alloc] initWithNewDocumentInDatabase:localDatabase];
+//					
+//					lesson.doc_type = @"lesson";
+//					lesson.course = course;
+//					lesson.start = [lessonDict objectForKey:@"start"];
+//					lesson.end = [lessonDict objectForKey:@"end"];
+//					lesson.day = [lessonDict objectForKey:@"day"];
+//					lesson.location = [lessonDict objectForKey:@"location"];
+//					lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
+//					
+//					RESTOperation *lessonSaveOp = [lesson save];
+//					if (lessonSaveOp && ![lessonSaveOp wait])
+//						[self showAlert:[lessonSaveOp.error description]];
+//					else
+//						[lessons addObject:lesson.document.documentID];
+//					
+//				}
+//				course.lessons = lessons;
+//				
+//				RESTOperation *courseSaveOp = [course save];
+//				if (courseSaveOp && ![courseSaveOp wait])
+//					[self showAlert:[courseSaveOp.error description]];
+//				else
+//					[courses addObject:course.document.documentID];
+//				
+//			}
 			
 			self.courses = courses;
 			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];

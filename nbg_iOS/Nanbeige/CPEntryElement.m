@@ -1,20 +1,18 @@
 //
-//  CPLabelLeftDetailElement.m
-//  CP
+//  CPEntryElement.m
+//  nbg_iOS
 //
-//  Created by ZongZiWang on 12-8-1.
-//  Copyright (c) 2012年 Peking University. All rights reserved.
+//  Created by ZongZiWang on 12-8-30.
+//  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
-#import "CPLabelLeftDetailElement.h"
-#import "Environment.h"
+#import "CPEntryElement.h"
 
-@implementation CPLabelLeftDetailElement
+@implementation CPEntryElement
 
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
-	
-	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"reuseIdentifier"];
-	
+    QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller];
+    
 	UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:cell.contentView.frame];
 	NSInteger rowNumber = [[[self parentSection] elements] count];
 	NSInteger row = [[[self parentSection] elements] indexOfObject:self];
@@ -28,15 +26,7 @@
 		bgImgView.image = [[UIImage imageNamed:@"cell-middle"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 10, 1, 10)];
 	cell.backgroundView = bgImgView;
 	
-    cell.imageView.image = self.image;
-	cell.textLabel.text = self.title;
-	cell.detailTextLabel.text = [self.value description];
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	
-    cell.selectionStyle = self.sections!= nil || self.controllerAction!=nil ? UITableViewCellSelectionStyleBlue: UITableViewCellSelectionStyleNone;
-//	cell.accessoryType = self.sections!= nil || self.controllerAction!=nil ? (self.accessoryType != (int) nil ? self.accessoryType : UITableViewCellAccessoryDisclosureIndicator) : UITableViewCellAccessoryNone;
-	
-    return cell;
+	return cell;
 }
 
 @end

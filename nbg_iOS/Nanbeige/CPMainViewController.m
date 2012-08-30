@@ -115,7 +115,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.tableView.backgroundColor = tableBgColorGrouped;
+	self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	self.title = TITLE_MAIN;
 		
 //	self.connector = [[CPIPGateHelper alloc] init];

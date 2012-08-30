@@ -32,7 +32,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.view.backgroundColor = tableBgColorGrouped;
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
 	if ([self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
 		[self.modeSegmentedControl setSelectedSegmentIndex:0];

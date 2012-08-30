@@ -6,8 +6,8 @@
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
-#import "QEntryElement.h"
+#import "QLabelElement.h"
 
-@interface CPPostEntryElement : QEntryElement
+@interface CPPostEntryElement : QLabelElement
 
 @end

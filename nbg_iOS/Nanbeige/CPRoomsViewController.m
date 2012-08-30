@@ -157,7 +157,7 @@
 		cell.textLabel.textColor = [UIColor colorWithRed:120/255.0 green:116/255.0 blue:100/255.0 alpha:1.0];
 		cell.textLabel.backgroundColor = [UIColor clearColor];
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-		cell.contentView.backgroundColor = tableBgColorGrouped;
+		cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 		
 		cell.textLabel.text = [[roomsOfBuilding objectAtIndex:indexPath.section] objectAtIndex:indexPath.row-1];
 		cell.detailTextLabel.text = nil;

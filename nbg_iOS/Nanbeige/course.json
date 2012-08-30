@@ -15,7 +15,7 @@
 				 "title":"七嘴八舌",
 				 "bind":"iterate:comments",
 				 "elementTemplate": {
-				 "type":"CPLabelMutipleLinesElement",
+				 "type":"CPCommentElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction"
 				 }
 				 }
