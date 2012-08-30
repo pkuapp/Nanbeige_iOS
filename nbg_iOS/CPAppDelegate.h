@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CPUserDefaultDelegate.h"
+#import "MBProgressHUD.h"
 
 // The name of the database the app will use.
 //#define kDatabaseName @"assignments_3"
@@ -36,6 +37,12 @@
 @property (nonatomic, retain) CouchTouchDBServer *server;
 @property (nonatomic, retain) CouchDatabase *database;
 @property (nonatomic, retain) CouchDatabase *localDatabase;
+
+@property (nonatomic, strong) MBProgressHUD *progressHud;
+
+- (void)showProgressHud:(NSString *)title;
+- (void)hideProgressHud;
+- (void)hideProgressHudAfterDelay:(NSTimeInterval)time;
 
 - (NSURL *)applicationDocumentsDirectory;
 - (void)updateAppUserProfileWith:(NSDictionary *)dict;

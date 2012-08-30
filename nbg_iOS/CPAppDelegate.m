@@ -22,6 +22,37 @@
 
 @implementation CPAppDelegate
 
+- (MBProgressHUD *)progressHud
+{
+	if (_progressHud == nil) {
+		_progressHud = [[MBProgressHUD alloc] initWithWindow:self.window];
+		[self.window addSubview:_progressHud];
+		_progressHud.userInteractionEnabled = NO;
+		_progressHud.opacity = 0.618;
+		_progressHud.animationType = MBProgressHUDAnimationZoom;
+	}
+	return _progressHud;
+}
+
+- (void)showProgressHud:(NSString *)title
+{
+	self.progressHud.mode = MBProgressHUDModeIndeterminate;
+	self.progressHud.transform = CGAffineTransformIdentity;
+	self.progressHud.labelText = title;
+	self.progressHud.taskInProgress = YES;
+	[self.progressHud show:YES];
+}
+
+- (void)hideProgressHud
+{
+	[self.progressHud hide:YES];
+}
+
+- (void)hideProgressHudAfterDelay:(NSTimeInterval)time
+{
+	[self.progressHud hide:YES afterDelay:time];
+}
+
 - (void)updateAppUserProfileWith:(NSDictionary *)dict {
     for (NSString* key in [dict allKeys]) {
         [[NSUserDefaults standardUserDefaults] setObject:[dict objectForKey:key] forKey:[NSString stringWithFormat:@"com.pkuapp:%@",key]];

@@ -10,10 +10,9 @@
 #import "WBEngine+addon.h"
 #import "Renren+addon.h"
 
-@interface CPCoursePostViewController : UIViewController <WBEngineDelegate> {
-    BOOL _isKeyboardHidden;
-	UIActivityIndicatorView *indicatorView;
-}
+@interface CPCoursePostViewController : UIViewController <WBEngineDelegate>
+
+@property (strong, nonatomic) NSNumber *course_id;
 @property (strong, nonatomic) WBEngine *weibo;
 @property (strong, nonatomic) Renren *renren;
 @property (retain, nonatomic) IBOutlet UITextView *textToPost;

@@ -11,7 +11,7 @@
 #import "CPAssignmentViewController.h"
 #import "CPPostEntryElement.h"
 
-@interface CPCourseViewController () <QuickDialogEntryElementDelegate, UIAlertViewDelegate>
+@interface CPCourseViewController () <UIScrollViewDelegate>
 
 @end
 
@@ -25,7 +25,8 @@
     self.quickDialogTableView.backgroundView = nil;
     self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
-	self.quickDialogTableView.delegate = self;
+	self.qTableDelegate = [[CPQTableDelegate alloc] initForTableView:self.quickDialogTableView scrollViewDelegate:self];
+	self.quickDialogTableView.delegate = self.qTableDelegate;
 }
 
 #pragma mark - View Lifecycle
@@ -109,15 +110,14 @@
 		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
 		self.navigationItem.rightBarButtonItem = auditButton;
 		
-		[self loading:NO];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[self loading:NO];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"取消旁听中..."];
 }
 
 - (void)onAuditCourse:(id)sender
@@ -128,15 +128,14 @@
 		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
 		self.navigationItem.rightBarButtonItem = auditButton;
 		
-		[self loading:NO];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[self loading:NO];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"旁听中..."];
 }
 
 - (void)setupCourseDetail
@@ -205,6 +204,8 @@
 {
 	if ([segue.identifier isEqualToString:@"CourseDetailSegue"]) {
 		[segue.destinationViewController setCourse:self.course];
+	} else if ([segue.identifier isEqualToString:@"CoursePostSegue"]) {
+		[segue.destinationViewController setCourse_id:self.course.id];
 	}
 }
 
@@ -215,24 +216,7 @@
 
 - (void)onPost:(id)sender
 {
-	[self performSegueWithIdentifier:@"PostSegue" sender:self];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"确定"]) {
-		[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/comment/add/", self.course.id] params:@{ @"content" : alertView.message } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-			
-			[self reloadTableViewDataSource];
-			
-		} error:^(CPRequest *request, NSError *error) {
-			[self loading:NO];
-			[self showAlert:[error description]];//NSLog(@"%@", [error description]);
-		}];
-		
-		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-		[self loading:YES];
-	}
+	[self performSegueWithIdentifier:@"CoursePostSegue" sender:self];
 }
 
 - (void)onDisplayCompleteAssignments:(id)sender
@@ -273,20 +257,22 @@
 			
 			[self refreshDisplay];
 			
-			[self loading:NO];
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
 			
 		} else {
-			[self loading:NO];
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
 			[self showAlert:@"评论返回非NSArray"];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[self loading:NO];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
+	
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新七嘴八舌中..."];
 }
 
 - (void)doneLoadingTableViewData{
@@ -295,7 +281,6 @@
 	//  model should call this when its done loading
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.quickDialogTableView];
-	[self loading:NO];
 	
 }
 

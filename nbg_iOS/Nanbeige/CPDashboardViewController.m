@@ -24,7 +24,8 @@
     self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
 	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
     self.quickDialogTableView.bounces = YES;
-	self.quickDialogTableView.delegate = self;
+	self.qTableDelegate = [[CPQTableDelegate alloc] initForTableView:self.quickDialogTableView scrollViewDelegate:self];
+	self.quickDialogTableView.delegate = self.qTableDelegate;
 }
 
 #pragma mark - View Lifecycle

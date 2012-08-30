@@ -13,11 +13,9 @@
 #import "Models+addon.h"
 #import "Course.h"
 #import "Lesson.h"
-#import "MBProgressHUD.h"
 
 @interface CPCoursesAllViewController ()  {
 	Course *courseSelected;
-	MBProgressHUD *progressHud;
 }
 
 @end
@@ -83,7 +81,6 @@
 
 - (void)viewDidUnload
 {
-	progressHud = nil;
 	[self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -92,7 +89,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
-	[progressHud hide:YES];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 }
 
 #pragma mark - Display
@@ -222,31 +219,22 @@
 			if (![putOp wait])
 				[self showAlert:[putOp.error description]];
 			
-			[progressHud hide:YES afterDelay:0.5];
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			
 		} else {
-			[progressHud hide:YES afterDelay:0.5];
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			[self showAlert:@"返回结果不是NSArray"];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[progressHud hide:YES afterDelay:0.5];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
-	progressHud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].delegate.window];
-	[[UIApplication sharedApplication].delegate.window addSubview:progressHud];
-	progressHud.userInteractionEnabled = NO;
-	progressHud.opacity = 0.618;
-	progressHud.animationType = MBProgressHUDAnimationZoom;
-	progressHud.mode = MBProgressHUDModeIndeterminate;
-	progressHud.transform = CGAffineTransformIdentity;
-	progressHud.labelText = @"获取课程列表中...";
-	progressHud.taskInProgress = YES;
-	[progressHud show:YES];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"获取课程列表中..."];
 	
 }
 

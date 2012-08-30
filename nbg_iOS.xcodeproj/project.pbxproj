@@ -489,6 +489,8 @@
 		26DE6FAB15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FA915EE8F2E009BE27A /* CPCoursesAllViewController.m */; };
 		26DE6FAE15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */; };
 		26DE6FAF15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */; };
+		26DE6FB215EEF7E5009BE27A /* CPQTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FB115EEF7E5009BE27A /* CPQTableDelegate.m */; };
+		26DE6FB315EEF7E5009BE27A /* CPQTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE6FB115EEF7E5009BE27A /* CPQTableDelegate.m */; };
 		26F14ED315DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED415DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED815DA3F3000C8E74E /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED715DA3F2F00C8E74E /* Course.m */; };
@@ -1397,6 +1399,8 @@
 		26DE6FA915EE8F2E009BE27A /* CPCoursesAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoursesAllViewController.m; sourceTree = "<group>"; };
 		26DE6FAC15EEA84E009BE27A /* CPCoursePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCoursePostViewController.h; sourceTree = "<group>"; };
 		26DE6FAD15EEA84E009BE27A /* CPCoursePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCoursePostViewController.m; sourceTree = "<group>"; };
+		26DE6FB015EEF7E5009BE27A /* CPQTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPQTableDelegate.h; sourceTree = "<group>"; };
+		26DE6FB115EEF7E5009BE27A /* CPQTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPQTableDelegate.m; sourceTree = "<group>"; };
 		26F14ED115DA253F00C8E74E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		26F14ED215DA253F00C8E74E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		26F14ED615DA3F2F00C8E74E /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
@@ -2285,6 +2289,8 @@
 				26D6209015DD221F000AB849 /* CPLabelMutipleLinesElement.m */,
 				26D6209315DD2518000AB849 /* CPPostEntryElement.h */,
 				26D6209415DD2518000AB849 /* CPPostEntryElement.m */,
+				26DE6FB015EEF7E5009BE27A /* CPQTableDelegate.h */,
+				26DE6FB115EEF7E5009BE27A /* CPQTableDelegate.m */,
 			);
 			name = CPQElement;
 			sourceTree = "<group>";
@@ -4290,6 +4296,7 @@
 				26DE6FA615EE8875009BE27A /* Weekset.m in Sources */,
 				26DE6FAA15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */,
 				26DE6FAE15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */,
+				26DE6FB215EEF7E5009BE27A /* CPQTableDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4517,6 +4524,7 @@
 				26DE6FA715EE8875009BE27A /* Weekset.m in Sources */,
 				26DE6FAB15EE8F2E009BE27A /* CPCoursesAllViewController.m in Sources */,
 				26DE6FAF15EEA84F009BE27A /* CPCoursePostViewController.m in Sources */,
+				26DE6FB315EEF7E5009BE27A /* CPQTableDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,9 +7,12 @@
 //
 
 #import "CPCoursePostViewController.h"
+#import "Models+addon.h"
+#import "Coffeepot.h"
 
 @interface CPCoursePostViewController () {
 	CGRect originalTextViewFrame;
+	BOOL _isKeyboardHidden;
 }
 
 @end
@@ -41,14 +44,10 @@
 	
 	// view init
 	[self.textToPost becomeFirstResponder];
-	indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-	[indicatorView setCenter:CGPointMake(160, 240)];
-    [self.view addSubview:indicatorView];
 }
 - (void)viewDidUnload
 {
 	[self setTextToPost:nil];
-	indicatorView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -77,7 +76,9 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+	[super viewDidDisappear:animated];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 }
 
 - (void)keyboardWillShow:(NSNotification*)notification {
@@ -129,10 +130,20 @@
         [alert show];
     }
     
-	// post
-    [self.weibo sendWeiBoWithText:self.textToPost.text image:nil];
-//	[self.renren requestWithParams:<#(NSMutableDictionary *)#> andDelegate:<#(id<RenrenDelegate>)#>]
-	[indicatorView startAnimating];
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/comment/add/", self.course_id] params:@{ @"content" : self.textToPost.text } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		
+		[self dismissModalViewControllerAnimated:YES];
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+	
+	[self.textToPost resignFirstResponder];
+	
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"七嘴八舌发送中..."];
 }
 
 - (IBAction)onCancelButtonPressed:(id)sender {
@@ -154,27 +165,26 @@
 
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
-	[indicatorView stopAnimating];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 	[self showAlert:@"微博未授权，请在设置中连接微博"];
 }
 
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
-	[indicatorView stopAnimating];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
 	[self showAlert:@"微博授权已过期，请在设置中再次连接微博"];
 }
 
 - (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
 {
-    [indicatorView stopAnimating];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
     NSLog(@"requestDidSucceedWithResult: %@", result);
-	[self showAlert:@"微博吐槽成功！"];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error
 {
-	[indicatorView stopAnimating];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
     NSLog(@"requestDidFailWithError: %@", error);
 	[self showAlert:@"微博吐槽失败，请稍后再试"];
 }
