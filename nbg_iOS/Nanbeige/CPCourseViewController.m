@@ -69,6 +69,13 @@
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	if (![self.course.orig_id length] ||
+		[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"course%@_edited", self.course.id]] boolValue]) [self reloadTableViewDataSource];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -97,20 +104,33 @@
 
 - (void)onDeselectCourse:(id)sender
 {
+	if (_reloading) return ;
+	
 	[self showAlert:@"暂不开放退选功能"];
 }
 
 - (void)onDeauditCourse:(id)sender
 {
+	if (_reloading) return ;
+	
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/edit/", self.course.id] params:@{ @"status" : @"none" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
-		self.navigationItem.rightBarButtonItem = auditButton;
-		
-		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		self.course.status = @"none";
+		RESTOperation *saveOp = [self.course save];
+		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
+		else {
+			UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
+			self.navigationItem.rightBarButtonItem = auditButton;
+			[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+			[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+			
+			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+		}
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
@@ -119,18 +139,27 @@
 
 - (void)onAuditCourse:(id)sender
 {
+	if (_reloading) return ;
 	
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/edit/", self.course.id] params:@{ @"status" : @"audit" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
-		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-		self.navigationItem.rightBarButtonItem = auditButton;
+		self.course.status = @"audit";
+		RESTOperation *saveOp = [self.course save];
+		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
+		else {
+			UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
+			[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+			[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+			self.navigationItem.rightBarButtonItem = auditButton;
+			
+			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+		}
 		
-		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
@@ -151,6 +180,8 @@
 		self.navigationItem.rightBarButtonItem = auditButton;
 	} else {
 		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
+		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
 		self.navigationItem.rightBarButtonItem = auditButton;
 	}
 	
@@ -216,16 +247,19 @@
 
 - (void)onDisplayCourseDetail:(id)sender
 {
+	if (_reloading) return ;
 	[self performSegueWithIdentifier:@"CourseDetailSegue" sender:self];
 }
 
 - (void)onPost:(id)sender
 {
+	if (_reloading) return ;
 	[self performSegueWithIdentifier:@"CoursePostSegue" sender:self];
 }
 
 - (void)onDisplayCompleteAssignments:(id)sender
 {
+	if (_reloading) return ;
 	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
 	CPAssignmentViewController *avc = [sb instantiateViewControllerWithIdentifier:@"AssignmentListIdentifier"];
 	avc.courseIdFilter = self.course.id;
@@ -260,24 +294,100 @@
 				if (op.error) [self showAlert:[op.error description]];
 			}];
 			
-			[self refreshDisplay];
+			[[NSUserDefaults standardUserDefaults] setObject:@0 forKey:[NSString stringWithFormat:@"course%@_edited", self.course.id]];
 			
-			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
-			[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
+			if (![self.course.orig_id length]) {
+				
+				[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/", self.course.id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+					
+					if ([collection isKindOfClass:[NSDictionary class]]) {
+						NSDictionary *courseDict = collection;
+						
+						Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
+						
+						course.doc_type = @"course";
+						course.status = [courseDict objectForKey:@"status"];
+						course.id = [courseDict objectForKey:@"id"];
+						course.name = [courseDict objectForKey:@"name"];
+						course.credit = [courseDict objectForKey:@"credit"];
+						course.orig_id = [courseDict objectForKey:@"orig_id"];
+						course.semester_id = [courseDict objectForKey:@"semester_id"];
+						course.ta = [courseDict objectForKey:@"ta"];
+						course.teacher = [courseDict objectForKey:@"teacher"];
+						
+						if (course.lessons) {
+							for (NSString *lessonDocumentID in course.lessons) {
+								CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
+								RESTOperation *deleteOp = [lessonDocument DELETE];
+								if (![deleteOp wait])
+									[self showAlert:[deleteOp.error description]];
+							}
+						}
+						
+						NSMutableArray *lessons = [[NSMutableArray alloc] init];
+						for (NSDictionary *lessonDict in [courseDict objectForKey:@"lessons"]) {
+							
+							Lesson *lesson = [[Lesson alloc] initWithNewDocumentInDatabase:localDatabase];
+							
+							lesson.doc_type = @"lesson";
+							lesson.course = course;
+							lesson.start = [lessonDict objectForKey:@"start"];
+							lesson.end = [lessonDict objectForKey:@"end"];
+							lesson.day = [lessonDict objectForKey:@"day"];
+							lesson.location = [lessonDict objectForKey:@"location"];
+							lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
+							
+							RESTOperation *lessonSaveOp = [lesson save];
+							if (lessonSaveOp && ![lessonSaveOp wait])
+								[self showAlert:[lessonSaveOp.error description]];
+							else
+								[lessons addObject:lesson.document.documentID];
+							
+						}
+						course.lessons = lessons;
+						
+						RESTOperation *courseSaveOp = [course save];
+						if (courseSaveOp && ![courseSaveOp wait])
+							[self showAlert:[courseSaveOp.error description]];
+						
+						[self setupCourseDetail];
+						[self refreshDisplay];
+						
+						[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+						[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
+						
+					} else {
+						[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+						[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
+						[self showAlert:@"课程返回非NSDictionary"];
+					}
+					
+				} error:^(CPRequest *request, NSError *error) {
+					[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+					[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
+					[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+				}];
+				
+			} else {
+				[self refreshDisplay];
+				
+				[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+				[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
+			}
 			
 		} else {
-			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
 			[self showAlert:@"评论返回非NSArray"];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
-	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新七嘴八舌中..."];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新课程信息中..."];
 }
 
 - (void)doneLoadingTableViewData{

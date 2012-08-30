@@ -122,9 +122,9 @@ static User *sharedAppUserObject = nil;
 				   courseList:(NSArray *)courseList
 {
 	if (index >= courseList.count) courseList = [[Course courseListDocument] propertyForKey:@"value"];
-	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-	NSString *courseDocumentID = [courseList objectAtIndex:index];
-	return [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
+	NSNumber *course_id = [[courseList objectAtIndex:index] objectForKey:@"id"];
+	NSString *course_name = [[courseList objectAtIndex:index] objectForKey:@"name"];
+	return [Course courseWithID:course_id name:course_name];
 }
 
 + (CouchDocument *)userCourseListDocument
@@ -188,6 +188,22 @@ static User *sharedAppUserObject = nil;
 		}
 	} else NSLog(@"Models+addon:courseWithID %@", queryOp.error);
 	if (!course) course = [[Course alloc] initWithNewDocumentInDatabase:localDatabase];
+	return course;
+}
+
++ (Course *)courseWithID:(NSNumber *)course_id
+					name:(NSString *)course_name
+{
+	Course *course = [self courseWithID:course_id];
+	if (![course.id integerValue]) {
+		course.doc_type = @"course";
+		course.id = course_id;
+		course.name = course_name;
+		RESTOperation *courseSaveOp = [course save];
+		[courseSaveOp onCompletion:^{
+			if (courseSaveOp.error)	NSLog(@"Models+addon:courseWithID:name %@", courseSaveOp.error);
+		}];
+	}
 	return course;
 }
 

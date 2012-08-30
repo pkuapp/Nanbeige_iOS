@@ -36,7 +36,7 @@
 		_timeTable = [[UITableView alloc] initWithFrame:self.bounds];
 		_timeTable.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		_timeTable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
-		_timeTable.bounces = FALSE;
+//		_timeTable.bounces = NO;
 		_timeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 		_timeTable.delegate = self;
 		_timeTable.dataSource = self;
@@ -78,6 +78,7 @@
 		[separators addObject:separator];
 	}
 	
+	self.todayCourses = [self.delegate coursesAtDate:self.date];
 	for (int index = 0; index < self.todayCourses.count; index++) {
 		NSDictionary *course = [self.todayCourses objectAtIndex:index];
 		NSInteger start = [[course objectForKey:kAPISTART] integerValue];

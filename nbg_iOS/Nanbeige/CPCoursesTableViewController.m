@@ -190,17 +190,20 @@
 		view = [[CPTimeTable alloc] initWithDate:date];
 	}
 	
+	view.university = self.university;
+	view.delegate = self;
+	
+	return view;
+}
+
+- (NSArray *)coursesAtDate:(NSDate *)date
+{
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"w";
 	NSInteger week = [[formatter stringFromDate:date] integerValue] - [[formatter stringFromDate:[NSDate date]] integerValue] + 1;
 	formatter.dateFormat = @"e";
 	NSInteger weekday = ([[formatter stringFromDate:date] integerValue] + 5) % 7 + 1;
-	
-	view.todayCourses = [self coursesAtWeekday:weekday Week:week];
-	view.university = self.university;
-	view.delegate = self;
-	
-	return view;
+	return [self coursesAtWeekday:weekday Week:week];
 }
 
 - (NSArray *)coursesAtWeekday:(NSInteger)weekday

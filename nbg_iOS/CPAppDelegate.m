@@ -113,8 +113,7 @@
 	[[UINavigationBar appearance] setTitleTextAttributes:titleTextAttributes];
 	
 	[[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"TabBar"]];
-	UIImage *tabBarSelected = [UIImage imageNamed:@"TabBar-selected"];
-	[[UITabBar appearance] setSelectionIndicatorImage:tabBarSelected];
+	[[UITabBar appearance] setSelectionIndicatorImage:[[UIImage imageNamed:@"TabBar-selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)]];
 	
 //	[[UITableView appearance] setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-TableView"]]];
 	

@@ -96,12 +96,16 @@
 	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:TITLE_SELECTED_COURSE style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.tabBarController.title = TITLE_SELECTED_COURSE;
 	
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
 	CouchDocument *courseListDocument = [Course userCourseListDocument];
-	if (![courseListDocument propertyForKey:@"value"]) {
+	if (![courseListDocument propertyForKey:@"value"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"user_courses_edited"] boolValue]) {
 		[self reloadTableViewDataSource];
 	}
-	
-	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)viewDidUnload
@@ -261,22 +265,25 @@
 			if (![putOp wait])
 				[self showAlert:[putOp.error description]];
 			
-			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			
+			[[NSUserDefaults standardUserDefaults] setObject:@0 forKey:@"user_courses_edited"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			
 		} else {
-			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			[self showAlert:@"返回结果不是NSArray"];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
-	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"获取课程列表中..."];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新课程列表中..."];
 	
 }
 

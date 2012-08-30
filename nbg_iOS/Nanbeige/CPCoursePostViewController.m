@@ -132,12 +132,14 @@
     
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/comment/add/", self.course_id] params:@{ @"content" : self.textToPost.text } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		
+		[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:[NSString stringWithFormat:@"course%@_edited", self.course_id]];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 		[self dismissModalViewControllerAnimated:YES];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
@@ -165,26 +167,26 @@
 
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
-	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 	[self showAlert:@"微博未授权，请在设置中连接微博"];
 }
 
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
-	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 	[self showAlert:@"微博授权已过期，请在设置中再次连接微博"];
 }
 
 - (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
 {
-	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
     NSLog(@"requestDidSucceedWithResult: %@", result);
 	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error
 {
-	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHudAfterDelay:0.5];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
     NSLog(@"requestDidFailWithError: %@", error);
 	[self showAlert:@"微博吐槽失败，请稍后再试"];
 }

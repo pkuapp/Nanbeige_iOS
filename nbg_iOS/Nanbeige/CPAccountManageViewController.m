@@ -215,6 +215,7 @@
 
 - (void)onLaunchActionSheet:(id)sender
 {
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	NSString *disconnectOrLogout = [dictLABEL2ACTIONSHEET objectForKey:[sender title]];
 	NSString *otherButtonTitle = nil;
 	if ([[sender title] isEqualToString:sEMAIL]) {
@@ -229,7 +230,6 @@
 										destructiveButtonTitle:disconnectOrLogout
 											 otherButtonTitles:otherButtonTitle, nil];
 	[menu showInView:self.view];
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 #pragma mark - ActionSheetDelegate Setup

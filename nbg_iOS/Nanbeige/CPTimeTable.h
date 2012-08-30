@@ -15,6 +15,7 @@
 
 - (void)didChangeIfShowTime:(BOOL)isShowTime;
 - (void)didDisplayCourse:(id)sender;
+- (NSArray *)coursesAtDate:(NSDate *)date;
 
 @end
 
