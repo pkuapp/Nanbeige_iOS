@@ -10,4 +10,16 @@
 
 @implementation CPLabelButtonCenterDangerElement
 
+- (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
+    QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller];
+    
+	UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:cell.contentView.frame];
+	bgImgView.image = [[UIImage imageNamed:@"cell-btn-danger-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+	cell.backgroundView = bgImgView;
+	
+	cell.textLabel.textColor = [UIColor whiteColor];
+	
+	return cell;
+}
+
 @end

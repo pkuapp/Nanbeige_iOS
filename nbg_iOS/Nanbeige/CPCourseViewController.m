@@ -9,7 +9,8 @@
 #import "CPCourseViewController.h"
 #import "Coffeepot.h"
 #import "CPAssignmentViewController.h"
-#import "CPPostEntryElement.h"
+#import "CPCommentPostElement.h"
+#import "CPLabelButtonElement.h"
 
 @interface CPCourseViewController () <UIScrollViewDelegate>
 
@@ -21,7 +22,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-	[self.quickDialogTableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-TableView"]]];
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 	self.qTableDelegate = [[CPQTableDelegate alloc] initForTableView:self.quickDialogTableView scrollViewDelegate:self];
 	self.quickDialogTableView.delegate = self.qTableDelegate;
 }
@@ -225,13 +226,38 @@
 
 - (void)refreshDisplay
 {
-	self.assignments = [@[ @{ @"title" : @"已完成的作业...", @"controllerAction" : @"onDisplayCompleteAssignments:"} ] mutableCopy];
+	self.assignments = [@[ ] mutableCopy];
+	
+	CouchDatabase *database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
+	CouchDesignDocument *design = [database designDocumentWithName: @"assignment"];
+    [design defineViewNamed:[NSString stringWithFormat:@"assignment?id=%@", self.course.id] mapBlock: MAPBLOCK({
+		NSString *type = [doc objectForKey:@"doc_type"];
+		NSNumber *finished = [doc objectForKey: @"finished"];
+		NSString *due = [doc objectForKey: @"due"];
+		NSNumber *course_id = [doc objectForKey:@"course_id"];
+		if ([type isEqualToString:@"assignment"] && [course_id isEqualToNumber:self.course.id] && ![finished boolValue]) emit(due, doc);
+	}) version: @"1.0"];
+	
+	CouchQuery *query = [design queryViewNamed:[NSString stringWithFormat:@"assignment?id=%@", self.course.id]];
+	query.descending = NO;
+	RESTOperation *queryOp = [query start];
+	if (queryOp && ![queryOp wait]) [self showAlert:[queryOp.error description]];
+	else {
+		for (CouchQueryRow* row in [query rows]) {
+            [self.assignments addObject:@{ @"title" : [row.document propertyForKey:@"content"] , @"value" : [row.document propertyForKey:@"due_display"] }];
+        }
+	}
 	
 	NSDictionary *dict = @{ @"assignments" : self.assignments, @"comments" : self.comments };
 	[self.root bindToObject:dict];
 	
+	QSection *assignmentSection = [[self.root sections] objectAtIndex:0];
+	CPLabelButtonElement *completeAssignmentsElement = [[CPLabelButtonElement alloc] initWithTitle:@"已完成的作业..." Value:nil];
+	completeAssignmentsElement.controllerAction = @"onDisplayCompleteAssignments:";
+	[assignmentSection addElement:completeAssignmentsElement];
+	
 	QSection *commentSection = [[self.root sections] objectAtIndex:1];
-	CPPostEntryElement *commentPostElement = [[CPPostEntryElement alloc] initWithTitle:@"我说" Value:nil];
+	CPCommentPostElement *commentPostElement = [[CPCommentPostElement alloc] initWithTitle:@"我说" Value:nil];
 	commentPostElement.controllerAction = @"onPost:";
 	[commentSection insertElement:commentPostElement atIndex:0];
 }

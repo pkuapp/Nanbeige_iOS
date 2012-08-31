@@ -1,14 +1,14 @@
 //
-//  CPLabelMutipleLinesElement.m
+//  CPAssignmentElement.m
 //  nbg_iOS
 //
 //  Created by ZongZiWang on 12-8-16.
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
-#import "CPLabelMutipleLinesElement.h"
+#import "CPAssignmentElement.h"
 
-@implementation CPLabelMutipleLinesElement
+@implementation CPAssignmentElement
 
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
     QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller];
@@ -26,7 +26,6 @@
 		bgImgView.image = [[UIImage imageNamed:@"cell-middle"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 10, 1, 10)];
 	cell.backgroundView = bgImgView;
 	
-	cell.textLabel.numberOfLines = 0;
 	cell.accessoryType = UITableViewCellAccessoryNone;
 	
 	return cell;

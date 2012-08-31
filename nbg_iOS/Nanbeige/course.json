@@ -7,7 +7,7 @@
 				 "title":"作业",
 				 "bind":"iterate:assignments",
 				 "elementTemplate": {
-				 "type":"CPLabelMutipleLinesElement",
+				 "type":"CPAssignmentElement",
 				 "bind":"title:title, value:value, controllerAction:controllerAction"
 				 }
 				 },

@@ -31,7 +31,6 @@
     cell.imageView.image = self.image;
 	cell.textLabel.text = self.title;
 	cell.detailTextLabel.text = [self.value description];
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
     cell.selectionStyle = self.sections!= nil || self.controllerAction!=nil ? UITableViewCellSelectionStyleBlue: UITableViewCellSelectionStyleNone;
 //	cell.accessoryType = self.sections!= nil || self.controllerAction!=nil ? (self.accessoryType != (int) nil ? self.accessoryType : UITableViewCellAccessoryDisclosureIndicator) : UITableViewCellAccessoryNone;

@@ -25,7 +25,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-	[self.quickDialogTableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-TableView"]]];
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 #pragma mark - View Lifecycle

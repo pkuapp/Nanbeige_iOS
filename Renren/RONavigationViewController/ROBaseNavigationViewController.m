@@ -8,6 +8,7 @@
 
 #import "ROBaseNavigationViewController.h"
 #import "Environment.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ROBaseNavigationViewController (Private) 
 
@@ -36,6 +37,14 @@
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         [self.view addSubview:_navigationBar];
+		
+		CGFloat navigationBarBottom = self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height;
+		UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
+		CALayer *shadowLayer = [CALayer layer];
+		shadowLayer.frame = CGRectMake(0, navigationBarBottom, self.view.frame.size.width, shadowImg.size.height);
+		shadowLayer.contents = (id)shadowImg.CGImage;
+		shadowLayer.zPosition = 1;
+		[self.view.layer addSublayer:shadowLayer];
         
         UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"连接到人人网"] autorelease];
         navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(close)];

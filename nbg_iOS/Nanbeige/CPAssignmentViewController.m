@@ -404,6 +404,7 @@
 		ncavc.assignment = [[self nowAssignments] objectAtIndex:assignmentSelect];
 	} else {
 		ncavc.bCreate = YES;
+		ncavc.courseIdFilter = self.courseIdFilter;
 		ncavc.assignment = [[Assignment alloc] initWithNewDocumentInDatabase:[(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database]];
 	}
 }

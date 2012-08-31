@@ -30,7 +30,7 @@
 				 {
 				 "elements": [
 							  {
-							  "type":"CPLabelButtonCenterElement",
+							  "type":"CPLabelButtonCenterDangerElement",
 							  "title":"登出",
 							  "controllerAction":"onLaunchActionSheet:"
 							  }

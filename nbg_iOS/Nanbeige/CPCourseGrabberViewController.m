@@ -23,7 +23,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-	[self.quickDialogTableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-TableView"]]];
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 #pragma mark - View Lifecycle
@@ -163,6 +163,7 @@
 					Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
 					
 					course.doc_type = @"course";
+					course.status = [courseDict objectForKey:@"status"];
 					course.id = [courseDict objectForKey:@"id"];
 					course.name = [courseDict objectForKey:@"name"];
 					course.credit = [courseDict objectForKey:@"credit"];

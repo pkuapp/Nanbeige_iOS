@@ -6,8 +6,8 @@
 //  Copyright (c) 2012年 wuhaotian. All rights reserved.
 //
 
-#import "QLabelElement.h"
+#import "CPLabelButtonCenterElement.h"
 
-@interface CPLabelButtonCenterDangerElement : QLabelElement
+@interface CPLabelButtonCenterDangerElement : CPLabelButtonCenterElement
 
 @end

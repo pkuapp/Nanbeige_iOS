@@ -115,7 +115,7 @@
 	[[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"TabBar"]];
 	[[UITabBar appearance] setSelectionIndicatorImage:[[UIImage imageNamed:@"TabBar-selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)]];
 	
-//	[[UITableView appearance] setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-TableView"]]];
+//	[[UITableView appearance] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 	
 //    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
 //    [[UISegmentedControl appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)]  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];

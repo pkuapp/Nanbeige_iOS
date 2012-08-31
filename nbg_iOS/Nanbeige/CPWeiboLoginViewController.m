@@ -8,6 +8,7 @@
 
 #import "CPWeiboLoginViewController.h"
 #import "Environment.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CPWeiboLoginViewController ()
 
@@ -25,6 +26,14 @@
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         [self.view addSubview:self.navigationBar];
+		
+		CGFloat navigationBarBottom = self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height;
+		UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
+		CALayer *shadowLayer = [CALayer layer];
+		shadowLayer.frame = CGRectMake(0, navigationBarBottom, self.view.frame.size.width, shadowImg.size.height);
+		shadowLayer.contents = (id)shadowImg.CGImage;
+		shadowLayer.zPosition = 1;
+		[self.view.layer addSublayer:shadowLayer];
         
         UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"连接到新浪微博"];
         navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:sCANCEL style:UIBarButtonItemStylePlain target:self action:@selector(close)];

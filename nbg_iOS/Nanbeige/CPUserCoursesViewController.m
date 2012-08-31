@@ -95,6 +95,17 @@
 	self.tabBarController.navigationItem.rightBarButtonItem = nil;
 	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:TITLE_SELECTED_COURSE style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.tabBarController.title = TITLE_SELECTED_COURSE;
+
+	if (!self.courses && [[Course userCourseListDocument] propertyForKey:@"value"]) {
+		self.courses = [[Course userCourseListDocument] propertyForKey:@"value"];
+		self.coursesAudit = self.coursesSelect = nil;
+		for (NSString *courseDocumentID in self.courses) {
+			Course *course = [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
+			if ([course.status isEqualToString:@"select"]) [self.coursesSelect addObject:course];
+			if ([course.status isEqualToString:@"audit"]) [self.coursesAudit addObject:course];
+		}
+		[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+	}
 	
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }

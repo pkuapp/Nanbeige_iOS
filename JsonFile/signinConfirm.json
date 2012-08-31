@@ -30,7 +30,7 @@
 				 {
 				 "elements": [
 							  {
-							  "type":"CPLabelButtonCenterElement",
+							  "type":"CPLabelButtonCenterDangerElement",
 							  "key":"onConfirmLogin",
 							  "title":"开始使用南北阁",
 							  "controllerAction":"onConfirmLogin:"

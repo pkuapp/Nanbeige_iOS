@@ -28,7 +28,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-	[self.quickDialogTableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-TableView"]]];
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 - (void)setAssignment:(Assignment *)assignment
@@ -37,9 +37,15 @@
 	if (self.bCreate) {
 		_assignment.finished = [NSNumber numberWithBool:NO];
 		if (self.coursesData.count) {
-			Course *course = [Course userCourseAtIndex:0 courseList:self.coursesData];
-			_assignment.course_id = course.id;
-			_assignment.course_name = course.name;
+			if (self.courseIdFilter) {
+				Course *course = [Course courseWithID:self.courseIdFilter];
+				_assignment.course_id = course.id;
+				_assignment.course_name = course.name;
+			} else {
+				Course *course = [Course userCourseAtIndex:0 courseList:self.coursesData];
+				_assignment.course_id = course.id;
+				_assignment.course_name = course.name;
+			}
 		}
 
 		if (self.coursesData.count && self.weeksData.count) {
@@ -263,6 +269,8 @@
 	if (op && ![op wait]) {
 		NSLog(@"AssignmentCreate:onConfirm %@", op.error);
 	} else {
+		[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:[NSString stringWithFormat:@"course%@_edited", self.course.id]];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 		[self dismissModalViewControllerAnimated:YES];
 	}
 }
