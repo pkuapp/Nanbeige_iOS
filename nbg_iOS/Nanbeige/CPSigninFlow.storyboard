@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="yuh-gK-erU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="yuh-gK-erU">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -23,11 +23,11 @@
             </objects>
             <point key="canvasLocation" x="390" y="-2304"/>
         </scene>
-        <!--Signin Comfirm View Controller-->
+        <!--Signin Confirm View Controller-->
         <scene sceneID="yVv-5F-5t8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLb-ys-YWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="n42-FH-vyM" customClass="CPSigninComfirmViewController" sceneMemberID="viewController">
+                <viewController id="n42-FH-vyM" customClass="CPSigninConfirmViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fni-C2-b5y">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -96,11 +96,11 @@
             </objects>
             <point key="canvasLocation" x="390" y="-3784"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav View Controller-->
         <scene sceneID="Ln2-vL-0si">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hji-9w-31u" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" id="yuh-gK-erU" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="yuh-gK-erU" customClass="CPNavViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eD4-UY-evD">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -113,11 +113,14 @@
         </scene>
     </scenes>
     <classes>
+        <class className="CPNavViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPNavViewController.h"/>
+        </class>
         <class className="CPSignViewController" superclassName="QuickDialogController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSignViewController.h"/>
         </class>
-        <class className="CPSigninComfirmViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSigninComfirmViewController.h"/>
+        <class className="CPSigninConfirmViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSigninConfirmViewController.h"/>
         </class>
         <class className="CPSigninEmailViewController" superclassName="QuickDialogController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSigninEmailViewController.h"/>
@@ -138,7 +141,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="XfO-LC-cTL"/>
-        <segue reference="1w8-dm-wKH"/>
+        <segue reference="HeC-sN-6Fj"/>
+        <segue reference="Myr-Rl-IFE"/>
     </inferredMetricsTieBreakers>
 </document>

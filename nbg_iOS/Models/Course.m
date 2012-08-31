@@ -14,6 +14,7 @@
 @implementation Course
 
 @dynamic doc_type;
+@dynamic status;
 @dynamic credit;
 @dynamic id;
 @dynamic name;

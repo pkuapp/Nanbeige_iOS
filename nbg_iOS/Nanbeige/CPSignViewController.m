@@ -28,10 +28,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = NO;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 - (WBEngine *)weibo {
@@ -64,14 +61,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
-	
-	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 }
 
 - (void)viewDidUnload
@@ -135,6 +125,7 @@
 	NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
 	[self.renren authorizationInNavigationWithPermisson:permissions
 											andDelegate:self];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 #pragma mark - WBEngineDelegate
@@ -146,14 +137,14 @@
     
 	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
     success:^(WBRequest *request, id result) {
-        [self loading:NO];
+		
 		if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
 			
 			[[Coffeepot shared] requestWithMethodPath:@"user/login/weibo/" params:@{@"token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 				
 				[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
 				[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
-                [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
+                [User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
 				[User updateSharedAppUserProfile:collection];
 				
 				[self loading:NO];
@@ -167,7 +158,7 @@
 					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {					
 						[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
 						[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
-						[User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
+						[User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
 						[User updateSharedAppUserProfile:collection];
 						
 						[self loading:NO];
@@ -176,19 +167,22 @@
 						
 					} error:^(CPRequest *request, NSError *error) {
 						[self loading:NO];
-						[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+						[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 					}];
 					
                 } else {
 					[self loading:NO];
-					[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+					[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 				}
             }];
-        }
+        } else {
+			[self loading:NO];
+			[self showAlert:[result description]];//NSLog(@"%@", [error description]);
+		}
     }
     fail:^(WBRequest *request, NSError *error) {
         [self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
     }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -236,7 +230,7 @@
 									  
 									  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
 									  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
-									  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
+									  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
 									  [User updateSharedAppUserProfile:collection];
 									  
 									  [self loading:NO];
@@ -251,7 +245,7 @@
 											  
 											  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
 											  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
-											  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
+											  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
 											  [User updateSharedAppUserProfile:collection];
 											  
 											  [self loading:NO];
@@ -260,21 +254,26 @@
 											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
-											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+											  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 										  }];
 										  
 									  } else {
 										  [self loading:NO];
-										  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+										  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 									  }
 									  
 								  }];
 								  
+							  } else if ([result isKindOfClass:[NSDictionary class]]) {
+								  NSLog(@"Sign:renrenDidLogin %@", result);
+							  } else {
+								  [self loading:NO];
+								  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+								 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 							 }
 	 ];
 	
@@ -296,6 +295,35 @@
  * @param renren 传回代理授权登录接口请求的Renren类型对象。
  */
 - (void)renren:(Renren *)renren loginFailWithError:(ROError*)error
+{
+	
+}
+
+/**
+ * 接口请求成功，第三方开发者实现这个方法
+ * @param renren 传回代理服务器接口请求的Renren类型对象。
+ * @param response 传回接口请求的响应。
+ */
+- (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response
+{
+	
+}
+
+/**
+ * 接口请求失败，第三方开发者实现这个方法
+ * @param renren 传回代理服务器接口请求的Renren类型对象。
+ * @param response 传回接口请求的错误对象。
+ */
+- (void)renren:(Renren *)renren requestFailWithError:(ROError*)error
+{
+	
+}
+
+/**
+ * renren取消Dialog时调用，第三方开发者实现这个方法
+ * @param renren 传回代理授权登录接口请求的Renren类型对象。
+ */
+- (void)renrenDialogDidCancel:(Renren *)renren
 {
 	
 }

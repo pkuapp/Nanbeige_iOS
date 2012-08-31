@@ -16,6 +16,7 @@
 
 @interface CPUserCoursesViewController ()  {
 	Course *courseSelected;
+	CouchDatabase *localDatabase;
 }
 
 @end
@@ -31,6 +32,22 @@
 		_courses = [[NSMutableArray alloc] init];
 	}
 	return _courses;
+}
+
+- (NSMutableArray *)coursesAudit
+{
+	if (_coursesAudit == nil) {
+		_coursesAudit = [[NSMutableArray alloc] init];
+	}
+	return _coursesAudit;
+}
+
+- (NSMutableArray *)coursesSelect
+{
+	if (_coursesSelect == nil) {
+		_coursesSelect = [[NSMutableArray alloc] init];
+	}
+	return _coursesSelect;
 }
 
 #pragma mark - View Lifecycle
@@ -60,7 +77,15 @@
 	//  update the last update date
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
+	localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	
 	self.courses = [[Course userCourseListDocument] propertyForKey:@"value"];
+	self.coursesAudit = self.coursesSelect = nil;
+	for (NSString *courseDocumentID in self.courses) {
+		Course *course = [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
+		if ([course.status isEqualToString:@"select"]) [self.coursesSelect addObject:course];
+		if ([course.status isEqualToString:@"audit"]) [self.coursesAudit addObject:course];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -70,6 +95,28 @@
 	self.tabBarController.navigationItem.rightBarButtonItem = nil;
 	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:TITLE_SELECTED_COURSE style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.tabBarController.title = TITLE_SELECTED_COURSE;
+
+	if (!self.courses && [[Course userCourseListDocument] propertyForKey:@"value"]) {
+		self.courses = [[Course userCourseListDocument] propertyForKey:@"value"];
+		self.coursesAudit = self.coursesSelect = nil;
+		for (NSString *courseDocumentID in self.courses) {
+			Course *course = [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
+			if ([course.status isEqualToString:@"select"]) [self.coursesSelect addObject:course];
+			if ([course.status isEqualToString:@"audit"]) [self.coursesAudit addObject:course];
+		}
+		[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+	}
+	
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	CouchDocument *courseListDocument = [Course userCourseListDocument];
+	if (![courseListDocument propertyForKey:@"value"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"user_courses_edited"] boolValue]) {
+		[self reloadTableViewDataSource];
+	}
 }
 
 - (void)viewDidUnload
@@ -77,6 +124,12 @@
 	[self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 }
 
 #pragma mark - Display
@@ -103,12 +156,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 1;
+	return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.courses.count;
+	if (section == 0) return self.coursesSelect.count;
+	return self.coursesAudit.count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+	if (section == 0) return @"已选课程";
+	else return @"旁听课程";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,9 +178,12 @@
 	if (nil == cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 	}
-	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-	CouchDocument *courseDocument = [localDatabase documentWithID:[self.courses objectAtIndex:indexPath.row]];
-	Course *course = [Course modelForDocument:courseDocument];
+//	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+//	CouchDocument *courseDocument = [localDatabase documentWithID:[self.courses objectAtIndex:indexPath.row]];
+//	Course *course = [Course modelForDocument:courseDocument];
+	Course *course;
+	if (indexPath.section == 0) course = [self.coursesSelect objectAtIndex:indexPath.row];
+	else course = [self.coursesAudit objectAtIndex:indexPath.row];
 	cell.textLabel.text = course.name;
     cell.detailTextLabel.text = course.orig_id;
 	
@@ -137,7 +200,9 @@
 	
 	[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
-		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+//		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+		
+		if (!self) return ;
 		
 		if ([collection isKindOfClass:[NSArray class]]) {
 			
@@ -146,9 +211,8 @@
 				
 				Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
 				
-				NSLog(@"%@", course.document.documentID);
-				
 				course.doc_type = @"course";
+				course.status = [courseDict objectForKey:@"status"];
 				course.id = [courseDict objectForKey:@"id"];
 				course.name = [courseDict objectForKey:@"name"];
 				course.credit = [courseDict objectForKey:@"credit"];
@@ -161,7 +225,8 @@
 					for (NSString *lessonDocumentID in course.lessons) {
 						CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
 						RESTOperation *deleteOp = [lessonDocument DELETE];
-						if (![deleteOp wait]) NSLog(@"%@", deleteOp.error);
+						if (![deleteOp wait])
+							[self showAlert:[deleteOp.error description]];
 					}
 				}
 				
@@ -176,39 +241,61 @@
 					lesson.end = [lessonDict objectForKey:@"end"];
 					lesson.day = [lessonDict objectForKey:@"day"];
 					lesson.location = [lessonDict objectForKey:@"location"];
-					lesson.week = [lessonDict objectForKey:@"week"];
+					lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
 					
-					RESTOperation *saveOp = [lesson save];
-					if ([saveOp wait])
+					RESTOperation *lessonSaveOp = [lesson save];
+					if (lessonSaveOp && ![lessonSaveOp wait])
+						[self showAlert:[lessonSaveOp.error description]];
+					else
 						[lessons addObject:lesson.document.documentID];
-					else NSLog(@"%@", saveOp.error);
 					
 				}
 				course.lessons = lessons;
 				
-				RESTOperation *saveOp = [course save];
-				if ([saveOp wait]) [courses addObject:course.document.documentID];
-				else [self showAlert:[saveOp.error description]];
+				RESTOperation *courseSaveOp = [course save];
+				if (courseSaveOp && ![courseSaveOp wait])
+					[self showAlert:[courseSaveOp.error description]];
+				else
+					[courses addObject:course.document.documentID];
 				
 			}
 			
-			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];
+			self.courses = courses;
+			self.coursesAudit = self.coursesSelect = nil;
+//			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+			for (NSString *courseDocumentID in self.courses) {
+				Course *course = [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
+				if ([course.status isEqualToString:@"select"]) [self.coursesSelect addObject:course];
+				if ([course.status isEqualToString:@"audit"]) [self.coursesAudit addObject:course];
+			}
+			
+			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"usercourselist", @"value" : courses } mutableCopy];
 			CouchDocument *courseListDocument = [Course userCourseListDocument];
 			if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
 			RESTOperation *putOp = [courseListDocument putProperties:courseListDict];
-			if (![putOp wait]) [self showAlert:[putOp.error description]];
+			if (![putOp wait])
+				[self showAlert:[putOp.error description]];
 			
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			
+			[[NSUserDefaults standardUserDefaults] setObject:@0 forKey:@"user_courses_edited"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			
 		} else {
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 			[self showAlert:@"返回结果不是NSArray"];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
+	
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新课程列表中..."];
+	
 }
 
 - (void)doneLoadingTableViewData{
@@ -258,8 +345,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	courseSelected = [Course userCourseAtIndex:indexPath.row courseList:self.courses];
+//	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	if (indexPath.section == 0) courseSelected = [self.coursesSelect objectAtIndex:indexPath.row];
+	else courseSelected = [self.coursesAudit objectAtIndex:indexPath.row];
+//	courseSelected = [Course courseAtIndex:indexPath.row courseList:self.courses];
 	[self performSegueWithIdentifier:@"CourseSegue" sender:self];
 }
 

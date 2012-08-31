@@ -25,10 +25,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = NO;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 #pragma mark - View Lifecycle
@@ -50,8 +47,6 @@
 //	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
 	self.navigationItem.rightBarButtonItem = loginButton;
 //	self.navigationItem.leftBarButtonItem = closeButton;
-	
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;	
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -86,7 +81,7 @@
 
 #pragma mark - Button controllerAction
 
-- (void)onLogin:(UIBarButtonItem *)sender {
+- (void)onLogin:(id)sender {
 	NSMutableDictionary *loginInfo = [[NSMutableDictionary alloc] init];
     [self.root fetchValueUsingBindingsIntoObject:loginInfo];
 	email = [loginInfo objectForKey:kAPIEMAIL];
@@ -103,18 +98,22 @@
 	
 	[[Coffeepot shared] requestWithMethodPath:@"user/login/email/" params:@{@"email":email, @"password":password } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
-		[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
-		[User updateSharedAppUserProfile:collection];
-		
-		[self loading:NO];
-		
-		[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+		if ([collection isKindOfClass:[NSDictionary class]]) {
+			
+			[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
+			[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
+			[User updateSharedAppUserProfile:collection];
+			
+			[self loading:NO];
+			[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];
+		} else {
+			[self loading:NO];
+			[self showAlert:[collection description]];//NSLog(@"%@", [error description]);
+		}
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];
-//        NSLog(@"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -125,6 +124,7 @@
 {
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	[self performSegueWithIdentifier:@"SignupEmailSegue" sender:self];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 @end

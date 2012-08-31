@@ -7,7 +7,10 @@
 //
 
 #import "QuickDialogController.h"
+#import "CPQTableDelegate.h"
 
 @interface CPDashboardViewController : QuickDialogController
+
+@property (strong, nonatomic) CPQTableDelegate *qTableDelegate;
 
 @end

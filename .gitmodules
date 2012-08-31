@@ -35,3 +35,6 @@
 [submodule "CouchCocoa"]
 	path = CouchCocoa
 	url = https://github.com/couchbaselabs/CouchCocoa.git
+[submodule "GUI"]
+	path = GUI
+	url = https://github.com/pkuapp/GUI.git

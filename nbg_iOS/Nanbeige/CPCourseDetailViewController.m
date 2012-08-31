@@ -18,10 +18,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-	self.quickDialogTableView.bounces = YES;
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 #pragma mark - View Lifecycle
@@ -59,7 +56,7 @@
 	NSString *time = @"", *place = @"", *teachers = @"", *tas = @"";
 	for (NSString *lessonDocumentID in self.course.lessons) {
 		Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
-		time = [time stringByAppendingFormat:@"%@%@-%@节 ", [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+		time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", [Weekset weeksetWithID:lesson.weekset_id].name, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
 		place = [place stringByAppendingFormat:@"%@ ", lesson.location];
 	}
 	for (NSString *teacher in self.course.teacher) {
@@ -69,10 +66,17 @@
 		tas = [tas stringByAppendingFormat:@"%@ ", ta];
 	}
 	
+	University *university = [University universityWithID:[[User sharedAppUser] university_id]];
+	
 	NSDictionary *dict = @{
-	@"basic" : @[ @{ @"title" : @"全称", @"value" : self.course.name }, @{ @"title" : @"编号", @"value" : self.course.orig_id }, @{ @"title" : @"学分", @"value" : self.course.credit }, @{ @"title" : @"教师", @"value" : teachers }, @{ @"title" : @"助教", @"value" : tas },  ],
+	@"basic" : [@[ @{ @"title" : @"全称", @"value" : self.course.name }, @{ @"title" : @"编号", @"value" : self.course.orig_id }, @{ @"title" : @"学分", @"value" : self.course.credit }, @{ @"title" : @"教师", @"value" : teachers }, ] mutableCopy],
 	@"extension" : @[ @{ @"title" : @"时间", @"value" :  time}, @{ @"title" : @"地点", @"value" : place } ],
 	@"exam" : @[ @{ @"title" : @"考试", @"value" : @"API未提供" } ]};
+	
+	if ([university.support_ta boolValue]) {
+		[[dict objectForKey:@"basic"] addObject:@{ @"title" : @"助教", @"value" : tas }];
+	}
+		
 	[self.root bindToObject:dict];
 }
 

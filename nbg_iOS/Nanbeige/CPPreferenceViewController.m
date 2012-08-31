@@ -19,10 +19,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = NO;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 #pragma mark - View Lifecycle
@@ -49,13 +46,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
-	
-	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 }
 
 - (void)viewDidUnload
@@ -80,6 +70,7 @@
 {
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kMAINORDERKEY];
 	[[[UIAlertView alloc] initWithTitle:nil message:@"已重置" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil] show];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 - (void)onAbout:(id)sender

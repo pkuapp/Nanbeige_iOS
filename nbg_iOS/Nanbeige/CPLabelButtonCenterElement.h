@@ -6,8 +6,8 @@
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "QLabelElement.h"
+#import "CPLabelButtonElement.h"
 
-@interface CPLabelButtonCenterElement : QLabelElement
+@interface CPLabelButtonCenterElement : CPLabelButtonElement
 
 @end

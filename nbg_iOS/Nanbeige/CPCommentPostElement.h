@@ -1,5 +1,5 @@
 //
-//  CPLabelMutipleLinesElement.h
+//  CPCommentPostElement.h
 //  nbg_iOS
 //
 //  Created by ZongZiWang on 12-8-16.
@@ -8,6 +8,6 @@
 
 #import "QLabelElement.h"
 
-@interface CPLabelMutipleLinesElement : QLabelElement
+@interface CPCommentPostElement : QLabelElement
 
 @end

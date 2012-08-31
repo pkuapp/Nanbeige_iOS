@@ -4,23 +4,6 @@
     "controllerName": "CPSigninEmailViewController",
 	"sections": [
 				 {
-				 "elements": [
-							  {
-							  "type":"QEntryElement",
-							  "placeholder":"Email",
-							  "keyboardType":"EmailAddress",
-							  "bind":"textValue:email",
-							  "autocorrectionType":"No"
-							  },
-							  {
-							  "type":"QEntryElement",
-							  "placeholder":"密码",
-							  "secureTextEntry":true,
-							  "bind":"textValue:password"
-							  }
-							  ]
-				 },
-				 {
 				 "title":"还未注册？",
 				 "elements":[
 							 {
@@ -29,6 +12,34 @@
 							 "controllerAction":"onEmailSignup:"
 							 }
 							 ]
-				 }
+				 },
+				 {
+				 "title":"注册用户",
+				 "elements": [
+							  {
+							  "type":"CPEntryElement",
+							  "placeholder":"Email",
+							  "keyboardType":"EmailAddress",
+							  "bind":"textValue:email",
+							  "autocorrectionType":"No",
+							  "autocapitalizationType":"None"
+							  },
+							  {
+							  "type":"CPEntryElement",
+							  "placeholder":"密码",
+							  "secureTextEntry":true,
+							  "bind":"textValue:password"
+							  }
+							  ]
+				 },
+				 {
+				 "elements":[
+							 {
+							 "type":"CPLabelButtonCenterElement",
+							 "title":"登录",
+							 "controllerAction":"onLogin:"
+							 }
+							 ]
+				 },
 				 ]
 }

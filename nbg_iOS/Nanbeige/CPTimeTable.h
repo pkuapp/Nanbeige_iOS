@@ -15,6 +15,7 @@
 
 - (void)didChangeIfShowTime:(BOOL)isShowTime;
 - (void)didDisplayCourse:(id)sender;
+- (NSArray *)coursesAtDate:(NSDate *)date;
 
 @end
 
@@ -24,7 +25,7 @@
 @property (strong, nonatomic) UITableView *timeTable;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) University *university;
-@property (strong, nonatomic) NSArray *courses;
+@property (strong, nonatomic) NSArray *todayCourses;
 
 - (id)initWithDate:(NSDate *)date;
 - (void)refreshDisplay;

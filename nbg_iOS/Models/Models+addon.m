@@ -31,38 +31,47 @@ static User *sharedAppUserObject = nil;
 	if (![dict isKindOfClass:[NSDictionary class]]) raise(-1);
     User *user = [self sharedAppUser];
     
+	if ([dict objectForKey:@"password"]) {
+		user.password = [dict objectForKey:@"password"];
+	}
+	if ([dict objectForKey:@"gate_id"]) {
+		user.gate_id = [dict objectForKey:@"gate_id"];
+	}
+	if ([dict objectForKey:@"gate_password"]) {
+		user.gate_password = [dict objectForKey:@"gate_password"];
+	}
+	
     if ([dict objectForKey:@"id"]) {
         user.id = [dict objectForKey:@"id"];
+    }
+    if ([dict objectForKey:@"email"]) {
+        user.email = [dict objectForKey:@"email"];
     }
 	if ([dict objectForKey:@"nickname"]) {
         user.nickname = [dict objectForKey:@"nickname"];
     }
-	
-    if ([dict objectForKey:@"email"]) {
-        user.email = [dict objectForKey:@"email"];
-    }
-    if ([dict objectForKey:@"weibo_token"]) {
-        user.weibo_token = [dict objectForKey:@"weibo_token"];
-    }
-    if ([dict objectForKey:@"renren_token"]) {
-        user.renren_token = [dict objectForKey:@"renren_token"];
-    }
-	if ([dict objectForKey:@"weibo_name"]) {
-		user.weibo_name = [dict objectForKey:@"weibo_name"];
-	}
-	if ([dict objectForKey:@"renren_name"]) {
-		user.renren_name = [dict objectForKey:@"renren_name"];
+	if ([dict objectForKey:@"course_imported"]) {
+		user.course_imported = [dict objectForKey:@"course_imported"];
 	}
 	
+    if ([dict objectForKey:@"weibo"] && ![[dict objectForKey:@"weibo"] isKindOfClass:[NSNull class]]) {
+        user.weibo_id = [[dict objectForKey:@"weibo"] objectForKey:@"id"];
+        user.weibo_name = [[dict objectForKey:@"weibo"] objectForKey:@"name"];
+        user.weibo_token = [[dict objectForKey:@"weibo"] objectForKey:@"token"];
+    }
+    if ([dict objectForKey:@"renren"] && ![[dict objectForKey:@"renren"] isKindOfClass:[NSNull class]]) {
+        user.renren_id = [[dict objectForKey:@"renren"] objectForKey:@"id"];
+        user.renren_name = [[dict objectForKey:@"renren"] objectForKey:@"name"];
+        user.renren_token = [[dict objectForKey:@"renren"] objectForKey:@"token"];
+    }
     if ([dict objectForKey:@"university"] && ![[dict objectForKey:@"university"] isKindOfClass:[NSNull class]]) {
-        user.university_name = [[dict objectForKey:@"university"] objectForKey:@"name"];
         user.university_id = [[dict objectForKey:@"university"] objectForKey:@"id"];
-    }
-	
+		user.university_name = [[dict objectForKey:@"university"] objectForKey:@"name"];
+	}
     if ([dict objectForKey:@"campus"] && ![[dict objectForKey:@"campus"] isKindOfClass:[NSNull class]]) {
-        user.campus_name = [[dict objectForKey:@"campus"] objectForKey:@"name"];
         user.campus_id = [[dict objectForKey:@"campus"] objectForKey:@"id"];
-    }
+		user.campus_name = [[dict objectForKey:@"campus"] objectForKey:@"name"];
+	}
 	
     [[NSManagedObjectContext defaultContext] save];
 }
@@ -83,7 +92,7 @@ static User *sharedAppUserObject = nil;
 
 @implementation Course (addon)
 
-+ (CouchDocument *)userCourseListDocument
++ (CouchDocument *)courseListDocument
 {
 	CouchDocument *courseListDocument = nil;
 	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
@@ -103,7 +112,42 @@ static User *sharedAppUserObject = nil;
 			}
 			courseListDocument = row.document;
 		}
-	} else NSLog(@"%@", queryOp.error);
+	} else NSLog(@"Models+addon:courseListDocument %@", queryOp.error);
+	
+	if (!courseListDocument) courseListDocument = [localDatabase untitledDocument];
+	return courseListDocument;
+}
+
++ (Course *)courseAtIndex:(NSInteger)index
+				   courseList:(NSArray *)courseList
+{
+	if (index >= courseList.count) courseList = [[Course courseListDocument] propertyForKey:@"value"];
+	NSNumber *course_id = [[courseList objectAtIndex:index] objectForKey:@"id"];
+	NSString *course_name = [[courseList objectAtIndex:index] objectForKey:@"name"];
+	return [Course courseWithID:course_id name:course_name];
+}
+
++ (CouchDocument *)userCourseListDocument
+{
+	CouchDocument *courseListDocument = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"usercourselist"];
+	[design defineViewNamed:@"byID" mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSString *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"usercourselist"]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	CouchQuery *query = [design queryViewNamed:@"byID"];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (courseListDocument) {
+				NSLog(@"重复课程列表:%@", row.document.properties);
+				[row.document DELETE];
+			}
+			courseListDocument = row.document;
+		}
+	} else NSLog(@"Models+addon:userCourseListDocument %@", queryOp.error);
 	
 	if (!courseListDocument) courseListDocument = [localDatabase untitledDocument];
 	return courseListDocument;
@@ -136,14 +180,30 @@ static User *sharedAppUserObject = nil;
 	if ([queryOp wait]) {
 		for (CouchQueryRow *row in query.rows) {
 			if (course && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"course"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:course_id]) {
-				NSLog(@"%@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				NSLog(@"Models+addon:courseWithID %@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
 				[row.document DELETE];
 			}
 			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:course_id])
 				course = [Course modelForDocument:row.document];
 		}
-	} else NSLog(@"%@", queryOp.error);
+	} else NSLog(@"Models+addon:courseWithID %@", queryOp.error);
 	if (!course) course = [[Course alloc] initWithNewDocumentInDatabase:localDatabase];
+	return course;
+}
+
++ (Course *)courseWithID:(NSNumber *)course_id
+					name:(NSString *)course_name
+{
+	Course *course = [self courseWithID:course_id];
+	if (![course.id integerValue]) {
+		course.doc_type = @"course";
+		course.id = course_id;
+		course.name = course_name;
+		RESTOperation *courseSaveOp = [course save];
+		[courseSaveOp onCompletion:^{
+			if (courseSaveOp.error)	NSLog(@"Models+addon:courseWithID:name %@", courseSaveOp.error);
+		}];
+	}
 	return course;
 }
 
@@ -169,15 +229,81 @@ static User *sharedAppUserObject = nil;
 	if ([queryOp wait]) {
 		for (CouchQueryRow *row in query.rows) {
 			if (university && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"university"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:university_id]) {
-				NSLog(@"%@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				NSLog(@"Models+addon:universityWithID %@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
 				[row.document DELETE];
 			}
 			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:university_id])
 				university = [University modelForDocument:row.document];
 		}
-	} else NSLog(@"%@", queryOp.error);
+	} else NSLog(@"Models+addon:universityWithID %@", queryOp.error);
 	if (!university) university = [[University alloc] initWithNewDocumentInDatabase:localDatabase];
 	return university;
+}
+
+@end
+
+@implementation Semester (addon)
+
++ (Semester *)semesterWithID:(NSNumber *)semester_id
+{
+	Semester *semester = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"semester"];
+	NSString *viewName = [NSString stringWithFormat:@"id=%@", semester_id];
+	[design defineViewNamed:viewName mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSNumber *id = [doc objectForKey: @"id"];
+		NSNumber *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"semester"] && [id isEqualToNumber:semester_id]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	
+	CouchQuery *query = [design queryViewNamed:viewName];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (semester && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"semester"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:semester_id]) {
+				NSLog(@"Models+addon:semesterWithID %@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				[row.document DELETE];
+			}
+			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:semester_id])
+				semester = [Semester modelForDocument:row.document];
+		}
+	} else NSLog(@"Models+addon:semesterWithID %@", queryOp.error);
+	if (!semester) semester = [[Semester alloc] initWithNewDocumentInDatabase:localDatabase];
+	return semester;
+}
+
+@end
+
+@implementation Weekset (addon)
+
++ (Weekset *)weeksetWithID:(NSNumber *)weekset_id
+{
+	Weekset *weekset = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"weekset"];
+	NSString *viewName = [NSString stringWithFormat:@"id=%@", weekset_id];
+	[design defineViewNamed:viewName mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSNumber *id = [doc objectForKey: @"id"];
+		NSNumber *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"weekset"] && [id isEqualToNumber:weekset_id]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	
+	CouchQuery *query = [design queryViewNamed:viewName];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (weekset && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"weekset"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:weekset_id]) {
+				NSLog(@"Models+addon:weeksetWithID %@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				[row.document DELETE];
+			}
+			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:weekset_id])
+				weekset = [Weekset modelForDocument:row.document];
+		}
+	} else NSLog(@"Models+addon:weeksetWithID %@", queryOp.error);
+	if (!weekset) weekset = [[Weekset alloc] initWithNewDocumentInDatabase:localDatabase];
+	return weekset;
 }
 
 @end

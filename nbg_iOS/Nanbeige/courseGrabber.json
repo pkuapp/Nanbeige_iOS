@@ -6,13 +6,14 @@
 				 {
 				 "elements": [
 							  {
-							  "type":"QEntryElement",
+							  "type":"CPEntryElement",
 							  "placeholder":"用户名",
 							  "bind":"textValue:username",
-							  "autocorrectionType":"No"
+							  "autocorrectionType":"No",
+							  "autocapitalizationType":"None"
 							  },
 							  {
-							  "type":"QEntryElement",
+							  "type":"CPEntryElement",
 							  "placeholder":"密码",
 							  "secureTextEntry":true,
 							  "bind":"textValue:password"
@@ -22,9 +23,10 @@
 				 {
 				 "bind":"iterate:captcha",
 				 "elementTemplate": {
-				 "type":"QEntryElement",
+				 "type":"CPEntryElement",
 				 "bind":"textValue:captcha, placeholder:placeholder",
-				 "autocorrectionType":"No"
+				 "autocorrectionType":"No",
+				 "autocapitalizationType":"None"
 				 }
 				 }
 				 ]

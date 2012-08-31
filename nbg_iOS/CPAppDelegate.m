@@ -12,6 +12,7 @@
 #import "CPAppModule.h"
 #import "Models/Models+addon.h"
 #import "Coffeepot.h"
+#import <QuartzCore/CALayer.h>
 
 @interface CPAppDelegate ()
 
@@ -20,6 +21,37 @@
 @end
 
 @implementation CPAppDelegate
+
+- (MBProgressHUD *)progressHud
+{
+	if (_progressHud == nil) {
+		_progressHud = [[MBProgressHUD alloc] initWithWindow:self.window];
+		[self.window addSubview:_progressHud];
+		_progressHud.userInteractionEnabled = NO;
+		_progressHud.opacity = 0.618;
+		_progressHud.animationType = MBProgressHUDAnimationZoom;
+	}
+	return _progressHud;
+}
+
+- (void)showProgressHud:(NSString *)title
+{
+	self.progressHud.mode = MBProgressHUDModeIndeterminate;
+	self.progressHud.transform = CGAffineTransformIdentity;
+	self.progressHud.labelText = title;
+	self.progressHud.taskInProgress = YES;
+	[self.progressHud show:YES];
+}
+
+- (void)hideProgressHud
+{
+	[self.progressHud hide:YES];
+}
+
+- (void)hideProgressHudAfterDelay:(NSTimeInterval)time
+{
+	[self.progressHud hide:YES afterDelay:time];
+}
 
 - (void)updateAppUserProfileWith:(NSDictionary *)dict {
     for (NSString* key in [dict allKeys]) {
@@ -46,7 +78,7 @@
 //		[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
 //        return YES;
 //	}
-    return ![[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue];
+    return ![[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue] || ![[User sharedAppUser].id integerValue];
 
 }
 
@@ -56,10 +88,44 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+	
+	UIImage *overlayImg = [UIImage imageNamed:@"corners"];
+	CALayer *overlay = [CALayer layer];
+	overlay.frame = CGRectMake(0, 20, overlayImg.size.width, overlayImg.size.height);
+	overlay.contents = (id)overlayImg.CGImage;
+	overlay.zPosition = 1;
+	[self.window.layer addSublayer:overlay];
+	
+	[[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-pressed-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 19, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+	
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavigationBar"] forBarMetrics:UIBarMetricsDefault];
+	
+	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] };
+	[[UINavigationBar appearance] setTitleTextAttributes:titleTextAttributes];
+	
+	[[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"TabBar"]];
+	[[UITabBar appearance] setSelectionIndicatorImage:[[UIImage imageNamed:@"TabBar-selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)]];
+	
+//	[[UITableView appearance] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
+	
+//    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)]  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    
+//    [[UISegmentedControl appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+//    
+//    [[UISegmentedControl appearance] setDividerImage:[UIImage imageNamed:@"btn-segmented-divider.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"nbg_iOS"];
-
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	
     JSObjectionInjector *injector = [JSObjection createInjector:[[CPAppModule alloc] init]];
     [JSObjection setDefaultInjector:injector];
 	
@@ -127,7 +193,7 @@
         self.window.rootViewController = rvc;
     }
     else {
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
         self.window.rootViewController = [sb instantiateInitialViewController];
     }
     

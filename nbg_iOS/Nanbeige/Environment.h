@@ -123,6 +123,7 @@
 #define TITLE_ITS @"IP网关"
 #define TITLE_ASSIGNMENT @"作业"
 #define TITLE_SELECTED_COURSE @"我的课程"
+#define TITLE_ALL_COURSE @"课程目录"
 #define FORMAT_TITLE_ROOMS @"教学楼・%@"
 #define LIMIT_ROOM_STRING_LENGTH 20
 
@@ -130,11 +131,11 @@
 //#define navBarBgColor [[UIColor alloc] initWithRed:77/255.0 green:77/255.0 blue:77/255.0 alpha:1.0]
 
 #define labelLeftColor [[UIColor alloc] initWithRed:0/255.0 green:114/255.0 blue:225/255.0 alpha:1.0]
-#define tableBgColorGrouped [[UIColor alloc] initWithRed:240/255.0 green:239/255.0 blue:235/255.0 alpha:1.0]
+//#define tableBgColorGrouped [[UIColor alloc] initWithRed:240/255.0 green:239/255.0 blue:235/255.0 alpha:1.0]
 #define tableBgColorPlain [[UIColor alloc] initWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
-#define navBarBgColor1 [[UIColor alloc] initWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0]
+//#define navBarBgColor1 [[UIColor alloc] initWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0]
 #define navBarTextColor1 [UIColor colorWithRed:230/255.0 green:109/255.0 blue:69/255.0 alpha:1.0]
-#define tabBarBgColor1 [[UIColor alloc] initWithRed:40/255.0 green:60/255.0 blue:68/255.0 alpha:1.0]
+//#define tabBarBgColor1 [[UIColor alloc] initWithRed:40/255.0 green:60/255.0 blue:68/255.0 alpha:1.0]
 
 #define separatorColorNoCourseFooter [[UIColor alloc] initWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0]
 #define separatorColorCourseMiddle [[UIColor alloc] initWithRed:237/255.0 green:237/255.0 blue:237/255.0 alpha:1.0]
@@ -173,7 +174,7 @@
 #define completeAssignmentCellColor [UIColor colorWithRed:112/255.0 green:112/255.0 blue:112/255.0 alpha:1.0]
 
 #define kMAINORDERKEY @"mainorder"
-#define kCOURSE_IMPORTED @"course_imported"
+//#define kCOURSE_IMPORTED @"course_imported"
 
 #define kWEIBOIDKEY @"weiboid"
 #define kWEIBONAMEKEY @"weiboname"

@@ -6,25 +6,22 @@
 //  Copyright (c) 2012年 Peking University. All rights reserved.
 //
 
-#import "CPSigninComfirmViewController.h"
+#import "CPSigninConfirmViewController.h"
 #import "Environment.h"
 #import "Coffeepot.h"
 #import "Models+addon.h"
 
-@interface CPSigninComfirmViewController ()
+@interface CPSigninConfirmViewController ()
 
 @end
 
-@implementation CPSigninComfirmViewController
+@implementation CPSigninConfirmViewController
 
 #pragma mark - Setter and Getter Methods
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = YES;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 - (WBEngine *)weibo {
@@ -136,7 +133,8 @@
 
 - (void)onConnectEmail:(id)sender
 {
-	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
+	[self showAlert:@"绑定Email功能暂未实现"];
+//	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
 }
 
 - (void)onConnectWeibo:(id)sender
@@ -156,18 +154,47 @@
 }
 
 - (void)onConfirmLogin:(id)sender
-{
-	[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+{	
+	if (![[User sharedAppUser].id integerValue]) {
+		NSMutableDictionary *params = [@{@"email":[User sharedAppUser].email, @"password":[User sharedAppUser].password, @"nickname":[User sharedAppUser].nickname} mutableCopy];
+		if ([User sharedAppUser].campus_id) [params setObject:[User sharedAppUser].campus_id forKey:@"campus_id"];
+		[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+
+			[[NSUserDefaults standardUserDefaults] setObject:[User sharedAppUser].email forKey:@"sync_db_username"];
+			[[NSUserDefaults standardUserDefaults] setObject:[User sharedAppUser].password forKey:@"sync_db_password"];
+			[User updateSharedAppUserProfile:collection];
+			
+			[self onFetchUniversity:[User sharedAppUser].university_id];
+
+		} error:^(CPRequest *request, NSError *error) {
+			[self loading:NO];
+			if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"Email 已被使用。"]) {
+				[self showAlert:[error.userInfo objectForKey:@"error"]];
+			} else {
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+			}
+		}];
+		
+	} else {
+		[self onFetchUniversity:[User sharedAppUser].university_id];
+	}
 	
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", [User sharedAppUser].university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
+	
+}
+
+- (void)onFetchUniversity:(NSNumber *)university_id
+{
+	
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
 		if ([collection isKindOfClass:[NSDictionary class]]) {
 			NSDictionary *universityDict = collection;
 			
-			University *university = [University universityWithID:[User sharedAppUser].university_id];
+			University *university = [University universityWithID:university_id];
 			university.doc_type = @"university";
-			university.id = [User sharedAppUser].university_id;
+			university.id = university_id;
 			university.name = [universityDict objectForKey:@"name"];
 			university.support_import_course = [[universityDict objectForKey:@"support"] objectForKey:@"import_course"];
 			university.support_list_course = [[universityDict objectForKey:@"support"] objectForKey:@"list_course"];
@@ -179,27 +206,103 @@
 			university.lessons_separators = [[universityDict objectForKey:@"lessons"] objectForKey:@"separators"];
 			
 			RESTOperation *op = [university save];
-			if (![op wait]) [self showAlert:[op.error description]];
+			if (op && ![op wait]) [self showAlert:[op.error description]];
 			else {
-				UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryBoard_iPhone" bundle:[NSBundle mainBundle]];
-				[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
+				[self onFetchSemester:university_id];
 			}
-			
-			[self loading:NO];
 			
 		} else {
 			[self loading:NO];
-			[self showAlert:@"返回结果不是NSDictionary"];
+			[self showAlert:@"University返回结果不是NSDictionary"];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
+}
+
+- (void)onFetchSemester:(NSNumber *)university_id
+{
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/semester/", university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+		
+		if ([collection isKindOfClass:[NSArray class]]) {
+			
+			for (NSDictionary *semesterDict in collection) {
+				
+				Semester *semester = [Semester semesterWithID:[semesterDict objectForKey:@"id"]];
+				
+				semester.doc_type = @"semester";
+				semester.id = [semesterDict objectForKey:@"id"];
+				semester.name = [semesterDict objectForKey:@"name"];
+				semester.year = [semesterDict objectForKey:@"year"];
+				semester.week_start = [[semesterDict objectForKey:@"week"] objectForKey:@"start"];
+				semester.week_end = [[semesterDict objectForKey:@"week"] objectForKey:@"end"];
+				
+				RESTOperation *op = [semester save];
+				if (op && ![op wait])
+					[self showAlert:[op.error description]];
+				else {
+					[self onFetchWeekset:[semesterDict objectForKey:@"id"]];
+				}
+			}
+			
+			[self loading:NO];
+			
+			[self onComplete];
+			
+		} else {
+			[self loading:NO];
+			[self showAlert:@"Semester返回结果不是NSArray"];
+		}
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[self loading:NO];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+}
+
+- (void)onFetchWeekset:(NSNumber *)semester_id
+{
 	
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
-	
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/semester/%@/weekset/", semester_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+		
+		if ([collection isKindOfClass:[NSArray class]]) {
+			
+			for (NSDictionary *weeksetDict in collection) {
+				
+				Weekset *weekset = [Weekset weeksetWithID:[weeksetDict objectForKey:@"id"]];
+				
+				weekset.doc_type = @"weekset";
+				weekset.id = [weeksetDict objectForKey:@"id"];
+				weekset.name = [weeksetDict objectForKey:@"name"];
+				weekset.weeks = [weeksetDict objectForKey:@"weeks"];
+				
+				RESTOperation *op = [weekset save];
+				if (op && ![op wait])
+					[self showAlert:[op.error description]];
+				else {
+					
+				}
+			}
+			
+		} else {
+			[self loading:NO];
+			[self showAlert:@"Weekset返回结果不是NSArray"];
+		}
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[self loading:NO];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+}
+
+- (void)onComplete
+{
+	[[NSUserDefaults standardUserDefaults] setObject: @1 forKey:@"CPIsSignedIn"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+	[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
 }
 
 #pragma mark - WBEngineDelegate
@@ -211,14 +314,11 @@
     
 	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
 								  success:^(WBRequest *request, id result) {
-									  [self loading:NO];
 									  
-									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
-										  
-										  
+									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {										  
 										  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 											  
-											  [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
+											  [User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
 											  
 											  [self refreshDataSource];
 											  
@@ -226,16 +326,16 @@
 											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
-											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+											  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 										  }];
-										  
-										  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-										  [self loading:YES];
+									  } else {
+										  [self loading:NO];
+										  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 									  }
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
 										 [self loading:NO];
-										 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+										 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 									 }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -256,13 +356,12 @@
 	[self.renren requestWithParam:requestParam
 					  andDelegate:self
 						  success:^(RORequest *request, id result) {
-							  [self loading:NO];
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								  
 								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 									  
-									  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
+									  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
 									  
 									  [self refreshDataSource];
 									  
@@ -270,16 +369,18 @@
 
 								  } error:^(CPRequest *request, NSError *error) {
 									  [self loading:NO];
-									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+									  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 								  }];
-
-								  [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-								  [self loading:YES];
+							  } else if ([result isKindOfClass:[NSDictionary class]]) {
+								  NSLog(@"SigninConfirm:renrenDidLogin %@", result);
+							  } else {
+								  [self loading:NO];
+								  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+								 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 							 }
 	 ];
 	

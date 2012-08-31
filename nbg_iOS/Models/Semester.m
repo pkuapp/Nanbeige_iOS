@@ -17,7 +17,6 @@
 @dynamic week_start;
 @dynamic name;
 @dynamic year;
-@dynamic week_excluded;
 @dynamic doc_type;
 
 @dynamic university;

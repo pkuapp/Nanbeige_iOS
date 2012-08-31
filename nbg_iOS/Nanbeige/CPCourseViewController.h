@@ -9,6 +9,7 @@
 #import "QuickDialogController.h"
 #import "Models+addon.h"
 #import "EGORefreshTableHeaderView.h"
+#import "CPQTableDelegate.h"
 
 @interface CPCourseViewController : QuickDialogController<UITableViewDelegate, UITableViewDataSource, EGORefreshTableHeaderDelegate> {
 	EGORefreshTableHeaderView *_refreshHeaderView;
@@ -17,6 +18,7 @@
 	BOOL _reloading;
 }
 
+@property (nonatomic, strong) CPQTableDelegate *qTableDelegate;
 @property (nonatomic, strong) Course *course;
 @property (nonatomic, strong) NSMutableArray *assignments;
 @property (nonatomic, strong) NSMutableArray *comments;

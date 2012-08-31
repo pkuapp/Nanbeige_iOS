@@ -8,6 +8,7 @@
 
 #import "ROBaseNavigationViewController.h"
 #import "Environment.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ROBaseNavigationViewController (Private) 
 
@@ -34,15 +35,16 @@
         
         _navigationBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _navigationBar.tintColor = navBarBgColor1;
-		
-		NSMutableDictionary *titleTextAttributes = [_navigationBar.titleTextAttributes mutableCopy];
-		if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-		[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-		[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-		_navigationBar.titleTextAttributes = titleTextAttributes;
         
         [self.view addSubview:_navigationBar];
+		
+		CGFloat navigationBarBottom = self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height;
+		UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
+		CALayer *shadowLayer = [CALayer layer];
+		shadowLayer.frame = CGRectMake(0, navigationBarBottom, self.view.frame.size.width, shadowImg.size.height);
+		shadowLayer.contents = (id)shadowImg.CGImage;
+		shadowLayer.zPosition = 1;
+		[self.view.layer addSublayer:shadowLayer];
         
         UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"连接到人人网"] autorelease];
         navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(close)];

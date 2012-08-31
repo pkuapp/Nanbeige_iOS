@@ -18,7 +18,7 @@
 @dynamic end;
 @dynamic location;
 @dynamic start;
-@dynamic week;
+@dynamic weekset_id;
 
 @dynamic course;
 

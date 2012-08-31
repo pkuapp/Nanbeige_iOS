@@ -76,6 +76,10 @@
 			for (int i = 0; i < cnt; i++) {
 				[newOrder addObject:[NSString stringWithFormat:@"%d", i]];
 			}
+			NSString * neworderStr = [newOrder componentsJoinedByString:@","];
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			[defaults setValue:neworderStr forKey:kMAINORDERKEY];
+			[defaults synchronize];
 		};
 		_functionOrder = [[NSArray alloc] initWithArray:newOrder];
 	}
@@ -111,16 +115,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.tableView.backgroundColor = tableBgColorGrouped;
-	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
+	self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	self.title = TITLE_MAIN;
-	
-	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 		
 //	self.connector = [[CPIPGateHelper alloc] init];
 	
@@ -146,10 +142,19 @@
 		[[self.functionArray objectAtIndex:0] setObject:@"Line3Button2Identifier" forKey:@"identifier"];
 		[[self.functionArray objectAtIndex:0] setObject:@"CPLine3Button2Cell" forKey:@"nibname"];
 	}
-	[self.tableView reloadData];
+
 //	self.connector.delegate = self;
 	if (self.itsCell) {
 		[self changeDetailGateInfo:nil isConnecting:NO];
+	}
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	if (![self.functionOrder isEqualToArray:[[self.defaults valueForKey:kMAINORDERKEY] componentsSeparatedByString:@","]]) {
+		self.functionOrder = nil;
+		[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 }
 

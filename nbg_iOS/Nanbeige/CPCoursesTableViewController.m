@@ -20,7 +20,30 @@
 @end
 
 @implementation CPCoursesTableViewController
-@synthesize paginatorView = _paginatorView;
+
+- (University *)university
+{
+	if (_university == nil) {
+		_university = [University universityWithID:[User sharedAppUser].university_id];
+	}
+	return _university;
+}
+
+- (NSArray *)courses
+{
+	if (_courses == nil) {
+		_courses = [[Course userCourseListDocument] propertyForKey:@"value"];
+	}
+	return _courses;
+}
+
+- (NSMutableDictionary *)weeksets
+{
+	if (_weeksets == nil) {
+		_weeksets = [[NSMutableDictionary alloc] init];
+	}
+	return _weeksets;
+}
 
 - (SYPaginatorView *)paginatorView
 {
@@ -68,8 +91,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
-	self.view.BackgroundColor = tableBgColorGrouped;
+	self.view.BackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
 	self.paginatorView.frame = self.view.bounds;
 	self.paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
@@ -84,7 +106,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	self.tabBarController.tabBar.tintColor = tabBarBgColor1;
 	
 	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
@@ -103,9 +124,16 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	if (bViewDidLoad && ![[[NSUserDefaults standardUserDefaults] objectForKey:kCOURSE_IMPORTED] boolValue]) {
+	if (bViewDidLoad && ![[User sharedAppUser].course_imported count]) {
 		[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
 		bViewDidLoad = NO;
+	} else if (![[User sharedAppUser].course_imported count]) {
+		[self.tabBarController.navigationController popViewControllerAnimated:YES];
+	} else {
+		CouchDocument *courseListDocument = [Course userCourseListDocument];
+		if (![courseListDocument propertyForKey:@"value"]) {
+			[self.tabBarController setSelectedIndex:1];
+		}
 	}
 }
 
@@ -157,12 +185,56 @@
 	NSString *identifier = [[today dateByAddingTimeInterval:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)] description];
 	
 	CPTimeTable *view = (CPTimeTable *)[paginatorView dequeueReusablePageWithIdentifier:identifier];
+	NSDate *date = [today dateByAddingTimeInterval:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)];
 	if (!view) {
-		view = [[CPTimeTable alloc] initWithDate:[today dateByAddingTimeInterval:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)]];
+		view = [[CPTimeTable alloc] initWithDate:date];
 	}
+	
+	view.university = self.university;
 	view.delegate = self;
 	
 	return view;
+}
+
+- (NSArray *)coursesAtDate:(NSDate *)date
+{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"w";
+	NSInteger week = [[formatter stringFromDate:date] integerValue] - [[formatter stringFromDate:[NSDate date]] integerValue] + 1;
+	formatter.dateFormat = @"e";
+	NSInteger weekday = ([[formatter stringFromDate:date] integerValue] + 5) % 7 + 1;
+	return [self coursesAtWeekday:weekday Week:week];
+}
+
+- (NSArray *)coursesAtWeekday:(NSInteger)weekday
+						 Week:(NSInteger)week
+{
+	NSMutableArray *result = [[NSMutableArray alloc] init];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	for (int i = 0; i < self.courses.count; i++) {
+		Course *course = [Course userCourseAtIndex:i courseList:self.courses];
+		for (NSString *lessonDocumentID in course.lessons) {
+			Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
+			NSInteger lessonDay = [lesson.day integerValue];
+			NSArray *weeks = [self.weeksets objectForKey:lesson.weekset_id];
+			if (weeks == nil) {
+				weeks = [Weekset weeksetWithID:lesson.weekset_id].weeks;
+				[self.weeksets setObject:weeks forKey:lesson.weekset_id];
+			}
+			if (lessonDay == weekday && [weeks containsObject:[NSNumber numberWithInteger:week]]) {
+				[result addObject:
+				 @{@"start" : lesson.start,
+				 @"end" : lesson.end,
+				 @"name" : course.name,
+				 @"location" : lesson.location,
+				 @"courseDocumentID" : course.document.documentID}];
+			}
+		}
+	}
+	return [result sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+		if ([[obj1 objectForKey:@"start"] integerValue] < [[obj2 objectForKey:@"start"] integerValue]) return NSOrderedAscending;
+		return NSOrderedDescending;
+	}];
 }
 
 #pragma mark - SYPaginatorViewDelegate

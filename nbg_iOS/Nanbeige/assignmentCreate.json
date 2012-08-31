@@ -6,7 +6,7 @@
 				 {
 				 "elements": [
 							  {
-							  "type":"QEntryElement",
+							  "type":"CPEntryElement",
 							  "placeholder":"作业要求",
 							  "bind":"textValue:content"
 							  },

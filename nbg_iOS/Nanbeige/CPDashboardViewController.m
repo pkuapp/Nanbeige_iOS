@@ -20,11 +20,9 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
-    self.quickDialogTableView.bounces = YES;
-	self.quickDialogTableView.delegate = self;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
+	self.qTableDelegate = [[CPQTableDelegate alloc] initForTableView:self.quickDialogTableView scrollViewDelegate:self];
+	self.quickDialogTableView.delegate = self.qTableDelegate;
 }
 
 #pragma mark - View Lifecycle

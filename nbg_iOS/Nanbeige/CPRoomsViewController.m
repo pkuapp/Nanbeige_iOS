@@ -56,7 +56,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
 	self.tableView.backgroundColor = tableBgColorPlain;
 	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"教学楼" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
@@ -83,6 +82,12 @@
 	self.rooms = [[doc properties] objectForKey:@"value"];
 	
 	[self reloadRooms];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)viewDidUnload
@@ -158,7 +163,7 @@
 		cell.textLabel.textColor = [UIColor colorWithRed:120/255.0 green:116/255.0 blue:100/255.0 alpha:1.0];
 		cell.textLabel.backgroundColor = [UIColor clearColor];
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-		cell.contentView.backgroundColor = tableBgColorGrouped;
+		cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 		
 		cell.textLabel.text = [[roomsOfBuilding objectAtIndex:indexPath.section] objectAtIndex:indexPath.row-1];
 		cell.detailTextLabel.text = nil;
@@ -242,7 +247,7 @@
 		[self syncNextRooms];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
 
@@ -298,7 +303,7 @@
 		[self syncNextRooms];
 		
 	} error:^(CPRequest *request, NSError *error) {
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
 

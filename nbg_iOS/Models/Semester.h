@@ -19,7 +19,6 @@
 @property (nonatomic, retain) NSString * year;
 @property (nonatomic, retain) NSDate * week_end;
 @property (nonatomic, retain) NSDate * week_start;
-@property (nonatomic, retain) NSArray * week_excluded;
 
 @property (nonatomic, assign) University * university;
 @property (nonatomic, retain) NSArray * courses;

@@ -7,6 +7,7 @@
 //
 
 #import "CPTabBarController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CPTabBarController ()
 
@@ -27,9 +28,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-//	UITabBarItem *feedTabBarButton = [[self.tabBar items] objectAtIndex:0];
-//	UITabBarItem *mainTabBarButton = [[self.tabBar items] objectAtIndex:1];
-//	UITabBarItem *preferenceTabBarButton = [[self.tabBar items] objectAtIndex:2];
+	
+//	UIImage *shadowImg = [UIImage imageNamed:@"TabBar-shadow"];
+//	CGFloat tabBarTop = self.tabBar.frame.origin.y - shadowImg.size.height;
+//	CALayer *shadowLayer = [CALayer layer];
+//	shadowLayer.frame = CGRectMake(0, tabBarTop, self.view.frame.size.width, shadowImg.size.height);
+//	shadowLayer.contents = (id)shadowImg.CGImage;
+//	shadowLayer.zPosition = 1;
+//	[self.view.layer addSublayer:shadowLayer];
+	
 	[self setSelectedIndex:1];
 }
 

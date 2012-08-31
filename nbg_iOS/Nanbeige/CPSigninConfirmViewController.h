@@ -10,7 +10,7 @@
 #import "WBEngine+addon.h"
 #import "Renren+addon.h"
 
-@interface CPSigninComfirmViewController : QuickDialogController  <WBEngineDelegate, RenrenDelegate>
+@interface CPSigninConfirmViewController : QuickDialogController  <WBEngineDelegate, RenrenDelegate>
 
 @property (nonatomic, strong) WBEngine *weibo;
 @property (nonatomic, strong) Renren *renren;

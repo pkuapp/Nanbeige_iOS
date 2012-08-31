@@ -12,8 +12,7 @@
 
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
     QTableViewCell *cell = (QTableViewCell *) [super getCellForTableView:tableView controller:controller];
-    
-	cell.accessoryType = UITableViewCellAccessoryNone;
+
 	cell.textLabel.textAlignment = UITextAlignmentCenter;
 	
 	return cell;

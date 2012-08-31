@@ -6,26 +6,27 @@
 				 {
 				 "elements": [
 							  {
-							  "type":"QEntryElement",
+							  "type":"CPEntryElement",
 							  "placeholder":"Email",
 							  "keyboardType":"EmailAddress",
 							  "bind":"textValue:email",
-							  "autocorrectionType":"No"
+							  "autocorrectionType":"No",
+							  "autocapitalizationType":"None"
 							  },
 							  {
-							  "type":"QEntryElement",
-							  "placeholder":"昵称",
-							  "bind":"textValue:nickname"
+							  "type":"CPEntryElement",
+							  "placeholder":"密码",
+							  "secureTextEntry":true,
+							  "bind":"textValue:password"
 							  }
 							  ]
 				 },
 				 {
 				 "elements":[
 							 {
-							 "type":"QEntryElement",
-							 "placeholder":"密码",
-							 "secureTextEntry":true,
-							 "bind":"textValue:password"
+							 "type":"CPEntryElement",
+							 "placeholder":"昵称",
+							 "bind":"textValue:nickname"
 							 }
 							 ]
 				 }

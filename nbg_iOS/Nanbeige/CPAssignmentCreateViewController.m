@@ -11,9 +11,7 @@
 #import "CPAssignmentDeadlineViewController.h"
 #import "CPAssignmentCourseViewController.h"
 #import "Environment.h"
-#import "Assignment.h"
-#import "Course.h"
-#import "Lesson.h"
+#import "Models+addon.h"
 
 #define DISPLAY_COURSE
 
@@ -30,10 +28,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = YES;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 - (void)setAssignment:(Assignment *)assignment
@@ -42,9 +37,15 @@
 	if (self.bCreate) {
 		_assignment.finished = [NSNumber numberWithBool:NO];
 		if (self.coursesData.count) {
-			Course *course = [Course userCourseAtIndex:0 courseList:self.coursesData];
-			_assignment.course_id = course.id;
-			_assignment.course_name = course.name;
+			if (self.courseIdFilter) {
+				Course *course = [Course courseWithID:self.courseIdFilter];
+				_assignment.course_id = course.id;
+				_assignment.course_name = course.name;
+			} else {
+				Course *course = [Course userCourseAtIndex:0 courseList:self.coursesData];
+				_assignment.course_id = course.id;
+				_assignment.course_name = course.name;
+			}
 		}
 
 		if (self.coursesData.count && self.weeksData.count) {
@@ -85,8 +86,10 @@
 		for (NSString *lessonDocumentID in self.course.lessons) {
 			Lesson *lesson = [Lesson modelForDocument:[self.localDatabase documentWithID:lessonDocumentID]];
 			NSNumber *day = lesson.day;
-			for (NSNumber *week in lesson.week) {
-				[tempArray addObject:@{ @"day" : day, @"week" : week }];
+			NSNumber *start = lesson.start;
+			NSNumber *end = lesson.end;
+			for (NSNumber *week in [Weekset weeksetWithID:lesson.weekset_id].weeks) {
+				[tempArray addObject:@{ @"day" : day, @"week" : week , @"start" : start, @"end" : end }];
 			}
 		}
 		_weeksData = [tempArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -94,10 +97,18 @@
 			int day1 = [[obj1 objectForKey:@"day"] intValue];
 			int week2 = [[obj2 objectForKey:@"week"] intValue];
 			int day2 = [[obj2 objectForKey:@"day"] intValue];
+			int start1 = [[obj1 objectForKey:@"start"] intValue];
+			int start2 = [[obj2 objectForKey:@"start"] intValue];
+			int end1 = [[obj1 objectForKey:@"end"] intValue];
+			int end2 = [[obj2 objectForKey:@"end"] intValue];
 			if (week1 < week2) return NSOrderedAscending;
 			if (week1 > week2) return NSOrderedDescending;
 			if (day1 < day2) return NSOrderedAscending;
 			if (day1 > day2) return NSOrderedDescending;
+			if (start1 < start2) return NSOrderedAscending;
+			if (start1 > start2) return NSOrderedDescending;
+			if (end1 < end2) return NSOrderedAscending;
+			if (end1 > end2) return NSOrderedDescending;
 			return NSOrderedSame;
 		}];
 		bCourseUpdated = NO;
@@ -121,14 +132,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
-	self.imageView.superview.backgroundColor = tableBgColorGrouped;
-	
-	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
+	self.imageView.superview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
 	if (!_bCreate) self.title = @"修改作业计划";
 	
@@ -165,6 +169,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	if (!self.coursesData.count) self.coursesData = [[Course userCourseListDocument] propertyForKey:@"value"];
 	[self refreshDisplay];
 }
 
@@ -196,9 +201,15 @@
 - (void)refreshDisplay
 {
 	// Once Course Changed
-	if (bCourseChanged && self.coursesData.count && self.weeksData.count && [self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
-		self.assignment.due_lesson = [self.weeksData objectAtIndex:0];
-		self.assignment.due_display = [CPAssignmentDeadlineViewController displayFromWeekDay:_assignment.due_lesson];
+	if (bCourseChanged && self.coursesData.count && [self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
+		if (self.weeksData.count) {
+			self.assignment.due_lesson = [self.weeksData objectAtIndex:0];
+			self.assignment.due_display = [CPAssignmentDeadlineViewController displayFromWeekDay:self.assignment.due_lesson];
+		} else {
+			self.assignment.due_type = TYPE_ON_DATE;
+			self.assignment.due_date = [NSDate date];
+			self.assignment.due_display = [CPAssignmentDeadlineViewController displayFromDate:self.assignment.due_date];
+		}
 	}
 	
 	QEntryElement *contentElement = [[[self.root.sections objectAtIndex:0] elements] objectAtIndex:0];
@@ -255,9 +266,11 @@
 	self.assignment.doc_type = @"assignment";
 	
 	RESTOperation *op = [self.assignment save];
-	if (![op wait]) {
-		NSLog(@"%@", op.error);
+	if (op && ![op wait]) {
+		NSLog(@"AssignmentCreate:onConfirm %@", op.error);
 	} else {
+		[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:[NSString stringWithFormat:@"course%@_edited", self.course.id]];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 		[self dismissModalViewControllerAnimated:YES];
 	}
 }
@@ -329,7 +342,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 		if (!self.imageView) {
 			self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 280, 280)];
 			UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.quickDialogTableView.frame.size.height, 320, 320)];
-			footerView.backgroundColor = tableBgColorGrouped;
+			footerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 			[footerView addSubview:self.imageView];
 			self.quickDialogTableView.tableFooterView = footerView;
 		}

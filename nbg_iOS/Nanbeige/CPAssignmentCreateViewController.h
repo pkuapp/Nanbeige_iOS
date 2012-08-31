@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSArray *weeksData;
 @property (strong, nonatomic) NSArray *coursesData;
 
+@property (strong, nonatomic) NSNumber *courseIdFilter;
 @property (nonatomic) BOOL bCreate;
 @property (nonatomic) BOOL bInitWithCamera;
 

@@ -23,9 +23,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = YES;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 #pragma mark - View Lifecycle
@@ -56,13 +54,6 @@
 	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
 	self.navigationItem.rightBarButtonItem = loginButton;
 	self.navigationItem.leftBarButtonItem = closeButton;
-	
-	self.navigationController.navigationBar.tintColor = navBarBgColor1;
-	NSMutableDictionary *titleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-	if (!titleTextAttributes) titleTextAttributes = [@{} mutableCopy];
-	[titleTextAttributes setObject:navBarTextColor1 forKey:UITextAttributeTextColor];
-	[titleTextAttributes setObject:[NSValue valueWithUIOffset:UIOffsetMake(0, 0)] forKey:UITextAttributeTextShadowOffset];
-	self.navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
 
 	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/" params:nil requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
@@ -83,7 +74,7 @@
 					[self.root bindToObject:dict];
 					UIImage *image = [UIImage imageWithData:data];
 					CGFloat width = image.size.width * 31.0 / image.size.height;
-					UIImageView *captchaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(290 - width, 6, width, 31)];
+					UIImageView *captchaImageView = [[UIImageView alloc] initWithFrame:CGRectMake(252 - width, 6, width, 31)];
 					captchaImageView.image = image;
 					
 					[self.quickDialogTableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationBottom];
@@ -98,13 +89,13 @@
 				
 			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
-				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 			}];
 		}
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -158,7 +149,7 @@
 	if (captcha) [params setObject:captcha forKey:@"captcha"];
 	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/start/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kCOURSE_IMPORTED];
+		[User updateSharedAppUserProfile:@{ @"course_imported" : collection }];
 		
 		[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 			
@@ -171,9 +162,8 @@
 					
 					Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
 					
-					NSLog(@"%@", course.document.documentID);
-					
 					course.doc_type = @"course";
+					course.status = [courseDict objectForKey:@"status"];
 					course.id = [courseDict objectForKey:@"id"];
 					course.name = [courseDict objectForKey:@"name"];
 					course.credit = [courseDict objectForKey:@"credit"];
@@ -186,7 +176,8 @@
 						for (NSString *lessonDocumentID in course.lessons) {
 							CouchDocument *lessonDocument = [localDatabase documentWithID:lessonDocumentID];
 							RESTOperation *deleteOp = [lessonDocument DELETE];
-							if (![deleteOp wait]) NSLog(@"%@", deleteOp.error);
+							if (![deleteOp wait])
+								[self showAlert:[deleteOp.error description]];
 						}
 					}
 					
@@ -201,29 +192,33 @@
 						lesson.end = [lessonDict objectForKey:@"end"];
 						lesson.day = [lessonDict objectForKey:@"day"];
 						lesson.location = [lessonDict objectForKey:@"location"];
-						lesson.week = [lessonDict objectForKey:@"week"];
+						lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
 						
-						RESTOperation *saveOp = [lesson save];
-						if ([saveOp wait])
+						RESTOperation *lessonSaveOp = [lesson save];
+						if (lessonSaveOp && ![lessonSaveOp wait])
+							[self showAlert:[lessonSaveOp.error description]];
+						else
 							[lessons addObject:lesson.document.documentID];
-						else NSLog(@"%@", saveOp.error);
 						
 					}
 					course.lessons = lessons;
 					
-					RESTOperation *saveOp = [course save];
-					if ([saveOp wait]) [courses addObject:course.document.documentID];
-					else [self showAlert:[saveOp.error description]];
+					RESTOperation *courseSaveOp = [course save];
+					if (courseSaveOp && ![courseSaveOp wait])
+						[self showAlert:[courseSaveOp.error description]];
+					else
+						[courses addObject:course.document.documentID];
 					
 				}
 				
-				NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];
+				NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"usercourselist", @"value" : courses } mutableCopy];
 				CouchDocument *courseListDocument = [Course userCourseListDocument];
 				if ([courseListDocument propertyForKey:@"_rev"]) [courseListDict setObject:[courseListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
 				RESTOperation *putOp = [courseListDocument putProperties:courseListDict];
-				
-				if (![putOp wait]) [self showAlert:[putOp.error description]];
-				else [self close];
+				if (![putOp wait])
+					[self showAlert:[putOp.error description]];
+				else
+					[self close];
 				
 				[self loading:NO];
 				
@@ -234,12 +229,18 @@
 			
 		} error:^(CPRequest *request, NSError *error) {
 			[self loading:NO];
-			[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+			[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 		}];
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		if ([error.userInfo isKindOfClass:[NSDictionary class]] && [error.userInfo objectForKey:@"error_code"]) {
+			NSString *errorCode = [error.userInfo objectForKey:@"error_code"];
+			if ([errorCode isEqualToString:@"AuthError"]) [self showAlert:@"用户名或密码错误"];
+			if ([errorCode isEqualToString:@"CaptchaError"]) [self showAlert:@"验证码错误"];
+			if ([errorCode isEqualToString:@"UnknownLoginError"]) [self showAlert:@"未知登录错误"];
+			if ([errorCode isEqualToString:@"GrabError"]) [self showAlert: [error.userInfo objectForKey:@"error"]];
+		} else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];

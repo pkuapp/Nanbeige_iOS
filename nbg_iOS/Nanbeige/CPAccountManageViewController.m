@@ -25,10 +25,7 @@
 
 - (void)setQuickDialogTableView:(QuickDialogTableView *)aQuickDialogTableView {
     [super setQuickDialogTableView:aQuickDialogTableView];
-    self.quickDialogTableView.backgroundView = nil;
-    self.quickDialogTableView.backgroundColor = tableBgColorGrouped;
-    self.quickDialogTableView.bounces = YES;
-	self.quickDialogTableView.deselectRowWhenViewAppears = YES;
+	[self.quickDialogTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 }
 
 - (WBEngine *)weibo {
@@ -111,7 +108,7 @@
 				
 			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
-				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 			}];
 			
 			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -127,7 +124,7 @@
 				
 			} error:^(CPRequest *request, NSError *error) {
 				[self loading:NO];
-				[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 			}];
 			
 			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -194,7 +191,8 @@
 
 - (void)onConnectEmail:(id)sender
 {
-	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
+	[self showAlert:@"绑定Email功能暂未实现"];
+//	[self performSegueWithIdentifier:@"ConnectEmailSegue" sender:self];
 }
 
 - (void)onConnectWeibo:(id)sender
@@ -211,6 +209,7 @@
 	NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
 	[self.renren authorizationInNavigationWithPermisson:permissions
 											andDelegate:self];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 - (void)onLaunchActionSheet:(id)sender
@@ -218,9 +217,11 @@
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	NSString *disconnectOrLogout = [dictLABEL2ACTIONSHEET objectForKey:[sender title]];
 	NSString *otherButtonTitle = nil;
-	if ([disconnectOrLogout isEqualToString:sDISCONNECTEMAIL]) {
+	if ([[sender title] isEqualToString:sEMAIL]) {
 		otherButtonTitle = sEDITPASSWORD;
 	}
+	if ([disconnectOrLogout isEqualToString:sDISCONNECTEMAIL] || [disconnectOrLogout isEqualToString:sDISCONNECTRENREN] || [disconnectOrLogout isEqualToString:sDISCONNECTWEIBO]) disconnectOrLogout = nil;
+	if (!disconnectOrLogout && !otherButtonTitle) return ;
 	
 	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:nil
 													  delegate:self
@@ -253,10 +254,10 @@
 
 - (void)onEditPassword:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	passwordEditAlert = [[UIAlertView alloc] initWithTitle:sEDITPASSWORD message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
 	passwordEditAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
 	[passwordEditAlert show];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 - (void)onLocalRenrenLogout:(id)sender
@@ -293,7 +294,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(%"%@", [error description]);
+		NSLog(@"AccountManage:onLocalEmailLogout %@", [error description]);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -350,7 +351,7 @@
 										  
 										  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 											  
-											  [User updateSharedAppUserProfile:@{ @"weibo_name" : [result objectForKey:@"screen_name"] , @"weibo_token" : [self.weibo accessToken] }];
+											  [User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
 											  
 											  [self refreshDataSource];
 											  
@@ -358,13 +359,16 @@
 											  
 										  } error:^(CPRequest *request, NSError *error) {
 											  [self loading:NO];
-											  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+											  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 										  }];
+									  } else {
+										  [self loading:NO];
+										  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 									  }
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
 										 [self loading:NO];
-										 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+										 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 									 }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -385,13 +389,12 @@
 	[self.renren requestWithParam:requestParam
 					  andDelegate:self
 						  success:^(RORequest *request, id result) {
-							  [self loading:NO];
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								    
-								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
+								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 									  
-									  [User updateSharedAppUserProfile:@{ @"renren_name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"renren_token" : [self.renren accessToken] }];
+									  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
 									  
 									  [self refreshDataSource];
 									  
@@ -399,13 +402,18 @@
 
 								  } error:^(CPRequest *request, NSError *error) {
 									  [self loading:NO];
-									  [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+									  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 								  }];
+							  } else if ([result isKindOfClass:[NSDictionary class]]) {
+								  NSLog(@"AccountManage:renrenDidLogin %@", result);
+							  } else {
+								  [self loading:NO];
+								  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
 							  }
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 [self showAlert:[error description]];//NSLog(%"%@", [error description]);
+								 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 							 }
 	 ];
 	

@@ -17,7 +17,6 @@
 @interface CPAssignmentViewController () 
 {
 	int assignmentSelect;
-	bool bViewDidLoad;
 }
 
 
@@ -126,29 +125,41 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.title = TITLE_ASSIGNMENT;
-	self.completeSegmentedControl.tintColor = navBarBgColor1;
 	
-	bViewDidLoad = YES;
+	self.assignmentsTableView.backgroundColor = tableBgColorPlain;
+	self.completeAssignmentsTableView.backgroundColor = tableBgColorPlain;
 	
 	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     
 	CouchDesignDocument *_design = [self.database designDocumentWithName: @"assignment"];
     CouchDesignDocument *_completeDesign = [self.database designDocumentWithName: @"completeAssignment"];
     if (self.courseIdFilter) {
-		[_design defineViewNamed: @"notcomplete" mapBlock: MAPBLOCK({
+		[_design defineViewNamed:[NSString stringWithFormat:@"notcomplete?id=%@", self.courseIdFilter] mapBlock: MAPBLOCK({
 			NSString *type = [doc objectForKey:@"doc_type"];
 			NSNumber *finished = [doc objectForKey: @"finished"];
 			NSString *due = [doc objectForKey: @"due"];
 			NSNumber *course_id = [doc objectForKey:@"course_id"];
 			if ([type isEqualToString:@"assignment"] && [course_id isEqualToNumber:self.courseIdFilter] && ![finished boolValue]) emit(due, doc);
 		}) version: @"1.0"];
-		[_completeDesign defineViewNamed: @"complete" mapBlock: MAPBLOCK({
+		[_completeDesign defineViewNamed: [NSString stringWithFormat:@"complete?id=%@", self.courseIdFilter] mapBlock: MAPBLOCK({
 			NSString *type = [doc objectForKey:@"doc_type"];
 			NSNumber *finished = [doc objectForKey: @"finished"];
 			NSString *due = [doc objectForKey: @"due"];
 			NSNumber *course_id = [doc objectForKey:@"course_id"];
 			if ([type isEqualToString:@"assignment"] && [course_id isEqualToNumber:self.courseIdFilter] && [finished boolValue]) emit(due, doc);
 		}) version: @"1.0"];
+		
+		// Create a query sorted by descending date, i.e. newest items first:
+		NSAssert(self.database!=nil, @"Not hooked up to database yet");
+		_query = [[_design queryViewNamed:[NSString stringWithFormat:@"notcomplete?id=%@", self.courseIdFilter]] asLiveQuery];
+		_query.descending = NO;
+		[_query addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
+		[_query start];
+		
+		_completeQuery = [[_completeDesign queryViewNamed:[NSString stringWithFormat:@"complete?id=%@", self.courseIdFilter]] asLiveQuery];
+		_completeQuery.descending = NO;
+		[_completeQuery addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
+		[_completeQuery start];
 	} else {
 		[_design defineViewNamed: @"notcomplete" mapBlock: MAPBLOCK({
 			NSString *type = [doc objectForKey:@"doc_type"];
@@ -162,20 +173,19 @@
 			NSString *due = [doc objectForKey: @"due"];
 			if ([type isEqualToString:@"assignment"] && [finished boolValue]) emit(due, doc);
 		}) version: @"1.0"];
+		
+		// Create a query sorted by descending date, i.e. newest items first:
+		NSAssert(self.database!=nil, @"Not hooked up to database yet");
+		_query = [[_design queryViewNamed: @"notcomplete"] asLiveQuery];
+		_query.descending = NO;
+		[_query addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
+		[_query start];
+		
+		_completeQuery = [[_completeDesign queryViewNamed: @"complete"] asLiveQuery];
+		_completeQuery.descending = NO;
+		[_completeQuery addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
+		[_completeQuery start];
 	}
-	
-
-	// Create a query sorted by descending date, i.e. newest items first:
-    NSAssert(self.database!=nil, @"Not hooked up to database yet");
-    _query = [[_design queryViewNamed: @"notcomplete"] asLiveQuery];
-    _query.descending = NO;
-    [_query addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
-	[_query start];
-	
-	_completeQuery = [[_completeDesign queryViewNamed: @"complete"] asLiveQuery];
-    _completeQuery.descending = NO;
-    [_completeQuery addObserver: self forKeyPath: @"rows" options: 0 context: NULL];
-	[_completeQuery start];
 	
 	[self updateSyncURL];
 	if (self.bInitShowComplete) {
@@ -252,17 +262,6 @@
 	[super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-	[super viewDidAppear:animated];
-	if (bViewDidLoad && ![[[NSUserDefaults standardUserDefaults] objectForKey:kCOURSE_IMPORTED] boolValue]) {
-		CPCourseGrabberViewController *cgvc = [[CPCourseGrabberViewController alloc] init];
-		UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:cgvc];
-		[self presentModalViewController:nc animated:YES];
-		bViewDidLoad = NO;
-	}
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -334,6 +333,8 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
 	[(id)cell courseName].text = assignment.course_name;
+	if ([assignment.due_type isEqualToString:TYPE_ON_LESSON] && [[(id)cell courseName].text length] > 5) [(id)cell courseName].text = [NSString stringWithFormat:@"%@...", [[(id)cell courseName].text substringToIndex:5]];
+	if ([assignment.due_type isEqualToString:TYPE_ON_DATE] && [[(id)cell courseName].text length] > 7) [(id)cell courseName].text =  [NSString stringWithFormat:@"%@...", [[(id)cell courseName].text substringToIndex:7]];
 	[(id)cell assignmentName].text = assignment.content;
 	[(id)cell assignmentTime].text = assignment.due_display;
 	if ([assignment.has_image boolValue]) {
@@ -358,9 +359,9 @@
 	RESTOperation *op = [assignment save];
 	[op onCompletion:^{
 		if (op.error) {
-			NSLog(@"%@", op.error);
+			NSLog(@"Assignment:changeComplete %@", op.error);
 		} else {
-			NSLog(@"%@", @"更新完毕");
+			NSLog(@"Assignment:changeComplete %@", @"更新完毕");
 		}
 	}];
 	
@@ -403,6 +404,7 @@
 		ncavc.assignment = [[self nowAssignments] objectAtIndex:assignmentSelect];
 	} else {
 		ncavc.bCreate = YES;
+		ncavc.courseIdFilter = self.courseIdFilter;
 		ncavc.assignment = [[Assignment alloc] initWithNewDocumentInDatabase:[(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database]];
 	}
 }
