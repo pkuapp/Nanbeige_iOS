@@ -1,0 +1,22 @@
+{
+	"grouped": true,
+	"title": "活动信息",
+    "controllerName": "CPEventViewController",
+	"sections": [
+				 {
+				 "bind":"iterate:informations",
+				 "elementTemplate": {
+				 "type":"CPLabelLeftDetailElement",
+				 "bind":"title:title, value:value, controllerAction:controllerAction"
+				 }
+				 },
+				 {
+				 "title":"七嘴八舌",
+				 "bind":"iterate:comments",
+				 "elementTemplate": {
+				 "type":"CPCommentElement",
+				 "bind":"title:title, value:value, controllerAction:controllerAction"
+				 }
+				 }
+				 ]
+}

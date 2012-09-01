@@ -209,6 +209,74 @@ static User *sharedAppUserObject = nil;
 
 @end
 
+@implementation Event (addon)
+
++ (CouchDocument *)eventListDocument
+{
+	CouchDocument *eventListDocument = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"eventlist"];
+	[design defineViewNamed:@"byID" mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSString *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"eventlist"]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	CouchQuery *query = [design queryViewNamed:@"byID"];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (eventListDocument) {
+				NSLog(@"重复活动列表:%@", row.document.properties);
+				[row.document DELETE];
+			}
+			eventListDocument = row.document;
+		}
+	} else NSLog(@"Models+addon:eventListDocument %@", queryOp.error);
+	
+	if (!eventListDocument) eventListDocument = [localDatabase untitledDocument];
+	return eventListDocument;
+}
+
++ (Event *)eventAtIndex:(NSInteger)index
+			  eventList:(NSArray *)eventList
+{
+	if (index >= eventList.count) eventList = [[Event eventListDocument] propertyForKey:@"value"];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	NSString *eventDocumentID = [eventList objectAtIndex:index];
+	return [Event modelForDocument:[localDatabase documentWithID:eventDocumentID]];
+}
+
++ (Event *)eventWithID:(NSNumber *)event_id
+{
+	Event *event = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"event"];
+	NSString *viewName = [NSString stringWithFormat:@"id=%@", event_id];
+	[design defineViewNamed:viewName mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSNumber *id = [doc objectForKey: @"id"];
+		NSNumber *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"event"] && [id isEqualToNumber:event_id]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	
+	CouchQuery *query = [design queryViewNamed:viewName];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (event && [[row.document.properties objectForKey:@"doc_type"] isEqualToString:@"event"] && [[row.document.properties objectForKey:@"id"] isEqualToNumber:event_id]) {
+				NSLog(@"Models+addon:eventWithID %@", [NSString stringWithFormat:@"重复课程:%@", row.document.properties]);
+				[row.document DELETE];
+			}
+			if ([[row.document.properties objectForKey:@"id"] isEqualToNumber:event_id])
+				event = [Event modelForDocument:row.document];
+		}
+	} else NSLog(@"Models+addon:eventWithID %@", queryOp.error);
+	if (!event) event = [[Event alloc] initWithNewDocumentInDatabase:localDatabase];
+	return event;
+}
+
+@end
+
 @implementation University (addon)
 
 + (University *)universityWithID:(NSNumber *)university_id

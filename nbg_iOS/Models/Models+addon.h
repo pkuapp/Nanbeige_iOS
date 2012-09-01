@@ -13,6 +13,7 @@
 #import "Lesson.h"
 #import "University.h"
 #import "Weekset.h"
+#import "Event.h"
 
 @interface User (addon)
 
@@ -31,6 +32,15 @@
 + (Course *)userCourseAtIndex:(NSInteger)index
 				   courseList:(NSArray *)courseList;
 + (Course *)courseWithID:(NSNumber *)course_id;
+
+@end
+
+@interface Event (addon)
+
++ (CouchDocument *)eventListDocument;
++ (Event *)eventAtIndex:(NSInteger)index
+			  eventList:(NSArray *)eventList;
++ (Event *)eventWithID:(NSNumber *)event_id;
 
 @end
 

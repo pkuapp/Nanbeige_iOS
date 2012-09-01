@@ -34,6 +34,7 @@
                         <segue destination="yil-Q7-q5m" kind="push" identifier="DetailGateInfoSegue" id="iBD-dN-4lH"/>
                         <segue destination="PRZ-eR-Bt6" kind="push" identifier="RoomsEnterSegue" id="nfF-gJ-ICc"/>
                         <segue destination="bM9-CV-lnz" kind="push" identifier="DashboardSegue" id="oEV-y0-AS3"/>
+                        <segue destination="SqH-ks-gpf" kind="push" identifier="EventAllSegue" id="8PQ-ph-nXC"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -1127,10 +1128,60 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="498" y="-948"/>
         </scene>
+        <!--Event View Controller-->
+        <scene sceneID="n6v-H0-CGQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ID-3i-A1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="TEq-Zc-D5C" customClass="CPEventViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vfr-eX-hJh">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KG0-6M-OaS"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2689" y="-4026"/>
+        </scene>
+        <!--Event All View Controller - 课程目录-->
+        <scene sceneID="2BN-4a-wf8">
+            <objects>
+                <searchDisplayController id="nxf-IK-ap7"/>
+                <searchDisplayController id="Elj-78-hzo"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YIJ-qd-5j8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController hidesBottomBarWhenPushed="YES" id="SqH-ks-gpf" customClass="CPEventAllViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UO8-WO-5vt">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AfX-g5-8g7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="SqH-ks-gpf" id="9An-un-9wi"/>
+                                    <outlet property="delegate" destination="SqH-ks-gpf" id="1bD-tr-kGQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="课程目录" image="265-download.png" id="pSy-Zf-BHE"/>
+                    <navigationItem key="navigationItem" id="849-Vx-d4f"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="AfX-g5-8g7" id="YXs-WW-RI4"/>
+                        <segue destination="TEq-Zc-D5C" kind="push" identifier="EventSegue" id="Wfg-kE-w3B"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2135" y="-4026"/>
+        </scene>
     </scenes>
     <resources>
         <image name="24-person.png" width="18" height="16"/>
         <image name="256-box2.png" width="22" height="20"/>
+        <image name="265-download.png" width="24" height="22"/>
         <image name="38-house.png" width="18" height="17"/>
         <image name="Icon@2x.png" width="114" height="114"/>
     </resources>
@@ -1140,9 +1191,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="yHJ-Pm-LdA"/>
-        <segue reference="M2A-jv-NdW"/>
-        <segue reference="G9S-eJ-tg0"/>
-        <segue reference="kkG-IZ-C1L"/>
+        <segue reference="Yqn-fv-amI"/>
+        <segue reference="nfF-gJ-ICc"/>
+        <segue reference="iBD-dN-4lH"/>
+        <segue reference="lVV-gW-QAM"/>
     </inferredMetricsTieBreakers>
 </document>

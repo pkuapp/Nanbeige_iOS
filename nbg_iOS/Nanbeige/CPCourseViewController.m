@@ -11,8 +11,11 @@
 #import "CPAssignmentViewController.h"
 #import "CPCommentPostElement.h"
 #import "CPLabelButtonElement.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface CPCourseViewController () <UIScrollViewDelegate>
+@interface CPCourseViewController () <UIScrollViewDelegate> {
+	CALayer *shadowLayer;
+}
 
 @end
 
@@ -54,7 +57,7 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
 	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-	CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"comments%@", self.course.id]];
+	CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"comments-%@", self.course.id]];
 	self.comments = [@[] mutableCopy];
 	for (NSDictionary *commentDict in [[doc properties] objectForKey:@"value"]) {
 		[self.comments addObject:@{ @"title" : [NSString stringWithFormat:@"%@：%@", [commentDict objectForKey:@"writer"], [commentDict objectForKey:@"content"]] } ];
@@ -68,6 +71,16 @@
 	[super viewWillAppear:animated];
 	[self refreshDisplay];
 	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
+	
+	if (!shadowLayer) {
+		CGFloat detailBottom = 105;
+		UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
+		shadowLayer = [CALayer layer];
+		shadowLayer.frame = CGRectMake(0, detailBottom, self.view.frame.size.width, shadowImg.size.height);
+		shadowLayer.contents = (id)shadowImg.CGImage;
+		shadowLayer.zPosition = 1;
+		[self.quickDialogTableView.layer addSublayer:shadowLayer];
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -313,7 +326,7 @@
 			[mutableComments setObject:self.course.id forKey:@"course_id"];
 			[mutableComments setObject:@"comments" forKey:@"doc_type"];
 			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-			CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"comments%@", self.course.id]];
+			CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"comments-%@", self.course.id]];
 			if ([doc propertyForKey:@"_rev"]) [mutableComments setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
 			RESTOperation *op = [doc putProperties:mutableComments];
 			[op onCompletion:^{

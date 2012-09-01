@@ -75,7 +75,7 @@
 	self.navigationItem.rightBarButtonItem = datePickButton;
 	
 	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-	CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"buildings%@", [User sharedAppUser].campus_id]];
+	CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"buildings-%@", [User sharedAppUser].campus_id]];
 	self.buildings = [[doc properties] objectForKey:@"value"];
 	
 	doc = [localDatabase documentWithID:@"rooms"];
@@ -290,7 +290,7 @@
 		[mutableBuildings setObject:campus_id forKey:@"campus_id"];
 		[mutableBuildings setObject:@"buildings" forKey:@"doc_type"];
 		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"buildings%@", campus_id]];
+		CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"buildings-%@", campus_id]];
 		if ([doc propertyForKey:@"_rev"]) [mutableBuildings setObject:[doc propertyForKey:@"_rev"] forKey:@"_rev"];
 		RESTOperation *op = [doc putProperties:mutableBuildings];
 		[op onCompletion:^{

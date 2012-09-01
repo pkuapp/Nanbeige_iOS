@@ -124,6 +124,7 @@
 #define TITLE_ASSIGNMENT @"作业"
 #define TITLE_SELECTED_COURSE @"我的课程"
 #define TITLE_ALL_COURSE @"课程目录"
+#define TITLE_ALL_EVENT @"活动目录"
 #define FORMAT_TITLE_ROOMS @"教学楼・%@"
 #define LIMIT_ROOM_STRING_LENGTH 20
 

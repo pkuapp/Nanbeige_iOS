@@ -55,14 +55,15 @@
 		NSMutableDictionary *itsDict = [@{ @"name" : @"IP网关", @"identifier" : @"Line1Button0Identifier", @"nibname" : @"CPLine1Button0Cell" } mutableCopy];
 		NSMutableDictionary *coursesDict = [@{ @"name" : @"课程", @"identifier" : @"Line3Button0Identifier", @"nibname" : @"CPLine3Button0Cell" } mutableCopy];
 		NSMutableDictionary *roomsDict = [@{ @"name" : @"自习室", @"identifier" : @"Line1Button0Identifier", @"nibname" : @"CPLine1Button0Cell" } mutableCopy];
-		NSDictionary *homeworkDict = [@{ @"name" : @"作业", @"identifier" : @"Line2Button2Identifier", @"nibname" : @"CPLine2Button2Cell" } mutableCopy];
+		NSMutableDictionary *homeworkDict = [@{ @"name" : @"作业", @"identifier" : @"Line2Button2Identifier", @"nibname" : @"CPLine2Button2Cell" } mutableCopy];
+		NSMutableDictionary *eventDict = [@{ @"name" : @"活动", @"identifier" : @"Line1Button0Identifier", @"nibname" : @"CPLine1Button0Cell" } mutableCopy];
 		
 		if ([[NSUserDefaults standardUserDefaults] objectForKey:kITSIDKEY] != nil) {
 			[itsDict setObject:@"Line3Button2Identifier" forKey:@"identifier"];
 			[itsDict setObject:@"CPLine3Button2Cell" forKey:@"nibname"];
 		}
 		
-		_functionArray = [@[ itsDict, coursesDict, roomsDict, homeworkDict ] mutableCopy];
+		_functionArray = [@[ itsDict, coursesDict, roomsDict, homeworkDict, eventDict ] mutableCopy];
 	}
 	return _functionArray;
 }
@@ -339,6 +340,8 @@
 	} else if ([name isEqualToString:@"作业"]) {
 		if (self.navc == nil) [self performSegueWithIdentifier:@"AssignmentEnterSegue" sender:self];
 		else [self.navigationController pushViewController:self.navc animated:YES];
+	} else if ([name isEqualToString:@"活动"]) {
+		[self performSegueWithIdentifier:@"EventAllSegue" sender:self];
 	} else {
 		[self showAlert:@"功能正在制作中，敬请期待！"];
 	}

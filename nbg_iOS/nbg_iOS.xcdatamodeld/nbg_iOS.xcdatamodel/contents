@@ -31,6 +31,18 @@
         <relationship name="semester" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Semester" inverseName="courses" inverseEntity="Semester" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="courses" inverseEntity="User" syncable="YES"/>
     </entity>
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="category_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="category_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="doc_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="follow_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="organizer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Lesson" representedClassName="Lesson" syncable="YES">
         <attribute name="day" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="doc_type" optional="YES" attributeType="String" syncable="YES"/>
@@ -107,5 +119,6 @@
         <element name="University" positionX="0" positionY="0" width="0" height="0"/>
         <element name="User" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Weekset" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
