@@ -19,6 +19,7 @@
 @dynamic category_name;
 @dynamic organizer;
 @dynamic location;
+@dynamic content;
 @dynamic follow_count;
 @dynamic time;
 

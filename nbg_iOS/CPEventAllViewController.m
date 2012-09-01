@@ -163,6 +163,7 @@
 				event.time = [eventDict objectForKey:@"time"];
 				event.organizer = [eventDict objectForKey:@"organizer"];
 				event.location = [eventDict objectForKey:@"location"];
+				event.content = [eventDict objectForKey:@"content"];
 				event.follow_count = [eventDict objectForKey:@"follow_count"];
 
 				RESTOperation *eventSaveOp = [event save];

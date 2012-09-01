@@ -34,6 +34,7 @@
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="category_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="category_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="doc_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="follow_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -114,11 +115,11 @@
     <elements>
         <element name="Assignment" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Course" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Lesson" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Semester" positionX="0" positionY="0" width="0" height="0"/>
         <element name="University" positionX="0" positionY="0" width="0" height="0"/>
         <element name="User" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Weekset" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

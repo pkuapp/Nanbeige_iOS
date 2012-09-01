@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSString * category_name;
 @property (nonatomic, retain) NSString * organizer;
 @property (nonatomic, retain) NSString * location;
+@property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSNumber * follow_count;
 @property (nonatomic, retain) NSString * time;
 

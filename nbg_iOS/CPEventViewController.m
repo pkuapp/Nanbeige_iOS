@@ -85,7 +85,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"event%@_edited", self.event.id]] boolValue]) [self reloadTableViewDataSource];
+	if (![self.event.content length] || [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"event%@_edited", self.event.id]] boolValue]) [self reloadTableViewDataSource];
 }
 
 - (void)viewDidUnload
@@ -231,10 +231,45 @@
 	NSDictionary *dict = @{ @"informations" : informations, @"comments" : self.comments };
 	[self.root bindToObject:dict];
 	
+	QSection *informationSection = [[self.root sections] objectAtIndex:0];
 	QSection *commentSection = [[self.root sections] objectAtIndex:1];
+	
 	CPCommentPostElement *commentPostElement = [[CPCommentPostElement alloc] initWithTitle:@"我说" Value:nil];
 	commentPostElement.controllerAction = @"onPost:";
 	[commentSection insertElement:commentPostElement atIndex:0];
+	
+	NSString *content;
+	if ([self.event.content length] == 0) content = @"无详细内容";
+	else content = self.event.content;
+	
+	CGSize boundingSize = CGSizeMake(280, CGFLOAT_MAX);
+	UIFont *labelFont = [UIFont systemFontOfSize:14];
+	CGSize labelStringSize = [content sizeWithFont:labelFont
+									constrainedToSize:boundingSize
+										lineBreakMode:UILineBreakModeWordWrap];
+	
+	UIView *eventContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, labelStringSize.height+60)];
+	informationSection.footerView = eventContentView;
+	
+	UIView *eventContentBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 320, labelStringSize.height+40)];
+	eventContentBgView.backgroundColor = tableBgColorPlain;
+	[eventContentView addSubview:eventContentBgView];
+	
+	UILabel *eventContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 280, labelStringSize.height)];
+	eventContentLabel.backgroundColor = [UIColor clearColor];
+	eventContentLabel.font = labelFont;
+	eventContentLabel.text = content;
+	[eventContentView addSubview:eventContentLabel];
+	
+	UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
+	UIImageView *shadowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, shadowImg.size.height)];
+	shadowView.image = shadowImg;
+	[eventContentView addSubview:shadowView];
+	
+	UIImage *mirrorShadowImg = [[UIImage alloc] initWithCGImage:shadowImg.CGImage scale:1.0 orientation:UIImageOrientationDownMirrored];
+	UIImageView *mirrorShadowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, labelStringSize.height+60-mirrorShadowImg.size.height, self.view.frame.size.width, shadowImg.size.height)];
+	mirrorShadowView.image = mirrorShadowImg;
+	[eventContentView addSubview:mirrorShadowView];
 }
 
 #pragma mark - Data Source Loading / Reloading Methods
@@ -284,6 +319,7 @@
 						event.time = [eventDict objectForKey:@"time"];
 						event.organizer = [eventDict objectForKey:@"organizer"];
 						event.location = [eventDict objectForKey:@"location"];
+						event.content = [eventDict objectForKey:@"content"];
 						event.follow_count = [eventDict objectForKey:@"follow_count"];
 						
 						RESTOperation *eventSaveOp = [event save];
