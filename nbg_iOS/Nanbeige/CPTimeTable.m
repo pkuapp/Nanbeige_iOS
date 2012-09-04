@@ -36,7 +36,7 @@
 		_timeTable = [[UITableView alloc] initWithFrame:self.bounds];
 		_timeTable.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		_timeTable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
-//		_timeTable.bounces = NO;
+		_timeTable.bounces = NO;
 		_timeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 		_timeTable.delegate = self;
 		_timeTable.dataSource = self;

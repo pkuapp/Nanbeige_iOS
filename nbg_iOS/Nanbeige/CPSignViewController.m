@@ -53,6 +53,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"sign"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }

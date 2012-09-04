@@ -35,6 +35,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"signinEmail"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }
@@ -43,14 +44,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:self action:@selector(onLogin:)];
+//	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:self action:@selector(onLogin:)];
 //	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
-	self.navigationItem.rightBarButtonItem = loginButton;
+//	self.navigationItem.rightBarButtonItem = loginButton;
 //	self.navigationItem.leftBarButtonItem = closeButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
 }
 

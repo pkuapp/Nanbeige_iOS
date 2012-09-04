@@ -36,6 +36,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"signupEmail"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }

@@ -1175,6 +1175,7 @@
 		262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCourseViewController.h; sourceTree = "<group>"; };
 		262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCourseViewController.m; sourceTree = "<group>"; };
 		262A4A1615D94F1D001BAC03 /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCourse.json; sourceTree = "<group>"; };
+		265CC8D015F66771004CA605 /* libQuickDialog-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libQuickDialog-Prefix.pch"; sourceTree = "<group>"; };
 		267657E315EF26D800373E2A /* CPCommentElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCommentElement.h; sourceTree = "<group>"; };
 		267657E415EF26D800373E2A /* CPCommentElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCommentElement.m; sourceTree = "<group>"; };
 		267657EB15EFB93000373E2A /* CPEntryElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPEntryElement.h; sourceTree = "<group>"; };
@@ -2076,6 +2077,15 @@
 			name = CPEvent;
 			sourceTree = "<group>";
 		};
+		265CC8CF15F66770004CA605 /* libQuickDialog */ = {
+			isa = PBXGroup;
+			children = (
+				265CC8D015F66771004CA605 /* libQuickDialog-Prefix.pch */,
+			);
+			name = libQuickDialog;
+			path = QuickDialog/libQuickDialog;
+			sourceTree = "<group>";
+		};
 		26CD809215D7811B0070DF78 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -2418,6 +2428,7 @@
 				413BA1E315D523CD000C9451 /* EGOTableViewPullRefresh */,
 				413BA1E215D52248000C9451 /* MBProgressHUD */,
 				413BA12915D520EE000C9451 /* FMDB */,
+				265CC8CF15F66770004CA605 /* libQuickDialog */,
 				413BA04715D52052000C9451 /* quickdialog */,
 				413BA01415D51EAE000C9451 /* SBJSON */,
 				413B9E7B15D51D95000C9451 /* Renren */,

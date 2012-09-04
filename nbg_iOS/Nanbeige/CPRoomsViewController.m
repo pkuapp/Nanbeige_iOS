@@ -90,6 +90,14 @@
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	if (![self.rooms count]) {
+		[self reloadTableViewDataSource];
+	}
+}
+
 - (void)viewDidUnload
 {
 	[self setTableView:nil];
@@ -98,6 +106,12 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 }
 
 #pragma mark - Display
@@ -226,6 +240,7 @@
 		
 		[self reloadRooms];
 		
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
 		
 		return ;
@@ -247,6 +262,7 @@
 		[self syncNextRooms];
 		
 	} error:^(CPRequest *request, NSError *error) {
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
@@ -303,8 +319,11 @@
 		[self syncNextRooms];
 		
 	} error:^(CPRequest *request, NSError *error) {
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
+	
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"获取自习室列表中..."];
 }
 
 - (void)doneLoadingTableViewData{

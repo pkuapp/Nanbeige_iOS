@@ -30,7 +30,7 @@
 		_progressHud.userInteractionEnabled = NO;
 		_progressHud.opacity = 0.618;
 		_progressHud.animationType = MBProgressHUDAnimationZoom;
-		_progressHud.graceTime = 0.2;
+		_progressHud.graceTime = 0.1;
 	}
 	return _progressHud;
 }
@@ -45,9 +45,9 @@
 	[self.progressHud show:YES];
 }
 
-- (void)showProgressHudModeAnnularDeterminate:(NSString *)title
+- (void)showProgressHudModeDeterminate:(NSString *)title
 {
-	self.progressHud.mode = MBProgressHUDModeAnnularDeterminate;
+	self.progressHud.mode = MBProgressHUDModeDeterminate;
 	self.progressHud.transform = CGAffineTransformIdentity;
 	self.progressHud.labelText = title;
 	self.progressHud.taskInProgress = YES;
@@ -63,7 +63,7 @@
 - (void)hideProgressHud
 {
 	self.progressHud.taskInProgress = NO;
-	[self.progressHud hide:YES afterDelay:0.2];
+	[self.progressHud hide:YES afterDelay:self.progressHud.graceTime];
 }
 
 - (void)hideProgressHudAfterDelay:(NSTimeInterval)time

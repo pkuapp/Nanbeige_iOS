@@ -226,19 +226,17 @@
         unsigned total = _pull.total + _push.total;
         NSLog(@"SYNC progress: %u / %u", completed, total);
         if (total > 0 && completed <= total) {
-            //[self showSyncStatus];
-            //[progress setProgress:(completed / (float)total)];
 			if (completed == 0) {
-				[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHudModeAnnularDeterminate:@"云端同步作业中..."];
+				[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHudModeDeterminate:@"云端同步作业中..."];
 			} else {
 				[(CPAppDelegate *)[UIApplication sharedApplication].delegate setProgressHudProgress:(completed / (float)total)];
 				if (completed == total) {
-					[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+					[(CPAppDelegate *)[UIApplication sharedApplication].delegate performSelector:@selector(hideProgressHud) withObject:nil afterDelay:0.5];
 				}
 			}
         } else {
-            //[self showSyncButton];
-        }
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+		}
     }
 	if (object == _query) {
 		self.assignments = nil;

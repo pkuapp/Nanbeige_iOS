@@ -33,10 +33,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-	self = [super initWithCoder:aDecoder];
-	if (self) {
-		self.root = [[QRootElement alloc] initWithJSONFile:@"event"];
-	}
+	self = [super initWithRoot:[[QRootElement alloc] initWithJSONFile:@"event"]];
 	return self;
 }
 

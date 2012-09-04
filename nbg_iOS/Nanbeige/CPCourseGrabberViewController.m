@@ -33,6 +33,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"courseGrabber"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }
@@ -42,6 +43,7 @@
 	self = [super init];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"courseGrabber"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }

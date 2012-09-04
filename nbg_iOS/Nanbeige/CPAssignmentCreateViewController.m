@@ -123,6 +123,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"assignmentCreate"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }
@@ -301,7 +302,7 @@
 													  delegate:self
 											 cancelButtonTitle:sCANCEL
 										destructiveButtonTitle:nil
-											 otherButtonTitles:@"拍照", @"选取照片", @"选取最近一张照片", nil];
+											 otherButtonTitles:@"拍照", @"选取照片", /*@"选取最近一张照片",*/ nil];
 	[menu showInView:self.view];
 }
 
@@ -319,11 +320,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 			NSLog(@"选取照片");
 			[self getMediaFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
 			break;
-		case 2:
+		/*case 2:
 			NSLog(@"选取最近一张照片");
-			break;
+			break;*/
 			
 		default:
+			[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 			break;
 	}
 }

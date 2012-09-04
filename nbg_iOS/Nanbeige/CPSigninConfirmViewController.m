@@ -46,6 +46,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"signinConfirm"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }

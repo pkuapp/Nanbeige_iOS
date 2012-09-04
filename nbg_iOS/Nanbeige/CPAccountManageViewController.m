@@ -50,6 +50,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"accountManage"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }

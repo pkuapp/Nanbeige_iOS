@@ -37,6 +37,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		self.root = [[QRootElement alloc] initWithJSONFile:@"course"];
+		self.resizeWhenKeyboardPresented = YES;
 	}
 	return self;
 }
