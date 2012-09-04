@@ -45,7 +45,7 @@
 
 - (void)hideProgressHud
 {
-	[self.progressHud hide:YES];
+	[self.progressHud hide:YES afterDelay:0.25];
 }
 
 - (void)hideProgressHudAfterDelay:(NSTimeInterval)time

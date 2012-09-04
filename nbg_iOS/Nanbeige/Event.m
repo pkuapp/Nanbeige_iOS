@@ -21,6 +21,7 @@
 @dynamic location;
 @dynamic content;
 @dynamic follow_count;
+@dynamic follow;
 @dynamic time;
 
 @end

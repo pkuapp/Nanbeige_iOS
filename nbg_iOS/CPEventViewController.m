@@ -114,45 +114,49 @@
 	[alertView show];
 }
 
-//- (void)onUnfollowEvent:(id)sender
-//{
-//	if (_reloading) return ;
-//	
-//	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"event/%@/edit/", self.event.id] params:@{ @"status" : @"none" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-//		
-//		self.event.status = @"none";
-//		RESTOperation *saveOp = [self.event save];
-//		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
-//		else {
-//			UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onFollowEvent:)];
-//			self.navigationItem.rightBarButtonItem = followButton;
-//			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-//			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-//			
-//			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_events_edited"];
-//			[[NSUserDefaults standardUserDefaults] synchronize];
-//		}
-//		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-//		
-//	} error:^(CPRequest *request, NSError *error) {
-//		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-//		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
-//	}];
-//	
-//	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"取消关注中..."];
-//}
-//
+- (void)onUnfollowEvent:(id)sender
+{
+	if (_reloading) return ;
+	
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"event/%@/edit/", self.event.id] params:@{ @"follow" : @0 } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		
+		self.event.follow = @0;
+		self.event.follow_count = [NSNumber numberWithInteger:[self.event.follow_count integerValue]-1];
+		RESTOperation *saveOp = [self.event save];
+		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
+		else {
+			UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onFollowEvent:)];
+			self.navigationItem.rightBarButtonItem = followButton;
+			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+			
+			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_events_edited"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			
+			[self performSelector:@selector(refreshData) withObject:nil afterDelay:0.5];
+		}
+		
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+	
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"取消关注中..."];
+}
+
 - (void)onFollowEvent:(id)sender
 {
 	if (_reloading) return ;
 	
-//	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"event/%@/edit/", self.event.id] params:@{ @"status" : @"follow" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"event/%@/follow/", self.event.id] params:nil requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"event/%@/edit/", self.event.id] params:@{ @"follow" : @1 } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-//		self.event.status = @"follow";
-//		RESTOperation *saveOp = [self.event save];
-//		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
-//		else {
+		self.event.follow = @1;
+		self.event.follow_count = [NSNumber numberWithInteger:[self.event.follow_count integerValue]+1];
+		RESTOperation *saveOp = [self.event save];
+		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
+		else {
 			UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"已关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onUnfollowEvent:)];
 			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
@@ -160,9 +164,9 @@
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_events_edited"];
 			[[NSUserDefaults standardUserDefaults] synchronize];
-		
-			[self performSelector:@selector(reloadTableViewDataSource) withObject:nil afterDelay:0.5];
-//		}
+			
+			[self performSelector:@selector(refreshData) withObject:nil afterDelay:0.5];
+		}
 		
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		
@@ -176,17 +180,17 @@
 
 - (void)setupEventDetail
 {
-//	if ([self.event.status isEqualToString:@"follow"]) {
-//		UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"已关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onUnfollowEvent:)];
-//		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-//		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-//		self.navigationItem.rightBarButtonItem = followButton;
-//	} else {
+	if ([self.event.follow boolValue]) {
+		UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"已关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onUnfollowEvent:)];
+		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+		self.navigationItem.rightBarButtonItem = followButton;
+	} else {
 		UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onFollowEvent:)];
 		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
 		self.navigationItem.rightBarButtonItem = followButton;
-//	}
+	}
 	
 	UIButton *eventDetailView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 105)];
 	[eventDetailView addTarget:self action:@selector(onDisplayEventDetail:) forControlEvents:UIControlStateHighlighted];
@@ -270,6 +274,12 @@
 	UIImageView *mirrorShadowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, labelStringSize.height+60-mirrorShadowImg.size.height, self.view.frame.size.width, shadowImg.size.height)];
 	mirrorShadowView.image = mirrorShadowImg;
 	[eventContentView addSubview:mirrorShadowView];
+}
+
+- (void)refreshData
+{
+	[self refreshDisplay];
+	[self.quickDialogTableView reloadData];
 }
 
 #pragma mark - Data Source Loading / Reloading Methods

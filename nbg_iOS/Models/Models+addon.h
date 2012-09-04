@@ -38,6 +38,7 @@
 @interface Event (addon)
 
 + (CouchDocument *)eventListDocument;
++ (CouchDocument *)eventFollowingListDocument;
 + (Event *)eventAtIndex:(NSInteger)index
 			  eventList:(NSArray *)eventList;
 + (Event *)eventWithID:(NSNumber *)event_id;

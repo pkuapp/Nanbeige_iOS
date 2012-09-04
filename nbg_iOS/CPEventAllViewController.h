@@ -18,6 +18,7 @@
 }
 
 @property (strong, nonatomic) NSMutableArray *events;
+@property (strong, nonatomic) NSMutableArray *eventsFollowing;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

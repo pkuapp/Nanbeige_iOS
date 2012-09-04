@@ -143,8 +143,6 @@
 	
 	[[Coffeepot shared] requestWithMethodPath:@"event/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
-		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		
 		if (!self) return ;
 		
 		if ([collection isKindOfClass:[NSArray class]]) {
@@ -182,8 +180,7 @@
 			if (![putOp wait])
 				[self showAlert:[putOp.error description]];
 			
-			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+			[self onFetchEventsFollowing];
 			
 		} else {
 			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
@@ -199,6 +196,66 @@
 	
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"获取活动列表中..."];
 	
+}
+
+- (void)onFetchEventsFollowing
+{
+	[[Coffeepot shared] requestWithMethodPath:@"event/following/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+		
+		if (!self) return ;
+		
+		if ([collection isKindOfClass:[NSArray class]]) {
+			
+			NSMutableArray *eventsFollowing = [[NSMutableArray alloc] init];
+			for (NSDictionary *eventDict in collection) {
+				
+				Event *event = [Event eventWithID:[eventDict objectForKey:@"id"]];
+				
+				event.doc_type = @"event";
+				event.id = [eventDict objectForKey:@"id"];
+				event.title = [eventDict objectForKey:@"title"];
+				event.subtitle = [eventDict objectForKey:@"subtitle"];
+				event.category_id = [[eventDict objectForKey:@"category"] objectForKey:@"id"];
+				event.category_name = [[eventDict objectForKey:@"category"] objectForKey:@"name"];
+				event.time = [eventDict objectForKey:@"time"];
+				event.organizer = [eventDict objectForKey:@"organizer"];
+				event.location = [eventDict objectForKey:@"location"];
+				event.content = [eventDict objectForKey:@"content"];
+				event.follow_count = [eventDict objectForKey:@"follow_count"];
+				event.follow = @1;
+				
+				RESTOperation *eventSaveOp = [event save];
+				if (eventSaveOp && ![eventSaveOp wait])
+					[self showAlert:[eventSaveOp.error description]];
+				else
+					[eventsFollowing addObject:event.document.documentID];
+				
+			}
+			
+			self.eventsFollowing = eventsFollowing;
+			NSMutableDictionary *eventFollowingListDict = [@{ @"doc_type" : @"eventfollowinglist", @"value" : eventsFollowing } mutableCopy];
+			CouchDocument *eventFollowingListDocument = [Event eventFollowingListDocument];
+			if ([eventFollowingListDocument propertyForKey:@"_rev"]) [eventFollowingListDict setObject:[eventFollowingListDocument propertyForKey:@"_rev"] forKey:@"_rev"];
+			RESTOperation *putOp = [eventFollowingListDocument putProperties:eventFollowingListDict];
+			if (![putOp wait])
+				[self showAlert:[putOp.error description]];
+			
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+			
+		} else {
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+			[self showAlert:@"返回结果不是NSArray"];
+		}
+		
+	} error:^(CPRequest *request, NSError *error) {
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+	}];
+	
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"获取关注活动列表中..."];
 }
 
 - (void)doneLoadingTableViewData{

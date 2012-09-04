@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSNumber * follow_count;
+@property (nonatomic, retain) NSNumber * follow;
 @property (nonatomic, retain) NSString * time;
 
 @end

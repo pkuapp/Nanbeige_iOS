@@ -237,6 +237,32 @@ static User *sharedAppUserObject = nil;
 	return eventListDocument;
 }
 
++ (CouchDocument *)eventFollowingListDocument
+{
+	CouchDocument *eventFollowingListDocument = nil;
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	CouchDesignDocument *design = [localDatabase designDocumentWithName: @"eventfollowinglist"];
+	[design defineViewNamed:@"byID" mapBlock: MAPBLOCK({
+		NSString *doc_type = [doc objectForKey:@"doc_type"];
+		NSString *doc_id = [doc objectForKey:@"_id"];
+		if ([doc_type isEqualToString:@"eventfollowinglist"]) emit(doc_id, doc);
+	}) version: @"1.0"];
+	CouchQuery *query = [design queryViewNamed:@"byID"];
+	RESTOperation *queryOp = [query start];
+	if ([queryOp wait]) {
+		for (CouchQueryRow *row in query.rows) {
+			if (eventFollowingListDocument) {
+				NSLog(@"重复活动列表:%@", row.document.properties);
+				[row.document DELETE];
+			}
+			eventFollowingListDocument = row.document;
+		}
+	} else NSLog(@"Models+addon:eventListDocument %@", queryOp.error);
+	
+	if (!eventFollowingListDocument) eventFollowingListDocument = [localDatabase untitledDocument];
+	return eventFollowingListDocument;
+}
+
 + (Event *)eventAtIndex:(NSInteger)index
 			  eventList:(NSArray *)eventList
 {
