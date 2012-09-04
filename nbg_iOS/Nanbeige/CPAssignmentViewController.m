@@ -225,9 +225,17 @@
         unsigned completed = _pull.completed + _push.completed;
         unsigned total = _pull.total + _push.total;
         NSLog(@"SYNC progress: %u / %u", completed, total);
-        if (total > 0 && completed < total) {
+        if (total > 0 && completed <= total) {
             //[self showSyncStatus];
             //[progress setProgress:(completed / (float)total)];
+			if (completed == 0) {
+				[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHudModeAnnularDeterminate:@"云端同步作业中..."];
+			} else {
+				[(CPAppDelegate *)[UIApplication sharedApplication].delegate setProgressHudProgress:(completed / (float)total)];
+				if (completed == total) {
+					[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+				}
+			}
         } else {
             //[self showSyncButton];
         }
@@ -253,6 +261,8 @@
 	[self setCompleteSegmentedControl:nil];
 	[self setAssignmentsTableView:nil];
 	[self setCompleteAssignmentsTableView:nil];
+	self.nibsRegistered = nil;
+	self.completeNibsRegistered = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -260,6 +270,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	if ([self.assignmentsTableView indexPathForSelectedRow])
+		[self.assignmentsTableView deselectRowAtIndexPath:[self.assignmentsTableView indexPathForSelectedRow] animated:YES];
+	if ([self.completeAssignmentsTableView indexPathForSelectedRow])
+		[self.completeAssignmentsTableView deselectRowAtIndexPath:[self.completeAssignmentsTableView indexPathForSelectedRow] animated:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -286,10 +306,10 @@
 		identifier = @"ImageCellIdentifier";
 	}
 	
-	if (![[[self nibsRegisteredOfTableView:tableView] objectForKey:nibName] isEqualToString:@"YES"]) {
+	if (![[[self nibsRegisteredOfTableView:tableView] objectForKey:nibName] integerValue]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
 		[tableView registerNib:nib forCellReuseIdentifier:identifier];
-		[[self nibsRegisteredOfTableView:tableView] setValue:@"YES" forKey:nibName];
+		[[self nibsRegisteredOfTableView:tableView] setValue:@1 forKey:nibName];
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
@@ -325,10 +345,10 @@
 		identifier = @"ImageCellIdentifier";
 	}
 	
-	if (![[[self nibsRegisteredOfTableView:tableView] objectForKey:nibName] isEqualToString:@"YES"]) {
+	if (![[[self nibsRegisteredOfTableView:tableView] objectForKey:nibName] integerValue]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
 		[tableView registerNib:nib forCellReuseIdentifier:identifier];
-		[[self nibsRegisteredOfTableView:tableView] setValue:@"YES" forKey:nibName];
+		[[self nibsRegisteredOfTableView:tableView] setValue:@1 forKey:nibName];
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
@@ -416,7 +436,6 @@
     // Navigation logic may go here. Create and push another view controller.
 	assignmentSelect = [indexPath row];
 	[self performSegueWithIdentifier:@"ModifyAssignmentSegue" sender:self];
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (IBAction)onAssignmentCompleteChanged:(id)sender {

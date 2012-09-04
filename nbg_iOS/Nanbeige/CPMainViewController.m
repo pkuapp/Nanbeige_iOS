@@ -128,6 +128,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+	self.nibsRegistered = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -143,6 +144,8 @@
 		[[self.functionArray objectAtIndex:0] setObject:@"Line3Button2Identifier" forKey:@"identifier"];
 		[[self.functionArray objectAtIndex:0] setObject:@"CPLine3Button2Cell" forKey:@"nibname"];
 	}
+	
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 
 //	self.connector.delegate = self;
 	if (self.itsCell) {
@@ -345,7 +348,6 @@
 	} else {
 		[self showAlert:@"功能正在制作中，敬请期待！"];
 	}
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Its Connect Display

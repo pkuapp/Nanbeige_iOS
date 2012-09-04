@@ -305,8 +305,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
 	self.Username = [self.defaults valueForKey:kITSIDKEY];
     self.Password = [self.defaults valueForKey:kITSPASSWORDKEY];
 	if ([self.defaults valueForKey:kITSIDKEY] == nil || ((NSString *)([self.defaults valueForKey:kITSIDKEY])).length == 0) {

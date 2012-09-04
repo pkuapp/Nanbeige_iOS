@@ -206,7 +206,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	BOOL prevIsShowTime = [[[NSUserDefaults standardUserDefaults] objectForKey:kSHOWTIME] boolValue];
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:!prevIsShowTime] forKey:kSHOWTIME];
 	[[NSUserDefaults standardUserDefaults] synchronize];

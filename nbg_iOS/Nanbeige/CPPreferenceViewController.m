@@ -9,7 +9,7 @@
 #import "CPPreferenceViewController.h"
 #import "Environment.h"
 
-@interface CPPreferenceViewController ()
+@interface CPPreferenceViewController () <UIAlertViewDelegate>
 
 @end
 
@@ -69,8 +69,12 @@
 - (void)onResetMainOrder:(id)sender
 {
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:kMAINORDERKEY];
-	[[[UIAlertView alloc] initWithTitle:nil message:@"已重置" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil] show];
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
+	[[[UIAlertView alloc] initWithTitle:nil message:@"已重置" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil] show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)onAbout:(id)sender

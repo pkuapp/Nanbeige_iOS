@@ -157,28 +157,11 @@
 	
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/all/?semester_id=%@", @5] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
-		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		
 		if (!self) return ;
 		
 		if ([collection isKindOfClass:[NSArray class]]) {
 			
-			NSMutableArray *courses = collection;//[[NSMutableArray alloc] init];
-//			for (NSDictionary *courseDict in collection) {
-//				
-//				Course *course = [Course courseWithID:[courseDict objectForKey:@"id"]];
-//				
-//				course.doc_type = @"course";
-//				course.id = [courseDict objectForKey:@"id"];
-//				course.name = [courseDict objectForKey:@"name"];
-//				
-//				RESTOperation *courseSaveOp = [course save];
-//				if (courseSaveOp && ![courseSaveOp wait])
-//					[self showAlert:[courseSaveOp.error description]];
-//				else
-//					[courses addObject:course.document.documentID];
-//				
-//			}
+			NSMutableArray *courses = collection;
 			
 			self.courses = courses;
 			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"courselist", @"value" : courses } mutableCopy];

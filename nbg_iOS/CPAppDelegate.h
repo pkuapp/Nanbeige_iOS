@@ -43,6 +43,8 @@
 - (void)showProgressHud:(NSString *)title;
 - (void)hideProgressHud;
 - (void)hideProgressHudAfterDelay:(NSTimeInterval)time;
+- (void)showProgressHudModeAnnularDeterminate:(NSString *)title;
+- (void)setProgressHudProgress:(float)progress;
 
 - (NSURL *)applicationDocumentsDirectory;
 - (void)updateAppUserProfileWith:(NSDictionary *)dict;

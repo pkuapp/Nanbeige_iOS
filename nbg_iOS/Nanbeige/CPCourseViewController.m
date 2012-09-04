@@ -70,7 +70,6 @@
 {
 	[super viewWillAppear:animated];
 	[self refreshDisplay];
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 	
 	if (!shadowLayer) {
 		CGFloat detailBottom = 105;
@@ -94,6 +93,12 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 }
 
 #pragma mark - Display

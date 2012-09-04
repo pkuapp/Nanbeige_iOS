@@ -131,6 +131,7 @@
 			[self loading:YES];
 		}
 	}
+	if (buttonIndex == 0) [self loading:NO];
 }
 
 #pragma mark - Refresh
@@ -209,12 +210,11 @@
 	NSArray *permissions = [[NSArray alloc] initWithObjects:@"status_update", nil];
 	[self.renren authorizationInNavigationWithPermisson:permissions
 											andDelegate:self];
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)onLaunchActionSheet:(id)sender
 {
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 	NSString *disconnectOrLogout = [dictLABEL2ACTIONSHEET objectForKey:[sender title]];
 	NSString *otherButtonTitle = nil;
 	if ([[sender title] isEqualToString:sEMAIL]) {
@@ -248,6 +248,7 @@
 		[self onEditPassword:self];
 	if ([method isEqualToString:sEDITNICKNAME])
 		[self onEditNickname:self];
+	if ([actionSheet cancelButtonIndex] == buttonIndex) [self loading:NO];
 }
 
 #pragma mark - ActionSheet Button controllerAction
@@ -257,7 +258,6 @@
 	passwordEditAlert = [[UIAlertView alloc] initWithTitle:sEDITPASSWORD message:nil delegate:self cancelButtonTitle:sCANCEL otherButtonTitles:sCONFIRM, nil];
 	passwordEditAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
 	[passwordEditAlert show];
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexForElement:sender] animated:YES];
 }
 
 - (void)onLocalRenrenLogout:(id)sender
@@ -419,6 +419,14 @@
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
+}
+
+- (void)loading:(BOOL)value
+{
+	if (!value) {
+		[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
+	}
+	[super loading:value];
 }
 
 @end

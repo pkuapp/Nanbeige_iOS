@@ -20,7 +20,7 @@
 @dynamic organizer;
 @dynamic location;
 @dynamic content;
-@dynamic follow_count;
+@dynamic follower_count;
 @dynamic follow;
 @dynamic time;
 

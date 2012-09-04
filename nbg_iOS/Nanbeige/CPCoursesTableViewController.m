@@ -141,7 +141,6 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-	self.paginatorView = nil;
 }
 
 #pragma mark - Display

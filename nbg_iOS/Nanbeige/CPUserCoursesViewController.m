@@ -345,7 +345,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == 0) courseSelected = [self.coursesSelect objectAtIndex:indexPath.row];
 	else courseSelected = [self.coursesAudit objectAtIndex:indexPath.row];
 //	courseSelected = [Course courseAtIndex:indexPath.row courseList:self.courses];

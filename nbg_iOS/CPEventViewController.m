@@ -69,7 +69,6 @@
 {
 	[super viewWillAppear:animated];
 	[self refreshDisplay];
-	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 	
 	if (!shadowLayer) {
 		CGFloat detailBottom = 105;
@@ -92,6 +91,12 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 }
 
 #pragma mark - Display
@@ -121,7 +126,7 @@
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"event/%@/edit/", self.event.id] params:@{ @"follow" : @0 } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
 		self.event.follow = @0;
-		self.event.follow_count = [NSNumber numberWithInteger:[self.event.follow_count integerValue]-1];
+		self.event.follower_count = [NSNumber numberWithInteger:[self.event.follower_count integerValue]-1];
 		RESTOperation *saveOp = [self.event save];
 		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
 		else {
@@ -153,7 +158,7 @@
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"event/%@/edit/", self.event.id] params:@{ @"follow" : @1 } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
 		self.event.follow = @1;
-		self.event.follow_count = [NSNumber numberWithInteger:[self.event.follow_count integerValue]+1];
+		self.event.follower_count = [NSNumber numberWithInteger:[self.event.follower_count integerValue]+1];
 		RESTOperation *saveOp = [self.event save];
 		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
 		else {
@@ -193,7 +198,7 @@
 	}
 	
 	UIButton *eventDetailView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 105)];
-	[eventDetailView addTarget:self action:@selector(onDisplayEventDetail:) forControlEvents:UIControlStateHighlighted];
+//	[eventDetailView addTarget:self action:@selector(onDisplayEventDetail:) forControlEvents:UIControlStateHighlighted];
 	eventDetailView.backgroundColor = tableBgColorPlain;
 	
 	UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 65, 65)];
@@ -230,7 +235,7 @@
 	if (self.event.location) [informations addObject:@{ @"title": @"地点", @"value" : self.event.location }];
 	if (self.event.organizer) [informations addObject:@{ @"title": @"发起人", @"value" : self.event.organizer }];
 	if (self.event.category_name) [informations addObject:@{ @"title": @"类别", @"value" : self.event.category_name }];
-	if (self.event.follow_count) [informations addObject:@{ @"title": @"关注人数", @"value" : [NSString stringWithFormat:@"%@", self.event.follow_count] }];
+	if (self.event.follower_count) [informations addObject:@{ @"title": @"关注人数", @"value" : [NSString stringWithFormat:@"%@", self.event.follower_count] }];
 	
 	NSDictionary *dict = @{ @"informations" : informations, @"comments" : self.comments };
 	[self.root bindToObject:dict];
@@ -330,7 +335,7 @@
 						event.organizer = [eventDict objectForKey:@"organizer"];
 						event.location = [eventDict objectForKey:@"location"];
 						event.content = [eventDict objectForKey:@"content"];
-						event.follow_count = [eventDict objectForKey:@"follow_count"];
+						event.follower_count = [eventDict objectForKey:@"follower_count"];
 						
 						RESTOperation *eventSaveOp = [event save];
 						if (eventSaveOp && ![eventSaveOp wait])

@@ -162,7 +162,8 @@
 				event.organizer = [eventDict objectForKey:@"organizer"];
 				event.location = [eventDict objectForKey:@"location"];
 				event.content = [eventDict objectForKey:@"content"];
-				event.follow_count = [eventDict objectForKey:@"follow_count"];
+				event.follower_count = [eventDict objectForKey:@"follower_count"];
+				event.follow = @0;
 
 				RESTOperation *eventSaveOp = [event save];
 				if (eventSaveOp && ![eventSaveOp wait])
@@ -221,7 +222,7 @@
 				event.organizer = [eventDict objectForKey:@"organizer"];
 				event.location = [eventDict objectForKey:@"location"];
 				event.content = [eventDict objectForKey:@"content"];
-				event.follow_count = [eventDict objectForKey:@"follow_count"];
+				event.follower_count = [eventDict objectForKey:@"follower_count"];
 				event.follow = @1;
 				
 				RESTOperation *eventSaveOp = [event save];
