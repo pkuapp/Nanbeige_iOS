@@ -342,4 +342,12 @@
 	
 }
 
+- (void)loading:(BOOL)value
+{
+	if (!value) {
+		[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
+	}
+	[super loading:value];
+}
+
 @end

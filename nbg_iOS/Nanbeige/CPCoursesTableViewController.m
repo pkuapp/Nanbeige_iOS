@@ -107,40 +107,54 @@
 {
 	[super viewWillAppear:animated];
 	
+	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17] };
+	[self.tabBarController.navigationController.navigationBar setTitleTextAttributes:titleTextAttributes];
+	
 	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
 	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"时间表" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
 	NSDate *day = [today dateByAddingTimeInterval:60*60*24*([self.paginatorView currentPageIndex] - TIMETABLEPAGEINDEX)];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"第w周 E M月d日";
+	formatter.dateFormat = @"E M月d日";
 	NSString *dayDate = [formatter stringFromDate:day];
-	self.tabBarController.title = dayDate;
-	
+	Semester *semester = [self semesterAtDate:day];
+	if (!semester) {
+		self.tabBarController.title = [NSString stringWithFormat:@"放假^_^ %@", dayDate];
+	} else {
+		NSInteger week = [day timeIntervalSinceDate:semester.week_start] / 3600 / 24 / 7 + 1;
+		self.tabBarController.title = [NSString stringWithFormat:@"第%d周 %@", week, dayDate];
+	}
+		
 	CPTimeTable *currentPage = (CPTimeTable *)[self.paginatorView currentPage];
 	[currentPage refreshDisplay];
+	NSInteger pageIndex = [self.paginatorView currentPageIndex];
+	if (pageIndex > 0) {
+		CPTimeTable *view = (CPTimeTable *)[self.paginatorView pageForIndex:pageIndex - 1];
+		[view refreshDisplay];
+	}
+	if (pageIndex + 1 < self.paginatorView.numberOfPages) {
+		CPTimeTable *view = (CPTimeTable *)[self.paginatorView pageForIndex:pageIndex + 1];
+		[view refreshDisplay];
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	if (bViewDidLoad && ![[User sharedAppUser].course_imported count]) {
-		[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
-		bViewDidLoad = NO;
-	} else if (![[User sharedAppUser].course_imported count]) {
-		[self.tabBarController.navigationController popViewControllerAnimated:YES];
-	} else {
-		CouchDocument *courseListDocument = [Course userCourseListDocument];
-		if (![courseListDocument propertyForKey:@"value"]) {
-			[self.tabBarController setSelectedIndex:1];
-		}
-	}
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] };
+	[self.tabBarController.navigationController.navigationBar setTitleTextAttributes:titleTextAttributes];
 }
 
 #pragma mark - Display
@@ -197,21 +211,37 @@
 
 - (NSArray *)coursesAtDate:(NSDate *)date
 {
+	Semester *semester = [self semesterAtDate:date];
+	if (!semester) return nil;
+	NSInteger week = [date timeIntervalSinceDate:semester.week_start] / 3600 / 24 / 7 + 1;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"w";
-	NSInteger week = [[formatter stringFromDate:date] integerValue] - [[formatter stringFromDate:[NSDate date]] integerValue] + 1;
 	formatter.dateFormat = @"e";
 	NSInteger weekday = ([[formatter stringFromDate:date] integerValue] + 5) % 7 + 1;
-	return [self coursesAtWeekday:weekday Week:week];
+	return [self coursesAtWeekday:weekday Week:week Semester_id:semester.id];
+}
+
+- (Semester *)semesterAtDate:(NSDate *)date
+{
+	University *university = [University universityWithID:[User sharedAppUser].university_id];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)[UIApplication sharedApplication].delegate localDatabase];
+	for (NSString *semesterDocumentID in university.semesters) {
+		Semester *semester = [Semester modelForDocument:[localDatabase documentWithID:semesterDocumentID]];
+		if ([date compare:semester.week_start] != NSOrderedAscending && [date compare:semester.week_end] != NSOrderedDescending) {
+			return semester;
+		}
+	}
+	return nil;
 }
 
 - (NSArray *)coursesAtWeekday:(NSInteger)weekday
 						 Week:(NSInteger)week
+					 Semester_id:(NSNumber *)semester_id
 {
 	NSMutableArray *result = [[NSMutableArray alloc] init];
 	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
 	for (int i = 0; i < self.courses.count; i++) {
 		Course *course = [Course userCourseAtIndex:i courseList:self.courses];
+		if (![course.semester_id isEqualToNumber:semester_id]) continue;
 		for (NSString *lessonDocumentID in course.lessons) {
 			Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
 			NSInteger lessonDay = [lesson.day integerValue];
@@ -242,9 +272,23 @@
 {
 	NSDate *day = [today dateByAddingTimeInterval:60*60*24*(pageIndex - TIMETABLEPAGEINDEX)];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"第w周 E M月d日";
+	formatter.dateFormat = @"E M月d日";
 	NSString *dayDate = [formatter stringFromDate:day];
-	self.tabBarController.title = dayDate;
+	
+	Semester *semester = [self semesterAtDate:day];
+	if (!semester) {
+		self.tabBarController.title = [NSString stringWithFormat:@"放假^_^ %@", dayDate];
+	} else {
+		NSInteger week = [day timeIntervalSinceDate:semester.week_start] / 3600 / 24 / 7 + 1;
+		self.tabBarController.title = [NSString stringWithFormat:@"第%d周 %@", week, dayDate];
+		if (![[User sharedAppUser].course_imported containsObject:semester.id]) {
+			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
+			return ;
+		} else if (![self.courses count]) {
+			[self.tabBarController setSelectedIndex:1];
+			return ;
+		}
+	}
 	
 	if (pageIndex > 0) {
 		CPTimeTable *view = (CPTimeTable *)[paginatorView pageForIndex:pageIndex - 1];

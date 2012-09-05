@@ -63,7 +63,7 @@
 			
 			[self loading:NO];
 			
-			[self showAlert:@"抓课器暂不可用"];
+			[self showAlert:@"该学期抓课器暂不可用"];
 			[self performSelector:@selector(close) withObject:nil afterDelay:1.0];
 			
 		} else if ([[collection objectForKey:@"require_captcha"] boolValue]) {
@@ -151,7 +151,11 @@
 	if (captcha) [params setObject:captcha forKey:@"captcha"];
 	[[Coffeepot shared] requestWithMethodPath:@"course/grabber/start/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		[User updateSharedAppUserProfile:@{ @"course_imported" : collection }];
+		NSDictionary *dict;
+		if ([User sharedAppUser].course_imported) dict = @{ @"course_imported" : [[User sharedAppUser].course_imported arrayByAddingObject:[collection objectForKey:@"semester_id"]] };
+		else dict = @{ @"course_imported" : [collection objectForKey:@"semester_id"] };
+		
+		[User updateSharedAppUserProfile:dict];
 		
 		[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 			
@@ -239,9 +243,11 @@
 		if ([error.userInfo isKindOfClass:[NSDictionary class]] && [error.userInfo objectForKey:@"error_code"]) {
 			NSString *errorCode = [error.userInfo objectForKey:@"error_code"];
 			if ([errorCode isEqualToString:@"AuthError"]) [self showAlert:@"用户名或密码错误"];
-			if ([errorCode isEqualToString:@"CaptchaError"]) [self showAlert:@"验证码错误"];
-			if ([errorCode isEqualToString:@"UnknownLoginError"]) [self showAlert:@"未知登录错误"];
-			if ([errorCode isEqualToString:@"GrabError"]) [self showAlert: [error.userInfo objectForKey:@"error"]];
+			else if ([errorCode isEqualToString:@"GrabberExpired"]) [self showAlert:@"验证码过期"];
+			else if ([errorCode isEqualToString:@"CaptchaError"]) [self showAlert:@"验证码错误"];
+			else if ([errorCode isEqualToString:@"UnknownLoginError"]) [self showAlert:@"未知登录错误"];
+			else if ([errorCode isEqualToString:@"GrabError"]) [self showAlert: [error.userInfo objectForKey:@"error"]];
+			else [self showAlert:errorCode];
 		} else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
@@ -252,6 +258,14 @@
 - (void)close
 {
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)loading:(BOOL)value
+{
+	if (!value) {
+		[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
+	}
+	[super loading:value];
 }
 
 @end

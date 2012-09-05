@@ -153,9 +153,7 @@
 	//  put here just for demo
 	_reloading = YES;
 	
-#warning 认为学期就是5
-	
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/all/?semester_id=%@", @5] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/all/?semester_id=%@", [self semesterForDate:[NSDate date]].id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
 		if (!self) return ;
 		
@@ -246,6 +244,34 @@
 	if ([segue.identifier isEqualToString:@"CourseSegue"]) {
 		[segue.destinationViewController setCourse:courseSelected];
 	}
+}
+
+- (Semester *)semesterForDate:(NSDate *)date
+{
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	
+	University *university = [University universityWithID:[User sharedAppUser].university_id];
+	Semester *semesterAfter;
+	Semester *semesterBefore;
+	Semester *semesterIn;
+	for (NSString *semesterDocumentID in university.semesters) {
+		Semester *semester = [Semester modelForDocument:[localDatabase documentWithID:semesterDocumentID]];
+		if ([date compare:semester.week_start] != NSOrderedAscending && [date compare:semester.week_end] != NSOrderedDescending) {
+			semesterIn = semester;
+		}
+		if ([date compare:semester.week_start] != NSOrderedDescending && [semesterAfter.week_start compare:semester.week_start] != NSOrderedAscending) {
+			semesterAfter = semester;
+		}
+		if ([date compare:semester.week_end] != NSOrderedAscending && [semesterBefore.week_end compare:semester.week_end] != NSOrderedDescending) {
+			semesterBefore = semester;
+		}
+	}
+	Semester *semester;
+	if (semesterIn) semester = semesterIn;
+	if (semesterAfter) semester = semesterAfter;
+	else semester = semesterBefore;
+	
+	return semester;
 }
 
 @end

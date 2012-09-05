@@ -229,6 +229,9 @@
 		
 		if ([collection isKindOfClass:[NSArray class]]) {
 			
+			University *university = [University universityWithID:university_id];
+			university.semesters = @[];
+			
 			for (NSDictionary *semesterDict in collection) {
 				
 				Semester *semester = [Semester semesterWithID:[semesterDict objectForKey:@"id"]];
@@ -237,20 +240,27 @@
 				semester.id = [semesterDict objectForKey:@"id"];
 				semester.name = [semesterDict objectForKey:@"name"];
 				semester.year = [semesterDict objectForKey:@"year"];
-				semester.week_start = [[semesterDict objectForKey:@"week"] objectForKey:@"start"];
-				semester.week_end = [[semesterDict objectForKey:@"week"] objectForKey:@"end"];
+				
+				NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+				formatter.dateFormat = @"yyyy-MM-dd";
+				semester.week_start = [formatter dateFromString:[[semesterDict objectForKey:@"week"] objectForKey:@"start"]];
+				semester.week_end = [formatter dateFromString:[[semesterDict objectForKey:@"week"] objectForKey:@"end"]];
 				
 				RESTOperation *op = [semester save];
 				if (op && ![op wait])
 					[self showAlert:[op.error description]];
 				else {
 					[self onFetchWeekset:[semesterDict objectForKey:@"id"]];
+					university.semesters = [university.semesters arrayByAddingObject:semester.document.documentID];
 				}
 			}
 			
-			[self loading:NO];
-			
-			[self onComplete];
+			RESTOperation *op = [university save];
+			if (op && ![op wait]) [self showAlert:[op.error description]];
+			else {
+				[self loading:NO];
+				[self onComplete];
+			}
 			
 		} else {
 			[self loading:NO];
@@ -387,6 +397,14 @@
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     [self loading:YES];
+}
+
+- (void)loading:(BOOL)value
+{
+	if (!value) {
+		[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
+	}
+	[super loading:value];
 }
 
 @end

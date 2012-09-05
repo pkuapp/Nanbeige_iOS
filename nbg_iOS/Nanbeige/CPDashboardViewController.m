@@ -42,6 +42,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	[self setupTimeIndicator];
+	UIBarButtonItem *cleanButton = [[UIBarButtonItem alloc] initWithTitle:@"清除课程数据库" style:UIBarButtonItemStyleBordered target:self action:@selector(onCleanDatabase:)];
+	self.navigationItem.rightBarButtonItem = cleanButton;
 }
 
 - (void)viewDidUnload
@@ -53,6 +55,21 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+}
+
+- (void)onCleanDatabase:(id)sender
+{
+	CouchDatabase *localDatabase = [(CPAppDelegate *)([UIApplication sharedApplication].delegate) localDatabase];
+	CouchQuery *query = [localDatabase getAllDocuments];
+	RESTOperation *op = [query start];
+	if ([op wait]) {
+		NSMutableArray *docs = [@[] mutableCopy];
+		for (CouchQueryRow *row in query.rows) {
+			if ([[row.document propertyForKey:@"doc_type"] isEqualToString:@"course"] || [[row.document propertyForKey:@"doc_type"] isEqualToString:@"courselist"] || [[row.document propertyForKey:@"doc_type"] isEqualToString:@"usercourselist"])
+			[docs addObject:row.document];
+		}
+		[localDatabase deleteDocuments:docs];
+	}
 }
 
 - (void)onPerformSegue:(id)sender

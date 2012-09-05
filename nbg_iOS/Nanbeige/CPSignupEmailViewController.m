@@ -12,7 +12,7 @@
 #import "Models+addon.h"
 
 
-@interface CPSignupEmailViewController () {
+@interface CPSignupEmailViewController () <UIAlertViewDelegate> {
 	NSString *email;
 	NSString *nickname;
 	NSString *password;
@@ -70,9 +70,14 @@
 -(void)showAlert:(NSString*)message{
 	[[[UIAlertView alloc] initWithTitle:nil
 								message:message
-							   delegate:nil
+							   delegate:self
 					  cancelButtonTitle:sCONFIRM
 					  otherButtonTitles:nil] show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 }
 
 #pragma mark - Button controllerAction
@@ -118,6 +123,14 @@
 //	
 //    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 //    [self loading:YES];
+}
+
+- (void)loading:(BOOL)value
+{
+	if (!value) {
+		[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
+	}
+	[super loading:value];
 }
 
 @end

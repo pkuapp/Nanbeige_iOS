@@ -259,10 +259,15 @@
 	[self setCompleteSegmentedControl:nil];
 	[self setAssignmentsTableView:nil];
 	[self setCompleteAssignmentsTableView:nil];
-	self.nibsRegistered = nil;
-	self.completeNibsRegistered = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+
+- (void)didReceiveMemoryWarning
+{
+	[super didReceiveMemoryWarning];
+	self.nibsRegistered = nil;
+	self.completeNibsRegistered = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -278,6 +283,7 @@
 {
 	[super viewDidDisappear:animated];
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+	[self forgetSync];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

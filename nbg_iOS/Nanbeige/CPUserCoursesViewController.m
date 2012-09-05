@@ -14,9 +14,10 @@
 #import "Course.h"
 #import "Lesson.h"
 
-@interface CPUserCoursesViewController ()  {
+@interface CPUserCoursesViewController () <UIActionSheetDelegate> {
 	Course *courseSelected;
 	CouchDatabase *localDatabase;
+	Semester *currentSemester;
 }
 
 @end
@@ -66,7 +67,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.tableView.backgroundColor = tableBgColorPlain;
-	
+		
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
 		view.delegate = self;
@@ -78,33 +79,22 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
 	
 	localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
+	currentSemester = [self semesterForDate:[NSDate date] needGrabber:YES];
 	
-	self.courses = [[Course userCourseListDocument] propertyForKey:@"value"];
-	self.coursesAudit = self.coursesSelect = nil;
-	for (NSString *courseDocumentID in self.courses) {
-		Course *course = [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
-		if ([course.status isEqualToString:@"select"]) [self.coursesSelect addObject:course];
-		if ([course.status isEqualToString:@"audit"]) [self.coursesAudit addObject:course];
-	}
+	[self refreshData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
-	self.tabBarController.navigationItem.rightBarButtonItem = nil;
+	UIBarButtonItem *semesterButton = [[UIBarButtonItem alloc] initWithTitle:@"切换学期" style:UIBarButtonItemStyleBordered target:self action:@selector(onChangeSemester:)];
+	self.tabBarController.navigationItem.rightBarButtonItem = semesterButton;
 	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:TITLE_SELECTED_COURSE style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.tabBarController.title = TITLE_SELECTED_COURSE;
 
-	if (!self.courses && [[Course userCourseListDocument] propertyForKey:@"value"]) {
-		self.courses = [[Course userCourseListDocument] propertyForKey:@"value"];
-		self.coursesAudit = self.coursesSelect = nil;
-		for (NSString *courseDocumentID in self.courses) {
-			Course *course = [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
-			if ([course.status isEqualToString:@"select"]) [self.coursesSelect addObject:course];
-			if ([course.status isEqualToString:@"audit"]) [self.coursesAudit addObject:course];
-		}
-		[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+	if (![self.courses count] && [[[Course userCourseListDocument] propertyForKey:@"value"] count]) {
+		[self refreshDisplay];
 	}
 	
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
@@ -130,6 +120,24 @@
 {
 	[super viewDidDisappear:animated];
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+}
+
+- (void)refreshData
+{
+	if ([self.courses count] == 0)
+		self.courses = [[Course userCourseListDocument] propertyForKey:@"value"];
+	self.coursesAudit = self.coursesSelect = nil;
+	for (NSString *courseDocumentID in self.courses) {
+		Course *course = [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
+		if ([course.status isEqualToString:@"select"] && [currentSemester.id isEqualToNumber:course.semester_id]) [self.coursesSelect addObject:course];
+		if ([course.status isEqualToString:@"audit"] && [currentSemester.id isEqualToNumber:course.semester_id]) [self.coursesAudit addObject:course];
+	}
+}
+
+- (void)refreshDisplay
+{
+	[self refreshData];
+	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Display
@@ -178,9 +186,6 @@
 	if (nil == cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 	}
-//	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-//	CouchDocument *courseDocument = [localDatabase documentWithID:[self.courses objectAtIndex:indexPath.row]];
-//	Course *course = [Course modelForDocument:courseDocument];
 	Course *course;
 	if (indexPath.section == 0) course = [self.coursesSelect objectAtIndex:indexPath.row];
 	else course = [self.coursesAudit objectAtIndex:indexPath.row];
@@ -199,9 +204,7 @@
 	_reloading = YES;
 	
 	[[Coffeepot shared] requestWithMethodPath:@"course/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
-		
-//		CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-		
+				
 		if (!self) return ;
 		
 		if ([collection isKindOfClass:[NSArray class]]) {
@@ -261,13 +264,7 @@
 			}
 			
 			self.courses = courses;
-			self.coursesAudit = self.coursesSelect = nil;
-//			CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
-			for (NSString *courseDocumentID in self.courses) {
-				Course *course = [Course modelForDocument:[localDatabase documentWithID:courseDocumentID]];
-				if ([course.status isEqualToString:@"select"]) [self.coursesSelect addObject:course];
-				if ([course.status isEqualToString:@"audit"]) [self.coursesAudit addObject:course];
-			}
+			[self refreshData];
 			
 			NSMutableDictionary *courseListDict = [@{ @"doc_type" : @"usercourselist", @"value" : courses } mutableCopy];
 			CouchDocument *courseListDocument = [Course userCourseListDocument];
@@ -347,7 +344,6 @@
 {
 	if (indexPath.section == 0) courseSelected = [self.coursesSelect objectAtIndex:indexPath.row];
 	else courseSelected = [self.coursesAudit objectAtIndex:indexPath.row];
-//	courseSelected = [Course courseAtIndex:indexPath.row courseList:self.courses];
 	[self performSegueWithIdentifier:@"CourseSegue" sender:self];
 }
 
@@ -356,6 +352,92 @@
 	if ([segue.identifier isEqualToString:@"CourseSegue"]) {
 		[segue.destinationViewController setCourse:courseSelected];
 	}
+}
+
+- (void)onChangeSemester:(id)sender
+{
+	NSString *prevSemseter = @"上一学期", *nextSemester = @"下一学期";
+	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"选择学期"
+													  delegate:self
+											 cancelButtonTitle:sCANCEL
+										destructiveButtonTitle:nil
+											 otherButtonTitles:prevSemseter, nextSemester, nil];
+	[menu showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	NSString *clickedButtonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+	if ([clickedButtonTitle isEqualToString:@"上一学期"]) {
+		Semester *prevSemester = [self prevSemester];
+		if (prevSemester) currentSemester = prevSemester;
+		else {
+			[self showAlert:@"没有上一学期的数据！"];
+		}
+	} else if ([clickedButtonTitle isEqualToString:@"下一学期"]) {
+		Semester *nextSemester = [self nextSemester];
+		if (nextSemester) currentSemester = nextSemester;
+		else {
+			[self showAlert:@"没有下一学期的数据！"];
+		}
+	};
+	
+	[self refreshDisplay];
+}
+
+- (Semester *)prevSemester
+{
+	University *university = [University universityWithID:[User sharedAppUser].university_id];
+	Semester *prevSemester;
+	for (NSString *semesterDocumentID in university.semesters) {
+		Semester *semester = [Semester modelForDocument:[localDatabase documentWithID:semesterDocumentID]];
+		if ([currentSemester.week_end compare:semester.week_end] == NSOrderedDescending && [prevSemester.week_end compare:semester.week_end] != NSOrderedDescending) {
+			prevSemester = semester;
+		}
+	}
+	return prevSemester;
+}
+
+- (Semester *)nextSemester
+{
+	University *university = [University universityWithID:[User sharedAppUser].university_id];
+	Semester *nextSemester;
+	for (NSString *semesterDocumentID in university.semesters) {
+		Semester *semester = [Semester modelForDocument:[localDatabase documentWithID:semesterDocumentID]];
+		if ([currentSemester.week_start compare:semester.week_start] == NSOrderedAscending && [nextSemester.week_start compare:semester.week_start] != NSOrderedAscending) {
+			nextSemester = semester;
+		}
+	}
+	return nextSemester;
+}
+
+- (Semester *)semesterForDate:(NSDate *)date
+				  needGrabber:(BOOL)isNeedGrabber
+{
+	University *university = [University universityWithID:[User sharedAppUser].university_id];
+	
+	Semester *semesterAfter;
+	Semester *semesterBefore;
+	Semester *semesterIn;
+	for (NSString *semesterDocumentID in university.semesters) {
+		Semester *semester = [Semester modelForDocument:[localDatabase documentWithID:semesterDocumentID]];
+		if ([date compare:semester.week_start] != NSOrderedAscending && [date compare:semester.week_end] != NSOrderedDescending) {
+			semesterIn = semester;
+		}
+		if ([date compare:semester.week_start] != NSOrderedDescending && [semesterAfter.week_start compare:semester.week_start] != NSOrderedAscending) {
+			semesterAfter = semester;
+		}
+		if ([date compare:semester.week_end] != NSOrderedAscending && [semesterBefore.week_end compare:semester.week_end] != NSOrderedDescending) {
+			semesterBefore = semester;
+		}
+	}
+	Semester *semester;
+	if (semesterIn) semester = semesterIn;
+	if (semesterAfter) semester = semesterAfter;
+	else semester = semesterBefore;
+	
+	if (![[User sharedAppUser].course_imported containsObject:semester.id] && isNeedGrabber) [self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
+	return semester;
 }
 
 @end

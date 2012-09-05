@@ -128,9 +128,14 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-	self.nibsRegistered = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)didReceiveMemoryWarning
+{
+	[super didReceiveMemoryWarning];
+	self.nibsRegistered = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -172,10 +177,10 @@
 //		self.connector.delegate = destinationViewController;
 		self.nivc = destinationViewController;
 	} else if ([segue.identifier isEqualToString:@"RoomsEnterSegue"]) {
-		self.nrvc = segue.destinationViewController;
+//		self.nrvc = segue.destinationViewController;
 	} else if ([segue.identifier isEqualToString:@"AssignmentEnterSegue"]) {
-		CPAssignmentViewController *destinationViewController = (CPAssignmentViewController *)[segue destinationViewController];
-		self.navc = destinationViewController;
+//		CPAssignmentViewController *destinationViewController = (CPAssignmentViewController *)[segue destinationViewController];
+//		self.navc = destinationViewController;
 	} else if ([segue.identifier isEqualToString:@"CreateAssignmentSegue"] || [segue.identifier isEqualToString:@"CreateAssignmentWithCameraSegue"]) {
 		UINavigationController *nc = segue.destinationViewController;
 		CPAssignmentCreateViewController *ncavc = (CPAssignmentCreateViewController *)(nc.topViewController);
