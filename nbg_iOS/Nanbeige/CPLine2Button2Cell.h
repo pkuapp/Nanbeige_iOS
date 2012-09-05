@@ -11,17 +11,14 @@
 @protocol CPLine2Button2DelegateProtocol <NSObject>
 
 - (void)onButton1Pressed:(id)sender;
-- (void)onButton2Pressed:(id)sender;
 
 @end
 
 @interface CPLine2Button2Cell : UITableViewCell
-@property (retain, nonatomic) IBOutlet UIImageView *imageView;
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;
 @property (copy, nonatomic) NSString *name;
 @property (copy, nonatomic) NSString *image;
 @property (strong, nonatomic) id<CPLine2Button2DelegateProtocol> delegate;
 - (IBAction)onButton1Pressed:(id)sender;
-- (IBAction)onButton2Pressed:(id)sender;
 
 @end

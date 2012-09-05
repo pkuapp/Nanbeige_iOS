@@ -12,7 +12,7 @@
 							  },
 							  {
 							  "type":"CPLabelButtonCenterElement",
-							  "title":"添加照片 beta ( 只支持一张 )",
+							  "title":"添加照片 alpha ( 内测中 )",
 							  "controllerAction":"onImageSelect:"
 							  }
 							  ]

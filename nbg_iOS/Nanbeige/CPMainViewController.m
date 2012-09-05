@@ -432,11 +432,6 @@
 	[self performSegueWithIdentifier:@"CreateAssignmentSegue" sender:self];
 }
 
-- (void)onButton2Pressed:(id)sender
-{
-	[self performSegueWithIdentifier:@"CreateAssignmentWithCameraSegue" sender:self];
-}
-
 #pragma mark - CPItsWidgetDelegateProtocol
 
 - (void)connectFree:(id)sender

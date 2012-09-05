@@ -15,7 +15,7 @@
 
 #define DISPLAY_COURSE
 
-@interface CPAssignmentCreateViewController () {
+@interface CPAssignmentCreateViewController () <UIAlertViewDelegate> {
 	BOOL bCourseChanged;
 	BOOL bCourseUpdated;
 }
@@ -298,12 +298,22 @@
 
 - (void)onImageSelect:(id)sender
 {
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"暂不支持添加照片" delegate:self cancelButtonTitle:sCONFIRM otherButtonTitles:nil, nil];
+	[alert show];
+	return ;
+	
+	//TODO
 	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"添加照片"
 													  delegate:self
 											 cancelButtonTitle:sCANCEL
 										destructiveButtonTitle:nil
 											 otherButtonTitles:@"拍照", @"选取照片", /*@"选取最近一张照片",*/ nil];
 	[menu showInView:self.view];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	[self.quickDialogTableView deselectRowAtIndexPath:[self.quickDialogTableView indexPathForSelectedRow] animated:YES];
 }
 
 #pragma mark - ActionSheetDelegate Setup

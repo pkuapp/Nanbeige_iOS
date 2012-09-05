@@ -315,25 +315,6 @@
 	[self onLocalWeiboLogout:sender];
 	[self onLocalEmailLogout:sender];
 	
-	CouchDatabase *localDatabase = [(CPAppDelegate *)([UIApplication sharedApplication].delegate) localDatabase];
-	CouchQuery *query = [localDatabase getAllDocuments];
-	RESTOperation *op = [query start];
-	if ([op wait]) {
-		NSMutableArray *docs = [@[] mutableCopy];
-		for (CouchQueryRow *row in query.rows) {
-			[docs addObject:row.document];
-		}
-		[localDatabase deleteDocuments:docs];
-	}
-	
-	[User deactiveSharedAppUser];
-	
-	id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
-	NSDictionary *emptySettings = (workaround51Crash != nil)
-	? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
-	: [NSDictionary dictionary];
-	[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
-	
 	UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPSigninFlow" bundle:[NSBundle mainBundle]];
 	[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
 }

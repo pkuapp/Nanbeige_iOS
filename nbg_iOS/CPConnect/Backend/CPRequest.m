@@ -107,7 +107,14 @@ static NSString* pAPIPort = @"333";
         }
 		
 		if( self.error ) {
-			[self _reportError:self.error];
+			//TODO
+			if (self.error.code == 403 && [[self.error.userInfo objectForKey:@"error_code"] isEqualToString:@"NotLoggedIn"]) {
+				[[[UIAlertView alloc] initWithTitle:@"未登录或登录过期" message:@"确认以重新登录" delegate:nil cancelButtonTitle:sCONFIRM otherButtonTitles:nil, nil] show];
+				UIStoryboard *sb = [UIStoryboard storyboardWithName:@"CPSigninFlow" bundle:[NSBundle mainBundle]];
+				[UIApplication sharedApplication].delegate.window.rootViewController = [sb instantiateInitialViewController];
+			} else {
+				[self _reportError:self.error];
+			}
 		}
 		else {
 			[self enumerateEventHandlers:kCPCompletionBlockHandlerKey block:^(id _handler) {
