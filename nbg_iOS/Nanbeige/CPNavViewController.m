@@ -8,9 +8,11 @@
 
 #import "CPNavViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
-@interface CPNavViewController ()
-
+@interface CPNavViewController (){
+    CALayer *alayer;
+}
 @end
 
 @implementation CPNavViewController
@@ -28,14 +30,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	
-	CGFloat navigationBarBottom = self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height;
 	UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
-	CALayer *shadowLayer = [CALayer layer];
-	shadowLayer.frame = CGRectMake(0, navigationBarBottom, self.view.frame.size.width, shadowImg.size.height);
-	shadowLayer.contents = (id)shadowImg.CGImage;
-	shadowLayer.zPosition = 1;
-	[self.view.layer addSublayer:shadowLayer];
+    UIImageView *shadow_view = [[UIImageView alloc] initWithImage:shadowImg];
+    shadow_view.frame = CGRectMake(0, 44, self.view.frame.size.width, shadowImg.size.height);
+    shadow_view.layer.shadowOffset = CGSizeMake(0, 100);
+    shadow_view.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.navigationBar.clipsToBounds = NO;
+    [self.navigationBar addSubview:shadow_view];
 }
 
 - (void)viewDidUnload

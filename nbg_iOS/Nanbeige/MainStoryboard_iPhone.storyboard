@@ -529,7 +529,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </datePicker>
                             <pickerView contentMode="scaleToFill" id="7eN-Bi-lce">
                                 <rect key="frame" x="0.0" y="49" width="320" height="216"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.44705882349999998" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="lcF-gu-4RP" id="4at-51-aOc"/>
