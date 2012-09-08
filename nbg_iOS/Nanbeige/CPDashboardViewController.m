@@ -44,6 +44,7 @@
 	[self setupTimeIndicator];
 	UIBarButtonItem *cleanButton = [[UIBarButtonItem alloc] initWithTitle:@"清除课程数据库" style:UIBarButtonItemStyleBordered target:self action:@selector(onCleanDatabase:)];
 	self.navigationItem.rightBarButtonItem = cleanButton;
+
 }
 
 - (void)viewDidUnload

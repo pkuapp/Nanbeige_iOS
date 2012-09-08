@@ -21,7 +21,21 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+                // Custom initialization
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        UIImage *image = [[UIImage imageNamed:@"mask-corners-top"] resizableImageWithCapInsets:UIEdgeInsetsMake(7, 7, 0, 7)];
+        UIImageView *mask_view = [[UIImageView alloc] initWithImage:image];
+        mask_view.frame = CGRectMake(0, 0, 320, 50);
+        //    [[self.view.subviews objectAtIndex:0] layer].mask = mask_view.layer;
+        //    NSLog(@"%@", [self.view subviews]);
+        
+        self.navigationBar.layer.mask = mask_view.layer;
     }
     return self;
 }

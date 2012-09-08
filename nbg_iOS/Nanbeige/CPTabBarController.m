@@ -15,11 +15,10 @@
 
 @implementation CPTabBarController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -36,7 +35,9 @@
 //	shadowLayer.contents = (id)shadowImg.CGImage;
 //	shadowLayer.zPosition = 1;
 //	[self.view.layer addSublayer:shadowLayer];
-	
+    self.tabBar.autoresizesSubviews = NO;
+    self.tabBar.frame = CGRectMake(0, self.tabBar.frame.origin.y+5, 320, 44);
+
 	[self setSelectedIndex:1];
 }
 

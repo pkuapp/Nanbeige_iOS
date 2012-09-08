@@ -110,24 +110,15 @@
 	
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 	
-	UIImage *overlayImg = [UIImage imageNamed:@"corners"];
-	CALayer *overlay = [CALayer layer];
-	overlay.frame = CGRectMake(0, 20, overlayImg.size.width, overlayImg.size.height);
-	overlay.contents = (id)overlayImg.CGImage;
-	overlay.zPosition = 1;
-	[self.window.layer addSublayer:overlay];
-	
-//	[[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-//    
-//    [[UIBarButtonItem appearance] setBackButtonBackgroundVerticalPositionAdjustment:-1.0 forBarMetrics:UIBarMetricsDefault];
-//    
-//    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-pressed-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 19, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-//    
-//    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-//    
-//    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-//    
-//    [[UIBarButtonItem appearance] setBackgroundVerticalPositionAdjustment:-1.0 forBarMetrics:UIBarMetricsDefault];
+    
+//	UIImage *overlayImg = [UIImage imageNamed:@"corners"];
+//	CALayer *overlay = [CALayer layer];
+//	overlay.frame = CGRectMake(0, 20, overlayImg.size.width, overlayImg.size.height);
+//	overlay.contents = (id)overlayImg.CGImage;
+//	overlay.zPosition = 1;
+//	[self.window.layer addSublayer:overlay];
+//	
+    
 	
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavigationBar"] forBarMetrics:UIBarMetricsDefault];
     
@@ -135,8 +126,11 @@
 	[[UINavigationBar appearance] setTitleTextAttributes:titleTextAttributes];
 	
 	[[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"TabBar"]];
-	[[UITabBar appearance] setSelectionIndicatorImage:[[UIImage imageNamed:@"TabBar-selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)]];
+	[[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"TabBar-selected"]];
+
+//	[[UITabBar appearance] setSelectionIndicatorImage:[[UIImage imageNamed:@"TabBar-selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(44, 6, 0, 6)]];
 	
+//    [UIImageView appearanceWhenContainedIn:, nil]
 //	[[UITableView appearance] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 	
 //    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
@@ -219,10 +213,17 @@
         self.window.rootViewController = [sb instantiateInitialViewController];
     }
     
+  
+    UIImage *image = [[UIImage imageNamed:@"mask-corners-bottom"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 7, 7)];
+    UIImageView *mask_view = [[UIImageView alloc] initWithImage:image];
+    mask_view.frame = CGRectMake(0, 20, 320, 460);
+
+    self.window.layer.mask = mask_view.layer;
     [self.window makeKeyAndVisible];
     
     return YES;
 }
+
 
 // Display an error alert, without blocking.
 // If 'fatal' is true, the app will quit when it's pressed.

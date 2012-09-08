@@ -109,7 +109,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.tableView.frame = CGRectMake(0 , 64, 320, 372);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
