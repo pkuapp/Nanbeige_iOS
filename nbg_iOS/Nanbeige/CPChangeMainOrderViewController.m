@@ -8,6 +8,7 @@
 
 #import "CPChangeMainOrderViewController.h"
 #import "CPMainViewController.h"
+#import "UIBarButtonItem+StyledButton.h"
 
 @interface CPChangeMainOrderViewController () {
 	NSString *oldorderStr;
@@ -40,7 +41,9 @@
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledPlainBarButtonItemWithTitle:@"取消" target:self selector:@selector(onCancelButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"完成" target:self selector:@selector(onChangeButtonPressed:)];
 
 	UINavigationController *nc = [self.tabBarController.childViewControllers objectAtIndex:1];
 	CPMainViewController *nmvc = (CPMainViewController *)(nc.topViewController);

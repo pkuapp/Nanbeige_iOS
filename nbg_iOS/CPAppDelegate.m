@@ -117,16 +117,20 @@
 	overlay.zPosition = 1;
 	[self.window.layer addSublayer:overlay];
 	
-	[[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-pressed-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 19, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-    
-    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    
-    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+//	[[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    
+//    [[UIBarButtonItem appearance] setBackButtonBackgroundVerticalPositionAdjustment:-1.0 forBarMetrics:UIBarMetricsDefault];
+//    
+//    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-pressed-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 19, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+//    
+//    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    
+//    [[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+//    
+//    [[UIBarButtonItem appearance] setBackgroundVerticalPositionAdjustment:-1.0 forBarMetrics:UIBarMetricsDefault];
 	
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavigationBar"] forBarMetrics:UIBarMetricsDefault];
-	
+    
 	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] };
 	[[UINavigationBar appearance] setTitleTextAttributes:titleTextAttributes];
 	

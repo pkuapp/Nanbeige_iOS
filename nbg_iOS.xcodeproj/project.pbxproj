@@ -1116,6 +1116,8 @@
 		41E7F97215D26F3A009B8703 /* CPBlockHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E7F97015D26F3A009B8703 /* CPBlockHandler.m */; };
 		41E7F98A15D2AF63009B8703 /* AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = 41E7F98915D2AF63009B8703 /* AFNetworking */; };
 		41E7F98B15D2AF63009B8703 /* AFNetworking in Resources */ = {isa = PBXBuildFile; fileRef = 41E7F98915D2AF63009B8703 /* AFNetworking */; };
+		41FA341D15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FA341C15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m */; };
+		41FA341E15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FA341C15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m */; };
 		41FD95E115D5603200477483 /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD95E015D5603200477483 /* Objection-iOS.framework */; };
 		41FD95E215D5603200477483 /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD95E015D5603200477483 /* Objection-iOS.framework */; };
 		41FD95ED15D616C600477483 /* CPCoursesFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */; };
@@ -1992,6 +1994,8 @@
 		41E7F96F15D26F3A009B8703 /* CPBlockHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPBlockHandler.h; path = CPConnect/Backend/CPBlockHandler.h; sourceTree = "<group>"; };
 		41E7F97015D26F3A009B8703 /* CPBlockHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPBlockHandler.m; path = CPConnect/Backend/CPBlockHandler.m; sourceTree = "<group>"; };
 		41E7F98915D2AF63009B8703 /* AFNetworking */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AFNetworking; path = AFNetworking/AFNetworking; sourceTree = "<group>"; };
+		41FA341B15FAFF0700D3510B /* UIBarButtonItem+StyledButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+StyledButton.h"; sourceTree = "<group>"; };
+		41FA341C15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+StyledButton.m"; sourceTree = "<group>"; };
 		41FD95E015D5603200477483 /* Objection-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "Objection-iOS.framework"; sourceTree = "<group>"; };
 		41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPCoursesFlow.storyboard; sourceTree = "<group>"; };
 		41FD95F015D6378B00477483 /* accountManage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = accountManage.json; path = ../JsonFile/accountManage.json; sourceTree = "<group>"; };
@@ -2484,6 +2488,8 @@
 		411DBBD315CB9E4000EDB31D /* nbg_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				41FA341B15FAFF0700D3510B /* UIBarButtonItem+StyledButton.h */,
+				41FA341C15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m */,
 				26228D7015F2583900B99C5B /* CPEvent */,
 				26F3E2D215D8BC1600D69D0D /* CPCourse */,
 				4120F2B115D6419000D0AA97 /* CPSignFlow */,
@@ -4387,6 +4393,7 @@
 				26228D7415F2585200B99C5B /* CPEventAllViewController.m in Sources */,
 				26228D7815F2586200B99C5B /* CPEventViewController.m in Sources */,
 				26228D7C15F25C8000B99C5B /* Event.m in Sources */,
+				41FA341D15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4622,6 +4629,7 @@
 				26228D7515F2585200B99C5B /* CPEventAllViewController.m in Sources */,
 				26228D7915F2586200B99C5B /* CPEventViewController.m in Sources */,
 				26228D7D15F25C8000B99C5B /* Event.m in Sources */,
+				41FA341E15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
