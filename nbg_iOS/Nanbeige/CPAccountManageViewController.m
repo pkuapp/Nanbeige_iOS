@@ -11,7 +11,6 @@
 #import "Models+addon.h"
 #import "Environment.h"
 #import "MagicalRecord.h"
-#import "UIBarButtonItem+StyledButton.h"
 
 @interface CPAccountManageViewController () <UIAlertViewDelegate> {
 	UIAlertView *nicknameEditAlert;
@@ -232,7 +231,10 @@
 		otherButtonTitle = sEDITPASSWORD;
 	}
 	if ([disconnectOrLogout isEqualToString:sDISCONNECTEMAIL] || [disconnectOrLogout isEqualToString:sDISCONNECTRENREN] || [disconnectOrLogout isEqualToString:sDISCONNECTWEIBO]) disconnectOrLogout = nil;
-	if (!disconnectOrLogout && !otherButtonTitle) return ;
+	if (!disconnectOrLogout && !otherButtonTitle) {
+		[self loading:NO];
+		return ;
+	}
 	
 	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:nil
 													  delegate:self

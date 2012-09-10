@@ -48,6 +48,8 @@
 	self.tableView.backgroundColor = tableBgColorPlain;
 	self.title = TITLE_ALL_EVENT;
 	
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@"仪表盘" target:self selector:@selector(onBack:)];
+	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
 		view.delegate = self;
@@ -315,6 +317,11 @@
 	if ([segue.identifier isEqualToString:@"EventSegue"]) {
 		[segue.destinationViewController setEvent:eventSelected];
 	}
+}
+
+- (void)onBack:(id)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -8,7 +8,6 @@
 
 #import "CPChangeMainOrderViewController.h"
 #import "CPMainViewController.h"
-#import "UIBarButtonItem+StyledButton.h"
 
 @interface CPChangeMainOrderViewController () {
 	NSString *oldorderStr;
@@ -19,8 +18,6 @@
 @implementation CPChangeMainOrderViewController
 @synthesize functionOrder;
 @synthesize functionArray;
-@synthesize cancelButton;
-@synthesize changeButton;
 
 #pragma mark - View Lifecycle
 
@@ -59,8 +56,6 @@
 
 - (void)viewDidUnload
 {
-	[self setCancelButton:nil];
-	[self setChangeButton:nil];
 	[super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

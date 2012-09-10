@@ -367,6 +367,38 @@ static User *sharedAppUserObject = nil;
 	return semester;
 }
 
++ (Semester *)semesterAtDate:(NSDate *)date
+{
+	University *university = [University universityWithID:[User sharedAppUser].university_id];
+	CouchDatabase *localDatabase = [(CPAppDelegate *)[UIApplication sharedApplication].delegate localDatabase];
+	for (NSString *semesterDocumentID in university.semesters) {
+		Semester *semester = [Semester modelForDocument:[localDatabase documentWithID:semesterDocumentID]];
+		if ([date compare:semester.week_start] != NSOrderedAscending && [date compare:semester.week_end] != NSOrderedDescending) {
+			return semester;
+		}
+	}
+	return nil;
+}
+
++ (NSInteger)weekAtDate:(NSDate *)date
+{
+	Semester *semester = [self semesterAtDate:[NSDate date]];
+	if (semester) return ([date timeIntervalSinceDate:semester.week_start] / 3600 / 24 / 7 + 1);
+	return 0;
+}
+
++ (NSInteger)currentWeek
+{
+	return [self weekAtDate:[NSDate date]];
+}
+
++ (NSInteger)totalWeek
+{
+	Semester *semester = [self semesterAtDate:[NSDate date]];
+	if (semester) return ([semester.week_end timeIntervalSinceDate:semester.week_start] / 3600 / 24 / 7 +1);
+	return -1;
+}
+
 @end
 
 @implementation Weekset (addon)

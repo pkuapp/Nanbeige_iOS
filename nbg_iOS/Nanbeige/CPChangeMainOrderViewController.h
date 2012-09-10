@@ -13,9 +13,4 @@
 @property (retain, nonatomic) NSArray * functionArray;
 @property (retain, nonatomic) NSArray * functionOrder;
 
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *changeButton;
-- (IBAction)onChangeButtonPressed:(id)sender;
-- (IBAction)onCancelButtonPressed:(id)sender;
-
 @end

@@ -11,6 +11,7 @@
 #import "CPAssignmentViewController.h"
 #import "CPCommentPostElement.h"
 #import "CPLabelButtonElement.h"
+#import "Models+addon.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface CPCourseViewController () <UIScrollViewDelegate> {
@@ -46,6 +47,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@" 课程 " target:self selector:@selector(onBack:)];
 	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.quickDialogTableView.bounds.size.height, self.view.frame.size.width, self.quickDialogTableView.bounds.size.height)];
@@ -122,6 +125,11 @@
 	[alertView show];
 }
 
+- (void)onBack:(id)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)onDeselectCourse:(id)sender
 {
 	if (_reloading) return ;
@@ -133,16 +141,22 @@
 {
 	if (_reloading) return ;
 	
-	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/edit/", self.course.id] params:@{ @"status" : @"none" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"course/%@/edit/", self.course.id] params:@{ @"status" : @"cancel" } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 		
-		self.course.status = @"none";
+		self.course.status = @"cancel";
 		RESTOperation *saveOp = [self.course save];
 		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
 		else {
-			UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
+			UIBarButtonItem *auditButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"旁听" target:self selector:@selector(onAuditCourse:)];
 			self.navigationItem.rightBarButtonItem = auditButton;
-			[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-			[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+			
+			CouchDocument *userCourseList = [Course userCourseListDocument];
+			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
+			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
+			[newDocs removeObject:self.course.document.documentID];
+			[newDict setObject:newDocs forKey:@"value"];
+			RESTOperation *putOp = [userCourseList putProperties:newDict];
+			if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
 			[[NSUserDefaults standardUserDefaults] synchronize];
@@ -167,10 +181,17 @@
 		RESTOperation *saveOp = [self.course save];
 		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
 		else {
-			UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
-			[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-			[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+			UIBarButtonItem *auditButton = [UIBarButtonItem styledRedBarButtonItemWithTitle:@"已旁听" target:self selector:@selector(onDeauditCourse:)];
 			self.navigationItem.rightBarButtonItem = auditButton;
+			
+			CouchDocument *userCourseList = [Course userCourseListDocument];
+			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
+			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
+			NSLog(@"%@", self.course.document.documentID);
+			[newDocs addObject:self.course.document.documentID];
+			[newDict setObject:newDocs forKey:@"value"];
+			RESTOperation *putOp = [userCourseList putProperties:newDict];
+			if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
 			[[NSUserDefaults standardUserDefaults] synchronize];
@@ -189,19 +210,13 @@
 - (void)setupCourseDetail
 {
 	if ([self.course.status isEqualToString:@"select"]) {
-		UIBarButtonItem *selectButton = [[UIBarButtonItem alloc] initWithTitle:@"已选" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeselectCourse:)];
-		[selectButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-		[selectButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+		UIBarButtonItem *selectButton = [UIBarButtonItem styledRedBarButtonItemWithTitle:@"已选" target:self selector:@selector(onDeselectCourse:)];
 		self.navigationItem.rightBarButtonItem = selectButton;
 	} else if ([self.course.status isEqualToString:@"audit"]) {
-		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"已旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onDeauditCourse:)];
-		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+		UIBarButtonItem *auditButton = [UIBarButtonItem styledRedBarButtonItemWithTitle:@"已旁听" target:self selector:@selector(onDeauditCourse:)];
 		self.navigationItem.rightBarButtonItem = auditButton;
 	} else {
-		UIBarButtonItem *auditButton = [[UIBarButtonItem alloc] initWithTitle:@"旁听" style:UIBarButtonItemStyleBordered target:self action:@selector(onAuditCourse:)];
-		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-		[auditButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+		UIBarButtonItem *auditButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"旁听" target:self selector:@selector(onAuditCourse:)];
 		self.navigationItem.rightBarButtonItem = auditButton;
 	}
 	

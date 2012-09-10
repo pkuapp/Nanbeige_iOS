@@ -240,26 +240,4 @@
 	[self showAlert:[[self.streams objectAtIndex:indexPath.row] objectForKey:kSTREAMTITLE]];
 }
 
-#pragma mark - Button controllerAction
-
-- (IBAction)renrenPost:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if ([defaults valueForKey:kRENRENIDKEY] == nil) {
-		[self showAlert:@"人人未授权！请到设置中授权"];
-		self.tabBarController.selectedIndex = 2;
-	} else {
-		[self performSegueWithIdentifier:@"RenrenPostSegue" sender:self];
-	}
-}
-
-- (IBAction)weiboPost:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	if ([defaults valueForKey:kWEIBOIDKEY] == nil) {
-		[self showAlert:@"微博未授权！请到设置中授权"];
-		self.tabBarController.selectedIndex = 2;
-	} else {
-		[self performSegueWithIdentifier:@"WeiboPostSegue" sender:self];
-	}
-}
-
 @end

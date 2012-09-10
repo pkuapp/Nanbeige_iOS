@@ -189,18 +189,7 @@
                             </textView>
                         </subviews>
                     </view>
-                    <navigationItem key="navigationItem" title="七嘴八舌" id="QwJ-wP-XSC">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="eAI-n3-wFE">
-                            <connections>
-                                <action selector="onCancelButtonPressed:" destination="GUA-bN-uuN" id="Az4-pb-KvT"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="发送" id="EqT-aN-v97">
-                            <connections>
-                                <action selector="onPostButtonPressed:" destination="GUA-bN-uuN" id="dh9-Eg-cnu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="七嘴八舌" id="QwJ-wP-XSC"/>
                     <connections>
                         <outlet property="textToPost" destination="PcS-XX-MXO" id="wht-DN-faw"/>
                     </connections>

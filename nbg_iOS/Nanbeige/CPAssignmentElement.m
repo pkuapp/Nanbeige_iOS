@@ -19,21 +19,28 @@
 	NSInteger row = [[[self parentSection] elements] indexOfObject:self];
 	if (rowNumber == 1) {
 		bgImgView.image = [[UIImage imageNamed:@"cell-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(11, 10, 10, 10)];
-		selectedBgImgView.image = [[UIImage imageNamed:@"cell-btn-pressed-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+		selectedBgImgView.image = [[UIImage imageNamed:@"cell-pressed-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(11, 10, 10, 10)];
 	} else if (row == 0) {
 		bgImgView.image = [[UIImage imageNamed:@"cell-top"] resizableImageWithCapInsets:UIEdgeInsetsMake(11, 10, 1, 10)];
-		selectedBgImgView.image = [[UIImage imageNamed:@"cell-btn-pressed-top"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+		selectedBgImgView.image = [[UIImage imageNamed:@"cell-pressed-top"] resizableImageWithCapInsets:UIEdgeInsetsMake(11, 10, 1, 10)];
 	} else if (row == rowNumber - 1) {
 		bgImgView.image = [[UIImage imageNamed:@"cell-bottom"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 10, 10, 10)];
-		selectedBgImgView.image = [[UIImage imageNamed:@"cell-btn-pressed-bottom"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+		selectedBgImgView.image = [[UIImage imageNamed:@"cell-pressed-bottom"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 10, 10, 10)];
 	} else {
 		bgImgView.image = [[UIImage imageNamed:@"cell-middle"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 10, 1, 10)];
-		selectedBgImgView.image = [[UIImage imageNamed:@"cell-btn-pressed-middle"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+		selectedBgImgView.image = [[UIImage imageNamed:@"cell-pressed-middle"] resizableImageWithCapInsets:UIEdgeInsetsMake(1, 10, 1, 10)];
 	}
 	cell.selectedBackgroundView = selectedBgImgView;
 	cell.backgroundView = bgImgView;
 	
-	cell.accessoryType = UITableViewCellAccessoryNone;
+	cell.textLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+	cell.textLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+	cell.textLabel.shadowOffset = CGSizeMake(0.0, 1.0);
+	cell.textLabel.highlightedTextColor = cell.textLabel.textColor;
+	cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+	cell.detailTextLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+	cell.detailTextLabel.shadowOffset = CGSizeMake(0.0, 1.0);
+	cell.detailTextLabel.highlightedTextColor = cell.detailTextLabel.textColor;
 	
 	return cell;
 }

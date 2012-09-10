@@ -92,6 +92,7 @@
 	// Do any additional setup after loading the view.
 	
 	self.view.BackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
+	self.tabBarController.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@"仪表盘" target:self selector:@selector(onBack:)];
 	
 	self.paginatorView.frame = self.view.bounds;
 	self.paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
@@ -107,25 +108,31 @@
 {
 	[super viewWillAppear:animated];
 	
-	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17] };
-	[self.tabBarController.navigationController.navigationBar setTitleTextAttributes:titleTextAttributes];
+//	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] , UITextAttributeFont : [UIFont boldSystemFontOfSize:17] };
+//	[self.tabBarController.navigationController.navigationBar setTitleTextAttributes:titleTextAttributes];
 	
-	UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:@"今天" style:UIBarButtonItemStyleBordered target:self action:@selector(onTodayButtonPressed:)];
+	UIBarButtonItem *todayButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"今天" target:self selector:@selector(onTodayButtonPressed:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = todayButton;
-	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"时间表" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
 	NSDate *day = [today dateByAddingTimeInterval:60*60*24*([self.paginatorView currentPageIndex] - TIMETABLEPAGEINDEX)];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"E M月d日";
 	NSString *dayDate = [formatter stringFromDate:day];
-	Semester *semester = [self semesterAtDate:day];
-	if (!semester) {
+	NSInteger week = [Semester weekAtDate:day];
+	if (!week) {
 		self.tabBarController.title = [NSString stringWithFormat:@"放假^_^ %@", dayDate];
 	} else {
-		NSInteger week = [day timeIntervalSinceDate:semester.week_start] / 3600 / 24 / 7 + 1;
 		self.tabBarController.title = [NSString stringWithFormat:@"第%d周 %@", week, dayDate];
+		Semester *semester = [Semester semesterAtDate:day];
+		if (![[User sharedAppUser].course_imported containsObject:semester.id]) {
+			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
+			return ;
+		} else if (![self.courses count]) {
+			[self.tabBarController setSelectedIndex:1];
+			return ;
+		}
 	}
-		
+	
 	CPTimeTable *currentPage = (CPTimeTable *)[self.paginatorView currentPage];
 	[currentPage refreshDisplay];
 	NSInteger pageIndex = [self.paginatorView currentPageIndex];
@@ -153,8 +160,8 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
-	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] };
-	[self.tabBarController.navigationController.navigationBar setTitleTextAttributes:titleTextAttributes];
+//	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] };
+//	[self.tabBarController.navigationController.navigationBar setTitleTextAttributes:titleTextAttributes];
 }
 
 #pragma mark - Display
@@ -175,6 +182,11 @@
 	[self.paginatorView setCurrentPageIndex:TIMETABLEPAGEINDEX animated:YES];
 	CPTimeTable *currentPage = (CPTimeTable *)[self.paginatorView currentPage];
 	[currentPage refreshDisplay];
+}
+
+- (void)onBack:(id)sender
+{
+	[self.tabBarController.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Private
@@ -211,26 +223,13 @@
 
 - (NSArray *)coursesAtDate:(NSDate *)date
 {
-	Semester *semester = [self semesterAtDate:date];
+	Semester *semester = [Semester semesterAtDate:date];
 	if (!semester) return nil;
 	NSInteger week = [date timeIntervalSinceDate:semester.week_start] / 3600 / 24 / 7 + 1;
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	formatter.dateFormat = @"e";
 	NSInteger weekday = ([[formatter stringFromDate:date] integerValue] + 5) % 7 + 1;
 	return [self coursesAtWeekday:weekday Week:week Semester_id:semester.id];
-}
-
-- (Semester *)semesterAtDate:(NSDate *)date
-{
-	University *university = [University universityWithID:[User sharedAppUser].university_id];
-	CouchDatabase *localDatabase = [(CPAppDelegate *)[UIApplication sharedApplication].delegate localDatabase];
-	for (NSString *semesterDocumentID in university.semesters) {
-		Semester *semester = [Semester modelForDocument:[localDatabase documentWithID:semesterDocumentID]];
-		if ([date compare:semester.week_start] != NSOrderedAscending && [date compare:semester.week_end] != NSOrderedDescending) {
-			return semester;
-		}
-	}
-	return nil;
 }
 
 - (NSArray *)coursesAtWeekday:(NSInteger)weekday
@@ -275,12 +274,12 @@
 	formatter.dateFormat = @"E M月d日";
 	NSString *dayDate = [formatter stringFromDate:day];
 	
-	Semester *semester = [self semesterAtDate:day];
-	if (!semester) {
+	NSInteger week = [Semester weekAtDate:day];
+	if (!week) {
 		self.tabBarController.title = [NSString stringWithFormat:@"放假^_^ %@", dayDate];
 	} else {
-		NSInteger week = [day timeIntervalSinceDate:semester.week_start] / 3600 / 24 / 7 + 1;
 		self.tabBarController.title = [NSString stringWithFormat:@"第%d周 %@", week, dayDate];
+		Semester *semester = [Semester semesterAtDate:day];
 		if (![[User sharedAppUser].course_imported containsObject:semester.id]) {
 			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
 			return ;

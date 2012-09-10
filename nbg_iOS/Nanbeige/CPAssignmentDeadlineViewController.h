@@ -23,7 +23,6 @@
 @property (weak, nonatomic) NSArray *weeksData;
 
 - (IBAction)onModeChange:(UISegmentedControl *)sender;
-- (IBAction)onConfirm:(id)sender;
 
 + (NSString *)displayFromWeekDay:(NSDictionary *)weekDay;
 + (NSString *)displayFromDate:(NSDate *)date;

@@ -68,7 +68,6 @@
 	[super viewWillAppear:animated];
 	
 	self.tabBarController.navigationItem.rightBarButtonItem = nil;
-	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:TITLE_SELECTED_COURSE style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.tabBarController.title = TITLE_ALL_COURSE;
 	
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
@@ -268,7 +267,7 @@
 	}
 	Semester *semester;
 	if (semesterIn) semester = semesterIn;
-	if (semesterAfter) semester = semesterAfter;
+	else if (semesterAfter) semester = semesterAfter;
 	else semester = semesterBefore;
 	
 	return semester;

@@ -54,6 +54,10 @@
 @interface Semester (addon)
 
 + (Semester *)semesterWithID:(NSNumber *)semester_id;
++ (Semester *)semesterAtDate:(NSDate *)date;
++ (NSInteger)weekAtDate:(NSDate *)date;
++ (NSInteger)currentWeek;
++ (NSInteger)totalWeek;
 
 @end
 

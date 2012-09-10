@@ -52,8 +52,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:sCONFIRM style:UIBarButtonItemStyleBordered target:self action:@selector(onConfirm:)];
-	UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
+	UIBarButtonItem *loginButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:sCONFIRM target:self selector:@selector(onConfirm:)];
+	UIBarButtonItem *closeButton = [UIBarButtonItem styledPlainBarButtonItemWithTitle:sCANCEL target:self selector:@selector(close)];
 	self.navigationItem.rightBarButtonItem = loginButton;
 	self.navigationItem.leftBarButtonItem = closeButton;
 

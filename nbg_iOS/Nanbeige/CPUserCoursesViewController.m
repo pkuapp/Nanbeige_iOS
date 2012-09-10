@@ -88,12 +88,12 @@
 {
 	[super viewWillAppear:animated];
 	
-	UIBarButtonItem *semesterButton = [[UIBarButtonItem alloc] initWithTitle:@"切换学期" style:UIBarButtonItemStyleBordered target:self action:@selector(onChangeSemester:)];
+	self.tabBarController.navigationItem.title = TITLE_SELECTED_COURSE;
+	
+	UIBarButtonItem *semesterButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"切换学期" target:self selector:@selector(onChangeSemester:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = semesterButton;
-	self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:TITLE_SELECTED_COURSE style:UIBarButtonItemStyleBordered target:nil action:nil];
-	self.tabBarController.title = TITLE_SELECTED_COURSE;
 
-	if (![self.courses count] && [[[Course userCourseListDocument] propertyForKey:@"value"] count]) {
+	if ((![self.courses count] && [[[Course userCourseListDocument] propertyForKey:@"value"] count]) || [[[NSUserDefaults standardUserDefaults] objectForKey:@"user_courses_edited"] boolValue]) {
 		[self refreshDisplay];
 	}
 	
@@ -104,7 +104,7 @@
 {
 	[super viewDidAppear:animated];
 	CouchDocument *courseListDocument = [Course userCourseListDocument];
-	if (![courseListDocument propertyForKey:@"value"] || [[[NSUserDefaults standardUserDefaults] objectForKey:@"user_courses_edited"] boolValue]) {
+	if (![courseListDocument propertyForKey:@"value"]) {
 		[self reloadTableViewDataSource];
 	}
 }
@@ -124,7 +124,7 @@
 
 - (void)refreshData
 {
-	if ([self.courses count] == 0)
+	if ([self.courses count] == 0 || [[[NSUserDefaults standardUserDefaults] objectForKey:@"user_courses_edited"] boolValue])
 		self.courses = [[Course userCourseListDocument] propertyForKey:@"value"];
 	self.coursesAudit = self.coursesSelect = nil;
 	for (NSString *courseDocumentID in self.courses) {
@@ -132,12 +132,15 @@
 		if ([course.status isEqualToString:@"select"] && [currentSemester.id isEqualToNumber:course.semester_id]) [self.coursesSelect addObject:course];
 		if ([course.status isEqualToString:@"audit"] && [currentSemester.id isEqualToNumber:course.semester_id]) [self.coursesAudit addObject:course];
 	}
+	[[NSUserDefaults standardUserDefaults] setObject:@0 forKey:@"user_courses_edited"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)refreshDisplay
 {
 	[self refreshData];
-	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+	[self.tableView reloadData];
+//	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Display
@@ -275,9 +278,6 @@
 			
 			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 			[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-			
-			[[NSUserDefaults standardUserDefaults] setObject:@0 forKey:@"user_courses_edited"];
-			[[NSUserDefaults standardUserDefaults] synchronize];
 			
 		} else {
 			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
@@ -433,7 +433,7 @@
 	}
 	Semester *semester;
 	if (semesterIn) semester = semesterIn;
-	if (semesterAfter) semester = semesterAfter;
+	else if (semesterAfter) semester = semesterAfter;
 	else semester = semesterBefore;
 	
 	if (![[User sharedAppUser].course_imported containsObject:semester.id] && isNeedGrabber) [self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];

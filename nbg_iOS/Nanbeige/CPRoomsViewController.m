@@ -71,8 +71,9 @@
 	
 	self.title = [NSString stringWithFormat:FORMAT_TITLE_ROOMS, @"今天"];
 	date = nil;
-	UIBarButtonItem *datePickButton = [[UIBarButtonItem alloc] initWithTitle:@"日期" style:UIBarButtonItemStyleBordered target:self action:@selector(onDatePick:)];
-	self.navigationItem.rightBarButtonItem = datePickButton;
+	
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@"仪表盘" target:self selector:@selector(onBack:)];
+	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"日期" target:self selector:@selector(onDatePick:)];
 	
 	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
 	CouchDocument *doc = [localDatabase documentWithID:[NSString stringWithFormat:@"buildings-%@", [User sharedAppUser].campus_id]];
@@ -379,6 +380,11 @@
 {
 	self.toolbar.hidden = NO;
 	self.datePicker.hidden = NO;
+}
+
+- (void)onBack:(id)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onConfrimDatePick:(id)sender {

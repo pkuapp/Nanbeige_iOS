@@ -70,11 +70,15 @@
 	University *university = [University universityWithID:[[User sharedAppUser] university_id]];
 	
 	NSDictionary *dict = @{
-	@"basic" : [@[ @{ @"title" : @"全称", @"value" : self.course.name }, @{ @"title" : @"编号", @"value" : self.course.orig_id }, @{ @"title" : @"学分", @"value" : self.course.credit }, @{ @"title" : @"教师", @"value" : teachers }, ] mutableCopy],
+	@"basic" : [@[] mutableCopy],
 	@"extension" : @[ @{ @"title" : @"时间", @"value" :  time}, @{ @"title" : @"地点", @"value" : place } ],
 	@"exam" : @[ @{ @"title" : @"考试", @"value" : @"API未提供" } ]};
 	
-	if ([university.support_ta boolValue]) {
+	if ([self.course.name isKindOfClass:[NSString class]]) [[dict objectForKey:@"basic"] addObject:@{ @"title" : @"全称", @"value" : self.course.name }];
+	if ([self.course.orig_id isKindOfClass:[NSString class]]) [[dict objectForKey:@"basic"] addObject:@{ @"title" : @"编号", @"value" : self.course.orig_id }];
+	if ([self.course.credit isKindOfClass:[NSNumber class]]) [[dict objectForKey:@"basic"] addObject:@{ @"title" : @"学分", @"value" : self.course.credit }];
+	if ([teachers isKindOfClass:[NSString class]]) [[dict objectForKey:@"basic"] addObject:@{ @"title" : @"教师", @"value" : teachers }];
+	if ([university.support_ta boolValue] && [tas isKindOfClass:[NSString class]]) {
 		[[dict objectForKey:@"basic"] addObject:@{ @"title" : @"助教", @"value" : tas }];
 	}
 		

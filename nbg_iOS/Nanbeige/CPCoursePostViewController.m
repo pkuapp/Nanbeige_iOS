@@ -36,6 +36,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledPlainBarButtonItemWithTitle:@"取消" target:self selector:@selector(onCancelButtonPressed:)];
+	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"发送" target:self selector:@selector(onPostButtonPressed:)];
+	
 	self.weibo = [WBEngine sharedWBEngine];
 	self.renren = [Renren sharedRenren];
 	
@@ -123,7 +126,7 @@
 
 #pragma mark - IBAction
 
-- (IBAction)onPostButtonPressed:(id)sender {
+- (void)onPostButtonPressed:(id)sender {
 	// check text length
 	if ([self.textToPost.text length] <= 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"状态不能为空！" message:nil delegate:nil cancelButtonTitle:sCONFIRM otherButtonTitles:nil];
@@ -148,7 +151,7 @@
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"七嘴八舌发送中..."];
 }
 
-- (IBAction)onCancelButtonPressed:(id)sender {
+- (void)onCancelButtonPressed:(id)sender {
 	[self dismissModalViewControllerAnimated:YES];
 }
 

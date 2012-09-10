@@ -34,6 +34,9 @@
 	
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@" 返回 " target:self selector:@selector(onBack:)];
+	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"确认" target:self selector:@selector(onConfirm:)];
+	
 	if ([self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
 		[self.modeSegmentedControl setSelectedSegmentIndex:0];
 		[self.deadlinePicker selectRow:[self.weeksData indexOfObject:self.assignment.due_lesson] inComponent:0 animated:YES];
@@ -73,7 +76,12 @@
 
 #pragma mark - Button controllerAction
 
-- (IBAction)onConfirm:(id)sender {
+- (void)onBack:(id)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onConfirm:(id)sender {
 	if ([self.modeSegmentedControl selectedSegmentIndex] == ON_LESSON) {
 		NSDictionary *due_lesson = [self.weeksData objectAtIndex:[self.deadlinePicker selectedRowInComponent:0]];
 		self.assignment.due_type = TYPE_ON_LESSON;

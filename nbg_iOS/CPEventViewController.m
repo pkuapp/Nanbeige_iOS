@@ -42,6 +42,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@"活动目录" target:self selector:@selector(onBack:)];
+	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.quickDialogTableView.bounds.size.height, self.view.frame.size.width, self.quickDialogTableView.bounds.size.height)];
 		view.delegate = self;
@@ -127,10 +129,8 @@
 		RESTOperation *saveOp = [self.event save];
 		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
 		else {
-			UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onFollowEvent:)];
+			UIBarButtonItem *followButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"关注" target:self selector:@selector(onFollowEvent:)];
 			self.navigationItem.rightBarButtonItem = followButton;
-			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_events_edited"];
 			[[NSUserDefaults standardUserDefaults] synchronize];
@@ -159,9 +159,7 @@
 		RESTOperation *saveOp = [self.event save];
 		if (saveOp && ![saveOp wait]) [self showAlert:[saveOp.error description]];
 		else {
-			UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"已关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onUnfollowEvent:)];
-			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-			[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+			UIBarButtonItem *followButton = [UIBarButtonItem styledRedBarButtonItemWithTitle:@"已关注" target:self selector:@selector(onUnfollowEvent:)];
 			self.navigationItem.rightBarButtonItem = followButton;
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_events_edited"];
@@ -183,14 +181,10 @@
 - (void)setupEventDetail
 {
 	if ([self.event.follow boolValue]) {
-		UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"已关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onUnfollowEvent:)];
-		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-now"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+		UIBarButtonItem *followButton = [UIBarButtonItem styledRedBarButtonItemWithTitle:@"已关注" target:self selector:@selector(onUnfollowEvent:)];
 		self.navigationItem.rightBarButtonItem = followButton;
 	} else {
-		UIBarButtonItem *followButton = [[UIBarButtonItem alloc] initWithTitle:@"关注" style:UIBarButtonItemStyleBordered target:self action:@selector(onFollowEvent:)];
-		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-		[followButton setBackgroundImage:[[UIImage imageNamed:@"btn-pressed-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 0, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+		UIBarButtonItem *followButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"关注" target:self selector:@selector(onFollowEvent:)];
 		self.navigationItem.rightBarButtonItem = followButton;
 	}
 	
@@ -419,6 +413,11 @@
 	
 	return [NSDate date]; // should return date data source was last changed
 	
+}
+
+- (void)onBack:(id)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

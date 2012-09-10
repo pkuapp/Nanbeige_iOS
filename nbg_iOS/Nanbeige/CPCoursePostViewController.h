@@ -17,7 +17,4 @@
 @property (strong, nonatomic) Renren *renren;
 @property (retain, nonatomic) IBOutlet UITextView *textToPost;
 
-- (IBAction)onPostButtonPressed:(id)sender;
-- (IBAction)onCancelButtonPressed:(id)sender;
-
 @end

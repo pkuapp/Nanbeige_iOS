@@ -33,7 +33,14 @@
 	cell.selectedBackgroundView = selectedBgImgView;
 	cell.backgroundView = bgImgView;
 	
-	cell.accessoryType = UITableViewCellAccessoryNone;
+	cell.textLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+	cell.textLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+	cell.textLabel.shadowOffset = CGSizeMake(0.0, 1.0);
+	cell.textLabel.highlightedTextColor = cell.textLabel.textColor;
+	cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+	cell.detailTextLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+	cell.detailTextLabel.shadowOffset = CGSizeMake(0.0, 1.0);
+	cell.detailTextLabel.highlightedTextColor = cell.detailTextLabel.textColor;
 	
 	return cell;
 }

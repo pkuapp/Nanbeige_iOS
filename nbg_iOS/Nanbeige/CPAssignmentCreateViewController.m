@@ -137,11 +137,10 @@
 	
 	if (!_bCreate) self.title = @"修改作业计划";
 	
-	UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc] initWithTitle:@"确认" style:UIBarButtonItemStyleBordered target:self action:@selector(onConfirm:)];
-	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(onCancel:)];
+	UIBarButtonItem *confirmButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"确认" target:self selector:@selector(onConfirm:)];
+	UIBarButtonItem *cancelButton = [UIBarButtonItem styledPlainBarButtonItemWithTitle:@"取消" target:self selector:@selector(onCancel:)];
 	self.navigationItem.rightBarButtonItem = confirmButton;
 	self.navigationItem.leftBarButtonItem = cancelButton;
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
 	bCourseChanged = NO;
 	bCourseUpdated = NO;
@@ -298,9 +297,9 @@
 
 - (void)onImageSelect:(id)sender
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"暂不支持添加照片" delegate:self cancelButtonTitle:sCONFIRM otherButtonTitles:nil, nil];
-	[alert show];
-	return ;
+//	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"暂不支持添加照片" delegate:self cancelButtonTitle:sCONFIRM otherButtonTitles:nil, nil];
+//	[alert show];
+//	return ;
 	
 	//TODO
 	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"添加照片"

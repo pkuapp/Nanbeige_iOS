@@ -19,6 +19,7 @@
     #import "Quickdialog.h"
     #import "Environment.h"
 	#import "CPAppDelegate.h"
+	#import "UIBarButtonItem+StyledButton.h"
 #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
 #define MR_SHORTHAND
     #import "CoreData+MagicalRecord.h"

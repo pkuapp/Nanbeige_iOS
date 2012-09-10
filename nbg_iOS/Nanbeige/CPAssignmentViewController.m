@@ -126,6 +126,9 @@
 	// Do any additional setup after loading the view.
 	self.title = TITLE_ASSIGNMENT;
 	
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@"仪表盘" target:self selector:@selector(onBack:)];
+	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"新增" target:self selector:@selector(onCreate:)];
+	
 	self.assignmentsTableView.backgroundColor = tableBgColorPlain;
 	self.completeAssignmentsTableView.backgroundColor = tableBgColorPlain;
 	
@@ -440,6 +443,16 @@
     // Navigation logic may go here. Create and push another view controller.
 	assignmentSelect = [indexPath row];
 	[self performSegueWithIdentifier:@"ModifyAssignmentSegue" sender:self];
+}
+
+- (void)onCreate:(id)sender
+{
+	[self performSegueWithIdentifier:@"CreateAssignmentSegue" sender:self];
+}
+
+- (void)onBack:(id)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onAssignmentCompleteChanged:(id)sender {

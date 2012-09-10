@@ -19,13 +19,7 @@
                             <outlet property="delegate" destination="T7Q-qL-CHf" id="nx4-QA-wqJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="仪表盘" id="Ghq-hk-poq">
-                        <barButtonItem key="rightBarButtonItem" title="测试" id="QMD-rF-C0e">
-                            <connections>
-                                <action selector="testDashboard:" destination="T7Q-qL-CHf" id="fmH-Fm-6PT"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="仪表盘" id="Ghq-hk-poq"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <segue destination="Y3a-g9-RLQ" kind="push" identifier="ItsEnterSegue" id="bRx-DI-TvE"/>
@@ -444,11 +438,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <action selector="onAssignmentCompleteChanged:" destination="R9G-nc-9ot" eventType="valueChanged" id="n6X-a9-qqr"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" title="新增" id="ABO-w1-NW0">
-                            <connections>
-                                <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentSegue" id="XCJ-0s-Ogk"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -456,6 +445,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="completeAssignmentsTableView" destination="72A-2d-N3C" id="IYy-UZ-G6v"/>
                         <outlet property="completeSegmentedControl" destination="4SG-yf-mbH" id="CKV-4m-lke"/>
                         <segue destination="ehN-NR-OG8" kind="modal" identifier="ModifyAssignmentSegue" id="kkG-IZ-C1L"/>
+                        <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentSegue" id="aB0-L4-nSj"/>
                     </connections>
                 </viewController>
             </objects>
@@ -553,11 +543,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <action selector="onModeChange:" destination="lcF-gu-4RP" eventType="valueChanged" id="LG5-Qt-suT"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" title="确认" id="Q3V-mC-j53">
-                            <connections>
-                                <action selector="onConfirm:" destination="lcF-gu-4RP" id="g0x-gb-UNz"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="C8M-LO-cBq" id="8mZ-op-1N9"/>
@@ -739,97 +724,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2135" y="-1650"/>
         </scene>
-        <!--Nanbeige Renren Post View Controller-->
-        <scene sceneID="nW8-K8-74z">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X2o-ph-mG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="gVN-yo-VUf" customClass="NanbeigeRenrenPostViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4JZ-JD-hof">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="@颐和园路5号 #吐槽# " id="HcU-L6-DS7">
-                                <rect key="frame" x="20" y="64" width="280" height="376"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <navigationBar contentMode="scaleToFill" id="Pe9-W2-IcR">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="人人吐槽" id="zel-kf-wMx">
-                                        <barButtonItem key="leftBarButtonItem" title="取消" id="xQ1-dG-QVK">
-                                            <connections>
-                                                <action selector="onCancelButtonPressed:" destination="gVN-yo-VUf" id="8iW-kW-Xww"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="发送" id="ecz-uE-GNH">
-                                            <connections>
-                                                <action selector="onPostButtonPressed:" destination="gVN-yo-VUf" id="gk5-ih-Vez"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <connections>
-                        <outlet property="textToPost" destination="HcU-L6-DS7" id="aYd-mg-oP1"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2135" y="-948"/>
-        </scene>
-        <!--Weibo Post View Controller-->
-        <scene sceneID="IcV-to-mG5">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Mt-yq-Kni" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="hoE-87-ggj" customClass="CPWeiboPostViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FqM-LA-lao">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="@颐和园路5号 #吐槽# " id="lzz-xU-U5L">
-                                <rect key="frame" x="20" y="64" width="280" height="376"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <navigationBar contentMode="scaleToFill" id="YGP-Bp-HTo">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="微吐槽" id="14A-h6-afX">
-                                        <barButtonItem key="leftBarButtonItem" title="取消" id="8Dq-FE-5RB">
-                                            <connections>
-                                                <action selector="onCancelButtonPressed:" destination="hoE-87-ggj" id="wBZ-gV-xmc"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="发送" id="T6c-Gc-tVT">
-                                            <connections>
-                                                <action selector="onPostButtonPressed:" destination="hoE-87-ggj" id="YyX-DI-ngd"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <connections>
-                        <outlet property="textToPost" destination="lzz-xU-U5L" id="UNx-Xu-LSx"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2541" y="-948"/>
-        </scene>
         <!--Nav View Controller - 信息流-->
         <scene sceneID="U6W-KN-1cs">
             <objects>
@@ -867,22 +761,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="信息流" id="8a9-Hj-YfP">
-                        <barButtonItem key="leftBarButtonItem" title="人人吐槽" id="xFJ-64-OPJ">
-                            <connections>
-                                <action selector="renrenPost:" destination="aEl-L1-1Fk" id="NS5-4K-IMW"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="微吐槽" id="uUJ-8r-eac">
-                            <connections>
-                                <action selector="weiboPost:" destination="aEl-L1-1Fk" id="0QV-KU-cOS"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="信息流" id="8a9-Hj-YfP"/>
                     <connections>
                         <outlet property="tableView" destination="myp-Zo-dPt" id="ebq-Ak-jaC"/>
-                        <segue destination="gVN-yo-VUf" kind="modal" identifier="RenrenPostSegue" id="qkn-qg-Dfo"/>
-                        <segue destination="hoE-87-ggj" kind="modal" identifier="WeiboPostSegue" id="bWh-Lc-zHo"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1099,7 +980,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
                 <tabBarController id="4" customClass="CPTabBarController" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1171,118 +1052,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="38-house.png" width="18" height="17"/>
         <image name="Icon@2x.png" width="114" height="114"/>
     </resources>
-    <classes>
-        <class className="CPAccountManageViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAccountManageViewController.h"/>
-        </class>
-        <class className="CPAssignmentCourseViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentCourseViewController.h"/>
-        </class>
-        <class className="CPAssignmentCreateViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentCreateViewController.h"/>
-        </class>
-        <class className="CPAssignmentDeadlineViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentDeadlineViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onConfirm:"/>
-                <relationship kind="action" name="onModeChange:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="deadlinePicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="modeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="CPAssignmentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onAssignmentCompleteChanged:"/>
-                <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="CPChangeMainOrderViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPChangeMainOrderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onChangeButtonPressed:"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="changeButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="CPDashboardViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPDashboardViewController.h"/>
-        </class>
-        <class className="CPDetailGateInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPDetailGateInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="CPEventAllViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPEventAllViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CPEventViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPEventViewController.h"/>
-        </class>
-        <class className="CPFeedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPFeedViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="renrenPost:"/>
-                <relationship kind="action" name="weiboPost:"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CPMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPMainViewController.h"/>
-        </class>
-        <class className="CPNavViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPNavViewController.h"/>
-        </class>
-        <class className="CPPreferenceViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPPreferenceViewController.h"/>
-        </class>
-        <class className="CPRoomsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPRoomsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="CPTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTabBarController.h"/>
-        </class>
-        <class className="CPUniversitySelectViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPUniversitySelectViewController.h"/>
-        </class>
-        <class className="CPWeiboPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPWeiboPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="action" name="onPostButtonPressed:"/>
-                <relationship kind="outlet" name="textToPost" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="QuickDialogController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuickDialogController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Yqn-fv-amI"/>
+        <segue reference="iBD-dN-4lH"/>
         <segue reference="nfF-gJ-ICc"/>
         <segue reference="lVV-gW-QAM"/>
-        <segue reference="iBD-dN-4lH"/>
+        <segue reference="aB0-L4-nSj"/>
     </inferredMetricsTieBreakers>
 </document>

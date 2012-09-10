@@ -964,8 +964,6 @@
 		414AFE3515D512A500EFFB60 /* CPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDBC15D512A500EFFB60 /* CPMainViewController.m */; };
 		414AFE3815D512A500EFFB60 /* CPPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */; };
 		414AFE3915D512A500EFFB60 /* CPPreferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */; };
-		414AFE3A15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */; };
-		414AFE3B15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */; };
 		414AFE3C15D512A500EFFB60 /* CPRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */; };
 		414AFE3D15D512A500EFFB60 /* CPRoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */; };
 		414AFE3E15D512A500EFFB60 /* CPUserCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDC615D512A500EFFB60 /* CPUserCoursesViewController.m */; };
@@ -976,8 +974,6 @@
 		414AFE4315D512A500EFFB60 /* CPTimeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDCB15D512A500EFFB60 /* CPTimeTable.m */; };
 		414AFE4415D512A500EFFB60 /* CPWeiboLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDCD15D512A500EFFB60 /* CPWeiboLoginViewController.m */; };
 		414AFE4515D512A500EFFB60 /* CPWeiboLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDCD15D512A500EFFB60 /* CPWeiboLoginViewController.m */; };
-		414AFE4615D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */; };
-		414AFE4715D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */; };
 		414AFE4815D512A500EFFB60 /* CPWelcomeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */; };
 		414AFE4915D512A500EFFB60 /* CPWelcomeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */; };
 		414AFE4E15D512A500EFFB60 /* SystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFDD915D512A500EFFB60 /* SystemHelper.m */; };
@@ -1946,8 +1942,6 @@
 		414AFDBC15D512A500EFFB60 /* CPMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainViewController.m; sourceTree = "<group>"; };
 		414AFDBF15D512A500EFFB60 /* CPPreferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPPreferenceViewController.h; path = Nanbeige/CPPreferenceViewController.h; sourceTree = "<group>"; };
 		414AFDC015D512A500EFFB60 /* CPPreferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPPreferenceViewController.m; path = Nanbeige/CPPreferenceViewController.m; sourceTree = "<group>"; };
-		414AFDC115D512A500EFFB60 /* CPRenrenPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRenrenPostViewController.h; sourceTree = "<group>"; };
-		414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRenrenPostViewController.m; sourceTree = "<group>"; };
 		414AFDC315D512A500EFFB60 /* CPRoomsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPRoomsViewController.h; sourceTree = "<group>"; };
 		414AFDC415D512A500EFFB60 /* CPRoomsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPRoomsViewController.m; sourceTree = "<group>"; };
 		414AFDC515D512A500EFFB60 /* CPUserCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPUserCoursesViewController.h; path = nbg_iOS/Nanbeige/CPUserCoursesViewController.h; sourceTree = "<group>"; };
@@ -1958,8 +1952,6 @@
 		414AFDCB15D512A500EFFB60 /* CPTimeTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTimeTable.m; sourceTree = "<group>"; };
 		414AFDCC15D512A500EFFB60 /* CPWeiboLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWeiboLoginViewController.h; sourceTree = "<group>"; };
 		414AFDCD15D512A500EFFB60 /* CPWeiboLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWeiboLoginViewController.m; sourceTree = "<group>"; };
-		414AFDCE15D512A500EFFB60 /* CPWeiboPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWeiboPostViewController.h; sourceTree = "<group>"; };
-		414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWeiboPostViewController.m; sourceTree = "<group>"; };
 		414AFDD015D512A500EFFB60 /* CPWelcomeSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPWelcomeSegue.h; sourceTree = "<group>"; };
 		414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPWelcomeSegue.m; sourceTree = "<group>"; };
 		414AFDD815D512A500EFFB60 /* SystemHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemHelper.h; sourceTree = "<group>"; };
@@ -2451,14 +2443,14 @@
 				267657F615F0494300373E2A /* CPLabelButtonCenterDangerElement.m */,
 				414AFDA815D512A500EFFB60 /* CPLabelLeftDetailElement.h */,
 				414AFDA915D512A500EFFB60 /* CPLabelLeftDetailElement.m */,
+				267657EB15EFB93000373E2A /* CPEntryElement.h */,
+				267657EC15EFB93100373E2A /* CPEntryElement.m */,
 				26D6208F15DD221F000AB849 /* CPAssignmentElement.h */,
 				26D6209015DD221F000AB849 /* CPAssignmentElement.m */,
 				267657E315EF26D800373E2A /* CPCommentElement.h */,
 				267657E415EF26D800373E2A /* CPCommentElement.m */,
 				26D6209315DD2518000AB849 /* CPCommentPostElement.h */,
 				26D6209415DD2518000AB849 /* CPCommentPostElement.m */,
-				267657EB15EFB93000373E2A /* CPEntryElement.h */,
-				267657EC15EFB93100373E2A /* CPEntryElement.m */,
 			);
 			name = CPQElement;
 			path = Nanbeige;
@@ -3438,10 +3430,6 @@
 				414AFDD115D512A500EFFB60 /* CPWelcomeSegue.m */,
 				414AFDD815D512A500EFFB60 /* SystemHelper.h */,
 				414AFDD915D512A500EFFB60 /* SystemHelper.m */,
-				414AFDC115D512A500EFFB60 /* CPRenrenPostViewController.h */,
-				414AFDC215D512A500EFFB60 /* CPRenrenPostViewController.m */,
-				414AFDCE15D512A500EFFB60 /* CPWeiboPostViewController.h */,
-				414AFDCF15D512A500EFFB60 /* CPWeiboPostViewController.m */,
 				414AFD8815D512A500EFFB60 /* CPCampusSelectViewController.h */,
 				414AFD8915D512A500EFFB60 /* CPCampusSelectViewController.m */,
 				41FD95F115D6378B00477483 /* chooseCampus.json */,
@@ -4363,13 +4351,11 @@
 				414AFE3215D512A500EFFB60 /* CPLoginItsViewController.m in Sources */,
 				414AFE3415D512A500EFFB60 /* CPMainViewController.m in Sources */,
 				414AFE3815D512A500EFFB60 /* CPPreferenceViewController.m in Sources */,
-				414AFE3A15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */,
 				414AFE3C15D512A500EFFB60 /* CPRoomsViewController.m in Sources */,
 				414AFE3E15D512A500EFFB60 /* CPUserCoursesViewController.m in Sources */,
 				414AFE4015D512A500EFFB60 /* CPFeedViewController.m in Sources */,
 				414AFE4215D512A500EFFB60 /* CPTimeTable.m in Sources */,
 				414AFE4415D512A500EFFB60 /* CPWeiboLoginViewController.m in Sources */,
-				414AFE4615D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */,
 				414AFE4815D512A500EFFB60 /* CPWelcomeSegue.m in Sources */,
 				414AFE4E15D512A500EFFB60 /* SystemHelper.m in Sources */,
 				413B9F4915D51D96000C9451 /* Renren.m in Sources */,
@@ -4603,13 +4589,11 @@
 				414AFE3315D512A500EFFB60 /* CPLoginItsViewController.m in Sources */,
 				414AFE3515D512A500EFFB60 /* CPMainViewController.m in Sources */,
 				414AFE3915D512A500EFFB60 /* CPPreferenceViewController.m in Sources */,
-				414AFE3B15D512A500EFFB60 /* CPRenrenPostViewController.m in Sources */,
 				414AFE3D15D512A500EFFB60 /* CPRoomsViewController.m in Sources */,
 				414AFE3F15D512A500EFFB60 /* CPUserCoursesViewController.m in Sources */,
 				414AFE4115D512A500EFFB60 /* CPFeedViewController.m in Sources */,
 				414AFE4315D512A500EFFB60 /* CPTimeTable.m in Sources */,
 				414AFE4515D512A500EFFB60 /* CPWeiboLoginViewController.m in Sources */,
-				414AFE4715D512A500EFFB60 /* CPWeiboPostViewController.m in Sources */,
 				414AFE4915D512A500EFFB60 /* CPWelcomeSegue.m in Sources */,
 				414AFE4F15D512A500EFFB60 /* SystemHelper.m in Sources */,
 				413B9F4C15D51D96000C9451 /* RenrenPay.m in Sources */,

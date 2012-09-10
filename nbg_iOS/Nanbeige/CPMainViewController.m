@@ -116,6 +116,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
+	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledRedBarButtonItemWithTitle:@"测试" target:self selector:@selector(testDashboard:)];
+	
 	self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	self.title = TITLE_MAIN;
 		
@@ -600,10 +602,7 @@
 	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
 	view.backgroundColor = [UIColor colorWithRed:227/255.0 green:225/255.0 blue:218/255.0 alpha:1.0];
 	
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	formatter.dateFormat = @"第w周 E M月d日";
 	self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, view.frame.size.height - 30, 280, 20)];
-	self.timeLabel.text = [formatter stringFromDate:[NSDate date]];
 	self.timeLabel.backgroundColor = [UIColor clearColor];
 	self.timeLabel.textColor = [UIColor whiteColor];
 	self.timeLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -611,8 +610,17 @@
 	self.timeLabel.shadowOffset = CGSizeMake(0, 0.5);
 	self.timeLabel.textAlignment = UITextAlignmentCenter;
 	
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"E M月d日";
+	NSInteger week = [Semester currentWeek];
+	if (!week) {
+		self.timeLabel.text = [NSString stringWithFormat:@"放假^_^ %@", [formatter stringFromDate:[NSDate date]]];
+	} else {
+		self.timeLabel.text = [NSString stringWithFormat:@"第%d周 %@", week, [formatter stringFromDate:[NSDate date]]];
+	}
+	
 	formatter.dateFormat = @"w";
-	UIView *timeIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width * [[formatter stringFromDate:[NSDate date]] integerValue] / 52, view.frame.size.height)];
+	UIView *timeIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width * [Semester currentWeek] / [Semester totalWeek], view.frame.size.height)];
 	timeIndicator.backgroundColor = navBarTextColor1;
 	
 	[self.tableView addSubview:view];
@@ -631,7 +639,7 @@
 	}
 }
 
-- (IBAction)testDashboard:(id)sender
+- (void)testDashboard:(id)sender
 {
 	[self performSegueWithIdentifier:@"DashboardSegue" sender:self];
 }

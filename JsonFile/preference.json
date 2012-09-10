@@ -20,7 +20,7 @@
 							 "controllerAction":"onChangeMainOrder:"
 							 },
 							 {
-							 "type":"CPLabelButtonElement",
+							 "type":"CPLabelButtonCenterElement",
 							 "title":"重置仪表盘布局",
 							 "controllerAction":"onResetMainOrder:"
 							 }
