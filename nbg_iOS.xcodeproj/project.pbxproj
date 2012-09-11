@@ -1875,7 +1875,7 @@
 		414AFCA815D3C6CC00EFFB60 /* Models+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Models+addon.h"; path = "Models/Models+addon.h"; sourceTree = "<group>"; };
 		414AFCA915D3C6CC00EFFB60 /* Models+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Models+addon.m"; path = "Models/Models+addon.m"; sourceTree = "<group>"; };
 		414AFD6B15D512A500EFFB60 /* courseGrabber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseGrabber.json; sourceTree = "<group>"; };
-		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CPSigninFlow.storyboard; sourceTree = "<group>"; };
+		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CPSigninFlow.storyboard; path = Nanbeige/CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD6F15D512A500EFFB60 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone.storyboard; path = Nanbeige/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		414AFD7615D512A500EFFB60 /* CPAccountManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPAccountManageViewController.h; path = Nanbeige/CPAccountManageViewController.h; sourceTree = "<group>"; };
@@ -2594,6 +2594,7 @@
 				4120F2B915D6B4F500D0AA97 /* CPUserDefaultDelegate.h */,
 				41D6FDD915D0BA4C0085DF89 /* CPAppModule.h */,
 				41D6FDDA15D0BA4C0085DF89 /* CPAppModule.m */,
+				414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */,
 				41FD95EC15D616C600477483 /* CPCoursesFlow.storyboard */,
 				414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */,
 				411DBBD415CB9E4000EDB31D /* Supporting Files */,
@@ -2765,7 +2766,6 @@
 				41FD95F615D6378B00477483 /* signupEmail.json */,
 				41FD95F315D6378B00477483 /* universitySelect.json */,
 				41FD95F415D6378B00477483 /* signinConfirm.json */,
-				414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */,
 				414AFD8A15D512A500EFFB60 /* CPSignViewController.h */,
 				414AFD8B15D512A500EFFB60 /* CPSignViewController.m */,
 				414AFD9A15D512A500EFFB60 /* CPSigninEmailViewController.h */,

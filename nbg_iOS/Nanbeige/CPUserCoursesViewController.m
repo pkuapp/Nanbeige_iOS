@@ -88,7 +88,7 @@
 {
 	[super viewWillAppear:animated];
 	
-	self.tabBarController.navigationItem.title = TITLE_SELECTED_COURSE;
+	self.tabBarController.title = TITLE_SELECTED_COURSE;
 	
 	UIBarButtonItem *semesterButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"切换学期" target:self selector:@selector(onChangeSemester:)];
 	self.tabBarController.navigationItem.rightBarButtonItem = semesterButton;

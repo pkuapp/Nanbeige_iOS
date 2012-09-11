@@ -23,6 +23,36 @@
             </objects>
             <point key="canvasLocation" x="390" y="-2304"/>
         </scene>
+        <!--Nav View Controller-->
+        <scene sceneID="xK9-MK-bkq">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BYX-qF-7XY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="Jqc-kK-yOd" customClass="CPNavViewController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0el-98-r6V">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="W5g-47-LlA" kind="relationship" relationship="rootViewController" id="wlf-qO-quu"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1040" y="-2304"/>
+        </scene>
+        <!--University Select View Controller-->
+        <scene sceneID="16K-02-1A8">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sfn-Gh-jUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="W5g-47-LlA" customClass="CPUniversitySelectViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XjG-Vj-37N">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9ZD-ns-1Yl"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1592" y="-2304"/>
+        </scene>
         <!--Signin Confirm View Controller-->
         <scene sceneID="yVv-5F-5t8">
             <objects>
@@ -34,6 +64,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="d1v-Cb-4Fz"/>
+                    <connections>
+                        <segue destination="Jqc-kK-yOd" kind="modal" identifier="UniversitySelectSegue" id="jLW-eV-wLp"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1040" y="-3266"/>
@@ -112,36 +145,13 @@
             <point key="canvasLocation" x="-786" y="-3266"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CPNavViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPNavViewController.h"/>
-        </class>
-        <class className="CPSignViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSignViewController.h"/>
-        </class>
-        <class className="CPSigninConfirmViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSigninConfirmViewController.h"/>
-        </class>
-        <class className="CPSigninEmailViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSigninEmailViewController.h"/>
-        </class>
-        <class className="CPSignupEmailViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPSignupEmailViewController.h"/>
-        </class>
-        <class className="CPUniversitySelectViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPUniversitySelectViewController.h"/>
-        </class>
-        <class className="QuickDialogController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuickDialogController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="HeC-sN-6Fj"/>
-        <segue reference="Myr-Rl-IFE"/>
+        <segue reference="ooK-Bm-0Rf"/>
+        <segue reference="1w8-dm-wKH"/>
     </inferredMetricsTieBreakers>
 </document>

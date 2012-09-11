@@ -43,10 +43,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
-	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
-		UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:sCANCEL style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
-		self.navigationItem.leftBarButtonItem = closeButton;
+	
+	if ([self.navigationController.viewControllers count] == 1) {
+		self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledPlainBarButtonItemWithTitle:sCANCEL target:self selector:@selector(dismissModalViewControllerAnimated:)];
+	} else {
+		NSArray *vcarray = self.navigationController.viewControllers;
+		NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+		back_title = @" 欢迎 ";
+		self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	}
 	
 	[[Coffeepot shared] requestWithMethodPath:@"university/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
@@ -77,6 +81,7 @@
 				[campuses addObject:displayCampus];
 			}
 		}
+		[campuses addObject:@{ @"campus" : @{ @"id" : @0, @"name" : @"" }, @"university" : @{ @"id" : @0, @"name" : sDEFAULTUNIVERSITY }, @"display_name" : @"家里蹲大学" }];
 		NSDictionary *dict = @{@"campuses":campuses};
 		[self.root bindToObject:dict];
 		
@@ -130,24 +135,42 @@
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
 	campus_selected = [campuses objectAtIndex:index];
 	
-	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue]) {
+	if ([[User sharedAppUser].id integerValue]) {
 		
-		[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus_selected objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		if ([[[campus_selected objectForKey:@"university"] objectForKey:@"id"] integerValue]) {
+		
+			[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_id" : [[campus_selected objectForKey:@"campus"] objectForKey:@"id"] } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+				
+				[self onFetchUniversity:[[campus_selected objectForKey:@"university"] objectForKey:@"id"]];
+				
+			} error:^(CPRequest *request, NSError *error) {
+				[self loading:NO];
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+			}];
 			
-			[self onFetchUniversity:[[campus_selected objectForKey:@"university"] objectForKey:@"id"]];
+			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+			[self loading:YES];
 			
-		} error:^(CPRequest *request, NSError *error) {
-			[self loading:NO];
-			[self showAlert:[error description]];//NSLog(@"%@", [error description]);
-		}];
+		} else {
+			
+			[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{ @"campus_none" : @1 } requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+				
+				[self loading:NO];
+				[self onComplete];
+				
+			} error:^(CPRequest *request, NSError *error) {
+				[self loading:NO];
+				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+			}];
+			
+			[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+			[self loading:YES];
+			
+		}
 		
 	} else {
-		[self loading:NO];
 		[self onComplete];
 	}
-	
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
 }
 
 - (void)onFetchUniversity:(NSNumber *)university_id
@@ -289,7 +312,7 @@
 		[localDatabase deleteDocuments:docs];
 	}
 	
-	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue])
+	if ([self.navigationController.viewControllers count] == 1)
 		[self dismissModalViewControllerAnimated:YES];
 	else
 		[self performSegueWithIdentifier:@"SigninConfirmSegue" sender:self];

@@ -50,6 +50,7 @@
                         <segue destination="R9G-nc-9ot" kind="push" identifier="AssignmentEnterSegue" id="M2A-jv-NdW"/>
                         <segue destination="PRZ-eR-Bt6" kind="push" identifier="RoomsEnterSegue" id="G9S-eJ-tg0"/>
                         <segue destination="ehN-NR-OG8" kind="push" identifier="CreateAssignmentSegue" id="i3w-8o-pRl"/>
+                        <segue destination="Y3a-g9-RLQ" kind="push" identifier="ItsEnterSegue" id="lMa-7l-wdl"/>
                     </connections>
                 </viewController>
             </objects>
@@ -70,11 +71,11 @@
             </objects>
             <point key="canvasLocation" x="2689" y="-2235"/>
         </scene>
-        <!--Nanbeige Login Its View Controller - 登录网关账号-->
+        <!--Login Its View Controller - 登录网关账号-->
         <scene sceneID="xSj-ac-kQt">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMa-Nz-veK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="KlT-c9-lbv" customClass="NanbeigeLoginItsViewController" sceneMemberID="viewController">
+                <tableViewController id="KlT-c9-lbv" customClass="CPLoginItsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="J2A-sF-dME">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,11 +145,11 @@
             </objects>
             <point key="canvasLocation" x="3167" y="-2235"/>
         </scene>
-        <!--Nanbeige Its View Controller - IP网关-->
+        <!--Its View Controller - IP网关-->
         <scene sceneID="A3L-J4-bX8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bc3-CC-xdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="Y3a-g9-RLQ" customClass="NanbeigeItsViewController" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="Y3a-g9-RLQ" customClass="CPItsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="WUT-SL-iux">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,7 +474,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ce-HP-s3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="lcF-gu-4RP" customClass="CPAssignmentDeadlineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAi-C7-ki4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="259"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="截止于所选这周的课堂上" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="VSB-aF-kCM">
@@ -560,7 +561,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Bd-cy-sDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zre-PQ-iW9" customClass="CPAssignmentCourseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="80L-b4-Scy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="259"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -575,7 +576,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4l-81-fss" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="XnQ-bK-izJ" customClass="CPAssignmentCreateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HSE-Dd-qJJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="259"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1052,6 +1053,110 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="38-house.png" width="18" height="17"/>
         <image name="Icon@2x.png" width="114" height="114"/>
     </resources>
+    <classes>
+        <class className="CPAccountManageViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAccountManageViewController.h"/>
+        </class>
+        <class className="CPAssignmentCourseViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentCourseViewController.h"/>
+        </class>
+        <class className="CPAssignmentCreateViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentCreateViewController.h"/>
+        </class>
+        <class className="CPAssignmentDeadlineViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentDeadlineViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onModeChange:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="deadlinePicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="modeSegmentedControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="CPAssignmentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onAssignmentCompleteChanged:"/>
+                <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="CPChangeMainOrderViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPChangeMainOrderViewController.h"/>
+        </class>
+        <class className="CPDashboardViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPDashboardViewController.h"/>
+        </class>
+        <class className="CPDetailGateInfoViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPDetailGateInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="CPEventAllViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPEventAllViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CPEventViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPEventViewController.h"/>
+        </class>
+        <class className="CPFeedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPFeedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CPItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPItsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="detailGateInfoPressed:"/>
+                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="detailGateInfo" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="CPLoginItsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPLoginItsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onCancelButtonPressed:"/>
+                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+            </relationships>
+        </class>
+        <class className="CPMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPMainViewController.h"/>
+        </class>
+        <class className="CPNavViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPNavViewController.h"/>
+        </class>
+        <class className="CPPreferenceViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPPreferenceViewController.h"/>
+        </class>
+        <class className="CPRoomsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPRoomsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="CPTabBarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTabBarController.h"/>
+        </class>
+        <class className="CPUniversitySelectViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPUniversitySelectViewController.h"/>
+        </class>
+        <class className="QuickDialogController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuickDialogController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -1059,8 +1164,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="iBD-dN-4lH"/>
-        <segue reference="nfF-gJ-ICc"/>
-        <segue reference="lVV-gW-QAM"/>
-        <segue reference="aB0-L4-nSj"/>
+        <segue reference="M2A-jv-NdW"/>
+        <segue reference="G9S-eJ-tg0"/>
+        <segue reference="i3w-8o-pRl"/>
+        <segue reference="lMa-7l-wdl"/>
     </inferredMetricsTieBreakers>
 </document>

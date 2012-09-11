@@ -38,6 +38,12 @@
         
         [self.view addSubview:_navigationBar];
 		
+		
+        UIImage *image = [[UIImage imageNamed:@"mask-corners-top"] resizableImageWithCapInsets:UIEdgeInsetsMake(7, 7, 0, 7)];
+        UIImageView *mask_view = [[UIImageView alloc] initWithImage:image];
+        mask_view.frame = CGRectMake(0, 0, 320, 50);
+        _navigationBar.layer.mask = mask_view.layer;
+		
 		CGFloat navigationBarBottom = self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height;
 		UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
 		CALayer *shadowLayer = [CALayer layer];
@@ -47,7 +53,7 @@
 		[self.view.layer addSublayer:shadowLayer];
         
         UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"连接到人人网"] autorelease];
-        navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(close)];
+        navItem.leftBarButtonItem = [UIBarButtonItem styledPlainBarButtonItemWithTitle:sCANCEL target:self selector:@selector(close)];
 		
         [_navigationBar pushNavigationItem: navItem animated: NO];
     }

@@ -55,6 +55,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	NSArray *vcarray = self.navigationController.viewControllers;
+	NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	back_title = @" 欢迎 ";
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 }
 
 - (void)viewDidUnload
@@ -105,24 +109,24 @@
 	NSMutableArray *connectaccount = [[NSMutableArray alloc] init];
 	
 	if (appuser.email)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", appuser.email, @"value", @"onLaunchActionSheet:", @"controllerAction", nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", appuser.email, @"value", nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onConnectEmail:", @"controllerAction", nil]];
 	
 	if (appuser.renren_name)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_name, @"value", @"onLaunchActionSheet:", @"controllerAction",nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_name, @"value",nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTRENREN, @"title", @"onConnectRenren:", @"controllerAction", nil]];
 	
 	if (appuser.weibo_name)
-		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", appuser.weibo_name, @"value", @"onLaunchActionSheet:", @"controllerAction",nil]];
+		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sWEIBO, @"title", appuser.weibo_name, @"value",nil]];
 	else
 		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTWEIBO, @"title", @"onConnectWeibo:", @"controllerAction", nil]];
 	
 	NSDictionary *dict = @{
 	@"identity": @[
-	@{ @"title" : sNICKNAME, @"value" : nickname, @"controllerAction" : @"onEditNickname:" } ,
-	@{ @"title" : sUNIVERSITY, @"value" : university , @"controllerAction" :  @"onEditUniversity:" } ] ,
+	@{ @"title" : sNICKNAME, @"value" : nickname } ,
+	@{ @"title" : sUNIVERSITY, @"value" : university } ] ,
 	@"loginaccount" : loginaccount,
 	@"connectaccount" : connectaccount};
 	[self.root bindToObject:dict];
@@ -176,17 +180,21 @@
 			}
 		}];
 		
+		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+		[self loading:YES];
+		
 	} else {
 		[self onFetchUniversity:[User sharedAppUser].university_id];
 	}
-	
-	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-	[self loading:YES];
 	
 }
 
 - (void)onFetchUniversity:(NSNumber *)university_id
 {
+	if (![university_id integerValue]) {
+		[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
+		return ;
+	}
 	
 	[[Coffeepot shared] requestWithMethodPath:[NSString stringWithFormat:@"university/%@/", university_id] params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		
@@ -221,6 +229,9 @@
 		[self loading:NO];
 		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
+	
+	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+	[self loading:YES];
 }
 
 - (void)onFetchSemester:(NSNumber *)university_id

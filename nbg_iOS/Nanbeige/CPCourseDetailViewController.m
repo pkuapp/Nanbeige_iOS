@@ -37,6 +37,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    NSArray *vcarray = self.navigationController.viewControllers;
+    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	[self refreshDisplay];
 }
 

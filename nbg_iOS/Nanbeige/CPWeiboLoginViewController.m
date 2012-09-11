@@ -27,6 +27,11 @@
         
         [self.view addSubview:self.navigationBar];
 		
+        UIImage *image = [[UIImage imageNamed:@"mask-corners-top"] resizableImageWithCapInsets:UIEdgeInsetsMake(7, 7, 0, 7)];
+        UIImageView *mask_view = [[UIImageView alloc] initWithImage:image];
+        mask_view.frame = CGRectMake(0, 0, 320, 50);
+        self.navigationBar.layer.mask = mask_view.layer;
+		
 		CGFloat navigationBarBottom = self.navigationBar.frame.origin.y + self.navigationBar.frame.size.height;
 		UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
 		CALayer *shadowLayer = [CALayer layer];
@@ -36,7 +41,7 @@
 		[self.view.layer addSublayer:shadowLayer];
         
         UINavigationItem *navItem = [[UINavigationItem alloc] initWithTitle:@"连接到新浪微博"];
-        navItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:sCANCEL style:UIBarButtonItemStylePlain target:self action:@selector(close)];
+        navItem.leftBarButtonItem = [UIBarButtonItem styledPlainBarButtonItemWithTitle:sCANCEL target:self selector:@selector(close)];
 
         [self.navigationBar pushNavigationItem: navItem animated: NO];
 		

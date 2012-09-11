@@ -44,7 +44,7 @@ static User *sharedAppUserObject = nil;
     if ([dict objectForKey:@"id"]) {
         user.id = [dict objectForKey:@"id"];
     }
-    if ([dict objectForKey:@"email"]) {
+    if ([[dict objectForKey:@"email"] length]) {
         user.email = [dict objectForKey:@"email"];
     }
 	if ([dict objectForKey:@"nickname"]) {

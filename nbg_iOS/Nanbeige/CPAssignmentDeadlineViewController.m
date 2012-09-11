@@ -34,7 +34,9 @@
 	
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@" 返回 " target:self selector:@selector(onBack:)];
+    NSArray *vcarray = self.navigationController.viewControllers;
+    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"确认" target:self selector:@selector(onConfirm:)];
 	
 	if ([self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {
@@ -75,11 +77,6 @@
 }
 
 #pragma mark - Button controllerAction
-
-- (void)onBack:(id)sender
-{
-	[self.navigationController popViewControllerAnimated:YES];
-}
 
 - (void)onConfirm:(id)sender {
 	if ([self.modeSegmentedControl selectedSegmentIndex] == ON_LESSON) {

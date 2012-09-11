@@ -60,14 +60,9 @@
     [super viewDidLoad];
     NSArray *vcarray = self.navigationController.viewControllers;
     NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
-
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self selector:@selector(didSelectBackBtn)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+	
     [self.navigationItem setHidesBackButton:YES];
-}
-
-- (void)didSelectBackBtn
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidUnload

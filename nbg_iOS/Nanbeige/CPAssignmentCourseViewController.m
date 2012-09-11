@@ -39,7 +39,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@" 返回 " target:self selector:@selector(onBack:)];
+    NSArray *vcarray = self.navigationController.viewControllers;
+    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	
 	NSMutableArray *courses = [@[] mutableCopy];
 	for (int i = 0; i < self.coursesData.count; i++) {
@@ -58,11 +60,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)onBack:(id)sender
-{
-	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)onCourseSelect:(id)sender

@@ -45,9 +45,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-	UIBarButtonItem *signupButton = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleBordered target:self action:@selector(onSignup:)];
-	self.navigationItem.rightBarButtonItem = signupButton;
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleBordered target:nil action:nil];
+	
+    NSArray *vcarray = self.navigationController.viewControllers;
+    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	back_title = @" 登录 ";
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+	
+	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"注册" target:self selector:@selector(onSignup:)];
 }
 
 - (void)viewDidUnload

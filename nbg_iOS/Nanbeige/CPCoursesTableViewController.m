@@ -92,7 +92,10 @@
 	// Do any additional setup after loading the view.
 	
 	self.view.BackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
-	self.tabBarController.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@"仪表盘" target:self selector:@selector(onBack:)];
+	
+    NSArray *vcarray = self.navigationController.viewControllers;
+    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	self.tabBarController.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.tabBarController.navigationController selector:@selector(popViewControllerAnimated:)];
 	
 	self.paginatorView.frame = self.view.bounds;
 	self.paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;
@@ -182,11 +185,6 @@
 	[self.paginatorView setCurrentPageIndex:TIMETABLEPAGEINDEX animated:YES];
 	CPTimeTable *currentPage = (CPTimeTable *)[self.paginatorView currentPage];
 	[currentPage refreshDisplay];
-}
-
-- (void)onBack:(id)sender
-{
-	[self.tabBarController.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Private

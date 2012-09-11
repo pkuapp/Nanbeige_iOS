@@ -126,7 +126,9 @@
 	// Do any additional setup after loading the view.
 	self.title = TITLE_ASSIGNMENT;
 	
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@"仪表盘" target:self selector:@selector(onBack:)];
+    NSArray *vcarray = self.navigationController.viewControllers;
+    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"新增" target:self selector:@selector(onCreate:)];
 	
 	self.assignmentsTableView.backgroundColor = tableBgColorPlain;
@@ -448,11 +450,6 @@
 - (void)onCreate:(id)sender
 {
 	[self performSegueWithIdentifier:@"CreateAssignmentSegue" sender:self];
-}
-
-- (void)onBack:(id)sender
-{
-	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onAssignmentCompleteChanged:(id)sender {

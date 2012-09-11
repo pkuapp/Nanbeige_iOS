@@ -42,7 +42,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@"活动目录" target:self selector:@selector(onBack:)];
+    NSArray *vcarray = self.navigationController.viewControllers;
+    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.quickDialogTableView.bounds.size.height, self.view.frame.size.width, self.quickDialogTableView.bounds.size.height)];
@@ -369,7 +371,7 @@
 //		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
 //	}];
 	
-	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新课程信息中..."];
+	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新活动信息中..."];
 }
 
 - (void)doneLoadingTableViewData{
@@ -413,11 +415,6 @@
 	
 	return [NSDate date]; // should return date data source was last changed
 	
-}
-
-- (void)onBack:(id)sender
-{
-	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

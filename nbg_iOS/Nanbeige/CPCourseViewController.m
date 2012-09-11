@@ -48,7 +48,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:@" 课程 " target:self selector:@selector(onBack:)];
+    NSArray *vcarray = self.navigationController.viewControllers;
+    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.quickDialogTableView.bounds.size.height, self.view.frame.size.width, self.quickDialogTableView.bounds.size.height)];
@@ -123,11 +125,6 @@
 											 cancelButtonTitle:sCONFIRM
 											 otherButtonTitles:nil];
 	[alertView show];
-}
-
-- (void)onBack:(id)sender
-{
-	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)onDeselectCourse:(id)sender
