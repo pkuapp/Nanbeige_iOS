@@ -156,6 +156,7 @@
 			if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
+			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"courses_table_edited"];
 			[[NSUserDefaults standardUserDefaults] synchronize];
 		}
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
@@ -191,6 +192,7 @@
 			if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
+			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"courses_table_edited"];
 			[[NSUserDefaults standardUserDefaults] synchronize];
 		}
 		

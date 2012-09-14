@@ -136,6 +136,10 @@
 		}
 	}
 	
+	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"courses_table_edited"] boolValue]) {
+		self.courses = nil;
+	}
+	
 	CPTimeTable *currentPage = (CPTimeTable *)[self.paginatorView currentPage];
 	[currentPage refreshDisplay];
 	NSInteger pageIndex = [self.paginatorView currentPageIndex];
@@ -238,6 +242,7 @@
 	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];
 	for (int i = 0; i < self.courses.count; i++) {
 		Course *course = [Course userCourseAtIndex:i courseList:self.courses];
+		if ([course.status isEqualToString:@"cancel"]) continue ;
 		if (![course.semester_id isEqualToNumber:semester_id]) continue;
 		for (NSString *lessonDocumentID in course.lessons) {
 			Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
