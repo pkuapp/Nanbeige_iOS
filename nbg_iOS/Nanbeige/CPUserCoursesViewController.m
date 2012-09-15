@@ -247,7 +247,13 @@
 					lesson.end = [lessonDict objectForKey:@"end"];
 					lesson.day = [lessonDict objectForKey:@"day"];
 					lesson.location = [lessonDict objectForKey:@"location"];
-					lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
+					if ([[lessonDict objectForKey:@"weekset_id"] isKindOfClass:[NSNumber class]])
+						lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
+					else {
+						lesson.weekset_id = nil;
+						lesson.weeks = [lessonDict objectForKey:@"weeks"];
+						lesson.weeks_display = [lessonDict objectForKey:@"weeks_display"];;
+					}
 					
 					RESTOperation *lessonSaveOp = [lesson save];
 					if (lessonSaveOp && ![lessonSaveOp wait])
@@ -436,7 +442,7 @@
 	else if (semesterAfter) semester = semesterAfter;
 	else semester = semesterBefore;
 	
-	if (![[User sharedAppUser].course_imported containsObject:semester.id] && isNeedGrabber) [self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
+	if ([[University universityWithID:[User sharedAppUser].university_id].support_import_course boolValue] && ![[User sharedAppUser].course_imported containsObject:semester.id] && isNeedGrabber) [self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
 	return semester;
 }
 

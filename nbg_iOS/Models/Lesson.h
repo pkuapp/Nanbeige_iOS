@@ -19,6 +19,8 @@
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSNumber * start;
 @property (nonatomic, retain) NSNumber * weekset_id;
+@property (nonatomic, retain) NSString * weeks;
+@property (nonatomic, retain) NSString * weeks_display;
 
 @property (nonatomic, assign) Course * course;
 

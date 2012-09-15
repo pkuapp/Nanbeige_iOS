@@ -51,6 +51,8 @@
         <attribute name="end" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="weeks" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weeks_display" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weekset_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="course" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="lessons" inverseEntity="Course" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="lessons" inverseEntity="User" syncable="YES"/>
@@ -114,13 +116,13 @@
         <relationship name="semester" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Semester" inverseName="weeksets" inverseEntity="Semester" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Course" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Lesson" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Semester" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="University" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Weekset" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Assignment" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="Course" positionX="0" positionY="0" width="128" height="240"/>
+        <element name="Event" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="Lesson" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="Semester" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="University" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="User" positionX="0" positionY="0" width="128" height="360"/>
+        <element name="Weekset" positionX="0" positionY="0" width="128" height="120"/>
     </elements>
 </model>

@@ -60,8 +60,16 @@
 	NSString *time = @"", *place = @"", *teachers = @"", *tas = @"";
 	for (NSString *lessonDocumentID in self.course.lessons) {
 		Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
-		time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", [Weekset weeksetWithID:lesson.weekset_id].name, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
-		place = [place stringByAppendingFormat:@"%@ ", lesson.location];
+		if (lesson.weekset_id) {
+			Weekset *weekset = [Weekset weeksetWithID:lesson.weekset_id];
+			if (weekset.name)
+				time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", weekset.name, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+			else
+				time = [time stringByAppendingFormat:@"%@%@-%@节 ", [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+		} else if ([lesson.weeks_display length]) {
+			time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", lesson.weeks_display, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+		}
+		if (lesson.location) place = [place stringByAppendingFormat:@"%@ ", lesson.location];
 	}
 	for (NSString *teacher in self.course.teacher) {
 		teachers = [teachers stringByAppendingFormat:@"%@ ", teacher];

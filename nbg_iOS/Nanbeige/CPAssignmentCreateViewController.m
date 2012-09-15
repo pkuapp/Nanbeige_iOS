@@ -88,7 +88,12 @@
 			NSNumber *day = lesson.day;
 			NSNumber *start = lesson.start;
 			NSNumber *end = lesson.end;
-			for (NSNumber *week in [Weekset weeksetWithID:lesson.weekset_id].weeks) {
+			NSArray *weeks;
+			if (lesson.weekset_id)
+				weeks = [Weekset weeksetWithID:lesson.weekset_id].weeks;
+			else
+				weeks = [lesson.weeks componentsSeparatedByString:@","];
+			for (NSNumber *week in weeks) {
 				[tempArray addObject:@{ @"day" : day, @"week" : week , @"start" : start, @"end" : end }];
 			}
 		}

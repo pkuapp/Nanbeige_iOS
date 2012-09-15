@@ -127,7 +127,7 @@
 	} else {
 		self.tabBarController.title = [NSString stringWithFormat:@"第%d周 %@", week, dayDate];
 		Semester *semester = [Semester semesterAtDate:day];
-		if (![[User sharedAppUser].course_imported containsObject:semester.id]) {
+		if ([[University universityWithID:[User sharedAppUser].university_id].support_import_course boolValue] && ![[User sharedAppUser].course_imported containsObject:semester.id]) {
 			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
 			return ;
 		} else if (![self.courses count]) {
@@ -249,11 +249,14 @@
 		for (NSString *lessonDocumentID in course.lessons) {
 			Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
 			NSInteger lessonDay = [lesson.day integerValue];
-			NSArray *weeks = [self.weeksets objectForKey:lesson.weekset_id];
-			if (weeks == nil) {
-				weeks = [Weekset weeksetWithID:lesson.weekset_id].weeks;
-				[self.weeksets setObject:weeks forKey:lesson.weekset_id];
-			}
+			NSArray *weeks;
+			if (lesson.weekset_id) {
+				weeks = [self.weeksets objectForKey:lesson.weekset_id];
+				if (weeks == nil) {
+					weeks = [Weekset weeksetWithID:lesson.weekset_id].weeks;
+					[self.weeksets setObject:weeks forKey:lesson.weekset_id];
+				}
+			} else weeks = [lesson.weeks componentsSeparatedByString:@","];
 			if (lessonDay == weekday && [weeks containsObject:[NSNumber numberWithInteger:week]]) {
 				[result addObject:
 				 @{@"start" : lesson.start,
@@ -285,7 +288,7 @@
 	} else {
 		self.tabBarController.title = [NSString stringWithFormat:@"第%d周 %@", week, dayDate];
 		Semester *semester = [Semester semesterAtDate:day];
-		if (![[User sharedAppUser].course_imported containsObject:semester.id]) {
+		if ([[University universityWithID:[User sharedAppUser].university_id].support_import_course boolValue] && ![[User sharedAppUser].course_imported containsObject:semester.id]) {
 			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
 			return ;
 		} else if (![self.courses count]) {

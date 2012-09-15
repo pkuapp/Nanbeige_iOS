@@ -189,6 +189,7 @@
 			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
 			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
 			if (![newDocs containsObject:self.course.document.documentID]) {
+				if (!newDocs) newDocs = [[NSMutableArray alloc] init];
 				[newDocs addObject:self.course.document.documentID];
 				[newDict setObject:newDocs forKey:@"value"];
 				RESTOperation *putOp = [userCourseList putProperties:newDict];
@@ -242,8 +243,16 @@
 	NSString *time = @"", *place = @"";
 	for (NSString *lessonDocumentID in self.course.lessons) {
 		Lesson *lesson = [Lesson modelForDocument:[localDatabase documentWithID:lessonDocumentID]];
-		time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", [Weekset weeksetWithID:lesson.weekset_id].name, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
-		place = [place stringByAppendingFormat:@"%@ ", lesson.location];
+		if (lesson.weekset_id) {
+			Weekset *weekset = [Weekset weeksetWithID:lesson.weekset_id];
+			if (weekset.name)
+				time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", weekset.name, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+			else
+				time = [time stringByAppendingFormat:@"%@%@-%@节 ", [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+		} else if ([lesson.weeks_display length]) {
+			time = [time stringByAppendingFormat:@"%@ %@%@-%@节 ", lesson.weeks_display, [@[@"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六"] objectAtIndex:([lesson.day integerValue] % 7)], lesson.start, lesson.end];
+		}
+		if (lesson.location) place = [place stringByAppendingFormat:@"%@ ", lesson.location];
 	}
 	
 	UILabel *courseTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 45, 205, 20)];
@@ -398,7 +407,13 @@
 							lesson.end = [lessonDict objectForKey:@"end"];
 							lesson.day = [lessonDict objectForKey:@"day"];
 							lesson.location = [lessonDict objectForKey:@"location"];
-							lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
+							if ([[lessonDict objectForKey:@"weekset_id"] isKindOfClass:[NSNumber class]])
+								lesson.weekset_id = [lessonDict objectForKey:@"weekset_id"];
+							else {
+								lesson.weekset_id = nil;
+								lesson.weeks = [lessonDict objectForKey:@"weeks"];
+								lesson.weeks_display = [lessonDict objectForKey:@"weeks_display"];;
+							}
 							
 							RESTOperation *lessonSaveOp = [lesson save];
 							if (lessonSaveOp && ![lessonSaveOp wait])
