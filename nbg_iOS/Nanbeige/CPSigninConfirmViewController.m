@@ -11,7 +11,8 @@
 #import "Coffeepot.h"
 #import "Models+addon.h"
 
-@interface CPSigninConfirmViewController ()
+@interface CPSigninConfirmViewController () {
+}
 
 @end
 
@@ -27,6 +28,7 @@
 - (WBEngine *)weibo {
     if (!_weibo) {
         _weibo = [WBEngine sharedWBEngine];
+		_weibo.delegate = self;
         _weibo.rootViewController = self;
     }
     return _weibo;
@@ -110,8 +112,8 @@
 	
 	if (appuser.email)
 		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sEMAIL, @"title", appuser.email, @"value", nil]];
-	else
-		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onConnectEmail:", @"controllerAction", nil]];
+//	else
+//		[connectaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sCONNECTEMAIL, @"title", @"onConnectEmail:", @"controllerAction", nil]];
 	
 	if (appuser.renren_name)
 		[loginaccount addObject:[NSDictionary dictionaryWithObjectsAndKeys:sRENREN, @"title", appuser.renren_name, @"value",nil]];
@@ -161,24 +163,62 @@
 - (void)onConfirmLogin:(id)sender
 {	
 	if (![[User sharedAppUser].id integerValue]) {
-		NSMutableDictionary *params = [@{@"email":[User sharedAppUser].email, @"password":[User sharedAppUser].password, @"nickname":[User sharedAppUser].nickname} mutableCopy];
-		if ([User sharedAppUser].campus_id) [params setObject:[User sharedAppUser].campus_id forKey:@"campus_id"];
-		[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+		
+		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"reg_by"] isEqualToString:@"email"]) {
+			NSMutableDictionary *params = [@{@"email":[User sharedAppUser].email, @"password":[User sharedAppUser].password, @"nickname":[User sharedAppUser].nickname} mutableCopy];
+			if ([User sharedAppUser].campus_id) [params setObject:[User sharedAppUser].campus_id forKey:@"campus_id"];
+			[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+				
+				[User updateSharedAppUserProfile:collection];
+				
+				[self onEditRemaining];
 
-			[[NSUserDefaults standardUserDefaults] setObject:[User sharedAppUser].email forKey:@"sync_db_username"];
-			[[NSUserDefaults standardUserDefaults] setObject:[User sharedAppUser].password forKey:@"sync_db_password"];
-			[User updateSharedAppUserProfile:collection];
-			
-			[self onFetchUniversity:[User sharedAppUser].university_id];
+			} error:^(CPRequest *request, NSError *error) {
+				[self loading:NO];
+				if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"Email 已被使用。"]) {
+					[self showAlert:[error.userInfo objectForKey:@"error"]];
+				} else {
+					if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+				}
+			}];
+#warning 判断是否Remaining还是Reg
+		} else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"reg_by"] isEqualToString:@"weibo"]) {
+			NSMutableDictionary *params = [@{@"token":[User sharedAppUser].weibo_token, @"nickname":[User sharedAppUser].nickname} mutableCopy];
+			if ([User sharedAppUser].campus_id) [params setObject:[User sharedAppUser].campus_id forKey:@"campus_id"];
+			[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+				
+				[User updateSharedAppUserProfile:collection];
+				
+				[self onEditRemaining];
+				
+			} error:^(CPRequest *request, NSError *error) {
+				[self loading:NO];
+				if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"TokenAlreadyUsed"]) {
+					[self showAlert:[error.userInfo objectForKey:@"error"]];
+				} else {
+					if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+				}
+			}];
+#warning 判断是否Remaining还是Reg
+		} else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"reg_by"] isEqualToString:@"renren"]) {
+			NSMutableDictionary *params = [@{@"token":[User sharedAppUser].renren_token, @"nickname":[User sharedAppUser].nickname} mutableCopy];
+			if ([User sharedAppUser].campus_id) [params setObject:[User sharedAppUser].campus_id forKey:@"campus_id"];
+			[[Coffeepot shared] requestWithMethodPath:@"user/reg/renren/" params:params requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+				
+				[User updateSharedAppUserProfile:collection];
+				
+				[self onEditRemaining];
+				
+			} error:^(CPRequest *request, NSError *error) {
+				[self loading:NO];
+				if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"TokenAlreadyUsed"]) {
+					[self showAlert:[error.userInfo objectForKey:@"error"]];
+				} else {
+					if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+				}
+			}];
 
-		} error:^(CPRequest *request, NSError *error) {
-			[self loading:NO];
-			if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"Email 已被使用。"]) {
-				[self showAlert:[error.userInfo objectForKey:@"error"]];
-			} else {
-				[self showAlert:[error description]];//NSLog(@"%@", [error description]);
-			}
-		}];
+		}
 		
 		[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 		[self loading:YES];
@@ -187,6 +227,33 @@
 		[self onFetchUniversity:[User sharedAppUser].university_id];
 	}
 	
+}
+
+- (void)onEditRemaining
+{
+#warning 判断是否Remaining还是Reg
+	if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"reg_by"] isEqualToString:@"weibo"] && [[User sharedAppUser].weibo_token length]) {
+		[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+			
+			[self onFetchUniversity:[User sharedAppUser].university_id];
+			
+		} error:^(CPRequest *request, NSError *error) {
+			[User updateSharedAppUserProfile:@{ @"weibo" : @{ } }];
+			[self onFetchUniversity:[User sharedAppUser].university_id];
+			if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		}];
+	}
+	if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"reg_by"] isEqualToString:@"renren"] && [[User sharedAppUser].renren_token length]) {
+		[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+			
+			[self onFetchUniversity:[User sharedAppUser].university_id];
+			
+		} error:^(CPRequest *request, NSError *error) {
+			[User updateSharedAppUserProfile:@{ @"renren" : @{ } }];
+			[self onFetchUniversity:[User sharedAppUser].university_id];
+			if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		}];
+	}
 }
 
 - (void)onFetchUniversity:(NSNumber *)university_id
@@ -227,7 +294,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -280,7 +347,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
 
@@ -315,7 +382,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[self loading:NO];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
 
@@ -337,8 +404,24 @@
 	[self.weibo loadRequestWithMethodName:@"users/show.json" httpMethod:@"GET" params:params postDataType:kWBRequestPostDataTypeNone httpHeaderFields:nil
 								  success:^(WBRequest *request, id result) {
 									  
-									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {										  
-										  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+									  if ([result isKindOfClass:[NSDictionary class]] && [result objectForKey:@"screen_name"]) {
+										  
+										  if ([[User sharedAppUser].id integerValue]) {
+								
+											  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+											  
+												  [User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
+												  
+												  [self refreshDataSource];
+												  
+												  [self loading:NO];
+												  
+											  } error:^(CPRequest *request, NSError *error) {
+												  [self loading:NO];
+												  if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+											  }];
+											  
+										  } else {
 											  
 											  [User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
 											  
@@ -346,10 +429,8 @@
 											  
 											  [self loading:NO];
 											  
-										  } error:^(CPRequest *request, NSError *error) {
-											  [self loading:NO];
-											  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
-										  }];
+										  }
+										  
 									  } else {
 										  [self loading:NO];
 										  [self showAlert:[result description]];//NSLog(@"%@", [error description]);
@@ -357,7 +438,7 @@
 								  }
 									 fail:^(WBRequest *request, NSError *error) {
 										 [self loading:NO];
-										 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+										 if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 									 }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -381,18 +462,33 @@
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								  
-								  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+								  [self.renren.handler clearEventHandlers:@"RenrenRequestSuccess"];
+								  
+								  if ([[User sharedAppUser].id integerValue]) {
+									  
+									  [[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"renren_token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
+										  
+										  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
+										  
+										  [self refreshDataSource];
+										  
+										  [self loading:NO];
+
+									  } error:^(CPRequest *request, NSError *error) {
+										  [self loading:NO];
+										  if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+									  }];
+									  
+								  } else {
 									  
 									  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
 									  
 									  [self refreshDataSource];
 									  
 									  [self loading:NO];
-
-								  } error:^(CPRequest *request, NSError *error) {
-									  [self loading:NO];
-									  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
-								  }];
+									  
+								  }
+								  
 							  } else if ([result isKindOfClass:[NSDictionary class]]) {
 								  NSLog(@"SigninConfirm:renrenDidLogin %@", result);
 							  } else {
@@ -402,7 +498,7 @@
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+								 if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 							 }
 	 ];
 	

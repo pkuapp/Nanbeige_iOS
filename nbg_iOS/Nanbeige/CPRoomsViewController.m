@@ -266,7 +266,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 }
 
@@ -323,7 +323,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"获取自习室列表中..."];

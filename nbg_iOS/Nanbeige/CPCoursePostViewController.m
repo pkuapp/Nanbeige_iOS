@@ -40,6 +40,7 @@
 	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"发送" target:self selector:@selector(onPostButtonPressed:)];
 	
 	self.weibo = [WBEngine sharedWBEngine];
+	self.weibo.delegate = self;
 	self.renren = [Renren sharedRenren];
 	
 	self.view.backgroundColor = tableBgColorPlain;
@@ -143,7 +144,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[self.textToPost resignFirstResponder];

@@ -54,6 +54,12 @@
 	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"注册" target:self selector:@selector(onSignup:)];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[User deactiveSharedAppUser];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -106,27 +112,12 @@
 		return ;
     }
 	
+	[[NSUserDefaults standardUserDefaults] setObject:[User sharedAppUser].email forKey:@"sync_db_username"];
+	[[NSUserDefaults standardUserDefaults] setObject:[User sharedAppUser].password forKey:@"sync_db_password"];
+	[[NSUserDefaults standardUserDefaults] setObject:@"email" forKey:@"reg_by"];
 	[User updateSharedAppUserProfile:@{ @"email" : email, @"nickname" : nickname, @"password" : password }];
 	
 	[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
-	
-//	[[Coffeepot shared] requestWithMethodPath:@"user/reg/email/" params:@{@"email":email, @"password":password ,@"nickname":nickname} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
-//		
-//		[[NSUserDefaults standardUserDefaults] setObject:email forKey:@"sync_db_username"];
-//		[[NSUserDefaults standardUserDefaults] setObject:password forKey:@"sync_db_password"];
-//		[User updateSharedAppUserProfile:collection];
-//		
-//		[self loading:NO];
-//		
-//		[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
-//		
-//	} error:^(CPRequest *request, NSError *error) {
-//		[self loading:NO];
-//		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
-//	}];
-//	
-//    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-//    [self loading:YES];
 }
 
 - (void)loading:(BOOL)value

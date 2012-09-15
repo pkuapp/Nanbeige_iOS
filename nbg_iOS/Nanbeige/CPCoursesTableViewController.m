@@ -138,6 +138,8 @@
 	
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"courses_table_edited"] boolValue]) {
 		self.courses = nil;
+		[[NSUserDefaults standardUserDefaults] setObject:@0 forKey:@"courses_table_edited"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
 	
 	CPTimeTable *currentPage = (CPTimeTable *)[self.paginatorView currentPage];

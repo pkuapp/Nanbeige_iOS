@@ -150,10 +150,13 @@
 			CouchDocument *userCourseList = [Course userCourseListDocument];
 			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
 			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
-			[newDocs removeObject:self.course.document.documentID];
-			[newDict setObject:newDocs forKey:@"value"];
-			RESTOperation *putOp = [userCourseList putProperties:newDict];
-			if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
+			if ([newDocs containsObject:self.course.document.documentID]) {
+				while (![newDocs containsObject:self.course.document.documentID])
+					[newDocs removeObject:self.course.document.documentID];
+				[newDict setObject:newDocs forKey:@"value"];
+				RESTOperation *putOp = [userCourseList putProperties:newDict];
+				if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
+			}
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"courses_table_edited"];
@@ -163,7 +166,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"取消旁听中..."];
@@ -185,11 +188,12 @@
 			CouchDocument *userCourseList = [Course userCourseListDocument];
 			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
 			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
-			NSLog(@"%@", self.course.document.documentID);
-			[newDocs addObject:self.course.document.documentID];
-			[newDict setObject:newDocs forKey:@"value"];
-			RESTOperation *putOp = [userCourseList putProperties:newDict];
-			if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
+			if (![newDocs containsObject:self.course.document.documentID]) {
+				[newDocs addObject:self.course.document.documentID];
+				[newDict setObject:newDocs forKey:@"value"];
+				RESTOperation *putOp = [userCourseList putProperties:newDict];
+				if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
+			}
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"courses_table_edited"];
@@ -200,7 +204,7 @@
 		
 	} error:^(CPRequest *request, NSError *error) {
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"旁听中..."];
@@ -424,7 +428,7 @@
 				} error:^(CPRequest *request, NSError *error) {
 					[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 					[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
-					[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+					if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 				}];
 				
 			} else {
@@ -443,7 +447,7 @@
 	} error:^(CPRequest *request, NSError *error) {
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:self afterDelay:0.5];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新课程信息中..."];

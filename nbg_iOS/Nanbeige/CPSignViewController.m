@@ -17,7 +17,6 @@
 #import <Objection-iOS/Objection.h>
 
 @interface CPSignViewController () {
-
 }
 
 @end
@@ -34,6 +33,7 @@
 - (WBEngine *)weibo {
     if (!_weibo) {
         _weibo = [WBEngine sharedWBEngine];
+		_weibo.delegate = self;
         _weibo.rootViewController = self;
     }
     return _weibo;
@@ -168,24 +168,18 @@
 				
 				if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
                     
-					[[Coffeepot shared] requestWithMethodPath:@"user/reg/weibo/" params:@{@"token":self.weibo.accessToken, @"nickname":[result objectForKey:@"screen_name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {					
-						[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
-						[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
-						[User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] } }];
-						[User updateSharedAppUserProfile:collection];
+					[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-weibo-%@", self.weibo.userID] forKey:@"sync_db_username"];
+					[[NSUserDefaults standardUserDefaults] setObject:self.weibo.accessToken forKey:@"sync_db_password"];
+					[[NSUserDefaults standardUserDefaults] setObject:@"weibo" forKey:@"reg_by"];
+					[User updateSharedAppUserProfile:@{ @"weibo" : @{ @"id" : [NSNumber numberWithInteger:[[self.weibo userID] integerValue]] , @"name" : [result objectForKey:@"screen_name"] , @"token" : [self.weibo accessToken] }, @"nickname" : [result objectForKey:@"screen_name"] }];
 						
-						[self loading:NO];
+					[self loading:NO];
 						
-						[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
-						
-					} error:^(CPRequest *request, NSError *error) {
-						[self loading:NO];
-						[self showAlert:[error description]];//NSLog(@"%@", [error description]);
-					}];
+					[self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 					
                 } else {
 					[self loading:NO];
-					[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+					if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 				}
             }];
         } else {
@@ -195,7 +189,7 @@
     }
     fail:^(WBRequest *request, NSError *error) {
         [self loading:NO];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
     }];
 	
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -239,6 +233,8 @@
 							  
 							  if ([result isKindOfClass:[NSArray class]] && [[result objectAtIndex:0] objectForKey:@"name"]) {
 								  
+								  [self.renren.handler clearEventHandlers:@"RenrenRequestSuccess"];
+								  
 								  [[Coffeepot shared] requestWithMethodPath:@"user/login/renren/" params:@{@"token":self.renren.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 									  
 									  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
@@ -253,31 +249,25 @@
 								  } error:^(CPRequest *request, NSError *error) {
 	
 									  if ([[error.userInfo objectForKey:@"error_code"] isEqualToString:@"UserNotFound"]) {
-										  
-										  [[Coffeepot shared] requestWithMethodPath:@"user/reg/renren/" params:@{@"token":self.renren.accessToken, @"nickname":[[result objectAtIndex:0] objectForKey:@"name"]} requestMethod:@"POST" success:^(CPRequest *_req, NSDictionary *collection) {
-											  
-											  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
-											  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
-											  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  } }];
-											  [User updateSharedAppUserProfile:collection];
-											  
-											  [self loading:NO];
+										  											  
+										  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"-renren-%@", [[result objectAtIndex:0] objectForKey:@"id"]] forKey:@"sync_db_username"];
+										  [[NSUserDefaults standardUserDefaults] setObject:self.renren.accessToken forKey:@"sync_db_password"];
+										  [[NSUserDefaults standardUserDefaults] setObject:@"renren" forKey:@"reg_by"];
+										  [User updateSharedAppUserProfile:@{ @"renren" : @{ @"id" : [[result objectAtIndex:0] objectForKey:@"uid"] , @"name" : [[result objectAtIndex:0] objectForKey:@"name"] , @"token" : [self.renren accessToken]  }, @"nickname" : [[result objectAtIndex:0] objectForKey:@"name"] }];
+	  
+										  [self loading:NO];
 
-											  [self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
+										  [self performSegueWithIdentifier:@"UniversitySelectSegue" sender:self];
 											  
-										  } error:^(CPRequest *request, NSError *error) {
-											  [self loading:NO];
-											  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
-										  }];
-										  
 									  } else {
 										  [self loading:NO];
-										  [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+										  if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 									  }
 									  
 								  }];
 								  
 							  } else if ([result isKindOfClass:[NSDictionary class]]) {
+								  [self loading:NO];
 								  NSLog(@"Sign:renrenDidLogin %@", result);
 							  } else {
 								  [self loading:NO];
@@ -286,7 +276,7 @@
 						  }
 							 fail:^(RORequest *request, ROError *error) {
 								 [self loading:NO];
-								 [self showAlert:[error description]];//NSLog(@"%@", [error description]);
+								 if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 							 }
 	 ];
 	

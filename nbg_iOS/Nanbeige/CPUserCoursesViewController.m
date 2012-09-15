@@ -288,7 +288,7 @@
 	} error:^(CPRequest *request, NSError *error) {
 		[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
 		[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
-		[self showAlert:[error description]];//NSLog(@"%@", [error description]);
+		if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 	}];
 	
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新课程列表中..."];
