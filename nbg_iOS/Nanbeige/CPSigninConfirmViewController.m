@@ -181,7 +181,6 @@
 					if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 				}
 			}];
-#warning 判断是否Remaining还是Reg
 		} else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"reg_by"] isEqualToString:@"weibo"]) {
 			NSMutableDictionary *params = [@{@"token":[User sharedAppUser].weibo_token, @"nickname":[User sharedAppUser].nickname} mutableCopy];
 			if ([User sharedAppUser].campus_id) [params setObject:[User sharedAppUser].campus_id forKey:@"campus_id"];
@@ -199,7 +198,6 @@
 					if ([error.userInfo objectForKey:@"error"]) [self showAlert:[error.userInfo objectForKey:@"error"]]; else [self showAlert:[error description]];//NSLog(@"%@", [error description]);
 				}
 			}];
-#warning 判断是否Remaining还是Reg
 		} else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"reg_by"] isEqualToString:@"renren"]) {
 			NSMutableDictionary *params = [@{@"token":[User sharedAppUser].renren_token, @"nickname":[User sharedAppUser].nickname} mutableCopy];
 			if ([User sharedAppUser].campus_id) [params setObject:[User sharedAppUser].campus_id forKey:@"campus_id"];
@@ -231,7 +229,6 @@
 
 - (void)onEditRemaining
 {
-#warning 判断是否Remaining还是Reg
 	if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"reg_by"] isEqualToString:@"weibo"] && [[User sharedAppUser].weibo_token length]) {
 		[[Coffeepot shared] requestWithMethodPath:@"user/edit/" params:@{@"weibo_token":self.weibo.accessToken} requestMethod:@"POST" success:^(CPRequest *_req, id collection) {
 			

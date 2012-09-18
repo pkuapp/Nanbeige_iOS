@@ -22,7 +22,7 @@
                     <navigationItem key="navigationItem" title="仪表盘" id="Ghq-hk-poq"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <segue destination="Y3a-g9-RLQ" kind="push" identifier="ItsEnterSegue" id="bRx-DI-TvE"/>
+                        <segue destination="Y3a-g9-RLQ" kind="push" identifier="OldItsEnterSegue" id="bRx-DI-TvE"/>
                         <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentSegue" id="R2x-pA-P8y"/>
                         <segue destination="R9G-nc-9ot" kind="push" identifier="AssignmentEnterSegue" id="lVV-gW-QAM"/>
                         <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentWithCameraSegue" id="Yqn-fv-amI"/>
@@ -30,6 +30,7 @@
                         <segue destination="PRZ-eR-Bt6" kind="push" identifier="RoomsEnterSegue" id="nfF-gJ-ICc"/>
                         <segue destination="bM9-CV-lnz" kind="push" identifier="DashboardSegue" id="oEV-y0-AS3"/>
                         <segue destination="SqH-ks-gpf" kind="push" identifier="EventAllSegue" id="8PQ-ph-nXC"/>
+                        <segue destination="Aqg-bc-fjw" kind="push" identifier="ItsEnterSegue" id="LPJ-k8-LHX"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -474,7 +475,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ce-HP-s3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="lcF-gu-4RP" customClass="CPAssignmentDeadlineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAi-C7-ki4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="259"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="截止于所选这周的课堂上" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="VSB-aF-kCM">
@@ -561,7 +562,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Bd-cy-sDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zre-PQ-iW9" customClass="CPAssignmentCourseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="80L-b4-Scy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="259"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -576,7 +577,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4l-81-fss" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="XnQ-bK-izJ" customClass="CPAssignmentCreateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HSE-Dd-qJJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="259"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -724,6 +725,55 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="2135" y="-1650"/>
+        </scene>
+        <!--Gate View Controller-->
+        <scene sceneID="d8h-0P-ZYl">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hQV-F3-AII" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController hidesBottomBarWhenPushed="YES" id="Aqg-bc-fjw" customClass="CPIPGateViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PqA-v2-6i8">
+                        <rect key="frame" x="0.0" y="64" width="320" height="308"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LzX-ii-xnJ"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="Sek-XT-Dme" kind="modal" identifier="IPGateLoginSegue" id="jGn-sr-Spa"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2135" y="-1151"/>
+        </scene>
+        <!--Gate Login View Controller-->
+        <scene sceneID="OSy-zO-4Uj">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UZs-Ha-3lv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Ysx-ZU-m0W" customClass="CPIPGateLoginViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w1G-44-eBw">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Q45-2e-Tx1"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2995" y="-1205"/>
+        </scene>
+        <!--Nav View Controller-->
+        <scene sceneID="lN3-rC-hou">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wgb-JU-hSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="Sek-XT-Dme" customClass="CPNavViewController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="D2c-tW-xGE">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ysx-ZU-m0W" kind="relationship" relationship="rootViewController" id="dVl-Yz-PbA"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="2601" y="-1205"/>
         </scene>
         <!--Nav View Controller - 信息流-->
         <scene sceneID="U6W-KN-1cs">
@@ -1112,6 +1162,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
+        <class className="CPIPGateLoginViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPIPGateLoginViewController.h"/>
+        </class>
+        <class className="CPIPGateViewController" superclassName="QuickDialogController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPIPGateViewController.h"/>
+        </class>
         <class className="CPItsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CPItsViewController.h"/>
             <relationships>
@@ -1163,10 +1219,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="nfF-gJ-ICc"/>
+        <segue reference="lVV-gW-QAM"/>
         <segue reference="iBD-dN-4lH"/>
-        <segue reference="M2A-jv-NdW"/>
-        <segue reference="G9S-eJ-tg0"/>
-        <segue reference="i3w-8o-pRl"/>
-        <segue reference="lMa-7l-wdl"/>
+        <segue reference="bRx-DI-TvE"/>
+        <segue reference="Yqn-fv-amI"/>
     </inferredMetricsTieBreakers>
 </document>

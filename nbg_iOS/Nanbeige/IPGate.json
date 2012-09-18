@@ -1,0 +1,45 @@
+{
+	"grouped": true,
+	"title": "IP网关",
+    "controllerName": "CPIPGateViewController",
+	"sections": [
+				 {
+				 "title":"连接到...",
+				 "elements": [
+							  {
+							  "type":"CPLabelButtonCenterElement",
+							  "title":"免费地址",
+							  "controllerAction":"onConnectFree:"
+							  },
+							  {
+							  "type":"CPLabelButtonCenterElement",
+							  "title":"收费地址",
+							  "controllerAction":"onConnectGlobal:"
+							  }
+							  ]
+				 },
+				 {
+				 "elements": [
+							  {
+							  "type":"CPLabelButtonCenterDangerElement",
+							  "title":"断开全部链接",
+							  "controllerAction":"onDisconnectAll:"
+							  }
+							  ]
+				 },
+				 {
+				 "elements": [
+							  {
+							  "type":"CPBooleanElement",
+							  "title":"自动断开别处连接",
+							  "controllerAction":"onChangeAutoDisconnect:"
+							  },
+							  {
+							  "type":"CPLabelButtonCenterElement",
+							  "title":"更改网关账户",
+							  "controllerAction":"onChangeAccount:"
+							  }
+							  ]
+				 }
+				 ]
+}

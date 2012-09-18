@@ -13,8 +13,9 @@ static NSString* kUserAgent = @"CoffepotOniOS";
 static NSString* kAPIVersion = @"2.0";
 static const NSTimeInterval kTimeoutInterval = 180.0;
 static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
+static NSString* pAPIProtocol = @"https";
 static NSString* pAPIDomain = @"api.pkuapp.com";
-static NSString* pAPIPort = @"333";
+static NSString* pAPIPort = @"443";
 
 @interface CPRequest () {
 }
@@ -132,7 +133,7 @@ static NSString* pAPIPort = @"333";
 							 requestURL:(NSString *) url {
 	
 	CPRequest* request = [[CPRequest alloc] init];
-	request.url = [NSString stringWithFormat:@"http://%@:%@/%@",pAPIDomain,pAPIPort,url];
+	request.url = [NSString stringWithFormat:@"%@://%@:%@/%@",pAPIProtocol,pAPIDomain,pAPIPort,url];
 	request.httpMethod = httpMethod;
 	request.params = [NSMutableDictionary dictionaryWithDictionary: params];
 	request.connection = nil;

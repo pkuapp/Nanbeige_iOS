@@ -1,0 +1,25 @@
+{
+	"grouped": true,
+	"title": "IP网关登录",
+    "controllerName": "CPIPGateLoginViewController",
+	"sections": [
+				 {
+				 "elements": [
+							  {
+							  "type":"CPEntryElement",
+							  "placeholder":"用户名",
+							  "keyboardType":"NumberPad",
+							  "bind":"textValue:gate_id",
+							  "autocorrectionType":"No",
+							  "autocapitalizationType":"None"
+							  },
+							  {
+							  "type":"CPEntryElement",
+							  "placeholder":"密码",
+							  "secureTextEntry":true,
+							  "bind":"textValue:gate_password"
+							  }
+							  ]
+				 }
+				 ]
+}

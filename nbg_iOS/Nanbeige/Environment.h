@@ -23,36 +23,6 @@
 #define urlCourseAll @"http://www.pkucada.org:8082/Server/course/all"
 #define urlCourseCategory @"http://www.pkucada.org:8082/Server/course/category"
 
-#define DEFAULT_TIMEOUT 20
-#define urlAPIUserLoginEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/email/"]
-#define urlAPIUserLoginWeibo [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/weibo/"]
-#define urlAPIUserLoginRenren [NSURL URLWithString:@"http://api.pkuapp.com:333/user/login/renren/"]
-#define urlAPIUserLogout [NSURL URLWithString:@"http://api.pkuapp.com:333/user/logout/"]
-#define urlAPIUserRegEmail [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/email/"]
-#define urlAPIUserRegWeibo [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/weibo/"]
-#define urlAPIUserRegRenren [NSURL URLWithString:@"http://api.pkuapp.com:333/user/reg/renren/"]
-#define urlAPIUserEdit [NSURL URLWithString:@"http://api.pkuapp.com:333/user/edit/"]
-#define urlAPIUniversity [NSURL URLWithString:@"http://api.pkuapp.com:333/university/"]
-#define urlAPIStudyBuildingWithCampus_ID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/study/building/?campus_id=%@", (id)]]
-#define urlAPIStudyBuildingRoomWithBuilding_ID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/study/building/%@/room/", (id)]]
-#define urlAPIStudyBuildingRoomWithBuilding_IDAndDate(id,date) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/study/building/%@/room/?date=%@", (id), (date)]]
-#define urlAPICourse [NSURL URLWithString:@"http://api.pkuapp.com:333/course/"]
-#define urlAPICourseGrabber [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/"]
-#define urlAPICourseGrabberCaptcha [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/captcha/"]
-#define urlAPICourseGrabberStart [NSURL URLWithString:@"http://api.pkuapp.com:333/course/grabber/start/"]
-#define urlAPICourseCommentWithCourse_ID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/%@/comment/", (id)]]
-#define urlAPICourseCommentAddWithCourse_ID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/%@/comment/add/", (id)]]
-#define urlAPICourseAssignment [NSURL URLWithString:@"http://api.pkuapp.com:333/course/assignment/"]
-#define urlAPICourseAssignmentFinishWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/assignment/%@/finish/", (id)]]
-#define urlAPICourseAssignmentDeleteWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/assignment/%@/delete/", (id)]]
-#define urlAPICourseAssignmentModifyWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/course/assignment/%@/modify/", (id)]]
-#define urlAPICourseAssignmentAdd [NSURL URLWithString:@"http://api.pkuapp.com:333/course/assignment/add/"]
-#define urlAPIEvent [NSURL URLWithString:@"http://api.pkuapp.com:333/event/"]
-#define urlAPIEventCategory [NSURL URLWithString:@"http://api.pkuapp.com:333/event/category/"]
-#define urlAPIEventWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/event/%@/", (id)]]
-#define urlAPIEventFollowWithID(id) [NSURL URLWithString:[NSString stringWithFormat:@"http://api.pkuapp.com:333/event/%@/follow/", (id)]]
-#define urlAPIEventFollowing [NSURL URLWithString:@"http://api.pkuapp.com:333/event/following/"]
-
 #define kAPIEMAIL @"email"
 #define kAPIUSERNAME @"username"
 #define kAPIPASSWORD @"password"

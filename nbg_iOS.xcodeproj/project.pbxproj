@@ -380,6 +380,16 @@
 		26CF8E4515EB13C50011BEBB /* news.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CF8DCA15EB13C50011BEBB /* news.png */; };
 		26CF8E4615EB13C50011BEBB /* news@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CF8DCB15EB13C50011BEBB /* news@2x.png */; };
 		26CF8E4715EB13C50011BEBB /* news@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CF8DCB15EB13C50011BEBB /* news@2x.png */; };
+		26D2F006160822EC00A5EE5E /* CPIPGateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F005160822EC00A5EE5E /* CPIPGateViewController.m */; };
+		26D2F007160822EC00A5EE5E /* CPIPGateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F005160822EC00A5EE5E /* CPIPGateViewController.m */; };
+		26D2F009160823DB00A5EE5E /* IPGate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D2F008160823DB00A5EE5E /* IPGate.json */; };
+		26D2F00A160823DB00A5EE5E /* IPGate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D2F008160823DB00A5EE5E /* IPGate.json */; };
+		26D2F00D1608262E00A5EE5E /* CPBooleanElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F00C1608262E00A5EE5E /* CPBooleanElement.m */; };
+		26D2F00E1608262E00A5EE5E /* CPBooleanElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F00C1608262E00A5EE5E /* CPBooleanElement.m */; };
+		26D2F0111608279000A5EE5E /* CPIPGateLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F0101608278F00A5EE5E /* CPIPGateLoginViewController.m */; };
+		26D2F0121608279000A5EE5E /* CPIPGateLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F0101608278F00A5EE5E /* CPIPGateLoginViewController.m */; };
+		26D2F0141608280A00A5EE5E /* IPGateLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D2F0131608280A00A5EE5E /* IPGateLogin.json */; };
+		26D2F0151608280A00A5EE5E /* IPGateLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D2F0131608280A00A5EE5E /* IPGateLogin.json */; };
 		26D6208D15DCED5F000AB849 /* CPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6208C15DCED5F000AB849 /* CPTabBarController.m */; };
 		26D6209115DD221F000AB849 /* CPAssignmentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209015DD221F000AB849 /* CPAssignmentElement.m */; };
 		26D6209215DD221F000AB849 /* CPAssignmentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209015DD221F000AB849 /* CPAssignmentElement.m */; };
@@ -1410,6 +1420,14 @@
 		26CF8DC915EB13C50011BEBB /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
 		26CF8DCA15EB13C50011BEBB /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
 		26CF8DCB15EB13C50011BEBB /* news@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news@2x.png"; sourceTree = "<group>"; };
+		26D2F004160822EC00A5EE5E /* CPIPGateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIPGateViewController.h; sourceTree = "<group>"; };
+		26D2F005160822EC00A5EE5E /* CPIPGateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIPGateViewController.m; sourceTree = "<group>"; };
+		26D2F008160823DB00A5EE5E /* IPGate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = IPGate.json; path = Nanbeige/IPGate.json; sourceTree = "<group>"; };
+		26D2F00B1608262E00A5EE5E /* CPBooleanElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBooleanElement.h; sourceTree = "<group>"; };
+		26D2F00C1608262E00A5EE5E /* CPBooleanElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBooleanElement.m; sourceTree = "<group>"; };
+		26D2F00F1608278F00A5EE5E /* CPIPGateLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIPGateLoginViewController.h; sourceTree = "<group>"; };
+		26D2F0101608278F00A5EE5E /* CPIPGateLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIPGateLoginViewController.m; sourceTree = "<group>"; };
+		26D2F0131608280A00A5EE5E /* IPGateLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = IPGateLogin.json; path = Nanbeige/IPGateLogin.json; sourceTree = "<group>"; };
 		26D6208B15DCED5F000AB849 /* CPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTabBarController.h; sourceTree = "<group>"; };
 		26D6208C15DCED5F000AB849 /* CPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTabBarController.m; sourceTree = "<group>"; };
 		26D6208F15DD221F000AB849 /* CPAssignmentElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentElement.h; sourceTree = "<group>"; };
@@ -2430,6 +2448,19 @@
 			path = "third-party";
 			sourceTree = "<group>";
 		};
+		26D2F002160822D100A5EE5E /* CPIPGate */ = {
+			isa = PBXGroup;
+			children = (
+				26D2F008160823DB00A5EE5E /* IPGate.json */,
+				26D2F0131608280A00A5EE5E /* IPGateLogin.json */,
+				26D2F004160822EC00A5EE5E /* CPIPGateViewController.h */,
+				26D2F005160822EC00A5EE5E /* CPIPGateViewController.m */,
+				26D2F00F1608278F00A5EE5E /* CPIPGateLoginViewController.h */,
+				26D2F0101608278F00A5EE5E /* CPIPGateLoginViewController.m */,
+			);
+			name = CPIPGate;
+			sourceTree = "<group>";
+		};
 		26D6208E15DD21E3000AB849 /* CPQElement */ = {
 			isa = PBXGroup;
 			children = (
@@ -2451,6 +2482,8 @@
 				267657E415EF26D800373E2A /* CPCommentElement.m */,
 				26D6209315DD2518000AB849 /* CPCommentPostElement.h */,
 				26D6209415DD2518000AB849 /* CPCommentPostElement.m */,
+				26D2F00B1608262E00A5EE5E /* CPBooleanElement.h */,
+				26D2F00C1608262E00A5EE5E /* CPBooleanElement.m */,
 			);
 			name = CPQElement;
 			path = Nanbeige;
@@ -2578,6 +2611,7 @@
 			children = (
 				41FA341B15FAFF0700D3510B /* UIBarButtonItem+StyledButton.h */,
 				41FA341C15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m */,
+				26D2F002160822D100A5EE5E /* CPIPGate */,
 				26228D7015F2583900B99C5B /* CPEvent */,
 				26F3E2D215D8BC1600D69D0D /* CPCourse */,
 				4120F2B115D6419000D0AA97 /* CPSignFlow */,
@@ -3921,6 +3955,8 @@
 				4191FA9715FB62440088E237 /* mask-corners-bottom@2x.png in Resources */,
 				4191FA9915FB62440088E237 /* mask-corners-top.png in Resources */,
 				4191FA9B15FB62440088E237 /* mask-corners-top@2x.png in Resources */,
+				26D2F009160823DB00A5EE5E /* IPGate.json in Resources */,
+				26D2F0141608280A00A5EE5E /* IPGateLogin.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4262,6 +4298,8 @@
 				4191FA9815FB62440088E237 /* mask-corners-bottom@2x.png in Resources */,
 				4191FA9A15FB62440088E237 /* mask-corners-top.png in Resources */,
 				4191FA9C15FB62440088E237 /* mask-corners-top@2x.png in Resources */,
+				26D2F00A160823DB00A5EE5E /* IPGate.json in Resources */,
+				26D2F0151608280A00A5EE5E /* IPGateLogin.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4524,6 +4562,9 @@
 				26228D7815F2586200B99C5B /* CPEventViewController.m in Sources */,
 				26228D7C15F25C8000B99C5B /* Event.m in Sources */,
 				41FA341D15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m in Sources */,
+				26D2F006160822EC00A5EE5E /* CPIPGateViewController.m in Sources */,
+				26D2F00D1608262E00A5EE5E /* CPBooleanElement.m in Sources */,
+				26D2F0111608279000A5EE5E /* CPIPGateLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4758,6 +4799,9 @@
 				26228D7915F2586200B99C5B /* CPEventViewController.m in Sources */,
 				26228D7D15F25C8000B99C5B /* Event.m in Sources */,
 				41FA341E15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m in Sources */,
+				26D2F007160822EC00A5EE5E /* CPIPGateViewController.m in Sources */,
+				26D2F00E1608262E00A5EE5E /* CPBooleanElement.m in Sources */,
+				26D2F0121608279000A5EE5E /* CPIPGateLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
