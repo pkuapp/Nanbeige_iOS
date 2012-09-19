@@ -8,6 +8,7 @@
 
 #import "CPIPGateViewController.h"
 #import "Models+addon.h"
+#import "Coffeepot.h"
 
 @interface CPIPGateViewController () {
 	BOOL bViewDidLoad;
@@ -65,6 +66,15 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)onConnectFree:(id)sender
+{
+	[[Coffeepot shared] requestIPGateWithGate_ID:[User sharedAppUser].gate_id Gate_Password:[User sharedAppUser].gate_password Range:@"2" Operation:@"connect" success:^(CPRequest *request, id collection) {
+		;
+	} error:^(CPRequest *request, NSError *error) {
+		;
+	}];
 }
 
 - (void)onChangeAccount:(id)sender

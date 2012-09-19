@@ -38,6 +38,10 @@ typedef enum
 + (CPRequest *)getRequestWithParameters:(NSDictionary *) params
 						  requestMethod:(NSString *) httpMethod
 							 requestURL:(NSString *) url;
++ (CPRequest *)getIPGateRequestWithGate_ID:(NSString *)gate_id
+							 Gate_Password:(NSString *)gate_password
+									 Range:(NSString *)range
+								 Operation:(NSString *)operation;
 
 - (void)addCompletionHandler:(void(^)(CPRequest*request,id collection))completionHandler;
 - (void)addErrorHandler:(void(^)(CPRequest*request, NSError *error))errorHandler;

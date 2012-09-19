@@ -52,7 +52,13 @@ typedef enum {
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                                params:(NSDictionary *)params
                               success:(void (^)(CPRequest*request,id collection))success_block
-                                error:(void (^)(CPRequest*request, NSError *error))error_block;
+							   error:(void (^)(CPRequest*request, NSError *error))error_block;
+- (CPRequest *)requestIPGateWithGate_ID:(NSString *)gate_id
+						  Gate_Password:(NSString *)gate_password
+								  Range:(NSString *)range
+							  Operation:(NSString *)operation
+								success:(void (^)(CPRequest*request,id collection))success_block
+								  error:(void (^)(CPRequest*request, NSError *error))error_block;
 
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                               params:(NSDictionary *)params

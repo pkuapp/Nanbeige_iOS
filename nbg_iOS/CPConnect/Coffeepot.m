@@ -100,6 +100,24 @@ static Coffeepot *coffeepotSharedObject = nil;
 							  }];
 }
 
+- (CPRequest *)requestIPGateWithGate_ID:(NSString *)gate_id
+						  Gate_Password:(NSString *)gate_password
+								  Range:(NSString *)range
+							  Operation:(NSString *)operation
+								success:(void (^)(CPRequest *, id))success_block
+								  error:(void (^)(CPRequest *, NSError *))error_block
+{
+	
+	return [self openIPGateWithGate_ID:gate_id Gate_Password:gate_password Range:range Operation:operation finalize: ^(CPRequest *request) {
+		if( success_block ) {
+			[request addCompletionHandler:success_block];
+		}
+		if( error_block ) {
+			[request addErrorHandler:error_block];
+		}
+	}];
+}
+
 - (CPRequest *)requestWithMethodPath:(NSString *)method_path
                               params:(NSDictionary *)params
                        requestMethod:(NSString *)httpMethod
@@ -124,6 +142,41 @@ static Coffeepot *coffeepotSharedObject = nil;
         }
     }];
 
+}
+
+- (CPRequest*)openIPGateWithGate_ID:(NSString *)gate_id
+					  Gate_Password:(NSString *)gate_password
+							  Range:(NSString *)range
+						  Operation:(NSString *)operation
+						   finalize:(void(^)(CPRequest*))finalize {
+	
+    
+	//    [self extendAccessTokenIfNeeded];
+    
+    CPRequest* _request = [CPRequest getIPGateRequestWithGate_ID:gate_id
+												   Gate_Password:gate_password
+														   Range:range
+													   Operation:operation];
+	
+	//    [_request addDebugOutputHandlers];
+    [_requests addObject:_request];
+	
+	[_request registerEventHandler:kCPStateChangeBlockHandlerKey handler:^(CPRequest *request, CPRequestState state) {
+		if( state == kCPRequestStateComplete ) {
+			if( [request isSessionExpired] ) {
+				//				[self invalidateSession];
+				[self _applyCoreHandlers:kCPSessionBlockHandlerKey];
+			}
+			[_requests removeObject:request];
+		}
+	}];
+	
+	if( finalize ) {
+		finalize(_request);
+	}
+	
+    [_request connect];
+    return _request;
 }
 
 - (CPRequest*)openUrl:(NSString *)url

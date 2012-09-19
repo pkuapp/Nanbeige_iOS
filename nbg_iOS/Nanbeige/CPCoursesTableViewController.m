@@ -257,13 +257,18 @@
 					[self.weeksets setObject:weeks forKey:lesson.weekset_id];
 				}
 			} else weeks = [lesson.weeks componentsSeparatedByString:@","];
-			if (lessonDay == weekday && [weeks containsObject:[NSNumber numberWithInteger:week]]) {
-				[result addObject:
-				 @{@"start" : lesson.start,
-				 @"end" : lesson.end,
-				 @"name" : course.name,
-				 @"location" : lesson.location,
-				 @"courseDocumentID" : course.document.documentID}];
+			if (lessonDay == weekday) {
+				for (NSNumber *lessonWeek in weeks) {
+					if ([lessonWeek integerValue] == week) {
+						[result addObject:
+						 @{@"start" : lesson.start,
+						 @"end" : lesson.end,
+						 @"name" : course.name,
+						 @"location" : lesson.location,
+						 @"courseDocumentID" : course.document.documentID}];
+						break;
+					}
+				}
 			}
 		}
 	}

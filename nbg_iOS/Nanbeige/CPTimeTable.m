@@ -123,7 +123,7 @@
 		locationLabel.text = location;
 		locationLabel.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.0];
 		locationLabel.font = [UIFont systemFontOfSize:13];
-		[self.timeTable addSubview:locationLabel];
+		if (end - start > 0) [self.timeTable addSubview:locationLabel];
 	}
 	[self.timeTable reloadData];
 }

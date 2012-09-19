@@ -16,6 +16,10 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 static NSString* pAPIProtocol = @"https";
 static NSString* pAPIDomain = @"api.pkuapp.com";
 static NSString* pAPIPort = @"443";
+static NSString* pIPGateProtocol = @"https";
+static NSString* pIPGateDomain = @"its.pku.edu.cn";
+static NSString* pIPGatePort = @"5428";
+static NSString* pIPGatePage = @"ipgatewayofpku";
 
 @interface CPRequest () {
 }
@@ -136,6 +140,21 @@ static NSString* pAPIPort = @"443";
 	request.url = [NSString stringWithFormat:@"%@://%@:%@/%@",pAPIProtocol,pAPIDomain,pAPIPort,url];
 	request.httpMethod = httpMethod;
 	request.params = [NSMutableDictionary dictionaryWithDictionary: params];
+	request.connection = nil;
+	request.responseText = nil;
+	
+	return request;
+}
+
++ (CPRequest *)getIPGateRequestWithGate_ID:(NSString *)gate_id
+							 Gate_Password:(NSString *)gate_password
+									 Range:(NSString *)range
+								 Operation:(NSString *)operation
+{
+	
+	CPRequest* request = [[CPRequest alloc] init];
+	request.url = [NSString stringWithFormat:@"%@://%@:%@/%@?uid=%@&password=%@&timeout=2&range=%@&operation=%@",pIPGateProtocol,pIPGateDomain,pIPGatePort,pIPGatePage,gate_id,gate_password,range,operation];
+	request.httpMethod = @"GET";
 	request.connection = nil;
 	request.responseText = nil;
 	
