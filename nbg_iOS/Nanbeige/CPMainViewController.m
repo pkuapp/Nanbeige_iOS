@@ -579,7 +579,7 @@
 								   persistence: NSURLCredentialPersistenceForSession];
 	NSURLProtectionSpace* space;
 	space = [[NSURLProtectionSpace alloc] initWithHost: kSyncDbHostNameWithID(appUser.id)
-												  port: 5984
+												  port: 6984
 											  protocol: @"http"
 												 realm: @"server"
 								  authenticationMethod: NSURLAuthenticationMethodDefault];

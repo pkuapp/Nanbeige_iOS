@@ -17,7 +17,7 @@
 
 // The default remote database URL to sync with, if the user hasn't set a different one as a pref.
 //#define kDefaultSyncDbURL @"https://zongziwang.cloudant.com/assignments_3"
-#define kSyncDbURLWithID(id) [NSString stringWithFormat:@"http://api.pkuapp.com:5984/user_sync_db_%@", (id)]
+#define kSyncDbURLWithID(id) [NSString stringWithFormat:@"http://api.pkuapp.com:6984/user_sync_db_%@", (id)]
 //#define kDefaultHostName @"zongziwang.cloudant.com"
 #define kSyncDbHostNameWithID(id) @"api.pkuapp.com"
 //#define kDefaultUsername @"lsonedivelesedsireveredi"
@@ -28,7 +28,7 @@
 // Define this to use a server at a specific URL, instead of the embedded Couchbase Mobile.
 // This can be useful for debugging, since you can use the admin console (futon) to inspect
 // or modify the database contents.
-//#define USE_REMOTE_SERVER @"http://localhost:5984/"
+//#define USE_REMOTE_SERVER @"http://localhost:6984/"
 
 @interface CPAppDelegate : UIResponder <UIApplicationDelegate, CPUserManageDelegate>
 

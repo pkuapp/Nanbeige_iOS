@@ -267,7 +267,6 @@
 								  }];
 								  
 							  } else if ([result isKindOfClass:[NSDictionary class]]) {
-								  [self loading:NO];
 								  NSLog(@"Sign:renrenDidLogin %@", result);
 							  } else {
 								  [self loading:NO];

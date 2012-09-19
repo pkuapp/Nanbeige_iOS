@@ -201,7 +201,10 @@
 #pragma mark - Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource{
-	
+	if (_reloading) {
+		[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHud:@"更新课程列表中..."];
+		return ;
+	}
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
 	_reloading = YES;

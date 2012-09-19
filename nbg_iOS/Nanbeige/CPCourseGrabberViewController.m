@@ -63,7 +63,7 @@
 			
 			[self loading:NO];
 			
-			[self showAlert:@"该学期抓课器暂不可用"];
+			[self showAlert:[collection objectForKey:@"info"]];
 			[self performSelector:@selector(close) withObject:nil afterDelay:1.0];
 			
 		} else if ([[collection objectForKey:@"require_captcha"] boolValue]) {

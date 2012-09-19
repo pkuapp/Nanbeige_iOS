@@ -126,14 +126,6 @@
 		self.tabBarController.title = [NSString stringWithFormat:@"放假^_^ %@", dayDate];
 	} else {
 		self.tabBarController.title = [NSString stringWithFormat:@"第%d周 %@", week, dayDate];
-		Semester *semester = [Semester semesterAtDate:day];
-		if ([[University universityWithID:[User sharedAppUser].university_id].support_import_course boolValue] && ![[User sharedAppUser].course_imported containsObject:semester.id]) {
-			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
-			return ;
-		} else if (![self.courses count]) {
-			[self.tabBarController setSelectedIndex:1];
-			return ;
-		}
 	}
 	
 	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"courses_table_edited"] boolValue]) {
@@ -158,6 +150,17 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+	if (bViewDidLoad) {
+		NSDate *day = [today dateByAddingTimeInterval:60*60*24*([self.paginatorView currentPageIndex] - TIMETABLEPAGEINDEX)];
+		Semester *semester = [Semester semesterAtDate:day];
+		if ([[University universityWithID:[User sharedAppUser].university_id].support_import_course boolValue] && ![[User sharedAppUser].course_imported containsObject:semester.id]) {
+			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
+			bViewDidLoad = NO;
+		} else if (![self.courses count]) {
+			[self.tabBarController setSelectedIndex:1];
+			bViewDidLoad = NO;
+		}
+	}
 }
 
 - (void)viewDidUnload
@@ -292,14 +295,14 @@
 		self.tabBarController.title = [NSString stringWithFormat:@"放假^_^ %@", dayDate];
 	} else {
 		self.tabBarController.title = [NSString stringWithFormat:@"第%d周 %@", week, dayDate];
-		Semester *semester = [Semester semesterAtDate:day];
-		if ([[University universityWithID:[User sharedAppUser].university_id].support_import_course boolValue] && ![[User sharedAppUser].course_imported containsObject:semester.id]) {
-			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
-			return ;
-		} else if (![self.courses count]) {
-			[self.tabBarController setSelectedIndex:1];
-			return ;
-		}
+//		Semester *semester = [Semester semesterAtDate:day];
+//		if ([[University universityWithID:[User sharedAppUser].university_id].support_import_course boolValue] && ![[User sharedAppUser].course_imported containsObject:semester.id]) {
+//			[self.tabBarController performSegueWithIdentifier:@"CourseGrabberSegue" sender:self];
+//			return ;
+//		} else if (![self.courses count]) {
+//			[self.tabBarController setSelectedIndex:1];
+//			return ;
+//		}
 	}
 	
 	if (pageIndex > 0) {
