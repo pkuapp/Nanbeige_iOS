@@ -9,7 +9,9 @@
 #import "CPAssignmentCourseViewController.h"
 #import "Models+addon.h"
 
-@interface CPAssignmentCourseViewController ()
+@interface CPAssignmentCourseViewController () {
+	NSMutableArray *courses;
+}
 
 @end
 
@@ -43,10 +45,11 @@
     NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
 	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	
-	NSMutableArray *courses = [@[] mutableCopy];
+	courses = [@[] mutableCopy];
 	for (int i = 0; i < self.coursesData.count; i++) {
 		Course *course = [Course userCourseAtIndex:i courseList:self.coursesData];
-		[courses addObject:@{ @"name" : course.name }];
+		if ([course.status isEqualToString:@"cancel"]) continue;
+		[courses addObject:@{ @"name" : course.name , @"id" : course.id}];
 	}
 	[self.root bindToObject:@{ @"courses" :  courses}];
 }
@@ -65,9 +68,8 @@
 - (void)onCourseSelect:(id)sender
 {
 	NSUInteger index = [[[sender parentSection] elements] indexOfObject:sender];
-	Course *course = [Course userCourseAtIndex:index courseList:self.coursesData];
-	self.assignment.course_id = course.id;
-	self.assignment.course_name = course.name;
+	self.assignment.course_id = [[courses objectAtIndex:index] objectForKey:@"id"];
+	self.assignment.course_name = [[courses objectAtIndex:index] objectForKey:@"name"];
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
