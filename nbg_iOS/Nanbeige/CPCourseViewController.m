@@ -147,16 +147,16 @@
 			UIBarButtonItem *auditButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"旁听" target:self selector:@selector(onAuditCourse:)];
 			self.navigationItem.rightBarButtonItem = auditButton;
 			
-//			CouchDocument *userCourseList = [Course userCourseListDocument];
-//			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
-//			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
-//			if ([newDocs containsObject:self.course.document.documentID]) {
-//				while (![newDocs containsObject:self.course.document.documentID])
-//					[newDocs removeObject:self.course.document.documentID];
-//				[newDict setObject:newDocs forKey:@"value"];
-//				RESTOperation *putOp = [userCourseList putProperties:newDict];
-//				if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
-//			}
+			CouchDocument *userCourseList = [Course userCourseListDocument];
+			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
+			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
+			if ([newDocs containsObject:self.course.document.documentID]) {
+				while (![newDocs containsObject:self.course.document.documentID])
+					[newDocs removeObject:self.course.document.documentID];
+				[newDict setObject:newDocs forKey:@"value"];
+				RESTOperation *putOp = [userCourseList putProperties:newDict];
+				if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
+			}
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"courses_table_edited"];
@@ -185,16 +185,16 @@
 			UIBarButtonItem *auditButton = [UIBarButtonItem styledRedBarButtonItemWithTitle:@"已旁听" target:self selector:@selector(onDeauditCourse:)];
 			self.navigationItem.rightBarButtonItem = auditButton;
 			
-//			CouchDocument *userCourseList = [Course userCourseListDocument];
-//			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
-//			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
-//			if (![newDocs containsObject:self.course.document.documentID]) {
-//				if (!newDocs) newDocs = [[NSMutableArray alloc] init];
-//				[newDocs addObject:self.course.document.documentID];
-//				[newDict setObject:newDocs forKey:@"value"];
-//				RESTOperation *putOp = [userCourseList putProperties:newDict];
-//				if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
-//			}
+			CouchDocument *userCourseList = [Course userCourseListDocument];
+			NSMutableDictionary *newDict = [userCourseList.properties mutableCopy];
+			NSMutableArray *newDocs = [[userCourseList propertyForKey:@"value"] mutableCopy];
+			if (![newDocs containsObject:self.course.document.documentID]) {
+				if (!newDocs) newDocs = [[NSMutableArray alloc] init];
+				[newDocs addObject:self.course.document.documentID];
+				[newDict setObject:newDocs forKey:@"value"];
+				RESTOperation *putOp = [userCourseList putProperties:newDict];
+				if (putOp && ![putOp wait]) [self showAlert:[putOp.error description]];
+			}
 			
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"user_courses_edited"];
 			[[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"courses_table_edited"];

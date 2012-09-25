@@ -146,6 +146,19 @@ static User *sharedAppUserObject = nil;
 				[row.document DELETE];
 			}
 			courseListDocument = row.document;
+			
+			if ([[courseListDocument propertyForKey:@"value"] count]) {
+				NSMutableArray *courses = [@[] mutableCopy];
+				for (int i = 0; i < [[courseListDocument propertyForKey:@"value"] count]; i++) {
+					Course *course = [Course userCourseAtIndex:i courseList:[courseListDocument propertyForKey:@"value"]];
+					if ([course.status isEqualToString:@"cancel"]) continue;
+					[courses addObject:course.document.documentID];
+				}
+				NSMutableDictionary *dict = [[courseListDocument properties] mutableCopy];
+				[dict setObject:courses forKey:@"value"];
+				RESTOperation *putOp = [courseListDocument putProperties:dict];
+				if (putOp && ![putOp wait]) NSLog(@"Models+addon:userCourseListDocument %@", putOp.error);
+			}
 		}
 	} else NSLog(@"Models+addon:userCourseListDocument %@", queryOp.error);
 	

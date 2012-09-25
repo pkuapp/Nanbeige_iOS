@@ -48,7 +48,6 @@
 	courses = [@[] mutableCopy];
 	for (int i = 0; i < self.coursesData.count; i++) {
 		Course *course = [Course userCourseAtIndex:i courseList:self.coursesData];
-		if ([course.status isEqualToString:@"cancel"]) continue;
 		[courses addObject:@{ @"name" : course.name , @"id" : course.id}];
 	}
 	[self.root bindToObject:@{ @"courses" :  courses}];
