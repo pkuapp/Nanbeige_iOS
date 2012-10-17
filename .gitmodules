@@ -1,6 +1,3 @@
-[submodule "AFNetworking"]
-	path = AFNetworking
-	url = https://github.com/AFNetworking/AFNetworking.git
 [submodule "json-framework"]
 	path = json-framework
 	url = https://github.com/stig/json-framework.git
@@ -23,9 +20,6 @@
 [submodule "MagicalRecord"]
 	path = MagicalRecord
 	url = https://github.com/magicalpanda/MagicalRecord.git
-[submodule "GCRetractableSectionController"]
-	path = GCRetractableSectionController
-	url = https://github.com/gcamp/GCRetractableSectionController.git
 [submodule "EGOTableViewPullRefresh"]
 	path = EGOTableViewPullRefresh
 	url = https://github.com/enormego/EGOTableViewPullRefresh.git

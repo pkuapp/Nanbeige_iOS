@@ -140,7 +140,7 @@
 	
 	self.imageView.superview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
-	if (!_bCreate) self.title = @"修改作业计划";
+	if (!_bCreate) self.root.title = @"修改作业计划";
 	
 	UIBarButtonItem *confirmButton = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"确认" target:self selector:@selector(onConfirm:)];
 	UIBarButtonItem *cancelButton = [UIBarButtonItem styledPlainBarButtonItemWithTitle:@"取消" target:self selector:@selector(onCancel:)];
