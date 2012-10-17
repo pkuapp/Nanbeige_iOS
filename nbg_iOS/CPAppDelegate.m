@@ -99,6 +99,9 @@
 	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor colorWithWhite:0.2 alpha:1], UITextAttributeTextShadowColor : [UIColor colorWithWhite:1 alpha:0.5], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 1)]} forState:UIControlStateNormal];
 	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor colorWithWhite:0.2 alpha:1], UITextAttributeTextShadowColor : [UIColor colorWithWhite:1 alpha:0.5], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 1)]} forState:UIControlStateHighlighted];
 
+	[[UISegmentedControl appearanceWhenContainedIn:[UINavigationBar class], nil] setBackgroundImage:[[UIImage imageNamed:@"btn-default"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 14, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+	[[UISegmentedControl appearanceWhenContainedIn:[UINavigationBar class], nil] setBackgroundImage:[[UIImage imageNamed:@"btn-default-pressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 14, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+	
 //	[[UITableView appearance] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
 //
 //    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
