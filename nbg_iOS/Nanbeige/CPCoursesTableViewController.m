@@ -93,9 +93,11 @@
 	
 	self.view.BackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
-    NSArray *vcarray = self.navigationController.viewControllers;
-    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
-	self.tabBarController.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.tabBarController.navigationController selector:@selector(popViewControllerAnimated:)];
+//    NSArray *vcarray = self.navigationController.viewControllers;
+//    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+//	self.tabBarController.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.tabBarController.navigationController selector:@selector(popViewControllerAnimated:)];
+	
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"课程表" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
 	self.paginatorView.frame = self.view.bounds;
 	self.paginatorView.pageGapWidth = TIMETABLEPAGEGAPWIDTH;

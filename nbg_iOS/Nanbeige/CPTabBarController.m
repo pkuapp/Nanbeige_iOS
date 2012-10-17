@@ -28,13 +28,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-//	UIImage *shadowImg = [UIImage imageNamed:@"TabBar-shadow"];
-//	CGFloat tabBarTop = self.tabBar.frame.origin.y - shadowImg.size.height;
-//	CALayer *shadowLayer = [CALayer layer];
-//	shadowLayer.frame = CGRectMake(0, tabBarTop, self.view.frame.size.width, shadowImg.size.height);
-//	shadowLayer.contents = (id)shadowImg.CGImage;
-//	shadowLayer.zPosition = 1;
-//	[self.view.layer addSublayer:shadowLayer];
+	UIImage *shadowImg = [UIImage imageNamed:@"TabBar-shadow"];
+	CGFloat tabBarTop = self.tabBar.frame.origin.y - shadowImg.size.height;
+	CALayer *shadowLayer = [CALayer layer];
+	shadowLayer.frame = CGRectMake(0, tabBarTop, self.view.frame.size.width, shadowImg.size.height);
+	shadowLayer.contents = (id)shadowImg.CGImage;
+	shadowLayer.zPosition = 1;
+	[self.view.layer addSublayer:shadowLayer];
     self.tabBar.autoresizesSubviews = NO;
     self.tabBar.frame = CGRectMake(0, self.tabBar.frame.origin.y+5, 320, 44);
 

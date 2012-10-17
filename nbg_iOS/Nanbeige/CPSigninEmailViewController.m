@@ -44,10 +44,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    NSArray *vcarray = self.navigationController.viewControllers;
-    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
-	back_title = @" 欢迎 ";
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+//    NSArray *vcarray = self.navigationController.viewControllers;
+//    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+//	back_title = @" 欢迎 ";
+//	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+	
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleBordered target:nil action:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

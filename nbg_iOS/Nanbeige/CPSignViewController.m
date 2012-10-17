@@ -62,6 +62,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"欢迎" style:UIBarButtonItemStyleBordered target:nil action:nil];
 }
 
 - (void)viewDidUnload

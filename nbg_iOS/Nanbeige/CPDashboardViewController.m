@@ -42,9 +42,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-    NSArray *vcarray = self.navigationController.viewControllers;
-    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+//    NSArray *vcarray = self.navigationController.viewControllers;
+//    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+//	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+	
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"仪表盘" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledRedBarButtonItemWithTitle:@"清除课程" target:self selector:@selector(onCleanDatabase:)];
 
 	self.root.title = TITLE_MAIN;

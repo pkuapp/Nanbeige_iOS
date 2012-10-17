@@ -34,9 +34,9 @@
 	
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	
-    NSArray *vcarray = self.navigationController.viewControllers;
-    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+//    NSArray *vcarray = self.navigationController.viewControllers;
+//    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+//	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"确认" target:self selector:@selector(onConfirm:)];
 	
 	if ([self.assignment.due_type isEqualToString:TYPE_ON_LESSON]) {

@@ -32,9 +32,6 @@
         UIImage *image = [[UIImage imageNamed:@"mask-corners-top"] resizableImageWithCapInsets:UIEdgeInsetsMake(7, 7, 0, 7)];
         UIImageView *mask_view = [[UIImageView alloc] initWithImage:image];
         mask_view.frame = CGRectMake(0, 0, 320, 50);
-        //    [[self.view.subviews objectAtIndex:0] layer].mask = mask_view.layer;
-        //    NSLog(@"%@", [self.view subviews]);
-        
         self.navigationBar.layer.mask = mask_view.layer;
     }
     return self;
@@ -45,12 +42,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	UIImage *shadowImg = [UIImage imageNamed:@"NavigationBar-shadow"];
-    UIImageView *shadow_view = [[UIImageView alloc] initWithImage:shadowImg];
-    shadow_view.frame = CGRectMake(0, 44, self.view.frame.size.width, shadowImg.size.height);
-    shadow_view.layer.shadowOffset = CGSizeMake(0, 100);
-    shadow_view.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.navigationBar.clipsToBounds = NO;
-    [self.navigationBar addSubview:shadow_view];
+	UIImageView *shadow_view = [[UIImageView alloc] initWithImage:shadowImg];
+	shadow_view.frame = CGRectMake(0, 44, self.view.frame.size.width, shadowImg.size.height);
+	shadow_view.layer.shadowOffset = CGSizeMake(0, 100);
+	shadow_view.layer.shadowColor = [[UIColor blackColor] CGColor];
+	self.navigationBar.clipsToBounds = NO;
+	[self.navigationBar addSubview:shadow_view];
 }
 
 - (void)viewDidUnload

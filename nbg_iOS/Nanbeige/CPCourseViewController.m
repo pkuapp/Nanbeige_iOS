@@ -48,9 +48,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-    NSArray *vcarray = self.navigationController.viewControllers;
-    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+//    NSArray *vcarray = self.navigationController.viewControllers;
+//    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+//	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"作业信息" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
 	if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.quickDialogTableView.bounds.size.height, self.view.frame.size.width, self.quickDialogTableView.bounds.size.height)];

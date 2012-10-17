@@ -47,11 +47,12 @@
 	if ([self.navigationController.viewControllers count] == 1) {
 		self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledPlainBarButtonItemWithTitle:sCANCEL target:self selector:@selector(dismissModalViewControllerAnimated:)];
 	} else {
-		NSArray *vcarray = self.navigationController.viewControllers;
-		NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
-		back_title = @" 欢迎 ";
-		self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+//		NSArray *vcarray = self.navigationController.viewControllers;
+//		NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+//		back_title = @" 欢迎 ";
+//		self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
 	}
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选校" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	
 	[[Coffeepot shared] requestWithMethodPath:@"university/" params:nil requestMethod:@"GET" success:^(CPRequest *_req, id collection) {
 		

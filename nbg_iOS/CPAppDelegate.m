@@ -78,48 +78,10 @@
 }
 
 - (BOOL)needSignin {
-
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//	if ([defaults valueForKey:kWEIBOIDKEY] == nil &&
-//		[defaults valueForKey:kRENRENIDKEY] == nil &&
-//		[defaults valueForKey:kCPEMAILKEY] == nil) {
-//		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kACCOUNTIDKEY];
-//	}
-//	
-//	if ([[NSUserDefaults standardUserDefaults] valueForKey:kACCOUNTIDKEY] != nil) {
-//        return NO;
-//	} else {
-//		id workaround51Crash = [[NSUserDefaults standardUserDefaults] objectForKey:@"WebKitLocalStorageDatabasePathPreferenceKey"];
-//		NSDictionary *emptySettings = (workaround51Crash != nil)
-//		? [NSDictionary dictionaryWithObject:workaround51Crash forKey:@"WebKitLocalStorageDatabasePathPreferenceKey"]
-//		: [NSDictionary dictionary];
-//		[[NSUserDefaults standardUserDefaults] setPersistentDomain:emptySettings forName:[[NSBundle mainBundle] bundleIdentifier]];
-//        return YES;
-//	}
     return ![[[NSUserDefaults standardUserDefaults] objectForKey:@"CPIsSignedIn"] boolValue] || ![[User sharedAppUser].id integerValue];
-
 }
 
 - (void)configureGlobalAppearance {
-//    [[UITableView appearance] setBackgroundColor:[UIColor colorWithRed:214.0/255 green:214.0/255 blue:214.0/255 alpha:1.0]];
-}
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	
-//	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-	
-    
-//	UIImage *overlayImg = [UIImage imageNamed:@"corners"];
-//	CALayer *overlay = [CALayer layer];
-//	overlay.frame = CGRectMake(0, 20, overlayImg.size.width, overlayImg.size.height);
-//	overlay.contents = (id)overlayImg.CGImage;
-//	overlay.zPosition = 1;
-//	[self.window.layer addSublayer:overlay];
-//	
-    
-	
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavigationBar"] forBarMetrics:UIBarMetricsDefault];
     
 	NSDictionary *titleTextAttributes = @{ UITextAttributeTextColor : navBarTextColor1, UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 0)] };
@@ -127,18 +89,31 @@
 	
 	[[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"TabBar"]];
 	[[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"TabBar-selected"]];
+	
+	[[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 14, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+	[[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"btn-pressed-back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 19, 14, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+	
+	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setBackgroundImage:[[UIImage imageNamed:@"btn"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 14, 7)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 9, 14, 9)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+	
+	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor colorWithWhite:0.2 alpha:1], UITextAttributeTextShadowColor : [UIColor colorWithWhite:1 alpha:0.5], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 1)]} forState:UIControlStateNormal];
+	[[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor colorWithWhite:0.2 alpha:1], UITextAttributeTextShadowColor : [UIColor colorWithWhite:1 alpha:0.5], UITextAttributeTextShadowOffset : [NSValue valueWithUIOffset:UIOffsetMake(0, 1)]} forState:UIControlStateHighlighted];
 
-//	[[UITabBar appearance] setSelectionIndicatorImage:[[UIImage imageNamed:@"TabBar-selected"] resizableImageWithCapInsets:UIEdgeInsetsMake(44, 6, 0, 6)]];
-	
-//    [UIImageView appearanceWhenContainedIn:, nil]
 //	[[UITableView appearance] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]]];
-	
+//
 //    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
 //    [[UISegmentedControl appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)]  forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-//    
+//
 //    [[UISegmentedControl appearance] setBackgroundImage:[[UIImage imageNamed:@"btn-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-//    
+//
 //    [[UISegmentedControl appearance] setDividerImage:[UIImage imageNamed:@"btn-segmented-divider.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	
+	[self configureGlobalAppearance];
     
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"nbg_iOS"];
 	
@@ -213,12 +188,12 @@
         self.window.rootViewController = [sb instantiateInitialViewController];
     }
     
-  
-    UIImage *image = [[UIImage imageNamed:@"mask-corners-bottom"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 7, 7)];
-    UIImageView *mask_view = [[UIImageView alloc] initWithImage:image];
-    mask_view.frame = CGRectMake(0, 20, 320, 460);
+//    UIImage *image = [[UIImage imageNamed:@"mask-corners-bottom"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 7, 7)];
+//    UIImageView *mask_view = [[UIImageView alloc] initWithImage:image];
+//    mask_view.frame = CGRectMake(0, 20, 320, 460);
+//
+//    self.window.layer.mask = mask_view.layer;
 
-    self.window.layer.mask = mask_view.layer;
     [self.window makeKeyAndVisible];
     
     return YES;

@@ -72,9 +72,11 @@
 	self.title = [NSString stringWithFormat:FORMAT_TITLE_ROOMS, @"今天"];
 	date = nil;
 	
-    NSArray *vcarray = self.navigationController.viewControllers;
-    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
-	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+//    NSArray *vcarray = self.navigationController.viewControllers;
+//    NSString *back_title = [[vcarray objectAtIndex:vcarray.count-2] title];
+//	self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTitle:back_title target:self.navigationController selector:@selector(popViewControllerAnimated:)];
+	
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"自习室" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"日期" target:self selector:@selector(onDatePick:)];
 	
 	CouchDatabase *localDatabase = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) localDatabase];

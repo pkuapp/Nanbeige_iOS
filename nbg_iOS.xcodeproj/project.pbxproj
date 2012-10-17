@@ -17,10 +17,7 @@
 		26228D7915F2586200B99C5B /* CPEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26228D7715F2586200B99C5B /* CPEventViewController.m */; };
 		26228D7C15F25C8000B99C5B /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 26228D7B15F25C8000B99C5B /* Event.m */; };
 		26228D7D15F25C8000B99C5B /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 26228D7B15F25C8000B99C5B /* Event.m */; };
-		26228D7F15F261E600B99C5B /* event.json in Resources */ = {isa = PBXBuildFile; fileRef = 26228D7E15F261E600B99C5B /* event.json */; };
-		26228D8015F261E600B99C5B /* event.json in Resources */ = {isa = PBXBuildFile; fileRef = 26228D7E15F261E600B99C5B /* event.json */; };
 		262A4A1415D94EF8001BAC03 /* CPAssignmentCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */; };
-		262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 262A4A1615D94F1D001BAC03 /* assignmentCourse.json */; };
 		267657E515EF26D900373E2A /* CPCommentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657E415EF26D800373E2A /* CPCommentElement.m */; };
 		267657E615EF26D900373E2A /* CPCommentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657E415EF26D800373E2A /* CPCommentElement.m */; };
 		267657ED15EFB93200373E2A /* CPEntryElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657EC15EFB93100373E2A /* CPEntryElement.m */; };
@@ -28,11 +25,8 @@
 		267657F715F0494400373E2A /* CPLabelButtonCenterDangerElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657F615F0494300373E2A /* CPLabelButtonCenterDangerElement.m */; };
 		267657F815F0494400373E2A /* CPLabelButtonCenterDangerElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 267657F615F0494300373E2A /* CPLabelButtonCenterDangerElement.m */; };
 		269B663516114E8200EB9A25 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 269B663416114E8200EB9A25 /* libxml2.dylib */; };
-		269CBB0115DC108900B5CF2C /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0015DC108900B5CF2C /* course.json */; };
 		269CBB0415DC10A100B5CF2C /* CPCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */; };
 		269CBB0715DC1E5C00B5CF2C /* CPCourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */; };
-		269CBB0915DC1F1000B5CF2C /* courseDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0815DC1F1000B5CF2C /* courseDetail.json */; };
-		269CBB0A15DC1F1000B5CF2C /* courseDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = 269CBB0815DC1F1000B5CF2C /* courseDetail.json */; };
 		26CD829315D789FC0070DF78 /* CouchCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829015D789FC0070DF78 /* CouchCocoa.framework */; };
 		26CD829415D789FD0070DF78 /* CouchCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829015D789FC0070DF78 /* CouchCocoa.framework */; };
 		26CD829715D789FD0070DF78 /* TouchDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26CD829215D789FC0070DF78 /* TouchDB.framework */; };
@@ -51,14 +45,10 @@
 		26CF8E4715EB13C50011BEBB /* news@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CF8DCB15EB13C50011BEBB /* news@2x.png */; };
 		26D2F006160822EC00A5EE5E /* CPIPGateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F005160822EC00A5EE5E /* CPIPGateViewController.m */; };
 		26D2F007160822EC00A5EE5E /* CPIPGateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F005160822EC00A5EE5E /* CPIPGateViewController.m */; };
-		26D2F009160823DB00A5EE5E /* IPGate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D2F008160823DB00A5EE5E /* IPGate.json */; };
-		26D2F00A160823DB00A5EE5E /* IPGate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D2F008160823DB00A5EE5E /* IPGate.json */; };
 		26D2F00D1608262E00A5EE5E /* CPBooleanElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F00C1608262E00A5EE5E /* CPBooleanElement.m */; };
 		26D2F00E1608262E00A5EE5E /* CPBooleanElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F00C1608262E00A5EE5E /* CPBooleanElement.m */; };
 		26D2F0111608279000A5EE5E /* CPIPGateLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F0101608278F00A5EE5E /* CPIPGateLoginViewController.m */; };
 		26D2F0121608279000A5EE5E /* CPIPGateLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D2F0101608278F00A5EE5E /* CPIPGateLoginViewController.m */; };
-		26D2F0141608280A00A5EE5E /* IPGateLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D2F0131608280A00A5EE5E /* IPGateLogin.json */; };
-		26D2F0151608280A00A5EE5E /* IPGateLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D2F0131608280A00A5EE5E /* IPGateLogin.json */; };
 		26D6208D15DCED5F000AB849 /* CPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6208C15DCED5F000AB849 /* CPTabBarController.m */; };
 		26D6209115DD221F000AB849 /* CPAssignmentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209015DD221F000AB849 /* CPAssignmentElement.m */; };
 		26D6209215DD221F000AB849 /* CPAssignmentElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D6209015DD221F000AB849 /* CPAssignmentElement.m */; };
@@ -82,6 +72,22 @@
 		26EF4E8F162F23D40015BF2A /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EF4E8C162F23D40015BF2A /* GHUnitIOS.framework */; };
 		26EF4E90162F23D40015BF2A /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EF4E8D162F23D40015BF2A /* Objection-iOS.framework */; };
 		26EF4E91162F23D40015BF2A /* Objection-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EF4E8D162F23D40015BF2A /* Objection-iOS.framework */; };
+		26EF4E94162F27240015BF2A /* IPGate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E92162F27240015BF2A /* IPGate.json */; };
+		26EF4E95162F27240015BF2A /* IPGate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E92162F27240015BF2A /* IPGate.json */; };
+		26EF4E96162F27240015BF2A /* IPGateLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E93162F27240015BF2A /* IPGateLogin.json */; };
+		26EF4E97162F27240015BF2A /* IPGateLogin.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E93162F27240015BF2A /* IPGateLogin.json */; };
+		26EF4E99162F272D0015BF2A /* event.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E98162F272D0015BF2A /* event.json */; };
+		26EF4E9A162F272D0015BF2A /* event.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E98162F272D0015BF2A /* event.json */; };
+		26EF4E9E162F27360015BF2A /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E9B162F27360015BF2A /* course.json */; };
+		26EF4E9F162F27360015BF2A /* course.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E9B162F27360015BF2A /* course.json */; };
+		26EF4EA0162F27360015BF2A /* courseDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E9C162F27360015BF2A /* courseDetail.json */; };
+		26EF4EA1162F27360015BF2A /* courseDetail.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E9C162F27360015BF2A /* courseDetail.json */; };
+		26EF4EA2162F27360015BF2A /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E9D162F27360015BF2A /* courseGrabber.json */; };
+		26EF4EA3162F27360015BF2A /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4E9D162F27360015BF2A /* courseGrabber.json */; };
+		26EF4EA6162F27430015BF2A /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4EA4162F27430015BF2A /* assignmentCourse.json */; };
+		26EF4EA7162F27430015BF2A /* assignmentCourse.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4EA4162F27430015BF2A /* assignmentCourse.json */; };
+		26EF4EA8162F27430015BF2A /* assignmentCreate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4EA5162F27430015BF2A /* assignmentCreate.json */; };
+		26EF4EA9162F27430015BF2A /* assignmentCreate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26EF4EA5162F27430015BF2A /* assignmentCreate.json */; };
 		26F14ED315DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED415DA253F00C8E74E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED215DA253F00C8E74E /* Assignment.m */; };
 		26F14ED815DA3F3000C8E74E /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14ED715DA3F2F00C8E74E /* Course.m */; };
@@ -90,7 +96,6 @@
 		26F14EDD15DA3F3000C8E74E /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F14EDB15DA3F3000C8E74E /* Lesson.m */; };
 		26F3E2BE15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
 		26F3E2BF15D7FE4100D69D0D /* Renren+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */; };
-		26F3E2D915D92EEE00D69D0D /* assignmentCreate.json in Resources */ = {isa = PBXBuildFile; fileRef = 26F3E2D815D92EED00D69D0D /* assignmentCreate.json */; };
 		411DBBCC15CB9E4000EDB31D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCB15CB9E4000EDB31D /* UIKit.framework */; };
 		411DBBCE15CB9E4000EDB31D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCD15CB9E4000EDB31D /* Foundation.framework */; };
 		411DBBD015CB9E4000EDB31D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411DBBCF15CB9E4000EDB31D /* CoreGraphics.framework */; };
@@ -566,8 +571,6 @@
 		413BA26F15D52FA6000C9451 /* CPIPGateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 413BA26C15D52FA5000C9451 /* CPIPGateHelper.m */; };
 		414AFCAA15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
 		414AFCAB15D3C6CC00EFFB60 /* Models+addon.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AFCA915D3C6CC00EFFB60 /* Models+addon.m */; };
-		414AFDDA15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
-		414AFDDB15D512A500EFFB60 /* courseGrabber.json in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6B15D512A500EFFB60 /* courseGrabber.json */; };
 		414AFDDC15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */; };
 		414AFDDD15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */; };
 		414AFDE215D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */; };
@@ -890,10 +893,8 @@
 		26228D7715F2586200B99C5B /* CPEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPEventViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		26228D7A15F25C8000B99C5B /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Nanbeige/Event.h; sourceTree = "<group>"; };
 		26228D7B15F25C8000B99C5B /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = Nanbeige/Event.m; sourceTree = "<group>"; };
-		26228D7E15F261E600B99C5B /* event.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = event.json; path = Nanbeige/event.json; sourceTree = "<group>"; };
 		262A4A1215D94EF7001BAC03 /* CPAssignmentCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentCourseViewController.h; sourceTree = "<group>"; };
 		262A4A1315D94EF7001BAC03 /* CPAssignmentCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAssignmentCourseViewController.m; sourceTree = "<group>"; };
-		262A4A1615D94F1D001BAC03 /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCourse.json; sourceTree = "<group>"; };
 		265CC8D015F66771004CA605 /* libQuickDialog-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libQuickDialog-Prefix.pch"; sourceTree = "<group>"; };
 		267657E315EF26D800373E2A /* CPCommentElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCommentElement.h; sourceTree = "<group>"; };
 		267657E415EF26D800373E2A /* CPCommentElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCommentElement.m; sourceTree = "<group>"; };
@@ -903,12 +904,10 @@
 		267657F515F0494300373E2A /* CPLabelButtonCenterDangerElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLabelButtonCenterDangerElement.h; sourceTree = "<group>"; };
 		267657F615F0494300373E2A /* CPLabelButtonCenterDangerElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLabelButtonCenterDangerElement.m; sourceTree = "<group>"; };
 		269B663416114E8200EB9A25 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		269CBB0015DC108900B5CF2C /* course.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = course.json; sourceTree = "<group>"; };
 		269CBB0215DC10A000B5CF2C /* CPCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseViewController.h; sourceTree = "<group>"; };
 		269CBB0315DC10A000B5CF2C /* CPCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CPCourseViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		269CBB0515DC1E5B00B5CF2C /* CPCourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCourseDetailViewController.h; sourceTree = "<group>"; };
 		269CBB0615DC1E5C00B5CF2C /* CPCourseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCourseDetailViewController.m; sourceTree = "<group>"; };
-		269CBB0815DC1F1000B5CF2C /* courseDetail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseDetail.json; sourceTree = "<group>"; };
 		26CD829015D789FC0070DF78 /* CouchCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CouchCocoa.framework; path = Frameworks/CouchCocoa.framework; sourceTree = "<group>"; };
 		26CD829215D789FC0070DF78 /* TouchDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchDB.framework; path = Frameworks/TouchDB.framework; sourceTree = "<group>"; };
 		26CF8DC615EB13C50011BEBB /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
@@ -919,12 +918,10 @@
 		26CF8DCB15EB13C50011BEBB /* news@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news@2x.png"; sourceTree = "<group>"; };
 		26D2F004160822EC00A5EE5E /* CPIPGateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIPGateViewController.h; sourceTree = "<group>"; };
 		26D2F005160822EC00A5EE5E /* CPIPGateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIPGateViewController.m; sourceTree = "<group>"; };
-		26D2F008160823DB00A5EE5E /* IPGate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = IPGate.json; path = Nanbeige/IPGate.json; sourceTree = "<group>"; };
 		26D2F00B1608262E00A5EE5E /* CPBooleanElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBooleanElement.h; sourceTree = "<group>"; };
 		26D2F00C1608262E00A5EE5E /* CPBooleanElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBooleanElement.m; sourceTree = "<group>"; };
 		26D2F00F1608278F00A5EE5E /* CPIPGateLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIPGateLoginViewController.h; sourceTree = "<group>"; };
 		26D2F0101608278F00A5EE5E /* CPIPGateLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPIPGateLoginViewController.m; sourceTree = "<group>"; };
-		26D2F0131608280A00A5EE5E /* IPGateLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = IPGateLogin.json; path = Nanbeige/IPGateLogin.json; sourceTree = "<group>"; };
 		26D6208B15DCED5F000AB849 /* CPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTabBarController.h; sourceTree = "<group>"; };
 		26D6208C15DCED5F000AB849 /* CPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTabBarController.m; sourceTree = "<group>"; };
 		26D6208F15DD221F000AB849 /* CPAssignmentElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAssignmentElement.h; sourceTree = "<group>"; };
@@ -947,6 +944,14 @@
 		26DE6FF915EF1D37009BE27A /* CPNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNavViewController.m; sourceTree = "<group>"; };
 		26EF4E8C162F23D40015BF2A /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = Frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
 		26EF4E8D162F23D40015BF2A /* Objection-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Objection-iOS.framework"; path = "Frameworks/Objection-iOS.framework"; sourceTree = "<group>"; };
+		26EF4E92162F27240015BF2A /* IPGate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = IPGate.json; path = JsonFile/IPGate.json; sourceTree = SOURCE_ROOT; };
+		26EF4E93162F27240015BF2A /* IPGateLogin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = IPGateLogin.json; path = JsonFile/IPGateLogin.json; sourceTree = SOURCE_ROOT; };
+		26EF4E98162F272D0015BF2A /* event.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = event.json; path = JsonFile/event.json; sourceTree = SOURCE_ROOT; };
+		26EF4E9B162F27360015BF2A /* course.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = course.json; path = JsonFile/course.json; sourceTree = SOURCE_ROOT; };
+		26EF4E9C162F27360015BF2A /* courseDetail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = courseDetail.json; path = JsonFile/courseDetail.json; sourceTree = SOURCE_ROOT; };
+		26EF4E9D162F27360015BF2A /* courseGrabber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = courseGrabber.json; path = JsonFile/courseGrabber.json; sourceTree = SOURCE_ROOT; };
+		26EF4EA4162F27430015BF2A /* assignmentCourse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = assignmentCourse.json; path = JsonFile/assignmentCourse.json; sourceTree = SOURCE_ROOT; };
+		26EF4EA5162F27430015BF2A /* assignmentCreate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = assignmentCreate.json; path = JsonFile/assignmentCreate.json; sourceTree = SOURCE_ROOT; };
 		26F14ED115DA253F00C8E74E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		26F14ED215DA253F00C8E74E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		26F14ED615DA3F2F00C8E74E /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
@@ -955,7 +960,6 @@
 		26F14EDB15DA3F3000C8E74E /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = Models/Lesson.m; sourceTree = "<group>"; };
 		26F3E2BC15D7FE4000D69D0D /* Renren+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Renren+addon.h"; path = "nbg_iOS/Renren+addon.h"; sourceTree = SOURCE_ROOT; };
 		26F3E2BD15D7FE4100D69D0D /* Renren+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Renren+addon.m"; path = "nbg_iOS/Renren+addon.m"; sourceTree = SOURCE_ROOT; };
-		26F3E2D815D92EED00D69D0D /* assignmentCreate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = assignmentCreate.json; sourceTree = "<group>"; };
 		411DBBC715CB9E3F00EDB31D /* nbg_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nbg_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		411DBBCB15CB9E4000EDB31D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		411DBBCD15CB9E4000EDB31D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1388,7 +1392,6 @@
 		413BA26D15D52FA5000C9451 /* CPIPGateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPIPGateHelper.h; sourceTree = "<group>"; };
 		414AFCA815D3C6CC00EFFB60 /* Models+addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Models+addon.h"; path = "Models/Models+addon.h"; sourceTree = "<group>"; };
 		414AFCA915D3C6CC00EFFB60 /* Models+addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Models+addon.m"; path = "Models/Models+addon.m"; sourceTree = "<group>"; };
-		414AFD6B15D512A500EFFB60 /* courseGrabber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = courseGrabber.json; sourceTree = "<group>"; };
 		414AFD6C15D512A500EFFB60 /* CPSigninFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CPSigninFlow.storyboard; path = Nanbeige/CPSigninFlow.storyboard; sourceTree = "<group>"; };
 		414AFD6F15D512A500EFFB60 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		414AFD7115D512A500EFFB60 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard_iPhone.storyboard; path = Nanbeige/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
@@ -1650,7 +1653,7 @@
 				26228D7315F2585200B99C5B /* CPEventAllViewController.m */,
 				26228D7615F2586200B99C5B /* CPEventViewController.h */,
 				26228D7715F2586200B99C5B /* CPEventViewController.m */,
-				26228D7E15F261E600B99C5B /* event.json */,
+				26EF4E98162F272D0015BF2A /* event.json */,
 			);
 			name = CPEvent;
 			sourceTree = "<group>";
@@ -1769,8 +1772,8 @@
 		26D2F002160822D100A5EE5E /* CPIPGate */ = {
 			isa = PBXGroup;
 			children = (
-				26D2F008160823DB00A5EE5E /* IPGate.json */,
-				26D2F0131608280A00A5EE5E /* IPGateLogin.json */,
+				26EF4E92162F27240015BF2A /* IPGate.json */,
+				26EF4E93162F27240015BF2A /* IPGateLogin.json */,
 				26D2F004160822EC00A5EE5E /* CPIPGateViewController.h */,
 				26D2F005160822EC00A5EE5E /* CPIPGateViewController.m */,
 				26D2F00F1608278F00A5EE5E /* CPIPGateLoginViewController.h */,
@@ -1836,9 +1839,9 @@
 		26F3E2D215D8BC1600D69D0D /* CPCourse */ = {
 			isa = PBXGroup;
 			children = (
-				414AFD6B15D512A500EFFB60 /* courseGrabber.json */,
-				269CBB0015DC108900B5CF2C /* course.json */,
-				269CBB0815DC1F1000B5CF2C /* courseDetail.json */,
+				26EF4E9B162F27360015BF2A /* course.json */,
+				26EF4E9C162F27360015BF2A /* courseDetail.json */,
+				26EF4E9D162F27360015BF2A /* courseGrabber.json */,
 				414AFD9015D512A500EFFB60 /* CPCourseGrabberViewController.h */,
 				414AFD9115D512A500EFFB60 /* CPCourseGrabberViewController.m */,
 				414AFD9415D512A500EFFB60 /* CPCoursesTableViewController.h */,
@@ -1927,18 +1930,17 @@
 			children = (
 				41FA341B15FAFF0700D3510B /* UIBarButtonItem+StyledButton.h */,
 				41FA341C15FAFF0700D3510B /* UIBarButtonItem+StyledButton.m */,
-				26D2F002160822D100A5EE5E /* CPIPGate */,
-				26228D7015F2583900B99C5B /* CPEvent */,
-				26F3E2D215D8BC1600D69D0D /* CPCourse */,
-				4120F2B115D6419000D0AA97 /* CPSignFlow */,
-				26F3E2C915D8332300D69D0D /* CPRoom */,
-				26F3E2C415D82AE500D69D0D /* CPPreference */,
-				4120F2B015D6413100D0AA97 /* CPAssignment */,
 				414E13E315D7A7E300000CA8 /* CPMainFlow */,
+				26F3E2C415D82AE500D69D0D /* CPPreference */,
+				4120F2B115D6419000D0AA97 /* CPSignFlow */,
+				26D2F002160822D100A5EE5E /* CPIPGate */,
+				26F3E2D215D8BC1600D69D0D /* CPCourse */,
+				26F3E2C915D8332300D69D0D /* CPRoom */,
+				26228D7015F2583900B99C5B /* CPEvent */,
+				4120F2B015D6413100D0AA97 /* CPAssignment */,
 				26D6208E15DD21E3000AB849 /* CPQElement */,
 				414AFD6815D512A400EFFB60 /* Nanbeige */,
 				414AFC8E15D3C59D00EFFB60 /* Models */,
-				414AFC4715D3982800EFFB60 /* Resources */,
 				411DBBDC15CB9E4000EDB31D /* CPAppDelegate.h */,
 				411DBBDD15CB9E4000EDB31D /* CPAppDelegate.m */,
 				4120F2B915D6B4F500D0AA97 /* CPUserDefaultDelegate.h */,
@@ -2085,8 +2087,8 @@
 		4120F2B015D6413100D0AA97 /* CPAssignment */ = {
 			isa = PBXGroup;
 			children = (
-				26F3E2D815D92EED00D69D0D /* assignmentCreate.json */,
-				262A4A1615D94F1D001BAC03 /* assignmentCourse.json */,
+				26EF4EA4162F27430015BF2A /* assignmentCourse.json */,
+				26EF4EA5162F27430015BF2A /* assignmentCreate.json */,
 				414AFD8415D512A500EFFB60 /* CPAssignmentViewController.h */,
 				414AFD8515D512A500EFFB60 /* CPAssignmentViewController.m */,
 				414AFD9615D512A500EFFB60 /* CPAssignmentCreateViewController.h */,
@@ -2719,14 +2721,6 @@
 			path = HMGLTransitions/Classes/HMGLTransitions;
 			sourceTree = "<group>";
 		};
-		414AFC4715D3982800EFFB60 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				41FD95EF15D6378B00477483 /* JsonFile */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		414AFC8E15D3C59D00EFFB60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -2851,13 +2845,6 @@
 			name = Backend;
 			sourceTree = "<group>";
 		};
-		41FD95EF15D6378B00477483 /* JsonFile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = JsonFile;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2934,7 +2921,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				411DBBD815CB9E4000EDB31D /* InfoPlist.strings in Resources */,
-				414AFDDA15D512A500EFFB60 /* courseGrabber.json in Resources */,
 				414AFDDC15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */,
 				414AFDE215D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */,
 				414AFDF015D512A500EFFB60 /* CPAssignmentImageCell.xib in Resources */,
@@ -3008,10 +2994,6 @@
 				41FD960215D6378B00477483 /* signinEmail.json in Resources */,
 				41FD960415D6378B00477483 /* signupEmail.json in Resources */,
 				41FD960615D6378B00477483 /* preference.json in Resources */,
-				26F3E2D915D92EEE00D69D0D /* assignmentCreate.json in Resources */,
-				262A4A1715D94F1D001BAC03 /* assignmentCourse.json in Resources */,
-				269CBB0115DC108900B5CF2C /* course.json in Resources */,
-				269CBB0915DC1F1000B5CF2C /* courseDetail.json in Resources */,
 				4163D84015DD3B4000BFE89E /* PKURoomCellXIB.xib in Resources */,
 				4163D84215DD3B4000BFE89E /* QueryResults.xib in Resources */,
 				4133AFAE15DE0A5300BEE9A3 /* test_data.plist in Resources */,
@@ -3021,7 +3003,6 @@
 				26CF8E4215EB13C50011BEBB /* list@2x.png in Resources */,
 				26CF8E4415EB13C50011BEBB /* news.png in Resources */,
 				26CF8E4615EB13C50011BEBB /* news@2x.png in Resources */,
-				26228D7F15F261E600B99C5B /* event.json in Resources */,
 				4191F9ED15FB547B0088E237 /* bg-TableView.png in Resources */,
 				4191F9EF15FB547B0088E237 /* bg-TableView@2x.png in Resources */,
 				4191F9F115FB547B0088E237 /* btn-back.png in Resources */,
@@ -3102,8 +3083,14 @@
 				4191FA9715FB62440088E237 /* mask-corners-bottom@2x.png in Resources */,
 				4191FA9915FB62440088E237 /* mask-corners-top.png in Resources */,
 				4191FA9B15FB62440088E237 /* mask-corners-top@2x.png in Resources */,
-				26D2F009160823DB00A5EE5E /* IPGate.json in Resources */,
-				26D2F0141608280A00A5EE5E /* IPGateLogin.json in Resources */,
+				26EF4E94162F27240015BF2A /* IPGate.json in Resources */,
+				26EF4E96162F27240015BF2A /* IPGateLogin.json in Resources */,
+				26EF4E99162F272D0015BF2A /* event.json in Resources */,
+				26EF4E9E162F27360015BF2A /* course.json in Resources */,
+				26EF4EA0162F27360015BF2A /* courseDetail.json in Resources */,
+				26EF4EA2162F27360015BF2A /* courseGrabber.json in Resources */,
+				26EF4EA6162F27430015BF2A /* assignmentCourse.json in Resources */,
+				26EF4EA8162F27430015BF2A /* assignmentCreate.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3112,7 +3099,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				411DBBF415CB9E4000EDB31D /* InfoPlist.strings in Resources */,
-				414AFDDB15D512A500EFFB60 /* courseGrabber.json in Resources */,
 				414AFDDD15D512A500EFFB60 /* CPSigninFlow.storyboard in Resources */,
 				414AFDE315D512A500EFFB60 /* MainStoryboard_iPhone.storyboard in Resources */,
 				414AFDF115D512A500EFFB60 /* CPAssignmentImageCell.xib in Resources */,
@@ -3186,7 +3172,6 @@
 				41FD960315D6378B00477483 /* signinEmail.json in Resources */,
 				41FD960515D6378B00477483 /* signupEmail.json in Resources */,
 				41FD960715D6378B00477483 /* preference.json in Resources */,
-				269CBB0A15DC1F1000B5CF2C /* courseDetail.json in Resources */,
 				4163D84115DD3B4000BFE89E /* PKURoomCellXIB.xib in Resources */,
 				4163D84315DD3B4000BFE89E /* QueryResults.xib in Resources */,
 				4133AFAF15DE0A5300BEE9A3 /* test_data.plist in Resources */,
@@ -3196,7 +3181,6 @@
 				26CF8E4315EB13C50011BEBB /* list@2x.png in Resources */,
 				26CF8E4515EB13C50011BEBB /* news.png in Resources */,
 				26CF8E4715EB13C50011BEBB /* news@2x.png in Resources */,
-				26228D8015F261E600B99C5B /* event.json in Resources */,
 				4191F9EE15FB547B0088E237 /* bg-TableView.png in Resources */,
 				4191F9F015FB547B0088E237 /* bg-TableView@2x.png in Resources */,
 				4191F9F215FB547B0088E237 /* btn-back.png in Resources */,
@@ -3277,8 +3261,14 @@
 				4191FA9815FB62440088E237 /* mask-corners-bottom@2x.png in Resources */,
 				4191FA9A15FB62440088E237 /* mask-corners-top.png in Resources */,
 				4191FA9C15FB62440088E237 /* mask-corners-top@2x.png in Resources */,
-				26D2F00A160823DB00A5EE5E /* IPGate.json in Resources */,
-				26D2F0151608280A00A5EE5E /* IPGateLogin.json in Resources */,
+				26EF4E95162F27240015BF2A /* IPGate.json in Resources */,
+				26EF4E97162F27240015BF2A /* IPGateLogin.json in Resources */,
+				26EF4E9A162F272D0015BF2A /* event.json in Resources */,
+				26EF4E9F162F27360015BF2A /* course.json in Resources */,
+				26EF4EA1162F27360015BF2A /* courseDetail.json in Resources */,
+				26EF4EA3162F27360015BF2A /* courseGrabber.json in Resources */,
+				26EF4EA7162F27430015BF2A /* assignmentCourse.json in Resources */,
+				26EF4EA9162F27430015BF2A /* assignmentCreate.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
