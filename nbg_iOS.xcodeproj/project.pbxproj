@@ -162,9 +162,7 @@
 		265EAFEA162FE64100933AFB /* datebar.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAEFC162FE64100933AFB /* datebar.png */; };
 		265EAFEB162FE64100933AFB /* datebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAEFD162FE64100933AFB /* datebar@2x.png */; };
 		265EAFEC162FE64100933AFB /* datebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAEFD162FE64100933AFB /* datebar@2x.png */; };
-		265EAFED162FE64100933AFB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAEFE162FE64100933AFB /* Default.png */; };
 		265EAFEE162FE64100933AFB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAEFE162FE64100933AFB /* Default.png */; };
-		265EAFEF162FE64100933AFB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAEFF162FE64100933AFB /* Default@2x.png */; };
 		265EAFF0162FE64100933AFB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAEFF162FE64100933AFB /* Default@2x.png */; };
 		265EAFF1162FE64100933AFB /* disclosure-indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAF00162FE64100933AFB /* disclosure-indicator.png */; };
 		265EAFF2162FE64100933AFB /* disclosure-indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 265EAF00162FE64100933AFB /* disclosure-indicator.png */; };
@@ -3839,8 +3837,6 @@
 				265EAFE7162FE64100933AFB /* datebar-arrow-right-pressed@2x.png in Resources */,
 				265EAFE9162FE64100933AFB /* datebar.png in Resources */,
 				265EAFEB162FE64100933AFB /* datebar@2x.png in Resources */,
-				265EAFED162FE64100933AFB /* Default.png in Resources */,
-				265EAFEF162FE64100933AFB /* Default@2x.png in Resources */,
 				265EAFF1162FE64100933AFB /* disclosure-indicator.png in Resources */,
 				265EAFF3162FE64100933AFB /* disclosure-indicator@2x.png in Resources */,
 				265EAFF5162FE64100933AFB /* discuss.png in Resources */,

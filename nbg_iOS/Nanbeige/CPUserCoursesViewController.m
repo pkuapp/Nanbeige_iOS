@@ -371,7 +371,7 @@
 											 cancelButtonTitle:sCANCEL
 										destructiveButtonTitle:nil
 											 otherButtonTitles:prevSemseter, nextSemester, nil];
-	[menu showInView:self.view];
+	[menu showFromTabBar:self.tabBarController.tabBar];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

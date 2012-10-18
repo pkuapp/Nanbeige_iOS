@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
     <scenes>
         <!--Main View Controller - 仪表盘-->
         <scene sceneID="tJc-E9-BST">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tkc-Kf-f7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="T7Q-qL-CHf" customClass="CPMainViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YDN-9X-SUS">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
@@ -33,13 +32,13 @@
                         <segue destination="Aqg-bc-fjw" kind="push" identifier="ItsEnterSegue" id="LPJ-k8-LHX"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tkc-Kf-f7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1426" y="-1650"/>
         </scene>
         <!--Dashboard View Controller-->
         <scene sceneID="WKp-at-k3T">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JGw-ae-2qi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="bM9-CV-lnz" customClass="CPDashboardViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kcI-Uw-Npr">
                         <rect key="frame" x="0.0" y="64" width="320" height="259"/>
@@ -54,13 +53,13 @@
                         <segue destination="Y3a-g9-RLQ" kind="push" identifier="ItsEnterSegue" id="lMa-7l-wdl"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JGw-ae-2qi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1038" y="-2235"/>
         </scene>
         <!--Nav View Controller-->
         <scene sceneID="KGt-Uk-zxi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WvZ-Da-VcH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="RwP-JK-hi1" customClass="CPNavViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="j0e-XR-uzm">
                         <autoresizingMask key="autoresizingMask"/>
@@ -69,13 +68,13 @@
                         <segue destination="KlT-c9-lbv" kind="relationship" relationship="rootViewController" id="F9d-FP-r3i"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WvZ-Da-VcH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2689" y="-2235"/>
         </scene>
         <!--Login Its View Controller - 登录网关账号-->
         <scene sceneID="xSj-ac-kQt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tMa-Nz-veK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="KlT-c9-lbv" customClass="CPLoginItsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="J2A-sF-dME">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -143,13 +142,13 @@
                         <outlet property="usernameCell" destination="mh4-zU-SXr" id="W0g-j7-A6L"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tMa-Nz-veK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3167" y="-2235"/>
         </scene>
         <!--Its View Controller - IP网关-->
         <scene sceneID="A3L-J4-bX8">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bc3-CC-xdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="Y3a-g9-RLQ" customClass="CPItsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="WUT-SL-iux">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
@@ -301,13 +300,13 @@
                         <segue destination="RwP-JK-hi1" kind="modal" identifier="ItsLoginSegue" id="m85-ZU-CEx"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bc3-CC-xdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2135" y="-2235"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="5CD-AV-rTt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mlz-Nx-XKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Q2G-KM-Kq9" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q6I-7e-pRH">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
@@ -316,13 +315,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZCQ-UU-0C9"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mlz-Nx-XKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2689" y="-3484"/>
         </scene>
         <!--Rooms View Controller-->
         <scene sceneID="wme-IW-XQm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tp2-vU-2tN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="PRZ-eR-Bt6" customClass="CPRoomsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Frq-ec-fYN">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
@@ -396,26 +395,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="Q2G-KM-Kq9" kind="push" identifier="RoomsDetailSegue" id="eJx-04-NjJ"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tp2-vU-2tN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2135" y="-3484"/>
         </scene>
         <!--Assignment View Controller-->
         <scene sceneID="Hi2-Wp-7gG">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dwg-ml-iBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AssignmentListIdentifier" hidesBottomBarWhenPushed="YES" id="R9G-nc-9ot" customClass="CPAssignmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n2c-vk-oaD">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="72A-2d-N3C">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="308"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="R9G-nc-9ot" id="H7D-ej-Xkf"/>
-                                    <outlet property="delegate" destination="R9G-nc-9ot" id="lsh-Vy-Vvh"/>
-                                </connections>
-                            </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="csx-uI-YCP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="308"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -443,20 +434,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="assignmentsTableView" destination="csx-uI-YCP" id="25G-wd-fvO"/>
-                        <outlet property="completeAssignmentsTableView" destination="72A-2d-N3C" id="IYy-UZ-G6v"/>
                         <outlet property="completeSegmentedControl" destination="4SG-yf-mbH" id="CKV-4m-lke"/>
+                        <outlet property="tableView" destination="csx-uI-YCP" id="yb0-Pm-8Dh"/>
                         <segue destination="ehN-NR-OG8" kind="modal" identifier="ModifyAssignmentSegue" id="kkG-IZ-C1L"/>
                         <segue destination="ehN-NR-OG8" kind="modal" identifier="CreateAssignmentSegue" id="aB0-L4-nSj"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dwg-ml-iBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2135" y="-2865"/>
         </scene>
         <!--Nav View Controller-->
         <scene sceneID="k6z-a8-cS9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="M6c-91-qGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="ehN-NR-OG8" customClass="CPNavViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qmn-xf-ImM"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="e9Q-bc-bhf">
@@ -466,13 +456,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="XnQ-bK-izJ" kind="relationship" relationship="rootViewController" id="bf1-Ka-dDp"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6c-91-qGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2689" y="-2865"/>
         </scene>
         <!--Assignment Deadline View Controller-->
         <scene sceneID="8df-Id-jg0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3ce-HP-s3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="lcF-gu-4RP" customClass="CPAssignmentDeadlineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BAi-C7-ki4">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -553,13 +543,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="modeSegmentedControl" destination="0Tk-W3-xU4" id="T99-mp-lCs"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ce-HP-s3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3714" y="-3151"/>
         </scene>
         <!--Assignment Course View Controller-->
         <scene sceneID="cR3-4j-h3P">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Bd-cy-sDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zre-PQ-iW9" customClass="CPAssignmentCourseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="80L-b4-Scy">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -568,13 +558,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="drt-Cq-yCU"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Bd-cy-sDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3714" y="-2579"/>
         </scene>
         <!--Assignment Create View Controller-->
         <scene sceneID="6ZA-Vk-256">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s4l-81-fss" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="XnQ-bK-izJ" customClass="CPAssignmentCreateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HSE-Dd-qJJ">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -587,13 +577,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="zre-PQ-iW9" kind="push" identifier="AssignmentCourseSegue" id="3IE-bG-wx1"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s4l-81-fss" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3167" y="-2865"/>
         </scene>
         <!--Detail Gate Info View Controller - 网关账户-->
         <scene sceneID="Jvb-ch-4CT">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ptU-kW-FT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="yil-Q7-q5m" customClass="CPDetailGateInfoViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="N5P-Sy-lrj">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
@@ -723,13 +713,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="remainTimeCell" destination="CEP-0G-yQl" id="1FF-zw-t7S"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ptU-kW-FT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2135" y="-1650"/>
         </scene>
         <!--Gate View Controller-->
         <scene sceneID="d8h-0P-ZYl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hQV-F3-AII" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="Aqg-bc-fjw" customClass="CPIPGateViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PqA-v2-6i8">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
@@ -742,13 +732,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="Sek-XT-Dme" kind="modal" identifier="IPGateLoginSegue" id="jGn-sr-Spa"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hQV-F3-AII" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2135" y="-1151"/>
         </scene>
         <!--Gate Login View Controller-->
         <scene sceneID="OSy-zO-4Uj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UZs-Ha-3lv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Ysx-ZU-m0W" customClass="CPIPGateLoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w1G-44-eBw">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -757,13 +747,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="Q45-2e-Tx1"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UZs-Ha-3lv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2995" y="-1205"/>
         </scene>
         <!--Nav View Controller-->
         <scene sceneID="lN3-rC-hou">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wgb-JU-hSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="Sek-XT-Dme" customClass="CPNavViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D2c-tW-xGE">
                         <autoresizingMask key="autoresizingMask"/>
@@ -772,13 +762,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="Ysx-ZU-m0W" kind="relationship" relationship="rootViewController" id="dVl-Yz-PbA"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wgb-JU-hSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2601" y="-1205"/>
         </scene>
         <!--Nav View Controller - 信息流-->
         <scene sceneID="U6W-KN-1cs">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L34-29-W0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="oer-wK-VZ2" customClass="CPNavViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="信息流" image="24-person.png" id="K18-pN-KfH"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="LIv-Df-pi9">
@@ -788,13 +778,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="aEl-L1-1Fk" kind="relationship" relationship="rootViewController" id="lPa-6P-D2A"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L34-29-W0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1038" y="-948"/>
         </scene>
         <!--Feed View Controller - 信息流-->
         <scene sceneID="qc2-n8-bCL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S9Z-aE-l9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="aEl-L1-1Fk" customClass="CPFeedViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cjs-J3-aSM">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -817,13 +807,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="tableView" destination="myp-Zo-dPt" id="ebq-Ak-jaC"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S9Z-aE-l9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1426" y="-948"/>
         </scene>
         <!--Nav View Controller - 仪表盘-->
         <scene sceneID="Q7Z-RS-Cjn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4pD-0c-Gig" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="mvE-0Z-o9Q" customClass="CPNavViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="仪表盘" image="38-house.png" id="1KK-SU-Yio"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Tmi-OI-np7">
@@ -837,13 +827,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="T7Q-qL-CHf" kind="relationship" relationship="rootViewController" id="yYP-zr-tWQ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4pD-0c-Gig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1038" y="-1643"/>
         </scene>
         <!--Preference View Controller-->
         <scene sceneID="Cdo-oD-Zee">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hi5-Yr-KfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="j82-iK-bsc" customClass="CPPreferenceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wO8-Fv-fgm">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -857,13 +847,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="5iG-hD-g5x" kind="push" identifier="ChangeMainOrderSegue" id="i5j-Nb-lth"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hi5-Yr-KfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1426" y="-328"/>
         </scene>
         <!--Account Manage View Controller-->
         <scene sceneID="wJr-wX-Vh1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Btr-Zn-ohZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="bGv-iP-NDt" customClass="CPAccountManageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hT7-EN-LW3">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -876,13 +866,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="Rwg-i3-Zyp" kind="modal" identifier="UniversitySelectSegue" id="qHk-oG-Tsc"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Btr-Zn-ohZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2135" y="-328"/>
         </scene>
         <!--University Select View Controller-->
         <scene sceneID="24G-RS-2Hp">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8T9-Lj-fJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Eoe-n4-jZJ" customClass="CPUniversitySelectViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JZf-EP-QgV">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -891,13 +881,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="f20-al-NzU"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8T9-Lj-fJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2957" y="-328"/>
         </scene>
         <!--Nav View Controller-->
         <scene sceneID="mwf-y5-DRY">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oDL-ly-5Rq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="Rwg-i3-Zyp" customClass="CPNavViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2s6-Nb-egW">
                         <autoresizingMask key="autoresizingMask"/>
@@ -906,13 +896,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="Eoe-n4-jZJ" kind="relationship" relationship="rootViewController" id="C81-k4-Csb"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oDL-ly-5Rq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2541" y="-328"/>
         </scene>
         <!--Change Main Order View Controller - 更改仪表盘布局-->
         <scene sceneID="KJ7-oZ-rj9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f4L-jI-hwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="5iG-hD-g5x" customClass="CPChangeMainOrderViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4wE-Su-wdG">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -925,13 +915,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="更改仪表盘布局" id="xwo-DS-GOI"/>
                     <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f4L-jI-hwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1526" y="334"/>
         </scene>
         <!--View Controller - 关于南北阁-->
         <scene sceneID="tzG-CO-2lz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="be0-Sh-XyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="nbq-Em-CIq" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lgJ-7g-Whd">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -983,13 +973,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="关于南北阁" id="Z6w-nu-iWN"/>
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="be0-Sh-XyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2135" y="276"/>
         </scene>
         <!--Nav View Controller - 设置-->
         <scene sceneID="ZKE-9y-wvS">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hHn-PN-yfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="Fn0-4a-utU" customClass="CPNavViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="设置" image="256-box2.png" id="ig8-A9-kws"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="jRt-2F-l7l">
@@ -999,13 +989,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="j82-iK-bsc" kind="relationship" relationship="rootViewController" id="zk8-Wx-VLr"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hHn-PN-yfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1038" y="-328"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Yr8-H3-0Cv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bSR-sz-pSJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="0HX-pK-4Ml" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PGE-Av-rlD">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -1023,13 +1013,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="ago-rE-zId"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bSR-sz-pSJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2541" y="276"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
                 <tabBarController id="4" customClass="CPTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
@@ -1043,13 +1033,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="Fn0-4a-utU" kind="relationship" relationship="viewControllers" id="6sT-uQ-WHL"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="498" y="-948"/>
         </scene>
         <!--Event View Controller-->
         <scene sceneID="n6v-H0-CGQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2ID-3i-A1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="TEq-Zc-D5C" customClass="CPEventViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vfr-eX-hJh">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
@@ -1058,15 +1048,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="KG0-6M-OaS"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ID-3i-A1c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2689" y="-4026"/>
         </scene>
         <!--Event All View Controller - 课程目录-->
         <scene sceneID="2BN-4a-wf8">
             <objects>
-                <searchDisplayController id="nxf-IK-ap7"/>
-                <searchDisplayController id="Elj-78-hzo"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YIJ-qd-5j8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="SqH-ks-gpf" customClass="CPEventAllViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UO8-WO-5vt">
                         <rect key="frame" x="0.0" y="64" width="320" height="308"/>
@@ -1092,6 +1080,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="TEq-Zc-D5C" kind="push" identifier="EventSegue" id="Wfg-kE-w3B"/>
                     </connections>
                 </viewController>
+                <searchDisplayController id="nxf-IK-ap7"/>
+                <searchDisplayController id="Elj-78-hzo"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YIJ-qd-5j8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2135" y="-4026"/>
         </scene>
@@ -1103,126 +1094,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="38-house.png" width="18" height="17"/>
         <image name="Icon@2x.png" width="114" height="114"/>
     </resources>
-    <classes>
-        <class className="CPAccountManageViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAccountManageViewController.h"/>
-        </class>
-        <class className="CPAssignmentCourseViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentCourseViewController.h"/>
-        </class>
-        <class className="CPAssignmentCreateViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentCreateViewController.h"/>
-        </class>
-        <class className="CPAssignmentDeadlineViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentDeadlineViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onModeChange:" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="deadlinePicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="modeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="modeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="CPAssignmentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPAssignmentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onAssignmentCompleteChanged:"/>
-                <relationship kind="outlet" name="assignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeAssignmentsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="completeSegmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="CPChangeMainOrderViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPChangeMainOrderViewController.h"/>
-        </class>
-        <class className="CPDashboardViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPDashboardViewController.h"/>
-        </class>
-        <class className="CPDetailGateInfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPDetailGateInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accuTimeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="balanceCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="packageCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="remainTimeCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="CPEventAllViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPEventAllViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CPEventViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPEventViewController.h"/>
-        </class>
-        <class className="CPFeedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPFeedViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CPIPGateLoginViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPIPGateLoginViewController.h"/>
-        </class>
-        <class className="CPIPGateViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPIPGateViewController.h"/>
-        </class>
-        <class className="CPItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="detailGateInfoPressed:"/>
-                <relationship kind="outlet" name="connectFree" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="connectGlobal" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="detailGateInfo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="disconnectAll" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="CPLoginItsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPLoginItsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelButtonPressed:"/>
-                <relationship kind="outlet" name="passwordCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-            </relationships>
-        </class>
-        <class className="CPMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPMainViewController.h"/>
-        </class>
-        <class className="CPNavViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPNavViewController.h"/>
-        </class>
-        <class className="CPPreferenceViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPPreferenceViewController.h"/>
-        </class>
-        <class className="CPRoomsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPRoomsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="CPTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPTabBarController.h"/>
-        </class>
-        <class className="CPUniversitySelectViewController" superclassName="QuickDialogController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CPUniversitySelectViewController.h"/>
-        </class>
-        <class className="QuickDialogController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuickDialogController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="nfF-gJ-ICc"/>
         <segue reference="lVV-gW-QAM"/>
-        <segue reference="iBD-dN-4lH"/>
         <segue reference="bRx-DI-TvE"/>
-        <segue reference="Yqn-fv-amI"/>
+        <segue reference="iBD-dN-4lH"/>
+        <segue reference="nfF-gJ-ICc"/>
+        <segue reference="kkG-IZ-C1L"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,9 +19,12 @@
 @interface CPMainViewController () <UIScrollViewDelegate> {
     BOOL _autoDisconnect;
     BOOL _hasSilentCallback;
+	CouchPersistentReplication* _pull;
+    CouchPersistentReplication* _push;
 }
 
 @property (strong, nonatomic) UILabel *timeLabel;
+@property (strong, nonatomic) CouchDatabase *database;
 
 @end
 
@@ -120,11 +123,14 @@
 	
 	self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-TableView"]];
 	self.title = TITLE_MAIN;
+	
+	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
 		
 //	self.connector = [[CPIPGateHelper alloc] init];
 	
 	[self setupTimeIndicator];
 	[self setupDatabaseForSync];
+	[self updateSyncURL];
 }
 
 - (void)viewDidUnload
@@ -167,6 +173,12 @@
 		self.functionOrder = nil;
 		[self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	[self forgetSync];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -230,6 +242,52 @@
 		[NSString stringWithFormat:@"%@元",[self.gateStateDictionary objectForKey:_keyIPGateBalance]] :
 		@"未知";
 	}
+}
+
+- (void)updateSyncURL {
+    if (!self.database)
+        return;
+    NSURL* newRemoteURL = nil;
+    NSString *syncpoint = [[NSUserDefaults standardUserDefaults] objectForKey:@"syncpoint"];
+    if (syncpoint.length > 0)
+        newRemoteURL = [NSURL URLWithString:syncpoint];
+    
+    [self forgetSync];
+	
+    NSArray* repls = [self.database replicateWithURL: newRemoteURL exclusively: YES];
+    _pull = [repls objectAtIndex: 0];
+    _push = [repls objectAtIndex: 1];
+    [_pull addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
+    [_push addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
+}
+
+- (void) forgetSync {
+    [_pull removeObserver: self forKeyPath: @"completed"];
+    _pull = nil;
+    [_push removeObserver: self forKeyPath: @"completed"];
+    _push = nil;
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                         change:(NSDictionary *)change context:(void *)context
+{
+    if (object == _pull || object == _push) {
+        unsigned completed = _pull.completed + _push.completed;
+        unsigned total = _pull.total + _push.total;
+        NSLog(@"SYNC progress: %u / %u", completed, total);
+        if (total > 0 && completed <= total) {
+			if (completed == 0) {
+				[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHudModeDeterminate:@"云端同步作业中..."];
+			} else {
+				[(CPAppDelegate *)[UIApplication sharedApplication].delegate setProgressHudProgress:(completed / (float)total)];
+				if (completed == total) {
+					[(CPAppDelegate *)[UIApplication sharedApplication].delegate performSelector:@selector(hideProgressHud) withObject:nil afterDelay:0.5];
+				}
+			}
+        } else {
+			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
+		}
+    }
 }
 
 #pragma mark - Display

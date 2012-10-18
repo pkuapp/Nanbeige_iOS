@@ -11,17 +11,13 @@
 #import "CPAssignmentNoImageCell.h"
 
 @interface CPAssignmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CPAssignmentCellDelegate, UIAlertViewDelegate> {
-    CouchPersistentReplication* _pull;
-    CouchPersistentReplication* _push;
 	CouchLiveQuery* _query;
 	CouchLiveQuery* _completeQuery;
 }
 @property (strong, nonatomic) NSMutableArray *assignments;
 @property (strong, nonatomic) NSMutableArray *completeAssignments;
 @property (strong, nonatomic) NSMutableDictionary *nibsRegistered;
-@property (strong, nonatomic) NSMutableDictionary *completeNibsRegistered;
-@property (weak, nonatomic) IBOutlet UITableView *assignmentsTableView;
-@property (weak, nonatomic) IBOutlet UITableView *completeAssignmentsTableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CouchDatabase *database;
 
 @property (strong, nonatomic) NSNumber *courseIdFilter;

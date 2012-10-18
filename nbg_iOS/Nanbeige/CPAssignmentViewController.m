@@ -25,13 +25,6 @@
 @end
 
 @implementation CPAssignmentViewController
-@synthesize assignments = _assignments;
-@synthesize completeAssignments = _completeAssignments;
-@synthesize nibsRegistered = _nibsRegistered;
-@synthesize assignmentsTableView = _assignmentsTableView;
-@synthesize completeAssignmentsTableView = _completeAssignmentsTableView;
-@synthesize completeNibsRegistered = _completeNibsRegistered;
-@synthesize completeSegmentedControl = _completeSegmentedControl;
 
 #pragma mark - Setter and Getter methods
 
@@ -42,6 +35,7 @@
 	}
 	return _assignments;
 }
+
 - (NSMutableArray *)completeAssignments
 {
 	if (_completeAssignments == nil) {
@@ -49,19 +43,13 @@
 	}
 	return _completeAssignments;
 }
+
 - (NSMutableDictionary *)nibsRegistered
 {
 	if (_nibsRegistered == nil) {
 		_nibsRegistered = [[NSMutableDictionary alloc] init];
 	}
 	return _nibsRegistered;
-}
-- (NSMutableDictionary *)completeNibsRegistered
-{
-	if (_completeNibsRegistered == nil) {
-		_completeNibsRegistered = [[NSMutableDictionary alloc] init];
-	}
-	return _completeNibsRegistered;
 }
 
 - (NSMutableArray *)nowAssignments
@@ -71,42 +59,13 @@
 	else 
 		return self.completeAssignments;
 }
+
 - (NSMutableArray *)otherAssignments
 {
 	if ([_completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
 		return self.completeAssignments;
 	else 
 		return self.assignments;
-}
-- (UITableView *)nowAssignmentsTableView
-{
-	if ([_completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
-		return self.assignmentsTableView;
-	else 
-		return self.completeAssignmentsTableView;
-}
-- (UITableView *)otherAssignmentsTableView
-{
-	if ([_completeSegmentedControl selectedSegmentIndex] == NOTCOMPLETE) 
-		return self.completeAssignmentsTableView;
-	else 
-		return self.assignmentsTableView;
-}
-- (NSMutableArray *)assignmentsOfTableView:(UITableView *)tableView
-{
-	if ([tableView isEqual:self.assignmentsTableView]) 
-		return self.assignments;
-	else if ([tableView isEqual:self.completeAssignmentsTableView])
-		return self.completeAssignments;
-	return nil;
-}
-- (NSMutableDictionary *)nibsRegisteredOfTableView:(UITableView *)tableView
-{
-	if ([tableView isEqual:self.assignmentsTableView]) 
-		return self.nibsRegistered;
-	else if ([tableView isEqual:self.completeAssignmentsTableView])
-		return self.completeNibsRegistered;
-	return nil;
 }
 
 #pragma mark - View Lifecycle
@@ -133,8 +92,7 @@
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"作业列表" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBlueBarButtonItemWithTitle:@"新增" target:self selector:@selector(onCreate:)];
 	
-	self.assignmentsTableView.backgroundColor = tableBgColorPlain;
-	self.completeAssignmentsTableView.backgroundColor = tableBgColorPlain;
+	self.tableView.backgroundColor = tableBgColorPlain;
 	
 	self.database = [(CPAppDelegate *)([[UIApplication sharedApplication] delegate]) database];
     
@@ -194,78 +152,35 @@
 		[_completeQuery start];
 	}
 	
-	[self updateSyncURL];
 	if (self.bInitShowComplete) {
 		self.completeSegmentedControl.selectedSegmentIndex = COMPLETE;
 		[self onAssignmentCompleteChanged:self.completeSegmentedControl];
 	}
 }
 
-- (void)updateSyncURL {
-    if (!self.database)
-        return;
-    NSURL* newRemoteURL = nil;
-    NSString *syncpoint = [[NSUserDefaults standardUserDefaults] objectForKey:@"syncpoint"];
-    if (syncpoint.length > 0)
-        newRemoteURL = [NSURL URLWithString:syncpoint];
-    
-    [self forgetSync];
-	
-    NSArray* repls = [self.database replicateWithURL: newRemoteURL exclusively: YES];
-    _pull = [repls objectAtIndex: 0];
-    _push = [repls objectAtIndex: 1];
-    [_pull addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
-    [_push addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
-}
-
-- (void) forgetSync {
-    [_pull removeObserver: self forKeyPath: @"completed"];
-    _pull = nil;
-    [_push removeObserver: self forKeyPath: @"completed"];
-    _push = nil;
-}
-
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                          change:(NSDictionary *)change context:(void *)context
 {
-    if (object == _pull || object == _push) {
-        unsigned completed = _pull.completed + _push.completed;
-        unsigned total = _pull.total + _push.total;
-        NSLog(@"SYNC progress: %u / %u", completed, total);
-        if (total > 0 && completed <= total) {
-			if (completed == 0) {
-				[(CPAppDelegate *)[UIApplication sharedApplication].delegate showProgressHudModeDeterminate:@"云端同步作业中..."];
-			} else {
-				[(CPAppDelegate *)[UIApplication sharedApplication].delegate setProgressHudProgress:(completed / (float)total)];
-				if (completed == total) {
-					[(CPAppDelegate *)[UIApplication sharedApplication].delegate performSelector:@selector(hideProgressHud) withObject:nil afterDelay:0.5];
-				}
-			}
-        } else {
-			[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-		}
-    }
 	if (object == _query) {
 		self.assignments = nil;
 		for (CouchQueryRow* row in [object rows]) {
             [self.assignments addObject:[Assignment modelForDocument:row.document]];
         }
-		[[self assignmentsTableView] reloadData];
+		[self.tableView reloadData];
 	}
 	if (object == _completeQuery) {
 		self.completeAssignments = nil;
 		for (CouchQueryRow* row in [object rows]) {
             [self.completeAssignments addObject:[Assignment modelForDocument:row.document]];
         }
-		[[self completeAssignmentsTableView] reloadData];
+		[self.tableView reloadData];
 	}
 }
 
 - (void)viewDidUnload
 {
 	[self setCompleteSegmentedControl:nil];
-	[self setAssignmentsTableView:nil];
-	[self setCompleteAssignmentsTableView:nil];
+	[self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -274,23 +189,18 @@
 {
 	[super didReceiveMemoryWarning];
 	self.nibsRegistered = nil;
-	self.completeNibsRegistered = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	if ([self.assignmentsTableView indexPathForSelectedRow])
-		[self.assignmentsTableView deselectRowAtIndexPath:[self.assignmentsTableView indexPathForSelectedRow] animated:YES];
-	if ([self.completeAssignmentsTableView indexPathForSelectedRow])
-		[self.completeAssignmentsTableView deselectRowAtIndexPath:[self.completeAssignmentsTableView indexPathForSelectedRow] animated:YES];
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
 	[(CPAppDelegate *)[UIApplication sharedApplication].delegate hideProgressHud];
-	[self forgetSync];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -310,17 +220,17 @@
 	NSString *nibName = @"CPAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
-	Assignment *assignment = [[self assignmentsOfTableView:tableView] objectAtIndex:row];
+	Assignment *assignment = [self.nowAssignments objectAtIndex:row];
 	
 	if ([assignment.has_image boolValue]) {
 		nibName = @"CPAssignmentImageCell";
 		identifier = @"ImageCellIdentifier";
 	}
 	
-	if (![[[self nibsRegisteredOfTableView:tableView] objectForKey:nibName] integerValue]) {
+	if (![[self.nibsRegistered objectForKey:nibName] integerValue]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
 		[tableView registerNib:nib forCellReuseIdentifier:identifier];
-		[[self nibsRegisteredOfTableView:tableView] setValue:@1 forKey:nibName];
+		[self.nibsRegistered setValue:@1 forKey:nibName];
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
@@ -336,10 +246,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if ([tableView isEqual:self.assignmentsTableView])
-		return [self.assignments count];
-	else 
-		return [self.completeAssignments count];
+	return [self.nowAssignments count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -349,17 +256,17 @@
 	NSString *nibName = @"CPAssignmentNoImageCell";
 	NSString *identifier = @"NoImageCellIdentifier";
 	
-	Assignment *assignment = [[self assignmentsOfTableView:tableView] objectAtIndex:row];
+	Assignment *assignment = [self.nowAssignments objectAtIndex:row];
 	
 	if ([assignment.has_image boolValue]) {
 		nibName = @"CPAssignmentImageCell";
 		identifier = @"ImageCellIdentifier";
 	}
 	
-	if (![[[self nibsRegisteredOfTableView:tableView] objectForKey:nibName] integerValue]) {
+	if (![[self.nibsRegistered objectForKey:nibName] integerValue]) {
 		UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
 		[tableView registerNib:nib forCellReuseIdentifier:identifier];
-		[[self nibsRegisteredOfTableView:tableView] setValue:@1 forKey:nibName];
+		[self.nibsRegistered setValue:@1 forKey:nibName];
 	}
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	
@@ -385,7 +292,7 @@
 
 - (void)changeComplete:(id)sender
 {
-	Assignment *assignment = [[self nowAssignments] objectAtIndex:[sender assignmentIndex]];
+	Assignment *assignment = [self.nowAssignments objectAtIndex:[sender assignmentIndex]];
 	assignment.finished = [NSNumber numberWithBool:![assignment.finished boolValue]];
 	RESTOperation *op = [assignment save];
 	[op onCompletion:^{
@@ -396,6 +303,23 @@
 		}
 	}];
 	
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		[tableView beginUpdates];
+		RESTOperation *deleteOp = [[[self.nowAssignments objectAtIndex:indexPath.row] document] DELETE];
+		if (deleteOp && ![deleteOp wait]) NSLog(@"%@", deleteOp.error);
+		[self.nowAssignments removeObjectAtIndex:indexPath.row];
+		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[tableView endUpdates];
+	}
 }
 
 /*
@@ -432,7 +356,7 @@
 	ncavc.bInitWithCamera = NO;
 	if ([segue.identifier isEqualToString:@"ModifyAssignmentSegue"]) {
 		ncavc.bCreate = NO;
-		ncavc.assignment = [[self nowAssignments] objectAtIndex:assignmentSelect];
+		ncavc.assignment = [self.nowAssignments objectAtIndex:assignmentSelect];
 	} else {
 		ncavc.bCreate = YES;
 		ncavc.courseIdFilter = self.courseIdFilter;
@@ -455,9 +379,7 @@
 }
 
 - (IBAction)onAssignmentCompleteChanged:(id)sender {
-	[[self nowAssignmentsTableView] reloadData];
-	[[self nowAssignmentsTableView] setHidden:NO];
-	[[self otherAssignmentsTableView] setHidden:YES];
+	[self.tableView reloadData];
 }
 		
 @end
